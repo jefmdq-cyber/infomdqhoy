@@ -27,8 +27,6 @@ body{background:#f0f4f8;color:#1a202c}
 .q-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
 .q-box{background:white;border:2px solid #1e293b;border-radius:12px;padding:12px;text-align:center;box-shadow:0 2px 0 #1e293b;cursor:pointer}
 .q-box b{font-size:20px;font-weight:900;color:#0f172a;letter-spacing:1px}
-.q-box.vacio{border-color:#cbd5e1;box-shadow:none;opacity:.6}
-.q-box.vacio b{color:#94a3b8;font-size:13px}
 .btn-wsp{display:block;background:#25D366;color:white;text-align:center;padding:16px;border-radius:12px;text-decoration:none;font-weight:800;margin-top:10px}
 .btn-outline{display:block;background:white;color:#1e40af;border:2px solid #1e40af;text-align:center;padding:10px;border-radius:10px;text-decoration:none;font-weight:700;font-size:13px;margin-top:8px}
 #modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;z-index:999;align-items:center;justify-content:center;padding:18px}
@@ -54,7 +52,7 @@ body{background:#f0f4f8;color:#1a202c}
 </div>
 <div class="container">
 <div class="card"><span class="badge" style="background:#dbeafe;color:#1d4ed8">DÓLAR HOY</span><h2 style="margin-top:6px">Dólar Hoy Mar del Plata</h2><p id="dolar-t" style="font-size:12px;color:#64748b"></p><div class="dolar-grid" id="dolar-g"></div></div>
-<div class="card"><span class="badge" style="background:#dcfce7;color:#15803d">QUINIELA COMPLETA 20 NÚMEROS - TUJUGADA</span><h2 style="margin-top:6px;font-size:18px" id="q-titulo">Quiniela Hoy - 6 Loterías</h2><select id="q-fecha" style="width:100%;margin-top:8px;padding:10px;border-radius:10px;border:2px solid #e2e8f0;font-weight:700;font-size:13px;background:white;color:#1e293b"></select><div class="q-tabs" id="qt" style="margin-top:10px"></div><div class="q-grid" id="qg"></div><a href="#" class="btn-outline" onclick="openM();return false">Ver 20 números de <span id="qn">Nacional</span></a><p id="info-uy" style="display:none;font-size:11px;color:#15803d;font-weight:700;margin-top:8px">🇺🇾 Uruguay solo tiene 2 sorteos oficiales: 15:00 y 21:00</p></div>
+<div class="card"><span class="badge" style="background:#dcfce7;color:#15803d">QUINIELA COMPLETA 20 NÚMEROS - TUJUGADA</span><h2 style="margin-top:6px;font-size:18px" id="q-titulo">Quiniela Hoy - 6 Loterías</h2><select id="q-fecha" style="width:100%;margin-top:8px;padding:10px;border-radius:10px;border:2px solid #e2e8f0;font-weight:700;font-size:13px;background:white;color:#1e293b"></select><div class="q-tabs" id="qt"></div><div class="q-grid" id="qg"></div><a href="#" class="btn-outline" onclick="openM();return false">Ver 20 números de <span id="qn">Nacional</span></a><p id="info-uy" style="display:none;font-size:11px;color:#15803d;font-weight:700;margin-top:8px">🇺🇾 Uruguay solo tiene 2 sorteos oficiales: 15:00 y 21:00</p></div>
 <div class="card" style="border-left:5px solid #25D366"><h2>💼 Empleos MDQ HOY</h2><div style="margin-top:10px"><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Mozo/a</b> - Güemes - NUEVO HOY</div><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Cajero/a</b> - Constitución</div><div style="padding:10px 0"><b>Vendedor/a</b> - Peatonal</div></div><a href="https://empleos-mdq.pages.dev/" target="_blank" class="btn-wsp">Ver todos los empleos →</a></div>
 <div class="card" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);color:white"><h2>🌤️ Clima Mar del Plata</h2><div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><div style="font-size:48px;font-weight:900" id="c-t">--°</div><div style="text-align:right;font-size:13px" id="c-d">Cargando automático...</div></div></div>
 <div class="footer"><a href="/terminos.html">Términos</a> | <a href="/privacidad.html">Privacidad</a> | <a href="/contacto.html">Contacto</a><p style="margin-top:10px;font-size:11px;color:#94a3b8">INFO MDQ HOY - jefmdq@gmail.com - © 2026</p></div>
@@ -86,40 +84,38 @@ function render(){
  document.getElementById('qg').innerHTML=hors.map((h,i)=>{
    let idSorteo = listaIds[i];
    let key = actual.toLowerCase();
-   let lista = (datosCompletos && datosCompletos[key] && datosCompletos[key][idSorteo])? datosCompletos[key][idSorteo] : [];
-   let vacio =!lista || lista.length < 5;
-   if(vacio){
-     return `<div class="q-box vacio"><div style="font-size:11px;color:#64748b;font-weight:700">${h}</div><b>Aún no sale</b></div>`;
+   let num = "--";
+   if(datosCompletos && datosCompletos[key] && datosCompletos[key][idSorteo]){
+     num = datosCompletos[key][idSorteo][0] || "--";
    }
-   return `<div class="q-box" onclick="actualSorteo='${idSorteo}';openM()"><div style="font-size:11px;color:#64748b;font-weight:700">${h}</div><b>${lista[0]}</b></div>`;
+   return `<div class="q-box" onclick="actualSorteo='${idSorteo}';openM()"><div style="font-size:11px;color:#64748b;font-weight:700">${h}</div><b>${num}</b></div>`;
  }).join('');
 }
 function openM(){
+ document.getElementById('modal').classList.add('active');
  let key = actual.toLowerCase();
  let arr = (datosCompletos && datosCompletos[key] && datosCompletos[key][actualSorteo])? datosCompletos[key][actualSorteo] : [];
- document.getElementById('modal').classList.add('active');
  document.getElementById('mt').textContent=actual+' - '+actualSorteo.toUpperCase()+' - 20 números';
- if(!arr || arr.length < 5){
-   document.getElementById('ml').innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:20px;color:#64748b"><b>Aún no sale</b><br>Este sorteo de hoy todavía no se sorteó.<br>Probá con otra fecha arriba.</div>`;
-   return;
- }
- document.getElementById('ml').innerHTML=arr.map((n,i)=>i===0?`<b class="q-pos cabeza">1°</b><span class="q-num cabeza">${n}</span>`:`<b class="q-pos">${i+1}°</b><span class="q-num">${n}</span>`).join('');
+ document.getElementById('ml').innerHTML=arr.map((n,i)=>i===0?`<b class="q-pos cabeza">1°</b><span class="q-num cabeza">${n}</span>`:`<b class="q-pos">${i+1}°</b><span class="q-num">${n}</span>`).join('') || "Aún sin datos para este sorteo";
 }
 function closeM(){document.getElementById('modal').classList.remove('active');}
 render();
 
+// ---------- SELECTOR DE FECHA (ultimos 30 dias) ----------
+// Genera las fechas en huso horario Argentina, no en el huso del navegador,
+// para que "Hoy" siempre sea el dia correcto sin importar donde este el usuario.
 function fechaARG(offsetDias){
   const ahora = new Date();
   const partes = new Intl.DateTimeFormat('en-CA',{timeZone:'America/Argentina/Buenos_Aires',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(ahora);
   const obj = {}; partes.forEach(p=>obj[p.type]=p.value);
   const base = new Date(Date.UTC(obj.year, obj.month-1, obj.day));
   base.setUTCDate(base.getUTCDate()+offsetDias);
-  return base.toISOString().slice(0,10);
+  return base.toISOString().slice(0,10); // YYYY-MM-DD
 }
 function etiquetaFecha(offsetDias, fechaStr){
+  if(offsetDias===0) return 'Hoy - '+fechaStr.split('-').reverse().slice(0,2).join('/');
+  if(offsetDias===-1) return 'Ayer - '+fechaStr.split('-').reverse().slice(0,2).join('/');
   const [y,m,d] = fechaStr.split('-');
-  if(offsetDias===0) return `Hoy - ${d}/${m}`;
-  if(offsetDias===-1) return `Ayer - ${d}/${m}`;
   return `${d}/${m}/${y}`;
 }
 
@@ -136,27 +132,31 @@ selectFecha.addEventListener('change', ()=> cargarDia(selectFecha.value));
 
 function cargarDia(fecha){
   const esHoy = fecha === fechaARG(0);
-  document.getElementById('q-titulo').textContent = esHoy? 'Quiniela Hoy - 6 Loterías' : 'Quiniela del '+fecha.split('-').reverse().join('/');
-  const ruta = esHoy? 'quiniela.json' : `historial/${fecha}.json`;
+  document.getElementById('q-titulo').textContent = esHoy ? 'Quiniela Hoy - 6 Loterías' : 'Quiniela del '+fecha.split('-').reverse().join('/');
+  // El dia de hoy se lee de quiniela.json (se actualiza cada 20 min).
+  // Los dias anteriores se leen del archivo fijo en historial/.
+  const ruta = esHoy ? '/quiniela.json' : `/historial/${fecha}.json`;
   fetch(ruta+'?v='+Date.now())
- .then(r=>{
-    if(!r.ok) throw new Error(esHoy? "quiniela.json no encontrado" : "Sin datos para ese día");
+  .then(r=>{
+    if(!r.ok) throw new Error(esHoy? "quiniela.json no encontrado ("+r.status+")" : "Sin datos guardados para ese dia");
     return r.json();
   })
- .then(raw=>{
+  .then(raw=>{
     let d = Array.isArray(raw)? raw[0] : raw;
     let fuente = d.completo || d;
     let norm = {};
     Object.keys(fuente).forEach(k=>{ norm[k.toLowerCase()] = fuente[k]; });
     datosCompletos = norm;
+    console.log("Quiniela cargada ("+fecha+"):", norm);
     render();
   })
- .catch(e=>{
+  .catch(e=>{
     console.error(e);
-    datosCompletos = {};
-    document.getElementById('qg').innerHTML = `<div style="grid-column:1/-1;background:#fee2e2;border:2px solid #fca5a5;padding:12px;border-radius:10px;color:#991b1b;font-size:12px"><b>${esHoy?'Error':'Sin datos'}:</b> ${e.message}. El historial empezó el 15/09/2026</div>`;
+    datosCompletos = null;
+    document.getElementById('qg').innerHTML = `<div style="grid-column:1/-1;background:#fee2e2;border:2px solid #dc2626;padding:12px;border-radius:10px;color:#991b1b;font-size:12px"><b>${esHoy?'Error':'Sin datos'}:</b> ${e.message}</div>`;
   });
 }
+
 cargarDia(selectFecha.value);
 </script>
 </body>
