@@ -2,43 +2,35 @@ import requests, json, re
 from datetime import datetime
 
 URL = "https://www.quinielanacional1.com.ar/"
-headers = {"User-Agent": "Mozilla/5.0"}
+hoy = datetime.now().strftime("%d/%m/%y") # ej: 15/09/26
+hoy_largo = datetime.now().strftime("%d/%m/%Y")
 
+headers = {"User-Agent": "Mozilla/5.0"}
 html = requests.get(URL, headers=headers, timeout=30).text
 
-# Busca: "Quiniela Previa, Primera, Matutina, Vespertina, Nocturna"
-patron = re.compile(
-    r'Quiniela\s+(Previa|Primera|Matutina|Vespertina|Nocturna).*?loteria\s+Ciudad.*?del dia.*?(\d{2}/\d{2}/\d{2,4}).*?Nacional\s*([\d,\s,]+?)(?:Buenos Aires|</div|<h2)',
-    re.IGNORECASE | re.DOTALL
-)
+turnos = ["Previa", "Primera", "Matutina", "Vespertina", "Nocturna"]
+lista_final = []
 
-final = {}
-for turno, fecha, bloque in patron.findall(html):
-    # bloque viene "1, 4563, 2, 4290..."
-    # agarro solo los numeros de 4 cifras en orden
-    nums = []
-    partes = re.split(r'[, \n\r]+', bloque)
-    for p in partes:
-        p = p.strip()
-        if re.match(r'^\d{4}$', p):
-            nums.append(p)
-    # si vino con formato 1,4563,2,4290 -> filtramos cada 2
-    if len(nums) < 5:
-        # fallback: extrae todos los 4 digitos del bloque
-        nums = re.findall(r'\b\d{4}\b', bloque)
-        # si son 40 (pos+num) nos quedamos con 1 si, 1 no
-        if len(nums) > 20:
-            nums = nums[1::2]
+for turno in turnos:
+    m = re.search(
+        rf'Quiniela\s+{turno}.*?loteria\s+Ciudad.*?del dia.*?(\d{{2}}/\d{{2}}/\d{{2,4}}).*?Nacional\s+([0-9,\s]+?)(?:Buenos Aires|<h2)',
+        html, re.IGNORECASE | re.DOTALL
+    )
+    if m:
+        fecha_web = m.group(1) # fecha que trae la web, ej 15/09/26
+        bloque = m.group(2)
+        nums = re.findall(r'\b\d{4}\b', bloque)[:20]
 
-    if nums:
-        final[turno.capitalize()] = {"fecha": fecha, "numeros": nums[:20]}
+        # ACA ESTA EL TRUCO QUE TE FALTABA:
+        # Si la fecha de la web es de hoy, guardamos los numeros
+        # Si es de ayer, lo dejamos VACIO para que tu pagina muestre "Aún no sale"
+        if hoy in fecha_web or hoy_largo in fecha_web or fecha_web in hoy:
+            lista_final.append({"turno": turno, "fecha": fecha_web, "numeros": nums})
+            print(f"{turno} {fecha_web} -> GUARDADO")
+        else:
+            lista_final.append({"turno": turno, "fecha": fecha_web, "numeros": []})
+            print(f"{turno} {fecha_web} es de ayer -> lo dejo vacio para que diga 'Aun no sale'")
 
-print("Encontrados:", list(final.keys()))
-
-# Si no encontró los 5, NO pisa el archivo para no dejarte en []
-if len(final) >= 3:
-    with open("quiniela.json", "w", encoding="utf-8") as f:
-        json.dump(final, f, ensure_ascii=False, indent=2)
-    print("Guardado OK")
-else:
-    print("Pocos datos, no piso quiniela.json")
+# Guardamos
+with open("quiniela.json", "w", encoding="utf-8") as f:
+    json.dump(lista_final, f, ensure_ascii=False, indent=2)
