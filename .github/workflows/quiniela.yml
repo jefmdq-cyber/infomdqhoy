@@ -17,12 +17,20 @@ jobs:
         run: |
           pip install requests beautifulsoup4 lxml
           python << 'PY'
-          import requests, re, json, os
-          from datetime import datetime
+          import requests, re, json, os, glob
+          from datetime import datetime, timedelta
+          from zoneinfo import ZoneInfo
           from urllib.parse import urlparse
           from bs4 import BeautifulSoup
 
           HEADERS = {"User-Agent": "Mozilla/5.0 Chrome/122","Referer":"https://www.google.com/"}
+          TZ_ARG = ZoneInfo("America/Argentina/Buenos_Aires")
+          AHORA = datetime.now(TZ_ARG)
+          HOY = AHORA.strftime("%Y-%m-%d")
+          DIAS_A_CONSERVAR = 30
+
+          os.makedirs("historial", exist_ok=True)
+          ARCHIVO_HOY = f"historial/{HOY}.json"
 
           # URLs REALES verificadas contra el menu del sitio (15/9/2026).
           # OJO: si el sitio vuelve a cambiar de nombre de pagina, la validacion
@@ -40,11 +48,14 @@ jobs:
           URUGUAY_URL = "https://www.tujugada.com.ar/quiniela_uruguay.asp"
           ORDEN_URUGUAY = ["vespertina","nocturna"]
 
-          # carga viejo para no pisar nunca con datos vacios
+          # carga viejo para no pisar nunca con datos vacios.
+          # OJO: se carga del archivo de HOY (historial/2026-09-15.json), no de
+          # quiniela.json a secas. Asi, cuando cambia el dia, arranca en blanco
+          # en vez de arrastrar los numeros de ayer para siempre.
           viejo = {}
-          if os.path.exists("quiniela.json"):
+          if os.path.exists(ARCHIVO_HOY):
             try:
-              viejo = json.load(open("quiniela.json",encoding="utf-8")).get("completo",{})
+              viejo = json.load(open(ARCHIVO_HOY,encoding="utf-8")).get("completo",{})
             except: pass
 
           def limpiar(html):
@@ -131,7 +142,8 @@ jobs:
                   completo["uruguay"][k] = []
 
           output = {
-              "actualizado": datetime.now().strftime("%d/%m/%Y %H:%M"),
+              "fecha": HOY,
+              "actualizado": AHORA.strftime("%d/%m/%Y %H:%M"),
               "completo": completo,
               "nacional":  completo["nacional"].get("nocturna",[]),
               "provincia": completo["provincia"].get("nocturna",[]),
@@ -141,11 +153,30 @@ jobs:
               "uruguay":   completo["uruguay"].get("nocturna",[]),
           }
 
+          # Guardamos DOS copias: el archivo con fecha (historial, para poder
+          # elegir un dia anterior desde la pagina) y quiniela.json (siempre
+          # el dia de hoy, para no romper nada que ya lo estuviera leyendo).
+          with open(ARCHIVO_HOY,"w",encoding="utf-8") as f:
+              json.dump(output,f,ensure_ascii=False,indent=2)
           with open("quiniela.json","w",encoding="utf-8") as f:
               json.dump(output,f,ensure_ascii=False,indent=2)
-          print("OK JSON generado con URLs corregidas y Uruguay real (3 cifras, 2 sorteos)")
+
+          # Poda: borramos del historial los archivos de mas de 30 dias asi el
+          # repo no crece para siempre.
+          limite = AHORA.date() - timedelta(days=DIAS_A_CONSERVAR)
+          for ruta in glob.glob("historial/*.json"):
+              nombre = os.path.basename(ruta).replace(".json","")
+              try:
+                  fecha_archivo = datetime.strptime(nombre, "%Y-%m-%d").date()
+                  if fecha_archivo < limite:
+                      os.remove(ruta)
+                      print(f"Borrado por antiguedad: {ruta}")
+              except ValueError:
+                  pass  # nombre de archivo que no es una fecha, se ignora
+
+          print(f"OK JSON generado para {HOY} (historial + quiniela.json)")
           PY
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "FIX: URLs correctas por provincia + Uruguay real (3 cifras, 2 sorteos)"
-          file_pattern: quiniela.json
+          commit_message: "Actualizacion quiniela + historial diario (30 dias)"
+          file_pattern: 'quiniela.json historial/'
