@@ -1,0 +1,23 @@
+name: Actualizacion quiniela
+on:
+  schedule:
+    - cron: '10 15,18,21,0 * * *' # 12:10, 15:10, 18:10 y 21:10 arg
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests beautifulsoup4
+      - run: python scraper.py
+      - run: |
+          git config user.name "bot"
+          git config user.email "bot@bot.com"
+          git add quiniela.json
+          git diff --staged --quiet || (git commit -m "update quiniela" && git push)
