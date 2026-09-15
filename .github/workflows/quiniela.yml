@@ -1,0 +1,150 @@
+name: Quiniela 20 TODOS los sorteos
+
+on:
+  schedule:
+    - cron: '*/20 * * * *'
+  workflow_dispatch:
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Scrapear sorteos
+        run: |
+          pip install requests beautifulsoup4 lxml pytz
+          python << 'PY'
+          import requests, re, json, os
+          from datetime import datetime
+          from urllib.parse import urlparse
+          from bs4 import BeautifulSoup
+          import pytz
+
+          HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/122.0.0.0 Safari/537.36"}
+
+          LOTERIAS_4CIFRAS = {
+            "nacional":   "https://www.tujugada.com.ar/quiniela-nacional.asp",
+            "provincia":  "https://www.tujugada.com.ar/quiniela_provincia_buenos_aires.asp",
+            "santafe":    "https://www.tujugada.com.ar/quiniela_santa_fe.asp",
+            "cordoba":    "https://www.tujugada.com.ar/quiniela_cordoba.asp",
+            "entrerios":  "https://www.tujugada.com.ar/quiniela_entre_rios.asp",
+          }
+          ORDEN_4CIFRAS = ["previa","primera","matutina","vespertina","nocturna"]
+
+          URUGUAY_URL = "https://www.tujugada.com.ar/quiniela_uruguay.asp"
+          ORDEN_URUGUAY = ["vespertina","nocturna"]
+
+          # Cargar datos viejos para mantener si aún no sorteó hoy
+          viejo = {}
+          if os.path.exists("quiniela.json"):
+            try:
+              viejo = json.load(open("quiniela.json", encoding="utf-8")).get("completo", {})
+            except: pass
+
+          tz_arg = pytz.timezone('America/Argentina/Buenos_Aires')
+          fecha_hoy_str = datetime.now(tz_arg).strftime("%d/%m/%Y")
+          hoy_corta = datetime.now(tz_arg).strftime("%d/%m")
+
+          def mismo_path(url_pedido, url_final):
+              return urlparse(url_pedido).path.lower() == urlparse(url_final).path.lower()
+
+          def extraer_sorteos(url, orden, digitos):
+              sorteos = {k: [] for k in orden}
+              try:
+                  r = requests.get(url, headers=HEADERS, timeout=30, allow_redirects=True)
+                  if not mismo_path(url, r.url):
+                      print(f"AVISO: {url} redirigió -> ignora")
+                      return sorteos
+                  
+                  soup = BeautifulSoup(r.text, "lxml")
+                  tablas = soup.find_all("table")
+
+                  for tabla in tablas:
+                      txt_tabla = tabla.get_text().lower()
+                      
+                      for key in orden:
+                          if key in txt_tabla:
+                              # 1. Validar si esta tabla específica pertenece a una fecha anterior
+                              fechas_encontradas = re.findall(r'\b(\d{1,2}/\d{1,2}(?:/\d{2,4})?)\b', txt_tabla)
+                              
+                              if fechas_encontradas:
+                                  mantiene_hoy = any(fecha_hoy_str in f or hoy_corta in f for f in fechas_encontradas)
+                                  if not mantiene_hoy:
+                                      print(f"INFO: El sorteo {key} en {url} tiene fecha vieja ({fechas_encontradas}). Se omite.")
+                                      continue
+
+                              # 2. Extracción asociando celda de ubicación con celda de número
+                              filas = tabla.find_all("tr")
+                              posiciones = {}
+                              
+                              for fila in filas:
+                                  cols = [c.get_text(strip=True) for c in fila.find_all(["td", "th"])]
+                                  for i in range(len(cols) - 1):
+                                      pos_match = re.search(r'^(\d{1,2})º?$', cols[i])
+                                      num_match = re.search(rf'^\d{{{digitos}}}$', cols[i+1])
+                                      if pos_match and num_match:
+                                          pos = int(pos_match.group(1))
+                                          val = num_match.group(0)
+                                          if 1 <= pos <= 20:
+                                              posiciones[pos] = val
+
+                              # Solo guarda si obtuvo la grilla completa de 20 ubicaciones
+                              if len(posiciones) == 20:
+                                  lista_ordenada = [posiciones[i] for i in range(1, 21)]
+                                  sorteos[key] = lista_ordenada
+
+                  print(f"{url} -> {sorteos}")
+              except Exception as e:
+                  print(f"Error parseando {url}: {e}")
+              return sorteos
+
+          completo = {}
+
+          # Loterías de 4 cifras
+          for nombre, url in LOTERIAS_4CIFRAS.items():
+              nuevo = extraer_sorteos(url, ORDEN_4CIFRAS, digitos=4)
+              completo[nombre] = {}
+              for k in ORDEN_4CIFRAS:
+                  if nuevo.get(k):
+                      completo[nombre][k] = nuevo[k]
+                  elif viejo.get(nombre, {}).get(k):
+                      completo[nombre][k] = viejo[nombre][k]
+                  else:
+                      completo[nombre][k] = []
+
+          # Uruguay de 3 cifras
+          nuevo_uy = extraer_sorteos(URUGUAY_URL, ORDEN_URUGUAY, digitos=3)
+          completo["uruguay"] = {}
+          for k in ORDEN_URUGUAY:
+              if nuevo_uy.get(k):
+                  completo["uruguay"][k] = nuevo_uy[k]
+              elif viejo.get("uruguay", {}).get(k):
+                  completo["uruguay"][k] = viejo["uruguay"][k]
+              else:
+                  completo["uruguay"][k] = []
+
+          output = {
+              "actualizado": datetime.now(tz_arg).strftime("%d/%m/%Y %H:%M"),
+              "completo": completo,
+              "nacional":  completo["nacional"].get("nocturna", []),
+              "provincia": completo["provincia"].get("nocturna", []),
+              "santafe":   completo["santafe"].get("nocturna", []),
+              "cordoba":   completo["cordoba"].get("nocturna", []),
+              "entrerios": completo["entrerios"].get("nocturna", []),
+              "uruguay":   completo["uruguay"].get("nocturna", []),
+          }
+
+          with open("quiniela.json", "w", encoding="utf-8") as f:
+              json.dump(output, f, ensure_ascii=False, indent=2)
+
+          print("OK: quiniela.json generado exitosamente.")
+          PY
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "FIX: Parsing HTML por posiciones 1-20 y validación de fecha individual"
+          file_pattern: quiniela.json
