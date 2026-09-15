@@ -1,0 +1,90 @@
+name: Quiniela 20 TODOS los sorteos
+on:
+  schedule:
+    - cron: '*/20 * * * *'
+  workflow_dispatch:
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Scrapear
+        run: |
+          pip install requests beautifulsoup4 lxml
+          python << 'PY'
+          import requests, re, json, os
+          from datetime import datetime, timedelta, timezone
+          from bs4 import BeautifulSoup
+          HEADERS = {"User-Agent": "Mozilla/5.0"}
+          LOTERIAS = {
+            "nacional": "https://www.tujugada.com.ar/quiniela-nacional.asp",
+            "provincia": "https://www.tujugada.com.ar/quiniela_provincia_buenos_aires.asp",
+            "santafe": "https://www.tujugada.com.ar/quiniela_santa_fe.asp",
+            "cordoba": "https://www.tujugada.com.ar/quiniela_cordoba.asp",
+            "entrerios": "https://www.tujugada.com.ar/quiniela_entre_rios.asp",
+          }
+          ORDEN = ["previa","primera","matutina","vespertina","nocturna"]
+          HORARIOS = {"previa": 10, "primera": 12, "matutina": 15, "vespertina": 18, "nocturna": 21}
+          zona = timezone(timedelta(hours=-3))
+          hoy = datetime.now(zona)
+          dia_mes = f"{hoy.day}/{hoy.month}"
+          hora_actual = hoy.hour + hoy.minute/60
+
+          def extraer(url, orden, digitos):
+              res = {k: [] for k in orden}
+              try:
+                  r = requests.get(url, headers=HEADERS, timeout=30)
+                  txt = BeautifulSoup(r.text, "lxml").get_text(" ", strip=True)
+                  pat = re.compile(r'(\d{1,2}/\d{1,2}(?:/\d{2,4})?)\s*-\s*(previa|primera|matutina|vespertina|nocturna)\s+\d{1,2}:\d{2}', re.I)
+                  matches = list(pat.finditer(txt))
+                  for i, m in enumerate(matches):
+                      fecha = m.group(1)
+                      sorteo = m.group(2).lower()
+                      if sorteo not in orden: continue
+                      f_norm = fecha.replace('/0','/')
+                      if dia_mes not in f_norm and dia_mes.replace('/','/0') not in fecha and f"0{dia_mes}" not in fecha:
+                          continue
+                      # BLOQUEO HORARIO: si aun no paso la hora, no lo mostramos
+                      if hora_actual < HORARIOS[sorteo] + 0.2: # 12 min de margen
+                          print(f" {sorteo} aun no salio, hora {hora_actual:.2f} < {HORARIOS[sorteo]}")
+                          continue
+                      ini = m.end()
+                      fin = matches[i+1].start() if i+1 < len(matches) else ini+3500
+                      trozo = txt[ini:fin]
+                      nums = re.findall(rf'\b\d{{{digitos}}}\b', trozo)
+                      nums = [n for n in nums if not n.startswith("20")]
+                      uniq=[]
+                      for n in nums:
+                          if n not in uniq: uniq.append(n)
+                      if len(uniq)>=10:
+                          res[sorteo]=uniq[:20]
+                  print(f"{url} -> {res}")
+              except Exception as e:
+                  print(f"Error {url}: {e}")
+              return res
+
+          completo={}
+          for nom, url in LOTERIAS.items():
+              completo[nom]=extraer(url, ORDEN, 4)
+          completo["uruguay"]=extraer("https://www.tujugada.com.ar/quiniela_uruguay.asp", ["vespertina","nocturna"], 3)
+
+          output={"actualizado": hoy.strftime("%d/%m/%Y %H:%M"), "fecha": hoy.strftime("%Y-%m-%d"), "completo": completo,
+                  "nacional": completo["nacional"].get("nocturna",[]), "provincia": completo["provincia"].get("nocturna",[]),
+                  "santafe": completo["santafe"].get("nocturna",[]), "cordoba": completo["cordoba"].get("nocturna",[]),
+                  "entrerios": completo["entrerios"].get("nocturna",[]), "uruguay": completo["uruguay"].get("nocturna",[])}
+
+          with open("quiniela.json","w",encoding="utf-8") as f: json.dump(output,f,ensure_ascii=False,indent=2)
+          os.makedirs("historial", exist_ok=True)
+          with open(f"historial/{hoy.strftime('%Y-%m-%d')}.json","w",encoding="utf-8") as f: json.dump(output,f,ensure_ascii=False,indent=2)
+          PY
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "fix: bloqueo horario nocturna"
+          file_pattern: |
+            quiniela.json
+            historial/*.json
