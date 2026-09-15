@@ -1,0 +1,67 @@
+name: Actualiza Quiniela cada 15 min
+on:
+  schedule:
+    - cron: '30,45 13 * * *'
+    - cron: '0,15,30 14 * * *'
+    - cron: '0,15,30,45 15 * * *'
+    - cron: '0 16 * * *'
+    - cron: '30,45 17 * * *'
+    - cron: '0,15,30 18 * * *'
+    - cron: '30,45 20 * * *'
+    - cron: '0,15,30 21 * * *'
+    - cron: '0,15,30,45 0 * * *'
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests beautifulsoup4 lxml
+      - run: |
+          python - << 'PY'
+          import requests, re, json
+          from bs4 import BeautifulSoup
+          from datetime import datetime
+          url = "https://www.jugandoonline.com.ar/SorteosQuiniela3.aspx"
+          html = requests.get(url, headers={"User-Agent":"Mozilla/5.0"}, timeout=30).text
+          texto = BeautifulSoup(html, "lxml").get_text(" ", strip=True)
+          def sacar(patron):
+              m = re.search(patron, texto, re.I | re.S)
+              if not m: return []
+              return re.findall(r",\s*(\d{3,4})", m.group(1))[:20]
+          with open("quiniela.json","r",encoding="utf-8") as f:
+              viejo = json.load(f)
+          nuevo = {}
+          nuevo["nacional_previa"] = sacar(r"Ciudad.*?Previa.*?((?:\d+\s*,\s*\d+.*?){5})")
+          nuevo["provincia_previa"] = sacar(r"Prov.*?Bs.*?As.*?Previa.*?((?:\d+\s*,\s*\d+.*?){5})")
+          nuevo["nacional_primera"] = sacar(r"Ciudad.*?Primera.*?((?:\d+\s*,\s*\d+.*?){5})")
+          nuevo["provincia_primera"] = sacar(r"Prov.*?Bs.*?As.*?Primera.*?((?:\d+\s*,\s*\d+.*?){5})")
+          nuevo["nacional_matutina"] = sacar(r"Ciudad.*?Matutina.*?((?:\d+\s*,\s*\d+.*?){5})")
+          nuevo["provincia_matutina"] = sacar(r"Prov.*?Bs.*?As.*?Matutina.*?((?:\d+\s*,\s*\d+.*?){5})")
+          nuevo["nacional_vespertina"] = sacar(r"Ciudad.*?Vespertina.*?((?:\d+\s*,\s*\d+.*?){5})")
+          nuevo["provincia_vespertina"] = sacar(r"Prov.*?Bs.*?As.*?Vespertina.*?((?:\d+\s*,\s*\d+.*?){5})")
+          nuevo["nacional_nocturna"] = sacar(r"Ciudad.*?Nocturna.*?((?:\d+\s*,\s*\d+.*?){5})")
+          nuevo["provincia_nocturna"] = sacar(r"Prov.*?Bs.*?As.*?Nocturna.*?((?:\d+\s*,\s*\d+.*?){5})")
+          viejo["fecha"] = datetime.now().strftime("%d/%m/%Y")
+          viejo["actualizado"] = datetime.now().strftime("%H:%M")
+          for k,v in nuevo.items():
+              if v: viejo[k] = v
+          for turno in ["nocturna","vespertina","matutina","primera","previa"]:
+              if viejo.get(f"nacional_{turno}"):
+                  viejo["nacional"] = viejo[f"nacional_{turno}"]
+                  viejo["provincia"] = viejo.get(f"provincia_{turno}", viejo.get("provincia"))
+                  break
+          with open("quiniela.json","w",encoding="utf-8") as f:
+              json.dump(viejo, f, ensure_ascii=False, indent=2)
+          PY
+      - run: |
+          git config user.name "robot-quiniela"
+          git config user.email "robot@infomdq.com"
+          git add quiniela.json
+          git commit -m "quiniela" || echo "sin cambios"
+          git push
