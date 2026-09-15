@@ -52,7 +52,7 @@ body{background:#f0f4f8;color:#1a202c}
 </div>
 <div class="container">
 <div class="card"><span class="badge" style="background:#dbeafe;color:#1d4ed8">DÓLAR HOY</span><h2 style="margin-top:6px">Dólar Hoy Mar del Plata</h2><p id="dolar-t" style="font-size:12px;color:#64748b"></p><div class="dolar-grid" id="dolar-g"></div></div>
-<div class="card"><span class="badge" style="background:#dcfce7;color:#15803d">QUINIELA COMPLETA 20 NÚMEROS - TUJUGADA</span><h2 style="margin-top:6px;font-size:18px">Quiniela Hoy - 6 Loterías</h2><div class="q-tabs" id="qt"></div><div class="q-grid" id="qg"></div><a href="#" class="btn-outline" onclick="openM();return false">Ver 20 números de <span id="qn">Nacional</span></a><p id="info-uy" style="display:none;font-size:11px;color:#15803d;font-weight:700;margin-top:8px">🇺🇾 Uruguay solo tiene 2 sorteos oficiales: 15:00 y 21:00</p></div>
+<div class="card"><span class="badge" style="background:#dcfce7;color:#15803d">QUINIELA COMPLETA 20 NÚMEROS - TUJUGADA</span><h2 style="margin-top:6px;font-size:18px" id="q-titulo">Quiniela Hoy - 6 Loterías</h2><select id="q-fecha" style="width:100%;margin-top:8px;padding:10px;border-radius:10px;border:2px solid #e2e8f0;font-weight:700;font-size:13px;background:white;color:#1e293b"></select><div class="q-tabs" id="qt"></div><div class="q-grid" id="qg"></div><a href="#" class="btn-outline" onclick="openM();return false">Ver 20 números de <span id="qn">Nacional</span></a><p id="info-uy" style="display:none;font-size:11px;color:#15803d;font-weight:700;margin-top:8px">🇺🇾 Uruguay solo tiene 2 sorteos oficiales: 15:00 y 21:00</p></div>
 <div class="card" style="border-left:5px solid #25D366"><h2>💼 Empleos MDQ HOY</h2><div style="margin-top:10px"><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Mozo/a</b> - Güemes - NUEVO HOY</div><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Cajero/a</b> - Constitución</div><div style="padding:10px 0"><b>Vendedor/a</b> - Peatonal</div></div><a href="https://empleos-mdq.pages.dev/" target="_blank" class="btn-wsp">Ver todos los empleos →</a></div>
 <div class="card" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);color:white"><h2>🌤️ Clima Mar del Plata</h2><div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><div style="font-size:48px;font-weight:900" id="c-t">--°</div><div style="text-align:right;font-size:13px" id="c-d">Cargando automático...</div></div></div>
 <div class="footer"><a href="/terminos.html">Términos</a> | <a href="/privacidad.html">Privacidad</a> | <a href="/contacto.html">Contacto</a><p style="margin-top:10px;font-size:11px;color:#94a3b8">INFO MDQ HOY - jefmdq@gmail.com - © 2026</p></div>
@@ -101,27 +101,63 @@ function openM(){
 function closeM(){document.getElementById('modal').classList.remove('active');}
 render();
 
-// --- ESTE ES EL FIX: LEE TU ARCHIVO LOCAL, NO GITHUB RAW ---
-fetch('/quiniela.json?v='+Date.now())
-.then(r=>{
-  if(!r.ok) throw new Error("quiniela.json no encontrado ("+r.status+") - debe estar junto al index.html");
-  return r.json();
-})
-.then(raw=>{
-  let d = Array.isArray(raw)? raw[0] : raw;
-  let fuente = d.completo || d;
-  let norm = {};
-  Object.keys(fuente).forEach(k=>{
-    norm[k.toLowerCase()] = fuente[k];
+// ---------- SELECTOR DE FECHA (ultimos 30 dias) ----------
+// Genera las fechas en huso horario Argentina, no en el huso del navegador,
+// para que "Hoy" siempre sea el dia correcto sin importar donde este el usuario.
+function fechaARG(offsetDias){
+  const ahora = new Date();
+  const partes = new Intl.DateTimeFormat('en-CA',{timeZone:'America/Argentina/Buenos_Aires',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(ahora);
+  const obj = {}; partes.forEach(p=>obj[p.type]=p.value);
+  const base = new Date(Date.UTC(obj.year, obj.month-1, obj.day));
+  base.setUTCDate(base.getUTCDate()+offsetDias);
+  return base.toISOString().slice(0,10); // YYYY-MM-DD
+}
+function etiquetaFecha(offsetDias, fechaStr){
+  if(offsetDias===0) return 'Hoy - '+fechaStr.split('-').reverse().slice(0,2).join('/');
+  if(offsetDias===-1) return 'Ayer - '+fechaStr.split('-').reverse().slice(0,2).join('/');
+  const [y,m,d] = fechaStr.split('-');
+  return `${d}/${m}/${y}`;
+}
+
+const selectFecha = document.getElementById('q-fecha');
+for(let i=0;i>=-29;i--){
+  const f = fechaARG(i);
+  const opt = document.createElement('option');
+  opt.value = f;
+  opt.textContent = etiquetaFecha(i, f);
+  selectFecha.appendChild(opt);
+}
+selectFecha.value = fechaARG(0);
+selectFecha.addEventListener('change', ()=> cargarDia(selectFecha.value));
+
+function cargarDia(fecha){
+  const esHoy = fecha === fechaARG(0);
+  document.getElementById('q-titulo').textContent = esHoy ? 'Quiniela Hoy - 6 Loterías' : 'Quiniela del '+fecha.split('-').reverse().join('/');
+  // El dia de hoy se lee de quiniela.json (se actualiza cada 20 min).
+  // Los dias anteriores se leen del archivo fijo en historial/.
+  const ruta = esHoy ? '/quiniela.json' : `/historial/${fecha}.json`;
+  fetch(ruta+'?v='+Date.now())
+  .then(r=>{
+    if(!r.ok) throw new Error(esHoy? "quiniela.json no encontrado ("+r.status+")" : "Sin datos guardados para ese dia");
+    return r.json();
+  })
+  .then(raw=>{
+    let d = Array.isArray(raw)? raw[0] : raw;
+    let fuente = d.completo || d;
+    let norm = {};
+    Object.keys(fuente).forEach(k=>{ norm[k.toLowerCase()] = fuente[k]; });
+    datosCompletos = norm;
+    console.log("Quiniela cargada ("+fecha+"):", norm);
+    render();
+  })
+  .catch(e=>{
+    console.error(e);
+    datosCompletos = null;
+    document.getElementById('qg').innerHTML = `<div style="grid-column:1/-1;background:#fee2e2;border:2px solid #dc2626;padding:12px;border-radius:10px;color:#991b1b;font-size:12px"><b>${esHoy?'Error':'Sin datos'}:</b> ${e.message}</div>`;
   });
-  datosCompletos = norm;
-  console.log("Quiniela cargada:", norm);
-  render();
-})
-.catch(e=>{
-  console.error(e);
-  document.getElementById('qg').innerHTML = `<div style="grid-column:1/-1;background:#fee2e2;border:2px solid #dc2626;padding:12px;border-radius:10px;color:#991b1b;font-size:12px"><b>Error:</b> ${e.message}<br>Asegurate que quiniela.json este en la raiz del repo.</div>`;
-});
+}
+
+cargarDia(selectFecha.value);
 </script>
 </body>
 </html>
