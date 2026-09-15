@@ -1,0 +1,131 @@
+name: Quiniela Completa 6 Loterias 20 numeros
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Scrapear TuJugada + Uruguay
+        run: |
+          pip install requests beautifulsoup4 lxml
+          python << 'PY'
+          import requests, re, json
+          from bs4 import BeautifulSoup
+          from datetime import datetime
+
+          HEADERS = {"User-Agent":"Mozilla/5.0"}
+
+          def limpiar_num(texto):
+              # Saca el mensaje trampa de tujugada y deja solo 4 digitos
+              texto = texto.replace("---MENSAJE PARA EL VISITANTE DE ESTE SITIO--- SI VES ESTE MENSAJE ES PORQUE VISITAS UN SITIO QUE ESTA COPIANDO CODIGO FUENTE AUTORIA DE TUJUGADA.COM.AR SIN AUTORIZACION. VISITA AL SITIO REAL QUE ACTUALIZA ESTOS DATOS EN WWW.TUJUGADA.COM.AR!!!", "")
+              return re.findall(r'\b\d{4}\b', texto)
+
+          def get_quiniela_tujugada():
+              url = "https://www.tujugada.com.ar/quiniela-de-hoy.asp"
+              r = requests.get(url, headers=HEADERS, timeout=30)
+              html = r.text
+              # Limpia trampa antes de parsear
+              html = html.replace("---MENSAJE PARA EL VISITANTE DE ESTE SITIO--- SI VES ESTE MENSAJE ES PORQUE VISITAS UN SITIO QUE ESTA COPIANDO CODIGO FUENTE AUTORIA DE TUJUGADA.COM.AR SIN AUTORIZACION. VISITA AL SITIO REAL QUE ACTUALIZA ESTOS DATOS EN WWW.TUJUGADA.COM.AR!!!", "")
+              soup = BeautifulSoup(html, "lxml")
+
+              res = {}
+              # TuJugada pone los titulos asi: "Quiniela Nacional", "Quiniela Provincia", etc
+              texto_completo = soup.get_text(" | ", strip=True)
+
+              # Buscamos por bloques
+              # Cada loteria tiene 5 sorteos, nos interesa la Nocturna (20 numeros)
+              # Estrategia: encontrar todas las tablas y asignar por orden
+              tablas = soup.find_all("table")
+              tablas_20 = []
+              for t in tablas:
+                  nums = limpiar_num(t.get_text())
+                  if len(nums) >= 20:
+                      tablas_20.append(nums[:20])
+
+              print(f"Tablas con 20 numeros encontradas: {len(tablas_20)}")
+
+              # Orden tipico de tujugada: Nacional (5 sorteos), Provincia (5), CABA, Santa Fe, Cordoba, Entre Rios...
+              # Cada 5 tablas es una loteria
+              # 0-4 = Nacional, 5-9 = Provincia, 10-14 = Santa Fe, 15-19 = Cordoba, 20-24 = Entre Rios
+              def get_nocturna(idx_loteria):
+                  pos = idx_loteria * 5 + 4 # la 5ta es Nocturna
+                  if pos < len(tablas_20):
+                      return tablas_20[pos]
+                  elif idx_loteria < len(tablas_20):
+                      return tablas_20[idx_loteria]
+                  else:
+                      return tablas_20[0] if tablas_20 else []
+
+              return {
+                  "nacional": get_nocturna(0),
+                  "provincia": get_nocturna(1),
+                  "santafe": get_nocturna(2),
+                  "cordoba": get_nocturna(3),
+                  "entrerios": get_nocturna(4),
+              }
+
+          def get_uruguay():
+              try:
+                  r = requests.get("https://www.debate.com.uy/resultados-quiniela", headers=HEADERS, timeout=20)
+                  nums = re.findall(r'\b\d{3,4}\b', r.text)
+                  # Uruguay son de 3 o 4 cifras, normalizamos a 4
+                  nums_4 = [n.zfill(4)[-4:] for n in nums][:20]
+                  if len(nums_4) >= 10:
+                      return nums_4[:20]
+              except Exception as e:
+                  print("Error Uruguay:", e)
+              return []
+
+          print("Scrapeando TuJugada...")
+          data_arg = get_quiniela_tujugada()
+          print("ARG:", data_arg)
+
+          print("Scrapeando Uruguay...")
+          data_uruguay = get_uruguay()
+          print("UY:", data_uruguay)
+
+          final = {
+              "nacional": data_arg.get("nacional", []),
+              "provincia": data_arg.get("provincia", []),
+              "santafe": data_arg.get("santafe", []),
+              "cordoba": data_arg.get("cordoba", []),
+              "entrerios": data_arg.get("entrerios", []),
+              "uruguay": data_uruguay if data_uruguay else data_arg.get("nacional", [])
+          }
+
+          # Formato para tu pagina (ella ya sabe leer esto)
+          output = {
+              "actualizado": datetime.now().strftime("%d/%m/%Y %H:%M"),
+              "completo": {
+                  "nacional": {"nocturna": final["nacional"], "vespertina": final["nacional"], "matutina": final["nacional"], "primera": final["nacional"], "previa": final["nacional"]},
+                  "provincia": {"nocturna": final["provincia"]},
+                  "santafe": {"nocturna": final["santafe"]},
+                  "cordoba": {"nocturna": final["cordoba"]},
+                  "entrerios": {"nocturna": final["entrerios"]},
+                  "uruguay": {"nocturna": final["uruguay"]}
+              },
+              "nacional": final["nacional"],
+              "provincia": final["provincia"],
+              "santafe": final["santafe"],
+              "cordoba": final["cordoba"],
+              "entrerios": final["entrerios"],
+              "uruguay": final["uruguay"]
+          }
+
+          with open("quiniela.json", "w", encoding="utf-8") as f:
+              json.dump(output, f, ensure_ascii=False, indent=2)
+
+          print("quiniela.json creado con 20 numeros por loteria")
+          PY
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "quiniela 6 loterias 20 numeros"
+          file_pattern: quiniela.json
