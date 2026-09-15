@@ -1,0 +1,139 @@
+name: Quiniela 20 TODOS los sorteos
+on:
+  schedule:
+    - cron: '*/20 * * * *'
+  workflow_dispatch:
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Scrapear sorteos
+        run: |
+          pip install requests beautifulsoup4 lxml
+          python << 'PY'
+          import requests, re, json, os
+          from datetime import datetime
+          from urllib.parse import urlparse
+          from bs4 import BeautifulSoup
+
+          HEADERS = {"User-Agent": "Mozilla/5.0 Chrome/122","Referer":"https://www.google.com/"}
+
+          # URLs REALES verificadas contra el menu del sitio (15/9/2026).
+          # OJO: si el sitio vuelve a cambiar de nombre de pagina, la validacion
+          # "mismo_path" de abajo evita que agarremos la portada por error.
+          LOTERIAS_4CIFRAS = {
+            "nacional":   "https://www.tujugada.com.ar/quiniela-nacional.asp",
+            "provincia":  "https://www.tujugada.com.ar/quiniela_provincia_buenos_aires.asp",
+            "santafe":    "https://www.tujugada.com.ar/quiniela_santa_fe.asp",
+            "cordoba":    "https://www.tujugada.com.ar/quiniela_cordoba.asp",
+            "entrerios":  "https://www.tujugada.com.ar/quiniela_entre_rios.asp",
+          }
+          ORDEN_4CIFRAS = ["previa","primera","matutina","vespertina","nocturna"]
+
+          # Uruguay es aparte: 3 cifras y solo 2 sorteos por dia.
+          URUGUAY_URL = "https://www.tujugada.com.ar/quiniela_uruguay.asp"
+          ORDEN_URUGUAY = ["vespertina","nocturna"]
+
+          # carga viejo para no pisar nunca con datos vacios
+          viejo = {}
+          if os.path.exists("quiniela.json"):
+            try:
+              viejo = json.load(open("quiniela.json",encoding="utf-8")).get("completo",{})
+            except: pass
+
+          def limpiar(html):
+              return html.replace("---MENSAJE PARA EL VISITANTE DE ESTE SITIO--- SI VES ESTE MENSAJE ES PORQUE VISITAS UN SITIO QUE ESTA COPIANDO CODIGO FUENTE AUTORIA DE TUJUGADA.COM.AR SIN AUTORIZACION. VISITA AL SITIO REAL QUE ACTUALIZA ESTOS DATOS EN WWW.TUJUGADA.COM.AR!!!", "")
+
+          def mismo_path(url_pedido, url_final):
+              # Si la pagina no existe mas, tujugada redirige a la portada
+              # (inicio_new.asp). Si el path final no coincide con el pedido,
+              # es una redirección y NO hay que usar ese contenido.
+              return urlparse(url_pedido).path.lower() == urlparse(url_final).path.lower()
+
+          def extraer_sorteos(url, orden, digitos):
+              sorteos = {k: [] for k in orden}
+              patron = r'\b\d{%d}\b' % digitos
+              try:
+                  r = requests.get(url, headers=HEADERS, timeout=30, allow_redirects=True)
+
+                  if not mismo_path(url, r.url):
+                      print(f"AVISO: {url} redirigio a {r.url} -> pagina no existe, se ignora")
+                      return sorteos
+
+                  html = limpiar(r.text)
+                  low = html.lower()
+                  for key in orden:
+                      # OJO: la palabra sola (ej. "nocturna") aparece DOS veces en la
+                      # pagina: en la frase de intro ("Nocturna: 21:00 hs.", con
+                      # los ":" pegados) Y en el titulo real de la tabla de esa
+                      # tirada ("Nocturna 21:00 hs. 35 - El Pajarito", SIN ":").
+                      # Si buscamos solo la palabra, agarra la frase de intro y
+                      # todas las tiradas quedan leyendo el mismo bloque de texto.
+                      # Anclamos la busqueda al titulo real: palabra + hora SIN ":".
+                      m = re.search(rf'\b{key}\b\s+\d{{1,2}}:\d{{2}}\s*hs\b', low)
+                      if m:
+                          idx = m.start()
+                          trozo = low[idx: idx+6000]
+                          nums = re.findall(patron, trozo)
+                          nums = [n for n in nums if not n.startswith("202")]  # descarta años
+                          uniq = []
+                          for n in nums:
+                              if n not in uniq:
+                                  uniq.append(n)
+                          if len(uniq) >= digitos + 1:  # umbral minimo de resultados validos
+                              sorteos[key] = uniq[:20]
+                  print(f"{url} -> {sorteos}")
+              except Exception as e:
+                  print(f"Error {url}: {e}")
+              return sorteos
+
+          completo = {}
+
+          # --- Loterias de 4 cifras / 5 sorteos ---
+          for nombre, url in LOTERIAS_4CIFRAS.items():
+              nuevo = extraer_sorteos(url, ORDEN_4CIFRAS, digitos=4)
+              completo[nombre] = {}
+              for k in ORDEN_4CIFRAS:
+                  if nuevo.get(k):
+                      completo[nombre][k] = nuevo[k]
+                  elif viejo.get(nombre,{}).get(k):
+                      completo[nombre][k] = viejo[nombre][k]
+                  else:
+                      completo[nombre][k] = []
+
+          # --- Uruguay: 3 cifras / 2 sorteos (Vespertina y Nocturna) ---
+          nuevo_uy = extraer_sorteos(URUGUAY_URL, ORDEN_URUGUAY, digitos=3)
+          completo["uruguay"] = {}
+          for k in ORDEN_URUGUAY:
+              if nuevo_uy.get(k):
+                  completo["uruguay"][k] = nuevo_uy[k]
+              elif viejo.get("uruguay",{}).get(k):
+                  completo["uruguay"][k] = viejo["uruguay"][k]
+              else:
+                  completo["uruguay"][k] = []
+
+          output = {
+              "actualizado": datetime.now().strftime("%d/%m/%Y %H:%M"),
+              "completo": completo,
+              "nacional":  completo["nacional"].get("nocturna",[]),
+              "provincia": completo["provincia"].get("nocturna",[]),
+              "santafe":   completo["santafe"].get("nocturna",[]),
+              "cordoba":   completo["cordoba"].get("nocturna",[]),
+              "entrerios": completo["entrerios"].get("nocturna",[]),
+              "uruguay":   completo["uruguay"].get("nocturna",[]),
+          }
+
+          with open("quiniela.json","w",encoding="utf-8") as f:
+              json.dump(output,f,ensure_ascii=False,indent=2)
+          print("OK JSON generado con URLs corregidas y Uruguay real (3 cifras, 2 sorteos)")
+          PY
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "FIX: URLs correctas por provincia + Uruguay real (3 cifras, 2 sorteos)"
+          file_pattern: quiniela.json
