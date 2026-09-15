@@ -1,0 +1,106 @@
+name: Quiniela 20 TODOS los sorteos
+on:
+  schedule:
+    - cron: '*/20 * * * *'
+  workflow_dispatch:
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Scrapear 20x5 sorteos
+        run: |
+          pip install requests beautifulsoup4 lxml
+          python << 'PY'
+          import requests, re, json, os
+          from datetime import datetime
+          from bs4 import BeautifulSoup
+
+          HEADERS = {"User-Agent": "Mozilla/5.0 Chrome/122","Referer":"https://www.google.com/"}
+          LOTERIAS = {
+            "nacional": "https://www.tujugada.com.ar/quiniela-nacional.asp",
+            "provincia": "https://www.tujugada.com.ar/quiniela-provincia.asp",
+            "santafe": "https://www.tujugada.com.ar/quiniela-santafe.asp",
+            "cordoba": "https://www.tujugada.com.ar/quiniela-cordoba.asp",
+            "entrerios": "https://www.tujugada.com.ar/quiniela-entrerios.asp",
+          }
+          ORDEN = ["previa","primera","matutina","vespertina","nocturna"]
+
+          # carga viejo para no pisar nunca con 0000
+          viejo = {}
+          if os.path.exists("quiniela.json"):
+            try:
+              viejo = json.load(open("quiniela.json",encoding="utf-8")).get("completo",{})
+            except: pass
+
+          def limpiar(html):
+              return html.replace("---MENSAJE PARA EL VISITANTE DE ESTE SITIO--- SI VES ESTE MENSAJE ES PORQUE VISITAS UN SITIO QUE ESTA COPIANDO CODIGO FUENTE AUTORIA DE TUJUGADA.COM.AR SIN AUTORIZACION. VISITA AL SITIO REAL QUE ACTUALIZA ESTOS DATOS EN WWW.TUJUGADA.COM.AR!!!", "")
+
+          def extraer_5_sorteos(url):
+              sorteos = {k: [] for k in ORDEN}
+              try:
+                  r = requests.get(url, headers=HEADERS, timeout=30)
+                  html = limpiar(r.text)
+                  # busca por posicion de cada palabra
+                  low = html.lower()
+                  for key in ORDEN:
+                      idx = low.find(key)
+                      if idx!= -1:
+                          trozo = low[idx: idx+12000]
+                          nums = re.findall(r'\b\d{4}\b', trozo)
+                          nums = [n for n in nums if not n.startswith("202")]
+                          # quita repetidos seguidos
+                          uniq=[]
+                          for n in nums:
+                              if n not in uniq:
+                                  uniq.append(n)
+                          if len(uniq) >= 5:
+                              sorteos[key] = uniq[:20]
+                  print(f"{url} -> {sorteos}")
+              except Exception as e:
+                  print(f"Error {url}: {e}")
+              return sorteos
+
+          completo = {}
+          for nombre, url in LOTERIAS.items():
+              nuevo = extraer_5_sorteos(url)
+              completo[nombre] = {}
+              for k in ORDEN:
+                  # si nuevo tiene datos, usa nuevo. Si no, usa viejo. Nunca 0000
+                  if nuevo.get(k):
+                      completo[nombre][k] = nuevo[k]
+                  elif viejo.get(nombre,{}).get(k):
+                      completo[nombre][k] = viejo[nombre][k]
+                  else:
+                      completo[nombre][k] = []
+
+          # Uruguay - lo dejamos intacto si ya existe, en 3 cifras. No lo rompemos
+          if viejo.get("uruguay"):
+              completo["uruguay"] = viejo["uruguay"]
+          else:
+              completo["uruguay"] = {"vespertina":[],"nocturna":[]}
+
+          output = {
+              "actualizado": datetime.now().strftime("%d/%m/%Y %H:%M"),
+              "completo": completo,
+              "nacional": completo["nacional"].get("nocturna",[]) or viejo.get("nacional",{}).get("nocturna",[]),
+              "provincia": completo["provincia"].get("nocturna",[]) or viejo.get("provincia",{}).get("nocturna",[]),
+              "santafe": completo["santafe"].get("nocturna",[]) or viejo.get("santafe",{}).get("nocturna",[]),
+              "cordoba": completo["cordoba"].get("nocturna",[]) or viejo.get("cordoba",{}).get("nocturna",[]),
+              "entrerios": completo["entrerios"].get("nocturna",[]) or viejo.get("entrerios",{}).get("nocturna",[]),
+              "uruguay": completo["uruguay"].get("nocturna",[]) or []
+          }
+
+          with open("quiniela.json","w",encoding="utf-8") as f:
+              json.dump(output,f,ensure_ascii=False,indent=2)
+          print("OK JSON 5 sorteos sin pisar")
+          PY
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "20 numeros todos los sorteos FIX sin 0000"
+          file_pattern: quiniela.json
