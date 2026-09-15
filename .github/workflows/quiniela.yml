@@ -1,0 +1,118 @@
+name: Quiniela 20 TODOS los sorteos
+
+on:
+  schedule:
+    - cron: '*/20 * * * *'
+  workflow_dispatch:
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Scrapear sorteos QuinielaNacional1
+        run: |
+          pip install requests beautifulsoup4 lxml pytz
+          python << 'PY'
+          import requests, re, json, os
+          from datetime import datetime
+          from bs4 import BeautifulSoup
+          import pytz
+
+          HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/122.0.0.0 Safari/537.36"}
+
+          URL_BASE = "https://quinielanacional1.com.ar/"
+          ORDEN_4CIFRAS = ["previa", "primera", "matutina", "vespertina", "nocturna"]
+          ORDEN_URUGUAY = ["vespertina", "nocturna"]
+
+          LOTERIAS = {
+              "nacional": ["nacional", "ciudad"],
+              "provincia": ["buenos aires", "provincia"],
+              "santafe": ["santa fe"],
+              "cordoba": ["cordoba", "córdoba"],
+              "entrerios": ["entre rios", "entre ríos"],
+              "uruguay": ["uruguay", "oro uruguay"]
+          }
+
+          viejo = {}
+          if os.path.exists("quiniela.json"):
+              try:
+                  viejo = json.load(open("quiniela.json", encoding="utf-8")).get("completo", {})
+              except: pass
+
+          tz_arg = pytz.timezone('America/Argentina/Buenos_Aires')
+          completo = {lot: {s: [] for s in (ORDEN_URUGUAY if lot == "uruguay" else ORDEN_4CIFRAS)} for lot in LOTERIAS}
+
+          try:
+              r = requests.get(URL_BASE, headers=HEADERS, timeout=30)
+              soup = BeautifulSoup(r.text, "lxml")
+              texto_pagina = soup.get_text()
+
+              # Divide la página por bloques de sorteos
+              bloques = re.split(r'(?=Resultados de la Quiniela|Martes|Lunes|Miércoles|Jueves|Viernes|Sábado)', texto_pagina, flags=re.IGNORECASE)
+
+              for bloque in bloques:
+                  txt_b = bloque.lower()
+
+                  # Identificar tipo de sorteo (primera, matutina, etc.)
+                  sorteo_actual = None
+                  for s in ORDEN_4CIFRAS:
+                      if s in txt_b:
+                          sorteo_actual = s
+                          break
+                  if not sorteo_actual:
+                      continue
+
+                  # Extraer pares (Ubicación. Número) secuencialmente
+                  # Ejemplo: 1. 1205  2. 1259 ... 20. 1201
+                  for lot_key, variantes in LOTERIAS.items():
+                      if any(v in txt_b for v in variantes):
+                          digitos = 3 if lot_key == "uruguay" else 4
+                          patron = rf'\b([1-9]|1[0-9]|20)[\.\º\°\s]+(\d{{{digitos}}})\b'
+                          coincidencias = re.findall(patron, bloque)
+
+                          posiciones = {}
+                          for pos_str, num_str in coincidencias:
+                              pos = int(pos_str)
+                              if 1 <= pos <= 20 and pos not in posiciones:
+                                  posiciones[pos] = num_str
+
+                          if len(posiciones) == 20:
+                              lista_ordenada = [posiciones[i] for i in range(1, 21)]
+                              if sorteo_actual in completo[lot_key]:
+                                  completo[lot_key][sorteo_actual] = lista_ordenada
+
+          except Exception as e:
+              print(f"Error parseando QuinielaNacional1: {e}")
+
+          # Preservar datos anteriores si el sorteo de hoy aún no salió
+          for lot, sorteos in completo.items():
+              for s, nums in sorteos.items():
+                  if not nums and viejo.get(lot, {}).get(s):
+                      completo[lot][s] = viejo[lot][s]
+
+          output = {
+              "actualizado": datetime.now(tz_arg).strftime("%d/%m/%Y %H:%M"),
+              "completo": completo,
+              "nacional":  completo["nacional"].get("nocturna", []),
+              "provincia": completo["provincia"].get("nocturna", []),
+              "santafe":   completo["santafe"].get("nocturna", []),
+              "cordoba":   completo["cordoba"].get("nocturna", []),
+              "entrerios": completo["entrerios"].get("nocturna", []),
+              "uruguay":   completo["uruguay"].get("nocturna", []),
+          }
+
+          with open("quiniela.json", "w", encoding="utf-8") as f:
+              json.dump(output, f, ensure_ascii=False, indent=2)
+
+          print("OK: quiniela.json generado correctamente.")
+          PY
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "FIX: Cambio de fuente a QuinielaNacional1 (Lectura secuencial limpia)"
+          file_pattern: quiniela.json
