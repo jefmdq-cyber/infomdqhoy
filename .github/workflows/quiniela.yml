@@ -1,80 +1,45 @@
-name: Actualiza Quiniela cada 15 min
+name: Actualizar quiniela
 on:
-  workflow_dispatch:
   schedule:
-    - cron: '30,45 13 * * *'
-    - cron: '0,15,30 14 * * *'
-    - cron: '0,15,30,45 15 * * *'
-    - cron: '0 16 * * *'
-    - cron: '30,45 17 * * *'
-    - cron: '0,15,30 18 * * *'
-    - cron: '30,45 20 * * *'
-    - cron: '0,15,30 21 * * *'
-    - cron: '0,15,30,45 0 * * *'
-    - cron: '0 1 * * *'
-
-permissions:
-  contents: write
-
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
 jobs:
   actualizar:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install requests beautifulsoup4 lxml
-      - run: |
-          python << 'PY'
-          import requests, re, json, os
+      - name: Generar quiniela
+        run: |
+          pip install requests beautifulsoup4
+          cat > script.py << 'PY'
+          import json, re, requests
+          from datetime import datetime
           from bs4 import BeautifulSoup
-          from datetime import datetime, timezone, timedelta
-          url = "https://www.jugandoonline.com.ar/SorteosQuiniela3.aspx"
-          html = requests.get(url, headers={"User-Agent":"Mozilla/5.0"}, timeout=40).text
-          texto = BeautifulSoup(html, "lxml").get_text(" ", strip=True)
-          def sacar(bloque):
-              nums = re.findall(r'\b\d{3,4}\b', bloque)
-              res=[]
-              for n in nums:
-                  if len(n)>=3:
-                      res.append(n.zfill(4))
-                  if len(res)==20:
-                      break
-              return res
-          def extraer(cp, tp):
-              m=re.search(rf"{cp}.*?{tp}", texto, re.I)
-              return sacar(texto[m.end():m.end()+2500]) if m else []
-          viejo=json.load(open("quiniela.json",encoding="utf-8")) if os.path.exists("quiniela.json") else {}
-          nuevo={}
-          nuevo["nacional_previa"]=extraer(r"Ciudad",r"Previa")
-          nuevo["nacional_primera"]=extraer(r"Ciudad",r"Primera")
-          nuevo["nacional_matutina"]=extraer(r"Ciudad",r"Matutina")
-          nuevo["nacional_vespertina"]=extraer(r"Ciudad",r"Vespertina")
-          nuevo["nacional_nocturna"]=extraer(r"Ciudad",r"Nocturna")
-          nuevo["provincia_previa"]=extraer(r"Prov",r"Previa")
-          nuevo["provincia_primera"]=extraer(r"Prov",r"Primera")
-          nuevo["provincia_matutina"]=extraer(r"Prov",r"Matutina")
-          nuevo["provincia_vespertina"]=extraer(r"Prov",r"Vespertina")
-          nuevo["provincia_nocturna"]=extraer(r"Prov",r"Nocturna")
-          ahora=datetime.now(timezone.utc)-timedelta(hours=3)
-          viejo["fecha"]=ahora.strftime("%d/%m/%Y")
-          viejo["actualizado"]=ahora.strftime("%H:%M")
-          for k,v in nuevo.items():
-              if v and len(v)>=5:
-                  viejo[k]=v
-          for t in ["nocturna","vespertina","matutina","primera","previa"]:
-              if viejo.get(f"nacional_{t}"):
-                  viejo["nacional"]=viejo[f"nacional_{t}"]
-                  viejo["provincia"]=viejo.get(f"provincia_{t}")
-                  break
-          json.dump(viejo, open("quiniela.json","w",encoding="utf-8"), ensure_ascii=False, indent=2)
-          print("Guardado OK")
+          try:
+              r = requests.get("https://www.dejugadas.com/quiniela-hoy-resultados-todas", headers={"User-Agent":"Mozilla/5.0"}, timeout=20)
+              soup = BeautifulSoup(r.text, "html.parser")
+              texto = soup.get_text(" ", strip=True)
+              res = {}
+              for m in re.findall(r'(Nacional|Provincia|Buenos Aires|Santa Fe|Cordoba|Entre Rios)\s+(\d{3,4})', texto, re.I):
+                  res[m[0].title()] = m[1]
+              data = {"actualizado": datetime.now().strftime("%d/%m %H:%M"), "resultados": res}
+              json.dump(data, open("quiniela.json","w",encoding="utf-8"), ensure_ascii=False, indent=2)
+          except Exception as e:
+              print(e)
           PY
-      - run: |
-          git config user.name "robot-quiniela"
-          git config user.email "robot@infomdq.com"
-          git pull --rebase origin main
+          python script.py
+      - name: Subir
+        run: |
+          cp quiniela.json /tmp/q.json
+          git checkout -- quiniela.json || true
+          git config user.name "robot"
+          git config user.email "robot@bot.com"
+          git pull --rebase
+          cp /tmp/q.json quiniela.json
           git add quiniela.json
-          git diff --staged --quiet || git commit -m "quiniela auto"
-          git push
+          git diff --staged --quiet || (git commit -m "auto" && git push)
