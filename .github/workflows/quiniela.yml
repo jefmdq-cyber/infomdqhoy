@@ -1,8 +1,10 @@
-name: Quiniela 20 TODOS los sorteos
+name: Actualizar Quiniela
+
 on:
   schedule:
-    - cron: '*/20 * * * *'
+    - cron: '15 1,11,13,16,19,22 * * *' # 10:15, 12:00, 15:00, 18:00, 21:00, 23:00 Arg
   workflow_dispatch:
+
 jobs:
   actualizar:
     runs-on: ubuntu-latest
@@ -10,105 +12,119 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Scrapear 20x5 sorteos
+
+      - name: Instalar dependencias
+        run: pip install requests beautifulsoup4 lxml
+
+      - name: Scrapear quiniela
         run: |
-          pip install requests beautifulsoup4 lxml
-          python << 'PY'
-          import requests, re, json
+          python - << 'PY'
+          import requests, json, re
           from bs4 import BeautifulSoup
           from datetime import datetime
 
-          HEADERS = {"User-Agent": "Mozilla/5.0 Chrome/122","Referer":"https://www.google.com/"}
+          URL = "https://www.tujugada.com.ar/"
+          headers = {"User-Agent": "Mozilla/5.0"}
 
-          LOTERIAS = {
-            "nacional": "https://www.tujugada.com.ar/quiniela-nacional.asp",
-            "provincia": "https://www.tujugada.com.ar/quiniela-provincia.asp",
-            "santafe": "https://www.tujugada.com.ar/quiniela-santafe.asp",
-            "cordoba": "https://www.tujugada.com.ar/quiniela-cordoba.asp",
-            "entrerios": "https://www.tujugada.com.ar/quiniela-entrerios.asp",
+          r = requests.get(URL, headers=headers, timeout=30)
+          soup = BeautifulSoup(r.text, "lxml")
+
+          # función que limpia el texto trampa: "---MENSAJE 899" -> "0899"
+          def limpia_num(txt):
+              if not txt: return None
+              # busca los últimos 3 o 4 dígitos
+              m = re.findall(r'(\d{3,4})', txt)
+              if not m:
+                  return None
+              num = m[-1]
+              return num.zfill(4)
+
+          datos = {}
+          # Cada tabla es una lotería
+          # En TuJugada están en orden: Nacional, Provincia, Santa Fe, Cordoba, Entre Rios, Montevideo
+          loterias_map = {
+              "nacional": "Nacional",
+              "provincia": "Provincia",
+              "santa fe": "SantaFe",
+              "cordoba": "Cordoba",
+              "entre rios": "EntreRios",
+              "montevideo": "Uruguay",
+              "uruguay": "Uruguay"
           }
 
-          def limpiar(html):
-              return html.replace("---MENSAJE PARA EL VISITANTE DE ESTE SITIO--- SI VES ESTE MENSAJE ES PORQUE VISITAS UN SITIO QUE ESTA COPIANDO CODIGO FUENTE AUTORIA DE TUJUGADA.COM.AR SIN AUTORIZACION. VISITA AL SITIO REAL QUE ACTUALIZA ESTOS DATOS EN WWW.TUJUGADA.COM.AR!!!", "")
+          for tabla in soup.find_all("table"):
+              titulo_prev = tabla.find_previous("h2") or tabla.find_previous("h3") or tabla.find_previous("b")
+              if not titulo_prev:
+                  continue
+              titulo = titulo_prev.get_text(strip=True).lower()
 
-          def extraer_5_sorteos(url):
-              try:
-                  r = requests.get(url, headers=HEADERS, timeout=30)
-                  html = limpiar(r.text)
-                  soup = BeautifulSoup(html, "lxml")
+              loteria_key = None
+              for k,v in loterias_map.items():
+                  if k in titulo:
+                      loteria_key = v
+                      break
+              if not loteria_key:
+                  continue
 
-                  # Busca bloques: "Previa", "Primera", etc y su tabla siguiente
-                  texto = soup.get_text("\n").lower()
-                  tablas = soup.find_all("table")
+              # sorteos dentro de la tabla
+              sorteos = {"previa":[], "primera":[], "matutina":[], "vespertina":[], "nocturna":[]}
 
-                  sorteos = {"previa":[],"primera":[],"matutina":[],"vespertina":[],"nocturna":[]}
-                  orden = ["previa","primera","matutina","vespertina","nocturna"]
+              filas = tabla.find_all("tr")
+              sorteo_actual = "nocturna"
+              for tr in filas:
+                  txt = tr.get_text(" ", strip=True).lower()
+                  if "previa" in txt: sorteo_actual="previa"
+                  elif "primera" in txt: sorteo_actual="primera"
+                  elif "matutina" in txt: sorteo_actual="matutina"
+                  elif "vespertina" in txt: sorteo_actual="vespertina"
+                  elif "nocturna" in txt: sorteo_actual="nocturna"
 
-                  # Filtra solo tablas con 20 numeros
-                  listas_20 = []
-                  for t in tablas:
-                      nums = re.findall(r'\b\d{4}\b', t.get_text())
-                      nums = [n for n in nums if not n.startswith("202")] # saca año 2026
-                      if len(nums) >= 20:
-                          listas_20.append(nums[:20])
+                  tds = tr.find_all("td")
+                  if len(tds)>=2:
+                      # el segundo td suele tener el número
+                      num_txt = tds[1].get_text(" ", strip=True)
+                      num = limpia_num(num_txt)
+                      if num and num.isdigit() and len(sorteos[sorteo_actual])<20:
+                          sorteos[sorteo_actual].append(num)
 
-                  # Si encontro 5, asigna en orden
-                  if len(listas_20) >= 5:
-                      for i, key in enumerate(orden):
-                          if i < len(listas_20):
-                              sorteos[key] = listas_20[i]
-                  elif listas_20:
-                      # Si solo encontro 1 o 2, replica para no dejar vacio
-                      for k in sorteos:
-                          sorteos[k] = listas_20[0]
+              # guardamos solo si tiene algo
+              if any(len(v)>0 for v in sorteos.values()):
+                  # si no hay sorteo separado, lo dejamos como lista plana para compatibilidad vieja
+                  if loteria_key not in datos:
+                      datos[loteria_key] = sorteos
+                  else:
+                      # merge
+                      for k,v in sorteos.items():
+                          if v:
+                              datos[loteria_key][k]=v
 
-                  print(f"{url} -> {len(listas_20)} sorteos")
-                  return sorteos
-              except Exception as e:
-                  print(f"Error {url}: {e}")
-                  return {"previa":[],"primera":[],"matutina":[],"vespertina":[],"nocturna":[]}
-
-          completo = {}
-          for nombre, url in LOTERIAS.items():
-              completo[nombre] = extraer_5_sorteos(url)
-
-          # Uruguay - 2 sorteos
-          try:
-              r = requests.get("https://www.loteriasyquinielas.com.uy/quiniela/", headers=HEADERS, timeout=20)
-              nums_uy = re.findall(r'\b\d{3,4}\b', r.text)
-              nums_uy = [n.zfill(4) for n in nums_uy][:40]
-              completo["uruguay"] = {
-                  "vespertina": nums_uy[:20] if len(nums_uy)>=20 else completo["nacional"]["vespertina"],
-                  "nocturna": nums_uy[20:40] if len(nums_uy)>=40 else completo["nacional"]["nocturna"]
-              }
-          except:
-              completo["uruguay"] = {"vespertina": completo["nacional"]["vespertina"], "nocturna": completo["nacional"]["nocturna"]}
-
-          # Evita JSON vacio
-          for lot in completo:
-              for sorteo in completo[lot]:
-                  if not completo[lot][sorteo]:
-                      completo[lot][sorteo] = completo["nacional"]["nocturna"] or ["0000"]*20
-
-          output = {
-              "actualizado": datetime.now().strftime("%d/%m/%Y %H:%M"),
-              "completo": completo,
-              "nacional": completo["nacional"]["nocturna"],
-              "provincia": completo["provincia"]["nocturna"],
-              "santafe": completo["santafe"]["nocturna"],
-              "cordoba": completo["cordoba"]["nocturna"],
-              "entrerios": completo["entrerios"]["nocturna"],
-              "uruguay": completo["uruguay"]["nocturna"]
+          # Estructura final compatible con tu index
+          final = {
+              "actualizado": datetime.now().isoformat(),
+              "completo": datos
           }
+          # también dejamos formato viejo plano (Nacional = últimos 20 nocturna)
+          for lot, sorts in datos.items():
+              if sorts.get("nocturna"):
+                  final[lot] = sorts["nocturna"]
+              elif sorts.get("vespertina"):
+                  final[lot] = sorts["vespertina"]
 
           with open("quiniela.json","w",encoding="utf-8") as f:
-              json.dump(output,f,ensure_ascii=False,indent=2)
-          print("OK JSON con 20 x 5 sorteos creado")
+              json.dump(final,f,ensure_ascii=False,indent=2)
+
+          print(json.dumps(final,indent=2)[:3000])
           PY
-      - uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "20 numeros todos los sorteos"
-          file_pattern: quiniela.json
+
+      - name: Guardar json
+        run: |
+          git config user.name "bot"
+          git config user.email "bot@infomdqhoy.com"
+          git add quiniela.json
+          git diff --staged --quiet || git commit -m "update quiniela $(date -u)"
+          git push
