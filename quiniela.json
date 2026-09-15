@@ -1,54 +1,35 @@
-{
-  "actualizado": "15/09/2026 19:05",
-  "fecha": "2026-09-15",
-  "completo": {
-    "nacional": {
-      "previa": [],
-      "primera": [],
-      "matutina": [],
-      "vespertina": [],
-      "nocturna": []
-    },
-    "provincia": {
-      "previa": [],
-      "primera": [],
-      "matutina": [],
-      "vespertina": [],
-      "nocturna": []
-    },
-    "santafe": {
-      "previa": [],
-      "primera": [],
-      "matutina": [],
-      "vespertina": [],
-      "nocturna": []
-    },
-    "cordoba": {
-      "previa": [],
-      "primera": [],
-      "matutina": [],
-      "vespertina": [],
-      "nocturna": []
-    },
-    "entrerios": {
-      "previa": [],
-      "primera": [],
-      "matutina": [],
-      "vespertina": [],
-      "nocturna": []
-    },
-    "uruguay": {
-      "previa": [],
-      "primera": [],
-      "matutina": [],
-      "vespertina": [],
-      "nocturna": []
-    }
+[
+  {
+    "turno": "Matutina",
+    "fecha": "15/09/26",
+    "numeros": [
+      "4563",
+      "4290",
+      "8068",
+      "2532",
+      "9658",
+      "0562",
+      "1642",
+      "7613",
+      "3376",
+      "7481",
+      "4062",
+      "3284",
+      "7888",
+      "0013",
+      "4533",
+      "5321",
+      "2662",
+      "6884",
+      "5828",
+      "7511"
+    ]
   },
-  "nacional": [],
-  "provincia": [],
-  "santafe": [],
-  "cordoba": [],
-  "entrerios": [],
-  "uruguay": []
-}
+  {
+    "turno": "Primera",
+    "fecha": "15/09/26",
+    "numeros": [
+      "6037"
+    ]
+  }
+]
