@@ -1,8 +1,33 @@
 {
-  "actualizado": "15/09 01:54",
-  "resultados": {
-    "Provincia": "6559",
-    "Ciudad": "2598",
-    "Uruguay": "026"
-  }
+  "actualizado": "15/09/2026 02:05",
+  "completo": {
+    "nacional": {
+      "nocturna": [],
+      "vespertina": [],
+      "matutina": [],
+      "primera": [],
+      "previa": []
+    },
+    "provincia": {
+      "nocturna": []
+    },
+    "santafe": {
+      "nocturna": []
+    },
+    "cordoba": {
+      "nocturna": []
+    },
+    "entrerios": {
+      "nocturna": []
+    },
+    "uruguay": {
+      "nocturna": []
+    }
+  },
+  "nacional": [],
+  "provincia": [],
+  "santafe": [],
+  "cordoba": [],
+  "entrerios": [],
+  "uruguay": []
 }
