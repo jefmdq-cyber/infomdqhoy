@@ -1,0 +1,141 @@
+name: Quiniela 20 TODOS los sorteos
+
+on:
+  schedule:
+    - cron: '*/20 * * * *'
+  workflow_dispatch:
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Scrapear sorteos Noticias Formosa
+        run: |
+          pip install requests beautifulsoup4 lxml pytz
+          python << 'PY'
+          import requests, re, json, os
+          from datetime import datetime
+          from bs4 import BeautifulSoup
+          import pytz
+
+          HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/122.0.0.0 Safari/537.36"}
+
+          LOTERIAS_4CIFRAS = ["nacional", "provincia", "santafe", "cordoba", "entrerios"]
+          ORDEN_4CIFRAS = ["previa", "primera", "matutina", "vespertina", "nocturna"]
+          ORDEN_URUGUAY = ["vespertina", "nocturna"]
+
+          viejo = {}
+          if os.path.exists("quiniela.json"):
+            try:
+              viejo = json.load(open("quiniela.json", encoding="utf-8")).get("completo", {})
+            except: pass
+
+          tz_arg = pytz.timezone('America/Argentina/Buenos_Aires')
+          fecha_hoy_str = datetime.now(tz_arg).strftime("%d/%m/%Y")
+          hoy_corta = datetime.now(tz_arg).strftime("%d/%m")
+
+          # Estructura base para guardar los resultados
+          completo = {lot: {s: [] for s in ORDEN_4CIFRAS} for lot in LOTERIAS_4CIFRAS}
+          completo["uruguay"] = {s: [] for s in ORDEN_URUGUAY}
+
+          # Mapeo de nombres como figuran en el texto de Noticias Formosa
+          MAPEO_LOTERIAS = {
+              "nacional": ["nacional", "ciudad"],
+              "provincia": ["provincia", "buenos aires"],
+              "santafe": ["santa fe"],
+              "cordoba": ["córdoba", "cordoba"],
+              "entrerios": ["entre ríos", "entre rios"],
+              "uruguay": ["uruguay", "montevideo"]
+          }
+
+          def scrapear_noticias_formosa():
+              url_base = "https://www.noticiasformosa.com.ar/category/quinielas/"
+              try:
+                  r = requests.get(url_base, headers=HEADERS, timeout=30)
+                  soup = BeautifulSoup(r.text, "lxml")
+
+                  # Busca las entradas/artículos de quiniela de la página
+                  articulos = soup.find_all(["article", "div"], class_=re.compile(r'post|entry'))
+                  
+                  for art in articulos:
+                      txt_art = art.get_text().lower()
+                      
+                      # Verifica que la publicación pertenezca al día de hoy
+                      if not any(fecha_hoy_str in txt_art or hoy_corta in txt_art for _ in [1]):
+                          continue
+
+                      tablas = art.find_all("table")
+                      for tabla in tablas:
+                          txt_tabla = tabla.get_text().lower()
+                          
+                          # Identifica lotería y sorteo en la tabla
+                          lot_encontrada = None
+                          for lot_key, variantes in MAPEO_LOTERIAS.items():
+                              if any(v in txt_tabla for v in variantes):
+                                  lot_encontrada = lot_key
+                                  break
+                          
+                          sorteo_encontrado = None
+                          orden_lista = ORDEN_URUGUAY if lot_encontrada == "uruguay" else ORDEN_4CIFRAS
+                          for s in orden_lista:
+                              if s in txt_tabla:
+                                  sorteo_encontrado = s
+                                  break
+
+                          if lot_encontrada and sorteo_encontrado:
+                              posiciones = {}
+                              digitos = 3 if lot_encontrada == "uruguay" else 4
+                              
+                              for fila in tabla.find_all("tr"):
+                                  cols = [c.get_text(strip=True) for c in fila.find_all(["td", "th"])]
+                                  for i in range(len(cols) - 1):
+                                      p_text = cols[i].replace("º", "").replace("°", "").strip()
+                                      v_text = cols[i+1].strip()
+                                      
+                                      if p_text.isdigit() and len(v_text) == digitos and v_text.isdigit():
+                                          pos = int(p_text)
+                                          if 1 <= pos <= 20 and pos not in posiciones:
+                                              posiciones[pos] = v_text
+
+                              if len(posiciones) == 20:
+                                  lista_ordenada = [posiciones[i] for i in range(1, 21)]
+                                  completo[lot_encontrada][sorteo_encontrado] = lista_ordenada
+
+              except Exception as e:
+                  print(f"Error parseando Noticias Formosa: {e}")
+
+          # Ejecuta el scraping
+          scrapear_noticias_formosa()
+
+          # Preserva datos anteriores si hoy aún no sorteó alguna quiniela
+          for lot, sorteos in completo.items():
+              for s, nums in sorteos.items():
+                  if not nums and viejo.get(lot, {}).get(s):
+                      completo[lot][s] = viejo[lot][s]
+
+          output = {
+              "actualizado": datetime.now(tz_arg).strftime("%d/%m/%Y %H:%M"),
+              "completo": completo,
+              "nacional":  completo["nacional"].get("nocturna", []),
+              "provincia": completo["provincia"].get("nocturna", []),
+              "santafe":   completo["santafe"].get("nocturna", []),
+              "cordoba":   completo["cordoba"].get("nocturna", []),
+              "entrerios": completo["entrerios"].get("nocturna", []),
+              "uruguay":   completo["uruguay"].get("nocturna", []),
+          }
+
+          with open("quiniela.json", "w", encoding="utf-8") as f:
+              json.dump(output, f, ensure_ascii=False, indent=2)
+
+          print("OK: quiniela.json generado con éxito usando Noticias Formosa.")
+          PY
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "FIX: Cambio de fuente a Noticias Formosa (Scraping limpio)"
+          file_pattern: quiniela.json
