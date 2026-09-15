@@ -52,20 +52,20 @@ body{background:#f0f4f8;color:#1a202c}
 </div>
 <div class="container">
 <div class="card"><span class="badge" style="background:#dbeafe;color:#1d4ed8">DÓLAR HOY</span><h2 style="margin-top:6px">Dólar Hoy Mar del Plata</h2><p id="dolar-t" style="font-size:12px;color:#64748b"></p><div class="dolar-grid" id="dolar-g"></div></div>
-<div class="card"><span class="badge" style="background:#dcfce7;color:#15803d">QUINIELA COMPLETA</span><h2 style="margin-top:6px;font-size:18px">Quiniela Hoy - 6 Loterías</h2><div class="q-tabs" id="qt"></div><div class="q-grid" id="qg"></div><a href="#" class="btn-outline" onclick="openM();return false">Ver 20 números de <span id="qn">Nacional</span></a><p id="info-uy" style="display:none;font-size:11px;color:#15803d;font-weight:700;margin-top:8px">🇺🇾 Uruguay solo tiene 2 sorteos oficiales: 15:00 y 21:00</p></div>
+<div class="card"><span class="badge" style="background:#dcfce7;color:#15803d">QUINIELA COMPLETA 20 NÚMEROS - TUJUGADA</span><h2 style="margin-top:6px;font-size:18px">Quiniela Hoy - 6 Loterías</h2><div class="q-tabs" id="qt"></div><div class="q-grid" id="qg"></div><a href="#" class="btn-outline" onclick="openM();return false">Ver 20 números de <span id="qn">Nacional</span></a><p id="info-uy" style="display:none;font-size:11px;color:#15803d;font-weight:700;margin-top:8px">🇺🇾 Uruguay solo tiene 2 sorteos oficiales: 15:00 y 21:00</p></div>
 <div class="card" style="border-left:5px solid #25D366"><h2>💼 Empleos MDQ HOY</h2><div style="margin-top:10px"><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Mozo/a</b> - Güemes - NUEVO HOY</div><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Cajero/a</b> - Constitución</div><div style="padding:10px 0"><b>Vendedor/a</b> - Peatonal</div></div><a href="https://empleos-mdq.pages.dev/" target="_blank" class="btn-wsp">Ver todos los empleos →</a></div>
 <div class="card" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);color:white"><h2>🌤️ Clima Mar del Plata</h2><div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><div style="font-size:48px;font-weight:900" id="c-t">--°</div><div style="text-align:right;font-size:13px" id="c-d">Cargando automático...</div></div></div>
 <div class="footer"><a href="/terminos.html">Términos</a> | <a href="/privacidad.html">Privacidad</a> | <a href="/contacto.html">Contacto</a><p style="margin-top:10px;font-size:11px;color:#94a3b8">INFO MDQ HOY - jefmdq@gmail.com - © 2026</p></div>
 </div>
 <div id="modal" onclick="closeM()"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-x" onclick="closeM()">×</span><h3 id="mt" style="padding-right:30px;font-size:18px"></h3><div id="ml" class="quiniela-list"></div></div></div>
-<div id="page-modal" style="position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;z-index:1000;align-items:center;justify-content:center;padding:18px"><div style="background:white;border-radius:16px;padding:20px;max-width:500px;width:100%;max-height:85vh;overflow:auto;position:relative"><span class="close-x" onclick="document.getElementById('page-modal').style.display='none'">×</span><h2 id="page-title" style="padding-right:30px"></h2><div id="page-content" style="margin-top:12px;font-size:14px;line-height:1.5;color:#334155"></div></div></div>
 <script>
 document.getElementById('f').textContent=new Date().toLocaleDateString('es-AR');
 let s=0; setInterval(()=>{s=s===0?1:0;document.getElementById('slide1').style.opacity=s===0?1:0;document.getElementById('slide2').style.opacity=s===1?1:0;},4000);
-async function dolar(){try{const r=await fetch('https://dolarapi.com/v1/dolares');const d=await r.json();let m={};d.forEach(x=>m[x.casa]=x);document.getElementById('dolar-g').innerHTML=`<div class="dolar-item blue"><div style="font-size:10px;color:#64748b;font-weight:700">BLUE</div><div style="font-size:22px;font-weight:900">$${m.blue.venta}</div><div style="font-size:11px">Compra $${m.blue.compra}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">OFICIAL</div><div style="font-size:22px;font-weight:900">$${m.oficial.venta}</div><div style="font-size:11px">Compra $${m.oficial.compra}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">MEP</div><div style="font-size:22px;font-weight:900">$${m.bolsa.venta}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">TARJETA</div><div style="font-size:22px;font-weight:900">$${m.tarjeta.venta}</div></div>`;document.getElementById('dolar-t').textContent='Actualizado '+new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});}catch(e){}}
-dolar();
-async function clima(){try{const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=-38.0055&longitude=-57.5426&current=temperature_2m,wind_speed_10m,relative_humidity_2m&timezone=America/Argentina/Buenos_Aires');const j=await r.json();document.getElementById('c-t').textContent=Math.round(j.current.temperature_2m)+'°';document.getElementById('c-d').innerHTML=`${Math.round(j.current.temperature_2m)}° Mar del Plata<br>Viento ${Math.round(j.current.wind_speed_10m)}km/h - Hum ${j.current.relative_humidity_2m}%`;}catch(e){}}
-clima();
+
+async function dolar(){try{const r=await fetch('https://dolarapi.com/v1/dolares');const d=await r.json();let m={};d.forEach(x=>m[x.casa]=x);document.getElementById('dolar-g').innerHTML=`<div class="dolar-item blue"><div style="font-size:10px;color:#64748b;font-weight:700">BLUE</div><div style="font-size:22px;font-weight:900">$${m.blue.venta}</div><div style="font-size:11px">Compra $${m.blue.compra}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">OFICIAL</div><div style="font-size:22px;font-weight:900">$${m.oficial.venta}</div><div style="font-size:11px">Compra $${m.oficial.compra}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">MEP</div><div style="font-size:22px;font-weight:900">$${m.bolsa.venta}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">TARJETA</div><div style="font-size:22px;font-weight:900">$${m.tarjeta.venta}</div></div>`;document.getElementById('dolar-t').textContent='Actualizado '+new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});}catch(e){}} dolar();
+
+async function clima(){try{const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=-38.0055&longitude=-57.5426&current=temperature_2m,wind_speed_10m,relative_humidity_2m&timezone=America/Argentina/Buenos_Aires');const j=await r.json();document.getElementById('c-t').textContent=Math.round(j.current.temperature_2m)+'°';document.getElementById('c-d').innerHTML=`${Math.round(j.current.temperature_2m)}° Mar del Plata<br>Viento ${Math.round(j.current.wind_speed_10m)}km/h - Hum ${j.current.relative_humidity_2m}%`;}catch(e){}} clima();
+
 let todas={Nacional:[],Provincia:[],SantaFe:[],Cordoba:[],EntreRios:[],Uruguay:[]};
 let datosCompletos=null;
 const horsARG=["Previa 10:15","Primera 12:00","Matutina 15:00","Vespertina 18:00","Nocturna 21:00"];
@@ -83,55 +83,45 @@ function render(){
  let listaIds = getListaSorteos();
  document.getElementById('qg').innerHTML=hors.map((h,i)=>{
    let idSorteo = listaIds[i];
+   let key = actual.toLowerCase();
    let num = "--";
-   if(datosCompletos && datosCompletos[actual.toLowerCase()] && datosCompletos[actual.toLowerCase()][idSorteo]){
-     num = datosCompletos[actual.toLowerCase()][idSorteo][0] || "--";
-   } else {
-     num = (todas[actual] && todas[actual][i]) || "--";
+   if(datosCompletos && datosCompletos[key] && datosCompletos[key][idSorteo]){
+     num = datosCompletos[key][idSorteo][0] || "--";
    }
    return `<div class="q-box" onclick="actualSorteo='${idSorteo}';openM()"><div style="font-size:11px;color:#64748b;font-weight:700">${h}</div><b>${num}</b></div>`;
  }).join('');
 }
 function openM(){
  document.getElementById('modal').classList.add('active');
- let arr = [];
- if(datosCompletos && datosCompletos[actual.toLowerCase()] && datosCompletos[actual.toLowerCase()][actualSorteo]){
-   arr = datosCompletos[actual.toLowerCase()][actualSorteo];
- } else {
-   arr = todas[actual] || [];
- }
+ let key = actual.toLowerCase();
+ let arr = (datosCompletos && datosCompletos[key] && datosCompletos[key][actualSorteo])? datosCompletos[key][actualSorteo] : [];
  document.getElementById('mt').textContent=actual+' - '+actualSorteo.toUpperCase()+' - 20 números';
- document.getElementById('ml').innerHTML=arr.map((n,i)=>i===0?`<b class="q-pos cabeza">1°</b><span class="q-num cabeza">${n}</span>`:`<b class="q-pos">${i+1}°</b><span class="q-num">${n}</span>`).join('');
+ document.getElementById('ml').innerHTML=arr.map((n,i)=>i===0?`<b class="q-pos cabeza">1°</b><span class="q-num cabeza">${n}</span>`:`<b class="q-pos">${i+1}°</b><span class="q-num">${n}</span>`).join('') || "Aún sin datos para este sorteo";
 }
 function closeM(){document.getElementById('modal').classList.remove('active');}
 render();
-fetch('quiniela.json?v='+Date.now()).then(r=>r.json()).then(raw=>{
- let d = Array.isArray(raw)? raw[0] : raw;
- if(!d) return;
- if(d.completo){
-   datosCompletos = d.completo;
-   todas = {
-     Nacional: d.completo.nacional?.nocturna || d.nacional || [],
-     Provincia: d.completo.provincia?.nocturna || d.provincia || [],
-     SantaFe: d.completo.santafe?.nocturna || d.santafe || [],
-     Cordoba: d.completo.cordoba?.nocturna || d.cordoba || [],
-     EntreRios: d.completo.entrerios?.nocturna || d.entrerios || [],
-     Uruguay: d.completo.uruguay?.nocturna || d.uruguay || []
-   };
- } else {
-   todas = {
-     Nacional: d.nacional || [],
-     Provincia: d.provincia || [],
-     SantaFe: d.santafe || [],
-     Cordoba: d.cordoba || [],
-     EntreRios: d.entrerios || [],
-     Uruguay: d.uruguay || []
-   };
- }
- render();
-}).catch(e=>{console.log(e)});
-const pages={terminos:`<p><b>INFO MDQ HOY</b> portal independiente no oficial de Mar del Plata.</p><p style="margin-top:10px"><b>Contacto:</b> jefmdq@gmail.com</p>`,privacidad:`<p>Usamos cookies de Monetag para publicidad. No pedimos registro.</p>`,contacto:`<p><b>Contacto</b><br><a href="mailto:jefmdq@gmail.com" style="color:#0ea5e9;font-weight:800">jefmdq@gmail.com</a></p>`};
-function openPage(k){window.location.href='/'+k+'.html';}
+
+// --- ESTE ES EL FIX: LEE TU ARCHIVO LOCAL, NO GITHUB RAW ---
+fetch('/quiniela.json?v='+Date.now())
+.then(r=>{
+  if(!r.ok) throw new Error("quiniela.json no encontrado ("+r.status+") - debe estar junto al index.html");
+  return r.json();
+})
+.then(raw=>{
+  let d = Array.isArray(raw)? raw[0] : raw;
+  let fuente = d.completo || d;
+  let norm = {};
+  Object.keys(fuente).forEach(k=>{
+    norm[k.toLowerCase()] = fuente[k];
+  });
+  datosCompletos = norm;
+  console.log("Quiniela cargada:", norm);
+  render();
+})
+.catch(e=>{
+  console.error(e);
+  document.getElementById('qg').innerHTML = `<div style="grid-column:1/-1;background:#fee2e2;border:2px solid #dc2626;padding:12px;border-radius:10px;color:#991b1b;font-size:12px"><b>Error:</b> ${e.message}<br>Asegurate que quiniela.json este en la raiz del repo.</div>`;
+});
 </script>
 </body>
 </html>
