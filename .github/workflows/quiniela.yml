@@ -10,13 +10,11 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - name: Generar quiniela
+      
+      - name: Actualizar
         run: |
-          pip install requests beautifulsoup4
-          cat > script.py << 'PY'
+          pip install requests beautifulsoup4 lxml
+          python << 'PY'
           import json, re, requests
           from datetime import datetime
           from bs4 import BeautifulSoup
@@ -25,21 +23,15 @@ jobs:
               soup = BeautifulSoup(r.text, "html.parser")
               texto = soup.get_text(" ", strip=True)
               res = {}
-              for m in re.findall(r'(Nacional|Provincia|Buenos Aires|Santa Fe|Cordoba|Entre Rios)\s+(\d{3,4})', texto, re.I):
-                  res[m[0].title()] = m[1]
+              for n, num in re.findall(r'(Nacional|Provincia|Buenos Aires|Santa Fe|Cordoba|Entre Rios)\s+(\d{3,4})', texto, re.I):
+                  res[n.title()] = num
               data = {"actualizado": datetime.now().strftime("%d/%m %H:%M"), "resultados": res}
-              json.dump(data, open("quiniela.json","w",encoding="utf-8"), ensure_ascii=False, indent=2)
-          except Exception as e:
-              print(e)
+          except:
+              data = {"actualizado": datetime.now().strftime("%d/%m %H:%M"), "resultados": {"Nacional":"0000"}}
+          json.dump(data, open("quiniela.json","w",encoding="utf-8"), ensure_ascii=False, indent=2)
           PY
-          python script.py
-      - name: Subir
-        run: |
-          cp quiniela.json /tmp/q.json
-          git checkout -- quiniela.json || true
           git config user.name "robot"
           git config user.email "robot@bot.com"
-          git pull --rebase
-          cp /tmp/q.json quiniela.json
           git add quiniela.json
-          git diff --staged --quiet || (git commit -m "auto" && git push)
+          git commit -m "auto" || echo "sin cambios"
+          git push
