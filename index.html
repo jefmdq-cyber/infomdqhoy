@@ -1,163 +1,118 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="google-site-verification" content="7e64033b70480c67" />
-<title>INFO MDQ HOY | Dólar, Quiniela y Empleos Mar del Plata</title>
-<script>(function(s){s.dataset.zone='11803402',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-<script>(function(s){s.dataset.zone='11803415',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
-body{background:#f0f4f8;color:#1a202c}
-.hero{position:relative;height:320px;overflow:hidden;background:#0f172a}
-.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1s ease}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,23,42,.95) 0%,rgba(0,0,0,.2) 60%)}
-.hero-text{position:absolute;bottom:18px;left:16px;right:16px;color:white;z-index:2}
-.hero-text h1{font-size:36px;font-weight:900;letter-spacing:-1px}
-.container{max-width:520px;margin:0 auto;padding:14px}
-.card{background:white;border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,.06);border:1px solid #e2e8f0}
-.badge{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800}
-.dolar-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-.dolar-item{background:#f8fafc;border-radius:12px;padding:14px;text-align:center;border:2px solid #e2e8f0}
-.dolar-item.blue{background:#eff6ff;border-color:#3b82f6}
-.q-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px}
-.q-tab{white-space:nowrap;padding:8px 12px;border-radius:20px;font-size:12px;font-weight:700;border:2px solid #e2e8f0;background:white;cursor:pointer}
-.q-tab.active{background:#1e40af;color:white;border-color:#1e40af}
-.q-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.q-box{background:white;border:2px solid #1e293b;border-radius:12px;padding:12px;text-align:center;box-shadow:0 2px 0 #1e293b;cursor:pointer}
-.q-box b{font-size:20px;font-weight:900;color:#0f172a;letter-spacing:1px}
-.btn-wsp{display:block;background:#25D366;color:white;text-align:center;padding:16px;border-radius:12px;text-decoration:none;font-weight:800;margin-top:10px}
-.btn-outline{display:block;background:white;color:#1e40af;border:2px solid #1e40af;text-align:center;padding:10px;border-radius:10px;text-decoration:none;font-weight:700;font-size:13px;margin-top:8px}
-#modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;z-index:999;align-items:center;justify-content:center;padding:18px}
-#modal.active{display:flex}
-.modal-box{background:white;border-radius:20px;padding:22px;max-width:420px;width:100%;max-height:85vh;overflow:auto;position:relative;border:3px solid #0f172a}
-.close-x{position:absolute;top:10px;right:12px;font-size:26px;font-weight:900;cursor:pointer;background:#0f172a;color:white;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center}
-.quiniela-list{display:grid;grid-template-columns:60px 1fr;gap:8px;margin-top:14px}
-.q-pos{background:#f1f5f9;border:2px solid #cbd5e1;border-radius:8px;padding:6px;text-align:center;font-weight:900;font-size:13px}
-.q-num{background:white;border:2px solid #0f172a;border-radius:8px;padding:6px 10px;font-weight:900;font-size:18px;letter-spacing:1px}
-.q-num.cabeza{background:#dc2626;color:white;border-color:#991b1b;box-shadow:0 2px 0 #991b1b;font-size:22px}
-.q-pos.cabeza{background:#dc2626;color:white;border-color:#991b1b}
-.footer{padding:20px;text-align:center}
-.footer a{color:#64748b;text-decoration:none;margin:0 6px;font-size:12px;font-weight:600}
-@media(min-width:800px){.container{max-width:1100px;display:grid;grid-template-columns:1fr 1fr;gap:16px}.hero{height:420px}.hero-text h1{font-size:56px}.container >.footer{grid-column:1 / -1}.card{margin-bottom:0}}
-</style>
-</head>
-<body>
-<div class="hero">
-<img id="slide1" src="banner1.jpg" alt="Mar del Plata día" style="opacity:1">
-<img id="slide2" src="banner2.jpg" alt="Mar del Plata noche" style="opacity:0">
-<div class="hero-overlay"></div>
-<div class="hero-text"><h1>INFO MDQ HOY</h1><p>Mar del Plata - Dólar, Quiniela, Clima y Empleos - <span id="f"></span></p></div>
-</div>
-<div class="container">
-<div class="card"><span class="badge" style="background:#dbeafe;color:#1d4ed8">DÓLAR HOY</span><h2 style="margin-top:6px">Dólar Hoy Mar del Plata</h2><p id="dolar-t" style="font-size:12px;color:#64748b"></p><div class="dolar-grid" id="dolar-g"></div></div>
-<div class="card"><span class="badge" style="background:#dcfce7;color:#15803d">QUINIELA COMPLETA 20 NÚMEROS - TUJUGADA</span><h2 style="margin-top:6px;font-size:18px" id="q-titulo">Quiniela Hoy - 6 Loterías</h2><select id="q-fecha" style="width:100%;margin-top:8px;padding:10px;border-radius:10px;border:2px solid #e2e8f0;font-weight:700;font-size:13px;background:white;color:#1e293b"></select><div class="q-tabs" id="qt"></div><div class="q-grid" id="qg"></div><a href="#" class="btn-outline" onclick="openM();return false">Ver 20 números de <span id="qn">Nacional</span></a><p id="info-uy" style="display:none;font-size:11px;color:#15803d;font-weight:700;margin-top:8px">🇺🇾 Uruguay solo tiene 2 sorteos oficiales: 15:00 y 21:00</p></div>
-<div class="card" style="border-left:5px solid #25D366"><h2>💼 Empleos MDQ HOY</h2><div style="margin-top:10px"><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Mozo/a</b> - Güemes - NUEVO HOY</div><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Cajero/a</b> - Constitución</div><div style="padding:10px 0"><b>Vendedor/a</b> - Peatonal</div></div><a href="https://empleos-mdq.pages.dev/" target="_blank" class="btn-wsp">Ver todos los empleos →</a></div>
-<div class="card" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);color:white"><h2>🌤️ Clima Mar del Plata</h2><div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><div style="font-size:48px;font-weight:900" id="c-t">--°</div><div style="text-align:right;font-size:13px" id="c-d">Cargando automático...</div></div></div>
-<div class="footer"><a href="/terminos.html">Términos</a> | <a href="/privacidad.html">Privacidad</a> | <a href="/contacto.html">Contacto</a><p style="margin-top:10px;font-size:11px;color:#94a3b8">INFO MDQ HOY - jefmdq@gmail.com - © 2026</p></div>
-</div>
-<div id="modal" onclick="closeM()"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-x" onclick="closeM()">×</span><h3 id="mt" style="padding-right:30px;font-size:18px"></h3><div id="ml" class="quiniela-list"></div></div></div>
-<script>
-document.getElementById('f').textContent=new Date().toLocaleDateString('es-AR');
-let s=0; setInterval(()=>{s=s===0?1:0;document.getElementById('slide1').style.opacity=s===0?1:0;document.getElementById('slide2').style.opacity=s===1?1:0;},4000);
+name: Quiniela 20 TODOS los sorteos
 
-async function dolar(){try{const r=await fetch('https://dolarapi.com/v1/dolares');const d=await r.json();let m={};d.forEach(x=>m[x.casa]=x);document.getElementById('dolar-g').innerHTML=`<div class="dolar-item blue"><div style="font-size:10px;color:#64748b;font-weight:700">BLUE</div><div style="font-size:22px;font-weight:900">$${m.blue.venta}</div><div style="font-size:11px">Compra $${m.blue.compra}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">OFICIAL</div><div style="font-size:22px;font-weight:900">$${m.oficial.venta}</div><div style="font-size:11px">Compra $${m.oficial.compra}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">MEP</div><div style="font-size:22px;font-weight:900">$${m.bolsa.venta}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">TARJETA</div><div style="font-size:22px;font-weight:900">$${m.tarjeta.venta}</div></div>`;document.getElementById('dolar-t').textContent='Actualizado '+new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});}catch(e){}} dolar();
+on:
+  schedule:
+    - cron: '*/20 * * * *'
+  workflow_dispatch:
 
-async function clima(){try{const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=-38.0055&longitude=-57.5426&current=temperature_2m,wind_speed_10m,relative_humidity_2m&timezone=America/Argentina/Buenos_Aires');const j=await r.json();document.getElementById('c-t').textContent=Math.round(j.current.temperature_2m)+'°';document.getElementById('c-d').innerHTML=`${Math.round(j.current.temperature_2m)}° Mar del Plata<br>Viento ${Math.round(j.current.wind_speed_10m)}km/h - Hum ${j.current.relative_humidity_2m}%`;}catch(e){}} clima();
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Scrapear sorteos QuinielaNacional1
+        run: |
+          pip install requests beautifulsoup4 lxml pytz
+          python << 'PY'
+          import requests, re, json, os
+          from datetime import datetime
+          from bs4 import BeautifulSoup
+          import pytz
 
-let todas={Nacional:[],Provincia:[],SantaFe:[],Cordoba:[],EntreRios:[],Uruguay:[]};
-let datosCompletos=null;
-const horsARG=["Previa 10:15","Primera 12:00","Matutina 15:00","Vespertina 18:00","Nocturna 21:00"];
-const horsUY=["Vespertina 15:00","Nocturna 21:00"];
-let actual="Nacional";
-let actualSorteo="nocturna";
-function getHors(){ return actual==="Uruguay"? horsUY : horsARG; }
-function getListaSorteos(){ return actual==="Uruguay"? ["vespertina","nocturna"] : ["previa","primera","matutina","vespertina","nocturna"]; }
-function renderT(){document.getElementById('qt').innerHTML=Object.keys(todas).map(k=>`<div class="q-tab ${k===actual?'active':''}" onclick="actual='${k}';render()">${k}</div>`).join('');}
-function render(){
- renderT();
- document.getElementById('qn').textContent=actual;
- document.getElementById('info-uy').style.display = actual==="Uruguay"? 'block' : 'none';
- let hors = getHors();
- let listaIds = getListaSorteos();
- document.getElementById('qg').innerHTML=hors.map((h,i)=>{
-   let idSorteo = listaIds[i];
-   let key = actual.toLowerCase();
-   let num = "--";
-   if(datosCompletos && datosCompletos[key] && datosCompletos[key][idSorteo]){
-     num = datosCompletos[key][idSorteo][0] || "--";
-   }
-   return `<div class="q-box" onclick="actualSorteo='${idSorteo}';openM()"><div style="font-size:11px;color:#64748b;font-weight:700">${h}</div><b>${num}</b></div>`;
- }).join('');
-}
-function openM(){
- document.getElementById('modal').classList.add('active');
- let key = actual.toLowerCase();
- let arr = (datosCompletos && datosCompletos[key] && datosCompletos[key][actualSorteo])? datosCompletos[key][actualSorteo] : [];
- document.getElementById('mt').textContent=actual+' - '+actualSorteo.toUpperCase()+' - 20 números';
- document.getElementById('ml').innerHTML=arr.map((n,i)=>i===0?`<b class="q-pos cabeza">1°</b><span class="q-num cabeza">${n}</span>`:`<b class="q-pos">${i+1}°</b><span class="q-num">${n}</span>`).join('') || "Aún sin datos para este sorteo";
-}
-function closeM(){document.getElementById('modal').classList.remove('active');}
-render();
+          HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/122.0.0.0 Safari/537.36"}
 
-// ---------- SELECTOR DE FECHA (ultimos 30 dias) ----------
-// Genera las fechas en huso horario Argentina, no en el huso del navegador,
-// para que "Hoy" siempre sea el dia correcto sin importar donde este el usuario.
-function fechaARG(offsetDias){
-  const ahora = new Date();
-  const partes = new Intl.DateTimeFormat('en-CA',{timeZone:'America/Argentina/Buenos_Aires',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(ahora);
-  const obj = {}; partes.forEach(p=>obj[p.type]=p.value);
-  const base = new Date(Date.UTC(obj.year, obj.month-1, obj.day));
-  base.setUTCDate(base.getUTCDate()+offsetDias);
-  return base.toISOString().slice(0,10); // YYYY-MM-DD
-}
-function etiquetaFecha(offsetDias, fechaStr){
-  if(offsetDias===0) return 'Hoy - '+fechaStr.split('-').reverse().slice(0,2).join('/');
-  if(offsetDias===-1) return 'Ayer - '+fechaStr.split('-').reverse().slice(0,2).join('/');
-  const [y,m,d] = fechaStr.split('-');
-  return `${d}/${m}/${y}`;
-}
+          URL_BASE = "https://quinielanacional1.com.ar/"
+          ORDEN_4CIFRAS = ["previa", "primera", "matutina", "vespertina", "nocturna"]
+          ORDEN_URUGUAY = ["vespertina", "nocturna"]
 
-const selectFecha = document.getElementById('q-fecha');
-for(let i=0;i>=-29;i--){
-  const f = fechaARG(i);
-  const opt = document.createElement('option');
-  opt.value = f;
-  opt.textContent = etiquetaFecha(i, f);
-  selectFecha.appendChild(opt);
-}
-selectFecha.value = fechaARG(0);
-selectFecha.addEventListener('change', ()=> cargarDia(selectFecha.value));
+          LOTERIAS = {
+              "nacional": ["nacional", "ciudad"],
+              "provincia": ["buenos aires", "provincia"],
+              "santafe": ["santa fe"],
+              "cordoba": ["cordoba", "córdoba"],
+              "entrerios": ["entre rios", "entre ríos"],
+              "uruguay": ["uruguay", "oro uruguay"]
+          }
 
-function cargarDia(fecha){
-  const esHoy = fecha === fechaARG(0);
-  document.getElementById('q-titulo').textContent = esHoy ? 'Quiniela Hoy - 6 Loterías' : 'Quiniela del '+fecha.split('-').reverse().join('/');
-  // El dia de hoy se lee de quiniela.json (se actualiza cada 20 min).
-  // Los dias anteriores se leen del archivo fijo en historial/.
-  const ruta = esHoy ? '/quiniela.json' : `/historial/${fecha}.json`;
-  fetch(ruta+'?v='+Date.now())
-  .then(r=>{
-    if(!r.ok) throw new Error(esHoy? "quiniela.json no encontrado ("+r.status+")" : "Sin datos guardados para ese dia");
-    return r.json();
-  })
-  .then(raw=>{
-    let d = Array.isArray(raw)? raw[0] : raw;
-    let fuente = d.completo || d;
-    let norm = {};
-    Object.keys(fuente).forEach(k=>{ norm[k.toLowerCase()] = fuente[k]; });
-    datosCompletos = norm;
-    console.log("Quiniela cargada ("+fecha+"):", norm);
-    render();
-  })
-  .catch(e=>{
-    console.error(e);
-    datosCompletos = null;
-    document.getElementById('qg').innerHTML = `<div style="grid-column:1/-1;background:#fee2e2;border:2px solid #dc2626;padding:12px;border-radius:10px;color:#991b1b;font-size:12px"><b>${esHoy?'Error':'Sin datos'}:</b> ${e.message}</div>`;
-  });
-}
+          viejo = {}
+          if os.path.exists("quiniela.json"):
+              try:
+                  viejo = json.load(open("quiniela.json", encoding="utf-8")).get("completo", {})
+              except: pass
 
-cargarDia(selectFecha.value);
-</script>
-</body>
-</html>
+          tz_arg = pytz.timezone('America/Argentina/Buenos_Aires')
+          completo = {lot: {s: [] for s in (ORDEN_URUGUAY if lot == "uruguay" else ORDEN_4CIFRAS)} for lot in LOTERIAS}
+
+          try:
+              r = requests.get(URL_BASE, headers=HEADERS, timeout=30)
+              soup = BeautifulSoup(r.text, "lxml")
+              texto_pagina = soup.get_text()
+
+              # Divide la página por bloques de sorteos
+              bloques = re.split(r'(?=Resultados de la Quiniela|Martes|Lunes|Miércoles|Jueves|Viernes|Sábado)', texto_pagina, flags=re.IGNORECASE)
+
+              for bloque in bloques:
+                  txt_b = bloque.lower()
+
+                  # Identificar tipo de sorteo (primera, matutina, etc.)
+                  sorteo_actual = None
+                  for s in ORDEN_4CIFRAS:
+                      if s in txt_b:
+                          sorteo_actual = s
+                          break
+                  if not sorteo_actual:
+                      continue
+
+                  # Extraer pares (Ubicación. Número) secuencialmente
+                  # Ejemplo: 1. 1205  2. 1259 ... 20. 1201
+                  for lot_key, variantes in LOTERIAS.items():
+                      if any(v in txt_b for v in variantes):
+                          digitos = 3 if lot_key == "uruguay" else 4
+                          patron = rf'\b([1-9]|1[0-9]|20)[\.\º\°\s]+(\d{{{digitos}}})\b'
+                          coincidencias = re.findall(patron, bloque)
+
+                          posiciones = {}
+                          for pos_str, num_str in coincidencias:
+                              pos = int(pos_str)
+                              if 1 <= pos <= 20 and pos not in posiciones:
+                                  posiciones[pos] = num_str
+
+                          if len(posiciones) == 20:
+                              lista_ordenada = [posiciones[i] for i in range(1, 21)]
+                              if sorteo_actual in completo[lot_key]:
+                                  completo[lot_key][sorteo_actual] = lista_ordenada
+
+          except Exception as e:
+              print(f"Error parseando QuinielaNacional1: {e}")
+
+          # Preservar datos anteriores si el sorteo de hoy aún no salió
+          for lot, sorteos in completo.items():
+              for s, nums in sorteos.items():
+                  if not nums and viejo.get(lot, {}).get(s):
+                      completo[lot][s] = viejo[lot][s]
+
+          output = {
+              "actualizado": datetime.now(tz_arg).strftime("%d/%m/%Y %H:%M"),
+              "completo": completo,
+              "nacional":  completo["nacional"].get("nocturna", []),
+              "provincia": completo["provincia"].get("nocturna", []),
+              "santafe":   completo["santafe"].get("nocturna", []),
+              "cordoba":   completo["cordoba"].get("nocturna", []),
+              "entrerios": completo["entrerios"].get("nocturna", []),
+              "uruguay":   completo["uruguay"].get("nocturna", []),
+          }
+
+          with open("quiniela.json", "w", encoding="utf-8") as f:
+              json.dump(output, f, ensure_ascii=False, indent=2)
+
+          print("OK: quiniela.json generado correctamente.")
+          PY
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "FIX: Cambio de fuente a QuinielaNacional1 (Lectura secuencial limpia)"
+          file_pattern: quiniela.json
