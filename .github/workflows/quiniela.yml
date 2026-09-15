@@ -24,84 +24,54 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Instalar dependencias
-        run: pip install requests beautifulsoup4 lxml
-      - name: Actualizar quiniela
-        run: |
+      - run: pip install requests beautifulsoup4 lxml
+      - run: |
           python << 'PY'
           import requests, re, json, os
           from bs4 import BeautifulSoup
           from datetime import datetime, timezone, timedelta
-
-          print("Iniciando...")
           url = "https://www.jugandoonline.com.ar/SorteosQuiniela3.aspx"
-          try:
-              html = requests.get(url, headers={"User-Agent":"Mozilla/5.0"}, timeout=40).text
-          except Exception as e:
-              print(f"Error al bajar pagina: {e}")
-              html = ""
-
-          soup = BeautifulSoup(html, "lxml")
-          texto = soup.get_text(" ", strip=True)
-          print(f"Texto largo: {len(texto)}")
-
-          def sacar_numeros(bloque):
+          html = requests.get(url, headers={"User-Agent":"Mozilla/5.0"}, timeout=40).text
+          texto = BeautifulSoup(html, "lxml").get_text(" ", strip=True)
+          def sacar(bloque):
               nums = re.findall(r'\b\d{3,4}\b', bloque)
-              res = []
+              res=[]
               for n in nums:
-                  if len(n) >= 3:
+                  if len(n)>=3:
                       res.append(n.zfill(4))
-                  if len(res) == 20:
+                  if len(res)==20:
                       break
               return res
-
-          def extraer(ciudad_pat, turno_pat):
-              pat = rf"{ciudad_pat}.*?{turno_pat}"
-              m = re.search(pat, texto, re.I)
-              if not m:
-                  return []
-              bloque = texto[m.end():m.end()+2500]
-              return sacar_numeros(bloque)
-
-          if not os.path.exists("quiniela.json"):
-              viejo = {}
-          else:
-              with open("quiniela.json","r",encoding="utf-8") as f:
-                  viejo = json.load(f)
-
-          nuevo = {}
-          nuevo["nacional_previa"] = extraer(r"Ciudad", r"Previa")
-          nuevo["nacional_primera"] = extraer(r"Ciudad", r"Primera")
-          nuevo["nacional_matutina"] = extraer(r"Ciudad", r"Matutina")
-          nuevo["nacional_vespertina"] = extraer(r"Ciudad", r"Vespertina")
-          nuevo["nacional_nocturna"] = extraer(r"Ciudad", r"Nocturna")
-          nuevo["provincia_previa"] = extraer(r"Prov", r"Previa")
-          nuevo["provincia_primera"] = extraer(r"Prov", r"Primera")
-          nuevo["provincia_matutina"] = extraer(r"Prov", r"Matutina")
-          nuevo["provincia_vespertina"] = extraer(r"Prov", r"Vespertina")
-          nuevo["provincia_nocturna"] = extraer(r"Prov", r"Nocturna")
-
-          ahora = datetime.now(timezone.utc) - timedelta(hours=3)
-          viejo["fecha"] = ahora.strftime("%d/%m/%Y")
-          viejo["actualizado"] = ahora.strftime("%H:%M")
-
+          def extraer(cp, tp):
+              m=re.search(rf"{cp}.*?{tp}", texto, re.I)
+              return sacar(texto[m.end():m.end()+2500]) if m else []
+          viejo=json.load(open("quiniela.json",encoding="utf-8")) if os.path.exists("quiniela.json") else {}
+          nuevo={}
+          nuevo["nacional_previa"]=extraer(r"Ciudad",r"Previa")
+          nuevo["nacional_primera"]=extraer(r"Ciudad",r"Primera")
+          nuevo["nacional_matutina"]=extraer(r"Ciudad",r"Matutina")
+          nuevo["nacional_vespertina"]=extraer(r"Ciudad",r"Vespertina")
+          nuevo["nacional_nocturna"]=extraer(r"Ciudad",r"Nocturna")
+          nuevo["provincia_previa"]=extraer(r"Prov",r"Previa")
+          nuevo["provincia_primera"]=extraer(r"Prov",r"Primera")
+          nuevo["provincia_matutina"]=extraer(r"Prov",r"Matutina")
+          nuevo["provincia_vespertina"]=extraer(r"Prov",r"Vespertina")
+          nuevo["provincia_nocturna"]=extraer(r"Prov",r"Nocturna")
+          ahora=datetime.now(timezone.utc)-timedelta(hours=3)
+          viejo["fecha"]=ahora.strftime("%d/%m/%Y")
+          viejo["actualizado"]=ahora.strftime("%H:%M")
           for k,v in nuevo.items():
-              if v and len(v) >= 5:
-                  viejo[k] = v
-                  print(f"OK {k} -> {v[:3]}")
-
-          for turno in ["nocturna","vespertina","matutina","primera","previa"]:
-              if viejo.get(f"nacional_{turno}"):
-                  viejo["nacional"] = viejo[f"nacional_{turno}"]
-                  viejo["provincia"] = viejo.get(f"provincia_{turno}", viejo.get("provincia"))
+              if v and len(v)>=5:
+                  viejo[k]=v
+          for t in ["nocturna","vespertina","matutina","primera","previa"]:
+              if viejo.get(f"nacional_{t}"):
+                  viejo["nacional"]=viejo[f"nacional_{t}"]
+                  viejo["provincia"]=viejo.get(f"provincia_{t}")
                   break
-
-          with open("quiniela.json","w",encoding="utf-8") as f:
-              json.dump(viejo, f, ensure_ascii=False, indent=2)
+          json.dump(viejo, open("quiniela.json","w",encoding="utf-8"), ensure_ascii=False, indent=2)
           print("Guardado OK")
           PY
-      - name: Guardar en GitHub
-        run: |
+      - run: |
           git config user.name "robot-quiniela"
           git config user.email "robot@infomdq.com"
           git add quiniela.json
