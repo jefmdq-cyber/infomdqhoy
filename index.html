@@ -82,6 +82,12 @@ body{background:#f0f4f8;color:#1a202c}
   <div class="barrio-btn btn-serena" onclick="abrirBarrio('serena')"><span>🏖️</span>SERENA</div>
   <div class="barrio-btn btn-acantilados" onclick="abrirBarrio('acantilados')"><span>🌊</span>ACANTILADOS</div>
 </div>
+
+<!-- BOTON EDEA LINDO ARRIBA Y CHICO -->
+<div style="text-align:center;margin:8px 0 14px 0;">
+  <button id="btn-edea" style="background:#facc15;color:#000;font-weight:900;padding:10px 20px;border:none;border-radius:20px;font-size:14px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.15)">⚡ Cortes de EDEA</button>
+</div>
+
 <div id="page-home" style="display:contents">
 <div class="card"><span class="badge" style="background:#dbeafe;color:#1d4ed8">DÓLAR HOY</span><h2 style="margin-top:6px">Dólar Hoy Mar del Plata</h2><p id="dolar-t" style="font-size:12px;color:#64748b"></p><div class="dolar-grid" id="dolar-g"></div>
 <a href="https://maps.google.com/?q=Guillermo+Magrassi+4299+Mar+del+Plata" target="_blank" style="text-decoration:none;display:block;">
@@ -125,6 +131,20 @@ body{background:#f0f4f8;color:#1a202c}
 <div class="footer"><a href="/terminos.html">Términos</a> | <a href="/privacidad.html">Privacidad</a> | <a href="/contacto.html">Contacto</a><p style="margin-top:10px;font-size:11px;color:#94a3b8">INFO MDQ SUR HOY - jefmdq@gmail.com - © 2026</p></div>
 </div>
 <div id="modal" onclick="closeM()"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-x" onclick="closeM()">×</span><h3 id="mt" style="padding-right:30px;font-size:18px"></h3><div id="ml" class="quiniela-list"></div></div></div>
+
+<!-- MODAL EDEA - TODO JUNTO OFICIAL -->
+<div id="modal-edea" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto">
+  <div style="background:#111;border:1px solid #333;border-radius:14px;padding:16px;max-width:600px;margin:20px auto;white-space:pre-wrap;color:#ddd">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <b style="color:#facc15;font-size:15px">EDEA - Obras en tu barrio (Oficial)</b>
+      <button onclick="document.getElementById('modal-edea').style.display='none'" style="background:#222;color:#fff;border:none;padding:6px 12px;border-radius:20px;font-weight:800">X</button>
+    </div>
+    <div id="texto-edea" style="margin-top:14px;font-size:14px;line-height:1.6">Cargando...</div>
+    <div id="fecha-edea" style="margin-top:14px;font-size:11px;color:#777;border-top:1px solid #222;padding-top:8px"></div>
+    <div style="margin-top:4px;font-size:11px;color:#555">Fuente oficial: edeaweb.com.ar/obras-en-tu-barrio/</div>
+  </div>
+</div>
+
 <script>
 document.getElementById('f').textContent=new Date().toLocaleDateString('es-AR');
 function abrirBarrio(nombre){document.getElementById('page-home').style.display='none';document.querySelectorAll('.barrio-page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+nombre).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});history.pushState(null,null,'#'+nombre);}
@@ -151,6 +171,21 @@ selectFecha.value = fechaARG(0);
 selectFecha.addEventListener('change', ()=> cargarDia(selectFecha.value));
 function cargarDia(fecha){const esHoy = fecha === fechaARG(0);document.getElementById('q-titulo').textContent = esHoy? 'Quiniela Hoy - 6 Loterías' : 'Quiniela del '+fecha.split('-').reverse().join('/');const ruta = esHoy? '/quiniela.json' : `/historial/${fecha}.json`;fetch(ruta+'?v='+Date.now()).then(r=>{if(!r.ok) throw new Error(esHoy? "quiniela.json no encontrado ("+r.status+")" : "Sin datos guardados para ese dia");return r.json();}).then(raw=>{let d = Array.isArray(raw)? raw[0] : raw;let fuente = d.completo || d;let norm = {};Object.keys(fuente).forEach(k=>{ norm[k.toLowerCase()] = fuente[k]; });datosCompletos = norm;render();}).catch(e=>{console.error(e);datosCompletos = null;document.getElementById('qg').innerHTML = `<div style="grid-column:1/-1;background:#fee2e2;border:2px solid #dc2626;padding:12px;border-radius:10px;color:#991b1b;font-size:12px"><b>${esHoy?'Error':'Sin datos'}:</b> ${e.message}</div>`;});}
 cargarDia(selectFecha.value);
+
+// EDEA - LOGICA SIMPLE
+document.getElementById('btn-edea').onclick = function(){
+  document.getElementById('modal-edea').style.display='block';
+  document.getElementById('texto-edea').innerText='Cargando datos oficiales de EDEA...';
+  fetch('/cortes-edea.json?v='+Date.now())
+   .then(r=>r.json())
+   .then(d=>{
+      let txt = d.info_oficial || (d.cortes? d.cortes.join("\n\n") : "") || "";
+      if(!txt || txt.trim().length < 10) txt = "Hoy EDEA no publicó cortes programados.";
+      document.getElementById('texto-edea').innerText = txt;
+      document.getElementById('fecha-edea').innerText = "Actualizado: " + (d.actualizado||"");
+    })
+   .catch(()=>{ document.getElementById('texto-edea').innerText='No se pudo cargar ahora. Probá en unos minutos.'; });
+}
 </script>
 <script>
 (function(){
@@ -160,34 +195,5 @@ cargarDia(selectFecha.value);
   document.body.appendChild(s);
 })();
 </script>
-  <!-- BOTON EDEA SIMPLE - PEGA ESTO -->
-<button id="btn-edea" style="width:100%;background:#facc15;color:#000;font-weight:800;padding:14px;border:none;border-radius:10px;margin:15px 0">⚡ VER CORTES PROGRAMADOS EDEA</button>
-
-<div id="modal-edea" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;padding:20px;overflow:auto">
-  <div style="background:#111;border:1px solid #333;border-radius:12px;padding:16px;max-width:600px;margin:20px auto;white-space:pre-wrap;color:#ddd">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <b style="color:#facc15">EDEA - Obras en tu barrio (Oficial)</b>
-      <button onclick="document.getElementById('modal-edea').style.display='none'" style="background:#222;color:#fff;border:none;padding:6px 10px;border-radius:6px">X</button>
-    </div>
-    <div id="texto-edea" style="margin-top:12px;font-size:14px;line-height:1.5">Cargando...</div>
-    <div id="fecha-edea" style="margin-top:10px;font-size:11px;color:#666"></div>
-    <div style="margin-top:10px;font-size:11px;color:#666">Fuente: edeaweb.com.ar/obras-en-tu-barrio/</div>
-  </div>
-</div>
-
-<script>
-document.getElementById('btn-edea').onclick = function(){
-  document.getElementById('modal-edea').style.display='block';
-  document.getElementById('texto-edea').innerText='Cargando datos oficiales...';
-  fetch('/cortes-edea.json?v='+Date.now())
-    .then(r=>r.json())
-    .then(d=>{
-      document.getElementById('texto-edea').innerText = d.info_oficial || d.cortes?.join("\n\n") || "Hoy EDEA no publicó cortes.";
-      document.getElementById('fecha-edea').innerText = "Actualizado: " + (d.actualizado||"");
-    })
-    .catch(()=>{ document.getElementById('texto-edea').innerText='No se pudo cargar ahora, probá más tarde.'; });
-}
-</script>
-<!-- FIN BOTON EDEA -->
 </body>
 </html>
