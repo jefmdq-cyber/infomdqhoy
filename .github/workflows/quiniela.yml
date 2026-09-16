@@ -1,0 +1,124 @@
+name: Quiniela 20 TODOS los sorteos
+
+on:
+  schedule:
+    - cron: '*/20 * * * *'
+  workflow_dispatch:
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Scrapear sorteos TuJugada
+        run: |
+          pip install requests beautifulsoup4 lxml pytz
+          python << 'PY'
+          import requests, json, os, re
+          from datetime import datetime
+          from bs4 import BeautifulSoup
+          import pytz
+
+          HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/122.0.0.0 Safari/537.36"}
+          
+          # Mapeo de loterías en TuJugada
+          LOTERIAS = {
+              "nacional": "nacional",
+              "provincia": "provincia",
+              "santafe": "santa-fe",
+              "cordoba": "cordoba",
+              "entrerios": "entre-rios",
+              "uruguay": "montevideo"
+          }
+
+          ORDEN_4CIFRAS = ["previa", "primera", "matutina", "vespertina", "nocturna"]
+          ORDEN_URUGUAY = ["vespertina", "nocturna"]
+
+          viejo = {}
+          if os.path.exists("quiniela.json"):
+              try:
+                  viejo = json.load(open("quiniela.json", encoding="utf-8")).get("completo", {})
+              except: pass
+
+          tz_arg = pytz.timezone('America/Argentina/Buenos_Aires')
+          completo = {lot: {s: [] for s in (ORDEN_URUGUAY if lot == "uruguay" else ORDEN_4CIFRAS)} for lot in LOTERIAS}
+
+          for lot_key, lot_slug in LOTERIAS.items():
+              url = f"https://www.tujugada.com.ar/resultados-quiniela-{lot_slug}.asp"
+              try:
+                  r = requests.get(url, headers=HEADERS, timeout=15)
+                  if r.status_code != 200:
+                      continue
+                  
+                  soup = BeautifulSoup(r.text, "lxml")
+
+                  # TuJugada organiza los sorteos en tablas con clase o contexto
+                  tablas = soup.find_all("table")
+                  for tabla in tablas:
+                      txt_tabla = tabla.get_text().lower()
+                      
+                      # Determinar qué sorteo es (previa, primera, etc.)
+                      sorteo_actual = None
+                      for s in (ORDEN_URUGUAY if lot_key == "uruguay" else ORDEN_4CIFRAS):
+                          if s in txt_tabla:
+                              sorteo_actual = s
+                              break
+                      
+                      if not sorteo_actual:
+                          continue
+
+                      posiciones = {}
+                      filas = tabla.find_all("tr")
+                      for fila in filas:
+                          celdas = [c.get_text(strip=True) for c in fila.find_all(["td", "th"])]
+                          # Las filas de quiniela suelen tener pares: [Posición, Número] o [Pos1, Num1, Pos2, Num2]
+                          for idx in range(0, len(celdas) - 1):
+                              pos_clean = re.sub(r'\D', '', celdas[idx])
+                              num_clean = re.sub(r'\D', '', celdas[idx+1])
+                              
+                              if pos_clean.isdigit() and num_clean.isdigit():
+                                  p_int = int(pos_clean)
+                                  digitos_esperados = 3 if lot_key == "uruguay" else 4
+                                  
+                                  if 1 <= p_int <= 20 and len(num_clean) == digitos_esperados:
+                                      if p_int not in posiciones:
+                                          posiciones[p_int] = num_clean
+
+                      # Si se obtuvieron las 20 posiciones completas y ordenadas
+                      if len(posiciones) == 20:
+                          completo[lot_key][sorteo_actual] = [posiciones[i] for i in range(1, 21)]
+
+              except Exception as e:
+                  print(f"Error procesando {lot_key}: {e}")
+
+          # Mantener sorteos anteriores si el sorteo de hoy todavía no se realizó
+          for lot, sorteos in completo.items():
+              for s, nums in sorteos.items():
+                  if not nums and viejo.get(lot, {}).get(s):
+                      completo[lot][s] = viejo[lot][s]
+
+          output = {
+              "actualizado": datetime.now(tz_arg).strftime("%d/%m/%Y %H:%M"),
+              "completo": completo,
+              "nacional":  completo["nacional"].get("nocturna", []),
+              "provincia": completo["provincia"].get("nocturna", []),
+              "santafe":   completo["santafe"].get("nocturna", []),
+              "cordoba":   completo["cordoba"].get("nocturna", []),
+              "entrerios": completo["entrerios"].get("nocturna", []),
+              "uruguay":   completo["uruguay"].get("nocturna", []),
+          }
+
+          with open("quiniela.json", "w", encoding="utf-8") as f:
+              json.dump(output, f, ensure_ascii=False, indent=2)
+
+          print("OK: quiniela.json generado exitosamente desde TuJugada.")
+          PY
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "FIX: Fuente migrada a TuJugada con orden estricto de celdas"
+          file_pattern: quiniela.json
