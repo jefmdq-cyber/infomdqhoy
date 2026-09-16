@@ -76,6 +76,18 @@ let actualSorteo="nocturna";
 function getHors(){ return actual==="Uruguay"? horsUY : horsARG; }
 function getListaSorteos(){ return actual==="Uruguay"? ["vespertina","nocturna"] : ["previa","primera","matutina","vespertina","nocturna"]; }
 
+// Mapeo flexible para evitar problemas de claves
+function normalizarClaveLotería(k){
+  let clean = k.toLowerCase().replace(/[\s\-_]/g, '');
+  if(clean.includes('santafe')) return 'santafe';
+  if(clean.includes('entrerios')) return 'entrerios';
+  if(clean.includes('provincia')) return 'provincia';
+  if(clean.includes('nacional') || clean.includes('ciudad')) return 'nacional';
+  if(clean.includes('cordoba')) return 'cordoba';
+  if(clean.includes('uruguay') || clean.includes('montevideo')) return 'uruguay';
+  return clean;
+}
+
 function cambiarLotería(k){
   actual = k;
   const sorteosDisponibles = getListaSorteos();
@@ -89,6 +101,41 @@ function renderT(){
   document.getElementById('qt').innerHTML=Object.keys(todas).map(k=>`<div class="q-tab ${k===actual?'active':''}" onclick="cambiarLotería('${k}')">${k}</div>`).join('');
 }
 
+// Extrae de forma limpia el arreglo de 20 números sin importar si viene como Array u Objeto
+function obtenerLista20(lotKey, sorteoKey){
+  if(!datosCompletos) return [];
+  
+  let targetLot = normalizarClaveLotería(lotKey);
+  let lotData = null;
+
+  // Buscar coincidencia de lotería en datosCompletos
+  for(let key in datosCompletos){
+    if(normalizarClaveLotería(key) === targetLot){
+      lotData = datosCompletos[key];
+      break;
+    }
+  }
+
+  if(!lotData || !lotData[sorteoKey]) return [];
+
+  let raw = lotData[sorteoKey];
+  let res = new Array(20).fill("--");
+
+  if(Array.isArray(raw)){
+    for(let i = 0; i < 20; i++){
+      if(raw[i] !== undefined && raw[i] !== null && raw[i] !== "") res[i] = raw[i];
+    }
+  } else if(typeof raw === 'object'){
+    // Si viene en formato {"1": "1234", "2": "5678"...}
+    for(let i = 1; i <= 20; i++){
+      let val = raw[i] || raw[String(i)];
+      if(val !== undefined && val !== null && val !== "") res[i - 1] = val;
+    }
+  }
+
+  return res;
+}
+
 function render(){
   renderT();
   document.getElementById('qn').textContent=actual;
@@ -96,49 +143,36 @@ function render(){
   document.getElementById('info-uy').style.display = actual==="Uruguay"? 'block' : 'none';
   let hors = getHors();
   let listaIds = getListaSorteos();
+
   document.getElementById('qg').innerHTML=hors.map((h,i)=>{
     let idSorteo = listaIds[i];
-    let key = actual.toLowerCase();
-    let num = "--";
-    if(datosCompletos && datosCompletos[key] && datosCompletos[key][idSorteo]){
-      let rawData = datosCompletos[key][idSorteo];
-      if(Array.isArray(rawData)){
-        num = rawData[0] || "--";
-      } else if(typeof rawData === 'object'){
-        num = rawData["1"] || rawData[1] || "--";
-      }
-    }
-    return `<div class="q-box" onclick="actualSorteo='${idSorteo}';render();openM()"><div style="font-size:11px;color:#64748b;font-weight:700">${h}</div><b>${num}</b></div>`;
+    let lista = obtenerLista20(actual, idSorteo);
+    let cabeza = lista[0] || "--";
+
+    return `<div class="q-box" onclick="actualSorteo='${idSorteo}';render();openM()"><div style="font-size:11px;color:#64748b;font-weight:700">${h}</div><b>${cabeza}</b></div>`;
   }).join('');
 }
 
 function openM(){
   document.getElementById('modal').classList.add('active');
-  let key = actual.toLowerCase();
-  let datosSorteo = (datosCompletos && datosCompletos[key] && datosCompletos[key][actualSorteo]) ? datosCompletos[key][actualSorteo] : [];
+  let lista20 = obtenerLista20(actual, actualSorteo);
 
   document.getElementById('mt').textContent = actual + ' - ' + actualSorteo.toUpperCase() + ' - 20 números';
 
-  if(!datosSorteo || (Array.isArray(datosSorteo) && datosSorteo.length === 0)){
+  // Verificar si hay datos cargados (diferentes a '--')
+  let tieneDatos = lista20.some(num => num !== "--");
+
+  if(!tieneDatos){
     document.getElementById('ml').innerHTML = '<div style="grid-column:1/-1;text-align:center;color:#64748b;font-weight:700;padding:20px">Aún sin datos para este sorteo</div>';
     return;
   }
 
-  // NORMALIZACIÓN: Ordenamiento numérico estricto del 1 al 20
-  let listaNumeros = [];
-  if(Array.isArray(datosSorteo)){
-    listaNumeros = datosSorteo;
-  } else if(typeof datosSorteo === 'object'){
-    listaNumeros = Object.keys(datosSorteo)
-      .sort((a,b) => parseInt(a) - parseInt(b))
-      .map(k => datosSorteo[k]);
-  }
-
+  // RECORRIDO ESTRICTO GARANTIZADO DEL 1° AL 20°
   let html = '';
   for(let i = 0; i < 20; i++){
-    let n = (listaNumeros[i] !== undefined && listaNumeros[i] !== null) ? listaNumeros[i] : '--';
-    let esCabeza = i === 0;
-    html += `<b class="q-pos ${esCabeza ? 'cabeza' : ''}">${i + 1}°</b><span class="q-num ${esCabeza ? 'cabeza' : ''}">${n}</span>`;
+    let numero = lista20[i] || '--';
+    let esCabeza = (i === 0);
+    html += `<b class="q-pos ${esCabeza ? 'cabeza' : ''}">${i + 1}°</b><span class="q-num ${esCabeza ? 'cabeza' : ''}">${numero}</span>`;
   }
   document.getElementById('ml').innerHTML = html;
 }
