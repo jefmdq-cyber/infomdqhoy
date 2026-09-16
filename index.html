@@ -160,5 +160,34 @@ cargarDia(selectFecha.value);
   document.body.appendChild(s);
 })();
 </script>
+  <!-- BOTON EDEA SIMPLE - PEGA ESTO -->
+<button id="btn-edea" style="width:100%;background:#facc15;color:#000;font-weight:800;padding:14px;border:none;border-radius:10px;margin:15px 0">⚡ VER CORTES PROGRAMADOS EDEA</button>
+
+<div id="modal-edea" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;padding:20px;overflow:auto">
+  <div style="background:#111;border:1px solid #333;border-radius:12px;padding:16px;max-width:600px;margin:20px auto;white-space:pre-wrap;color:#ddd">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <b style="color:#facc15">EDEA - Obras en tu barrio (Oficial)</b>
+      <button onclick="document.getElementById('modal-edea').style.display='none'" style="background:#222;color:#fff;border:none;padding:6px 10px;border-radius:6px">X</button>
+    </div>
+    <div id="texto-edea" style="margin-top:12px;font-size:14px;line-height:1.5">Cargando...</div>
+    <div id="fecha-edea" style="margin-top:10px;font-size:11px;color:#666"></div>
+    <div style="margin-top:10px;font-size:11px;color:#666">Fuente: edeaweb.com.ar/obras-en-tu-barrio/</div>
+  </div>
+</div>
+
+<script>
+document.getElementById('btn-edea').onclick = function(){
+  document.getElementById('modal-edea').style.display='block';
+  document.getElementById('texto-edea').innerText='Cargando datos oficiales...';
+  fetch('/cortes-edea.json?v='+Date.now())
+    .then(r=>r.json())
+    .then(d=>{
+      document.getElementById('texto-edea').innerText = d.info_oficial || d.cortes?.join("\n\n") || "Hoy EDEA no publicó cortes.";
+      document.getElementById('fecha-edea').innerText = "Actualizado: " + (d.actualizado||"");
+    })
+    .catch(()=>{ document.getElementById('texto-edea').innerText='No se pudo cargar ahora, probá más tarde.'; });
+}
+</script>
+<!-- FIN BOTON EDEA -->
 </body>
 </html>
