@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="7e64033b70480c67" />
 <title>INFO MDQ HOY | Dólar, Quiniela y Empleos Mar del Plata</title>
+<meta property="og:title" content="INFO MDQ HOY | Dólar, Quiniela y Empleos Mar del Plata">
+<meta property="og:description" content="Dólar hoy, quiniela completa de 6 loterías, clima y empleos en Mar del Plata, actualizado todo el día.">
+<meta property="og:image" content="https://infomdqhoy.pages.dev/banner1.jpg">
+<meta property="og:url" content="https://infomdqhoy.pages.dev/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="INFO MDQ HOY | Dólar, Quiniela y Empleos Mar del Plata">
+<meta name="twitter:description" content="Dólar hoy, quiniela completa de 6 loterías, clima y empleos en Mar del Plata, actualizado todo el día.">
+<meta name="twitter:image" content="https://infomdqhoy.pages.dev/banner1.jpg">
 <script>(function(s){s.dataset.zone='11803402',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 <script>(function(s){s.dataset.zone='11803415',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 <style>
@@ -54,7 +63,35 @@ body{background:#f0f4f8;color:#1a202c}
 <div class="card"><span class="badge" style="background:#dbeafe;color:#1d4ed8">DÓLAR HOY</span><h2 style="margin-top:6px">Dólar Hoy Mar del Plata</h2><p id="dolar-t" style="font-size:12px;color:#64748b"></p><div class="dolar-grid" id="dolar-g"></div></div>
 <div class="card"><span class="badge" style="background:#dcfce7;color:#15803d">QUINIELA COMPLETA 20 NÚMEROS - TUJUGADA</span><h2 style="margin-top:6px;font-size:18px" id="q-titulo">Quiniela Hoy - 6 Loterías</h2><select id="q-fecha" style="width:100%;margin-top:8px;padding:10px;border-radius:10px;border:2px solid #e2e8f0;font-weight:700;font-size:13px;background:white;color:#1e293b"></select><div class="q-tabs" id="qt"></div><div class="q-grid" id="qg"></div><a href="#" class="btn-outline" onclick="openM();return false">Ver 20 números de <span id="qn">Nacional</span></a><p id="info-uy" style="display:none;font-size:11px;color:#15803d;font-weight:700;margin-top:8px">🇺🇾 Uruguay solo tiene 2 sorteos oficiales: 15:00 y 21:00</p></div>
 <div class="card" style="border-left:5px solid #25D366"><h2>💼 Empleos MDQ HOY</h2><div style="margin-top:10px"><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Mozo/a</b> - Güemes - NUEVO HOY</div><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Cajero/a</b> - Constitución</div><div style="padding:10px 0"><b>Vendedor/a</b> - Peatonal</div></div><a href="https://empleos-mdq.pages.dev/" target="_blank" class="btn-wsp">Ver todos los empleos →</a></div>
-<div class="card" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);color:white"><h2>🌤️ Clima Mar del Plata</h2><div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><div style="font-size:48px;font-weight:900" id="c-t">--°</div><div style="text-align:right;font-size:13px" id="c-d">Cargando automático...</div></div></div>
+<div class="card" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);color:white">
+<h2>🌤️ Clima Mar del Plata</h2>
+<div style="display:flex;align-items:center;gap:14px;margin-top:12px">
+  <div style="font-size:54px;line-height:1" id="c-icon">⛅</div>
+  <div>
+    <div style="font-size:46px;font-weight:900;line-height:1" id="c-t">--°</div>
+    <div style="font-size:13px;opacity:.9;margin-top:2px" id="c-desc">Cargando...</div>
+  </div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px">
+  <div style="background:rgba(255,255,255,.18);border-radius:10px;padding:8px 4px;text-align:center">
+    <div style="font-size:9px;opacity:.85;font-weight:700;letter-spacing:.5px">SENSACIÓN</div>
+    <div style="font-weight:800;font-size:15px;margin-top:2px" id="c-st">--°</div>
+  </div>
+  <div style="background:rgba(255,255,255,.18);border-radius:10px;padding:8px 4px;text-align:center">
+    <div style="font-size:9px;opacity:.85;font-weight:700;letter-spacing:.5px">HUMEDAD</div>
+    <div style="font-weight:800;font-size:15px;margin-top:2px" id="c-hum">--%</div>
+  </div>
+  <div style="background:rgba(255,255,255,.18);border-radius:10px;padding:8px 4px;text-align:center">
+    <div style="font-size:9px;opacity:.85;font-weight:700;letter-spacing:.5px">VIENTO</div>
+    <div style="font-weight:800;font-size:15px;margin-top:2px" id="c-wind">-- km/h</div>
+  </div>
+</div>
+<div style="display:flex;justify-content:space-between;margin-top:12px;font-size:13px;opacity:.95;border-top:1px solid rgba(255,255,255,.25);padding-top:10px">
+  <span>🔽 Mínima <b id="c-min">--°</b></span>
+  <span>🔼 Máxima <b id="c-max">--°</b></span>
+</div>
+</div>
+<div class="card" style="background:linear-gradient(135deg,#0891b2,#0e7490);color:white"><h2>🌊 Mareas Mar del Plata</h2><div id="mareas-lista" style="margin-top:10px;font-size:13px">Cargando mareas...</div></div>
 <div class="footer"><a href="/terminos.html">Términos</a> | <a href="/privacidad.html">Privacidad</a> | <a href="/contacto.html">Contacto</a><p style="margin-top:10px;font-size:11px;color:#94a3b8">INFO MDQ HOY - jefmdq@gmail.com - © 2026</p></div>
 </div>
 <div id="modal" onclick="closeM()"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-x" onclick="closeM()">×</span><h3 id="mt" style="padding-right:30px;font-size:18px"></h3><div id="ml" class="quiniela-list"></div></div></div>
@@ -64,7 +101,64 @@ let s=0; setInterval(()=>{s=s===0?1:0;document.getElementById('slide1').style.op
 
 async function dolar(){try{const r=await fetch('https://dolarapi.com/v1/dolares');const d=await r.json();let m={};d.forEach(x=>m[x.casa]=x);document.getElementById('dolar-g').innerHTML=`<div class="dolar-item blue"><div style="font-size:10px;color:#64748b;font-weight:700">BLUE</div><div style="font-size:22px;font-weight:900">$${m.blue.venta}</div><div style="font-size:11px">Compra $${m.blue.compra}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">OFICIAL</div><div style="font-size:22px;font-weight:900">$${m.oficial.venta}</div><div style="font-size:11px">Compra $${m.oficial.compra}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">MEP</div><div style="font-size:22px;font-weight:900">$${m.bolsa.venta}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">TARJETA</div><div style="font-size:22px;font-weight:900">$${m.tarjeta.venta}</div></div>`;document.getElementById('dolar-t').textContent='Actualizado '+new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});}catch(e){}} dolar();
 
-async function clima(){try{const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=-38.0055&longitude=-57.5426&current=temperature_2m,wind_speed_10m,relative_humidity_2m&timezone=America/Argentina/Buenos_Aires');const j=await r.json();document.getElementById('c-t').textContent=Math.round(j.current.temperature_2m)+'°';document.getElementById('c-d').innerHTML=`${Math.round(j.current.temperature_2m)}° Mar del Plata<br>Viento ${Math.round(j.current.wind_speed_10m)}km/h - Hum ${j.current.relative_humidity_2m}%`;}catch(e){}} clima();
+// Mapa de codigos de clima (estandar WMO que usa Open-Meteo) a icono + texto.
+const CODIGOS_CLIMA = {
+  0:['☀️','Despejado'], 1:['🌤️','Mayormente despejado'], 2:['⛅','Parcialmente nublado'], 3:['☁️','Nublado'],
+  45:['🌫️','Niebla'], 48:['🌫️','Niebla helada'],
+  51:['🌦️','Llovizna débil'], 53:['🌦️','Llovizna'], 55:['🌦️','Llovizna intensa'],
+  61:['🌧️','Lluvia débil'], 63:['🌧️','Lluvia'], 65:['🌧️','Lluvia intensa'],
+  66:['🌧️','Lluvia helada'], 67:['🌧️','Lluvia helada intensa'],
+  71:['🌨️','Nieve débil'], 73:['🌨️','Nieve'], 75:['🌨️','Nieve intensa'], 77:['🌨️','Granizo fino'],
+  80:['🌦️','Chubascos débiles'], 81:['🌦️','Chubascos'], 82:['⛈️','Chubascos fuertes'],
+  85:['🌨️','Chubascos de nieve'], 86:['🌨️','Chubascos de nieve fuertes'],
+  95:['⛈️','Tormenta'], 96:['⛈️','Tormenta con granizo'], 99:['⛈️','Tormenta fuerte con granizo'],
+};
+async function clima(){try{
+  const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=-38.0055&longitude=-57.5426&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=America/Argentina/Buenos_Aires');
+  const j=await r.json();
+  const c=j.current;
+  const [icono, desc] = CODIGOS_CLIMA[c.weather_code] || ['🌡️','—'];
+  document.getElementById('c-icon').textContent=icono;
+  document.getElementById('c-t').textContent=Math.round(c.temperature_2m)+'°';
+  document.getElementById('c-desc').textContent=desc;
+  document.getElementById('c-st').textContent=Math.round(c.apparent_temperature)+'°';
+  document.getElementById('c-hum').textContent=Math.round(c.relative_humidity_2m)+'%';
+  document.getElementById('c-wind').textContent=Math.round(c.wind_speed_10m)+' km/h';
+  document.getElementById('c-min').textContent=Math.round(j.daily.temperature_2m_min[0])+'°';
+  document.getElementById('c-max').textContent=Math.round(j.daily.temperature_2m_max[0])+'°';
+}catch(e){console.error(e);}} clima();
+
+// Mareas: usamos el Marine API de Open-Meteo (gratis, sin clave, mismo
+// proveedor que ya usamos para el clima). Da la altura del mar hora a hora;
+// de ahi calculamos los picos (marea alta) y valles (marea baja) del dia,
+// igual que una tabla de mareas tradicional.
+async function mareas(){
+  try{
+    const r = await fetch('https://marine-api.open-meteo.com/v1/marine?latitude=-38.0055&longitude=-57.5426&hourly=sea_level_height_msl&timezone=America%2FArgentina%2FBuenos_Aires&forecast_days=2&cell_selection=sea');
+    const j = await r.json();
+    const horas = j.hourly.time;
+    const alturas = j.hourly.sea_level_height_msl;
+    const hoyStr = fechaARG(0);
+    const eventos = [];
+    for(let i=1;i<alturas.length-1;i++){
+      const prev=alturas[i-1], cur=alturas[i], next=alturas[i+1];
+      const esAlta = cur>prev && cur>=next;
+      const esBaja = cur<prev && cur<=next;
+      if((esAlta||esBaja) && horas[i].startsWith(hoyStr)){
+        eventos.push({hora:horas[i].slice(11,16), altura:cur.toFixed(2), tipo: esAlta?'Alta':'Baja'});
+      }
+    }
+    const cont = document.getElementById('mareas-lista');
+    if(eventos.length===0){ cont.textContent = 'Sin datos de marea para hoy.'; return; }
+    cont.innerHTML = eventos.map(e=>
+      `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.25)"><span>${e.tipo==='Alta'?'🔼':'🔽'} Marea ${e.tipo}</span><b>${e.hora} hs · ${e.altura} m</b></div>`
+    ).join('');
+  }catch(e){
+    console.error(e);
+    document.getElementById('mareas-lista').textContent = 'No se pudo cargar la marea.';
+  }
+}
+mareas();
 
 let todas={Nacional:[],Provincia:[],SantaFe:[],Cordoba:[],EntreRios:[],Uruguay:[]};
 let datosCompletos=null;
