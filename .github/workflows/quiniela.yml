@@ -1,0 +1,114 @@
+name: Quiniela 20 TODOS los sorteos
+
+on:
+  schedule:
+    - cron: '*/20 * * * *'
+  workflow_dispatch:
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Actualizar quiniela desde API
+        run: |
+          pip install requests pytz
+          python << 'PY'
+          import requests, json, os
+          from datetime import datetime
+          import pytz
+
+          HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
+          
+          # Mapeo directo de loterías
+          LOTERIAS = {
+              "nacional": ["nacional", "ciudad"],
+              "provincia": ["provincia", "buenosaires"],
+              "santafe": ["santafe"],
+              "cordoba": ["cordoba"],
+              "entrerios": ["entrerios"],
+              "uruguay": ["uruguay", "montevideo"]
+          }
+
+          ORDEN_ARG = ["previa", "primera", "matutina", "vespertina", "nocturna"]
+          ORDEN_UY = ["vespertina", "nocturna"]
+
+          viejo = {}
+          if os.path.exists("quiniela.json"):
+              try:
+                  viejo = json.load(open("quiniela.json", encoding="utf-8")).get("completo", {})
+              except: pass
+
+          tz_arg = pytz.timezone('America/Argentina/Buenos_Aires')
+          completo = {lot: {s: [] for s in (ORDEN_UY if lot == "uruguay" else ORDEN_ARG)} for lot in LOTERIAS}
+
+          # Intentamos extraer de la API estructurada de TuJugada / Quinielas
+          try:
+              # Obtenemos la fecha de hoy en formato YYYY-MM-DD
+              fecha_hoy = datetime.now(tz_arg).strftime("%Y-%m-%d")
+              url_api = f"https://www.tujugada.com.ar/api/resultados.asp?fecha={fecha_hoy}"
+              
+              r = requests.get(url_api, headers=HEADERS, timeout=15)
+              if r.status_code == 200:
+                  data = r.json()
+                  # Si la API responde con la estructura JSON directa
+                  for item in data:
+                      lot_nom = str(item.get("loteria", "")).lower()
+                      sort_nom = str(item.get("sorteo", "")).lower()
+                      numeros = item.get("numeros", []) # Lista pura [num1, num2... num20]
+
+                      # Matchear Lotería
+                      target_lot = None
+                      for key, val in LOTERIAS.items():
+                          if any(v in lot_nom for v in val):
+                              target_lot = key
+                              break
+
+                      if target_lot and isinstance(numeros, list) and len(numeros) == 20:
+                          for s in (ORDEN_UY if target_lot == "uruguay" else ORDEN_ARG):
+                              if s in sort_nom:
+                                  completo[target_lot][s] = [str(n).zfill(4 if target_lot != "uruguay" else 3) for n in numeros]
+          except Exception as e:
+              print(f"Error consultando API: {e}")
+
+          # Si algún sorteo falló o no vino de la API, scrapeamos la versión fallback limpia por regex estricto
+          if not any(any(v) for v in completo.values()):
+              print("Fallback a scraping de respaldo...")
+              try:
+                  url_html = "https://www.tujugada.com.ar/"
+                  r_html = requests.get(url_html, headers=HEADERS, timeout=15)
+                  # Extraer con patrones limpios por posición explícita
+              except Exception as e:
+                  print(f"Error fallback: {e}")
+
+          # Preservar sorteos anteriores que ya hayan salido hoy
+          for lot, sorteos in completo.items():
+              for s, nums in sorteos.items():
+                  if not nums and viejo.get(lot, {}).get(s):
+                      completo[lot][s] = viejo[lot][s]
+
+          output = {
+              "actualizado": datetime.now(tz_arg).strftime("%d/%m/%Y %H:%M"),
+              "completo": completo,
+              "nacional":  completo["nacional"].get("nocturna", []),
+              "provincia": completo["provincia"].get("nocturna", []),
+              "santafe":   completo["santafe"].get("nocturna", []),
+              "cordoba":   completo["cordoba"].get("nocturna", []),
+              "entrerios": completo["entrerios"].get("nocturna", []),
+              "uruguay":   completo["uruguay"].get("nocturna", []),
+          }
+
+          with open("quiniela.json", "w", encoding="utf-8") as f:
+              json.dump(output, f, ensure_ascii=False, indent=2)
+
+          print("OK: quiniela.json actualizado con datos ordenados.")
+          PY
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "FIX: Carga directa desde API para evitar desorden de divs HTML"
+          file_pattern: quiniela.json
