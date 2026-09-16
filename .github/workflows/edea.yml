@@ -1,0 +1,44 @@
+name: Cortes EDEA
+on:
+  schedule:
+    - cron: '0 */2 * * *' # cada 2 horas
+  workflow_dispatch:
+jobs:
+  edea:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - run: pip install requests beautifulsoup4
+      - run: |
+          python - << 'PY'
+          import requests, json, re
+          from bs4 import BeautifulSoup
+          from datetime import datetime
+          url = "https://edeaweb.com.ar/obras-en-tu-barrio/"
+          r = requests.get(url, headers={"User-Agent":"Mozilla/5.0"}, timeout=30)
+          soup = BeautifulSoup(r.text, "html.parser")
+          texto = soup.get_text(" ", strip=True)
+          # busca cortes del sur
+          cortes = []
+          # EDEA los pone como "08:00 a 12:00 - Barrio X"
+          pattern = r'(\d{1,2}:\d{2}[^A-Za-z0-9]{0,10}\d{1,2}:\d{2}[^.]{0,250}(?:Faro|Alfar|Serena|Acantilados|Chapadmalal|Mario Bravo|Sur)[^.]{0,200})'
+          for m in re.finditer(pattern, texto, re.I):
+              cortes.append(m.group(1)[:300].strip())
+          # guarda
+          data = {
+            "actualizado": datetime.now().strftime("%d/%m/%Y %H:%M"),
+            "fuente": url,
+            "cortes": cortes[:15]
+          }
+          with open("cortes-edea.json", "w", encoding="utf-8") as f:
+              json.dump(data, f, ensure_ascii=False, indent=2)
+          print(f"Guardados {len(cortes)} cortes")
+          PY
+      - run: |
+          git config user.name "bot"
+          git config user.email "bot@infomdq.com"
+          git add cortes-edea.json || true
+          git commit -m "Update cortes EDEA" || true
+          git push
