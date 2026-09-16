@@ -82,6 +82,11 @@ body{background:#f0f4f8;color:#1a202c}
   <div class="barrio-btn btn-serena" onclick="abrirBarrio('serena')"><span>🏖️</span>SERENA</div>
   <div class="barrio-btn btn-acantilados" onclick="abrirBarrio('acantilados')"><span>🌊</span>ACANTILADOS</div>
 </div>
+  <div class="card" onclick="abrirBarrio('cortes')" style="background:#111;border:2px solid #facc15;text-align:center;cursor:pointer;grid-column:1/-1">
+  <div style="color:#facc15;font-weight:900;font-size:18px">⚡ CORTES PROGRAMADOS EDEA HOY</div>
+  <div style="color:#e2e8f0;font-size:12px;margin-top:4px">Tocá para ver si hay cortes en Faro, Alfar, Serena, Acantilados y Chapadmalal</div>
+  <div id="cortes-resumen-home" style="margin-top:8px;font-size:11px;color:#facc15;font-weight:700"></div>
+</div>
 <div id="page-home" style="display:contents">
 <div class="card"><span class="badge" style="background:#dbeafe;color:#1d4ed8">DÓLAR HOY</span><h2 style="margin-top:6px">Dólar Hoy Mar del Plata</h2><p id="dolar-t" style="font-size:12px;color:#64748b"></p><div class="dolar-grid" id="dolar-g"></div>
 <a href="https://maps.google.com/?q=Guillermo+Magrassi+4299+Mar+del+Plata" target="_blank" style="text-decoration:none;display:block;">
@@ -121,6 +126,12 @@ body{background:#f0f4f8;color:#1a202c}
   <div class="barrio-header"><img src="banner2.jpg"><div class="barrio-header-overlay"></div><div class="barrio-header-text"><h2>🌊 ACANTILADOS</h2><p>Calle 20 esquina 497</p></div></div>
   <div class="card"><h3>🏛️ Asociación Vecinal de Fomento Los Acantilados</h3><div class="info-box"><b>📍 Dirección:</b> Calle 20 esquina 497 - Parque Los Acantilados<br><b>📌 Datos:</b> Reserva forestal y acceso a playa</div></div>
   <div class="card" style="background:#f0fdf4;border:2px solid #22c55e"><h3>📢 Notificaciones - ACANTILADOS</h3><div id="noti-acantilados" style="margin-top:10px;font-size:13px;color:#64748b;padding:12px;background:white;border-radius:10px;border:1px solid #e2e8f0">No hay notificaciones por el momento.</div></div>
+</div>
+  <div id="page-cortes" class="barrio-page">
+  <div class="btn-volver" onclick="volverHome()">← Volver al inicio</div>
+  <div class="barrio-header" style="height:180px;background:linear-gradient(135deg,#0f172a,#eab308)"><div class="barrio-header-text"><h2>⚡ CORTES EDEA HOY</h2><p id="cortes-fecha">Fuente oficial: edeaweb.com.ar/obras-en-tu-barrio/</p></div></div>
+  <div class="card" id="cortes-lista" style="font-size:13px;line-height:1.6">Cargando cortes oficiales de EDEA...<br><br><a href="https://edeaweb.com.ar/obras-en-tu-barrio/" target="_blank" style="color:#1e40af;font-weight:800">Ver fuente oficial EDEA →</a></div>
+  <div class="card" style="background:#fffbe6;border:2px solid #facc15;font-size:11px;color:#854d0e">⚠️ Los trabajos de EDEA pueden reprogramarse si las condiciones climáticas no son favorables.</div>
 </div>
 <div class="footer"><a href="/terminos.html">Términos</a> | <a href="/privacidad.html">Privacidad</a> | <a href="/contacto.html">Contacto</a><p style="margin-top:10px;font-size:11px;color:#94a3b8">INFO MDQ SUR HOY - jefmdq@gmail.com - © 2026</p></div>
 </div>
