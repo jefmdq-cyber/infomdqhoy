@@ -1,0 +1,128 @@
+name: Quiniela 20 TODOS los sorteos
+
+on:
+  schedule:
+    - cron: '*/20 * * * *'
+  workflow_dispatch:
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Scrapear sorteos QuinielaNacional1
+        run: |
+          pip install requests beautifulsoup4 lxml pytz
+          python << 'PY'
+          import requests, json, os
+          from datetime import datetime
+          from bs4 import BeautifulSoup
+          import pytz
+
+          HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/122.0.0.0 Safari/537.36"}
+          URL_BASE = "https://quinielanacional1.com.ar/"
+          ORDEN_4CIFRAS = ["previa", "primera", "matutina", "vespertina", "nocturna"]
+          ORDEN_URUGUAY = ["vespertina", "nocturna"]
+
+          LOTERIAS = {
+              "nacional": ["nacional", "ciudad"],
+              "provincia": ["buenos aires", "provincia"],
+              "santafe": ["santa fe"],
+              "cordoba": ["cordoba", "córdoba"],
+              "entrerios": ["entre rios", "entre ríos"],
+              "uruguay": ["uruguay", "oro uruguay"]
+          }
+
+          viejo = {}
+          if os.path.exists("quiniela.json"):
+              try:
+                  viejo = json.load(open("quiniela.json", encoding="utf-8")).get("completo", {})
+              except: pass
+
+          tz_arg = pytz.timezone('America/Argentina/Buenos_Aires')
+          completo = {lot: {s: [] for s in (ORDEN_URUGUAY if lot == "uruguay" else ORDEN_4CIFRAS)} for lot in LOTERIAS}
+
+          try:
+              r = requests.get(URL_BASE, headers=HEADERS, timeout=30)
+              soup = BeautifulSoup(r.text, "lxml")
+
+              # Recorremos cada tabla HTML presente en la página
+              for tabla in soup.find_all("table"):
+                  texto_tabla = tabla.get_text().lower()
+
+                  # 1. Identificar a qué lotería pertenece la tabla
+                  lot_encontrada = None
+                  for lot_key, variantes in LOTERIAS.items():
+                      if any(v in texto_tabla for v in variantes):
+                          lot_encontrada = lot_key
+                          break
+                  
+                  if not lot_encontrada:
+                      continue
+
+                  # 2. Identificar el sorteo (previa, primera, etc.)
+                  sorteo_encontrado = None
+                  for s in (ORDEN_URUGUAY if lot_encontrada == "uruguay" else ORDEN_4CIFRAS):
+                      if s in texto_tabla:
+                          sorteo_encontrado = s
+                          break
+
+                  if not sorteo_encontrado:
+                      continue
+
+                  # 3. Extraer celdas estructuradas (Búsqueda estricta por filas tr / td)
+                  posiciones = {}
+                  for fila in tabla.find_all("tr"):
+                      celdas = [c.get_text(strip=True) for c in fila.find_all(["td", "th"])]
+                      if len(celdas) >= 2:
+                          # Buscamos patrones del tipo "1°", "1", "1." y el número correspondiente
+                          for k in range(len(celdas) - 1):
+                              pos_clean = celdas[k].replace("°", "").replace(".", "").strip()
+                              num_clean = celdas[k+1].strip()
+                              
+                              if pos_clean.isdigit() and num_clean.isdigit():
+                                  p_int = int(pos_clean)
+                                  digitos_esperados = 3 if lot_encontrada == "uruguay" else 4
+                                  if 1 <= p_int <= 20 and len(num_clean) == digitos_esperados:
+                                      if p_int not in posiciones:
+                                          posiciones[p_int] = num_clean
+
+                  # Si logramos reconstruir los 20 extractos ordenados
+                  if len(posiciones) == 20:
+                      lista_20 = [posiciones[i] for i in range(1, 21)]
+                      completo[lot_encontrada][sorteo_encontrado] = lista_20
+
+          except Exception as e:
+              print(f"Error parseando QuinielaNacional1: {e}")
+
+          # Preservar datos anteriores si el sorteo de hoy aún no salió o no se capturó completo
+          for lot, sorteos in completo.items():
+              for s, nums in sorteos.items():
+                  if not nums and viejo.get(lot, {}).get(s):
+                      completo[lot][s] = viejo[lot][s]
+
+          output = {
+              "actualizado": datetime.now(tz_arg).strftime("%d/%m/%Y %H:%M"),
+              "completo": completo,
+              "nacional":  completo["nacional"].get("nocturna", []),
+              "provincia": completo["provincia"].get("nocturna", []),
+              "santafe":   completo["santafe"].get("nocturna", []),
+              "cordoba":   completo["cordoba"].get("nocturna", []),
+              "entrerios": completo["entrerios"].get("nocturna", []),
+              "uruguay":   completo["uruguay"].get("nocturna", []),
+          }
+
+          with open("quiniela.json", "w", encoding="utf-8") as f:
+              json.dump(output, f, ensure_ascii=False, indent=2)
+
+          print("OK: quiniela.json generado correctamente con lectura limpia de tablas HTML.")
+          PY
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "FIX: Extracción estricta por celdas HTML (Garantiza orden 1 al 20)"
+          file_pattern: quiniela.json
