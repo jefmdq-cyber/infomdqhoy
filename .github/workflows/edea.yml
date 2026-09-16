@@ -1,7 +1,7 @@
 name: Cortes EDEA
 on:
   schedule:
-    - cron: '0 */2 * * *' # cada 2 horas
+    - cron: '0 */2 * * *'
   workflow_dispatch:
 jobs:
   edea:
@@ -13,32 +13,38 @@ jobs:
       - run: pip install requests beautifulsoup4
       - run: |
           python - << 'PY'
-          import requests, json, re
+          import requests, json
           from bs4 import BeautifulSoup
           from datetime import datetime
+          
           url = "https://edeaweb.com.ar/obras-en-tu-barrio/"
           r = requests.get(url, headers={"User-Agent":"Mozilla/5.0"}, timeout=30)
           soup = BeautifulSoup(r.text, "html.parser")
-          texto = soup.get_text(" ", strip=True)
-          # busca cortes del sur
-          cortes = []
-          # EDEA los pone como "08:00 a 12:00 - Barrio X"
-          pattern = r'(\d{1,2}:\d{2}[^A-Za-z0-9]{0,10}\d{1,2}:\d{2}[^.]{0,250}(?:Faro|Alfar|Serena|Acantilados|Chapadmalal|Mario Bravo|Sur)[^.]{0,200})'
-          for m in re.finditer(pattern, texto, re.I):
-              cortes.append(m.group(1)[:300].strip())
-          # guarda
+          
+          # agarra todo el texto tal cual lo pone EDEA
+          contenido = soup.find("main") or soup.find("article") or soup
+          texto_limpio = contenido.get_text("\n", strip=True)
+          
+          # lo cortamos para que no traiga menúes
+          if "obras en tu barrio" in texto_limpio.lower():
+              texto_limpio = texto_limpio.lower().split("obras en tu barrio")[-1]
+          
+          # lo dejamos prolijo en líneas
+          lineas = [l.strip() for l in texto_limpio.split("\n") if len(l.strip()) > 15]
+          lineas = lineas[:50]  # primeras 50 lineas, es todo
+          
           data = {
             "actualizado": datetime.now().strftime("%d/%m/%Y %H:%M"),
             "fuente": url,
-            "cortes": cortes[:15]
+            "info_oficial": "\n".join(lineas)
           }
+          
           with open("cortes-edea.json", "w", encoding="utf-8") as f:
               json.dump(data, f, ensure_ascii=False, indent=2)
-          print(f"Guardados {len(cortes)} cortes")
           PY
       - run: |
           git config user.name "bot"
           git config user.email "bot@infomdq.com"
           git add cortes-edea.json || true
-          git commit -m "Update cortes EDEA" || true
+          git commit -m "Update EDEA oficial" || true
           git push
