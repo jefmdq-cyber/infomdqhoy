@@ -52,7 +52,7 @@ body{background:#f0f4f8;color:#1a202c}
 </div>
 <div class="container">
 <div class="card"><span class="badge" style="background:#dbeafe;color:#1d4ed8">DÓLAR HOY</span><h2 style="margin-top:6px">Dólar Hoy Mar del Plata</h2><p id="dolar-t" style="font-size:12px;color:#64748b"></p><div class="dolar-grid" id="dolar-g"></div></div>
-<div class="card"><span class="badge" style="background:#dcfce7;color:#15803d">QUINIELA COMPLETA 20 NÚMEROS</span><h2 style="margin-top:6px;font-size:18px" id="q-titulo">Quiniela Hoy - 6 Loterías</h2><select id="q-fecha" style="width:100%;margin-top:8px;padding:10px;border-radius:10px;border:2px solid #e2e8f0;font-weight:700;font-size:13px;background:white;color:#1e293b"></select><div class="q-tabs" id="qt"></div><div class="q-grid" id="qg"></div><a href="#" class="btn-outline" onclick="openM();return false">Ver 20 números de <span id="qn">Nacional</span> (<span id="qsn">Nocturna</span>)</a><p id="info-uy" style="display:none;font-size:11px;color:#15803d;font-weight:700;margin-top:8px">🇺🇾 Uruguay solo tiene 2 sorteos oficiales: 15:00 y 21:00</p></div>
+<div class="card"><span class="badge" style="background:#dcfce7;color:#15803d">QUINIELA COMPLETA 20 NÚMEROS</span><h2 style="margin-top:6px;font-size:18px" id="q-titulo">Quiniela Hoy - 6 Loterías</h2><select id="q-fecha" style="width:100%;margin-top:8px;padding:10px;border-radius:10px;border:2px solid #e2e8f0;font-weight:700;font-size:13px;background:white;color:#1e293b"></select><div class="q-tabs" id="qt"></div><div class="q-grid" id="qg"></div><a href="#" class="btn-outline" onclick="openM();return false">Ver 20 números de <span id="qn">Nacional</span> (<span id="qsn">NOCTURNA</span>)</a><p id="info-uy" style="display:none;font-size:11px;color:#15803d;font-weight:700;margin-top:8px">🇺🇾 Uruguay solo tiene 2 sorteos oficiales: 15:00 y 21:00</p></div>
 <div class="card" style="border-left:5px solid #25D366"><h2>💼 Empleos MDQ HOY</h2><div style="margin-top:10px"><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Mozo/a</b> - Güemes - NUEVO HOY</div><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Cajero/a</b> - Constitución</div><div style="padding:10px 0"><b>Vendedor/a</b> - Peatonal</div></div><a href="https://empleos-mdq.pages.dev/" target="_blank" class="btn-wsp">Ver todos los empleos →</a></div>
 <div class="card" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);color:white"><h2>🌤️ Clima Mar del Plata</h2><div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><div style="font-size:48px;font-weight:900" id="c-t">--°</div><div style="text-align:right;font-size:13px" id="c-d">Cargando automático...</div></div></div>
 <div class="footer"><a href="/terminos.html">Términos</a> | <a href="/privacidad.html">Privacidad</a> | <a href="/contacto.html">Contacto</a><p style="margin-top:10px;font-size:11px;color:#94a3b8">INFO MDQ HOY - jefmdq@gmail.com - © 2026</p></div>
@@ -101,7 +101,12 @@ function render(){
     let key = actual.toLowerCase();
     let num = "--";
     if(datosCompletos && datosCompletos[key] && datosCompletos[key][idSorteo]){
-      num = datosCompletos[key][idSorteo][0] || "--";
+      let rawData = datosCompletos[key][idSorteo];
+      if(Array.isArray(rawData)){
+        num = rawData[0] || "--";
+      } else if(typeof rawData === 'object'){
+        num = rawData["1"] || rawData[1] || "--";
+      }
     }
     return `<div class="q-box" onclick="actualSorteo='${idSorteo}';render();openM()"><div style="font-size:11px;color:#64748b;font-weight:700">${h}</div><b>${num}</b></div>`;
   }).join('');
@@ -110,19 +115,30 @@ function render(){
 function openM(){
   document.getElementById('modal').classList.add('active');
   let key = actual.toLowerCase();
-  let arr = (datosCompletos && datosCompletos[key] && datosCompletos[key][actualSorteo])? datosCompletos[key][actualSorteo] : [];
-  document.getElementById('mt').textContent=actual+' - '+actualSorteo.toUpperCase()+' - 20 números';
-  
-  if(!arr || arr.length === 0) {
+  let datosSorteo = (datosCompletos && datosCompletos[key] && datosCompletos[key][actualSorteo]) ? datosCompletos[key][actualSorteo] : [];
+
+  document.getElementById('mt').textContent = actual + ' - ' + actualSorteo.toUpperCase() + ' - 20 números';
+
+  if(!datosSorteo || (Array.isArray(datosSorteo) && datosSorteo.length === 0)){
     document.getElementById('ml').innerHTML = '<div style="grid-column:1/-1;text-align:center;color:#64748b;font-weight:700;padding:20px">Aún sin datos para este sorteo</div>';
     return;
   }
 
+  // NORMALIZACIÓN: Ordenamiento numérico estricto del 1 al 20
+  let listaNumeros = [];
+  if(Array.isArray(datosSorteo)){
+    listaNumeros = datosSorteo;
+  } else if(typeof datosSorteo === 'object'){
+    listaNumeros = Object.keys(datosSorteo)
+      .sort((a,b) => parseInt(a) - parseInt(b))
+      .map(k => datosSorteo[k]);
+  }
+
   let html = '';
-  for(let i=0; i<20; i++){
-    let n = arr[i] || '--';
+  for(let i = 0; i < 20; i++){
+    let n = (listaNumeros[i] !== undefined && listaNumeros[i] !== null) ? listaNumeros[i] : '--';
     let esCabeza = i === 0;
-    html += `<b class="q-pos ${esCabeza?'cabeza':''}">${i+1}°</b><span class="q-num ${esCabeza?'cabeza':''}">${n}</span>`;
+    html += `<b class="q-pos ${esCabeza ? 'cabeza' : ''}">${i + 1}°</b><span class="q-num ${esCabeza ? 'cabeza' : ''}">${n}</span>`;
   }
   document.getElementById('ml').innerHTML = html;
 }
@@ -161,12 +177,11 @@ function cargarDia(fecha){
   const esHoy = fecha === fechaARG(0);
   document.getElementById('q-titulo').textContent = esHoy ? 'Quiniela Hoy - 6 Loterías' : 'Quiniela del '+fecha.split('-').reverse().join('/');
   
-  // RUTA RELATIVA: Funciona tanto localmente como subida a la web
   const ruta = esHoy ? 'quiniela.json' : `historial/${fecha}.json`;
   
   fetch(ruta + '?v=' + Date.now())
   .then(r=>{
-    if(!r.ok) throw new Error(esHoy ? "Aún no se generó quiniela.json de hoy" : "Sin historial guardado para esa fecha");
+    if(!r.ok) throw new Error(esHoy ? "Cargando datos actualizados..." : "Sin historial guardado para esa fecha");
     return r.json();
   })
   .then(raw=>{
