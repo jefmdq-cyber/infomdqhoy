@@ -96,7 +96,7 @@ function openM(){
  let key = actual.toLowerCase();
  let arr = (datosCompletos && datosCompletos[key] && datosCompletos[key][actualSorteo])? datosCompletos[key][actualSorteo] : [];
  document.getElementById('mt').textContent=actual+' - '+actualSorteo.toUpperCase()+' - 20 números';
- document.getElementById('ml').innerHTML=arr.map((n,i)=>i===0?`<b class="q-pos cabeza">1°</b><span class="q-num cabeza">${n}</span>`:`<b class="q-pos">${i+1}°</b><span class="q-num">${n}</span>`).join('') || "Aún sin datos para este sorteo";
+ document.getElementById('ml').innerHTML=arr.map((n,i)=>i===0?`<b class="q-pos cabeza">1°</b><span class="q-num cabeza">${n}</span>`:`<b class="q-pos">${i+1}°</b><span class="q-num">${n}</span>`).join('') || "Aún sin sorteo";
 }
 function closeM(){document.getElementById('modal').classList.remove('active');}
 render();
