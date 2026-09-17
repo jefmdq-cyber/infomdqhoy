@@ -82,12 +82,9 @@ body{background:#f0f4f8;color:#1a202c}
   <div class="barrio-btn btn-serena" onclick="abrirBarrio('serena')"><span>🏖️</span>SERENA</div>
   <div class="barrio-btn btn-acantilados" onclick="abrirBarrio('acantilados')"><span>🌊</span>ACANTILADOS</div>
 </div>
-
-<!-- BOTON EDEA ARREGLADO - OCUPA TODO EL ANCHO Y CENTRADO -->
 <div style="grid-column:1 / -1; text-align:center; margin:0 0 12px 0;">
   <button id="btn-edea" style="background:#facc15;color:#000;font-weight:900;padding:10px 22px;border:none;border-radius:20px;font-size:14px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.15)">⚡ Cortes de EDEA</button>
 </div>
-
 <div id="page-home" style="display:contents">
 <div class="card"><span class="badge" style="background:#dbeafe;color:#1d4ed8">DÓLAR HOY</span><h2 style="margin-top:6px">Dólar Hoy Mar del Plata</h2><p id="dolar-t" style="font-size:12px;color:#64748b"></p><div class="dolar-grid" id="dolar-g"></div>
 <a href="https://maps.google.com/?q=Guillermo+Magrassi+4299+Mar+del+Plata" target="_blank" style="text-decoration:none;display:block;">
@@ -125,7 +122,29 @@ body{background:#f0f4f8;color:#1a202c}
   </div>
   <a href="https://wa.me/5492235820394" target="_blank" style="display:block;text-align:center;background:#f97316;color:#0b1f4d;font-weight:900;padding:12px;border-radius:12px;margin-top:12px;text-decoration:none">📲 WhatsApp 223 582-0394</a>
 </div>
-<div class="card"><span class="badge" style="background:#dcfce7;color:#15803d">QUINIELA - RESULTADOS OFICIALES</span><h2 style="margin-top:6px;font-size:18px" id="q-titulo">Quiniela Hoy - 6 Loterías</h2><select id="q-fecha" style="width:100%;margin-top:8px;padding:10px;border-radius:10px;border:2px solid #e2e8f0;font-weight:700;font-size:13px;background:white;color:#1e293b"></select><div class="q-tabs" id="qt"></div><div class="q-grid" id="qg"></div><a href="#" class="btn-outline" onclick="openM();return false">Ver 20 números de <span id="qn">Nacional</span></a><p id="info-uy" style="display:none;font-size:11px;color:#15803d;font-weight:700;margin-top:8px">🇺🇾 Uruguay solo tiene 2 sorteos oficiales: 15:00 y 21:00</p></div>
+
+<!-- CARTEL LEGAL OBLIGATORIO +18 - ARRIBA DE QUINIELA -->
+<div class="card" style="background:white; border:4px solid black; border-radius:12px; padding:0; overflow:hidden; margin-bottom:14px;">
+  <div style="background:white; padding:16px 10px; text-align:center;">
+    <div style="font-size:22px; font-weight:900; color:black; line-height:1.1; font-family:Arial Black, Arial;">+18 | EL JUGAR COMPULSIVAMENTE ES PERJUDICIAL PARA LA SALUD</div>
+    <div style="font-size:13px; font-weight:800; margin-top:6px;">Prohibido para menores de 18 años - Resultados con fines informativos</div>
+    <div style="font-size:11px; margin-top:6px; color:#444;">Ayuda: 0800-444-4000 | No organizamos apuestas</div>
+  </div>
+</div>
+
+<div class="card"><span class="badge" style="background:#dcfce7;color:#15803d">QUINIELA - RESULTADOS OFICIALES</span><h2 style="margin-top:6px;font-size:18px" id="q-titulo">Quiniela Hoy - 6 Loterías</h2><select id="q-fecha" style="width:100%;margin-top:8px;padding:10px;border-radius:10px;border:2px solid #e2e8f0;font-weight:700;font-size:13px;background:white;color:#1e293b"></select><div class="q-tabs" id="qt"></div><div class="q-grid" id="qg"></div><a href="#" class="btn-outline" onclick="openM();return false">Ver 20 números de <span id="qn">Nacional</span></a><p id="info-uy" style="display:none;font-size:11px;color:#15803d;font-weight:700;margin-top:8px">🇺🇾 Uruguay solo tiene 2 sorteos oficiales: 15:00 y 21:00</p>
+
+<!-- CARTEL PUBLICITE AQUI - CHIQUITO -->
+<div style="background:#FFD500; border-radius:12px; overflow:hidden; border:2px solid #000; font-family:Arial; margin-top:16px;">
+  <div style="background:#FFD500; padding:10px; text-align:center; font-weight:900; font-size:16px;">📢 PUBLICITE AQUI - Zona Sur</div>
+  <div style="background:white; padding:12px; text-align:center;">
+    <div style="font-weight:bold; font-size:13px;">Faro - Alfar - Serena - Acantilados - Chapadmalal</div>
+    <div style="font-size:12px; margin:6px 0; color:#333;">Tu negocio visto por +500 vecinos por día</div>
+    <a href="https://wa.me/5492235820394?text=Hola%20Jorge,%20quiero%20publicitar%20mi%20negocio%20en%20INFOMDQHOY%20Zona%20Sur" target="_blank" style="display:inline-block; background:#25D366; color:white; padding:10px 18px; text-decoration:none; font-weight:bold; border-radius:30px; margin-top:6px; font-size:13px;">WhatsApp: 223 582-0394</a>
+  </div>
+</div>
+</div>
+
 <div class="card" style="border-left:5px solid #25D366"><h2>💼 Empleos MDQ HOY</h2><div style="margin-top:10px"><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Mozo/a</b> - Güemes - NUEVO HOY</div><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Cajero/a</b> - Constitución</div><div style="padding:10px 0"><b>Vendedor/a</b> - Peatonal</div></div><a href="https://empleos-mdq.pages.dev/" target="_blank" class="btn-wsp">Ver todos los empleos →</a></div>
 <div class="card" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);color:white"><h2>🌤️ Clima Mar del Plata</h2><div style="display:flex;align-items:center;gap:14px;margin-top:12px"><div style="font-size:54px;line-height:1" id="c-icon">⛅</div><div><div style="font-size:46px;font-weight:900;line-height:1" id="c-t">--°</div><div style="font-size:13px;opacity:.9;margin-top:2px" id="c-desc">Cargando...</div></div></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px"><div style="background:rgba(255,255,255,.18);border-radius:10px;padding:8px 4px;text-align:center"><div style="font-size:9px;opacity:.85;font-weight:700;letter-spacing:.5px">SENSACIÓN</div><div style="font-weight:800;font-size:15px;margin-top:2px" id="c-st">--°</div></div><div style="background:rgba(255,255,255,.18);border-radius:10px;padding:8px 4px;text-align:center"><div style="font-size:9px;opacity:.85;font-weight:700;letter-spacing:.5px">HUMEDAD</div><div style="font-weight:800;font-size:15px;margin-top:2px" id="c-hum">--%</div></div><div style="background:rgba(255,255,255,.18);border-radius:10px;padding:8px 4px;text-align:center"><div style="font-size:9px;opacity:.85;font-weight:700;letter-spacing:.5px">VIENTO</div><div style="font-weight:800;font-size:15px;margin-top:2px" id="c-wind">-- km/h</div></div></div><div style="display:flex;justify-content:space-between;margin-top:12px;font-size:13px;opacity:.95;border-top:1px solid rgba(255,255,255,.25);padding-top:10px"><span>🔽 Mínima <b id="c-min">--°</b></span><span>🔼 Máxima <b id="c-max">--°</b></span></div></div>
 <div class="card" style="background:linear-gradient(135deg,#0891b2,#0e7490);color:white"><h2>🌊 Mareas Mar del Plata</h2><div id="mareas-lista" style="margin-top:10px;font-size:13px">Cargando mareas...</div></div>
@@ -160,8 +179,6 @@ body{background:#f0f4f8;color:#1a202c}
 <div class="footer"><a href="/terminos.html">Términos</a> | <a href="/privacidad.html">Privacidad</a> | <a href="/contacto.html">Contacto</a><p style="margin-top:10px;font-size:11px;color:#94a3b8">INFO MDQ SUR HOY - jefmdq@gmail.com - © 2026</p></div>
 </div>
 <div id="modal" onclick="closeM()"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-x" onclick="closeM()">×</span><h3 id="mt" style="padding-right:30px;font-size:18px"></h3><div id="ml" class="quiniela-list"></div></div></div>
-
-<!-- MODAL EDEA - TODO JUNTO OFICIAL -->
 <div id="modal-edea" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto">
   <div style="background:#111;border:1px solid #333;border-radius:14px;padding:16px;max-width:600px;margin:20px auto;white-space:pre-wrap;color:#ddd">
     <div style="display:flex;justify-content:space-between;align-items:center">
@@ -173,15 +190,10 @@ body{background:#f0f4f8;color:#1a202c}
     <div style="margin-top:4px;font-size:11px;color:#555">Fuente oficial: edeaweb.com.ar/obras-en-tu-barrio/</div>
   </div>
 </div>
-
 <script>
 document.getElementById('f').textContent=new Date().toLocaleDateString('es-AR');
 function abrirBarrio(nombre){document.getElementById('page-home').style.display='none';document.querySelectorAll('.barrio-page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+nombre).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});history.pushState(null,null,'#'+nombre);}
 function volverHome(){document.getElementById('page-home').style.display='contents';document.querySelectorAll('.barrio-page').forEach(p=>p.classList.remove('active'));window.scrollTo({top:0,behavior:'smooth'});history.pushState(null,null,'#');}
-// Sincroniza lo que se ve con el hash de la URL: hace que el boton "atras"
-// del celular funcione bien (antes cambiaba la URL pero la pantalla se
-// quedaba trabada) y de paso permite compartir un link directo a un barrio
-// (ej: infomdqhoy.pages.dev/#alfar abre directo esa pagina).
 function aplicarHash(){
   const h = location.hash.replace('#','');
   const validos = ['faro','alfar','serena','acantilados'];
@@ -217,20 +229,18 @@ selectFecha.value = fechaARG(0);
 selectFecha.addEventListener('change', ()=> cargarDia(selectFecha.value));
 function cargarDia(fecha){const esHoy = fecha === fechaARG(0);document.getElementById('q-titulo').textContent = esHoy? 'Quiniela Hoy - 6 Loterías' : 'Quiniela del '+fecha.split('-').reverse().join('/');const ruta = esHoy? '/quiniela.json' : `/historial/${fecha}.json`;fetch(ruta+'?v='+Date.now()).then(r=>{if(!r.ok) throw new Error(esHoy? "quiniela.json no encontrado ("+r.status+")" : "Sin datos guardados para ese dia");return r.json();}).then(raw=>{let d = Array.isArray(raw)? raw[0] : raw;let fuente = d.completo || d;let norm = {};Object.keys(fuente).forEach(k=>{ norm[k.toLowerCase()] = fuente[k]; });datosCompletos = norm;render();}).catch(e=>{console.error(e);datosCompletos = null;document.getElementById('qg').innerHTML = `<div style="grid-column:1/-1;background:#fee2e2;border:2px solid #dc2626;padding:12px;border-radius:10px;color:#991b1b;font-size:12px"><b>${esHoy?'Error':'Sin datos'}:</b> ${e.message}</div>`;});}
 cargarDia(selectFecha.value);
-
-// EDEA - MUESTRA TODO OFICIAL
 document.getElementById('btn-edea').onclick = function(){
   document.getElementById('modal-edea').style.display='block';
   document.getElementById('texto-edea').innerText='Cargando datos oficiales de EDEA...';
   fetch('/cortes-edea.json?v='+Date.now())
-  .then(r=>r.json())
-  .then(d=>{
+ .then(r=>r.json())
+ .then(d=>{
       let txt = d.info_oficial || (d.cortes? d.cortes.join("\n\n") : "") || "";
       if(!txt || txt.trim().length < 10) txt = "Hoy EDEA no publicó cortes programados.";
       document.getElementById('texto-edea').innerText = txt;
       document.getElementById('fecha-edea').innerText = "Actualizado: " + (d.actualizado||"");
     })
-  .catch(()=>{ document.getElementById('texto-edea').innerText='No se pudo cargar ahora. Probá en unos minutos.'; });
+ .catch(()=>{ document.getElementById('texto-edea').innerText='No se pudo cargar ahora. Probá en unos minutos.'; });
 }
 </script>
 </body>
