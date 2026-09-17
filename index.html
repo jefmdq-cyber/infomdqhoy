@@ -38,7 +38,7 @@ body{background:#f0f4f8;color:#1a202c}
 .barrio-header{border-radius:18px;overflow:hidden;position:relative;height:240px;background:#0f172a;margin-bottom:14px}
 .barrio-header.faro{height:340px}
 .barrio-header img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.barrio-header.faro img{object-position:center top}
+.barrio-header.faro img{object-position:75% top}
 .barrio-header-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.85),rgba(0,0,0,.1))}
 .barrio-header-text{position:absolute;bottom:16px;left:16px;right:16px;color:white}
 .barrio-header-text h2{font-size:30px;font-weight:900}
@@ -93,6 +93,16 @@ body{background:#f0f4f8;color:#1a202c}
   <div style="font-size:10px; color:#666; margin-top:2px;">Ayuda: 0800-444-4000 | No organizamos apuestas</div>
 </div>
 <div id="page-home" style="display:contents">
+<div class="card"><span class="badge" style="background:#dcfce7;color:#15803d">QUINIELA - RESULTADOS OFICIALES</span><h2 style="margin-top:6px;font-size:18px" id="q-titulo">Quiniela Hoy - 6 Loterías</h2><select id="q-fecha" style="width:100%;margin-top:8px;padding:10px;border-radius:10px;border:2px solid #e2e8f0;font-weight:700;font-size:13px;background:white;color:#1e293b"></select><div class="q-tabs" id="qt"></div><div class="q-grid" id="qg"></div><a href="#" class="btn-outline" onclick="openM();return false">Ver 20 números de <span id="qn">Nacional</span></a><p id="info-uy" style="display:none;font-size:11px;color:#15803d;font-weight:700;margin-top:8px">🇺🇾 Uruguay solo tiene 2 sorteos oficiales: 15:00 y 21:00</p>
+<div style="background:#FFD500; border-radius:12px; overflow:hidden; border:2px solid #000; font-family:Arial; margin-top:16px;">
+  <div style="background:#FFD500; padding:10px; text-align:center; font-weight:900; font-size:15px;">📢 PUBLICITE AQUI - Zona Sur</div>
+  <div style="background:white; padding:12px; text-align:center;">
+    <div style="font-weight:bold; font-size:13px;">Faro - Alfar - Serena - Acantilados - Chapadmalal</div>
+    <div style="font-size:12px; margin:6px 0; color:#333;">Tu negocio visto por +500 vecinos por día</div>
+    <a href="https://wa.me/5492235820394?text=Hola%20Jorge,%20quiero%20publicitar%20mi%20negocio%20en%20INFOMDQHOY%20Zona%20Sur" target="_blank" style="display:inline-block; background:#25D366; color:white; padding:10px 18px; text-decoration:none; font-weight:bold; border-radius:30px; margin-top:6px; font-size:13px;">📲 Consultar por WhatsApp</a>
+  </div>
+</div>
+</div>
 <div class="card"><span class="badge" style="background:#dbeafe;color:#1d4ed8">DÓLAR HOY</span><h2 style="margin-top:6px">Dólar Hoy Mar del Plata</h2><p id="dolar-t" style="font-size:12px;color:#64748b"></p><div class="dolar-grid" id="dolar-g"></div>
 <a href="https://maps.google.com/?q=Guillermo+Magrassi+4299+Mar+del+Plata" target="_blank" style="text-decoration:none;display:block;">
 <div style="background:#111; border:2px solid #ff00ff; padding:18px; text-align:center; border-radius:15px; margin-top:12px; box-shadow: 0 0 15px #ff00ff;">
@@ -103,6 +113,9 @@ body{background:#f0f4f8;color:#1a202c}
 </div>
 </a>
 </div>
+<div class="card" style="border-left:5px solid #25D366"><h2>💼 Empleos MDQ HOY</h2><div style="margin-top:10px"><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Mozo/a</b> - Güemes - NUEVO HOY</div><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Cajero/a</b> - Constitución</div><div style="padding:10px 0"><b>Vendedor/a</b> - Peatonal</div></div><a href="https://empleos-mdq.pages.dev/" target="_blank" class="btn-wsp">Ver todos los empleos →</a></div>
+<div class="card" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);color:white"><h2>🌤️ Clima Mar del Plata</h2><div style="display:flex;align-items:center;gap:14px;margin-top:12px"><div style="font-size:54px;line-height:1" id="c-icon">⛅</div><div><div style="font-size:46px;font-weight:900;line-height:1" id="c-t">--°</div><div style="font-size:13px;opacity:.9;margin-top:2px" id="c-desc">Cargando...</div></div></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px"><div style="background:rgba(255,255,255,.18);border-radius:10px;padding:8px 4px;text-align:center"><div style="font-size:9px;opacity:.85;font-weight:700;letter-spacing:.5px">SENSACIÓN</div><div style="font-weight:800;font-size:15px;margin-top:2px" id="c-st">--°</div></div><div style="background:rgba(255,255,255,.18);border-radius:10px;padding:8px 4px;text-align:center"><div style="font-size:9px;opacity:.85;font-weight:700;letter-spacing:.5px">HUMEDAD</div><div style="font-weight:800;font-size:15px;margin-top:2px" id="c-hum">--%</div></div><div style="background:rgba(255,255,255,.18);border-radius:10px;padding:8px 4px;text-align:center"><div style="font-size:9px;opacity:.85;font-weight:700;letter-spacing:.5px">VIENTO</div><div style="font-weight:800;font-size:15px;margin-top:2px" id="c-wind">-- km/h</div></div></div><div style="display:flex;justify-content:space-between;margin-top:12px;font-size:13px;opacity:.95;border-top:1px solid rgba(255,255,255,.25);padding-top:10px"><span>🔽 Mínima <b id="c-min">--°</b></span><span>🔼 Máxima <b id="c-max">--°</b></span></div></div>
+<div class="card" style="background:linear-gradient(135deg,#0891b2,#0e7490);color:white"><h2>🌊 Mareas Mar del Plata</h2><div id="mareas-lista" style="margin-top:10px;font-size:13px">Cargando mareas...</div></div>
 <div class="card" style="background:linear-gradient(135deg,#0b1f4d,#132b63);color:white;border:2px solid #f97316">
   <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">
     <div style="display:flex;align-items:center;gap:8px">
@@ -129,19 +142,6 @@ body{background:#f0f4f8;color:#1a202c}
   </div>
   <a href="https://wa.me/5492235820394" target="_blank" style="display:block;text-align:center;background:#f97316;color:#0b1f4d;font-weight:900;padding:12px;border-radius:12px;margin-top:12px;text-decoration:none">📲 WhatsApp 223 582-0394</a>
 </div>
-<div class="card"><span class="badge" style="background:#dcfce7;color:#15803d">QUINIELA - RESULTADOS OFICIALES</span><h2 style="margin-top:6px;font-size:18px" id="q-titulo">Quiniela Hoy - 6 Loterías</h2><select id="q-fecha" style="width:100%;margin-top:8px;padding:10px;border-radius:10px;border:2px solid #e2e8f0;font-weight:700;font-size:13px;background:white;color:#1e293b"></select><div class="q-tabs" id="qt"></div><div class="q-grid" id="qg"></div><a href="#" class="btn-outline" onclick="openM();return false">Ver 20 números de <span id="qn">Nacional</span></a><p id="info-uy" style="display:none;font-size:11px;color:#15803d;font-weight:700;margin-top:8px">🇺🇾 Uruguay solo tiene 2 sorteos oficiales: 15:00 y 21:00</p>
-<div style="background:#FFD500; border-radius:12px; overflow:hidden; border:2px solid #000; font-family:Arial; margin-top:16px;">
-  <div style="background:#FFD500; padding:10px; text-align:center; font-weight:900; font-size:15px;">📢 PUBLICITE AQUI - Zona Sur</div>
-  <div style="background:white; padding:12px; text-align:center;">
-    <div style="font-weight:bold; font-size:13px;">Faro - Alfar - Serena - Acantilados - Chapadmalal</div>
-    <div style="font-size:12px; margin:6px 0; color:#333;">Tu negocio visto por +500 vecinos por día</div>
-    <a href="https://wa.me/5492235820394?text=Hola%20Jorge,%20quiero%20publicitar%20mi%20negocio%20en%20INFOMDQHOY%20Zona%20Sur" target="_blank" style="display:inline-block; background:#25D366; color:white; padding:10px 18px; text-decoration:none; font-weight:bold; border-radius:30px; margin-top:6px; font-size:13px;">📲 Consultar por WhatsApp</a>
-  </div>
-</div>
-</div>
-<div class="card" style="border-left:5px solid #25D366"><h2>💼 Empleos MDQ HOY</h2><div style="margin-top:10px"><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Mozo/a</b> - Güemes - NUEVO HOY</div><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Cajero/a</b> - Constitución</div><div style="padding:10px 0"><b>Vendedor/a</b> - Peatonal</div></div><a href="https://empleos-mdq.pages.dev/" target="_blank" class="btn-wsp">Ver todos los empleos →</a></div>
-<div class="card" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);color:white"><h2>🌤️ Clima Mar del Plata</h2><div style="display:flex;align-items:center;gap:14px;margin-top:12px"><div style="font-size:54px;line-height:1" id="c-icon">⛅</div><div><div style="font-size:46px;font-weight:900;line-height:1" id="c-t">--°</div><div style="font-size:13px;opacity:.9;margin-top:2px" id="c-desc">Cargando...</div></div></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px"><div style="background:rgba(255,255,255,.18);border-radius:10px;padding:8px 4px;text-align:center"><div style="font-size:9px;opacity:.85;font-weight:700;letter-spacing:.5px">SENSACIÓN</div><div style="font-weight:800;font-size:15px;margin-top:2px" id="c-st">--°</div></div><div style="background:rgba(255,255,255,.18);border-radius:10px;padding:8px 4px;text-align:center"><div style="font-size:9px;opacity:.85;font-weight:700;letter-spacing:.5px">HUMEDAD</div><div style="font-weight:800;font-size:15px;margin-top:2px" id="c-hum">--%</div></div><div style="background:rgba(255,255,255,.18);border-radius:10px;padding:8px 4px;text-align:center"><div style="font-size:9px;opacity:.85;font-weight:700;letter-spacing:.5px">VIENTO</div><div style="font-weight:800;font-size:15px;margin-top:2px" id="c-wind">-- km/h</div></div></div><div style="display:flex;justify-content:space-between;margin-top:12px;font-size:13px;opacity:.95;border-top:1px solid rgba(255,255,255,.25);padding-top:10px"><span>🔽 Mínima <b id="c-min">--°</b></span><span>🔼 Máxima <b id="c-max">--°</b></span></div></div>
-<div class="card" style="background:linear-gradient(135deg,#0891b2,#0e7490);color:white"><h2>🌊 Mareas Mar del Plata</h2><div id="mareas-lista" style="margin-top:10px;font-size:13px">Cargando mareas...</div></div>
 </div>
 <div id="page-faro" class="barrio-page">
   <div class="btn-volver" onclick="volverHome()">← Volver al inicio</div>
