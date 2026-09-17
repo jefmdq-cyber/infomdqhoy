@@ -65,7 +65,7 @@ body{background:#f0f4f8;color:#1a202c}
 .q-pos.cabeza{background:#dc2626;color:white;border-color:#991b1b}
 .footer{padding:20px;text-align:center}
 .footer a{color:#64748b;text-decoration:none;margin:0 6px;font-size:12px;font-weight:600}
-@media(min-width:800px){.container{max-width:1100px;display:grid;grid-template-columns:1fr 1fr;gap:16px}.hero{height:420px}.hero-text h1{font-size:56px}.container >.footer{grid-column:1 / -1}.card{margin-bottom:0}.barrios-nav{grid-column:1 / -1;grid-template-columns:repeat(4,1fr)}.barrio-page{grid-column:1 / -1}}
+@media(min-width:800px){.container{max-width:1100px;display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}.hero{height:420px}.hero-text h1{font-size:56px}.container >.footer{grid-column:1 / -1}.card{margin-bottom:0}.barrios-nav{grid-column:1 / -1;grid-template-columns:repeat(4,1fr)}.barrio-page{grid-column:1 / -1}}
 </style>
 </head>
 <body>
@@ -85,6 +85,14 @@ body{background:#f0f4f8;color:#1a202c}
 <div style="grid-column:1 / -1; text-align:center; margin:0 0 12px 0;">
   <button id="btn-edea" style="background:#facc15;color:#000;font-weight:900;padding:10px 22px;border:none;border-radius:20px;font-size:14px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.15)">⚡ Cortes de EDEA</button>
 </div>
+
+<!-- CARTEL LEGAL CORREGIDO - OCUPA TODO EL ANCHO, SIN HUECO -->
+<div style="grid-column:1 / -1; background:white; border:3px solid black; border-radius:12px; padding:12px 10px; text-align:center; height:fit-content; align-self:start;">
+  <div style="font-size:15px; font-weight:900; color:black; line-height:1.2; font-family:Arial Black, Arial, sans-serif;">+18 | EL JUGAR COMPULSIVAMENTE ES PERJUDICIAL PARA LA SALUD</div>
+  <div style="font-size:12px; font-weight:700; margin-top:4px;">Prohibido para menores de 18 años - Resultados con fines informativos</div>
+  <div style="font-size:10px; color:#666; margin-top:2px;">Ayuda: 0800-444-4000 | No organizamos apuestas</div>
+</div>
+
 <div id="page-home" style="display:contents">
 <div class="card"><span class="badge" style="background:#dbeafe;color:#1d4ed8">DÓLAR HOY</span><h2 style="margin-top:6px">Dólar Hoy Mar del Plata</h2><p id="dolar-t" style="font-size:12px;color:#64748b"></p><div class="dolar-grid" id="dolar-g"></div>
 <a href="https://maps.google.com/?q=Guillermo+Magrassi+4299+Mar+del+Plata" target="_blank" style="text-decoration:none;display:block;">
@@ -122,29 +130,16 @@ body{background:#f0f4f8;color:#1a202c}
   </div>
   <a href="https://wa.me/5492235820394" target="_blank" style="display:block;text-align:center;background:#f97316;color:#0b1f4d;font-weight:900;padding:12px;border-radius:12px;margin-top:12px;text-decoration:none">📲 WhatsApp 223 582-0394</a>
 </div>
-
-<!-- CARTEL LEGAL OBLIGATORIO +18 - ARRIBA DE QUINIELA -->
-<div class="card" style="background:white; border:4px solid black; border-radius:12px; padding:0; overflow:hidden; margin-bottom:14px;">
-  <div style="background:white; padding:16px 10px; text-align:center;">
-    <div style="font-size:22px; font-weight:900; color:black; line-height:1.1; font-family:Arial Black, Arial;">+18 | EL JUGAR COMPULSIVAMENTE ES PERJUDICIAL PARA LA SALUD</div>
-    <div style="font-size:13px; font-weight:800; margin-top:6px;">Prohibido para menores de 18 años - Resultados con fines informativos</div>
-    <div style="font-size:11px; margin-top:6px; color:#444;">Ayuda: 0800-444-4000 | No organizamos apuestas</div>
-  </div>
-</div>
-
 <div class="card"><span class="badge" style="background:#dcfce7;color:#15803d">QUINIELA - RESULTADOS OFICIALES</span><h2 style="margin-top:6px;font-size:18px" id="q-titulo">Quiniela Hoy - 6 Loterías</h2><select id="q-fecha" style="width:100%;margin-top:8px;padding:10px;border-radius:10px;border:2px solid #e2e8f0;font-weight:700;font-size:13px;background:white;color:#1e293b"></select><div class="q-tabs" id="qt"></div><div class="q-grid" id="qg"></div><a href="#" class="btn-outline" onclick="openM();return false">Ver 20 números de <span id="qn">Nacional</span></a><p id="info-uy" style="display:none;font-size:11px;color:#15803d;font-weight:700;margin-top:8px">🇺🇾 Uruguay solo tiene 2 sorteos oficiales: 15:00 y 21:00</p>
-
-<!-- CARTEL PUBLICITE AQUI - CHIQUITO -->
 <div style="background:#FFD500; border-radius:12px; overflow:hidden; border:2px solid #000; font-family:Arial; margin-top:16px;">
-  <div style="background:#FFD500; padding:10px; text-align:center; font-weight:900; font-size:16px;">📢 PUBLICITE AQUI - Zona Sur</div>
+  <div style="background:#FFD500; padding:10px; text-align:center; font-weight:900; font-size:15px;">📢 PUBLICITE AQUI - Zona Sur</div>
   <div style="background:white; padding:12px; text-align:center;">
     <div style="font-weight:bold; font-size:13px;">Faro - Alfar - Serena - Acantilados - Chapadmalal</div>
     <div style="font-size:12px; margin:6px 0; color:#333;">Tu negocio visto por +500 vecinos por día</div>
-    <a href="https://wa.me/5492235820394?text=Hola%20Jorge,%20quiero%20publicitar%20mi%20negocio%20en%20INFOMDQHOY%20Zona%20Sur" target="_blank" style="display:inline-block; background:#25D366; color:white; padding:10px 18px; text-decoration:none; font-weight:bold; border-radius:30px; margin-top:6px; font-size:13px;">WhatsApp: 223 582-0394</a>
+    <a href="https://wa.me/5492235820394?text=Hola%20Jorge,%20quiero%20publicitar%20mi%20negocio%20en%20INFOMDQHOY%20Zona%20Sur" target="_blank" style="display:inline-block; background:#25D366; color:white; padding:10px 18px; text-decoration:none; font-weight:bold; border-radius:30px; margin-top:6px; font-size:13px;">📲 Consultar por WhatsApp</a>
   </div>
 </div>
 </div>
-
 <div class="card" style="border-left:5px solid #25D366"><h2>💼 Empleos MDQ HOY</h2><div style="margin-top:10px"><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Mozo/a</b> - Güemes - NUEVO HOY</div><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Cajero/a</b> - Constitución</div><div style="padding:10px 0"><b>Vendedor/a</b> - Peatonal</div></div><a href="https://empleos-mdq.pages.dev/" target="_blank" class="btn-wsp">Ver todos los empleos →</a></div>
 <div class="card" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);color:white"><h2>🌤️ Clima Mar del Plata</h2><div style="display:flex;align-items:center;gap:14px;margin-top:12px"><div style="font-size:54px;line-height:1" id="c-icon">⛅</div><div><div style="font-size:46px;font-weight:900;line-height:1" id="c-t">--°</div><div style="font-size:13px;opacity:.9;margin-top:2px" id="c-desc">Cargando...</div></div></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px"><div style="background:rgba(255,255,255,.18);border-radius:10px;padding:8px 4px;text-align:center"><div style="font-size:9px;opacity:.85;font-weight:700;letter-spacing:.5px">SENSACIÓN</div><div style="font-weight:800;font-size:15px;margin-top:2px" id="c-st">--°</div></div><div style="background:rgba(255,255,255,.18);border-radius:10px;padding:8px 4px;text-align:center"><div style="font-size:9px;opacity:.85;font-weight:700;letter-spacing:.5px">HUMEDAD</div><div style="font-weight:800;font-size:15px;margin-top:2px" id="c-hum">--%</div></div><div style="background:rgba(255,255,255,.18);border-radius:10px;padding:8px 4px;text-align:center"><div style="font-size:9px;opacity:.85;font-weight:700;letter-spacing:.5px">VIENTO</div><div style="font-weight:800;font-size:15px;margin-top:2px" id="c-wind">-- km/h</div></div></div><div style="display:flex;justify-content:space-between;margin-top:12px;font-size:13px;opacity:.95;border-top:1px solid rgba(255,255,255,.25);padding-top:10px"><span>🔽 Mínima <b id="c-min">--°</b></span><span>🔼 Máxima <b id="c-max">--°</b></span></div></div>
 <div class="card" style="background:linear-gradient(135deg,#0891b2,#0e7490);color:white"><h2>🌊 Mareas Mar del Plata</h2><div id="mareas-lista" style="margin-top:10px;font-size:13px">Cargando mareas...</div></div>
