@@ -7,13 +7,13 @@
 <title>INFO MDQ SUR HOY | Alfar, Faro, Serena, Acantilados y Chapadmalal - Dólar y Quiniela</title>
 <meta property="og:title" content="INFO MDQ SUR HOY | Alfar, Faro, Serena, Acantilados y Chapadmalal">
 <meta property="og:description" content="Dólar hoy, quiniela completa de 6 loterías, clima y empleos en Alfar, Faro, Serena, Acantilados y Chapadmalal, actualizado todo el día.">
-<meta property="og:image" content="https://infomdqhoy.pages.dev/banner1.jpg">
+<meta property="og:image" content="https://infomdqhoy.pages.dev/faro-nuevo.jpg">
 <meta property="og:url" content="https://infomdqhoy.pages.dev/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="INFO MDQ SUR HOY | Alfar, Faro, Serena, Acantilados y Chapadmalal">
 <meta name="twitter:description" content="Dólar hoy, quiniela completa de 6 loterías, clima y empleos en Alfar, Faro, Serena, Acantilados y Chapadmalal.">
-<meta name="twitter:image" content="https://infomdqhoy.pages.dev/banner1.jpg">
+<meta name="twitter:image" content="https://infomdqhoy.pages.dev/faro-nuevo.jpg">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4997896017063436" crossorigin="anonymous"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
@@ -70,7 +70,7 @@ body{background:#f0f4f8;color:#1a202c}
 </head>
 <body>
 <div class="hero">
-<img id="slide1" src="banner1.jpg" alt="Mar del Plata día" style="opacity:1">
+<img id="slide1" src="faro-nuevo.jpg" alt="Faro Mar del Plata" style="opacity:1">
 <img id="slide2" src="banner2.jpg" alt="Mar del Plata noche" style="opacity:0">
 <div class="hero-overlay"></div>
 <div class="hero-text"><h1>INFO MDQ SUR HOY</h1><p>Alfar, Faro, Serena, Acantilados, Chapadmalal - Dólar, Quiniela, Clima y Empleos - <span id="f"></span></p></div>
@@ -146,7 +146,7 @@ body{background:#f0f4f8;color:#1a202c}
 </div>
 <div id="page-faro" class="barrio-page">
   <div class="btn-volver" onclick="volverHome()">← Volver al inicio</div>
-  <div class="barrio-header"><img src="banner1.jpg"><div class="barrio-header-overlay"></div><div class="barrio-header-text"><h2>🗼 FARO NORTE</h2><p>Sánchez de Bustamante 3460 - Mar del Plata</p></div></div>
+  <div class="barrio-header"><img src="faro-nuevo.jpg"><div class="barrio-header-overlay"></div><div class="barrio-header-text"><h2>🗼 FARO NORTE</h2><p>Sánchez de Bustamante 3460 - Mar del Plata</p></div></div>
   <div class="card"><h3>🏛️ Sociedad de Fomento Faro Norte</h3><div class="info-box"><b>📍 Dirección:</b> Sánchez de Bustamante 3460<br><b>🚌 Colectivo:</b> 511<br><b>📌 Actividades:</b> Salud, talleres, RCP, vacunaciones y castraciones</div></div>
   <div class="card" style="padding:10px; display:flex; flex-direction:column; align-items:center; border:2px solid #000">
   <img src="ritmos-faro.jpg" style="width:100%; max-width:380px; border-radius:12px; display:block">
@@ -233,14 +233,14 @@ document.getElementById('btn-edea').onclick = function(){
   document.getElementById('modal-edea').style.display='block';
   document.getElementById('texto-edea').innerText='Cargando datos oficiales de EDEA...';
   fetch('/cortes-edea.json?v='+Date.now())
- .then(r=>r.json())
- .then(d=>{
+.then(r=>r.json())
+.then(d=>{
       let txt = d.info_oficial || (d.cortes? d.cortes.join("\n\n") : "") || "";
       if(!txt || txt.trim().length < 10) txt = "Hoy EDEA no publicó cortes programados.";
       document.getElementById('texto-edea').innerText = txt;
       document.getElementById('fecha-edea').innerText = "Actualizado: " + (d.actualizado||"");
     })
- .catch(()=>{ document.getElementById('texto-edea').innerText='No se pudo cargar ahora. Probá en unos minutos.'; });
+.catch(()=>{ document.getElementById('texto-edea').innerText='No se pudo cargar ahora. Probá en unos minutos.'; });
 }
 </script>
 </body>
