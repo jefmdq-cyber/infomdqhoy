@@ -1,14 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3L9SZ6YVFT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-3L9SZ6YVFT');
-</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3L9SZ6YVFT');</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="7e64033b70480c67" />
@@ -92,12 +86,10 @@ body{background:#f0f4f8;color:#1a202c}
   <a href="#serena" class="barrio-btn btn-serena" onclick="abrirBarrio('serena');return false;"><span>🏖️</span>SERENA</a>
   <a href="#acantilados" class="barrio-btn btn-acantilados" onclick="abrirBarrio('acantilados');return false;"><span>🌊</span>ACANTILADOS</a>
 </div>
-
 <div style="grid-column:1 / -1; margin: 2px 0 14px 0;">
   <input id="buscadorActividades" placeholder="🔍 Buscá yoga, zumba, folklore, ritmos..." style="width:100%;padding:14px;border-radius:12px;border:2px solid #0f172a;font-weight:700;font-size:14px;">
   <div id="resultadoBuscador" style="margin-top:10px"></div>
 </div>
-
 <div style="grid-column:1 / -1; text-align:center; margin:0 0 12px 0;">
   <button id="btn-edea" style="background:#facc15;color:#000;font-weight:900;padding:10px 22px;border:none;border-radius:20px;font-size:14px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.15)">⚡ Cortes de EDEA</button>
 </div>
@@ -162,9 +154,9 @@ body{background:#f0f4f8;color:#1a202c}
   <div class="barrio-header faro"><img src="faro-nuevo.jpg"><div class="barrio-header-overlay"></div><div class="barrio-header-text"><h2>🗼 FARO NORTE</h2><p>Sánchez de Bustamante 3460 - Mar del Plata</p></div></div>
   <div class="card"><h3>🏛️ Sociedad de Fomento Faro Norte</h3><div class="info-box"><b>📍 Dirección:</b> Sánchez de Bustamante 3460<br><b>🚌 Colectivo:</b> 511<br><b>📌 Actividades:</b> Salud, talleres, RCP, vacunaciones y castraciones</div></div>
   <div class="card" style="padding:10px; display:flex; flex-direction:column; align-items:center; border:2px solid #000">
-  <img src="ritmos-faro.jpg" style="width:100%; max-width:380px; border-radius:12px; display:block">
-  <p style="font-size:11px; color:#777; text-align:center; margin:6px 0 0 0">Info: Asoc. Vecinal de Fomento Faro Norte</p>
-</div>
+    <img src="ritmos-faro.jpg" style="width:100%; max-width:380px; border-radius:12px; display:block">
+    <p style="font-size:11px; color:#777; text-align:center; margin:6px 0 0 0">Info: Asoc. Vecinal de Fomento Faro Norte</p>
+  </div>
   <div class="card"><h3>🎯 Actividades en FARO NORTE</h3><div id="acts-faro" style="font-size:13px">Cargando...</div></div>
   <div class="card" style="background:#fffbe6;border:2px solid #facc15"><h3>📢 Notificaciones - FARO</h3><div id="noti-faro" style="margin-top:10px;font-size:13px;color:#64748b;padding:12px;background:white;border-radius:10px;border:1px solid #e2e8f0">No hay notificaciones por el momento.</div></div>
 </div>
@@ -206,98 +198,105 @@ body{background:#f0f4f8;color:#1a202c}
     <div style="margin-top:4px;font-size:11px;color:#555">Fuente oficial: edeaweb.com.ar/obras-en-tu-barrio/</div>
   </div>
 </div>
+
+<!-- MODAL ACTIVIDADES TIPO EDEA SIN WHATSAPP -->
+<div id="modal-acts" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto" onclick="this.style.display='none'">
+  <div style="background:white;border:3px solid #0f172a;border-radius:16px;padding:18px;max-width:420px;margin:20px auto;color:#1a202c" onclick="event.stopPropagation()">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <b id="act-titulo" style="font-size:16px">Actividad</b>
+      <button onclick="document.getElementById('modal-acts').style.display='none'" style="background:#0f172a;color:white;border:none;padding:6px 12px;border-radius:20px;font-weight:800">X</button>
+    </div>
+    <img id="act-img" src="ritmos-faro.jpg" style="width:100%;border-radius:12px;margin-top:12px;display:none">
+    <div id="act-info" style="margin-top:12px;font-size:13px;line-height:1.6"></div>
+    <div style="margin-top:14px;font-size:11px;color:#64748b;text-align:center;border-top:1px solid #e2e8f0;padding-top:10px">Info: Asoc. Vecinal de Fomento Faro Norte</div>
+  </div>
+</div>
+
 <script>
 document.getElementById('f').textContent=new Date().toLocaleDateString('es-AR');
 function abrirBarrio(nombre){document.getElementById('page-home').style.display='none';document.querySelectorAll('.barrio-page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+nombre).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});history.pushState(null,null,'#'+nombre);}
 function volverHome(){document.getElementById('page-home').style.display='contents';document.querySelectorAll('.barrio-page').forEach(p=>p.classList.remove('active'));window.scrollTo({top:0,behavior:'smooth'});history.pushState(null,null,'#');}
-function aplicarHash(){
-  const h = location.hash.replace('#','');
-  const validos = ['faro','alfar','serena','acantilados'];
-  document.querySelectorAll('.barrio-page').forEach(p=>p.classList.remove('active'));
-  if(validos.includes(h)){
-    document.getElementById('page-home').style.display='none';
-    document.getElementById('page-'+h).classList.add('active');
-  } else {
-    document.getElementById('page-home').style.display='contents';
-  }
-}
-window.addEventListener('popstate', aplicarHash);
-aplicarHash();
-let s=0; setInterval(()=>{s=s===0?1:0;document.getElementById('slide1').style.opacity=s===0?1:0;document.getElementById('slide2').style.opacity=s===1?1:0;},4000);
-async function dolar(){try{const r=await fetch('https://dolarapi.com/v1/dolares');const d=await r.json();let m={};d.forEach(x=>m[x.casa]=x);document.getElementById('dolar-g').innerHTML=`<div class="dolar-item blue"><div style="font-size:10px;color:#64748b;font-weight:700">BLUE</div><div style="font-size:22px;font-weight:900">$${m.blue.venta}</div><div style="font-size:11px">Compra $${m.blue.compra}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">OFICIAL</div><div style="font-size:22px;font-weight:900">$${m.oficial.venta}</div><div style="font-size:11px">Compra $${m.oficial.compra}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">MEP</div><div style="font-size:22px;font-weight:900">$${m.bolsa.venta}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">TARJETA</div><div style="font-size:22px;font-weight:900">$${m.tarjeta.venta}</div></div>`;document.getElementById('dolar-t').textContent='Actualizado '+new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});}catch(e){}} dolar();
-const CODIGOS_CLIMA = {0:['☀️','Despejado'],1:['🌤️','Mayormente despejado'],2:['⛅','Parcialmente nublado'],3:['☁️','Nublado'],45:['🌫️','Niebla'],48:['🌫️','Niebla helada'],51:['🌦️','Llovizna débil'],53:['🌦️','Llovizna'],55:['🌦️','Llovizna intensa'],61:['🌧️','Lluvia débil'],63:['🌧️','Lluvia'],65:['🌧️','Lluvia intensa'],66:['🌧️','Lluvia helada'],67:['🌧️','Lluvia helada intensa'],71:['🌨️','Nieve débil'],73:['🌨️','Nieve'],75:['🌨️','Nieve intensa'],77:['🌨️','Granizo fino'],80:['🌦️','Chubascos débiles'],81:['🌦️','Chubascos'],82:['⛈️','Chubascos fuertes'],85:['🌨️','Chubascos de nieve'],86:['🌨️','Chubascos de nieve fuertes'],95:['⛈️','Tormenta'],96:['⛈️','Tormenta con granizo'],99:['⛈️','Tormenta fuerte con granizo']};
-async function clima(){try{const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=-38.0055&longitude=-57.5426&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=America/Argentina/Buenos_Aires');const j=await r.json();const c=j.current;const [icono, desc] = CODIGOS_CLIMA[c.weather_code] || ['🌡️','—'];document.getElementById('c-icon').textContent=icono;document.getElementById('c-t').textContent=Math.round(c.temperature_2m)+'°';document.getElementById('c-desc').textContent=desc;document.getElementById('c-st').textContent=Math.round(c.apparent_temperature)+'°';document.getElementById('c-hum').textContent=Math.round(c.relative_humidity_2m)+'%';document.getElementById('c-wind').textContent=Math.round(c.wind_speed_10m)+' km/h';document.getElementById('c-min').textContent=Math.round(j.daily.temperature_2m_min[0])+'°';document.getElementById('c-max').textContent=Math.round(j.daily.temperature_2m_max[0])+'°';}catch(e){}} clima();
-async function mareas(){try{const r = await fetch('https://marine-api.open-meteo.com/v1/marine?latitude=-38.0055&longitude=-57.5426&hourly=sea_level_height_msl&timezone=America%2FArgentina%2FBuenos_Aires&forecast_days=2&cell_selection=sea');const j = await r.json();const horas = j.hourly.time;const alturas = j.hourly.sea_level_height_msl;const hoyStr = fechaARG(0);const eventos = [];for(let i=1;i<alturas.length-1;i++){const prev=alturas[i-1], cur=alturas[i], next=alturas[i+1];const esAlta = cur>prev && cur>=next;const esBaja = cur<prev && cur<=next;if((esAlta||esBaja) && horas[i].startsWith(hoyStr)){eventos.push({hora:horas[i].slice(11,16), altura:cur.toFixed(2), tipo: esAlta?'Alta':'Baja'});}}const cont = document.getElementById('mareas-lista');if(eventos.length===0){ cont.textContent = 'Sin datos de marea para hoy.'; return; }cont.innerHTML = eventos.map(e=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.25)"><span>${e.tipo==='Alta'?'🔼':'🔽'} Marea ${e.tipo}</span><b>${e.hora} hs · ${e.altura} m</b></div>`).join('');}catch(e){document.getElementById('mareas-lista').textContent = 'No se pudo cargar la marea.';}} mareas();
+function aplicarHash(){const h=location.hash.replace('#','');const validos=['faro','alfar','serena','acantilados'];document.querySelectorAll('.barrio-page').forEach(p=>p.classList.remove('active'));if(validos.includes(h)){document.getElementById('page-home').style.display='none';document.getElementById('page-'+h).classList.add('active');}else{document.getElementById('page-home').style.display='contents';}}
+window.addEventListener('popstate', aplicarHash);aplicarHash();
+let s=0;setInterval(()=>{s=s===0?1:0;document.getElementById('slide1').style.opacity=s===0?1:0;document.getElementById('slide2').style.opacity=s===1?1:0;},4000);
+async function dolar(){try{const r=await fetch('https://dolarapi.com/v1/dolares');const d=await r.json();let m={};d.forEach(x=>m[x.casa]=x);document.getElementById('dolar-g').innerHTML=`<div class="dolar-item blue"><div style="font-size:10px;color:#64748b;font-weight:700">BLUE</div><div style="font-size:22px;font-weight:900">$${m.blue.venta}</div><div style="font-size:11px">Compra $${m.blue.compra}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">OFICIAL</div><div style="font-size:22px;font-weight:900">$${m.oficial.venta}</div><div style="font-size:11px">Compra $${m.oficial.compra}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">MEP</div><div style="font-size:22px;font-weight:900">$${m.bolsa.venta}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">TARJETA</div><div style="font-size:22px;font-weight:900">$${m.tarjeta.venta}</div></div>`;document.getElementById('dolar-t').textContent='Actualizado '+new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});}catch(e){}}dolar();
+const CODIGOS_CLIMA={0:['☀️','Despejado'],1:['🌤️','Mayormente despejado'],2:['⛅','Parcialmente nublado'],3:['☁️','Nublado'],45:['🌫️','Niebla'],48:['🌫️','Niebla helada'],51:['🌦️','Llovizna débil'],53:['🌦️','Llovizna'],55:['🌦️','Llovizna intensa'],61:['🌧️','Lluvia débil'],63:['🌧️','Lluvia'],65:['🌧️','Lluvia intensa'],66:['🌧️','Lluvia helada'],67:['🌧️','Lluvia helada intensa'],71:['🌨️','Nieve débil'],73:['🌨️','Nieve'],75:['🌨️','Nieve intensa'],77:['🌨️','Granizo fino'],80:['🌦️','Chubascos débiles'],81:['🌦️','Chubascos'],82:['⛈️','Chubascos fuertes'],85:['🌨️','Chubascos de nieve'],86:['🌨️','Chubascos de nieve fuertes'],95:['⛈️','Tormenta'],96:['⛈️','Tormenta con granizo'],99:['⛈️','Tormenta fuerte con granizo']};
+async function clima(){try{const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=-38.0055&longitude=-57.5426&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code&daily=temperature_2m_max,temperature_2m_min&timezone=America/Argentina/Buenos_Aires');const j=await r.json();const c=j.current;const [icono,desc]=CODIGOS_CLIMA[c.weather_code]||['🌡️','—'];document.getElementById('c-icon').textContent=icono;document.getElementById('c-t').textContent=Math.round(c.temperature_2m)+'°';document.getElementById('c-desc').textContent=desc;document.getElementById('c-st').textContent=Math.round(c.apparent_temperature)+'°';document.getElementById('c-hum').textContent=Math.round(c.relative_humidity_2m)+'%';document.getElementById('c-wind').textContent=Math.round(c.wind_speed_10m)+' km/h';document.getElementById('c-min').textContent=Math.round(j.daily.temperature_2m_min[0])+'°';document.getElementById('c-max').textContent=Math.round(j.daily.temperature_2m_max[0])+'°';}catch(e){}}clima();
+async function mareas(){try{const r=await fetch('https://marine-api.open-meteo.com/v1/marine?latitude=-38.0055&longitude=-57.5426&hourly=sea_level_height_msl&timezone=America%2FArgentina%2FBuenos_Aires&forecast_days=2&cell_selection=sea');const j=await r.json();const horas=j.hourly.time;const alturas=j.hourly.sea_level_height_msl;const hoyStr=fechaARG(0);const eventos=[];for(let i=1;i<alturas.length-1;i++){const prev=alturas[i-1],cur=alturas[i],next=alturas[i+1];const esAlta=cur>prev&&cur>=next;const esBaja=cur<prev&&cur<=next;if((esAlta||esBaja)&&horas[i].startsWith(hoyStr)){eventos.push({hora:horas[i].slice(11,16),altura:cur.toFixed(2),tipo:esAlta?'Alta':'Baja'});}}const cont=document.getElementById('mareas-lista');if(eventos.length===0){cont.textContent='Sin datos de marea para hoy.';return;}cont.innerHTML=eventos.map(e=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.25)"><span>${e.tipo==='Alta'?'🔼':'🔽'} Marea ${e.tipo}</span><b>${e.hora} hs · ${e.altura} m</b></div>`).join('');}catch(e){document.getElementById('mareas-lista').textContent='No se pudo cargar la marea.';}}mareas();
 let todas={Nacional:[],Provincia:[],SantaFe:[],Cordoba:[],EntreRios:[],Uruguay:[]};let datosCompletos=null;
 const horsARG=["Previa 10:15","Primera 12:00","Matutina 15:00","Vespertina 18:00","Nocturna 21:00"];const horsUY=["Vespertina 15:00","Nocturna 21:00"];let actual="Nacional";let actualSorteo="nocturna";
-function getHors(){ return actual==="Uruguay"? horsUY : horsARG; }
-function getListaSorteos(){ return actual==="Uruguay"? ["vespertina","nocturna"] : ["previa","primera","matutina","vespertina","nocturna"]; }
+function getHors(){return actual==="Uruguay"?horsUY:horsARG;}
+function getListaSorteos(){return actual==="Uruguay"?["vespertina","nocturna"]:["previa","primera","matutina","vespertina","nocturna"];}
 function renderT(){document.getElementById('qt').innerHTML=Object.keys(todas).map(k=>`<div class="q-tab ${k===actual?'active':''}" onclick="actual='${k}';render()">${k}</div>`).join('');}
-function render(){renderT();document.getElementById('qn').textContent=actual;document.getElementById('info-uy').style.display = actual==="Uruguay"? 'block' : 'none';let hors = getHors();let listaIds = getListaSorteos();document.getElementById('qg').innerHTML=hors.map((h,i)=>{let idSorteo = listaIds[i];let key = actual.toLowerCase();let num = "--";if(datosCompletos && datosCompletos[key] && datosCompletos[key][idSorteo]){num = datosCompletos[key][idSorteo][0] || "--";}return `<div class="q-box" onclick="actualSorteo='${idSorteo}';openM()"><div style="font-size:11px;color:#64748b;font-weight:700">${h}</div><b>${num}</b></div>`;}).join('');}
-function openM(){document.getElementById('modal').classList.add('active');let key = actual.toLowerCase();let arr = (datosCompletos && datosCompletos[key] && datosCompletos[key][actualSorteo])? datosCompletos[key][actualSorteo] : [];document.getElementById('mt').textContent=actual+' - '+actualSorteo.toUpperCase()+' - 20 números';document.getElementById('ml').innerHTML=arr.map((n,i)=>i===0?`<b class="q-pos cabeza">1°</b><span class="q-num cabeza">${n}</span>`:`<b class="q-pos">${i+1}°</b><span class="q-num">${n}</span>`).join('') || "Aún sin sorteo";}
+function render(){renderT();document.getElementById('qn').textContent=actual;document.getElementById('info-uy').style.display=actual==="Uruguay"?'block':'none';let hors=getHors();let listaIds=getListaSorteos();document.getElementById('qg').innerHTML=hors.map((h,i)=>{let idSorteo=listaIds[i];let key=actual.toLowerCase();let num="--";if(datosCompletos&&datosCompletos[key]&&datosCompletos[key][idSorteo]){num=datosCompletos[key][idSorteo][0]||"--";}return `<div class="q-box" onclick="actualSorteo='${idSorteo}';openM()"><div style="font-size:11px;color:#64748b;font-weight:700">${h}</div><b>${num}</b></div>`;}).join('');}
+function openM(){document.getElementById('modal').classList.add('active');let key=actual.toLowerCase();let arr=(datosCompletos&&datosCompletos[key]&&datosCompletos[key][actualSorteo])?datosCompletos[key][actualSorteo]:[];document.getElementById('mt').textContent=actual+' - '+actualSorteo.toUpperCase()+' - 20 números';document.getElementById('ml').innerHTML=arr.map((n,i)=>i===0?`<b class="q-pos cabeza">1°</b><span class="q-num cabeza">${n}</span>`:`<b class="q-pos">${i+1}°</b><span class="q-num">${n}</span>`).join('')||"Aún sin sorteo";}
 function closeM(){document.getElementById('modal').classList.remove('active');}
 render();
-function fechaARG(offsetDias){const ahora = new Date();const partes = new Intl.DateTimeFormat('en-CA',{timeZone:'America/Argentina/Buenos_Aires',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(ahora);const obj = {}; partes.forEach(p=>obj[p.type]=p.value);const base = new Date(Date.UTC(obj.year, obj.month-1, obj.day));base.setUTCDate(base.getUTCDate()+offsetDias);return base.toISOString().slice(0,10);}
-function etiquetaFecha(offsetDias, fechaStr){if(offsetDias===0) return 'Hoy - '+fechaStr.split('-').reverse().slice(0,2).join('/');if(offsetDias===-1) return 'Ayer - '+fechaStr.split('-').reverse().slice(0,2).join('/');const [y,m,d] = fechaStr.split('-');return `${d}/${m}/${y}`;}
-const selectFecha = document.getElementById('q-fecha');
-for(let i=0;i>=-29;i--){const f = fechaARG(i);const opt = document.createElement('option');opt.value = f;opt.textContent = etiquetaFecha(i, f);selectFecha.appendChild(opt);}
-selectFecha.value = fechaARG(0);
-selectFecha.addEventListener('change', ()=> cargarDia(selectFecha.value));
-function cargarDia(fecha){const esHoy = fecha === fechaARG(0);document.getElementById('q-titulo').textContent = esHoy? 'Quiniela Hoy - 6 Loterías' : 'Quiniela del '+fecha.split('-').reverse().join('/');const ruta = esHoy? '/quiniela.json' : `/historial/${fecha}.json`;fetch(ruta+'?v='+Date.now()).then(r=>{if(!r.ok) throw new Error(esHoy? "quiniela.json no encontrado ("+r.status+")" : "Sin datos guardados para ese dia");return r.json();}).then(raw=>{let d = Array.isArray(raw)? raw[0] : raw;let fuente = d.completo || d;let norm = {};Object.keys(fuente).forEach(k=>{ norm[k.toLowerCase()] = fuente[k]; });datosCompletos = norm;render();}).catch(e=>{console.error(e);datosCompletos = null;document.getElementById('qg').innerHTML = `<div style="grid-column:1/-1;background:#fee2e2;border:2px solid #dc2626;padding:12px;border-radius:10px;color:#991b1b;font-size:12px"><b>${esHoy?'Error':'Sin datos'}:</b> ${e.message}</div>`;});}
+function fechaARG(offsetDias){const ahora=new Date();const partes=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Argentina/Buenos_Aires',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(ahora);const obj={};partes.forEach(p=>obj[p.type]=p.value);const base=new Date(Date.UTC(obj.year,obj.month-1,obj.day));base.setUTCDate(base.getUTCDate()+offsetDias);return base.toISOString().slice(0,10);}
+function etiquetaFecha(offsetDias,fechaStr){if(offsetDias===0)return 'Hoy - '+fechaStr.split('-').reverse().slice(0,2).join('/');if(offsetDias===-1)return 'Ayer - '+fechaStr.split('-').reverse().slice(0,2).join('/');const [y,m,d]=fechaStr.split('-');return `${d}/${m}/${y}`;}
+const selectFecha=document.getElementById('q-fecha');
+for(let i=0;i>=-29;i--){const f=fechaARG(i);const opt=document.createElement('option');opt.value=f;opt.textContent=etiquetaFecha(i,f);selectFecha.appendChild(opt);}
+selectFecha.value=fechaARG(0);
+selectFecha.addEventListener('change',()=>cargarDia(selectFecha.value));
+function cargarDia(fecha){const esHoy=fecha===fechaARG(0);document.getElementById('q-titulo').textContent=esHoy?'Quiniela Hoy - 6 Loterías':'Quiniela del '+fecha.split('-').reverse().join('/');const ruta=esHoy?'/quiniela.json':`/historial/${fecha}.json`;fetch(ruta+'?v='+Date.now()).then(r=>{if(!r.ok)throw new Error(esHoy?"quiniela.json no encontrado ("+r.status+")":"Sin datos guardados para ese dia");return r.json();}).then(raw=>{let d=Array.isArray(raw)?raw[0]:raw;let fuente=d.completo||d;let norm={};Object.keys(fuente).forEach(k=>{norm[k.toLowerCase()]=fuente[k];});datosCompletos=norm;render();}).catch(e=>{console.error(e);datosCompletos=null;document.getElementById('qg').innerHTML=`<div style="grid-column:1/-1;background:#fee2e2;border:2px solid #dc2626;padding:12px;border-radius:10px;color:#991b1b;font-size:12px"><b>${esHoy?'Error':'Sin datos'}:</b> ${e.message}</div>`;});}
 cargarDia(selectFecha.value);
-document.getElementById('btn-edea').onclick = function(){
-  document.getElementById('modal-edea').style.display='block';
-  document.getElementById('texto-edea').innerText='Cargando datos oficiales de EDEA...';
-  fetch('/cortes-edea.json?v='+Date.now())
-.then(r=>r.json())
-.then(d=>{
-      let txt = d.info_oficial || (d.cortes? d.cortes.join("\n\n") : "") || "";
-      if(!txt || txt.trim().length < 10) txt = "Hoy EDEA no publicó cortes programados.";
-      document.getElementById('texto-edea').innerText = txt;
-      document.getElementById('fecha-edea').innerText = "Actualizado: " + (d.actualizado||"");
-    })
-.catch(()=>{ document.getElementById('texto-edea').innerText='No se pudo cargar ahora. Probá en unos minutos.'; });
-}
+document.getElementById('btn-edea').onclick=function(){document.getElementById('modal-edea').style.display='block';document.getElementById('texto-edea').innerText='Cargando datos oficiales de EDEA...';fetch('/cortes-edea.json?v='+Date.now()).then(r=>r.json()).then(d=>{let txt=d.info_oficial||(d.cortes?d.cortes.join("\n\n"):"")||"";if(!txt||txt.trim().length<10)txt="Hoy EDEA no publicó cortes programados.";document.getElementById('texto-edea').innerText=txt;document.getElementById('fecha-edea').innerText="Actualizado: "+(d.actualizado||"");}).catch(()=>{document.getElementById('texto-edea').innerText='No se pudo cargar ahora. Probá en unos minutos.';});}
 
-// --- ACTIVIDADES ARREGLADO CLICKEABLE - NO TOCA QUINIELA ---
+// --- ACTIVIDADES CON MODAL TIPO EDEA SIN WHATSAPP ---
+let actsCache=[];
 async function cargarActsJSON(){
   try{
-    const r = await fetch('/actividades.json?v='+Date.now());
+    const r=await fetch('/actividades.json?v='+Date.now());
     if(!r.ok) throw 0;
-    return await r.json();
-  }catch{ return []; }
+    actsCache=await r.json();
+    return actsCache;
+  }catch{actsCache=[];return[];}
+}
+function abrirModalActividad(barrio,nombre){
+  const a=actsCache.find(x=> x.barrio===barrio && x.nombre===nombre);
+  if(!a) return;
+  document.getElementById('modal-acts').style.display='block';
+  document.getElementById('act-titulo').textContent=a.nombre;
+  const img=document.getElementById('act-img');
+  if(a.barrio==='faro'){img.src='ritmos-faro.jpg';img.style.display='block';}else{img.style.display='none';}
+  document.getElementById('act-info').innerHTML=`
+    <div style="display:inline-block;background:#e0f2fe;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800">${a.actividad.toUpperCase()}</div><br><br>
+    <b>📍 Lugar:</b> ${a.lugar}<br>
+    <b>🗓️ Días:</b> ${a.dias}<br>
+    <b>📞 Contacto:</b> ${a.contacto||'Ver en flyer'}<br>
+    <b>🏘️ Barrio:</b> ${a.barrio.toUpperCase()}
+  `;
 }
 async function pintarActividadesPorBarrio(){
-  const acts = await cargarActsJSON();
-  const barrios = ['faro','alfar','serena','acantilados'];
+  const acts=await cargarActsJSON();
+  const barrios=['faro','alfar','serena','acantilados'];
   barrios.forEach(b=>{
-    const el = document.getElementById('acts-'+b);
+    const el=document.getElementById('acts-'+b);
     if(!el) return;
-    const mias = acts.filter(a=>a.barrio===b);
-    el.innerHTML = mias.length? mias.map(a=>`
-      <div onclick="abrirBarrio('${b}')" style="cursor:pointer;padding:12px 0;border-bottom:1px solid #eee">
+    const mias=acts.filter(a=>a.barrio===b);
+    el.innerHTML=mias.length?mias.map(a=>`
+      <div onclick="abrirModalActividad('${a.barrio}','${a.nombre.replace(/'/g,"\\'")}')" style="cursor:pointer;padding:12px 0;border-bottom:1px solid #eee">
         <b>${a.nombre}</b> - <span style="background:#e0f2fe;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:800">${a.actividad.toUpperCase()}</span><br>
-        <small>📍 ${a.lugar} - ${a.dias} ${a.contacto? ' - '+a.contacto : ''}</small>
+        <small>📍 ${a.lugar} - ${a.dias}</small>
         <div style="margin-top:6px"><span style="background:#0f172a;color:white;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800">👉 Ver info</span></div>
       </div>
-    `).join('') : '<div style="color:#64748b;padding:10px;background:#f8fafc;border-radius:8px">No hay actividades cargadas aún para este barrio.</div>';
+    `).join(''):'<div style="color:#64748b;padding:10px;background:#f8fafc;border-radius:8px">No hay actividades cargadas aún para este barrio.</div>';
   });
 }
 pintarActividadesPorBarrio();
-
 document.getElementById('buscadorActividades')?.addEventListener('input', async (e)=>{
-  const q = e.target.value.toLowerCase().trim();
-  const resEl = document.getElementById('resultadoBuscador');
-  if(q.length < 2){ resEl.innerHTML=''; return; }
-  const acts = await cargarActsJSON();
-  const filtradas = acts.filter(a => (a.actividad+' '+a.nombre+' '+a.barrio+' '+a.lugar).toLowerCase().includes(q));
-  resEl.innerHTML = filtradas.length? filtradas.map(a=>`
-    <div onclick="abrirBarrio('${a.barrio}')" style="cursor:pointer;background:white;border:2px solid #0f172a;border-radius:10px;padding:10px;margin-bottom:6px">
+  const q=e.target.value.toLowerCase().trim();
+  const resEl=document.getElementById('resultadoBuscador');
+  if(q.length<2){resEl.innerHTML='';return;}
+  const acts=actsCache.length?actsCache:await cargarActsJSON();
+  const filtradas=acts.filter(a=>(a.actividad+' '+a.nombre+' '+a.barrio+' '+a.lugar).toLowerCase().includes(q));
+  resEl.innerHTML=filtradas.length?filtradas.map(a=>`
+    <div onclick="abrirModalActividad('${a.barrio}','${a.nombre.replace(/'/g,"\\'")}')" style="cursor:pointer;background:white;border:2px solid #0f172a;border-radius:10px;padding:10px;margin-bottom:6px">
       <b>${a.nombre}</b> - ${a.actividad.toUpperCase()}<br>
       <small>📍 ${a.barrio.toUpperCase()} - ${a.lugar} - ${a.dias}</small><br>
-      <span style="background:#25D366;color:white;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:800;margin-top:4px;display:inline-block">TOCÁ PARA VER →</span>
+      <span style="background:#0f172a;color:white;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:800;margin-top:4px;display:inline-block">TOCÁ PARA VER INFO →</span>
     </div>
-  `).join('') : '<div style="font-size:12px;color:#64748b">No encontré nada con "'+e.target.value+'"</div>';
+  `).join(''):'<div style="font-size:12px;color:#64748b">No encontré nada con "'+e.target.value+'"</div>';
 });
 </script>
 </body>
