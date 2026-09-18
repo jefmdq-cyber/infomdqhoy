@@ -7,7 +7,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-3L9SZ6YVFT');
 </script>
 <meta charset="UTF-8">
@@ -35,7 +34,7 @@ body{background:#f0f4f8;color:#1a202c}
 .container{max-width:520px;margin:0 auto;padding:14px}
 .card{background:white;border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,.06);border:1px solid #e2e8f0}
 .barrios-nav{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
-.barrio-btn{padding:18px 8px;border-radius:18px;font-weight:900;font-size:14px;text-align:center;color:white;cursor:pointer;border:none;box-shadow:0 6px 16px rgba(0,0,0,.15);transition:.15s}
+.barrio-btn{padding:18px 8px;border-radius:18px;font-weight:900;font-size:14px;text-align:center;color:white;cursor:pointer;border:none;box-shadow:0 6px 16px rgba(0,0,0,.15);transition:.15s;text-decoration:none;display:block}
 .barrio-btn span{display:block;font-size:26px;margin-bottom:4px}
 .barrio-btn:active{transform:scale(.96)}
 .btn-faro{background:linear-gradient(135deg,#0f172a,#334155)}
@@ -88,11 +87,17 @@ body{background:#f0f4f8;color:#1a202c}
 </div>
 <div class="container">
 <div class="barrios-nav">
-  <div class="barrio-btn btn-faro" onclick="abrirBarrio('faro')"><span>🗼</span>FARO NORTE</div>
-  <div class="barrio-btn btn-alfar" onclick="abrirBarrio('alfar')"><span>🌲</span>ALFAR</div>
-  <div class="barrio-btn btn-serena" onclick="abrirBarrio('serena')"><span>🏖️</span>SERENA</div>
-  <div class="barrio-btn btn-acantilados" onclick="abrirBarrio('acantilados')"><span>🌊</span>ACANTILADOS</div>
+  <a href="#faro" class="barrio-btn btn-faro" onclick="abrirBarrio('faro');return false;"><span>🗼</span>FARO NORTE</a>
+  <a href="#alfar" class="barrio-btn btn-alfar" onclick="abrirBarrio('alfar');return false;"><span>🌲</span>ALFAR</a>
+  <a href="#serena" class="barrio-btn btn-serena" onclick="abrirBarrio('serena');return false;"><span>🏖️</span>SERENA</a>
+  <a href="#acantilados" class="barrio-btn btn-acantilados" onclick="abrirBarrio('acantilados');return false;"><span>🌊</span>ACANTILADOS</a>
 </div>
+
+<div style="grid-column:1 / -1; margin: 2px 0 14px 0;">
+  <input id="buscadorActividades" placeholder="🔍 Buscá yoga, zumba, folklore, ritmos..." style="width:100%;padding:14px;border-radius:12px;border:2px solid #0f172a;font-weight:700;font-size:14px;">
+  <div id="resultadoBuscador" style="margin-top:10px"></div>
+</div>
+
 <div style="grid-column:1 / -1; text-align:center; margin:0 0 12px 0;">
   <button id="btn-edea" style="background:#facc15;color:#000;font-weight:900;padding:10px 22px;border:none;border-radius:20px;font-size:14px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.15)">⚡ Cortes de EDEA</button>
 </div>
@@ -161,24 +166,28 @@ body{background:#f0f4f8;color:#1a202c}
   <p style="font-size:11px; color:#777; text-align:center; margin:6px 0 0 0">Info: Asoc. Vecinal de Fomento Faro Norte</p>
 </div>
 <p style="font-size:11px; color:#777; text-align:center; margin:4px 0 0 0">Info: Asoc. Vecinal de Fomento Faro Norte</p>
+  <div class="card"><h3>🎯 Actividades en FARO NORTE</h3><div id="acts-faro" style="font-size:13px">Cargando...</div></div>
   <div class="card" style="background:#fffbe6;border:2px solid #facc15"><h3>📢 Notificaciones - FARO</h3><div id="noti-faro" style="margin-top:10px;font-size:13px;color:#64748b;padding:12px;background:white;border-radius:10px;border:1px solid #e2e8f0">No hay notificaciones por el momento.</div></div>
 </div>
 <div id="page-alfar" class="barrio-page">
   <div class="btn-volver" onclick="volverHome()">← Volver al inicio</div>
   <div class="barrio-header"><img src="banner2.jpg"><div class="barrio-header-overlay"></div><div class="barrio-header-text"><h2>🌲 ALFAR</h2><p>Luis Franco 750 - Mar del Plata</p></div></div>
   <div class="card"><h3>🏛️ Sociedad de Fomento Alfar</h3><div class="info-box"><b>📍 Dirección:</b> Luis Franco 750<br><b>📌 Servicios:</b> Vacunación, pediatría, odontología y castraciones</div></div>
+  <div class="card"><h3>🎯 Actividades en ALFAR</h3><div id="acts-alfar" style="font-size:13px">Cargando...</div></div>
   <div class="card" style="background:#eff6ff;border:2px solid #3b82f6"><h3>📢 Notificaciones - ALFAR</h3><div id="noti-alfar" style="margin-top:10px;font-size:13px;color:#64748b;padding:12px;background:white;border-radius:10px;border:1px solid #e2e8f0">No hay notificaciones por el momento.</div></div>
 </div>
 <div id="page-serena" class="barrio-page">
   <div class="btn-volver" onclick="volverHome()">← Volver al inicio</div>
   <div class="barrio-header"><img src="banner1.jpg"><div class="barrio-header-overlay"></div><div class="barrio-header-text"><h2>🏖️ PLAYA SERENA</h2><p>Calle 544 frente a la plaza</p></div></div>
   <div class="card"><h3>🏛️ Sociedad de Fomento y Biblioteca Playa Serena</h3><div class="info-box"><b>📍 Dirección:</b> Calle 11 (ex 544) frente a la plaza<br><b>🚌 Colectivos:</b> 511, 221, Costa Azul<br><b>📌 Actividades:</b> Talleres culturales y biblioteca</div></div>
+  <div class="card"><h3>🎯 Actividades en SERENA</h3><div id="acts-serena" style="font-size:13px">Cargando...</div></div>
   <div class="card" style="background:#ecfeff;border:2px solid #06b6d4"><h3>📢 Notificaciones - SERENA</h3><div id="noti-serena" style="margin-top:10px;font-size:13px;color:#64748b;padding:12px;background:white;border-radius:10px;border:1px solid #e2e8f0">No hay notificaciones por el momento.</div></div>
 </div>
 <div id="page-acantilados" class="barrio-page">
   <div class="btn-volver" onclick="volverHome()">← Volver al inicio</div>
   <div class="barrio-header"><img src="banner2.jpg"><div class="barrio-header-overlay"></div><div class="barrio-header-text"><h2>🌊 ACANTILADOS</h2><p>Calle 20 esquina 497</p></div></div>
   <div class="card"><h3>🏛️ Asociación Vecinal de Fomento Los Acantilados</h3><div class="info-box"><b>📍 Dirección:</b> Calle 20 esquina 497 - Parque Los Acantilados<br><b>📌 Datos:</b> Reserva forestal y acceso a playa</div></div>
+  <div class="card"><h3>🎯 Actividades en ACANTILADOS</h3><div id="acts-acantilados" style="font-size:13px">Cargando...</div></div>
   <div class="card" style="background:#f0fdf4;border:2px solid #22c55e"><h3>📢 Notificaciones - ACANTILADOS</h3><div id="noti-acantilados" style="margin-top:10px;font-size:13px;color:#64748b;padding:12px;background:white;border-radius:10px;border:1px solid #e2e8f0">No hay notificaciones por el momento.</div></div>
 </div>
 <div class="card" style="background:#f8fafc;border:1px solid #e2e8f0">
@@ -250,6 +259,40 @@ document.getElementById('btn-edea').onclick = function(){
     })
 .catch(()=>{ document.getElementById('texto-edea').innerText='No se pudo cargar ahora. Probá en unos minutos.'; });
 }
+
+// --- NUEVO: ACTIVIDADES - NO TOCA QUINIELA ---
+async function cargarActsJSON(){
+  try{
+    const r = await fetch('/actividades.json?v='+Date.now());
+    if(!r.ok) throw 0;
+    return await r.json();
+  }catch{ return []; }
+}
+async function pintarActividadesPorBarrio(){
+  const acts = await cargarActsJSON();
+  const barrios = ['faro','alfar','serena','acantilados'];
+  barrios.forEach(b=>{
+    const el = document.getElementById('acts-'+b);
+    if(!el) return;
+    const mias = acts.filter(a=>a.barrio===b);
+    el.innerHTML = mias.length? mias.map(a=>`<div style="padding:10px 0;border-bottom:1px solid #eee"><b>${a.nombre}</b> - <span style="background:#e0f2fe;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:800">${a.actividad.toUpperCase()}</span><br><small>📍 ${a.lugar} - ${a.dias} ${a.contacto? ' - '+a.contacto : ''}</small></div>`).join('') : '<div style="color:#64748b;padding:10px;background:#f8fafc;border-radius:8px">No hay actividades cargadas aún para este barrio.</div>';
+  });
+}
+pintarActividadesPorBarrio();
+
+document.getElementById('buscadorActividades')?.addEventListener('input', async (e)=>{
+  const q = e.target.value.toLowerCase().trim();
+  const resEl = document.getElementById('resultadoBuscador');
+  if(q.length < 2){ resEl.innerHTML=''; return; }
+  const acts = await cargarActsJSON();
+  const filtradas = acts.filter(a => (a.actividad+' '+a.nombre+' '+a.barrio+' '+a.lugar).toLowerCase().includes(q));
+  resEl.innerHTML = filtradas.length? filtradas.map(a=>`
+    <div style="background:white;border:2px solid #0f172a;border-radius:10px;padding:10px;margin-bottom:6px">
+      <b>${a.nombre}</b> - ${a.actividad.toUpperCase()}<br>
+      <small>📍 ${a.barrio.toUpperCase()} - ${a.lugar} - ${a.dias}</small>
+    </div>
+  `).join('') : '<div style="font-size:12px;color:#64748b">No encontré nada con "'+e.target.value+'"</div>';
+});
 </script>
 </body>
 </html>
