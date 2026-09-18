@@ -1,0 +1,21 @@
+{
+  "name": "INFO MDQ SUR HOY",
+  "short_name": "MDQ SUR",
+  "description": "Dólar, quiniela, clima, mareas y actividades en Alfar, Faro, Serena y Acantilados",
+  "start_url": "/?utm_source=pwa",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
