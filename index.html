@@ -99,6 +99,11 @@ body{background:#f0f4f8;color:#1a202c}
   <button id="btn-instalar" style="flex:1; display:none; background:#0f172a;color:#fff;font-weight:900;padding:12px 18px;border:none;border-radius:20px;font-size:14px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.15)">📲 Instalar App</button>
 </div>
 
+<!-- NUEVO: BOTONES COLECTIVOS -->
+<div style="grid-column:1 / -1; display:flex; gap:10px; justify-content:center; margin:0 0 12px 0;">
+  <button id="btn-511" style="flex:1; background:#1e40af;color:white;font-weight:900;padding:12px 18px;border:none;border-radius:20px;font-size:14px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.15)">🚌 511 - Horarios</button>
+  <button id="btn-221" style="flex:1; background:#0e7490;color:white;font-weight:900;padding:12px 18px;border:none;border-radius:20px;font-size:14px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.15)">🚌 221 - Horarios</button>
+</div>
 <div style="grid-column:1 / -1; background:white; border:3px solid black; border-radius:12px; padding:12px 10px; text-align:center; height:fit-content; align-self:start;">
   <div style="font-size:15px; font-weight:900; color:black; line-height:1.2; font-family:Arial Black, Arial, sans-serif;">+18 | EL JUGAR COMPULSIVAMENTE ES PERJUDICIAL PARA LA SALUD</div>
   <div style="font-size:12px; font-weight:700; margin-top:4px;">Prohibido para menores de 18 años - Resultados con fines informativos</div>
@@ -204,6 +209,85 @@ body{background:#f0f4f8;color:#1a202c}
     <div style="margin-top:4px;font-size:11px;color:#555">Fuente oficial: edeaweb.com.ar/obras-en-tu-barrio/</div>
   </div>
 </div>
+<!-- MODALES COLECTIVOS -->
+<div id="modal-511" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto" onclick="this.style.display='none'">
+  <div style="background:white;border:3px solid #1e40af;border-radius:14px;padding:16px;max-width:500px;margin:20px auto;color:#1a202c" onclick="event.stopPropagation()">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <b style="color:#1e40af;font-size:16px">🚌 511 - Peralta Ramos</b>
+      <button onclick="document.getElementById('modal-511').style.display='none'" style="background:#0f172a;color:#fff;border:none;padding:6px 12px;border-radius:20px;font-weight:800">X</button>
+    </div>
+    <div style="margin-top:10px;background:#eff6ff;border:2px solid #3b82f6;border-radius:10px;padding:10px;font-size:13px;line-height:1.5">
+      <b>Recorrido:</b> Acantilados - Alfar - Faro Norte - Centro<br>
+      <b>Horario:</b> Todos los días <b>06:10 a 23:40 cada 30 min</b><br>
+      <span style="font-size:11px;color:#64748b">Fuente: Empresa Peralta Ramos - Frecuencia oficial</span>
+    </div>
+    <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:12px;font-weight:700;text-align:center">
+      <div style="background:#f1f5f9;padding:8px;border-radius:8px">06:10</div><div style="background:#f1f5f9;padding:8px;border-radius:8px">06:40</div>
+      <div style="background:#f1f5f9;padding:8px;border-radius:8px">07:10</div><div style="background:#f1f5f9;padding:8px;border-radius:8px">07:40</div>
+      <div style="background:#f1f5f9;padding:8px;border-radius:8px">08:10</div><div style="background:#f1f5f9;padding:8px;border-radius:8px">08:40</div>
+      <div style="background:#f1f5f9;padding:8px;border-radius:8px">09:10</div><div style="background:#f1f5f9;padding:8px;border-radius:8px">09:40</div>
+      <div style="background:#f1f5f9;padding:8px;border-radius:8px">10:10</div><div style="background:#f1f5f9;padding:8px;border-radius:8px">10:40</div>
+      <div style="background:#f1f5f9;padding:8px;border-radius:8px">11:10</div><div style="background:#f1f5f9;padding:8px;border-radius:8px">11:40</div>
+      <div style="background:#f1f5f9;padding:8px;border-radius:8px">12:10</div><div style="background:#f1f5f9;padding:8px;border-radius:8px">12:40</div>
+      <div style="background:#f1f5f9;padding:8px;border-radius:8px">13:10</div><div style="background:#f1f5f9;padding:8px;border-radius:8px">13:40</div>
+      <div style="background:#f1f5f9;padding:8px;border-radius:8px">14:10</div><div style="background:#f1f5f9;padding:8px;border-radius:8px">14:40</div>
+      <div style="background:#f1f5f9;padding:8px;border-radius:8px">15:10</div><div style="background:#f1f5f9;padding:8px;border-radius:8px">15:40</div>
+      <div style="background:#f1f5f9;padding:8px;border-radius:8px">16:10</div><div style="background:#f1f5f9;padding:8px;border-radius:8px">16:40</div>
+      <div style="background:#f1f5f9;padding:8px;border-radius:8px">17:10</div><div style="background:#f1f5f9;padding:8px;border-radius:8px">17:40</div>
+      <div style="background:#f1f5f9;padding:8px;border-radius:8px">18:10</div><div style="background:#f1f5f9;padding:8px;border-radius:8px">18:40</div>
+      <div style="background:#f1f5f9;padding:8px;border-radius:8px">19:10</div><div style="background:#f1f5f9;padding:8px;border-radius:8px">19:40</div>
+      <div style="background:#f1f5f9;padding:8px;border-radius:8px">20:10</div><div style="background:#f1f5f9;padding:8px;border-radius:8px">20:40</div>
+      <div style="background:#f1f5f9;padding:8px;border-radius:8px">21:10</div><div style="background:#f1f5f9;padding:8px;border-radius:8px">21:40</div>
+      <div style="background:#f1f5f9;padding:8px;border-radius:8px">22:10</div><div style="background:#f1f5f9;padding:8px;border-radius:8px">22:40</div>
+      <div style="background:#f1f5f9;padding:8px;border-radius:8px">23:10</div><div style="background:#f1f5f9;padding:8px;border-radius:8px">23:40</div>
+    </div>
+    <a href="https://www.mardelplata.gob.ar/cuandollega" target="_blank" style="display:block;text-align:center;background:#1e40af;color:white;font-weight:900;padding:12px;border-radius:12px;margin-top:12px;text-decoration:none">📍 Ver en vivo dónde viene el 511</a>
+  </div>
+</div>
+
+<div id="modal-221" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto" onclick="this.style.display='none'">
+  <div style="background:white;border:3px solid #0e7490;border-radius:14px;padding:16px;max-width:500px;margin:20px auto;color:#1a202c" onclick="event.stopPropagation()">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <b style="color:#0e7490;font-size:16px">🚌 221 - Costa Azul - Sale de Serena</b>
+      <button onclick="document.getElementById('modal-221').style.display='none'" style="background:#0f172a;color:#fff;border:none;padding:6px 12px;border-radius:20px;font-weight:800">X</button>
+    </div>
+    <div style="margin-top:10px">
+      <div style="font-weight:900;font-size:13px;margin-bottom:6px;background:#ecfeff;padding:8px;border-radius:8px;border:2px solid #06b6d4">📅 LUNES A SÁBADO - Sale de Calle 0 y 238</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;font-size:11px;font-weight:800;text-align:center">
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">04:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">04:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">04:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">05:00</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">05:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">05:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">06:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">06:20</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">06:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">07:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">07:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">07:40</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">08:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">08:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">08:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">09:00</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">09:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">09:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">10:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">10:20</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">10:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">11:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">11:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">11:40</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">12:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">12:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">12:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">13:00</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">13:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">13:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">14:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">14:20</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">14:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">15:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">15:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">15:40</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">16:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">16:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">16:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">17:00</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">17:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">17:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">18:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">18:20</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">18:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">19:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">19:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">19:40</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">20:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">20:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">20:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">21:00</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">21:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">21:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">22:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">22:20</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">22:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">23:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">23:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">23:40</div>
+      </div>
+      <div style="font-weight:900;font-size:13px;margin:14px 0 6px 0;background:#fff7ed;padding:8px;border-radius:8px;border:2px solid #f97316">📅 DOMINGO - Cada 30 min</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;font-size:11px;font-weight:800;text-align:center">
+        <div style="background:#fff7ed;padding:6px;border-radius:6px">04:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">04:30</div><div style="background:#fff7ed;padding:6px;border-radius:6px">05:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">05:30</div>
+        <div style="background:#fff7ed;padding:6px;border-radius:6px">06:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">06:30</div><div style="background:#fff7ed;padding:6px;border-radius:6px">07:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">07:30</div>
+        <div style="background:#fff7ed;padding:6px;border-radius:6px">08:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">08:30</div><div style="background:#fff7ed;padding:6px;border-radius:6px">09:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">09:30</div>
+        <div style="background:#fff7ed;padding:6px;border-radius:6px">10:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">10:30</div><div style="background:#fff7ed;padding:6px;border-radius:6px">11:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">11:30</div>
+        <div style="background:#fff7ed;padding:6px;border-radius:6px">12:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">12:30</div><div style="background:#fff7ed;padding:6px;border-radius:6px">13:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">13:30</div>
+        <div style="background:#fff7ed;padding:6px;border-radius:6px">14:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">14:30</div><div style="background:#fff7ed;padding:6px;border-radius:6px">15:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">15:30</div>
+        <div style="background:#fff7ed;padding:6px;border-radius:6px">16:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">16:30</div><div style="background:#fff7ed;padding:6px;border-radius:6px">17:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">17:30</div>
+        <div style="background:#fff7ed;padding:6px;border-radius:6px">18:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">18:30</div><div style="background:#fff7ed;padding:6px;border-radius:6px">19:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">19:30</div>
+        <div style="background:#fff7ed;padding:6px;border-radius:6px">20:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">20:30</div><div style="background:#fff7ed;padding:6px;border-radius:6px">21:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">21:30</div>
+        <div style="background:#fff7ed;padding:6px;border-radius:6px">22:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">22:30</div><div style="background:#fff7ed;padding:6px;border-radius:6px">23:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">23:30</div>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-size:10px;color:#64748b;text-align:center">Fuente: Moovit Oficial Costa Azul</div>
+  </div>
+</div>
+
 <div id="modal-acts" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto" onclick="this.style.display='none'">
   <div style="background:white;border:3px solid #0f172a;border-radius:16px;padding:18px;max-width:420px;margin:20px auto;color:#1a202c" onclick="event.stopPropagation()">
     <div style="display:flex;justify-content:space-between;align-items:center">
@@ -225,7 +309,6 @@ let s=0;setInterval(()=>{s=s===0?1:0;document.getElementById('slide1').style.opa
 async function dolar(){try{const r=await fetch('https://dolarapi.com/v1/dolares');const d=await r.json();let m={};d.forEach(x=>m[x.casa]=x);document.getElementById('dolar-g').innerHTML=`<div class="dolar-item blue"><div style="font-size:10px;color:#64748b;font-weight:700">BLUE</div><div style="font-size:22px;font-weight:900">$${m.blue.venta}</div><div style="font-size:11px">Compra $${m.blue.compra}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">OFICIAL</div><div style="font-size:22px;font-weight:900">$${m.oficial.venta}</div><div style="font-size:11px">Compra $${m.oficial.compra}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">MEP</div><div style="font-size:22px;font-weight:900">$${m.bolsa.venta}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">TARJETA</div><div style="font-size:22px;font-weight:900">$${m.tarjeta.venta}</div></div>`;document.getElementById('dolar-t').textContent='Actualizado '+new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});}catch(e){}}dolar();
 const CODIGOS_CLIMA={0:['☀️','Despejado'],1:['🌤️','Mayormente despejado'],2:['⛅','Parcialmente nublado'],3:['☁️','Nublado'],45:['🌫️','Niebla'],48:['🌫️','Niebla helada'],51:['🌦️','Llovizna débil'],53:['🌦️','Llovizna'],55:['🌦️','Llovizna intensa'],61:['🌧️','Lluvia débil'],63:['🌧️','Lluvia'],65:['🌧️','Lluvia intensa'],66:['🌧️','Lluvia helada'],67:['🌧️','Lluvia helada intensa'],71:['🌨️','Nieve débil'],73:['🌨️','Nieve'],75:['🌨️','Nieve intensa'],77:['🌨️','Granizo fino'],80:['🌦️','Chubascos débiles'],81:['🌦️','Chubascos'],82:['⛈️','Chubascos fuertes'],85:['🌨️','Chubascos de nieve'],86:['🌨️','Chubascos de nieve fuertes'],95:['⛈️','Tormenta'],96:['⛈️','Tormenta con granizo'],99:['⛈️','Tormenta fuerte con granizo']};
 async function clima(){try{const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=-38.0055&longitude=-57.5426&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code&daily=temperature_2m_max,temperature_2m_min,weather_code&forecast_days=3&timezone=America/Argentina/Buenos_Aires');const j=await r.json();const c=j.current;const [icono,desc]=CODIGOS_CLIMA[c.weather_code]||['🌡️','—'];document.getElementById('c-icon').textContent=icono;document.getElementById('c-t').textContent=Math.round(c.temperature_2m)+'°';document.getElementById('c-desc').textContent=desc;document.getElementById('c-st').textContent=Math.round(c.apparent_temperature)+'°';document.getElementById('c-hum').textContent=Math.round(c.relative_humidity_2m)+'%';document.getElementById('c-wind').textContent=Math.round(c.wind_speed_10m)+' km/h';document.getElementById('c-min').textContent=Math.round(j.daily.temperature_2m_min[0])+'°';document.getElementById('c-max').textContent=Math.round(j.daily.temperature_2m_max[0])+'°';
-  // Pronostico de 3 dias (hoy, mañana, pasado) debajo de minima/maxima
   const nombresDia=['Hoy','Mañana'];
   document.getElementById('c-forecast').innerHTML=j.daily.time.map((fechaStr,i)=>{
     const [iconoD]=CODIGOS_CLIMA[j.daily.weather_code[i]]||['🌡️','—'];
@@ -259,6 +342,8 @@ selectFecha.addEventListener('change',()=>cargarDia(selectFecha.value));
 function cargarDia(fecha){const esHoy=fecha===fechaARG(0);document.getElementById('q-titulo').textContent=esHoy?'Quiniela Hoy - 6 Loterías':'Quiniela del '+fecha.split('-').reverse().join('/');const ruta=esHoy?'/quiniela.json':`/historial/${fecha}.json`;fetch(ruta+'?v='+Date.now()).then(r=>{if(!r.ok)throw new Error(esHoy?"quiniela.json no encontrado ("+r.status+")":"Sin datos guardados para ese dia");return r.json();}).then(raw=>{let d=Array.isArray(raw)?raw[0]:raw;let fuente=d.completo||d;let norm={};Object.keys(fuente).forEach(k=>{norm[k.toLowerCase()]=fuente[k];});datosCompletos=norm;render();}).catch(e=>{console.error(e);datosCompletos=null;document.getElementById('qg').innerHTML=`<div style="grid-column:1/-1;background:#fee2e2;border:2px solid #dc2626;padding:12px;border-radius:10px;color:#991b1b;font-size:12px"><b>${esHoy?'Error':'Sin datos'}:</b> ${e.message}</div>`;});}
 cargarDia(selectFecha.value);
 document.getElementById('btn-edea').onclick=function(){document.getElementById('modal-edea').style.display='block';document.getElementById('texto-edea').innerText='Cargando datos oficiales de EDEA...';fetch('/cortes-edea.json?v='+Date.now()).then(r=>r.json()).then(d=>{let txt=d.info_oficial||(d.cortes?d.cortes.join("\n\n"):"")||"";if(!txt||txt.trim().length<10)txt="Hoy EDEA no publicó cortes programados.";document.getElementById('texto-edea').innerText=txt;document.getElementById('fecha-edea').innerText="Actualizado: "+(d.actualizado||"");}).catch(()=>{document.getElementById('texto-edea').innerText='No se pudo cargar ahora. Probá en unos minutos.';});}
+document.getElementById('btn-511').onclick=function(){document.getElementById('modal-511').style.display='block'}
+document.getElementById('btn-221').onclick=function(){document.getElementById('modal-221').style.display='block'}
 let actsCache=[];
 async function cargarActsJSON(){
   try{
@@ -319,8 +404,6 @@ document.getElementById('buscadorActividades')?.addEventListener('input', async 
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('/sw.js').then(()=>console.log('MDQ SUR App lista'));
 }
-
-// --- BOTON INSTALAR APP AL LADO DE EDEA ---
 let instalacionPrompt = null;
 const btnInstalar = document.getElementById('btn-instalar');
 window.addEventListener('beforeinstallprompt', (e) => {
