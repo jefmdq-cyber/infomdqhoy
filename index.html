@@ -165,7 +165,6 @@ body{background:#f0f4f8;color:#1a202c}
   <img src="ritmos-faro.jpg" style="width:100%; max-width:380px; border-radius:12px; display:block">
   <p style="font-size:11px; color:#777; text-align:center; margin:6px 0 0 0">Info: Asoc. Vecinal de Fomento Faro Norte</p>
 </div>
-<p style="font-size:11px; color:#777; text-align:center; margin:4px 0 0 0">Info: Asoc. Vecinal de Fomento Faro Norte</p>
   <div class="card"><h3>🎯 Actividades en FARO NORTE</h3><div id="acts-faro" style="font-size:13px">Cargando...</div></div>
   <div class="card" style="background:#fffbe6;border:2px solid #facc15"><h3>📢 Notificaciones - FARO</h3><div id="noti-faro" style="margin-top:10px;font-size:13px;color:#64748b;padding:12px;background:white;border-radius:10px;border:1px solid #e2e8f0">No hay notificaciones por el momento.</div></div>
 </div>
@@ -260,7 +259,7 @@ document.getElementById('btn-edea').onclick = function(){
 .catch(()=>{ document.getElementById('texto-edea').innerText='No se pudo cargar ahora. Probá en unos minutos.'; });
 }
 
-// --- NUEVO: ACTIVIDADES - NO TOCA QUINIELA ---
+// --- ACTIVIDADES ARREGLADO CLICKEABLE - NO TOCA QUINIELA ---
 async function cargarActsJSON(){
   try{
     const r = await fetch('/actividades.json?v='+Date.now());
@@ -275,7 +274,13 @@ async function pintarActividadesPorBarrio(){
     const el = document.getElementById('acts-'+b);
     if(!el) return;
     const mias = acts.filter(a=>a.barrio===b);
-    el.innerHTML = mias.length? mias.map(a=>`<div style="padding:10px 0;border-bottom:1px solid #eee"><b>${a.nombre}</b> - <span style="background:#e0f2fe;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:800">${a.actividad.toUpperCase()}</span><br><small>📍 ${a.lugar} - ${a.dias} ${a.contacto? ' - '+a.contacto : ''}</small></div>`).join('') : '<div style="color:#64748b;padding:10px;background:#f8fafc;border-radius:8px">No hay actividades cargadas aún para este barrio.</div>';
+    el.innerHTML = mias.length? mias.map(a=>`
+      <div onclick="abrirBarrio('${b}')" style="cursor:pointer;padding:12px 0;border-bottom:1px solid #eee">
+        <b>${a.nombre}</b> - <span style="background:#e0f2fe;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:800">${a.actividad.toUpperCase()}</span><br>
+        <small>📍 ${a.lugar} - ${a.dias} ${a.contacto? ' - '+a.contacto : ''}</small>
+        <div style="margin-top:6px"><span style="background:#0f172a;color:white;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800">👉 Ver info</span></div>
+      </div>
+    `).join('') : '<div style="color:#64748b;padding:10px;background:#f8fafc;border-radius:8px">No hay actividades cargadas aún para este barrio.</div>';
   });
 }
 pintarActividadesPorBarrio();
@@ -287,9 +292,10 @@ document.getElementById('buscadorActividades')?.addEventListener('input', async 
   const acts = await cargarActsJSON();
   const filtradas = acts.filter(a => (a.actividad+' '+a.nombre+' '+a.barrio+' '+a.lugar).toLowerCase().includes(q));
   resEl.innerHTML = filtradas.length? filtradas.map(a=>`
-    <div style="background:white;border:2px solid #0f172a;border-radius:10px;padding:10px;margin-bottom:6px">
+    <div onclick="abrirBarrio('${a.barrio}')" style="cursor:pointer;background:white;border:2px solid #0f172a;border-radius:10px;padding:10px;margin-bottom:6px">
       <b>${a.nombre}</b> - ${a.actividad.toUpperCase()}<br>
-      <small>📍 ${a.barrio.toUpperCase()} - ${a.lugar} - ${a.dias}</small>
+      <small>📍 ${a.barrio.toUpperCase()} - ${a.lugar} - ${a.dias}</small><br>
+      <span style="background:#25D366;color:white;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:800;margin-top:4px;display:inline-block">TOCÁ PARA VER →</span>
     </div>
   `).join('') : '<div style="font-size:12px;color:#64748b">No encontré nada con "'+e.target.value+'"</div>';
 });
