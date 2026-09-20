@@ -4,31 +4,10 @@
   window.OneSignalDeferred = window.OneSignalDeferred || [];
   OneSignalDeferred.push(async function(OneSignal) {
     await OneSignal.init({
-     App ID: 5ad4c72f-3373-44b0-b64f-0ecadf1a6223",
-      allowLocalhostAsSecureOrigin: true,
-      promptOptions: {
-        slidedown: {
-          prompts: [
-            {
-              type: "push",
-              autoPrompt: true,
-              text: {
-                actionMessage: "¿Te gustaría recibir alertas sobre cortes de luz, colectivos y quiniela en la Zona Sur?",
-                acceptButton: "Sí, activar",
-                cancelButton: "No, gracias"
-              },
-              delay: {
-                pageViews: 1,
-                timeDelay: 2
-              }
-            }
-          ]
-        }
-      }
+      appId: "5ad4c72f-3373-44b0-b64f-0ecadf1a6223",
     });
   });
 </script>
-
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3L9SZ6YVFT"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3L9SZ6YVFT');</script>
 <meta charset="UTF-8">
