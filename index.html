@@ -5,6 +5,20 @@
   OneSignalDeferred.push(async function(OneSignal) {
     await OneSignal.init({
       appId: "5ad4c72f-3373-44b0-b64f-0ecadf1a6223",
+      promptOptions: {
+        slidedown: {
+          prompts: [
+            {
+              type: "push",
+              autoPrompt: true, // ← Obliga al cartel a aparecer solo
+              delay: {
+                pageViews: 1,
+                timeDelay: 1 // ← Se despliega exactamente al 1er segundo
+              }
+            }
+          ]
+        }
+      }
     });
   });
 </script>
