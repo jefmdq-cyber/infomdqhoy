@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
 <head>
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script>
@@ -18,7 +16,10 @@
                 acceptButton: "Activar Alertas",
                 cancelButton: "No, gracias"
               },
-              delay: { pageViews: 1, timeDelay: 1 },
+              delay: {
+                pageViews: 1,
+                timeDelay: 1
+              },
               categories: [
                 { id: "barrio_alfar", label: "🟢 Barrio Alfar" },
                 { id: "barrio_faro", label: "🔵 Faro Norte / Punta Mogotes" },
@@ -32,6 +33,7 @@
     });
   });
 </script>
+
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3L9SZ6YVFT"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3L9SZ6YVFT');</script>
 <meta charset="UTF-8">
@@ -41,8 +43,6 @@
 <meta name="theme-color" content="#0f172a">
 <link rel="apple-touch-icon" href="/icon-192.png">
 <title>INFO MDQ SUR HOY | Alfar, Faro, Serena, Acantilados y Chapadmalal - Dólar y Quiniela</title>
-<meta name="description" content="Dólar hoy, quiniela completa de 6 loterías, clima, cortes de EDEA y empleos en Alfar, Faro, Serena, Acantilados y Chapadmalal, actualizado todo el día.">
-<link rel="canonical" href="https://infomdqhoy.pages.dev/">
 <meta property="og:title" content="INFO MDQ SUR HOY | Alfar, Faro, Serena, Acantilados y Chapadmalal">
 <meta property="og:description" content="Dólar hoy, quiniela completa de 6 loterías, clima y empleos en Alfar, Faro, Serena, Acantilados y Chapadmalal, actualizado todo el día.">
 <meta property="og:image" content="https://infomdqhoy.pages.dev/banner1.jpg">
@@ -119,18 +119,24 @@ body{background:#f0f4f8;color:#1a202c}
 <div class="barrios-nav">
   <a href="#faro" class="barrio-btn btn-faro" onclick="abrirBarrio('faro');return false;"><span>🗼</span>FARO NORTE</a>
   <a href="#alfar" class="barrio-btn btn-alfar" onclick="abrirBarrio('alfar');return false;"><span>🌲</span>ALFAR</a>
-  <a href="#serena" class="barrio-btn btn-serena" onclick="abrirBarrio('serena');return false;"><span>🏖</span>SERENA</a>
+  <a href="#serena" class="barrio-btn btn-serena" onclick="abrirBarrio('serena');return false;"><span>🏖️</span>SERENA</a>
   <a href="#acantilados" class="barrio-btn btn-acantilados" onclick="abrirBarrio('acantilados');return false;"><span>🌊</span>ACANTILADOS</a>
 </div>
+
 <!-- FARMACIA VARA -->
 <div style="background:white;border-radius:22px;overflow:hidden;border:1px solid #e2e8f0;box-shadow:0 8px 24px rgba(0,0,0,.1);max-width:560px;margin:0 auto 14px auto;font-family:Inter,'Segoe UI',system-ui,sans-serif;grid-column:1 / -1">
+
   <div style="background: radial-gradient(circle at center, #1e1e1e 0%, #111111 100%); border-radius: 40px; padding: clamp(14px,4vw,22px) clamp(18px,6vw,36px); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: inset 0 2px 4px rgba(255,255,255,0.05), 0 8px 24px rgba(0,0,0,0.4); margin: 10px; font-family: 'Arial Black', Impact, sans-serif; border: 2px solid #222222;">
-    <div style="color: #ffffff; font-size: clamp(20px,6vw,34px); font-weight: 900; letter-spacing: -0.8px; line-height: 1; text-transform: uppercase;">FARMACIA VARA</div>
-    <div style="width: 52px; height: 52px; background: linear-gradient(135deg, #a7f3d0 0%, #10b981 50%, #047857 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; position: relative; border: 3px solid #ffffff; flex-shrink: 0;">
+    <div style="color: #ffffff; font-size: clamp(20px,6vw,34px); font-weight: 900; letter-spacing: -0.8px; line-height: 1; text-transform: uppercase; text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c5c5c5, 0 3px 0 #bbb, 0 4px 0 #b0b0b0, 0 5px 0 #a5a5a5, 0 6px 1px rgba(0,0,0,0.1), 0 0 5px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.3), 0 3px 5px rgba(0,0,0,0.2), 0 5px 10px rgba(0,0,0,0.25);">
+      FARMACIA VARA
+    </div>
+    <div style="width: 52px; height: 52px; background: linear-gradient(135deg, #a7f3d0 0%, #10b981 50%, #047857 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; position: relative; border: 3px solid #ffffff; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.35);">
       <div style="width: 32px; height: 12px; background: #ffffff; border-radius: 4px; position: absolute;"></div>
       <div style="width: 12px; height: 32px; background: #ffffff; border-radius: 4px; position: absolute;"></div>
+      <div style="width: 12px; height: 12px; background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(16,185,129,0.4)); position: absolute; border-radius: 3px; z-index: 2;"></div>
     </div>
   </div>
+
   <div style="padding:12px 14px;display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap">
     <div style="flex:1 1 200px;min-width:150px;background:white;border-radius:16px;border:1px solid #e2e8f0;overflow:hidden">
       <img src="farmacia-vara-frente.jpeg" onerror="this.onerror=null;this.src='farmacia-vara-frente.jpg'" alt="Frente Farmacia Vara" style="width:100%;height:auto;display:block">
@@ -152,24 +158,27 @@ body{background:#f0f4f8;color:#1a202c}
       </div>
     </div>
   </div>
+
   <div style="margin:0 14px 10px 14px;background:#86d391;border-radius:14px;padding:12px 6px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px">
     <a href="https://wa.me/5492235808030?text=Hola%20Farmacia%20Vara%2C%20los%20vi%20en%20InfoMDQHoy" target="_blank" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:5px;border-right:2px solid #5aa867;padding-right:4px;justify-content:center;min-width:0">
-      <div style="width:30px;height:30px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">W</div>
+      <div style="width:30px;height:30px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 5px rgba(0,0,0,.2)">
+        <svg viewBox="0 0 32 32" width="17" height="17" fill="white"><path d="M19.11 17.2c-.31-.16-1.84-.9-2.12-1.01-.29-.11-.5-.16-.7.16-.21.31-.82 1.01-1 1.22-.19.21-.37.23-.69.08-.31-.16-1.32-.48-2.51-1.54-.93-.83-1.55-1.85-1.74-2.16-.18-.31-.02-.48.14-.64.14-.14.31-.37.47-.55.16-.18.21-.31.31-.52.1-.21.05-.39-.03-.54-.08-.16-.7-1.69-.96-2.31-.25-.6-.51-.52-.7-.53h-.6c-.21 0-.54.08-.82.39-.29.31-1.08 1.06-1.08 2.58s1.11 2.99 1.26 3.2c.16.21 2.18 3.33 5.28 4.67.74.32 1.31.51 1.76.65.74.23 1.41.2 1.94.12.59-.09 1.84-.75 2.1-1.48.26-.72.26-1.34.18-1.47-.08-.13-.29-.21-.6-.36zM16 2.04c-7.7 0-13.94 6.24-13.94 13.94 0 2.46.64 4.86 1.86 6.97L2.05 30l7.25-1.9A13.9 13.9 0 0 0 16 30.08c7.7 0 13.94-6.24 13.94-13.94S23.7 2.04 16 2.04zm0 25.33A11.35 11.35 0 0 1 10.22 26l-.42-.25-4.31 1.13 1.15-4.2-.27-.43a11.35 11.35 0 0 1-1.74-6.02c0-6.28 5.11-11.39 11.39-11.39a11.33 11.33 0 0 1 8.05 3.33 11.33 11.33 0 0 1 3.33 8.05c0 6.28-5.11 11.39-11.4 11.39z"/></svg>
+      </div>
       <div style="color:#05210f;font-weight:900;font-size:10.5px;line-height:1.2;text-align:center">WhatsApp<br><b style="font-size:11px">2235808030</b></div>
     </a>
     <a href="https://www.google.com/maps/search/?api=1&query=Estados+Unidos+779+Alfar+Mar+del+Plata" target="_blank" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:5px;border-right:2px solid #5aa867;padding-right:4px;justify-content:center;min-width:0">
-      <div style="width:30px;height:30px;background:#0f172a;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">M</div>
+      <div style="width:30px;height:30px;background:#0f172a;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
       <div style="color:#05210f;font-weight:900;font-size:10.5px;line-height:1.2;text-align:center">Ver en<br>el mapa</div>
     </a>
     <a href="https://www.google.com/maps/search/?api=1&query=Diagonal+Estados+Unidos+779+Alfar+Mar+del+Plata" target="_blank" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:5px;justify-content:center;min-width:0">
-      <div style="width:30px;height:30px;background:#14532d;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">U</div>
+      <div style="width:30px;height:30px;background:#14532d;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 21s-6-5.373-6-10a6 6 0 0 1 12 0c0 4.627-6 10-6 10z"/><circle cx="12" cy="11" r="2"/></svg></div>
       <div style="color:#05210f;font-weight:900;font-size:10.5px;line-height:1.2;text-align:center">Estados Unidos<br><b style="font-size:10.5px">Nº 779</b></div>
     </a>
   </div>
+
   <div style="text-align:center;font-size:11px;color:#64748b;font-weight:700;padding:0 14px 14px 14px">Atención personalizada · Productos de calidad</div>
 </div>
-cantilados" class="barrio-btn btn-acantilados" onclick="abrirBarrio('acantilados');return false;"><span>🌊</span>ACANTILADOS</a>
-</div>
+
 <div style="grid-column:1 / -1; margin: 2px 0 14px 0;">
   <input id="buscadorActividades" placeholder="🔍 Buscá yoga, zumba, folklore, ritmos..." style="width:100%;padding:14px;border-radius:12px;border:2px solid #0f172a;font-weight:700;font-size:14px;">
   <div id="resultadoBuscador" style="margin-top:10px"></div>
@@ -242,8 +251,6 @@ cantilados" class="barrio-btn btn-acantilados" onclick="abrirBarrio('acantilados
   <div class="btn-volver" onclick="volverHome()">← Volver al inicio</div>
   <div class="barrio-header faro"><img src="faro-nuevo.jpg"><div class="barrio-header-overlay"></div><div class="barrio-header-text"><h2>🗼 FARO NORTE</h2><p>Sánchez de Bustamante 3460 - Mar del Plata</p></div></div>
   <div class="card"><h3>🏛️ Sociedad de Fomento Faro Norte</h3><div class="info-box"><b>📍 Dirección:</b> Sánchez de Bustamante 3460<br><b>🚌 Colectivo:</b> 511<br><b>📌 Actividades:</b> Salud, talleres, RCP, vacunaciones y castraciones</div></div>
-
-  <!-- NUEVO - PILATES MAT FARO NORTE - VA PRIMERO ARRIBA DE TODO - ICONO MODERNO -->
   <div class="card" style="border:3px solid #0f172a; position:relative; overflow:hidden; background: linear-gradient(135deg,#ffffff 0%, #f0fdf4 100%);">
     <div style="position:absolute;top:0;right:0;background:#22c55e;color:white;padding:5px 12px;border-radius:0 0 0 14px;font-size:10px;font-weight:900;letter-spacing:.5px">● NUEVO</div>
     <div style="display:flex; gap:14px; align-items:flex-start;">
@@ -263,7 +270,6 @@ cantilados" class="barrio-btn btn-acantilados" onclick="abrirBarrio('acantilados
 <img src="pilates-faro.jpg" alt="Pilates Faro Norte" style="width:100%; max-width:380px; border-radius:12px; display:block; margin:0 auto">
     <p style="font-size:11px;color:#64748b;text-align:center;margin:6px 0 0 0">Info: Asoc. Vecinal de Fomento Faro Norte</p>
   </div>
-
   <div class="card" style="padding:10px; display:flex; flex-direction:column; align-items:center; border:2px solid #000">
     <img src="ritmos-faro.jpg" style="width:100%; max-width:380px; border-radius:12px; display:block">
     <p style="font-size:11px; color:#777; text-align:center; margin:6px 0 0 0">Info: Asoc. Vecinal de Fomento Faro Norte</p>
@@ -531,4 +537,3 @@ window.addEventListener('appinstalled', () => {
 </script>
 </body>
 </html>
-
