@@ -11,10 +11,21 @@
             {
               type: "push",
               autoPrompt: true,
+              text: {
+                actionMessage: "¿De qué barrio sos? Seleccioná para recibir alertas críticas de tu zona (Cortes de luz, colectivos, clima):",
+                acceptButton: "Activar Alertas",
+                cancelButton: "No, gracias"
+              },
               delay: {
                 pageViews: 1,
                 timeDelay: 1
-              }
+              },
+              categories: [
+                { id: "barrio_alfar", label: "🟢 Barrio Alfar" },
+                { id: "barrio_faro", label: "🔵 Faro Norte / Punta Mogotes" },
+                { id: "barrio_serena", label: "🟡 Playa Serena" },
+                { id: "barrio_acantilados", label: "🟠 Los Acantilados" }
+              ]
             }
           ]
         }
@@ -22,6 +33,7 @@
     });
   });
 </script>
+
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3L9SZ6YVFT"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3L9SZ6YVFT');</script>
 <meta charset="UTF-8">
