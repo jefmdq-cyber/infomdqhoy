@@ -118,9 +118,9 @@ body{background:#f0f4f8;color:#1a202c}
   <a href="#acantilados" class="barrio-btn btn-acantilados" onclick="abrirBarrio('acantilados');return false;"><span>🌊</span>ACANTILADOS</a>
 </div>
 <!-- FARMACIA VARA - VERSIÓN FINAL RESPONSIVE - SE VE BIEN EN CELULAR -->
+<!-- FARMACIA VARA - FOTO COMPLETA - NO RECORTA CARTEL -->
 <div style="grid-column:1 / -1;background:#ffffff;border-radius:20px;overflow:hidden;border:1px solid #e2e8f0;box-shadow:0 8px 24px rgba(0,0,0,.08);font-family:Inter,'Segoe UI',system-ui,sans-serif;max-width:680px;margin:0 auto">
 
-  <!-- CABECERA NEGRA LIMPIA - SIN SOMBRA FEA -->
   <div style="background:#0f172a;margin:10px;border-radius:18px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between">
     <div style="color:#ffffff;font-size:26px;font-weight:900;letter-spacing:0.5px;font-family:Arial Black,Arial,sans-serif;line-height:1">FARMACIA VARA</div>
     <div style="width:42px;height:42px;background:#10b981;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:2px solid white">
@@ -128,12 +128,13 @@ body{background:#f0f4f8;color:#1a202c}
     </div>
   </div>
 
-  <!-- CONTENIDO QUE EN CELULAR SE APILA -->
-  <div style="display:flex;flex-wrap:wrap;padding:12px;gap:12px">
-    <!-- FOTO -->
-    <div style="flex:1 1 260px;min-width:240px">
-      <img src="farmacia-vara-frente.jpeg" onerror="this.onerror=null;this.src='farmacia-vara-frente.jpg'" alt="Farmacia Vara" style="width:100%;height:220px;object-fit:cover;border-radius:14px;border:1px solid #e2e8f0;display:block">
+  <div style="display:flex;flex-wrap:wrap;padding:12px;gap:12px;align-items:flex-start">
+    
+    <!-- FOTO SIN RECORTE - SE VE TODO EL FRENTE -->
+    <div style="flex:1 1 260px;min-width:240px;background:#ffffff;border-radius:14px;border:1px solid #e2e8f0;overflow:hidden">
+      <img src="farmacia-vara-frente.jpeg" onerror="this.onerror=null;this.src='farmacia-vara-frente.jpg'" alt="Frente Farmacia Vara - Se ve cartel completo" style="width:100%;height:auto;display:block;object-fit:contain">
     </div>
+
     <!-- DATOS -->
     <div style="flex:1 1 220px;min-width:220px">
       <div style="color:#14532d;font-weight:900;font-size:20px;line-height:1">FARMACIA VARA</div>
@@ -153,24 +154,17 @@ body{background:#f0f4f8;color:#1a202c}
     </div>
   </div>
 
-  <!-- BOTONERA VERDE PERO LEGIBLE EN CELULAR -->
   <div style="margin:0 12px 12px 12px;background:#86d391;border-radius:14px;padding:10px;display:flex;flex-wrap:wrap;gap:8px">
-    
     <a href="https://wa.me/5492235808030?text=Hola%20Farmacia%20Vara,%20los%20vi%20en%20InfoMDQHoy" target="_blank" style="flex:1 1 120px;text-decoration:none;display:flex;align-items:center;gap:8px;justify-content:center;background:#ffffff;border-radius:10px;padding:9px 8px">
       <div style="width:30px;height:30px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg viewBox="0 0 32 32" width="18" height="18" fill="white"><path d="M19.11 17.2c-.31-.16-1.84-.9-2.12-1.01-.29-.11-.5-.16-.7.16-.21.31-.82 1.01-1 1.22-.19.21-.37.23-.69.08-.31-.16-1.32-.48-2.51-1.54-.93-.83-1.55-1.85-1.74-2.16-.18-.31-.02-.48.14-.64.14-.14.31-.37.47-.55.16-.18.21-.31.31-.52.1-.21.05-.39-.03-.54-.08-.16-.7-1.69-.96-2.31-.25-.6-.51-.52-.7-.53h-.6c-.21 0-.54.08-.82.39-.29.31-1.08 1.06-1.08 2.58s1.11 2.99 1.26 3.2c.16.21 2.18 3.33 5.28 4.67.74.32 1.31.51 1.76.65.74.23 1.41.2 1.94.12.59-.09 1.84-.75 2.1-1.48.26-.72.26-1.34.18-1.47-.08-.13-.29-.21-.6-.36zM16 2.04c-7.7 0-13.94 6.24-13.94 13.94 0 2.46.64 4.86 1.86 6.97L2.05 30l7.25-1.9A13.9 13.9 0 0 0 16 30.08c7.7 0 13.94-6.24 13.94-13.94S23.7 2.04 16 2.04z"/></svg></div>
       <div style="color:#05210f;font-weight:900;font-size:11px;line-height:1.1;text-align:left">WhatsApp:<br><b style="font-size:13px">2235808030</b></div>
     </a>
-
     <a href="https://www.google.com/maps/search/?api=1&query=Estados+Unidos+779+Alfar+Mar+del+Plata" target="_blank" style="flex:1 1 90px;text-decoration:none;display:flex;align-items:center;gap:6px;justify-content:center;background:#0f172a;border-radius:10px;padding:9px 8px">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
       <div style="color:white;font-weight:800;font-size:11px;line-height:1.1">Ver en<br>el mapa</div>
     </a>
-
     <a href="https://www.google.com/maps/search/?api=1&query=Estados+Unidos+779+Alfar+Mar+del+Plata" target="_blank" style="flex:1 1 90px;text-decoration:none;display:flex;align-items:center;gap:6px;justify-content:center;background:#14532d;border-radius:10px;padding:9px 8px">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 21s-6-5.373-6-10a6 6 0 0 1 12 0c0 4.627-6 10-6 10z"/><circle cx="12" cy="11" r="2"/></svg>
       <div style="color:white;font-weight:800;font-size:11px;line-height:1.1">Estados Unidos<br><b>779</b></div>
     </a>
-
   </div>
 </div>
 
