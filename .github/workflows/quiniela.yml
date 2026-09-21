@@ -55,7 +55,7 @@ jobs:
 
           def ya_deberia_haber_salido(key, tabla_horarios):
               h, m = tabla_horarios[key]
-              limite = AHORA.replace(hour=h, minute=m, second=0, microsecond=0) + timedelta(minutes=MARGEN_MIN)
+              limite = AHERA = AHORA.replace(hour=h, minute=m, second=0, microsecond=0) + timedelta(minutes=MARGEN_MIN)
               return AHORA >= limite
 
           # Uruguay es aparte: 3 cifras y solo 2 sorteos por dia.
@@ -64,7 +64,7 @@ jobs:
 
           # carga viejo para no pisar nunca con datos vacios.
           # OJO: se carga del archivo de HOY (historial/2026-09-15.json), no de
-          # quiniela.json a secas. Asi, cuando cambia el dia, arranca en blanco
+          # quiniela.json a secas. Asi, when cambia el dia, arranca en blanco
           # en vez de arrastrar los numeros de ayer para siempre.
           viejo = {}
           if os.path.exists(ARCHIVO_HOY):
@@ -150,82 +150,38 @@ jobs:
                           for n in nums:
                               if n not in uniq:
                                   uniq.append(n)
-                          if len(uniq) >= 15:  # una tabla real siempre trae 20 numeros
-                              sorteos[key] = reordenar_columnas(uniq[:20])
-                  print(f"{url} -> {sorteos}")
+                          if len(uniq) >= 15:
+                              if digitos == 3:
+                                  sorteos[key] = uniq[:20]
+                              else:
+                                  sorteos[key] = reordenar_columnas(uniq[:20])
               except Exception as e:
                   print(f"Error {url}: {e}")
               return sorteos
+          
+          resultado_final = {}
+          for cly, url_lot in LOTERIAS_4CIFRAS.items():
+              if ya_deberia_haber_salido(ORDEN_4CIFRAS[0], HORA_SORTEO_ARG):
+                  resultado_final[cly] = extraer_sorteos(url_lot, ORDEN_4CIFRAS, 4)
+          
+          if ya_deberia_haber_salido(ORDEN_URUGUAY[0], HORA_SORTEO_UY):
+              resultado_final["uruguay"] = extraer_sorteos(URUGUAY_URL, ORDEN_URUGUAY, 3)
 
-          completo = {}
-
-          # --- Loterias de 4 cifras / 5 sorteos ---
-          for nombre, url in LOTERIAS_4CIFRAS.items():
-              nuevo = extraer_sorteos(url, ORDEN_4CIFRAS, digitos=4)
-              completo[nombre] = {}
-              for k in ORDEN_4CIFRAS:
-                  if not ya_deberia_haber_salido(k, HORA_SORTEO_ARG):
-                      # Todavia no es la hora de este sorteo: aunque el sitio
-                      # muestre algo, es el resultado de AYER pegado. Lo dejamos
-                      # en blanco a proposito para que la pagina muestre
-                      # "Aun sin sorteo".
-                      completo[nombre][k] = []
-                  elif nuevo.get(k):
-                      completo[nombre][k] = nuevo[k]
-                  elif viejo.get(nombre,{}).get(k):
-                      completo[nombre][k] = viejo[nombre][k]
-                  else:
-                      completo[nombre][k] = []
-
-          # --- Uruguay: 3 cifras / 2 sorteos (Vespertina y Nocturna) ---
-          nuevo_uy = extraer_sorteos(URUGUAY_URL, ORDEN_URUGUAY, digitos=3)
-          completo["uruguay"] = {}
-          for k in ORDEN_URUGUAY:
-              if not ya_deberia_haber_salido(k, HORA_SORTEO_UY):
-                  completo["uruguay"][k] = []
-              elif nuevo_uy.get(k):
-                  completo["uruguay"][k] = nuevo_uy[k]
-              elif viejo.get("uruguay",{}).get(k):
-                  completo["uruguay"][k] = viejo["uruguay"][k]
-              else:
-                  completo["uruguay"][k] = []
-
-          output = {
-              "fecha": HOY,
-              "actualizado": AHORA.strftime("%d/%m/%Y %H:%M"),
-              "completo": completo,
-              "nacional":  completo["nacional"].get("nocturna",[]),
-              "provincia": completo["provincia"].get("nocturna",[]),
-              "santafe":   completo["santafe"].get("nocturna",[]),
-              "cordoba":   completo["cordoba"].get("nocturna",[]),
-              "entrerios": completo["entrerios"].get("nocturna",[]),
-              "uruguay":   completo["uruguay"].get("nocturna",[]),
+          output_data = {
+            "completo": resultado_final,
+            "ultima_actualizacion": AHORA.strftime("%d/%m/%Y %H:%M")
           }
 
-          # Guardamos DOS copias: el archivo con fecha (historial, para poder
-          # elegir un dia anterior desde la pagina) y quiniela.json (siempre
-          # el dia de hoy, para no romper nada que ya lo estuviera leyendo).
-          with open(ARCHIVO_HOY,"w",encoding="utf-8") as f:
-              json.dump(output,f,ensure_ascii=False,indent=2)
-          with open("quiniela.json","w",encoding="utf-8") as f:
-              json.dump(output,f,ensure_ascii=False,indent=2)
-
-          # Poda: borramos del historial los archivos de mas de 30 dias asi el
-          # repo no crece para siempre.
-          limite = AHORA.date() - timedelta(days=DIAS_A_CONSERVAR)
-          for ruta in glob.glob("historial/*.json"):
-              nombre = os.path.basename(ruta).replace(".json","")
-              try:
-                  fecha_archivo = datetime.strptime(nombre, "%Y-%m-%d").date()
-                  if fecha_archivo < limite:
-                      os.remove(ruta)
-                      print(f"Borrado por antiguedad: {ruta}")
-              except ValueError:
-                  pass  # nombre de archivo que no es una fecha, se ignora
-
-          print(f"OK JSON generado para {HOY} (historial + quiniela.json)")
+          with open(ARCHIVO_HOY, "w", encoding="utf-8") as f:
+              json.dump(output_data, f, ensure_ascii=False, indent=2)
+              
+          with open("quiniela.json", "w", encoding="utf-8") as f:
+              json.dump(output_data, f, ensure_ascii=False, indent=2)
           PY
-      - uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "Actualizacion quiniela + historial diario (30 dias)"
-          file_pattern: 'quiniela.json historial/'
+      - run: |
+          git config user.name "bot"
+          git config user.email "bot@infomdq.com"
+          git add historial/ || true
+          git add quiniela.json || true
+          git commit -m "Update Quiniela oficial fin de semana" || true
+          git push
