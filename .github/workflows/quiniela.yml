@@ -1,154 +1,338 @@
-
 name: Quiniela - REGLA UNICA Argentina + Uruguay
 
 on:
   schedule:
-    - cron: "*/20 * * * *"
+    - cron: '*/20 13-23,0-1 * * *'
   workflow_dispatch:
 
 jobs:
   actualizar:
     runs-on: ubuntu-latest
+
     permissions:
       contents: write
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Scrapear con MISMA REGLA para Argentina y Uruguay
+
+      - name: Scrapear con regla segura para Argentina y Uruguay
         run: |
           pip install requests beautifulsoup4 lxml
+
           python << 'PY'
-          import requests, re, json, os
+          import requests
+          import re
+          import json
+          import os
+
           from datetime import datetime, timedelta
           from zoneinfo import ZoneInfo
           from bs4 import BeautifulSoup
 
           HEADERS = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/122",
-            "Accept-Language": "es-AR,es;q=0.9",
-            "Referer": "https://www.tujugada.com.ar/"
+              "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/122",
+              "Accept-Language": "es-AR,es;q=0.9",
+              "Referer": "https://www.tujugada.com.ar/"
           }
+
           TZ = ZoneInfo("America/Argentina/Buenos_Aires")
           AHORA = datetime.now(TZ)
           HOY = AHORA.strftime("%Y-%m-%d")
+
           os.makedirs("historial", exist_ok=True)
+
           ARCHIVO = f"historial/{HOY}.json"
 
-          ORDEN = ["previa","primera","matutina","vespertina","nocturna"]
-          ORDEN_UY = ["vespertina","nocturna"]
-          HORA = {"previa":(10,15),"primera":(12,0),"matutina":(15,0),"vespertina":(18,0),"nocturna":(21,0)}
-          HORA_UY = {"vespertina":(15,0),"nocturna":(21,0)}
+          ORDEN = [
+              "previa",
+              "primera",
+              "matutina",
+              "vespertina",
+              "nocturna"
+          ]
+
+          ORDEN_UY = [
+              "vespertina",
+              "nocturna"
+          ]
+
+          HORA = {
+              "previa": (10, 15),
+              "primera": (12, 0),
+              "matutina": (15, 0),
+              "vespertina": (18, 0),
+              "nocturna": (21, 0)
+          }
+
+          HORA_UY = {
+              "vespertina": (15, 0),
+              "nocturna": (21, 0)
+          }
+
           MARGEN = 25
 
           def ya_deberia(k, tabla):
-              h,m = tabla[k]
-              limite = AHORA.replace(hour=h,minute=m,second=0,microsecond=0)+timedelta(minutes=MARGEN)
+              h, m = tabla[k]
+
+              limite = AHORA.replace(
+                  hour=h,
+                  minute=m,
+                  second=0,
+                  microsecond=0
+              ) + timedelta(minutes=MARGEN)
+
               return AHORA >= limite
 
-          # ESTA ES LA REGLA QUE ARREGLA ARGENTINA Y AHORA TAMBIEN URUGUAY
           def reordenar_columnas(lista):
-              # tujugada escribe: 1,11,2,12,3,13,4,14,5,15...
-              # nosotros queremos: 1,2,3,4,5,6,7,8,9,10, 11,12,13,14,15...
+              """
+              Regla exclusiva de las loterías argentinas.
+              Tujugada muestra las columnas de Argentina como:
+              1,11,2,12,3,13...
+              y deben quedar:
+              1,2,3,4,5...
+              """
+
               if len(lista) < 20:
                   return lista
+
               return lista[0::2] + lista[1::2]
 
           def extraer_tabla_robusta(html, digitos):
-              # Extrae solo las columnas NUMERO, evitando el veneno anti-bot
+              """
+              Extrae únicamente los números de las columnas de resultados,
+              evitando textos anti-bot y mensajes de la página.
+              """
+
               soup = BeautifulSoup(html, "lxml")
               numeros = []
+
               for tr in soup.find_all("tr"):
                   tds = tr.find_all("td")
+
                   if len(tds) >= 4:
-                      # En tujugada Uruguay: td[0]=Ubic, td[1]=NUMERO, td[2]=Ubic, td[3]=NUMERO
-                      for col in [1,3]:
+                      for col in [1, 3]:
                           txt = tds[col].get_text(" ", strip=True)
+
                           if not txt:
                               continue
-                          # Si tiene el mensaje venenoso, quedarse solo con el ultimo numero de 3 cifras (el real)
-                          if "MENSAJE" in txt.upper() or "COPIANDO" in txt.upper():
-                              matches = re.findall(rf'\b\d{{{digitos}}}\b', txt)
+
+                          if (
+                              "MENSAJE" in txt.upper()
+                              or "COPIANDO" in txt.upper()
+                          ):
+                              matches = re.findall(
+                                  rf"\b\d{{{digitos}}}\b",
+                                  txt
+                              )
+
                               if matches:
                                   numeros.append(matches[-1])
                           else:
-                              m = re.search(rf'\b\d{{{digitos}}}\b', txt)
-                              if m:
-                                  numeros.append(m.group())
+                              match = re.search(
+                                  rf"\b\d{{{digitos}}}\b",
+                                  txt
+                              )
+
+                              if match:
+                                  numeros.append(match.group())
+
                           if len(numeros) >= 20:
                               break
+
                   if len(numeros) >= 20:
                       break
+
               return numeros
 
-          viejo={}
+          viejo = {}
+
           if os.path.exists(ARCHIVO):
-              try: viejo=json.load(open(ARCHIVO,encoding="utf-8")).get("completo",{})
-              except: pass
+              try:
+                  with open(ARCHIVO, encoding="utf-8") as archivo:
+                      viejo = json.load(archivo).get("completo", {})
+              except Exception:
+                  viejo = {}
 
           def extraer(url, orden, digitos, key_loteria, tabla):
-              sorteos={k:[] for k in orden}
-              guard=viejo.get(key_loteria,{})
+              sorteos = {k: [] for k in orden}
+              guardado = viejo.get(key_loteria, {})
+
               try:
-                  r=requests.get(url, headers=HEADERS, timeout=30)
-                  soup=BeautifulSoup(r.text, "lxml")
-                  texto_bajo=soup.get_text(" ").lower()
+                  respuesta = requests.get(
+                      url,
+                      headers=HEADERS,
+                      timeout=30
+                  )
+
+                  soup = BeautifulSoup(respuesta.text, "lxml")
+                  texto_bajo = soup.get_text(" ").lower()
+
                   for k in orden:
                       if not ya_deberia(k, tabla):
-                          sorteos[k]=[]
-                          print(f"{key_loteria} {k} aun no sorteado -> vacio")
+                          sorteos[k] = []
+                          print(
+                              f"{key_loteria} {k} aún no sorteado -> vacío"
+                          )
                           continue
-                      # buscar seccion del sorteo
-                      idx = texto_bajo.find(k)
-                      if idx == -1:
-                          # si no encuentra, intentar con guardado
-                          if guard.get(k):
-                              sorteos[k]=guard[k]
+
+                      indice = texto_bajo.find(k)
+
+                      if indice == -1:
+                          if guardado.get(k):
+                              sorteos[k] = guardado[k]
+
                           continue
-                      trozo_html = r.text[idx:idx+15000]
-                      raw = extraer_tabla_robusta(trozo_html, digitos)
+
+                      trozo_html = respuesta.text[indice:indice + 15000]
+
+                      raw = extraer_tabla_robusta(
+                          trozo_html,
+                          digitos
+                      )
+
                       if len(raw) < 10:
-                          # fallback regex simple
-                          trozo_text = texto_bajo[idx:idx+5000]
-                          raw2 = re.findall(rf'\b\d{{{digitos}}}\b', trozo_text)
-                          uniq=[]
-                          for n in raw2:
-                              if n not in uniq:
-                                  uniq.append(n)
+                          trozo_texto = texto_bajo[indice:indice + 5000]
+
+                          raw2 = re.findall(
+                              rf"\b\d{{{digitos}}}\b",
+                              trozo_texto
+                          )
+
+                          uniq = []
+
+                          for numero in raw2:
+                              if numero not in uniq:
+                                  uniq.append(numero)
+
                           raw = uniq[:20]
-                      
+
                       if len(raw) >= 10:
-                          # APLICAR MISMA REGLA QUE ARGENTINA
-                          sorteos[k]=reordenar_columnas(raw[:20])
-                          print(f"{key_loteria} {k} OK {sorteos[k][:3]}... -> reordenado")
+                          if digitos == 3:
+                              """
+                              Uruguay ya viene en orden correcto.
+                              No se aplica reordenar_columnas().
+                              Esto evita cruzar los casilleros 5 y 15.
+                              """
+
+                              uniq = []
+
+                              for numero in raw:
+                                  if numero not in uniq:
+                                      uniq.append(numero)
+
+                              sorteos[k] = uniq[:20]
+
+                              print(
+                                  f"{key_loteria} {k} OK "
+                                  f"{sorteos[k][:3]}... "
+                                  "-> directo, sin reordenar"
+                              )
+                          else:
+                              """
+                              Argentina conserva su regla original
+                              de destrenzado de columnas.
+                              """
+
+                              sorteos[k] = reordenar_columnas(
+                                  raw[:20]
+                              )
+
+                              print(
+                                  f"{key_loteria} {k} OK "
+                                  f"{sorteos[k][:3]}... "
+                                  "-> reordenado"
+                              )
                       else:
-                          if guard.get(k) and len(guard.get(k))>=10:
-                              sorteos[k]=guard[k]
-                              print(f"{key_loteria} {k} fallo, conservo guardado")
-              except Exception as e:
-                  print(f"Error {key_loteria} {e}")
+                          if (
+                              guardado.get(k)
+                              and len(guardado.get(k)) >= 10
+                          ):
+                              sorteos[k] = guardado[k]
+
+                              print(
+                                  f"{key_loteria} {k} "
+                                  "falló, conservo guardado"
+                              )
+
+              except Exception as error:
+                  print(f"Error {key_loteria}: {error}")
+
                   for k in orden:
-                      if ya_deberia(k,tabla) and viejo.get(key_loteria,{}).get(k):
-                          sorteos[k]=viejo[key_loteria][k]
+                      if (
+                          ya_deberia(k, tabla)
+                          and viejo.get(key_loteria, {}).get(k)
+                      ):
+                          sorteos[k] = viejo[key_loteria][k]
+
               return sorteos
 
-          res={}
-          for cly in ["nacional","provincia","santafe","cordoba","entrerios"]:
-              res[cly]=extraer("https://tujugada.com.ar", ORDEN, 4, cly, HORA)
-          
-          # URUGUAY AHORA CON LA MISMA REGLA
-          res["uruguay"]=extraer("https://tujugada.com.ar/quiniela_uruguay.asp", ORDEN_UY, 3, "uruguay", HORA_UY)
+          resultados = {}
 
-          out={"fecha":HOY,"fecha_arg":AHORA.strftime("%d/%m/%Y"),"completo":res,"ultima_actualizacion":AHORA.strftime("%d/%m/%Y %H:%M")}
-          with open(ARCHIVO,"w",encoding="utf-8") as f: json.dump(out,f,ensure_ascii=False,indent=2)
-          with open("quiniela.json","w",encoding="utf-8") as f: json.dump(out,f,ensure_ascii=False,indent=2)
-          print("FINAL OK - Misma regla aplicada a Argentina y Uruguay")
+          for loteria in [
+              "nacional",
+              "provincia",
+              "santafe",
+              "cordoba",
+              "entrerios"
+          ]:
+              resultados[loteria] = extraer(
+                  "https://tujugada.com.ar",
+                  ORDEN,
+                  4,
+                  loteria,
+                  HORA
+              )
+
+          resultados["uruguay"] = extraer(
+              "https://tujugada.com.ar/quiniela_uruguay.asp",
+              ORDEN_UY,
+              3,
+              "uruguay",
+              HORA_UY
+          )
+
+          salida = {
+              "fecha": HOY,
+              "fecha_arg": AHORA.strftime("%d/%m/%Y"),
+              "completo": resultados,
+              "ultima_actualizacion": AHORA.strftime(
+                  "%d/%m/%Y %H:%M"
+              )
+          }
+
+          with open(ARCHIVO, "w", encoding="utf-8") as archivo:
+              json.dump(
+                  salida,
+                  archivo,
+                  ensure_ascii=False,
+                  indent=2
+              )
+
+          with open("quiniela.json", "w", encoding="utf-8") as archivo:
+              json.dump(
+                  salida,
+                  archivo,
+                  ensure_ascii=False,
+                  indent=2
+              )
+
+          print(
+              "FINAL OK - Argentina conserva el reordenamiento; "
+              "Uruguay queda directo y sin intercambio de casilleros"
+          )
           PY
+
       - name: Commit
         run: |
           git config user.name "bot"
           git config user.email "bot@infomdq.com"
+
           git add historial/ quiniela.json
-          git commit -m "FINAL: misma regla columnas Argentina y Uruguay + filtro veneno" || true
+
+          git commit -m "Actualizar quiniela Argentina y Uruguay" || true
+
           git push
