@@ -1,5 +1,5 @@
 
-name: Actualizar quiniela - V3 FINAL sin futuros ni mezcla Uruguay
+name: Actualizar quiniela - V4 FIX Uruguay columnas + sin futuros
 
 on:
   schedule:
@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Scrapear quiniela V3 - respeta horarios y no mezcla Uruguay
+      - name: Scrapear V4 - Uruguay tambien reordenado
         run: |
           pip install requests beautifulsoup4 lxml
           python << 'PY'
@@ -26,98 +26,85 @@ jobs:
           from bs4 import BeautifulSoup
 
           HEADERS = {"User-Agent": "Mozilla/5.0 Chrome/122"}
-          TZ_ARG = ZoneInfo("America/Argentina/Buenos_Aires")
-          AHORA = datetime.now(TZ_ARG)
+          TZ = ZoneInfo("America/Argentina/Buenos_Aires")
+          AHORA = datetime.now(TZ)
           HOY = AHORA.strftime("%Y-%m-%d")
           os.makedirs("historial", exist_ok=True)
-          ARCHIVO_HOY = f"historial/{HOY}.json"
+          ARCHIVO = f"historial/{HOY}.json"
 
-          LOTERIAS = ["nacional","provincia","santafe","cordoba","entrerios"]
           ORDEN = ["previa","primera","matutina","vespertina","nocturna"]
-          HORA = {"previa":(10,15), "primera":(12,0), "matutina":(15,0), "vespertina":(18,0), "nocturna":(21,0)}
-          HORA_UY = {"vespertina":(15,0), "nocturna":(21,0)}
-          MARGEN = 25  # minutos de tolerancia despues del horario
+          ORDEN_UY = ["vespertina","nocturna"]
+          HORA = {"previa":(10,15),"primera":(12,0),"matutina":(15,0),"vespertina":(18,0),"nocturna":(21,0)}
+          HORA_UY = {"vespertina":(15,0),"nocturna":(21,0)}
+          MARGEN = 25
 
-          def ya_deberia(key, tabla):
-              h,m = tabla[key]
-              limite = AHORA.replace(hour=h, minute=m, second=0, microsecond=0) + timedelta(minutes=MARGEN)
+          def ya_deberia(k, tabla):
+              h,m = tabla[k]
+              limite = AHORA.replace(hour=h,minute=m,second=0,microsecond=0)+timedelta(minutes=MARGEN)
               return AHORA >= limite
 
           def texto_plano(html):
-              soup = BeautifulSoup(html, "lxml")
+              from bs4 import BeautifulSoup
+              soup = BeautifulSoup(html,"lxml")
               for t in soup(["script","style"]): t.decompose()
-              return re.sub(r'\s+', ' ', soup.get_text(" "))
+              return re.sub(r'\s+',' ',soup.get_text(" "))
 
-          def reordenar_arg(lista):
-              # Para loterias argentinas 4 cifras que vienen en 2 columnas
-              if len(lista)<20: return lista
+          def reordenar_columnas(lista):
+              # TUJUGADA muestra 20 numeros en 2 columnas: HTML viene 1,11,2,12,3,13... -> corregir a 1..10,11..20
+              # Aplica tanto para 4 cifras como para 3 cifras (Uruguay)
+              if len(lista) < 20: return lista
               return lista[0::2] + lista[1::2]
 
-          def reordenar_uy(lista):
-              # Uruguay no se reordena, viene ya ordenado 1..20
-              return lista
-
-          # Cargar guardado por si falla tujugada
-          viejo = {}
-          if os.path.exists(ARCHIVO_HOY):
-              try: viejo = json.load(open(ARCHIVO_HOY,encoding="utf-8")).get("completo",{})
+          viejo={}
+          if os.path.exists(ARCHIVO):
+              try: viejo=json.load(open(ARCHIVO,encoding="utf-8")).get("completo",{})
               except: pass
 
-          def extraer(url, orden, digitos, cly_key, tabla, reordenar_fn):
-              sorteos = {k: [] for k in orden}
-              guard = viejo.get(cly_key, {})
+          def extraer(url, orden, digitos, key_loteria, tabla):
+              sorteos={k:[] for k in orden}
+              guard=viejo.get(key_loteria,{})
               try:
-                  r = requests.get(url, headers=HEADERS, timeout=30)
-                  txt = texto_plano(r.text)
-                  low = txt.lower()
-                  for key in orden:
-                      # REGLA CLAVE: si todavia no es la hora, SIEMPRE blanco, aunque tengamos guardado futuro
-                      if not ya_deberia(key, tabla):
-                          sorteos[key] = []
-                          print(f"{cly_key} {key} todavia no sorteado -> blanco")
+                  r=requests.get(url,headers=HEADERS,timeout=30)
+                  low=re.sub(r'\s+',' ',BeautifulSoup(r.text,"lxml").get_text(" ").lower())
+                  for k in orden:
+                      if not ya_deberia(k, tabla):
+                          sorteos[k]=[]
                           continue
-                      # Si ya es la hora, intentar extraer
-                      m = re.search(rf'\b{key}\b', low)
-                      nums = []
+                      m=re.search(rf'\b{k}\b',low)
+                      nums=[]
                       if m:
-                          trozo = low[m.start(): m.start()+3000]
-                          raw = re.findall(rf'\b\d{{{digitos}}}\b', trozo)
+                          trozo=low[m.start():m.start()+3000]
+                          raw=re.findall(rf'\b\d{{{digitos}}}\b',trozo)
                           uniq=[]
                           for n in raw:
                               if n not in uniq: uniq.append(n)
-                          nums = uniq[:20]
-                      if len(nums) >= 10:  # minimo para considerar valido
-                          sorteos[key] = reordenar_fn(nums)
-                          print(f"{cly_key} {key} OK {len(nums)} numeros")
+                          nums=uniq[:20]
+                      if len(nums)>=10:
+                          sorteos[k]=reordenar_columnas(nums)
                       else:
-                          # Si no pudimos extraer pero ya deberia haber salido, conservar guardado viejo si existe
-                          if guard.get(key) and len(guard.get(key))>=10:
-                              sorteos[key]=guard[key]
-                              print(f"{cly_key} {key} fallo extraccion, conservo guardado")
-                          else:
-                              sorteos[key]=[]
+                          if guard.get(k) and len(guard.get(k))>=10:
+                              sorteos[k]=guard[k]
               except Exception as e:
-                  print(f"Error {cly_key} {e}")
+                  print(f"Error {key_loteria} {e}")
                   for k in orden:
-                      if ya_deberia(k, tabla) and viejo.get(cly_key, {}).get(k):
-                          sorteos[k]=viejo[cly_key][k]
+                      if ya_deberia(k,tabla) and viejo.get(key_loteria,{}).get(k):
+                          sorteos[k]=viejo[key_loteria][k]
               return sorteos
 
           res={}
-          for cly in LOTERIAS:
-              res[cly]=extraer("https://tujugada.com.ar", ORDEN, 4, cly, HORA, reordenar_arg)
-          # Uruguay separado con logica distinta sin reordenar
-          res["uruguay"]=extraer("https://tujugada.com.ar", ["vespertina","nocturna"], 3, "uruguay", HORA_UY, reordenar_uy)
+          for cly in ["nacional","provincia","santafe","cordoba","entrerios"]:
+              res[cly]=extraer("https://tujugada.com.ar",ORDEN,4,cly,HORA)
+          res["uruguay"]=extraer("https://tujugada.com.ar",ORDEN_UY,3,"uruguay",HORA_UY)
 
           out={"fecha":HOY,"fecha_arg":AHORA.strftime("%d/%m/%Y"),"completo":res,"ultima_actualizacion":AHORA.strftime("%d/%m/%Y %H:%M")}
-          with open(ARCHIVO_HOY,"w",encoding="utf-8") as f: json.dump(out,f,ensure_ascii=False,indent=2)
+          with open(ARCHIVO,"w",encoding="utf-8") as f: json.dump(out,f,ensure_ascii=False,indent=2)
           with open("quiniela.json","w",encoding="utf-8") as f: json.dump(out,f,ensure_ascii=False,indent=2)
-          print(f"OK {HOY} generado V3")
+          print("V4 OK")
           PY
       - name: Commit
         run: |
           git config user.name "bot"
           git config user.email "bot@infomdq.com"
           git add historial/ quiniela.json
-          git commit -m "V3 fix: respeta horarios y Uruguay sin mezcla" || true
+          git commit -m "V4 fix Uruguay columnas reordenadas" || true
           git push
