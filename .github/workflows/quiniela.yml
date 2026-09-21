@@ -1,7 +1,12 @@
 name: Quiniela 20 TODOS los sorteos
 on:
   schedule:
-      - cron: '*/20 13-23,0-1 * * *'
+    # 1. Lunes a Viernes: Cada 20 minutos de 13:00 a 23:40 (Hora UTC)
+    - cron: '*/20 13-23 * * 1-5'
+    # 2. Sábados: Cada 20 minutos de 13:00 a 22:00 (Corte estricto a las 10 PM UTC)
+    - cron: '*/20 13-22 * * 6'
+    # 3. Lunes: Reactivación demorada a partir de las 12:00 hs del mediodía (Hora UTC)
+    - cron: '*/20 12-23 * * 1'
   workflow_dispatch:
 jobs:
   actualizar:
@@ -23,7 +28,7 @@ jobs:
           from urllib.parse import urlparse
           from bs4 import BeautifulSoup
 
-          HEADERS = {"User-Agent": "Mozilla/5.0 Chrome/122","Referer":"https://google.com"}
+          HEADERS = {"User-Agent": "Mozilla/5.0 Chrome/122","Referer":"https://www.google.com/"}
           TZ_ARG = ZoneInfo("America/Argentina/Buenos_Aires")
           AHORA = datetime.now(TZ_ARG)
           HOY = AHORA.strftime("%Y-%m-%d")
@@ -33,11 +38,11 @@ jobs:
           ARCHIVO_HOY = f"historial/{HOY}.json"
 
           LOTERIAS_4CIFRAS = {
-            "nacional":   "https://tujugada.com.ar",
-            "provincia":  "https://tujugada.com.ar",
-            "santafe":    "https://tujugada.com.ar",
-            "cordoba":    "https://tujugada.com.ar",
-            "entrerios":  "https://tujugada.com.ar",
+            "nacional":   "https://www.tujugada.com.ar/quiniela-nacional.asp",
+            "provincia":  "https://www.tujugada.com.ar/quiniela_provincia_buenos_aires.asp",
+            "santafe":    "https://www.tujugada.com.ar/quiniela_santa_fe.asp",
+            "cordoba":    "https://www.tujugada.com.ar/quiniela_cordoba.asp",
+            "entrerios":  "https://www.tujugada.com.ar/quiniela_entre_rios.asp",
           }
           ORDEN_4CIFRAS = ["previa","primera","matutina","vespertina","nocturna"]
 
@@ -50,7 +55,7 @@ jobs:
               limite = AHORA.replace(hour=h, minute=m, second=0, microsecond=0) + timedelta(minutes=MARGEN_MIN)
               return AHORA >= limite
 
-          URUGUAY_URL = "https://tujugada.com.ar"
+          URUGUAY_URL = "https://www.tujugada.com.ar/quiniela_uruguay.asp"
           ORDEN_URUGUAY = ["vespertina","nocturna"]
 
           viejo = {}
@@ -60,7 +65,7 @@ jobs:
             except: pass
 
           def limpiar(html):
-              return html.replace("---MENSAJE PARA EL VISITANTE DE ESTE SITIO--- SI VES ESTE MENSAJE ES PORQUE VISITAS UN SITIO QUE ESTA COPIANDO CODIGO FUENTE AUTORIA DE TUJUGADA.COM.AR SIN AUTORIZACION. VISITA AL SITIO REAL QUE ACTUALIZA ESTOS DATOS EN ://tujugada.com.AR!!!", "")
+              return html.replace("---MENSAJE PARA EL VISITANTE DE ESTE SITIO--- SI VES ESTE MENSAJE ES PORQUE VISITAS UN SITIO QUE ESTA COPIANDO CODIGO FUENTE AUTORIA DE TUJUGADA.COM.AR SIN AUTORIZACION. VISITA AL SITIO REAL QUE ACTUALIZA ESTOS DATOS EN WWW.TUJUGADA.COM.AR!!!", "")
 
           def mismo_path(url_pedido, url_final):
               return urlparse(url_pedido).path.lower() == urlparse(url_final).path.lower()
@@ -86,11 +91,8 @@ jobs:
               patron = r'\b\d{%d}\b' % digitos
               try:
                   r = requests.get(url, headers=HEADERS, timeout=30, allow_redirects=True)
-
                   if not mismo_path(url, r.url):
-                      print(f"AVISO: {url} redirigio a {r.url} -> pagina no existe, se ignora")
                       return sorteos
-
                   low = texto_plano(r.text).lower()
                   for key in orden:
                       m = re.search(rf'\b{key}\b\s+\d{{1,2}}:\d{{2}}\s*hs\b', low)
@@ -108,6 +110,7 @@ jobs:
                   print(f"Error en {url}: {e}")
               return sorteos
           
+          # Ejecucion principal del scraping
           resultado_final = {}
           for cly, url_lot in LOTERIAS_4CIFRAS.items():
               if ya_deberia_haber_salido(ORDEN_4CIFRAS[0], HORA_SORTEO_ARG):
