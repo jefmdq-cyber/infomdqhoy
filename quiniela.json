@@ -1,0 +1,46 @@
+{
+  "fecha": "2026-09-21",
+  "fecha_arg": "21/09/2026",
+  "completo": {
+    "nacional": {
+      "previa": [],
+      "primera": [],
+      "matutina": [],
+      "vespertina": [],
+      "nocturna": []
+    },
+    "provincia": {
+      "previa": [],
+      "primera": [],
+      "matutina": [],
+      "vespertina": [],
+      "nocturna": []
+    },
+    "santafe": {
+      "previa": [],
+      "primera": [],
+      "matutina": [],
+      "vespertina": [],
+      "nocturna": []
+    },
+    "cordoba": {
+      "previa": [],
+      "primera": [],
+      "matutina": [],
+      "vespertina": [],
+      "nocturna": []
+    },
+    "entrerios": {
+      "previa": [],
+      "primera": [],
+      "matutina": [],
+      "vespertina": [],
+      "nocturna": []
+    },
+    "uruguay": {
+      "vespertina": [],
+      "nocturna": []
+    }
+  },
+  "ultima_actualizacion": "21/09/2026 19:26"
+}
