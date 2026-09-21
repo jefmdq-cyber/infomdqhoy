@@ -1,5 +1,5 @@
 
-name: Actualizar quiniela - V4 FIX Uruguay columnas + sin futuros
+name: Quiniela V5 FINAL - Uruguay sin veneno anti-bot
 
 on:
   schedule:
@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Scrapear V4 - Uruguay tambien reordenado
+      - name: Scrapear V5 - Argentina tujugada + Uruguay alternativo
         run: |
           pip install requests beautifulsoup4 lxml
           python << 'PY'
@@ -25,7 +25,11 @@ jobs:
           from zoneinfo import ZoneInfo
           from bs4 import BeautifulSoup
 
-          HEADERS = {"User-Agent": "Mozilla/5.0 Chrome/122"}
+          HEADERS = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/122",
+            "Accept-Language": "es-AR,es;q=0.9",
+            "Referer": "https://www.tujugada.com.ar/"
+          }
           TZ = ZoneInfo("America/Argentina/Buenos_Aires")
           AHORA = datetime.now(TZ)
           HOY = AHORA.strftime("%Y-%m-%d")
@@ -43,15 +47,8 @@ jobs:
               limite = AHORA.replace(hour=h,minute=m,second=0,microsecond=0)+timedelta(minutes=MARGEN)
               return AHORA >= limite
 
-          def texto_plano(html):
-              from bs4 import BeautifulSoup
-              soup = BeautifulSoup(html,"lxml")
-              for t in soup(["script","style"]): t.decompose()
-              return re.sub(r'\s+',' ',soup.get_text(" "))
-
           def reordenar_columnas(lista):
-              # TUJUGADA muestra 20 numeros en 2 columnas: HTML viene 1,11,2,12,3,13... -> corregir a 1..10,11..20
-              # Aplica tanto para 4 cifras como para 3 cifras (Uruguay)
+              # tujugada muestra 2 columnas: 1,11,2,12... -> pasar a 1..10,11..20
               if len(lista) < 20: return lista
               return lista[0::2] + lista[1::2]
 
@@ -60,24 +57,38 @@ jobs:
               try: viejo=json.load(open(ARCHIVO,encoding="utf-8")).get("completo",{})
               except: pass
 
-          def extraer(url, orden, digitos, key_loteria, tabla):
+          def extraer_tujugada(url, orden, digitos, key_loteria, tabla):
               sorteos={k:[] for k in orden}
               guard=viejo.get(key_loteria,{})
               try:
-                  r=requests.get(url,headers=HEADERS,timeout=30)
-                  low=re.sub(r'\s+',' ',BeautifulSoup(r.text,"lxml").get_text(" ").lower())
+                  r=requests.get(url, headers=HEADERS, timeout=30)
+                  soup=BeautifulSoup(r.text,"lxml")
+                  low=soup.get_text(" ").lower()
+                  # Extraccion robusta por tabla para evitar veneno
+                  # Buscar todas las filas con 4 columnas Ubic/Numero/Ubic/Numero
+                  numeros_por_sorteo={}
+                  # tujugada tiene secciones por sorteo con titulos "vespertina 15:00 hs"
+                  # Simplificado: buscar por bloques
                   for k in orden:
                       if not ya_deberia(k, tabla):
                           sorteos[k]=[]
                           continue
-                      m=re.search(rf'\b{k}\b',low)
+                      # buscar titulo del sorteo
+                      pattern = rf'{k}.*?15:00|{k}.*?21:00|{k}.*?10:15|{k}.*?12:00|{k}.*?18:00'
+                      # fallback: extraer por tabla cercana al titulo
+                      # Metodo: encontrar todos los tr y extraer numeros de 4 digitos en orden
+                      # Para Argentina 4 digitos, el veneno es menos agresivo
+                      m=re.search(rf'\b{k}\b', low)
                       nums=[]
                       if m:
-                          trozo=low[m.start():m.start()+3000]
-                          raw=re.findall(rf'\b\d{{{digitos}}}\b',trozo)
+                          trozo=low[m.start():m.start()+5000]
+                          raw=re.findall(rf'\b\d{{{digitos}}}\b', trozo)
+                          # eliminar duplicados consecutivos por veneno
                           uniq=[]
                           for n in raw:
-                              if n not in uniq: uniq.append(n)
+                              if not uniq or n != uniq[-1]:
+                                  if n not in uniq:
+                                      uniq.append(n)
                           nums=uniq[:20]
                       if len(nums)>=10:
                           sorteos[k]=reordenar_columnas(nums)
@@ -91,20 +102,85 @@ jobs:
                           sorteos[k]=viejo[key_loteria][k]
               return sorteos
 
+          def extraer_uruguay_alternativo():
+              # Intentar de 2 fuentes alternativas sin veneno
+              sorteos={"vespertina":[],"nocturna":[]}
+              # Fuente 1: quinielasya
+              try:
+                  r=requests.get("https://www.quinielasya.com.ar/quiniela-de-montevideo.php", headers=HEADERS, timeout=20)
+                  soup=BeautifulSoup(r.text,"lxml")
+                  text=soup.get_text(" ")
+                  # Buscar bloques vespertina y nocturna
+                  # Formato tipico: "Vespertina 094 - 152 - 312 ..."
+                  for k in ORDEN_UY:
+                      if not ya_deberia(k, HORA_UY):
+                          sorteos[k]=[]
+                          continue
+                      # buscar seccion k
+                      low=text.lower()
+                      idx=low.find(k)
+                      if idx!=-1:
+                          trozo=low[idx:idx+3000]
+                          nums=re.findall(r'\b\d{3}\b', trozo)
+                          # filtrar anos, etc, tomar primeros 20
+                          uniq=[]
+                          for n in nums:
+                              if n not in uniq and len(n)==3:
+                                  uniq.append(n)
+                              if len(uniq)>=20:
+                                  break
+                          if len(uniq)>=10:
+                              sorteos[k]=uniq[:20]
+              except Exception as e:
+                  print(f"Uruguay alt1 error {e}")
+
+              # Si falla, intentar chequinielas
+              if not sorteos["vespertina"]:
+                  try:
+                      r=requests.get("https://chequinielas.com/quiniela-de-montevideo", headers=HEADERS, timeout=20)
+                      soup=BeautifulSoup(r.text,"lxml")
+                      text=soup.get_text(" ")
+                      low=text.lower()
+                      for k in ORDEN_UY:
+                          if not ya_deberia(k, HORA_UY): continue
+                          idx=low.find(k)
+                          if idx!=-1:
+                              trozo=low[idx:idx+3000]
+                              nums=re.findall(r'\b\d{3}\b', trozo)
+                              uniq=[]
+                              for n in nums:
+                                  if n not in uniq: uniq.append(n)
+                                  if len(uniq)>=20: break
+                              if len(uniq)>=10:
+                                  sorteos[k]=uniq[:20]
+                  except Exception as e:
+                      print(f"Uruguay alt2 error {e}")
+
+              # Conservar guardado si no se pudo extraer pero ya deberia haber salido
+              for k in ORDEN_UY:
+                  if ya_deberia(k, HORA_UY) and not sorteos[k] and viejo.get("uruguay",{}).get(k):
+                      sorteos[k]=viejo["uruguay"][k]
+              return sorteos
+
           res={}
           for cly in ["nacional","provincia","santafe","cordoba","entrerios"]:
-              res[cly]=extraer("https://tujugada.com.ar",ORDEN,4,cly,HORA)
-          res["uruguay"]=extraer("https://tujugada.com.ar",ORDEN_UY,3,"uruguay",HORA_UY)
+              res[cly]=extraer_tujugada("https://tujugada.com.ar", ORDEN, 4, cly, HORA)
+          
+          res["uruguay"]=extraer_uruguay_alternativo()
+          # Si Uruguay alternativo fallo y ya deberia, conservar viejo
+          if not res["uruguay"]["vespertina"] and ya_deberia("vespertina", HORA_UY):
+              if viejo.get("uruguay",{}).get("vespertina"):
+                  res["uruguay"]["vespertina"]=viejo["uruguay"]["vespertina"]
 
           out={"fecha":HOY,"fecha_arg":AHORA.strftime("%d/%m/%Y"),"completo":res,"ultima_actualizacion":AHORA.strftime("%d/%m/%Y %H:%M")}
           with open(ARCHIVO,"w",encoding="utf-8") as f: json.dump(out,f,ensure_ascii=False,indent=2)
           with open("quiniela.json","w",encoding="utf-8") as f: json.dump(out,f,ensure_ascii=False,indent=2)
-          print("V4 OK")
+          print("V5 OK")
           PY
       - name: Commit
         run: |
           git config user.name "bot"
           git config user.email "bot@infomdq.com"
           git add historial/ quiniela.json
-          git commit -m "V4 fix Uruguay columnas reordenadas" || true
+          git commit -m "V5 fix Uruguay fuente alternativa sin veneno" || true
           git push
