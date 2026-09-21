@@ -1,143 +1,829 @@
-name: Quiniela 20 TODOS los sorteos
-on:
-  schedule:
-    # 1. Lunes a Viernes: Cada 20 minutos de 13:00 a 23:40 (Hora UTC)
-    - cron: '*/20 13-23 * * 1-5'
-    # 2. Sábados: Cada 20 minutos de 13:00 a 22:00 (Corte estricto a las 10 PM UTC)
-    - cron: '*/20 13-22 * * 6'
-    # 3. Lunes: Reactivación demorada a partir de las 12:00 hs del mediodía (Hora UTC)
-    - cron: '*/20 12-23 * * 1'
-  workflow_dispatch:
-jobs:
-  actualizar:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - name: Scrapear sorteos
-        run: |
-          pip install requests beautifulsoup4 lxml
-          python << 'PY'
-          import requests, re, json, os, glob
-          from datetime import datetime, timedelta
-          from zoneinfo import ZoneInfo
-          from urllib.parse import urlparse
-          from bs4 import BeautifulSoup
+<head>
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "5ad4c72f-3373-44b0-b64f-0ecadf1a6223",
+      promptOptions: {
+        slidedown: {
+          prompts: [
+            {
+              type: "push",
+              autoPrompt: true,
+              text: {
+                actionMessage: "¿De qué barrio sos? Seleccioná para recibir alertas críticas de tu zona (Cortes de luz, colectivos, clima):",
+                acceptButton: "Activar Alertas",
+                cancelButton: "No, gracias"
+              },
+              delay: {
+                pageViews: 1,
+                timeDelay: 1
+              },
+              categories: [
+                { id: "barrio_alfar", label: "🟢 Barrio Alfar" },
+                { id: "barrio_faro", label: "🔵 Faro Norte / Punta Mogotes" },
+                { id: "barrio_serena", label: "🟡 Playa Serena" },
+                { id: "barrio_acantilados", label: "🟠 Los Acantilados" }
+              ]
+            }
+          ]
+        }
+      }
+    });
+  });
+</script>
 
-          HEADERS = {"User-Agent": "Mozilla/5.0 Chrome/122","Referer":"https://www.google.com/"}
-          TZ_ARG = ZoneInfo("America/Argentina/Buenos_Aires")
-          AHORA = datetime.now(TZ_ARG)
-          HOY = AHORA.strftime("%Y-%m-%d")
-          DIAS_A_CONSERVAR = 30
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3L9SZ6YVFT"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3L9SZ6YVFT');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="7e64033b70480c67" />
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0f172a">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<title>INFO MDQ SUR HOY | Alfar, Faro, Serena, Acantilados y Chapadmalal - Dólar y Quiniela</title>
+<meta name="description" content="Dólar hoy, quiniela completa de 6 loterías, clima, cortes de EDEA y empleos en Alfar, Faro, Serena, Acantilados y Chapadmalal, actualizado todo el día.">
+<link rel="canonical" href="https://infomdqhoy.pages.dev/"> 
+<meta property="og:title" content="INFO MDQ SUR HOY | Alfar, Faro, Serena, Acantilados y Chapadmalal">
+<meta property="og:description" content="Dólar hoy, quiniela completa de 6 loterías, clima y empleos en Alfar, Faro, Serena, Acantilados y Chapadmalal, actualizado todo el día.">
+<meta property="og:image" content="https://infomdqhoy.pages.dev/banner1.jpg">
+<meta property="og:url" content="https://infomdqhoy.pages.dev/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="INFO MDQ SUR HOY | Alfar, Faro, Serena, Acantilados y Chapadmalal">
+<meta name="twitter:description" content="Dólar hoy, quiniela completa de 6 loterías, clima y empleos en Alfar, Faro, Serena, Acantilados y Chapadmalal.">
+<meta name="twitter:image" content="https://infomdqhoy.pages.dev/banner1.jpg">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4997896017063436" crossorigin="anonymous"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
+body{background:#f0f4f8;color:#1a202c}
+.hero{position:relative;height:320px;overflow:hidden;background:#0f172a}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1s ease}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,23,42,.95) 0%,rgba(0,0,0,.2) 60%)}
+.hero-text{position:absolute;bottom:18px;left:16px;right:16px;color:white;z-index:2}
+.hero-text h1{font-size:36px;font-weight:900;letter-spacing:-1px}
+.container{max-width:520px;margin:0 auto;padding:14px}
+.card{background:white;border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,.06);border:1px solid #e2e8f0}
+.barrios-nav{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.barrio-btn{padding:18px 8px;border-radius:18px;font-weight:900;font-size:14px;text-align:center;color:white;cursor:pointer;border:none;box-shadow:0 6px 16px rgba(0,0,0,.15);transition:.15s;text-decoration:none;display:block}
+.barrio-btn span{display:block;font-size:26px;margin-bottom:4px}
+.barrio-btn:active{transform:scale(.96)}
+.btn-faro{background:linear-gradient(135deg,#0f172a,#334155)}
+.btn-alfar{background:linear-gradient(135deg,#1e40af,#3b82f6)}
+.btn-serena{background:linear-gradient(135deg,#0e7490,#06b6d4)}
+.btn-acantilados{background:linear-gradient(135deg,#15803d,#22c55e)}
+.barrio-page{display:none}
+.barrio-page.active{display:block}
+.barrio-header{border-radius:18px;overflow:hidden;position:relative;height:240px;background:#0f172a;margin-bottom:14px}
+.barrio-header.faro{height:340px}
+.barrio-header img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.barrio-header.faro img{object-position:75% top}
+.barrio-header-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.85),rgba(0,0,0,.1))}
+.barrio-header-text{position:absolute;bottom:16px;left:16px;right:16px;color:white}
+.barrio-header-text h2{font-size:30px;font-weight:900}
+.btn-volver{display:block !important;width:100% !important;max-width:320px !important;margin:0 auto 18px auto !important;background:white !important;border:2px solid #0f172a !important;color:#0f172a !important;padding:12px 22px !important;border-radius:999px !important;font-weight:900 !important;font-size:13px !important;cursor:pointer !important;text-align:center !important;box-shadow:0 4px 12px rgba(15,23,42,.08) !important;}
+.info-box{padding:14px;background:#f8fafc;border-radius:12px;border:2px solid #e2e8f0;font-size:13px;line-height:1.6;margin-top:10px}
+.badge{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800}
+.dolar-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.dolar-item{background:#f8fafc;border-radius:12px;padding:14px;text-align:center;border:2px solid #e2e8f0}
+.dolar-item.blue{background:#eff6ff;border-color:#3b82f6}
+.q-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px}
+.q-tab{white-space:nowrap;padding:8px 12px;border-radius:20px;font-size:12px;font-weight:700;border:2px solid #e2e8f0;background:white;cursor:pointer}
+.q-tab.active{background:#1e40af;color:white;border-color:#1e40af}
+.q-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.q-box{background:white;border:2px solid #1e293b;border-radius:12px;padding:12px;text-align:center;box-shadow:0 2px 0 #1e293b;cursor:pointer}
+.q-box b{font-size:20px;font-weight:900;color:#0f172a;letter-spacing:1px}
+.btn-wsp{display:block;background:#25D366;color:white;text-align:center;padding:16px;border-radius:12px;text-decoration:none;font-weight:800;margin-top:10px}
+.btn-outline{display:block;background:white;color:#1e40af;border:2px solid #1e40af;text-align:center;padding:10px;border-radius:10px;text-decoration:none;font-weight:700;font-size:13px;margin-top:8px}
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;z-index:999;align-items:center;justify-content:center;padding:18px}
+#modal.active{display:flex}
+.modal-box{background:white;border-radius:20px;padding:22px;max-width:420px;width:100%;max-height:85vh;overflow:auto;position:relative;border:3px solid #0f172a}
+.close-x{position:absolute;top:10px;right:12px;font-size:26px;font-weight:900;cursor:pointer;background:#0f172a;color:white;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.quiniela-list{display:grid;grid-template-columns:60px 1fr;gap:8px;margin-top:14px}
+.q-pos{background:#f1f5f9;border:2px solid #cbd5e1;border-radius:8px;padding:6px;text-align:center;font-weight:900;font-size:13px}
+.q-num{background:white;border:2px solid #0f172a;border-radius:8px;padding:6px 10px;font-weight:900;font-size:18px;letter-spacing:1px}
+.q-num.cabeza{background:#dc2626;color:white;border-color:#991b1b;box-shadow:0 2px 0 #991b1b;font-size:22px}
+.q-pos.cabeza{background:#dc2626;color:white;border-color:#991b1b}
+.footer{padding:20px;text-align:center}
+.footer a{color:#64748b;text-decoration:none;margin:0 6px;font-size:12px;font-weight:600}
+@media(min-width:800px){.container{max-width:1100px;display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}.hero{height:420px}.hero-text h1{font-size:56px}.container >.footer{grid-column:1 / -1}.card{margin-bottom:0}.barrios-nav{grid-column:1 / -1;grid-template-columns:repeat(4,1fr)}.barrio-page{grid-column:1 / -1}}
 
-          os.makedirs("historial", exist_ok=True)
-          ARCHIVO_HOY = f"historial/{HOY}.json"
+/* === PARCHE V2 - SIN ROMPER CLIMA / MAREAS / VERIFICA MDQ === */
+:root{ --bg-clean:#f8fafc; --text-night:#0b132b; }
+body{background:#f8fafc !important;color:#0b132b !important}
+.container{max-width:520px !important}
+@media(min-width:900px){.container{max-width:1140px !important;display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start} }
 
-          LOTERIAS_4CIFRAS = {
-            "nacional":   "https://www.tujugada.com.ar/quiniela-nacional.asp",
-            "provincia":  "https://www.tujugada.com.ar/quiniela_provincia_buenos_aires.asp",
-            "santafe":    "https://tujugada.com.ar",
-            "cordoba":    "https://tujugada.com.ar",
-            "entrerios":  "https://tujugada.com.ar",
-          }
-          ORDEN_4CIFRAS = ["previa","primera","matutina","vespertina","nocturna"]
+/* 2 - BUSCADOR TOP CENTER */
+#buscadorActividades{
+width:100% !important;padding:16px 18px 16px 48px !important;
+border-radius:999px !important;border:2px solid #e2e8f0 !important;
+background:#fff !important;color:#0b132b !important;
+font-weight:700 !important;font-size:14px !important;
+box-shadow:0 4px 14px rgba(11,19,43,.06) !important;
+}
 
-          MARGEN_MIN = 20
-          HORA_SORTEO_ARG = {"previa":(10,15), "primera":(12,0), "matutina":(15,0), "vespertina":(18,0), "nocturna":(21,0)}
-          HORA_SORTEO_UY  = {"vespertina":(15,0), "nocturna":(21,0)}
+/* 1 - EDEA / COLECTIVOS */
+#btn-edea{
+background:linear-gradient(135deg,#0ea5e9 0%,#38bdf8 50%,#7dd3fc 100%) !important;
+color:#0b132b !important;border:1.5px solid rgba(255,255,255,.9) !important;
+border-radius:20px !important;font-weight:800 !important;font-size:13.5px !important;
+box-shadow:0 8px 20px rgba(14,165,233,.25) !important;
+}
+#btn-511, #btn-221{
+background:linear-gradient(135deg,#f59e0b 0%,#fbbf24 55%,#fde68a 100%) !important;
+color:#451a03 !important;border:1.5px solid rgba(255,255,255,.9) !important;
+border-radius:20px !important;font-weight:800 !important;font-size:13.5px !important;
+box-shadow:0 8px 20px rgba(245,158,11,.25) !important;
+}
+#btn-221{background:linear-gradient(135deg,#fb923c 0%,#fdba74 100%) !important}
 
-          def ya_deberia_haber_salido(key, tabla_horarios):
-              h, m = tabla_horarios[key]
-              limite = AHORA.replace(hour=h, minute=m, second=0, microsecond=0) + timedelta(minutes=MARGEN_MIN)
-              return AHORA >= limite
+/* 3 - BARRIOS */
+.barrio-btn{
+border-radius:16px !important;font-weight:900 !important;
+border:2px solid rgba(255,255,255,.95) !important;
+box-shadow:0 8px 18px rgba(11,19,43,.10), inset 0 1px 0 rgba(255,255,255,.9) !important;
+}
+.btn-faro{background:linear-gradient(135deg,#dbeafe 0%,#bfdbfe 100%) !important;color:#1e3a8a !important}
+.btn-alfar{background:linear-gradient(135deg,#dcfce7 0%,#bbf7d0 100%) !important;color:#14532d !important}
+.btn-serena{background:linear-gradient(135deg,#fef9c3 0%,#fde68a 100%) !important;color:#854d0e !important}
+.btn-acantilados{background:linear-gradient(135deg,#ffedd5 0%,#fed7aa 100%) !important;color:#7c2d12 !important}
 
-          URUGUAY_URL = "https://tujugada.com.ar"
-          ORDEN_URUGUAY = ["vespertina","nocturna"]
+/* 4 - DOLAR UNIFICADO */
+.dolar-item, .dolar-item.blue{
+background:linear-gradient(180deg,#eff6ff 0%,#ffffff 100%) !important;
+border:2px solid #1e3a8a !important;border-radius:16px !important;
+box-shadow:0 8px 18px rgba(30,58,138,.12) !important;
+}
 
-          def limpiar(html):
-              return html.replace("---MENSAJE PARA EL VISITANTE DE ESTE SITIO--- SI VES ESTE MENSAJE ES PORQUE VISITAS UN SITIO QUE ESTA COPIANDO CODIGO FUENTE AUTORIA DE TUJUGADA.COM.AR SIN AUTORIZACION. VISITA AL SITIO REAL QUE ACTUALIZA ESTOS DATOS EN WWW.TUJUGADA.COM.AR!!!", "")
+/* 5 - NO PISAR CARDS DE COLOR (clima/mareas/verifica) */
+.card:not([style*="linear-gradient"]){
+background:#fff !important;border-radius:20px !important;
+box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !important;
+}
 
-          def mismo_path(url_pedido, url_final):
-              return urlparse(url_pedido).path.lower() == urlparse(url_final).path.lower()
+.btn-guia{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:8px;padding:16px 20px;border-radius:20px;background:linear-gradient(135deg,#7e22ce,#581c87);color:#fff !important;font-weight:800;font-size:14px;text-decoration:none;box-shadow:0 8px 20px rgba(126,34,206,.35);margin:0 0 14px 0;transition:.15s}
+.btn-guia:active{transform:scale(.97)}
 
-          def texto_plano(html_crudo):
-              soup = BeautifulSoup(limpiar(html_crudo), "lxml")
-              for tag in soup(["script", "style"]):
-                  tag.decompose()
-              texto = soup.get_text(separator=" ")
-              texto = re.sub(r'\s+', ' ', texto)
-              return texto
+</style>
+</head>
+<body>
+<div class="hero">
+<img id="slide1" src="banner1.jpg" alt="Mar del Plata día" style="opacity:1">
+<img id="slide2" src="banner2.jpg" alt="Mar del Plata noche" style="opacity:0">
+<div class="hero-overlay"></div>
+<div class="hero-text"><h1>INFO MDQ SUR HOY</h1><p>Alfar, Faro, Serena, Acantilados, Chapadmalal - Dólar, Quiniela, Clima y Empleos - <span id="f"></span></p></div>
+</div>
+<div class="container">
 
-          def reordenar_columnas(lista):
-              if len(lista) < 20:
-                  return lista
-              veinte = lista[:20]
-              izquierda = beige = veinte[0::2]
-              derecha = veinte[1::2]
-              return izquierda + derecha
+<!-- BUSCADOR PREMIUM REUBICADO TOP CENTER -->
+<div style="grid-column:1/-1; position:relative; max-width:560px; margin:4px auto 16px auto; width:100%;">
+  <span style="position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:18px;z-index:2;pointer-events:none">🔍</span>
+  <input id="buscadorActividades" type="search" placeholder="Buscar actividades o comercios en el sur..." style="width:100%;padding:16px 18px 16px 48px;border-radius:999px;border:2px solid #e2e8f0;background:#fff;color:#0b132b;font-weight:700;font-size:14px;box-shadow:0 4px 14px rgba(11,19,43,.06);outline:none;">
+  <div id="resultadoBuscador" style="margin-top:10px"></div>
+</div>
+<a href="comercios.html" class="btn-guia">🛍 Ver Guía de Comercios</a>
 
-          def extraer_sorteos(url, orden, digitos):
-              sorteos = {k: [] for k in orden}
-              patron = r'\b\d{%d}\b' % digitos
-              try:
-                  r = requests.get(url, headers=HEADERS, timeout=30, allow_redirects=True)
-                  if not mismo_path(url, r.url):
-                      return sorteos
-                  
-                  texto_completo = texto_plano(r.text)
-                  low = texto_completo.lower()
-                  
-                  # FILTRO DE SEGURIDAD ABSOLUTO DE FECHA COMERCIAL:
-                  # Buscamos la fecha real que publica la pagina original (ej: "21/09/2026")
-                  fecha_actual_str = AHORA.strftime("%d/%m/%Y")
-                  if fecha_actual_str not in texto_completo:
-                      print(f"AVISO: La pagina {url} todavia tiene los resultados de ayer. Se dejan vacios los sorteos pendientes.")
-                      return sorteos
 
-                  for key in orden:
-                      m = re.search(rf'\b{key}\b\s+\d{{1,2}}:\d{{2}}\s*hs\b', low)
-                      if m:
-                          idx = m.start()
-                          trozo = low[idx: idx+1500]
-                          nums = re.findall(patron, trozo)
-                          uniq = []
-                          for n in nums:
-                              if n not in uniq:
-                                  uniq.append(n)
-                          if len(uniq) >= 15:
-                              sorteos[key] = reordenar_columnas(uniq)
-              except Exception as e:
-                  print(f"Error en {url}: {e}")
-              return sorteos
-          
-          # Ejecucion principal del scraping
-          resultado_final = {}
-          for cly, url_lot in LOTERIAS_4CIFRAS.items():
-              if ya_deberia_haber_salido(ORDEN_4CIFRAS, HORA_SORTEO_ARG):
-                  resultado_final[cly] = extraer_sorteos(url_lot, ORDEN_4CIFRAS, 4)
-          
-          if ya_deberia_haber_salido(ORDEN_URUGUAY, HORA_SORTEO_UY):
-              resultado_final["uruguay"] = extraer_sorteos(URUGUAY_URL, ORDEN_URUGUAY, 3)
+<div class="barrios-nav">
+  <a href="#faro" class="barrio-btn btn-faro" onclick="abrirBarrio('faro');return false;"><span>🗼</span>FARO NORTE</a>
+  <a href="#alfar" class="barrio-btn btn-alfar" onclick="abrirBarrio('alfar');return false;"><span>🌲</span>ALFAR</a>
+  <a href="#serena" class="barrio-btn btn-serena" onclick="abrirBarrio('serena');return false;"><span>🏖️</span>SERENA</a>
+  <a href="#acantilados" class="barrio-btn btn-acantilados" onclick="abrirBarrio('acantilados');return false;"><span>🌊</span>ACANTILADOS</a>
+</div>
 
-          output_data = {
-            "completo": resultado_final,
-            "ultima_actualizacion": AHORA.strftime("%d/%m/%Y %H:%M")
-          }
+<!-- FARMACIA REMOVIDA -->
 
-          with open(ARCHIVO_HOY, "w", encoding="utf-8") as f:
-              json.dump(output_data, f, ensure_ascii=False, indent=2)
-              
-          with open("quiniela.json", "w", encoding="utf-8") as f:
-              json.dump(output_data, f, ensure_ascii=False, indent=2)
-          PY
-      - run: |
-          git config user.name "bot"
-          git config user.email "bot@infomdq.com"
-          git add historial/ || true
-          git add quiniela.json || true
-          git commit -m "Update Quiniela con limpieza estricta de fecha" || true
-          git push
+
+<div style="grid-column:1 / -1; display:flex; gap:10px; justify-content:center; margin:0 0 12px 0;">
+  <button id="btn-edea" style="flex:1; background:#facc15;color:#000;font-weight:900;padding:12px 18px;border:none;border-radius:20px;font-size:14px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.15)">⚡ Cortes de EDEA</button>
+  <button id="btn-instalar" style="flex:1; display:none; background:#0f172a;color:#fff;font-weight:900;padding:12px 18px;border:none;border-radius:20px;font-size:14px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.15)">📲 Instalar App</button>
+</div>
+<div style="grid-column:1 / -1; display:flex; gap:10px; justify-content:center; margin:0 0 12px 0;">
+  <button id="btn-511" style="flex:1; background:#1e40af;color:white;font-weight:900;padding:12px 18px;border:none;border-radius:20px;font-size:14px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.15)">🚌 511 - Horarios</button>
+  <button id="btn-221" style="flex:1; background:#0e7490;color:white;font-weight:900;padding:12px 18px;border:none;border-radius:20px;font-size:14px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.15)">🚌 221 - Horarios</button>
+</div>
+<div style="grid-column:1 / -1; background:white; border:3px solid black; border-radius:12px; padding:12px 10px; text-align:center; height:fit-content; align-self:start;">
+  <div style="font-size:15px; font-weight:900; color:black; line-height:1.2; font-family:Arial Black, Arial, sans-serif;">+18 | EL JUGAR COMPULSIVAMENTE ES PERJUDICIAL PARA LA SALUD</div>
+  <div style="font-size:12px; font-weight:700; margin-top:4px;">Prohibido para menores de 18 años - Resultados con fines informativos</div>
+  <div style="font-size:10px; color:#666; margin-top:2px;">Ayuda: 0800-444-4000 | No organizamos apuestas</div>
+</div>
+<div id="page-home" style="display:contents">
+<div style="grid-column:1/-1;max-width:560px;margin:0 auto 14px auto;"><!-- FARMACIA VARA -->
+<div style="background:white;border-radius:22px;overflow:hidden;border:1px solid #e2e8f0;box-shadow:0 8px 24px rgba(0,0,0,.1);max-width:560px;margin:0 auto 14px auto;font-family:Inter,'Segoe UI',system-ui,sans-serif;grid-column:1 / -1">
+
+  <div style="background: radial-gradient(circle at center, #1e1e1e 0%, #111111 100%); border-radius: 40px; padding: clamp(14px,4vw,22px) clamp(18px,6vw,36px); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: inset 0 2px 4px rgba(255,255,255,0.05), 0 8px 24px rgba(0,0,0,0.4); margin: 10px; font-family: 'Arial Black', Impact, sans-serif; border: 2px solid #222222;">
+    <div style="color: #ffffff; font-size: clamp(20px,6vw,34px); font-weight: 900; letter-spacing: -0.8px; line-height: 1; text-transform: uppercase; text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c5c5c5, 0 3px 0 #bbb, 0 4px 0 #b0b0b0, 0 5px 0 #a5a5a5, 0 6px 1px rgba(0,0,0,0.1), 0 0 5px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.3), 0 3px 5px rgba(0,0,0,0.2), 0 5px 10px rgba(0,0,0,0.25);">
+      FARMACIA VARA
+    </div>
+    <div style="width: 52px; height: 52px; background: linear-gradient(135deg, #a7f3d0 0%, #10b981 50%, #047857 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; position: relative; border: 3px solid #ffffff; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.35);">
+      <div style="width: 32px; height: 12px; background: #ffffff; border-radius: 4px; position: absolute;"></div>
+      <div style="width: 12px; height: 32px; background: #ffffff; border-radius: 4px; position: absolute;"></div>
+      <div style="width: 12px; height: 12px; background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(16,185,129,0.4)); position: absolute; border-radius: 3px; z-index: 2;"></div>
+    </div>
+  </div>
+
+  <div style="padding:12px 14px;display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap">
+    <div style="flex:1 1 200px;min-width:150px;background:white;border-radius:16px;border:1px solid #e2e8f0;overflow:hidden">
+      <img src="farmacia-vara-frente.jpeg" onerror="this.onerror=null;this.src='farmacia-vara-frente.jpg'" alt="Frente Farmacia Vara" style="width:100%;height:auto;display:block">
+    </div>
+    <div style="flex:1 1 220px;padding-top:2px">
+      <div style="color:#14532d;font-weight:900;font-size:19px;line-height:1.25">Tu farmacia en Alfar,<br>para toda la Zona Sur</div>
+      <div style="margin-top:12px;display:flex;flex-direction:column;gap:9px;font-size:14px;font-weight:700;color:#0f172a">
+        <div>🛵 Envíos a domicilio</div>
+        <div>📋 Obras Sociales y Prepagas</div>
+        <div>🧴 Perfumería y Cosmética</div>
+        <div>🧪 Preparados Magistrales</div>
+        <div><span style="background:#14532d;color:white;padding:3px 6px;border-radius:5px;font-size:9px;font-weight:900">PAMI</span> Atiende PAMI</div>
+        <div><span style="background:#1e40af;color:white;padding:3px 6px;border-radius:5px;font-size:9px;font-weight:900">IOMA</span> Atiende IOMA</div>
+        <div style="margin-top:4px;padding:8px 10px;background:#f1f5f9;border-radius:12px;border:1px solid #e2e8f0;font-size:12px;font-weight:700;color:#334155;line-height:1.4">
+          🕒 <span style="color:#14532d;font-weight:900;font-size:11px">HORARIO DE INVIERNO:</span><br>
+          • Lun a Vie: 9 a 20 hs.<br>
+          • Sáb: 9 a 13 hs. y 17 a 20 hs.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin:0 14px 10px 14px;background:#86d391;border-radius:14px;padding:12px 6px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px">
+    <a href="https://wa.me/5492235808030?text=Hola%20Farmacia%20Vara%2C%20los%20vi%20en%20InfoMDQHoy" target="_blank" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:5px;border-right:2px solid #5aa867;padding-right:4px;justify-content:center;min-width:0">
+      <div style="width:30px;height:30px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 5px rgba(0,0,0,.2)">
+        <svg viewBox="0 0 32 32" width="17" height="17" fill="white"><path d="M19.11 17.2c-.31-.16-1.84-.9-2.12-1.01-.29-.11-.5-.16-.7.16-.21.31-.82 1.01-1 1.22-.19.21-.37.23-.69.08-.31-.16-1.32-.48-2.51-1.54-.93-.83-1.55-1.85-1.74-2.16-.18-.31-.02-.48.14-.64.14-.14.31-.37.47-.55.16-.18.21-.31.31-.52.1-.21.05-.39-.03-.54-.08-.16-.7-1.69-.96-2.31-.25-.6-.51-.52-.7-.53h-.6c-.21 0-.54.08-.82.39-.29.31-1.08 1.06-1.08 2.58s1.11 2.99 1.26 3.2c.16.21 2.18 3.33 5.28 4.67.74.32 1.31.51 1.76.65.74.23 1.41.2 1.94.12.59-.09 1.84-.75 2.1-1.48.26-.72.26-1.34.18-1.47-.08-.13-.29-.21-.6-.36zM16 2.04c-7.7 0-13.94 6.24-13.94 13.94 0 2.46.64 4.86 1.86 6.97L2.05 30l7.25-1.9A13.9 13.9 0 0 0 16 30.08c7.7 0 13.94-6.24 13.94-13.94S23.7 2.04 16 2.04zm0 25.33A11.35 11.35 0 0 1 10.22 26l-.42-.25-4.31 1.13 1.15-4.2-.27-.43a11.35 11.35 0 0 1-1.74-6.02c0-6.28 5.11-11.39 11.39-11.39a11.33 11.33 0 0 1 8.05 3.33 11.33 11.33 0 0 1 3.33 8.05c0 6.28-5.11 11.39-11.4 11.39z"/></svg>
+      </div>
+      <div style="color:#05210f;font-weight:900;font-size:10.5px;line-height:1.2;text-align:center">WhatsApp<br><b style="font-size:11px">2235808030</b></div>
+    </a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Estados+Unidos+779+Alfar+Mar+del+Plata" target="_blank" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:5px;border-right:2px solid #5aa867;padding-right:4px;justify-content:center;min-width:0">
+      <div style="width:30px;height:30px;background:#0f172a;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+      <div style="color:#05210f;font-weight:900;font-size:10.5px;line-height:1.2;text-align:center">Ver en<br>el mapa</div>
+    </a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Diagonal+Estados+Unidos+779+Alfar+Mar+del+Plata" target="_blank" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:5px;justify-content:center;min-width:0">
+      <div style="width:30px;height:30px;background:#14532d;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 21s-6-5.373-6-10a6 6 0 0 1 12 0c0 4.627-6 10-6 10z"/><circle cx="12" cy="11" r="2"/></svg></div>
+      <div style="color:#05210f;font-weight:900;font-size:10.5px;line-height:1.2;text-align:center">Estados Unidos<br><b style="font-size:10.5px">Nº 779</b></div>
+    </a>
+  </div>
+
+  <a href="https://www.INSTAGRAM_PLACEHOLDER/farmaciavaraok/" target="_blank" style="display:block;margin:0 14px 10px 14px;padding:11px;border-radius:12px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:white;font-weight:900;text-align:center;text-decoration:none;">📸 @farmaciavaraok</a>
+
+  <div style="text-align:center;font-size:11px;color:#64748b;font-weight:700;padding:0 14px 14px 14px">Atención personalizada · Productos de calidad</div>
+</div></div>
+<div style="grid-column:1/-1;max-width:760px;margin:0 auto 14px auto;"><div style="box-sizing:border-box;width:100%;max-width:760px;margin:0 auto;padding:12px;background:#fafafa;border:1px solid #e5e7eb;border-radius:28px;font-family:Inter,Arial,sans-serif;color:#0b132b;box-shadow:0 14px 35px rgba(11,19,43,.12);">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 16px;background:linear-gradient(135deg,#7e22ce,#581c87);border-radius:18px;">
+    <div style="font-size:1.4rem;font-weight:900;color:#fff;text-transform:uppercase;">Proveeduría Kevin</div>
+    <div style="width:45px;height:45px;border-radius:50%;background:#b8f34a;display:flex;align-items:center;justify-content:center;font-size:1.5rem;">🛍️</div>
+  </div>
+
+  <div style="position:relative;margin-top:12px;overflow:hidden;border-radius:22px 22px 14px 14px;background:#e5e7eb;">
+    <img src="proveeduria-kevin.jpeg" alt="Fachada real Proveeduría Kevin Alfar" style="display:block;width:100%;height:clamp(230px,42vw,360px);object-fit:cover;">
+    <div style="position:absolute;left:16px;bottom:15px;padding:8px 12px;border-radius:10px;background:rgba(11,19,43,.88);color:#fff;font-size:.7rem;font-weight:900;text-transform:uppercase;">FOTO REAL DEL LOCAL</div>
+    <div style="position:absolute;right:15px;top:15px;padding:9px 13px;border-radius:999px;background:#b8f34a;color:#0b132b;font-size:.68rem;font-weight:900;transform:rotate(3deg);">Comprá más. Pagá menos.</div>
+  </div>
+
+  <div style="margin-top:12px;padding:10px;border-radius:12px;background:white;border-top:2px dotted #e2e8f0;border-bottom:2px dotted #e2e8f0;text-align:center;">
+    <span style="color:#dc2626;font-weight:900;font-style:italic;">¡Comprá más. Pagá menos. Elegí Kevin!</span>
+    <span style="background:#dc2626;color:white;font-weight:900;font-size:10px;padding:5px 10px;border-radius:20px;margin-left:6px;">PRECIOS DESTACADOS 🏷</span>
+  </div>
+
+  <div style="padding:18px 8px 8px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;">
+      <div style="background:#fff;border-radius:16px;border:1px solid #f1f5f9;box-shadow:0 3px 10px rgba(11,19,43,.06);overflow:hidden;">
+        <div style="background:#f1f5f9;padding:8px 12px;font-weight:900;font-size:11px;">🟢 SUCURSAL ALFAR</div>
+        <div style="padding:12px;font-size:12.5px;font-weight:700;">📍 Diagonal Estados Unidos 474</div>
+      </div>
+      <div style="background:#fff;border-radius:16px;border:1px solid #f1f5f9;box-shadow:0 3px 10px rgba(11,19,43,.06);overflow:hidden;">
+        <div style="background:#fff7ed;padding:8px 12px;font-weight:900;font-size:11px;">🟠 SUCURSAL ACANTILADOS</div>
+        <div style="padding:12px;font-size:12px;font-weight:700;">📍 Calle 493 entre 6 y 8<br><span style="font-size:10px;color:#64748b;">(en el kiosko de diario)</span></div>
+      </div>
+    </div>
+
+    <a href="https://www.INSTAGRAM_PLACEHOLDER/autoserviciokevin" target="_blank" style="display:block;margin-bottom:14px;padding:11px;border-radius:12px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:white;font-weight:900;text-align:center;text-decoration:none;">📸 @autoserviciokevin</a>
+
+    <a href="https://wa.me/5492230000000?text=Hola%20Kevin!" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:17px;border-radius:18px;background:#25D366;color:white;text-decoration:none;font-weight:900;box-shadow:0 7px 0 #159447;">💬 ¡Hacé tu pedido por WhatsApp!</a>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px;">
+      <a href="https://www.google.com/maps/search/?api=1&query=Diagonal+Estados+Unidos+600+Alfar+Mar+del+Plata" target="_blank" style="padding:12px;border-radius:999px;background:#eef0f2;text-align:center;font-weight:900;text-decoration:none;color:#263244;">🗺 Ver Mapa Alfar</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Calle+493+entre+6+y+8+Acantilados" target="_blank" style="padding:12px;border-radius:999px;background:#eef0f2;text-align:center;font-weight:900;text-decoration:none;color:#263244;">🗺 Ver Mapa Acantilados</a>
+    </div>
+  </div>
+</div></div>
+
+<div class="card"><span class="badge" style="background:#dcfce7;color:#15803d">QUINIELA - RESULTADOS OFICIALES</span><h2 style="margin-top:6px;font-size:18px" id="q-titulo">Quiniela Hoy - 6 Loterías</h2>
+<div style="display:flex;align-items:center;gap:8px;margin-top:10px;background:#f0f9ff;border:2px solid #0ea5e9;border-radius:12px;padding:8px 12px;box-shadow:0 4px 12px rgba(14,165,233,.15);">
+  <span style="font-family:Inter,sans-serif;font-weight:600;font-size:12px;color:#0c4a6e;white-space:nowrap;">📅 Fecha:</span>
+  <select id="q-fecha" style="flex:1;padding:8px 10px;border-radius:8px;border:2px solid #0ea5e9;font-weight:700;font-size:13px;background:white;color:#0b132b;outline:none;cursor:pointer;font-family:Inter,sans-serif;"></select>
+  <button type="button" id="btn-ver-fechas" style="font-family:Inter,sans-serif;font-weight:700;font-size:11px;color:#fff;background:linear-gradient(135deg,#0ea5e9,#0284c7);padding:6px 12px;border-radius:999px;cursor:pointer;white-space:nowrap;box-shadow:0 2px 8px rgba(14,165,233,.3);border:none;">Ver fechas anteriores ▼</button>
+</div>
+<div style="margin-top:6px;text-align:right;">
+  <button type="button" id="btn-buscar-otra" style="font-family:Inter,sans-serif;font-weight:600;font-size:11px;color:#0284c7;background:#e0f2fe;border:1px solid #7dd3fc;border-radius:999px;padding:4px 12px;cursor:pointer;">Buscar otra fecha 📅</button>
+</div>
+<div class="q-tabs" id="qt"></div><div class="q-grid" id="qg"></div><a href="#" class="btn-outline" onclick="openM();return false">Ver 20 números de <span id="qn">Nacional</span></a><p id="info-uy" style="display:none;font-size:11px;color:#15803d;font-weight:700;margin-top:8px">🇺🇾 Uruguay solo tiene 2 sorteos oficiales: 15:00 y 21:00</p>
+<div style="background:#FFD500; border-radius:12px; overflow:hidden; border:2px solid #000; font-family:Arial; margin-top:16px;">
+  <div style="background:#FFD500; padding:10px; text-align:center; font-weight:900; font-size:15px;">📢 PUBLICITE AQUI - Zona Sur</div>
+  <div style="background:white; padding:12px; text-align:center;">
+    <div style="font-weight:bold; font-size:13px;">Faro - Alfar - Serena - Acantilados - Chapadmalal</div>
+    <div style="font-size:12px; margin:6px 0; color:#333;">Tu negocio visto por +500 vecinos por día</div>
+    <a href="https://wa.me/5492235820394?text=Hola%20Jorge,%20quiero%20publicitar%20mi%20negocio%20en%20INFOMDQHOY%20Zona%20Sur" target="_blank" style="display:inline-block; background:#25D366; color:white; padding:10px 18px; text-decoration:none; font-weight:bold; border-radius:30px; margin-top:6px; font-size:13px;">📲 Consultar por WhatsApp</a>
+  </div>
+</div>
+</div>
+<div class="card"><span class="badge" style="background:#dbeafe;color:#1d4ed8">DÓLAR HOY</span><h2 style="margin-top:6px">Dólar Hoy Mar del Plata</h2><p id="dolar-t" style="font-size:12px;color:#64748b"></p><div class="dolar-grid" id="dolar-g"></div>
+<a href="https://maps.google.com/?q=Guillermo+Magrassi+4299+Mar+del+Plata" target="_blank" style="text-decoration:none;display:block;">
+<div style="background:#111; border:2px solid #ff00ff; padding:18px; text-align:center; border-radius:15px; margin-top:12px; box-shadow: 0 0 15px #ff00ff;">
+  <div style="color:#00ff00; font-size:22px; font-weight:900; text-shadow: 0 0 8px #00ff00;">✨ KIOSCO LOS MELLI ✨</div>
+  <div style="color:#fff; font-size:13px; margin:8px 0; letter-spacing:1px;">GOLOSINAS - BEBIDAS - LIBRERÍA Y MUCHO MÁS</div>
+  <div style="color:#ffcc00; font-size:13px; border:1px dashed #ffcc00; display:inline-block; padding:6px 14px; border-radius:20px; margin-top:5px;">📍 Guillermo Magrassi 4299 - MdP</div>
+  <div style="margin-top:12px; background:#00ff00; color:#000; font-weight:900; font-size:13px; padding:8px 18px; border-radius:20px; display:inline-block; box-shadow: 0 0 10px #00ff00;">VER EN EL MAPA</div>
+</div>
+</a>
+</div>
+<div class="card" style="border-left:5px solid #25D366"><h2>💼 Empleos MDQ HOY</h2><div style="margin-top:10px"><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Mozo/a</b> - Güemes - NUEVO HOY</div><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Cajero/a</b> - Constitución</div><div style="padding:10px 0"><b>Vendedor/a</b> - Peatonal</div></div><a href="https://empleos-mdq.pages.dev/" target="_blank" class="btn-wsp">Ver todos los empleos →</a></div>
+<div class="card" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);color:white"><h2>🌤️ Clima Mar del Plata</h2><div style="display:flex;align-items:center;gap:14px;margin-top:12px"><div style="font-size:54px;line-height:1" id="c-icon">⛅</div><div><div style="font-size:46px;font-weight:900;line-height:1" id="c-t">--°</div><div style="font-size:13px;opacity:.9;margin-top:2px" id="c-desc">Cargando...</div></div></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px"><div style="background:rgba(255,255,255,.18);border-radius:10px;padding:8px 4px;text-align:center"><div style="font-size:9px;opacity:.85;font-weight:700;letter-spacing:.5px">SENSACIÓN</div><div style="font-weight:800;font-size:15px;margin-top:2px" id="c-st">--°</div></div><div style="background:rgba(255,255,255,.18);border-radius:10px;padding:8px 4px;text-align:center"><div style="font-size:9px;opacity:.85;font-weight:700;letter-spacing:.5px">HUMEDAD</div><div style="font-weight:800;font-size:15px;margin-top:2px" id="c-hum">--%</div></div><div style="background:rgba(255,255,255,.18);border-radius:10px;padding:8px 4px;text-align:center"><div style="font-size:9px;opacity:.85;font-weight:700;letter-spacing:.5px">VIENTO</div><div style="font-weight:800;font-size:15px;margin-top:2px" id="c-wind">-- km/h</div></div></div><div style="display:flex;justify-content:space-between;margin-top:12px;font-size:13px;opacity:.95;border-top:1px solid rgba(255,255,255,.25);padding-top:10px"><span>🔽 Mínima <b id="c-min">--°</b></span><span>🔼 Máxima <b id="c-max">--°</b></span></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px;border-top:1px solid rgba(255,255,255,.25);padding-top:10px" id="c-forecast"></div></div>
+<div class="card" style="background:linear-gradient(135deg,#0891b2,#0e7490);color:white"><h2>🌊 Mareas Mar del Plata</h2><div id="mareas-lista" style="margin-top:10px;font-size:13px">Cargando mareas...</div></div>
+<div class="card" style="background:linear-gradient(135deg,#0b1f4d,#132b63);color:white;border:2px solid #f97316">
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">
+    <div style="display:flex;align-items:center;gap:8px">
+      <span style="font-size:22px">🛡️</span>
+      <span style="font-weight:900;font-size:18px;letter-spacing:.3px">Verificá <span style="color:#f97316">MDQ</span></span>
+    </div>
+    <span style="font-size:11px;background:#f97316;color:#0b1f4d;padding:3px 10px;border-radius:20px;font-weight:800">📍 Mar del Plata</span>
+  </div>
+  <div style="font-size:11px;color:#fbbf24;font-weight:800;margin-top:10px;letter-spacing:.3px">VERIFICACIÓN PRESENCIAL DE ALQUILERES</div>
+  <div style="background:#f97316;color:#0b1f4d;font-weight:800;font-size:12px;padding:10px 12px;border-radius:10px;margin-top:8px;line-height:1.4">⚠️ ¿Te piden transferir seña sin ver la casa? Evitá estafas.</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;font-size:11px;font-weight:700">
+    <div style="background:rgba(255,255,255,.08);border-radius:10px;padding:8px;text-align:center">🎥 Video HD interior y frente</div>
+    <div style="background:rgba(255,255,255,.08);border-radius:10px;padding:8px;text-align:center">📍 Fotos + GPS real</div>
+    <div style="background:rgba(255,255,255,.08);border-radius:10px;padding:8px;text-align:center">🔑 Verifico llave del dueño</div>
+    <div style="background:rgba(255,255,255,.08);border-radius:10px;padding:8px;text-align:center">📄 Informe en el día</div>
+  </div>
+  <div style="display:flex;gap:10px;margin-top:12px">
+    <div style="flex:1;text-align:center;border:2px solid #f97316;border-radius:10px;padding:8px">
+      <div style="font-size:9px;opacity:.85;font-weight:700">MAR DEL PLATA</div><div style="font-weight:900;font-size:17px;color:#f97316">$25.000</div>
+    </div>
+    <div style="flex:1;text-align:center;border:2px solid #f97316;border-radius:10px;padding:8px">
+      <div style="font-size:9px;opacity:.85;font-weight:700">MIRAMAR</div><div style="font-weight:900;font-size:17px;color:#f97316">$30.000</div>
+    </div>
+  </div>
+  <a href="https://wa.me/5492235820394" target="_blank" style="display:block;text-align:center;background:#f97316;color:#0b1f4d;font-weight:900;padding:12px;border-radius:12px;margin-top:12px;text-decoration:none">📲 WhatsApp 223 582-0394</a>
+</div>
+</div>
+<div id="page-faro" class="barrio-page">
+  <div class="btn-volver" onclick="volverHome()">← Volver al inicio</div>
+  <div class="barrio-header faro"><img src="faro-nuevo.jpg"><div class="barrio-header-overlay"></div><div class="barrio-header-text"><h2>🗼 FARO NORTE</h2><p>Sánchez de Bustamante 3460 - Mar del Plata</p></div></div>
+  <div class="card"><h3>🏛️ Sociedad de Fomento Faro Norte</h3><div class="info-box"><b>📍 Dirección:</b> Sánchez de Bustamante 3460<br><b>🚌 Colectivo:</b> 511<br><b>📌 Actividades:</b> Salud, talleres, RCP, vacunaciones y castraciones</div></div>
+  <div class="card" style="border:3px solid #0f172a; position:relative; overflow:hidden; background: linear-gradient(135deg,#ffffff 0%, #f0fdf4 100%);">
+    <div style="position:absolute;top:0;right:0;background:#22c55e;color:white;padding:5px 12px;border-radius:0 0 0 14px;font-size:10px;font-weight:900;letter-spacing:.5px">● NUEVO</div>
+    <div style="display:flex; gap:14px; align-items:flex-start;">
+      <div style="width:56px;height:56px;min-width:56px;background:linear-gradient(135deg,#0f172a,#22c55e);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 6px 14px rgba(0,0,0,.15)">🧘‍♀️</div>
+      <div style="flex:1">
+        <span style="background:#dcfce7;color:#15803d;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:900">FARO NORTE · SOC. DE FOMENTO</span>
+        <h3 style="margin-top:6px;font-size:19px;line-height:1.2;font-weight:900">Pilates Mat</h3>
+        <div style="font-size:13px;line-height:1.5;margin-top:6px;color:#334155">
+          <b>📍</b> Asoc. Vecinal de Fomento Faro Norte<br>
+          <b>🗓️</b> Martes y jueves - <b>14hs y 15hs</b><br>
+          <b>👥</b> Todas las edades y niveles<br>
+          <b style="color:#dc2626">Cupos limitados</b>
+        </div>
+        <a href="https://wa.me/5492235466679?text=Hola%20quiero%20info%20de%20Pilates%20en%20Faro%20Norte" target="_blank" style="display:block;background:#0f172a;color:white;text-align:center;padding:12px;border-radius:12px;text-decoration:none;font-weight:900;margin-top:12px;font-size:14px">📲 Reservar: 223 546-6679</a>
+      </div>
+    </div>
+<img src="pilates-faro.jpg" alt="Pilates Faro Norte" style="width:100%; max-width:380px; border-radius:12px; display:block; margin:0 auto">
+    <p style="font-size:11px;color:#64748b;text-align:center;margin:6px 0 0 0">Info: Asoc. Vecinal de Fomento Faro Norte</p>
+  </div>
+  <div class="card" style="padding:10px; display:flex; flex-direction:column; align-items:center; border:2px solid #000">
+    <img src="ritmos-faro.jpg" style="width:100%; max-width:380px; border-radius:12px; display:block">
+    <p style="font-size:11px; color:#777; text-align:center; margin:6px 0 0 0">Info: Asoc. Vecinal de Fomento Faro Norte</p>
+  </div>
+  <div class="card"><h3>🎯 Actividades en FARO NORTE</h3><div id="acts-faro" style="font-size:13px">Cargando...</div></div>
+  <div class="card" style="background:#fffbe6;border:2px solid #facc15"><h3>📢 Notificaciones - FARO</h3><div id="noti-faro" style="margin-top:10px;font-size:13px;color:#64748b;padding:12px;background:white;border-radius:10px;border:1px solid #e2e8f0">No hay notificaciones por el momento.</div></div>
+</div>
+<div id="page-alfar" class="barrio-page">
+  <div class="btn-volver" onclick="volverHome()">← Volver al inicio</div>
+  <div class="barrio-header"><img src="banner2.jpg"><div class="barrio-header-overlay"></div><div class="barrio-header-text"><h2>🌲 ALFAR</h2><p>Luis Franco 750 - Mar del Plata</p></div></div>
+<div style="margin-top:14px"><div style="max-width:760px;margin:0 auto 14px auto;"><div style="margin-bottom:14px"><!-- FARMACIA VARA -->
+<div style="background:white;border-radius:22px;overflow:hidden;border:1px solid #e2e8f0;box-shadow:0 8px 24px rgba(0,0,0,.1);max-width:560px;margin:0 auto 14px auto;font-family:Inter,'Segoe UI',system-ui,sans-serif;grid-column:1 / -1">
+
+  <div style="background: radial-gradient(circle at center, #1e1e1e 0%, #111111 100%); border-radius: 40px; padding: clamp(14px,4vw,22px) clamp(18px,6vw,36px); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: inset 0 2px 4px rgba(255,255,255,0.05), 0 8px 24px rgba(0,0,0,0.4); margin: 10px; font-family: 'Arial Black', Impact, sans-serif; border: 2px solid #222222;">
+    <div style="color: #ffffff; font-size: clamp(20px,6vw,34px); font-weight: 900; letter-spacing: -0.8px; line-height: 1; text-transform: uppercase; text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c5c5c5, 0 3px 0 #bbb, 0 4px 0 #b0b0b0, 0 5px 0 #a5a5a5, 0 6px 1px rgba(0,0,0,0.1), 0 0 5px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.3), 0 3px 5px rgba(0,0,0,0.2), 0 5px 10px rgba(0,0,0,0.25);">
+      FARMACIA VARA
+    </div>
+    <div style="width: 52px; height: 52px; background: linear-gradient(135deg, #a7f3d0 0%, #10b981 50%, #047857 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; position: relative; border: 3px solid #ffffff; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.35);">
+      <div style="width: 32px; height: 12px; background: #ffffff; border-radius: 4px; position: absolute;"></div>
+      <div style="width: 12px; height: 32px; background: #ffffff; border-radius: 4px; position: absolute;"></div>
+      <div style="width: 12px; height: 12px; background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(16,185,129,0.4)); position: absolute; border-radius: 3px; z-index: 2;"></div>
+    </div>
+  </div>
+
+  <div style="padding:12px 14px;display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap">
+    <div style="flex:1 1 200px;min-width:150px;background:white;border-radius:16px;border:1px solid #e2e8f0;overflow:hidden">
+      <img src="farmacia-vara-frente.jpeg" onerror="this.onerror=null;this.src='farmacia-vara-frente.jpg'" alt="Frente Farmacia Vara" style="width:100%;height:auto;display:block">
+    </div>
+    <div style="flex:1 1 220px;padding-top:2px">
+      <div style="color:#14532d;font-weight:900;font-size:19px;line-height:1.25">Tu farmacia en Alfar,<br>para toda la Zona Sur</div>
+      <div style="margin-top:12px;display:flex;flex-direction:column;gap:9px;font-size:14px;font-weight:700;color:#0f172a">
+        <div>🛵 Envíos a domicilio</div>
+        <div>📋 Obras Sociales y Prepagas</div>
+        <div>🧴 Perfumería y Cosmética</div>
+        <div>🧪 Preparados Magistrales</div>
+        <div><span style="background:#14532d;color:white;padding:3px 6px;border-radius:5px;font-size:9px;font-weight:900">PAMI</span> Atiende PAMI</div>
+        <div><span style="background:#1e40af;color:white;padding:3px 6px;border-radius:5px;font-size:9px;font-weight:900">IOMA</span> Atiende IOMA</div>
+        <div style="margin-top:4px;padding:8px 10px;background:#f1f5f9;border-radius:12px;border:1px solid #e2e8f0;font-size:12px;font-weight:700;color:#334155;line-height:1.4">
+          🕒 <span style="color:#14532d;font-weight:900;font-size:11px">HORARIO DE INVIERNO:</span><br>
+          • Lun a Vie: 9 a 20 hs.<br>
+          • Sáb: 9 a 13 hs. y 17 a 20 hs.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin:0 14px 10px 14px;background:#86d391;border-radius:14px;padding:12px 6px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px">
+    <a href="https://wa.me/5492235808030?text=Hola%20Farmacia%20Vara%2C%20los%20vi%20en%20InfoMDQHoy" target="_blank" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:5px;border-right:2px solid #5aa867;padding-right:4px;justify-content:center;min-width:0">
+      <div style="width:30px;height:30px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 5px rgba(0,0,0,.2)">
+        <svg viewBox="0 0 32 32" width="17" height="17" fill="white"><path d="M19.11 17.2c-.31-.16-1.84-.9-2.12-1.01-.29-.11-.5-.16-.7.16-.21.31-.82 1.01-1 1.22-.19.21-.37.23-.69.08-.31-.16-1.32-.48-2.51-1.54-.93-.83-1.55-1.85-1.74-2.16-.18-.31-.02-.48.14-.64.14-.14.31-.37.47-.55.16-.18.21-.31.31-.52.1-.21.05-.39-.03-.54-.08-.16-.7-1.69-.96-2.31-.25-.6-.51-.52-.7-.53h-.6c-.21 0-.54.08-.82.39-.29.31-1.08 1.06-1.08 2.58s1.11 2.99 1.26 3.2c.16.21 2.18 3.33 5.28 4.67.74.32 1.31.51 1.76.65.74.23 1.41.2 1.94.12.59-.09 1.84-.75 2.1-1.48.26-.72.26-1.34.18-1.47-.08-.13-.29-.21-.6-.36zM16 2.04c-7.7 0-13.94 6.24-13.94 13.94 0 2.46.64 4.86 1.86 6.97L2.05 30l7.25-1.9A13.9 13.9 0 0 0 16 30.08c7.7 0 13.94-6.24 13.94-13.94S23.7 2.04 16 2.04zm0 25.33A11.35 11.35 0 0 1 10.22 26l-.42-.25-4.31 1.13 1.15-4.2-.27-.43a11.35 11.35 0 0 1-1.74-6.02c0-6.28 5.11-11.39 11.39-11.39a11.33 11.33 0 0 1 8.05 3.33 11.33 11.33 0 0 1 3.33 8.05c0 6.28-5.11 11.39-11.4 11.39z"/></svg>
+      </div>
+      <div style="color:#05210f;font-weight:900;font-size:10.5px;line-height:1.2;text-align:center">WhatsApp<br><b style="font-size:11px">2235808030</b></div>
+    </a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Estados+Unidos+779+Alfar+Mar+del+Plata" target="_blank" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:5px;border-right:2px solid #5aa867;padding-right:4px;justify-content:center;min-width:0">
+      <div style="width:30px;height:30px;background:#0f172a;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+      <div style="color:#05210f;font-weight:900;font-size:10.5px;line-height:1.2;text-align:center">Ver en<br>el mapa</div>
+    </a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Diagonal+Estados+Unidos+779+Alfar+Mar+del+Plata" target="_blank" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:5px;justify-content:center;min-width:0">
+      <div style="width:30px;height:30px;background:#14532d;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 21s-6-5.373-6-10a6 6 0 0 1 12 0c0 4.627-6 10-6 10z"/><circle cx="12" cy="11" r="2"/></svg></div>
+      <div style="color:#05210f;font-weight:900;font-size:10.5px;line-height:1.2;text-align:center">Estados Unidos<br><b style="font-size:10.5px">Nº 779</b></div>
+    </a>
+  </div>
+
+  <a href="https://www.INSTAGRAM_PLACEHOLDER/farmaciavaraok/" target="_blank" style="display:block;margin:0 14px 10px 14px;padding:11px;border-radius:12px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:white;font-weight:900;text-align:center;text-decoration:none;">📸 @farmaciavaraok</a>
+
+  <div style="text-align:center;font-size:11px;color:#64748b;font-weight:700;padding:0 14px 14px 14px">Atención personalizada · Productos de calidad</div>
+</div></div><div style="box-sizing:border-box;width:100%;max-width:760px;margin:0 auto;padding:12px;background:#fafafa;border:1px solid #e5e7eb;border-radius:28px;font-family:Inter,Arial,sans-serif;color:#0b132b;box-shadow:0 14px 35px rgba(11,19,43,.12);">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 16px;background:linear-gradient(135deg,#7e22ce,#581c87);border-radius:18px;">
+    <div style="font-size:1.4rem;font-weight:900;color:#fff;text-transform:uppercase;">Proveeduría Kevin</div>
+    <div style="width:45px;height:45px;border-radius:50%;background:#b8f34a;display:flex;align-items:center;justify-content:center;font-size:1.5rem;">🛍️</div>
+  </div>
+
+  <div style="position:relative;margin-top:12px;overflow:hidden;border-radius:22px 22px 14px 14px;background:#e5e7eb;">
+    <img src="proveeduria-kevin.jpeg" alt="Fachada real Proveeduría Kevin Alfar" style="display:block;width:100%;height:clamp(230px,42vw,360px);object-fit:cover;">
+    <div style="position:absolute;left:16px;bottom:15px;padding:8px 12px;border-radius:10px;background:rgba(11,19,43,.88);color:#fff;font-size:.7rem;font-weight:900;text-transform:uppercase;">FOTO REAL DEL LOCAL</div>
+    <div style="position:absolute;right:15px;top:15px;padding:9px 13px;border-radius:999px;background:#b8f34a;color:#0b132b;font-size:.68rem;font-weight:900;transform:rotate(3deg);">Comprá más. Pagá menos.</div>
+  </div>
+
+  <div style="margin-top:12px;padding:10px;border-radius:12px;background:white;border-top:2px dotted #e2e8f0;border-bottom:2px dotted #e2e8f0;text-align:center;">
+    <span style="color:#dc2626;font-weight:900;font-style:italic;">¡Comprá más. Pagá menos. Elegí Kevin!</span>
+    <span style="background:#dc2626;color:white;font-weight:900;font-size:10px;padding:5px 10px;border-radius:20px;margin-left:6px;">PRECIOS DESTACADOS 🏷</span>
+  </div>
+
+  <div style="padding:18px 8px 8px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;">
+      <div style="background:#fff;border-radius:16px;border:1px solid #f1f5f9;box-shadow:0 3px 10px rgba(11,19,43,.06);overflow:hidden;">
+        <div style="background:#f1f5f9;padding:8px 12px;font-weight:900;font-size:11px;">🟢 SUCURSAL ALFAR</div>
+        <div style="padding:12px;font-size:12.5px;font-weight:700;">📍 Diagonal Estados Unidos 474</div>
+      </div>
+      <div style="background:#fff;border-radius:16px;border:1px solid #f1f5f9;box-shadow:0 3px 10px rgba(11,19,43,.06);overflow:hidden;">
+        <div style="background:#fff7ed;padding:8px 12px;font-weight:900;font-size:11px;">🟠 SUCURSAL ACANTILADOS</div>
+        <div style="padding:12px;font-size:12px;font-weight:700;">📍 Calle 493 entre 6 y 8<br><span style="font-size:10px;color:#64748b;">(en el kiosko de diario)</span></div>
+      </div>
+    </div>
+
+    <a href="https://www.INSTAGRAM_PLACEHOLDER/autoserviciokevin" target="_blank" style="display:block;margin-bottom:14px;padding:11px;border-radius:12px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:white;font-weight:900;text-align:center;text-decoration:none;">📸 @autoserviciokevin</a>
+
+    <a href="https://wa.me/5492230000000?text=Hola%20Kevin!" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:17px;border-radius:18px;background:#25D366;color:white;text-decoration:none;font-weight:900;box-shadow:0 7px 0 #159447;">💬 ¡Hacé tu pedido por WhatsApp!</a>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px;">
+      <a href="https://www.google.com/maps/search/?api=1&query=Diagonal+Estados+Unidos+600+Alfar+Mar+del+Plata" target="_blank" style="padding:12px;border-radius:999px;background:#eef0f2;text-align:center;font-weight:900;text-decoration:none;color:#263244;">🗺 Ver Mapa Alfar</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Calle+493+entre+6+y+8+Acantilados" target="_blank" style="padding:12px;border-radius:999px;background:#eef0f2;text-align:center;font-weight:900;text-decoration:none;color:#263244;">🗺 Ver Mapa Acantilados</a>
+    </div>
+  </div>
+</div></div></div>
+
+  <div class="card"><h3>🏛️ Sociedad de Fomento Alfar</h3><div class="info-box"><b>📍 Dirección:</b> Luis Franco 750<br><b>📌 Servicios:</b> Vacunación, pediatría, odontología y castraciones</div></div>
+  <div class="card"><h3>🎯 Actividades en ALFAR</h3><div id="acts-alfar" style="font-size:13px">Cargando...</div></div>
+  <div class="card" style="background:#eff6ff;border:2px solid #3b82f6"><h3>📢 Notificaciones - ALFAR</h3><div id="noti-alfar" style="margin-top:10px;font-size:13px;color:#64748b;padding:12px;background:white;border-radius:10px;border:1px solid #e2e8f0">No hay notificaciones por el momento.</div></div>
+</div>
+<div id="page-serena" class="barrio-page">
+  <div class="btn-volver" onclick="volverHome()">← Volver al inicio</div>
+  <div class="barrio-header"><img src="banner1.jpg"><div class="barrio-header-overlay"></div><div class="barrio-header-text"><h2>🏖️ PLAYA SERENA</h2><p>Calle 544 frente a la plaza</p></div></div>
+  <div class="card"><h3>🏛️ Sociedad de Fomento y Biblioteca Playa Serena</h3><div class="info-box"><b>📍 Dirección:</b> Calle 11 (ex 544) frente a la plaza<br><b>🚌 Colectivos:</b> 511, 221, Costa Azul<br><b>📌 Actividades:</b> Talleres culturales y biblioteca</div></div>
+  <div class="card"><h3>🎯 Actividades en SERENA</h3><div id="acts-serena" style="font-size:13px">Cargando...</div></div>
+  <div class="card" style="background:#ecfeff;border:2px solid #06b6d4"><h3>📢 Notificaciones - SERENA</h3><div id="noti-serena" style="margin-top:10px;font-size:13px;color:#64748b;padding:12px;background:white;border-radius:10px;border:1px solid #e2e8f0">No hay notificaciones por el momento.</div></div>
+</div>
+<div id="page-acantilados" class="barrio-page">
+  <div class="btn-volver" onclick="volverHome()">← Volver al inicio</div>
+  <div class="barrio-header"><img src="banner2.jpg"><div class="barrio-header-overlay"></div><div class="barrio-header-text"><h2>🌊 ACANTILADOS</h2><p>Calle 20 esquina 497</p></div></div>
+<div style="margin-top:14px"><div style="max-width:760px;margin:0 auto 14px auto;"><div style="box-sizing:border-box;width:100%;max-width:760px;margin:0 auto;padding:12px;background:#fafafa;border:1px solid #e5e7eb;border-radius:28px;font-family:Inter,Arial,sans-serif;color:#0b132b;box-shadow:0 14px 35px rgba(11,19,43,.12);">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 16px;background:linear-gradient(135deg,#7e22ce,#581c87);border-radius:18px;">
+    <div style="font-size:1.4rem;font-weight:900;color:#fff;text-transform:uppercase;">Proveeduría Kevin</div>
+    <div style="width:45px;height:45px;border-radius:50%;background:#b8f34a;display:flex;align-items:center;justify-content:center;font-size:1.5rem;">🛍️</div>
+  </div>
+
+  <div style="position:relative;margin-top:12px;overflow:hidden;border-radius:22px 22px 14px 14px;background:#e5e7eb;">
+    <img src="proveeduria-kevin.jpeg" alt="Fachada real Proveeduría Kevin Alfar" style="display:block;width:100%;height:clamp(230px,42vw,360px);object-fit:cover;">
+    <div style="position:absolute;left:16px;bottom:15px;padding:8px 12px;border-radius:10px;background:rgba(11,19,43,.88);color:#fff;font-size:.7rem;font-weight:900;text-transform:uppercase;">FOTO REAL DEL LOCAL</div>
+    <div style="position:absolute;right:15px;top:15px;padding:9px 13px;border-radius:999px;background:#b8f34a;color:#0b132b;font-size:.68rem;font-weight:900;transform:rotate(3deg);">Comprá más. Pagá menos.</div>
+  </div>
+
+  <div style="margin-top:12px;padding:10px;border-radius:12px;background:white;border-top:2px dotted #e2e8f0;border-bottom:2px dotted #e2e8f0;text-align:center;">
+    <span style="color:#dc2626;font-weight:900;font-style:italic;">¡Comprá más. Pagá menos. Elegí Kevin!</span>
+    <span style="background:#dc2626;color:white;font-weight:900;font-size:10px;padding:5px 10px;border-radius:20px;margin-left:6px;">PRECIOS DESTACADOS 🏷</span>
+  </div>
+
+  <div style="padding:18px 8px 8px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;">
+      <div style="background:#fff;border-radius:16px;border:1px solid #f1f5f9;box-shadow:0 3px 10px rgba(11,19,43,.06);overflow:hidden;">
+        <div style="background:#f1f5f9;padding:8px 12px;font-weight:900;font-size:11px;">🟢 SUCURSAL ALFAR</div>
+        <div style="padding:12px;font-size:12.5px;font-weight:700;">📍 Diagonal Estados Unidos 474</div>
+      </div>
+      <div style="background:#fff;border-radius:16px;border:1px solid #f1f5f9;box-shadow:0 3px 10px rgba(11,19,43,.06);overflow:hidden;">
+        <div style="background:#fff7ed;padding:8px 12px;font-weight:900;font-size:11px;">🟠 SUCURSAL ACANTILADOS</div>
+        <div style="padding:12px;font-size:12px;font-weight:700;">📍 Calle 493 entre 6 y 8<br><span style="font-size:10px;color:#64748b;">(en el kiosko de diario)</span></div>
+      </div>
+    </div>
+
+    <a href="https://www.INSTAGRAM_PLACEHOLDER/autoserviciokevin" target="_blank" style="display:block;margin-bottom:14px;padding:11px;border-radius:12px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:white;font-weight:900;text-align:center;text-decoration:none;">📸 @autoserviciokevin</a>
+
+    <a href="https://wa.me/5492230000000?text=Hola%20Kevin!" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:17px;border-radius:18px;background:#25D366;color:white;text-decoration:none;font-weight:900;box-shadow:0 7px 0 #159447;">💬 ¡Hacé tu pedido por WhatsApp!</a>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px;">
+      <a href="https://www.google.com/maps/search/?api=1&query=Diagonal+Estados+Unidos+600+Alfar+Mar+del+Plata" target="_blank" style="padding:12px;border-radius:999px;background:#eef0f2;text-align:center;font-weight:900;text-decoration:none;color:#263244;">🗺 Ver Mapa Alfar</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Calle+493+entre+6+y+8+Acantilados" target="_blank" style="padding:12px;border-radius:999px;background:#eef0f2;text-align:center;font-weight:900;text-decoration:none;color:#263244;">🗺 Ver Mapa Acantilados</a>
+    </div>
+  </div>
+</div></div></div>
+
+  <div class="card"><h3>🏛️ Asociación Vecinal de Fomento Los Acantilados</h3><div class="info-box"><b>📍 Dirección:</b> Calle 20 esquina 497 - Parque Los Acantilados<br><b>📌 Datos:</b> Reserva forestal y acceso a playa</div></div>
+  <div class="card"><h3>🎯 Actividades en ACANTILADOS</h3><div id="acts-acantilados" style="font-size:13px">Cargando...</div></div>
+  <div class="card" style="background:#f0fdf4;border:2px solid #22c55e"><h3>📢 Notificaciones - ACANTILADOS</h3><div id="noti-acantilados" style="margin-top:10px;font-size:13px;color:#64748b;padding:12px;background:white;border-radius:10px;border:1px solid #e2e8f0">No hay notificaciones por el momento.</div></div>
+</div>
+<div class="card" style="background:#f8fafc;border:1px solid #e2e8f0">
+<div style="font-size:11px;color:#64748b;line-height:1.6">🔞 <b>Juego responsable:</b> este sitio publica resultados de quiniela con fines informativos. No somos un operador de juego, no vendemos apuestas ni tomamos jugadas. Actividad exclusiva para mayores de 18 años. El juego en exceso puede ser perjudicial para la salud. Si vos o alguien cercano necesita ayuda, comunicate a la línea gratuita del Instituto Provincial de Lotería y Casinos de Buenos Aires: <b>0800-444-4000</b> (24 hs, los 365 días).</div>
+</div>
+<div class="footer"><a href="/terminos.html">Términos</a> | <a href="/privacidad.html">Privacidad</a> | <a href="/contacto.html">Contacto</a><p style="margin-top:10px;font-size:11px;color:#94a3b8">INFO MDQ SUR HOY - jefmdq@gmail.com - © 2026</p></div>
+</div>
+<div id="modal" onclick="closeM()"><div class="modal-box" onclick="event.stopPropagation()"><span class="close-x" onclick="closeM()">×</span><h3 id="mt" style="padding-right:30px;font-size:18px"></h3><div id="ml" class="quiniela-list"></div></div></div>
+<div id="modal-edea" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto">
+  <div style="background:#111;border:1px solid #333;border-radius:14px;padding:16px;max-width:600px;margin:20px auto;white-space:pre-wrap;color:#ddd">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <b style="color:#facc15;font-size:15px">EDEA - Obras en tu barrio (Oficial)</b>
+      <button onclick="document.getElementById('modal-edea').style.display='none'" style="background:#222;color:#fff;border:none;padding:6px 12px;border-radius:20px;font-weight:800">X</button>
+    </div>
+    <div id="texto-edea" style="margin-top:14px;font-size:14px;line-height:1.6">Cargando...</div>
+    <div id="fecha-edea" style="margin-top:14px;font-size:11px;color:#777;border-top:1px solid #222;padding-top:8px"></div>
+    <div style="margin-top:4px;font-size:11px;color:#555">Fuente oficial: edeaweb.com.ar/obras-en-tu-barrio/</div>
+  </div>
+</div>
+<div id="modal-511" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto" onclick="this.style.display='none'">
+  <div style="background:white;border:3px solid #1e40af;border-radius:14px;padding:16px;max-width:500px;margin:20px auto;color:#1a202c" onclick="event.stopPropagation()">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <b style="color:#1e40af;font-size:16px">🚌 511 - Salidas desde Zona Sur</b>
+      <button onclick="document.getElementById('modal-511').style.display='none'" style="background:#0f172a;color:#fff;border:none;padding:6px 12px;border-radius:20px;font-weight:800">X</button>
+    </div>
+    <div style="margin-top:6px;font-size:11px;background:#fff3cd;border:1px solid #facc15;padding:8px;border-radius:8px">Todos los días 06:10 a 23:40 cada 30 min. Fuente oficial Moovit / Peralta Ramos</div>
+    <div style="margin-top:12px;background:#eff6ff;border:2px solid #1e40af;border-radius:12px;padding:12px">
+      <div style="font-weight:900;font-size:13px">📍 SALE DE ALFAR hacia el Centro</div>
+      <div style="font-size:11px;color:#64748b;margin-top:2px">Sale de Alfar, pasa por Faro → Centro. Pasa por Bosque pero NO sale del Bosque.</div>
+      <div style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;font-size:11px;font-weight:800;text-align:center">
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">06:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">06:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">07:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">07:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">08:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">08:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">09:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">09:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">10:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">10:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">11:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">11:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">12:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">12:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">13:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">13:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">14:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">14:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">15:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">15:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">16:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">16:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">17:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">17:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">18:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">18:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">19:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">19:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">20:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">20:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">21:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">21:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">22:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">22:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">23:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">23:40</div>
+      </div>
+    </div>
+    <div style="margin-top:10px;background:#f0fdf4;border:2px solid #15803d;border-radius:12px;padding:12px">
+      <div style="font-weight:900;font-size:13px">📍 SALE DE ACANTILADOS → PASA POR SERENA → Alfar → Centro</div>
+      <div style="font-size:11px;color:#64748b;margin-top:2px">Sale de Calle 22 y 493. Primero Serena, después Alfar/Bosque. Mismo horario.</div>
+      <div style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;font-size:11px;font-weight:800;text-align:center">
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">06:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">06:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">07:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">07:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">08:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">08:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">09:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">09:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">10:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">10:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">11:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">11:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">12:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">12:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">13:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">13:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">14:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">14:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">15:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">15:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">16:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">16:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">17:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">17:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">18:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">18:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">19:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">19:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">20:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">20:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">21:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">21:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">22:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">22:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">23:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">23:40</div>
+      </div>
+    </div>
+    <a href="https://www.mardelplata.gob.ar/cuandollega" target="_blank" style="display:block;text-align:center;background:#1e40af;color:white;font-weight:900;padding:12px;border-radius:12px;margin-top:12px;text-decoration:none">📍 Ver en vivo dónde viene el 511</a>
+  </div>
+</div>
+<div id="modal-221" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto" onclick="this.style.display='none'">
+  <div style="background:white;border:3px solid #0e7490;border-radius:14px;padding:16px;max-width:500px;margin:20px auto;color:#1a202c" onclick="event.stopPropagation()">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <b style="color:#0e7490;font-size:16px">🚌 221 - Costa Azul - Sale de Serena</b>
+      <button onclick="document.getElementById('modal-221').style.display='none'" style="background:#0f172a;color:#fff;border:none;padding:6px 12px;border-radius:20px;font-weight:800">X</button>
+    </div>
+    <div style="margin-top:10px">
+      <div style="font-weight:900;font-size:13px;margin-bottom:6px;background:#ecfeff;padding:8px;border-radius:8px;border:2px solid #06b6d4">📅 LUNES A SÁBADO - Sale de Calle 0 y 238</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;font-size:11px;font-weight:800;text-align:center">
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">04:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">04:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">04:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">05:00</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">05:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">05:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">06:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">06:20</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">06:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">07:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">07:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">07:40</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">08:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">08:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">08:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">09:00</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">09:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">09:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">10:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">10:20</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">10:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">11:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">11:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">11:40</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">12:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">12:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">12:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">13:00</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">13:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">13:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">14:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">14:20</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">14:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">15:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">15:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">15:40</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">16:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">16:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">16:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">17:00</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">17:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">17:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">18:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">18:20</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">18:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">19:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">19:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">19:40</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">20:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">20:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">20:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">21:00</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">21:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">21:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">22:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">22:20</div>
+        <div style="background:#f1f5f9;padding:6px;border-radius:6px">22:40</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">23:00</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">23:20</div><div style="background:#f1f5f9;padding:6px;border-radius:6px">23:40</div>
+      </div>
+      <div style="font-weight:900;font-size:13px;margin:14px 0 6px 0;background:#fff7ed;padding:8px;border-radius:8px;border:2px solid #f97316">📅 DOMINGO - Cada 30 min</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;font-size:11px;font-weight:800;text-align:center">
+        <div style="background:#fff7ed;padding:6px;border-radius:6px">04:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">04:30</div><div style="background:#fff7ed;padding:6px;border-radius:6px">05:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">05:30</div>
+        <div style="background:#fff7ed;padding:6px;border-radius:6px">06:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">06:30</div><div style="background:#fff7ed;padding:6px;border-radius:6px">07:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">07:30</div>
+        <div style="background:#fff7ed;padding:6px;border-radius:6px">08:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">08:30</div><div style="background:#fff7ed;padding:6px;border-radius:6px">09:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">09:30</div>
+        <div style="background:#fff7ed;padding:6px;border-radius:6px">10:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">10:30</div><div style="background:#fff7ed;padding:6px;border-radius:6px">11:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">11:30</div>
+        <div style="background:#fff7ed;padding:6px;border-radius:6px">12:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">12:30</div><div style="background:#fff7ed;padding:6px;border-radius:6px">13:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">13:30</div>
+        <div style="background:#fff7ed;padding:6px;border-radius:6px">14:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">14:30</div><div style="background:#fff7ed;padding:6px;border-radius:6px">15:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">15:30</div>
+        <div style="background:#fff7ed;padding:6px;border-radius:6px">16:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">16:30</div><div style="background:#fff7ed;padding:6px;border-radius:6px">17:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">17:30</div>
+        <div style="background:#fff7ed;padding:6px;border-radius:6px">18:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">18:30</div><div style="background:#fff7ed;padding:6px;border-radius:6px">19:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">19:30</div>
+        <div style="background:#fff7ed;padding:6px;border-radius:6px">20:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">20:30</div><div style="background:#fff7ed;padding:6px;border-radius:6px">21:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">21:30</div>
+        <div style="background:#fff7ed;padding:6px;border-radius:6px">22:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">22:30</div><div style="background:#fff7ed;padding:6px;border-radius:6px">23:00</div><div style="background:#fff7ed;padding:6px;border-radius:6px">23:30</div>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-size:10px;color:#64748b;text-align:center">Fuente: Moovit Oficial Costa Azul</div>
+  </div>
+</div>
+<div id="modal-acts" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto" onclick="this.style.display='none'">
+  <div style="background:white;border:3px solid #0f172a;border-radius:16px;padding:18px;max-width:420px;margin:20px auto;color:#1a202c" onclick="event.stopPropagation()">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <b id="act-titulo" style="font-size:16px">Actividad</b>
+      <button onclick="document.getElementById('modal-acts').style.display='none'" style="background:#0f172a;color:white;border:none;padding:6px 12px;border-radius:20px;font-weight:800">X</button>
+    </div>
+    <img id="act-img" src="ritmos-faro.jpg" style="width:100%;border-radius:12px;margin-top:12px;display:none">
+    <div id="act-info" style="margin-top:12px;font-size:13px;line-height:1.6"></div>
+    <div style="margin-top:14px;font-size:11px;color:#64748b;text-align:center;border-top:1px solid #e2e8f0;padding-top:10px">Info: Asoc. Vecinal de Fomento Faro Norte</div>
+  </div>
+</div>
+<script>
+document.getElementById('f').textContent=new Date().toLocaleDateString('es-AR');
+function abrirBarrio(nombre){document.getElementById('page-home').style.display='none';document.querySelectorAll('.barrio-page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+nombre).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});history.pushState(null,null,'#'+nombre);}
+function volverHome(){document.getElementById('page-home').style.display='contents';document.querySelectorAll('.barrio-page').forEach(p=>p.classList.remove('active'));window.scrollTo({top:0,behavior:'smooth'});history.pushState(null,null,'#');}
+function aplicarHash(){const h=location.hash.replace('#','');const validos=['faro','alfar','serena','acantilados'];document.querySelectorAll('.barrio-page').forEach(p=>p.classList.remove('active'));if(validos.includes(h)){document.getElementById('page-home').style.display='none';document.getElementById('page-'+h).classList.add('active');}else{document.getElementById('page-home').style.display='contents';}}
+window.addEventListener('popstate', aplicarHash);aplicarHash();
+let s=0;setInterval(()=>{s=s===0?1:0;document.getElementById('slide1').style.opacity=s===0?1:0;document.getElementById('slide2').style.opacity=s===1?1:0;},4000);
+async function dolar(){try{const r=await fetch('https://dolarapi.com/v1/dolares');const d=await r.json();let m={};d.forEach(x=>m[x.casa]=x);document.getElementById('dolar-g').innerHTML=`<div class="dolar-item blue"><div style="font-size:10px;color:#64748b;font-weight:700">BLUE</div><div style="font-size:22px;font-weight:900">$${m.blue.venta}</div><div style="font-size:11px">Compra $${m.blue.compra}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">OFICIAL</div><div style="font-size:22px;font-weight:900">$${m.oficial.venta}</div><div style="font-size:11px">Compra $${m.oficial.compra}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">MEP</div><div style="font-size:22px;font-weight:900">$${m.bolsa.venta}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">TARJETA</div><div style="font-size:22px;font-weight:900">$${m.tarjeta.venta}</div></div>`;document.getElementById('dolar-t').textContent='Actualizado '+new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});}catch(e){}}dolar();
+const CODIGOS_CLIMA={0:['☀️','Despejado'],1:['🌤️','Mayormente despejado'],2:['⛅','Parcialmente nublado'],3:['☁️','Nublado'],45:['🌫️','Niebla'],48:['🌫️','Niebla helada'],51:['🌦️','Llovizna débil'],53:['🌦️','Llovizna'],55:['🌦️','Llovizna intensa'],61:['🌧️','Lluvia débil'],63:['🌧️','Lluvia'],65:['🌧️','Lluvia intensa'],66:['🌧️','Lluvia helada'],67:['🌧️','Lluvia helada intensa'],71:['🌨️','Nieve débil'],73:['🌨️','Nieve'],75:['🌨️','Nieve intensa'],77:['🌨️','Granizo fino'],80:['🌦️','Chubascos débiles'],81:['🌦️','Chubascos'],82:['⛈️','Chubascos fuertes'],85:['🌨️','Chubascos de nieve'],86:['🌨️','Chubascos de nieve fuertes'],95:['⛈️','Tormenta'],96:['⛈️','Tormenta con granizo'],99:['⛈️','Tormenta fuerte con granizo']};
+async function clima(){try{const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=-38.0055&longitude=-57.5426&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,weather_code&daily=temperature_2m_max,temperature_2m_min,weather_code&forecast_days=3&timezone=America/Argentina/Buenos_Aires');const j=await r.json();const c=j.current;const [icono,desc]=CODIGOS_CLIMA[c.weather_code]||['🌡️','—'];document.getElementById('c-icon').textContent=icono;document.getElementById('c-t').textContent=Math.round(c.temperature_2m)+'°';document.getElementById('c-desc').textContent=desc;document.getElementById('c-st').textContent=Math.round(c.apparent_temperature)+'°';document.getElementById('c-hum').textContent=Math.round(c.relative_humidity_2m)+'%';document.getElementById('c-wind').textContent=Math.round(c.wind_speed_10m)+' km/h';document.getElementById('c-min').textContent=Math.round(j.daily.temperature_2m_min[0])+'°';document.getElementById('c-max').textContent=Math.round(j.daily.temperature_2m_max[0])+'°';
+  const nombresDia=['Hoy','Mañana'];
+  document.getElementById('c-forecast').innerHTML=j.daily.time.map((fechaStr,i)=>{
+    const [iconoD]=CODIGOS_CLIMA[j.daily.weather_code[i]]||['🌡️','—'];
+    let etiqueta=nombresDia[i];
+    if(!etiqueta){const d=new Date(fechaStr+'T12:00:00');etiqueta=d.toLocaleDateString('es-AR',{weekday:'short'}).replace('.','');etiqueta=etiqueta.charAt(0).toUpperCase()+etiqueta.slice(1);}
+    const mx=Math.round(j.daily.temperature_2m_max[i]);
+    const mn=Math.round(j.daily.temperature_2m_min[i]);
+    return `<div style="background:rgba(255,255,255,.18);border-radius:10px;padding:8px 4px;text-align:center">
+      <div style="font-size:10px;font-weight:800;opacity:.9">${etiqueta}</div>
+      <div style="font-size:22px;margin:2px 0">${iconoD}</div>
+      <div style="font-size:12px;font-weight:700">${mx}° <span style="opacity:.75">${mn}°</span></div>
+    </div>`;
+  }).join('');
+}catch(e){console.error(e);}}clima();
+async function mareas(){try{const r=await fetch('https://marine-api.open-meteo.com/v1/marine?latitude=-38.0055&longitude=-57.5426&hourly=sea_level_height_msl&timezone=America%2FArgentina%2FBuenos_Aires&forecast_days=2&cell_selection=sea');const j=await r.json();const horas=j.hourly.time;const alturas=j.hourly.sea_level_height_msl;const hoyStr=fechaARG(0);const eventos=[];for(let i=1;i<alturas.length-1;i++){const prev=alturas[i-1],cur=alturas[i],next=alturas[i+1];const esAlta=cur>prev&&cur>=next;const esBaja=cur<prev&&cur<=next;if((esAlta||esBaja)&&horas[i].startsWith(hoyStr)){eventos.push({hora:horas[i].slice(11,16),altura:cur.toFixed(2),tipo:esAlta?'Alta':'Baja'});}}const cont=document.getElementById('mareas-lista');if(eventos.length===0){cont.textContent='Sin datos de marea para hoy.';return;}cont.innerHTML=eventos.map(e=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.25)"><span>${e.tipo==='Alta'?'🔼':'🔽'} Marea ${e.tipo}</span><b>${e.hora} hs · ${e.altura} m</b></div>`).join('');}catch(e){document.getElementById('mareas-lista').textContent='No se pudo cargar la marea.';}}mareas();
+let todas={Nacional:[],Provincia:[],SantaFe:[],Cordoba:[],EntreRios:[],Uruguay:[]};let datosCompletos=null;
+const horsARG=["Previa 10:15","Primera 12:00","Matutina 15:00","Vespertina 18:00","Nocturna 21:00"];const horsUY=["Vespertina 15:00","Nocturna 21:00"];let actual="Nacional";let actualSorteo="nocturna";
+function getHors(){return actual==="Uruguay"?horsUY:horsARG;}
+function getListaSorteos(){return actual==="Uruguay"?["vespertina","nocturna"]:["previa","primera","matutina","vespertina","nocturna"];}
+function renderT(){document.getElementById('qt').innerHTML=Object.keys(todas).map(k=>`<div class="q-tab ${k===actual?'active':''}" onclick="actual='${k}';render()">${k}</div>`).join('');}
+function render(){renderT();document.getElementById('qn').textContent=actual;document.getElementById('info-uy').style.display=actual==="Uruguay"?'block':'none';let hors=getHors();let listaIds=getListaSorteos();document.getElementById('qg').innerHTML=hors.map((h,i)=>{let idSorteo=listaIds[i];let key=actual.toLowerCase();let num="--";if(datosCompletos&&datosCompletos[key]&&datosCompletos[key][idSorteo]){num=datosCompletos[key][idSorteo][0]||"--";}return `<div class="q-box" onclick="actualSorteo='${idSorteo}';openM()"><div style="font-size:11px;color:#64748b;font-weight:700">${h}</div><b>${num}</b></div>`;}).join('');}
+function openM(){document.getElementById('modal').classList.add('active');let key=actual.toLowerCase();let arr=(datosCompletos&&datosCompletos[key]&&datosCompletos[key][actualSorteo])?datosCompletos[key][actualSorteo]:[];document.getElementById('mt').textContent=actual+' - '+actualSorteo.toUpperCase()+' - 20 números';document.getElementById('ml').innerHTML=arr.map((n,i)=>i===0?`<b class="q-pos cabeza">1°</b><span class="q-num cabeza">${n}</span>`:`<b class="q-pos">${i+1}°</b><span class="q-num">${n}</span>`).join('')||"Aún sin sorteo";}
+function closeM(){document.getElementById('modal').classList.remove('active');}
+render();
+function fechaARG(offsetDias){const ahora=new Date();const partes=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Argentina/Buenos_Aires',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(ahora);const obj={};partes.forEach(p=>obj[p.type]=p.value);const base=new Date(Date.UTC(obj.year,obj.month-1,obj.day));base.setUTCDate(base.getUTCDate()+offsetDias);return base.toISOString().slice(0,10);}
+function etiquetaFecha(offsetDias,fechaStr){if(offsetDias===0)return 'Hoy - '+fechaStr.split('-').reverse().slice(0,2).join('/');if(offsetDias===-1)return 'Ayer - '+fechaStr.split('-').reverse().slice(0,2).join('/');const [y,m,d]=fechaStr.split('-');return `${d}/${m}/${y}`;}
+const selectFecha=document.getElementById('q-fecha');
+for(let i=0;i>=-29;i--){const f=fechaARG(i);const opt=document.createElement('option');opt.value=f;opt.textContent=etiquetaFecha(i,f);selectFecha.appendChild(opt);}
+selectFecha.value=fechaARG(0);
+selectFecha.addEventListener('change',()=>cargarDia(selectFecha.value));
+function cargarDia(fecha){const esHoy=fecha===fechaARG(0);document.getElementById('q-titulo').textContent=esHoy?'Quiniela Hoy - 6 Loterías':'Quiniela del '+fecha.split('-').reverse().join('/');const ruta=esHoy?'./quiniela.json':`./historial/${fecha}.json`;fetch(ruta+'?v='+Date.now()).then(r=>{if(!r.ok)throw new Error(esHoy?"quiniela.json no encontrado ("+r.status+")":"Sin datos guardados para ese dia");return r.json();}).then(raw=>{let d=Array.isArray(raw)?raw[0]:raw;let fuente=d.completo||d;let norm={};Object.keys(fuente).forEach(k=>{norm[k.toLowerCase()]=fuente[k];});datosCompletos=norm;render();}).catch(e=>{console.error(e);datosCompletos=null;document.getElementById('qg').innerHTML=`<div style="grid-column:1/-1;background:#fee2e2;border:2px solid #dc2626;padding:12px;border-radius:10px;color:#991b1b;font-size:12px"><b>${esHoy?'Error':'Sin datos'}:</b> ${e.message}</div>`;});}
+cargarDia(selectFecha.value);
+document.getElementById('btn-edea').onclick=function(){document.getElementById('modal-edea').style.display='block';document.getElementById('texto-edea').innerText='Cargando datos oficiales de EDEA...';fetch('./cortes-edea.json?v='+Date.now()).then(r=>r.json()).then(d=>{let txt=d.info_oficial||(d.cortes?d.cortes.join("\n\n"):"")||"";if(!txt||txt.trim().length<10)txt="Hoy EDEA no publicó cortes programados.";document.getElementById('texto-edea').innerText=txt;document.getElementById('fecha-edea').innerText="Actualizado: "+(d.actualizado||"");}).catch(()=>{document.getElementById('texto-edea').innerText='No se pudo cargar ahora. Probá en unos minutos.';});}
+document.getElementById('btn-511').onclick=function(){document.getElementById('modal-511').style.display='block'}
+document.getElementById('btn-221').onclick=function(){document.getElementById('modal-221').style.display='block'}
+let actsCache=[];
+async function cargarActsJSON(){
+  try{
+    const r=await fetch('./actividades.json?v='+Date.now());
+    if(!r.ok) throw 0;
+    actsCache=await r.json();
+    return actsCache;
+  }catch{actsCache=[];return[];}
+}
+function abrirModalActividad(barrio,nombre){
+  const a=actsCache.find(x=> x.barrio===barrio && x.nombre.trim().toLowerCase()===nombre.trim().toLowerCase());
+  if(!a) return;
+  document.getElementById('modal-acts').style.display='block';
+  document.getElementById('act-titulo').textContent=a.nombre;
+  const img=document.getElementById('act-img');
+  const nn=(a.nombre||'').toLowerCase();
+  const aa=(a.actividad||'').toLowerCase();
+  if(nn.includes('ritmos')||aa.includes('ritmos')||aa.includes('salsa')){img.src='ritmos-faro.jpg';img.style.display='block';}else if(nn.includes('pilates')||aa.includes('pilates')){img.src='pilates-faro.jpg';img.style.display='block';}else{img.style.display='none';}
+  document.getElementById('act-info').innerHTML=`
+    <div style="display:inline-block;background:#e0f2fe;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800">${a.actividad.toUpperCase()}</div><br><br>
+    <b>📍 Lugar:</b> ${a.lugar}<br>
+    <b>🗓️ Días:</b> ${a.dias}<br>
+    <b>📞 Contacto:</b> ${a.contacto||'Ver en flyer'}<br>
+    <b>🏘️ Barrio:</b> ${a.barrio.toUpperCase()}
+  `;
+}
+async function pintarActividadesPorBarrio(){
+  const acts=await cargarActsJSON();
+  const barrios=['faro','alfar','serena','acantilados'];
+  barrios.forEach(b=>{
+    const el=document.getElementById('acts-'+b);
+    if(!el) return;
+    const mias=acts.filter(a=>a.barrio===b);
+    el.innerHTML=mias.length?mias.map(a=>`
+      <div onclick="abrirModalActividad('${a.barrio}','${a.nombre.replace(/'/g,"\\'")}')" style="cursor:pointer;padding:12px 0;border-bottom:1px solid #eee">
+        <b>${a.nombre}</b> - <span style="background:#e0f2fe;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:800">${a.actividad.toUpperCase()}</span><br>
+        <small>📍 ${a.lugar} - ${a.dias}</small>
+        <div style="margin-top:6px"><span style="background:#0f172a;color:white;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800">👉 Ver info</span></div>
+      </div>
+    `).join(''):'<div style="color:#64748b;padding:10px;background:#f8fafc;border-radius:8px">No hay actividades cargadas aún para este barrio.</div>';
+  });
+}
+pintarActividadesPorBarrio();
+document.getElementById('buscadorActividades')?.addEventListener('input', async (e)=>{
+  const q=e.target.value.toLowerCase().trim();
+  const resEl=document.getElementById('resultadoBuscador');
+  if(q.length<2){resEl.innerHTML='';return;}
+  const acts=actsCache.length?actsCache:await cargarActsJSON();
+  const filtradas=acts.filter(a=>(a.actividad+' '+a.nombre+' '+a.barrio+' '+a.lugar).toLowerCase().includes(q));
+  resEl.innerHTML=filtradas.length?filtradas.map(a=>`
+    <div onclick="abrirModalActividad('${a.barrio}','${a.nombre.replace(/'/g,"\\'")}')" style="cursor:pointer;background:white;border:2px solid #0f172a;border-radius:10px;padding:10px;margin-bottom:6px">
+      <b>${a.nombre}</b> - ${a.actividad.toUpperCase()}<br>
+      <small>📍 ${a.barrio.toUpperCase()} - ${a.lugar} - ${a.dias}</small><br>
+      <span style="background:#0f172a;color:white;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:800;margin-top:4px;display:inline-block">TOCÁ PARA VER INFO →</span>
+    </div>
+  `).join(''):'<div style="font-size:12px;color:#64748b">No encontré nada con "'+e.target.value+'"</div>';
+});
+</script>
+<script>
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('/sw.js').then(()=>console.log('MDQ SUR App lista'));
+}
+let instalacionPrompt = null;
+const btnInstalar = document.getElementById('btn-instalar');
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  instalacionPrompt = e;
+  if(btnInstalar) btnInstalar.style.display = 'block';
+});
+if(btnInstalar){
+  btnInstalar.addEventListener('click', async () => {
+    if (!instalacionPrompt) return;
+    instalacionPrompt.prompt();
+    const res = await instalacionPrompt.userChoice;
+    if (res.outcome === 'accepted') {
+      btnInstalar.style.display = 'none';
+    }
+    instalacionPrompt = null;
+  });
+}
+window.addEventListener('appinstalled', () => {
+  if(btnInstalar) btnInstalar.style.display = 'none';
+});
+</script>
+
+<script>
+// V9 - RESTAURADO V6 VISUAL + FIX REAL BUSCADOR Y QUINIELA
+document.addEventListener('DOMContentLoaded', function(){
+  const sel = document.getElementById('q-fecha');
+  const btn1 = document.getElementById('btn-ver-fechas');
+  const btn2 = document.getElementById('btn-buscar-otra');
+  function abrirCalendario(){
+    if(!sel) return;
+    try{
+      if(typeof sel.showPicker === 'function'){ sel.showPicker(); }
+      else { sel.focus(); sel.click(); }
+    }catch(e){ sel.focus(); }
+  }
+  if(btn1) btn1.addEventListener('click', abrirCalendario);
+  if(btn2) btn2.addEventListener('click', abrirCalendario);
+  console.log('Quiniela botones OK', !!sel, !!btn1, !!btn2);
+});
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', async function(){
+  try{
+    const r = await fetch('./actividades.json?v='+Date.now());
+    console.log('actividades.json status', r.status);
+    const j = await r.json();
+    console.log('actividades.json count', j.length);
+    if(j.length>0) console.log('ejemplo', j[0]);
+  }catch(e){ console.error('Error cargando actividades.json', e); }
+});
+</script>
+
+</body>
+</html>
