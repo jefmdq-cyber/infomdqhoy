@@ -89,12 +89,10 @@ jobs:
 
           def reordenar_columnas(lista):
               """
-              Regla exclusiva de Argentina.
+              Regla para tablas intercaladas:
 
-              Tujugada entrega Argentina intercalada:
               1, 11, 2, 12, 3, 13...
-
-              Se transforma en:
+              se convierte en:
               1, 2, 3, 4, 5... 11, 12, 13...
               """
 
@@ -105,19 +103,50 @@ jobs:
 
           def extraer_tabla_robusta(html, digitos):
               """
-              Extrae los números de las columnas de resultados,
-              ignorando mensajes anti-bot.
+              Extrae los números de una sola tabla.
+              No mezcla filas de tablas diferentes.
+
+              Devuelve:
+              - lista de hasta 20 números
+              - True si la tabla tiene dos columnas intercaladas
               """
 
               soup = BeautifulSoup(html, "lxml")
-              numeros = []
 
-              for tr in soup.find_all("tr"):
-                  tds = tr.find_all("td")
+              for table in soup.find_all("table"):
+                  numeros = []
+                  tabla_intercalada = False
 
-                  if len(tds) >= 4:
-                      for col in [1, 3]:
-                          txt = tds[col].get_text(" ", strip=True)
+                  for tr in table.find_all("tr"):
+                      if tr.has_attr("hidden"):
+                          continue
+
+                      estilo = tr.get(
+                          "style",
+                          ""
+                      ).replace(" ", "").lower()
+
+                      if (
+                          "display:none" in estilo
+                          or "visibility:hidden" in estilo
+                      ):
+                          continue
+
+                      tds = tr.find_all("td")
+
+                      if len(tds) >= 4:
+                          columnas = [1, 3]
+                          tabla_intercalada = True
+                      elif len(tds) >= 2:
+                          columnas = [1]
+                      else:
+                          continue
+
+                      for col in columnas:
+                          txt = tds[col].get_text(
+                              " ",
+                              strip=True
+                          )
 
                           if not txt:
                               continue
@@ -145,17 +174,25 @@ jobs:
                           if len(numeros) >= 20:
                               break
 
-                  if len(numeros) >= 20:
-                      break
+                      if len(numeros) >= 20:
+                          break
 
-              return numeros
+                  if len(numeros) >= 20:
+                      return numeros[:20], tabla_intercalada
+
+              return [], False
 
           viejo = {}
 
           if os.path.exists(ARCHIVO):
               try:
-                  with open(ARCHIVO, encoding="utf-8") as archivo:
-                      viejo = json.load(archivo).get("completo", {})
+                  with open(
+                      ARCHIVO,
+                      encoding="utf-8"
+                  ) as archivo:
+                      viejo = json.load(
+                          archivo
+                      ).get("completo", {})
               except Exception:
                   viejo = {}
 
@@ -170,8 +207,14 @@ jobs:
                       timeout=30
                   )
 
-                  soup = BeautifulSoup(respuesta.text, "lxml")
-                  texto_bajo = soup.get_text(" ").lower()
+                  soup = BeautifulSoup(
+                      respuesta.text,
+                      "lxml"
+                  )
+
+                  texto_bajo = soup.get_text(
+                      " "
+                  ).lower()
 
                   for k in orden:
                       if not ya_deberia(k, tabla):
@@ -194,28 +237,34 @@ jobs:
 
                       if digitos == 3:
                           """
-                          Uruguay utiliza una tabla única.
-                          Se lee el HTML completo para evitar el desfase
-                          entre el índice del texto y el índice del HTML.
+                          Uruguay utiliza una página específica.
+                          Se lee el HTML completo para no desfasar
+                          los índices de texto frente al HTML.
                           """
 
                           trozo_html = respuesta.text
                       else:
                           """
-                          Argentina conserva la extracción original
-                          por sección.
+                          Argentina conserva la búsqueda por sección.
                           """
 
                           trozo_html = respuesta.text[
                               indice:indice + 15000
                           ]
 
-                      raw = extraer_tabla_robusta(
-                          trozo_html,
-                          digitos
+                      raw, tabla_intercalada = (
+                          extraer_tabla_robusta(
+                              trozo_html,
+                              digitos
+                          )
                       )
 
                       if len(raw) < 10:
+                          """
+                          Fallback de seguridad si no se detecta
+                          una tabla completa.
+                          """
+
                           trozo_texto = texto_bajo[
                               indice:indice + 5000
                           ]
@@ -234,12 +283,13 @@ jobs:
                           raw = uniq[:20]
 
                       if len(raw) >= 10:
-                          if digitos == 3:
+                          if (
+                              digitos == 3
+                              and not tabla_intercalada
+                          ):
                               """
-                              Uruguay ya se extrae en orden:
-                              1, 2, 3, 4... 20.
-
-                              No se aplica reordenar_columnas().
+                              Uruguay en tabla secuencial:
+                              guardar directamente sin reordenar.
                               """
 
                               uniq = []
@@ -257,12 +307,14 @@ jobs:
                               )
                           else:
                               """
-                              Argentina conserva su regla original
-                              de reordenamiento.
+                              Argentina y cualquier tabla con dos
+                              columnas intercaladas: reordenar.
                               """
 
-                              sorteos[k] = reordenar_columnas(
-                                  raw[:20]
+                              sorteos[k] = (
+                                  reordenar_columnas(
+                                      raw[:20]
+                                  )
                               )
 
                               print(
@@ -283,14 +335,21 @@ jobs:
                               )
 
               except Exception as error:
-                  print(f"Error {key_loteria}: {error}")
+                  print(
+                      f"Error {key_loteria}: {error}"
+                  )
 
                   for k in orden:
                       if (
                           ya_deberia(k, tabla)
-                          and viejo.get(key_loteria, {}).get(k)
+                          and viejo.get(
+                              key_loteria,
+                              {}
+                          ).get(k)
                       ):
-                          sorteos[k] = viejo[key_loteria][k]
+                          sorteos[k] = viejo[
+                              key_loteria
+                          ][k]
 
               return sorteos
 
@@ -328,7 +387,11 @@ jobs:
               )
           }
 
-          with open(ARCHIVO, "w", encoding="utf-8") as archivo:
+          with open(
+              ARCHIVO,
+              "w",
+              encoding="utf-8"
+          ) as archivo:
               json.dump(
                   salida,
                   archivo,
@@ -336,7 +399,11 @@ jobs:
                   indent=2
               )
 
-          with open("quiniela.json", "w", encoding="utf-8") as archivo:
+          with open(
+              "quiniela.json",
+              "w",
+              encoding="utf-8"
+          ) as archivo:
               json.dump(
                   salida,
                   archivo,
@@ -345,8 +412,8 @@ jobs:
               )
 
           print(
-              "FINAL OK - Argentina reordenada; "
-              "Uruguay guardado directamente"
+              "FINAL OK - Argentina y Uruguay "
+              "extraídos sin mezclar tablas"
           )
           PY
 
