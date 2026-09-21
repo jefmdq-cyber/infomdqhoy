@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Scrapear con regla segura para Argentina y Uruguay
+      - name: Scrapear con MISMA REGLA para Argentina y Uruguay
         run: |
           pip install requests beautifulsoup4 lxml
 
@@ -89,11 +89,11 @@ jobs:
 
           def reordenar_columnas(lista):
               """
-              Regla exclusiva de las loterías argentinas.
-              Tujugada muestra las columnas de Argentina como:
-              1,11,2,12,3,13...
-              y deben quedar:
-              1,2,3,4,5...
+              Tujugada entrega los resultados intercalados:
+              1, 11, 2, 12, 3, 13...
+
+              La salida correcta debe ser:
+              1, 2, 3, 4, 5... 11, 12, 13...
               """
 
               if len(lista) < 20:
@@ -174,9 +174,12 @@ jobs:
                   for k in orden:
                       if not ya_deberia(k, tabla):
                           sorteos[k] = []
+
                           print(
-                              f"{key_loteria} {k} aún no sorteado -> vacío"
+                              f"{key_loteria} {k} "
+                              "aún no sorteado -> vacío"
                           )
+
                           continue
 
                       indice = texto_bajo.find(k)
@@ -187,7 +190,9 @@ jobs:
 
                           continue
 
-                      trozo_html = respuesta.text[indice:indice + 15000]
+                      trozo_html = respuesta.text[
+                          indice:indice + 15000
+                      ]
 
                       raw = extraer_tabla_robusta(
                           trozo_html,
@@ -195,7 +200,9 @@ jobs:
                       )
 
                       if len(raw) < 10:
-                          trozo_texto = texto_bajo[indice:indice + 5000]
+                          trozo_texto = texto_bajo[
+                              indice:indice + 5000
+                          ]
 
                           raw2 = re.findall(
                               rf"\b\d{{{digitos}}}\b",
@@ -211,41 +218,14 @@ jobs:
                           raw = uniq[:20]
 
                       if len(raw) >= 10:
-                          if digitos == 3:
-                              """
-                              Uruguay ya viene en orden correcto.
-                              No se aplica reordenar_columnas().
-                              Esto evita cruzar los casilleros 5 y 15.
-                              """
+                          # Esta regla se aplica a Argentina y Uruguay.
+                          sorteos[k] = reordenar_columnas(raw[:20])
 
-                              uniq = []
-
-                              for numero in raw:
-                                  if numero not in uniq:
-                                      uniq.append(numero)
-
-                              sorteos[k] = uniq[:20]
-
-                              print(
-                                  f"{key_loteria} {k} OK "
-                                  f"{sorteos[k][:3]}... "
-                                  "-> directo, sin reordenar"
-                              )
-                          else:
-                              """
-                              Argentina conserva su regla original
-                              de destrenzado de columnas.
-                              """
-
-                              sorteos[k] = reordenar_columnas(
-                                  raw[:20]
-                              )
-
-                              print(
-                                  f"{key_loteria} {k} OK "
-                                  f"{sorteos[k][:3]}... "
-                                  "-> reordenado"
-                              )
+                          print(
+                              f"{key_loteria} {k} OK "
+                              f"{sorteos[k][:3]}... "
+                              "-> reordenado"
+                          )
                       else:
                           if (
                               guardado.get(k)
@@ -321,8 +301,8 @@ jobs:
               )
 
           print(
-              "FINAL OK - Argentina conserva el reordenamiento; "
-              "Uruguay queda directo y sin intercambio de casilleros"
+              "FINAL OK - Misma regla de columnas aplicada "
+              "a Argentina y Uruguay"
           )
           PY
 
