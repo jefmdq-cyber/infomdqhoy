@@ -190,9 +190,23 @@ jobs:
 
                           continue
 
-                      trozo_html = respuesta.text[
-                          indice:indice + 15000
-                      ]
+                      if digitos == 3:
+                          """
+                          Uruguay utiliza una tabla única. Se lee el HTML
+                          completo para evitar el desfase que se produce
+                          al usar un índice de texto sobre HTML crudo.
+                          """
+
+                          trozo_html = respuesta.text
+                      else:
+                          """
+                          Argentina conserva la extracción original
+                          por sección.
+                          """
+
+                          trozo_html = respuesta.text[
+                              indice:indice + 15000
+                          ]
 
                       raw = extraer_tabla_robusta(
                           trozo_html,
@@ -218,7 +232,8 @@ jobs:
                           raw = uniq[:20]
 
                       if len(raw) >= 10:
-                          # Esta regla se aplica a Argentina y Uruguay.
+                          # Misma regla de reordenamiento para Argentina
+                          # y Uruguay.
                           sorteos[k] = reordenar_columnas(raw[:20])
 
                           print(
@@ -301,8 +316,8 @@ jobs:
               )
 
           print(
-              "FINAL OK - Misma regla de columnas aplicada "
-              "a Argentina y Uruguay"
+              "FINAL OK - Argentina y Uruguay "
+              "extraídos y reordenados correctamente"
           )
           PY
 
