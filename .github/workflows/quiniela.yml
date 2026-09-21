@@ -1,10 +1,6 @@
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '*/20 13-23 * * 1-5'
-    - cron: '*/20 13-22 * * 6'
-    - cron: '*/30 13-22 * * 0'
 jobs:
   actualizar:
     runs-on: ubuntu-latest
@@ -15,7 +11,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Scrapear sorteos
+      - name: Scrapear sorteos ULTRA SEGURO - no borra nunca lo ya sorteado
         run: |
           pip install requests beautifulsoup4 lxml
           python << 'PY'
@@ -23,7 +19,6 @@ jobs:
           from datetime import datetime, timedelta
           from zoneinfo import ZoneInfo
           from bs4 import BeautifulSoup
-          from urllib.parse import urlparse
 
           HEADERS = {"User-Agent": "Mozilla/5.0 Chrome/122"}
           TZ_ARG = ZoneInfo("America/Argentina/Buenos_Aires")
@@ -52,19 +47,13 @@ jobs:
               if len(lista)<20: return lista
               return lista[0::2] + lista[1::2]
 
+          # Cargar lo que ya hay hoy para NO BORRARLO
           viejo = {}
           if os.path.exists(ARCHIVO_HOY):
               try: viejo = json.load(open(ARCHIVO_HOY,encoding="utf-8")).get("completo",{})
               except: pass
-          # Si no hay historial de hoy, intentar cargar quiniela.json viejo como respaldo para no perder numeros de hoy ya sorteados
           if not viejo and os.path.exists("quiniela.json"):
-              try: 
-                  qold = json.load(open("quiniela.json",encoding="utf-8")).get("completo",{})
-                  # Solo usarlo si tiene fecha de hoy en ultima_actualizacion
-                  ult = json.load(open("quiniela.json",encoding="utf-8")).get("ultima_actualizacion","")
-                  if HOY in ult or datetime.now().strftime("%d/%m/%Y") in ult or len(qold)>0:
-                      # No usarlo como viejo para no arrastrar sabado, pero si como emergencia lo dejamos vacio y re-scrapeamos
-                      pass
+              try: viejo = json.load(open("quiniela.json",encoding="utf-8")).get("completo",{})
               except: pass
 
           def extraer(url, orden, digitos, cly_key, tabla):
@@ -75,15 +64,15 @@ jobs:
                   txt = texto_plano(r.text)
                   low = txt.lower()
                   for key in orden:
-                      # FIX: Si todavia no es la hora, BLANCO SIEMPRE
-                      if not ya_deberia(key, tabla):
-                          sorteos[key] = []
-                          continue
-                      # Si ya es la hora y teniamos guardado hoy, respetarlo (para no perder lo ya sorteado)
+                      # REGLA 1: Si ya tenemos numeros guardados hoy, NUNCA los borres, conservalos
                       if guard and len(guard.get(key, [])) >= 15:
                           sorteos[key] = guard[key]
                           continue
-                      # Si no teniamos guardado, extraer fresco de la pagina sin exigir fecha exacta
+                      # REGLA 2: Si todavia no es la hora, dejar en blanco
+                      if not ya_deberia(key, tabla):
+                          sorteos[key] = []
+                          continue
+                      # REGLA 3: Si es la hora y no teniamos nada, intentar extraer
                       m = re.search(rf'\b{key}\b', low)
                       if m:
                           trozo = low[m.start(): m.start()+2000]
@@ -95,10 +84,10 @@ jobs:
                               sorteos[key]=reordenar(uniq)
               except Exception as e:
                   print(f"Error {cly_key} {e}")
-                  # En error, devolver lo guardado si existe para no borrar todo
+                  # En error, devolver lo guardado para no dejar todo en blanco
                   if guard:
-                      return {k: guard.get(k,[]) for k in orden}
-                  return sorteos
+                      for k in orden:
+                          if guard.get(k): sorteos[k]=guard[k]
               return sorteos
 
           res={}
@@ -109,11 +98,11 @@ jobs:
           out={"fecha":HOY,"fecha_arg":AHORA.strftime("%d/%m/%Y"),"completo":res,"ultima_actualizacion":AHORA.strftime("%d/%m/%Y %H:%M")}
           with open(ARCHIVO_HOY,"w",encoding="utf-8") as f: json.dump(out,f,ensure_ascii=False,indent=2)
           with open("quiniela.json","w",encoding="utf-8") as f: json.dump(out,f,ensure_ascii=False,indent=2)
-          print(f"Restaurado {HOY} -> { {k: len(v.get('previa',[])) for k,v in res.items()} }")
+          print(f"OK {HOY} guardado sin borrar sorteados")
           PY
       - run: |
           git config user.name "bot"
           git config user.email "bot@infomdq.com"
           git add historial/ quiniela.json
-          git commit -m "Restaurar quiniela hoy sin borrar sorteados" || true
+          git commit -m "Fix ultra seguro no borra sorteados" || true
           git push
