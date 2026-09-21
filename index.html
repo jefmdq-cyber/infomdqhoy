@@ -708,45 +708,29 @@ function cargarDia(fecha){
     return r.json();
   }).then(raw=>{
     let d=Array.isArray(raw)?raw[0]:raw;
-    // FIX: detectar si quiniela.json trae fecha vieja (ej sábado) y hoy es domingo/lunes sin sorteo
-    let fechaEnJson = (d.fecha || d.fecha_str || d.dia || d.date || "").toString().slice(0,10);
-    // Si es hoy y el json trae otra fecha (ej: sábado), no mostrar esos números como si fueran de hoy
+    // FIX QUINIELA: si el json trae fecha vieja (ej sábado) y hoy es otro día, no mostrar esos números como si fueran de hoy
+    // Volver a mostrar -- en blanco como en tu captura
+    let fechaEnJson = (d.fecha || d.fecha_str || d.dia || d.date || d.fecha_arg || "").toString().slice(0,10);
     if(esHoy && fechaEnJson && fechaEnJson !== fecha){
-      console.warn("quiniela.json es de", fechaEnJson, "pero se pidió", fecha, "- mostrando como sin sorteo");
-      // Si el json no tiene flag de sorteos de hoy, lo tratamos como que todavía no sorteó
-      // Buscamos si tiene al menos un sorteo con números de hoy
-      let tieneNumerosHoy = false;
-      try{
-        let fuenteTmp = d.completo||d;
-        // si tiene alguna lotería con datos, asumimos que son viejos, no de hoy
-        // Para hoy mostramos cartel de "todavía no sorteó"
-        if(fechaEnJson !== fecha){
-          throw new Error("Todavía no hay sorteos para hoy ("+fecha.split('-').reverse().join('/')+"). Último sorteo: "+fechaEnJson.split('-').reverse().join('/'));
-        }
-      }catch(err){
-        throw err;
-      }
+      console.warn("quiniela.json es de", fechaEnJson, "pero se pidió", fecha, "- mostrando guiones en blanco");
+      datosCompletos={};
+      render();
+      return;
     }
     let fuente=d.completo||d;
     let norm={};
     Object.keys(fuente).forEach(k=>{norm[k.toLowerCase()]=fuente[k];});
-    // Si norm está vacío o no tiene loterías, es que no sorteó
-    let keys = Object.keys(norm).filter(k=>!['fecha','fecha_str','dia','date','actualizado'].includes(k));
-    if(esHoy && keys.length===0){
-      throw new Error("Todavía no hay sorteos para hoy - Aún no sorteó");
-    }
     datosCompletos=norm;
     render();
   }).catch(e=>{
     console.error(e);
     datosCompletos=null;
-    let msg = e.message||"Sin datos";
-    let esHoyMsg = fecha===fechaARG(0);
-    let esSinSorteo = msg.toLowerCase().includes("todavía no hay") || msg.toLowerCase().includes("no sorteó") || msg.toLowerCase().includes("aún no");
-    if(esHoyMsg && esSinSorteo){
-      document.getElementById('qg').innerHTML=`<div style="grid-column:1/-1;background:#fef9c3;border:2px dashed #ca8a04;padding:16px;border-radius:12px;color:#854d0e;text-align:center"><b>⏳ ${msg}</b><br><span style="font-size:12px;font-weight:600">Los números aparecerán acá cuando se haga el sorteo. Podés ver el del sábado en el historial.</span></div>`;
+    // Si es hoy y no hay datos, mostrar guiones como antes (no cartel amarillo)
+    if(fecha===fechaARG(0)){
+      datosCompletos={};
+      render();
     }else{
-      document.getElementById('qg').innerHTML=`<div style="grid-column:1/-1;background:#fee2e2;border:2px solid #dc2626;padding:12px;border-radius:10px;color:#991b1b;font-size:12px"><b>${esHoyMsg?'':''} ${esSinSorteo?'Aviso':'Sin datos'}:</b> ${msg}</div>`;
+      document.getElementById('qg').innerHTML=`<div style="grid-column:1/-1;background:#fee2e2;border:2px solid #dc2626;padding:12px;border-radius:10px;color:#991b1b;font-size:12px"><b>Sin datos:</b> ${e.message}</div>`;
     }
   });
 }
@@ -871,3 +855,4 @@ document.addEventListener('DOMContentLoaded', async function(){
 
 </body>
 </html>
+
