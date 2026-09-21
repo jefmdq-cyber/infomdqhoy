@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Scrapear con MISMA REGLA para Argentina y Uruguay
+      - name: Scrapear Argentina y Uruguay
         run: |
           pip install requests beautifulsoup4 lxml
 
@@ -89,10 +89,12 @@ jobs:
 
           def reordenar_columnas(lista):
               """
-              Tujugada entrega los resultados intercalados:
+              Regla exclusiva de Argentina.
+
+              Tujugada entrega Argentina intercalada:
               1, 11, 2, 12, 3, 13...
 
-              La salida correcta debe ser:
+              Se transforma en:
               1, 2, 3, 4, 5... 11, 12, 13...
               """
 
@@ -103,8 +105,8 @@ jobs:
 
           def extraer_tabla_robusta(html, digitos):
               """
-              Extrae únicamente los números de las columnas de resultados,
-              evitando textos anti-bot y mensajes de la página.
+              Extrae los números de las columnas de resultados,
+              ignorando mensajes anti-bot.
               """
 
               soup = BeautifulSoup(html, "lxml")
@@ -192,9 +194,9 @@ jobs:
 
                       if digitos == 3:
                           """
-                          Uruguay utiliza una tabla única. Se lee el HTML
-                          completo para evitar el desfase que se produce
-                          al usar un índice de texto sobre HTML crudo.
+                          Uruguay utiliza una tabla única.
+                          Se lee el HTML completo para evitar el desfase
+                          entre el índice del texto y el índice del HTML.
                           """
 
                           trozo_html = respuesta.text
@@ -232,15 +234,42 @@ jobs:
                           raw = uniq[:20]
 
                       if len(raw) >= 10:
-                          # Misma regla de reordenamiento para Argentina
-                          # y Uruguay.
-                          sorteos[k] = reordenar_columnas(raw[:20])
+                          if digitos == 3:
+                              """
+                              Uruguay ya se extrae en orden:
+                              1, 2, 3, 4... 20.
 
-                          print(
-                              f"{key_loteria} {k} OK "
-                              f"{sorteos[k][:3]}... "
-                              "-> reordenado"
-                          )
+                              No se aplica reordenar_columnas().
+                              """
+
+                              uniq = []
+
+                              for numero in raw:
+                                  if numero not in uniq:
+                                      uniq.append(numero)
+
+                              sorteos[k] = uniq[:20]
+
+                              print(
+                                  f"{key_loteria} {k} OK "
+                                  f"{sorteos[k][:3]}... "
+                                  "-> directo, sin reordenar"
+                              )
+                          else:
+                              """
+                              Argentina conserva su regla original
+                              de reordenamiento.
+                              """
+
+                              sorteos[k] = reordenar_columnas(
+                                  raw[:20]
+                              )
+
+                              print(
+                                  f"{key_loteria} {k} OK "
+                                  f"{sorteos[k][:3]}... "
+                                  "-> reordenado"
+                              )
                       else:
                           if (
                               guardado.get(k)
@@ -316,8 +345,8 @@ jobs:
               )
 
           print(
-              "FINAL OK - Argentina y Uruguay "
-              "extraídos y reordenados correctamente"
+              "FINAL OK - Argentina reordenada; "
+              "Uruguay guardado directamente"
           )
           PY
 
