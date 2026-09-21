@@ -82,7 +82,7 @@ body{background:#f0f4f8;color:#1a202c}
 .barrio-header-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.85),rgba(0,0,0,.1))}
 .barrio-header-text{position:absolute;bottom:16px;left:16px;right:16px;color:white}
 .barrio-header-text h2{font-size:30px;font-weight:900}
-.btn-volver{display:inline-block;background:white;border:2px solid #0f172a;color:#0f172a;padding:10px 18px;border-radius:30px;font-weight:900;font-size:12px;cursor:pointer;margin-bottom:14px}
+.btn-volver{display:block !important;width:100% !important;max-width:320px !important;margin:0 auto 18px auto !important;background:white !important;border:2px solid #0f172a !important;color:#0f172a !important;padding:12px 22px !important;border-radius:999px !important;font-weight:900 !important;font-size:13px !important;cursor:pointer !important;text-align:center !important;box-shadow:0 4px 12px rgba(15,23,42,.08) !important;}
 .info-box{padding:14px;background:#f8fafc;border-radius:12px;border:2px solid #e2e8f0;font-size:13px;line-height:1.6;margin-top:10px}
 .badge{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800}
 .dolar-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
@@ -108,6 +108,64 @@ body{background:#f0f4f8;color:#1a202c}
 .footer{padding:20px;text-align:center}
 .footer a{color:#64748b;text-decoration:none;margin:0 6px;font-size:12px;font-weight:600}
 @media(min-width:800px){.container{max-width:1100px;display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}.hero{height:420px}.hero-text h1{font-size:56px}.container >.footer{grid-column:1 / -1}.card{margin-bottom:0}.barrios-nav{grid-column:1 / -1;grid-template-columns:repeat(4,1fr)}.barrio-page{grid-column:1 / -1}}
+
+/* === PARCHE V2 - SIN ROMPER CLIMA / MAREAS / VERIFICA MDQ === */
+:root{ --bg-clean:#f8fafc; --text-night:#0b132b; }
+body{background:#f8fafc !important;color:#0b132b !important}
+.container{max-width:520px !important}
+@media(min-width:900px){.container{max-width:1140px !important;display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start} }
+
+/* 2 - BUSCADOR TOP CENTER */
+#buscadorActividades{
+width:100% !important;padding:16px 18px 16px 48px !important;
+border-radius:999px !important;border:2px solid #e2e8f0 !important;
+background:#fff !important;color:#0b132b !important;
+font-weight:700 !important;font-size:14px !important;
+box-shadow:0 4px 14px rgba(11,19,43,.06) !important;
+}
+
+/* 1 - EDEA / COLECTIVOS */
+#btn-edea{
+background:linear-gradient(135deg,#0ea5e9 0%,#38bdf8 50%,#7dd3fc 100%) !important;
+color:#0b132b !important;border:1.5px solid rgba(255,255,255,.9) !important;
+border-radius:20px !important;font-weight:800 !important;font-size:13.5px !important;
+box-shadow:0 8px 20px rgba(14,165,233,.25) !important;
+}
+#btn-511, #btn-221{
+background:linear-gradient(135deg,#f59e0b 0%,#fbbf24 55%,#fde68a 100%) !important;
+color:#451a03 !important;border:1.5px solid rgba(255,255,255,.9) !important;
+border-radius:20px !important;font-weight:800 !important;font-size:13.5px !important;
+box-shadow:0 8px 20px rgba(245,158,11,.25) !important;
+}
+#btn-221{background:linear-gradient(135deg,#fb923c 0%,#fdba74 100%) !important}
+
+/* 3 - BARRIOS */
+.barrio-btn{
+border-radius:16px !important;font-weight:900 !important;
+border:2px solid rgba(255,255,255,.95) !important;
+box-shadow:0 8px 18px rgba(11,19,43,.10), inset 0 1px 0 rgba(255,255,255,.9) !important;
+}
+.btn-faro{background:linear-gradient(135deg,#dbeafe 0%,#bfdbfe 100%) !important;color:#1e3a8a !important}
+.btn-alfar{background:linear-gradient(135deg,#dcfce7 0%,#bbf7d0 100%) !important;color:#14532d !important}
+.btn-serena{background:linear-gradient(135deg,#fef9c3 0%,#fde68a 100%) !important;color:#854d0e !important}
+.btn-acantilados{background:linear-gradient(135deg,#ffedd5 0%,#fed7aa 100%) !important;color:#7c2d12 !important}
+
+/* 4 - DOLAR UNIFICADO */
+.dolar-item, .dolar-item.blue{
+background:linear-gradient(180deg,#eff6ff 0%,#ffffff 100%) !important;
+border:2px solid #1e3a8a !important;border-radius:16px !important;
+box-shadow:0 8px 18px rgba(30,58,138,.12) !important;
+}
+
+/* 5 - NO PISAR CARDS DE COLOR (clima/mareas/verifica) */
+.card:not([style*="linear-gradient"]){
+background:#fff !important;border-radius:20px !important;
+box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !important;
+}
+
+.btn-guia{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:8px;padding:16px 20px;border-radius:20px;background:linear-gradient(135deg,#7e22ce,#581c87);color:#fff !important;font-weight:800;font-size:14px;text-decoration:none;box-shadow:0 8px 20px rgba(126,34,206,.35);margin:0 0 14px 0;transition:.15s}
+.btn-guia:active{transform:scale(.97)}
+
 </style>
 </head>
 <body>
@@ -118,6 +176,16 @@ body{background:#f0f4f8;color:#1a202c}
 <div class="hero-text"><h1>INFO MDQ SUR HOY</h1><p>Alfar, Faro, Serena, Acantilados, Chapadmalal - Dólar, Quiniela, Clima y Empleos - <span id="f"></span></p></div>
 </div>
 <div class="container">
+
+<!-- BUSCADOR PREMIUM REUBICADO TOP CENTER -->
+<div style="grid-column:1/-1; position:relative; max-width:560px; margin:4px auto 16px auto; width:100%;">
+  <span style="position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:18px;z-index:2;pointer-events:none">🔍</span>
+  <input id="buscadorActividades" type="search" placeholder="Buscar actividades o comercios en el sur..." style="width:100%;padding:16px 18px 16px 48px;border-radius:999px;border:2px solid #e2e8f0;background:#fff;color:#0b132b;font-weight:700;font-size:14px;box-shadow:0 4px 14px rgba(11,19,43,.06);outline:none;">
+  <div id="resultadoBuscador" style="margin-top:10px"></div>
+</div>
+<a href="comercios.html" class="btn-guia">🛍 Ver Guía de Comercios</a>
+
+
 <div class="barrios-nav">
   <a href="#faro" class="barrio-btn btn-faro" onclick="abrirBarrio('faro');return false;"><span>🗼</span>FARO NORTE</a>
   <a href="#alfar" class="barrio-btn btn-alfar" onclick="abrirBarrio('alfar');return false;"><span>🌲</span>ALFAR</a>
@@ -125,7 +193,24 @@ body{background:#f0f4f8;color:#1a202c}
   <a href="#acantilados" class="barrio-btn btn-acantilados" onclick="abrirBarrio('acantilados');return false;"><span>🌊</span>ACANTILADOS</a>
 </div>
 
-<!-- FARMACIA VARA -->
+<!-- FARMACIA REMOVIDA -->
+
+
+<div style="grid-column:1 / -1; display:flex; gap:10px; justify-content:center; margin:0 0 12px 0;">
+  <button id="btn-edea" style="flex:1; background:#facc15;color:#000;font-weight:900;padding:12px 18px;border:none;border-radius:20px;font-size:14px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.15)">⚡ Cortes de EDEA</button>
+  <button id="btn-instalar" style="flex:1; display:none; background:#0f172a;color:#fff;font-weight:900;padding:12px 18px;border:none;border-radius:20px;font-size:14px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.15)">📲 Instalar App</button>
+</div>
+<div style="grid-column:1 / -1; display:flex; gap:10px; justify-content:center; margin:0 0 12px 0;">
+  <button id="btn-511" style="flex:1; background:#1e40af;color:white;font-weight:900;padding:12px 18px;border:none;border-radius:20px;font-size:14px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.15)">🚌 511 - Horarios</button>
+  <button id="btn-221" style="flex:1; background:#0e7490;color:white;font-weight:900;padding:12px 18px;border:none;border-radius:20px;font-size:14px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.15)">🚌 221 - Horarios</button>
+</div>
+<div style="grid-column:1 / -1; background:white; border:3px solid black; border-radius:12px; padding:12px 10px; text-align:center; height:fit-content; align-self:start;">
+  <div style="font-size:15px; font-weight:900; color:black; line-height:1.2; font-family:Arial Black, Arial, sans-serif;">+18 | EL JUGAR COMPULSIVAMENTE ES PERJUDICIAL PARA LA SALUD</div>
+  <div style="font-size:12px; font-weight:700; margin-top:4px;">Prohibido para menores de 18 años - Resultados con fines informativos</div>
+  <div style="font-size:10px; color:#666; margin-top:2px;">Ayuda: 0800-444-4000 | No organizamos apuestas</div>
+</div>
+<div id="page-home" style="display:contents">
+<div style="grid-column:1/-1;max-width:560px;margin:0 auto 14px auto;"><!-- FARMACIA VARA -->
 <div style="background:white;border-radius:22px;overflow:hidden;border:1px solid #e2e8f0;box-shadow:0 8px 24px rgba(0,0,0,.1);max-width:560px;margin:0 auto 14px auto;font-family:Inter,'Segoe UI',system-ui,sans-serif;grid-column:1 / -1">
 
   <div style="background: radial-gradient(circle at center, #1e1e1e 0%, #111111 100%); border-radius: 40px; padding: clamp(14px,4vw,22px) clamp(18px,6vw,36px); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: inset 0 2px 4px rgba(255,255,255,0.05), 0 8px 24px rgba(0,0,0,0.4); margin: 10px; font-family: 'Arial Black', Impact, sans-serif; border: 2px solid #222222;">
@@ -179,27 +264,57 @@ body{background:#f0f4f8;color:#1a202c}
   </div>
 
   <div style="text-align:center;font-size:11px;color:#64748b;font-weight:700;padding:0 14px 14px 14px">Atención personalizada · Productos de calidad</div>
-</div>
+</div></div>
+<div style="grid-column:1/-1;max-width:760px;margin:0 auto 14px auto;"><div style="box-sizing:border-box;width:100%;max-width:760px;margin:0 auto;padding:12px;background:#fafafa;border:1px solid #e5e7eb;border-radius:28px;font-family:Inter,Arial,sans-serif;color:#0b132b;box-shadow:0 14px 35px rgba(11,19,43,.12);">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 16px;background:linear-gradient(135deg,#7e22ce,#581c87);border-radius:18px;">
+    <div style="font-size:1.4rem;font-weight:900;color:#fff;text-transform:uppercase;">Proveeduría Kevin</div>
+    <div style="width:45px;height:45px;border-radius:50%;background:#b8f34a;display:flex;align-items:center;justify-content:center;font-size:1.5rem;">🛍️</div>
+  </div>
 
-<div style="grid-column:1 / -1; margin: 2px 0 14px 0;">
-  <input id="buscadorActividades" placeholder="🔍 Buscá yoga, zumba, folklore, ritmos..." style="width:100%;padding:14px;border-radius:12px;border:2px solid #0f172a;font-weight:700;font-size:14px;">
-  <div id="resultadoBuscador" style="margin-top:10px"></div>
+  <div style="position:relative;margin-top:12px;overflow:hidden;border-radius:22px 22px 14px 14px;background:#e5e7eb;">
+    <img src="proveeduria-kevin.jpeg" alt="Fachada real Proveeduría Kevin Alfar" style="display:block;width:100%;height:clamp(230px,42vw,360px);object-fit:cover;">
+    <div style="position:absolute;left:16px;bottom:15px;padding:8px 12px;border-radius:10px;background:rgba(11,19,43,.88);color:#fff;font-size:.7rem;font-weight:900;text-transform:uppercase;">FOTO REAL DEL LOCAL</div>
+    <div style="position:absolute;right:15px;top:15px;padding:9px 13px;border-radius:999px;background:#b8f34a;color:#0b132b;font-size:.68rem;font-weight:900;transform:rotate(3deg);">Comprá más. Pagá menos.</div>
+  </div>
+
+  <div style="margin-top:12px;padding:10px;border-radius:12px;background:white;border-top:2px dotted #e2e8f0;border-bottom:2px dotted #e2e8f0;text-align:center;">
+    <span style="color:#dc2626;font-weight:900;font-style:italic;">¡Comprá más. Pagá menos. Elegí Kevin!</span>
+    <span style="background:#dc2626;color:white;font-weight:900;font-size:10px;padding:5px 10px;border-radius:20px;margin-left:6px;">PRECIOS DESTACADOS 🏷</span>
+  </div>
+
+  <div style="padding:18px 8px 8px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;">
+      <div style="background:#fff;border-radius:16px;border:1px solid #f1f5f9;box-shadow:0 3px 10px rgba(11,19,43,.06);overflow:hidden;">
+        <div style="background:#f1f5f9;padding:8px 12px;font-weight:900;font-size:11px;">🟢 SUCURSAL ALFAR</div>
+        <div style="padding:12px;font-size:12.5px;font-weight:700;">📍 Diagonal Estados Unidos 474</div>
+      </div>
+      <div style="background:#fff;border-radius:16px;border:1px solid #f1f5f9;box-shadow:0 3px 10px rgba(11,19,43,.06);overflow:hidden;">
+        <div style="background:#fff7ed;padding:8px 12px;font-weight:900;font-size:11px;">🟠 SUCURSAL ACANTILADOS</div>
+        <div style="padding:12px;font-size:12px;font-weight:700;">📍 Calle 493 entre 6 y 8<br><span style="font-size:10px;color:#64748b;">(en el kiosko de diario)</span></div>
+      </div>
+    </div>
+
+    <a href="https://www.instagram.com/autoserviciokevin" target="_blank" style="display:block;margin-bottom:14px;padding:11px;border-radius:12px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:white;font-weight:900;text-align:center;text-decoration:none;">📸 @autoserviciokevin</a>
+
+    <a href="https://wa.me/5492230000000?text=Hola%20Kevin!" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:17px;border-radius:18px;background:#25D366;color:white;text-decoration:none;font-weight:900;box-shadow:0 7px 0 #159447;">💬 ¡Hacé tu pedido por WhatsApp!</a>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px;">
+      <a href="https://www.google.com/maps/search/?api=1&query=Diagonal+Estados+Unidos+600+Alfar+Mar+del+Plata" target="_blank" style="padding:12px;border-radius:999px;background:#eef0f2;text-align:center;font-weight:900;text-decoration:none;color:#263244;">🗺 Ver Mapa Alfar</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Calle+493+entre+6+y+8+Acantilados" target="_blank" style="padding:12px;border-radius:999px;background:#eef0f2;text-align:center;font-weight:900;text-decoration:none;color:#263244;">🗺 Ver Mapa Acantilados</a>
+    </div>
+  </div>
+</div></div>
+
+<div class="card"><span class="badge" style="background:#dcfce7;color:#15803d">QUINIELA - RESULTADOS OFICIALES</span><h2 style="margin-top:6px;font-size:18px" id="q-titulo">Quiniela Hoy - 6 Loterías</h2>
+<div style="display:flex;align-items:center;gap:8px;margin-top:10px;background:#f0f9ff;border:2px solid #0ea5e9;border-radius:12px;padding:8px 12px;box-shadow:0 4px 12px rgba(14,165,233,.15);">
+  <span style="font-family:Inter,sans-serif;font-weight:600;font-size:12px;color:#0c4a6e;white-space:nowrap;">📅 Fecha:</span>
+  <select id="q-fecha" style="flex:1;padding:8px 10px;border-radius:8px;border:2px solid #0ea5e9;font-weight:700;font-size:13px;background:white;color:#0b132b;outline:none;cursor:pointer;font-family:Inter,sans-serif;"></select>
+  <button type="button" id="btn-ver-fechas" style="font-family:Inter,sans-serif;font-weight:700;font-size:11px;color:#fff;background:linear-gradient(135deg,#0ea5e9,#0284c7);padding:6px 12px;border-radius:999px;cursor:pointer;white-space:nowrap;box-shadow:0 2px 8px rgba(14,165,233,.3);border:none;">Ver fechas anteriores ▼</button>
 </div>
-<div style="grid-column:1 / -1; display:flex; gap:10px; justify-content:center; margin:0 0 12px 0;">
-  <button id="btn-edea" style="flex:1; background:#facc15;color:#000;font-weight:900;padding:12px 18px;border:none;border-radius:20px;font-size:14px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.15)">⚡ Cortes de EDEA</button>
-  <button id="btn-instalar" style="flex:1; display:none; background:#0f172a;color:#fff;font-weight:900;padding:12px 18px;border:none;border-radius:20px;font-size:14px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.15)">📲 Instalar App</button>
+<div style="margin-top:6px;text-align:right;">
+  <button type="button" id="btn-buscar-otra" style="font-family:Inter,sans-serif;font-weight:600;font-size:11px;color:#0284c7;background:#e0f2fe;border:1px solid #7dd3fc;border-radius:999px;padding:4px 12px;cursor:pointer;">Buscar otra fecha 📅</button>
 </div>
-<div style="grid-column:1 / -1; display:flex; gap:10px; justify-content:center; margin:0 0 12px 0;">
-  <button id="btn-511" style="flex:1; background:#1e40af;color:white;font-weight:900;padding:12px 18px;border:none;border-radius:20px;font-size:14px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.15)">🚌 511 - Horarios</button>
-  <button id="btn-221" style="flex:1; background:#0e7490;color:white;font-weight:900;padding:12px 18px;border:none;border-radius:20px;font-size:14px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.15)">🚌 221 - Horarios</button>
-</div>
-<div style="grid-column:1 / -1; background:white; border:3px solid black; border-radius:12px; padding:12px 10px; text-align:center; height:fit-content; align-self:start;">
-  <div style="font-size:15px; font-weight:900; color:black; line-height:1.2; font-family:Arial Black, Arial, sans-serif;">+18 | EL JUGAR COMPULSIVAMENTE ES PERJUDICIAL PARA LA SALUD</div>
-  <div style="font-size:12px; font-weight:700; margin-top:4px;">Prohibido para menores de 18 años - Resultados con fines informativos</div>
-  <div style="font-size:10px; color:#666; margin-top:2px;">Ayuda: 0800-444-4000 | No organizamos apuestas</div>
-</div>
-<div id="page-home" style="display:contents">
-<div class="card"><span class="badge" style="background:#dcfce7;color:#15803d">QUINIELA - RESULTADOS OFICIALES</span><h2 style="margin-top:6px;font-size:18px" id="q-titulo">Quiniela Hoy - 6 Loterías</h2><select id="q-fecha" style="width:100%;margin-top:8px;padding:10px;border-radius:10px;border:2px solid #e2e8f0;font-weight:700;font-size:13px;background:white;color:#1e293b"></select><div class="q-tabs" id="qt"></div><div class="q-grid" id="qg"></div><a href="#" class="btn-outline" onclick="openM();return false">Ver 20 números de <span id="qn">Nacional</span></a><p id="info-uy" style="display:none;font-size:11px;color:#15803d;font-weight:700;margin-top:8px">🇺🇾 Uruguay solo tiene 2 sorteos oficiales: 15:00 y 21:00</p>
+<div class="q-tabs" id="qt"></div><div class="q-grid" id="qg"></div><a href="#" class="btn-outline" onclick="openM();return false">Ver 20 números de <span id="qn">Nacional</span></a><p id="info-uy" style="display:none;font-size:11px;color:#15803d;font-weight:700;margin-top:8px">🇺🇾 Uruguay solo tiene 2 sorteos oficiales: 15:00 y 21:00</p>
 <div style="background:#FFD500; border-radius:12px; overflow:hidden; border:2px solid #000; font-family:Arial; margin-top:16px;">
   <div style="background:#FFD500; padding:10px; text-align:center; font-weight:900; font-size:15px;">📢 PUBLICITE AQUI - Zona Sur</div>
   <div style="background:white; padding:12px; text-align:center;">
@@ -282,6 +397,100 @@ body{background:#f0f4f8;color:#1a202c}
 <div id="page-alfar" class="barrio-page">
   <div class="btn-volver" onclick="volverHome()">← Volver al inicio</div>
   <div class="barrio-header"><img src="banner2.jpg"><div class="barrio-header-overlay"></div><div class="barrio-header-text"><h2>🌲 ALFAR</h2><p>Luis Franco 750 - Mar del Plata</p></div></div>
+<div style="margin-top:14px"><div style="max-width:760px;margin:0 auto 14px auto;"><div style="margin-bottom:14px"><!-- FARMACIA VARA -->
+<div style="background:white;border-radius:22px;overflow:hidden;border:1px solid #e2e8f0;box-shadow:0 8px 24px rgba(0,0,0,.1);max-width:560px;margin:0 auto 14px auto;font-family:Inter,'Segoe UI',system-ui,sans-serif;grid-column:1 / -1">
+
+  <div style="background: radial-gradient(circle at center, #1e1e1e 0%, #111111 100%); border-radius: 40px; padding: clamp(14px,4vw,22px) clamp(18px,6vw,36px); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: inset 0 2px 4px rgba(255,255,255,0.05), 0 8px 24px rgba(0,0,0,0.4); margin: 10px; font-family: 'Arial Black', Impact, sans-serif; border: 2px solid #222222;">
+    <div style="color: #ffffff; font-size: clamp(20px,6vw,34px); font-weight: 900; letter-spacing: -0.8px; line-height: 1; text-transform: uppercase; text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c5c5c5, 0 3px 0 #bbb, 0 4px 0 #b0b0b0, 0 5px 0 #a5a5a5, 0 6px 1px rgba(0,0,0,0.1), 0 0 5px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.3), 0 3px 5px rgba(0,0,0,0.2), 0 5px 10px rgba(0,0,0,0.25);">
+      FARMACIA VARA
+    </div>
+    <div style="width: 52px; height: 52px; background: linear-gradient(135deg, #a7f3d0 0%, #10b981 50%, #047857 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; position: relative; border: 3px solid #ffffff; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.35);">
+      <div style="width: 32px; height: 12px; background: #ffffff; border-radius: 4px; position: absolute;"></div>
+      <div style="width: 12px; height: 32px; background: #ffffff; border-radius: 4px; position: absolute;"></div>
+      <div style="width: 12px; height: 12px; background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(16,185,129,0.4)); position: absolute; border-radius: 3px; z-index: 2;"></div>
+    </div>
+  </div>
+
+  <div style="padding:12px 14px;display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap">
+    <div style="flex:1 1 200px;min-width:150px;background:white;border-radius:16px;border:1px solid #e2e8f0;overflow:hidden">
+      <img src="farmacia-vara-frente.jpeg" onerror="this.onerror=null;this.src='farmacia-vara-frente.jpg'" alt="Frente Farmacia Vara" style="width:100%;height:auto;display:block">
+    </div>
+    <div style="flex:1 1 220px;padding-top:2px">
+      <div style="color:#14532d;font-weight:900;font-size:19px;line-height:1.25">Tu farmacia en Alfar,<br>para toda la Zona Sur</div>
+      <div style="margin-top:12px;display:flex;flex-direction:column;gap:9px;font-size:14px;font-weight:700;color:#0f172a">
+        <div>🛵 Envíos a domicilio</div>
+        <div>📋 Obras Sociales y Prepagas</div>
+        <div>🧴 Perfumería y Cosmética</div>
+        <div>🧪 Preparados Magistrales</div>
+        <div><span style="background:#14532d;color:white;padding:3px 6px;border-radius:5px;font-size:9px;font-weight:900">PAMI</span> Atiende PAMI</div>
+        <div><span style="background:#1e40af;color:white;padding:3px 6px;border-radius:5px;font-size:9px;font-weight:900">IOMA</span> Atiende IOMA</div>
+        <div style="margin-top:4px;padding:8px 10px;background:#f1f5f9;border-radius:12px;border:1px solid #e2e8f0;font-size:12px;font-weight:700;color:#334155;line-height:1.4">
+          🕒 <span style="color:#14532d;font-weight:900;font-size:11px">HORARIO DE INVIERNO:</span><br>
+          • Lun a Vie: 9 a 20 hs.<br>
+          • Sáb: 9 a 13 hs. y 17 a 20 hs.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin:0 14px 10px 14px;background:#86d391;border-radius:14px;padding:12px 6px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px">
+    <a href="https://wa.me/5492235808030?text=Hola%20Farmacia%20Vara%2C%20los%20vi%20en%20InfoMDQHoy" target="_blank" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:5px;border-right:2px solid #5aa867;padding-right:4px;justify-content:center;min-width:0">
+      <div style="width:30px;height:30px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 5px rgba(0,0,0,.2)">
+        <svg viewBox="0 0 32 32" width="17" height="17" fill="white"><path d="M19.11 17.2c-.31-.16-1.84-.9-2.12-1.01-.29-.11-.5-.16-.7.16-.21.31-.82 1.01-1 1.22-.19.21-.37.23-.69.08-.31-.16-1.32-.48-2.51-1.54-.93-.83-1.55-1.85-1.74-2.16-.18-.31-.02-.48.14-.64.14-.14.31-.37.47-.55.16-.18.21-.31.31-.52.1-.21.05-.39-.03-.54-.08-.16-.7-1.69-.96-2.31-.25-.6-.51-.52-.7-.53h-.6c-.21 0-.54.08-.82.39-.29.31-1.08 1.06-1.08 2.58s1.11 2.99 1.26 3.2c.16.21 2.18 3.33 5.28 4.67.74.32 1.31.51 1.76.65.74.23 1.41.2 1.94.12.59-.09 1.84-.75 2.1-1.48.26-.72.26-1.34.18-1.47-.08-.13-.29-.21-.6-.36zM16 2.04c-7.7 0-13.94 6.24-13.94 13.94 0 2.46.64 4.86 1.86 6.97L2.05 30l7.25-1.9A13.9 13.9 0 0 0 16 30.08c7.7 0 13.94-6.24 13.94-13.94S23.7 2.04 16 2.04zm0 25.33A11.35 11.35 0 0 1 10.22 26l-.42-.25-4.31 1.13 1.15-4.2-.27-.43a11.35 11.35 0 0 1-1.74-6.02c0-6.28 5.11-11.39 11.39-11.39a11.33 11.33 0 0 1 8.05 3.33 11.33 11.33 0 0 1 3.33 8.05c0 6.28-5.11 11.39-11.4 11.39z"/></svg>
+      </div>
+      <div style="color:#05210f;font-weight:900;font-size:10.5px;line-height:1.2;text-align:center">WhatsApp<br><b style="font-size:11px">2235808030</b></div>
+    </a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Estados+Unidos+779+Alfar+Mar+del+Plata" target="_blank" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:5px;border-right:2px solid #5aa867;padding-right:4px;justify-content:center;min-width:0">
+      <div style="width:30px;height:30px;background:#0f172a;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+      <div style="color:#05210f;font-weight:900;font-size:10.5px;line-height:1.2;text-align:center">Ver en<br>el mapa</div>
+    </a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Diagonal+Estados+Unidos+779+Alfar+Mar+del+Plata" target="_blank" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:5px;justify-content:center;min-width:0">
+      <div style="width:30px;height:30px;background:#14532d;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 21s-6-5.373-6-10a6 6 0 0 1 12 0c0 4.627-6 10-6 10z"/><circle cx="12" cy="11" r="2"/></svg></div>
+      <div style="color:#05210f;font-weight:900;font-size:10.5px;line-height:1.2;text-align:center">Estados Unidos<br><b style="font-size:10.5px">Nº 779</b></div>
+    </a>
+  </div>
+
+  <div style="text-align:center;font-size:11px;color:#64748b;font-weight:700;padding:0 14px 14px 14px">Atención personalizada · Productos de calidad</div>
+</div></div><div style="box-sizing:border-box;width:100%;max-width:760px;margin:0 auto;padding:12px;background:#fafafa;border:1px solid #e5e7eb;border-radius:28px;font-family:Inter,Arial,sans-serif;color:#0b132b;box-shadow:0 14px 35px rgba(11,19,43,.12);">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 16px;background:linear-gradient(135deg,#7e22ce,#581c87);border-radius:18px;">
+    <div style="font-size:1.4rem;font-weight:900;color:#fff;text-transform:uppercase;">Proveeduría Kevin</div>
+    <div style="width:45px;height:45px;border-radius:50%;background:#b8f34a;display:flex;align-items:center;justify-content:center;font-size:1.5rem;">🛍️</div>
+  </div>
+
+  <div style="position:relative;margin-top:12px;overflow:hidden;border-radius:22px 22px 14px 14px;background:#e5e7eb;">
+    <img src="proveeduria-kevin.jpeg" alt="Fachada real Proveeduría Kevin Alfar" style="display:block;width:100%;height:clamp(230px,42vw,360px);object-fit:cover;">
+    <div style="position:absolute;left:16px;bottom:15px;padding:8px 12px;border-radius:10px;background:rgba(11,19,43,.88);color:#fff;font-size:.7rem;font-weight:900;text-transform:uppercase;">FOTO REAL DEL LOCAL</div>
+    <div style="position:absolute;right:15px;top:15px;padding:9px 13px;border-radius:999px;background:#b8f34a;color:#0b132b;font-size:.68rem;font-weight:900;transform:rotate(3deg);">Comprá más. Pagá menos.</div>
+  </div>
+
+  <div style="margin-top:12px;padding:10px;border-radius:12px;background:white;border-top:2px dotted #e2e8f0;border-bottom:2px dotted #e2e8f0;text-align:center;">
+    <span style="color:#dc2626;font-weight:900;font-style:italic;">¡Comprá más. Pagá menos. Elegí Kevin!</span>
+    <span style="background:#dc2626;color:white;font-weight:900;font-size:10px;padding:5px 10px;border-radius:20px;margin-left:6px;">PRECIOS DESTACADOS 🏷</span>
+  </div>
+
+  <div style="padding:18px 8px 8px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;">
+      <div style="background:#fff;border-radius:16px;border:1px solid #f1f5f9;box-shadow:0 3px 10px rgba(11,19,43,.06);overflow:hidden;">
+        <div style="background:#f1f5f9;padding:8px 12px;font-weight:900;font-size:11px;">🟢 SUCURSAL ALFAR</div>
+        <div style="padding:12px;font-size:12.5px;font-weight:700;">📍 Diagonal Estados Unidos 474</div>
+      </div>
+      <div style="background:#fff;border-radius:16px;border:1px solid #f1f5f9;box-shadow:0 3px 10px rgba(11,19,43,.06);overflow:hidden;">
+        <div style="background:#fff7ed;padding:8px 12px;font-weight:900;font-size:11px;">🟠 SUCURSAL ACANTILADOS</div>
+        <div style="padding:12px;font-size:12px;font-weight:700;">📍 Calle 493 entre 6 y 8<br><span style="font-size:10px;color:#64748b;">(en el kiosko de diario)</span></div>
+      </div>
+    </div>
+
+    <a href="https://www.instagram.com/autoserviciokevin" target="_blank" style="display:block;margin-bottom:14px;padding:11px;border-radius:12px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:white;font-weight:900;text-align:center;text-decoration:none;">📸 @autoserviciokevin</a>
+
+    <a href="https://wa.me/5492230000000?text=Hola%20Kevin!" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:17px;border-radius:18px;background:#25D366;color:white;text-decoration:none;font-weight:900;box-shadow:0 7px 0 #159447;">💬 ¡Hacé tu pedido por WhatsApp!</a>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px;">
+      <a href="https://www.google.com/maps/search/?api=1&query=Diagonal+Estados+Unidos+600+Alfar+Mar+del+Plata" target="_blank" style="padding:12px;border-radius:999px;background:#eef0f2;text-align:center;font-weight:900;text-decoration:none;color:#263244;">🗺 Ver Mapa Alfar</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Calle+493+entre+6+y+8+Acantilados" target="_blank" style="padding:12px;border-radius:999px;background:#eef0f2;text-align:center;font-weight:900;text-decoration:none;color:#263244;">🗺 Ver Mapa Acantilados</a>
+    </div>
+  </div>
+</div></div></div>
+
   <div class="card"><h3>🏛️ Sociedad de Fomento Alfar</h3><div class="info-box"><b>📍 Dirección:</b> Luis Franco 750<br><b>📌 Servicios:</b> Vacunación, pediatría, odontología y castraciones</div></div>
   <div class="card"><h3>🎯 Actividades en ALFAR</h3><div id="acts-alfar" style="font-size:13px">Cargando...</div></div>
   <div class="card" style="background:#eff6ff;border:2px solid #3b82f6"><h3>📢 Notificaciones - ALFAR</h3><div id="noti-alfar" style="margin-top:10px;font-size:13px;color:#64748b;padding:12px;background:white;border-radius:10px;border:1px solid #e2e8f0">No hay notificaciones por el momento.</div></div>
@@ -296,6 +505,46 @@ body{background:#f0f4f8;color:#1a202c}
 <div id="page-acantilados" class="barrio-page">
   <div class="btn-volver" onclick="volverHome()">← Volver al inicio</div>
   <div class="barrio-header"><img src="banner2.jpg"><div class="barrio-header-overlay"></div><div class="barrio-header-text"><h2>🌊 ACANTILADOS</h2><p>Calle 20 esquina 497</p></div></div>
+<div style="margin-top:14px"><div style="max-width:760px;margin:0 auto 14px auto;"><div style="box-sizing:border-box;width:100%;max-width:760px;margin:0 auto;padding:12px;background:#fafafa;border:1px solid #e5e7eb;border-radius:28px;font-family:Inter,Arial,sans-serif;color:#0b132b;box-shadow:0 14px 35px rgba(11,19,43,.12);">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 16px;background:linear-gradient(135deg,#7e22ce,#581c87);border-radius:18px;">
+    <div style="font-size:1.4rem;font-weight:900;color:#fff;text-transform:uppercase;">Proveeduría Kevin</div>
+    <div style="width:45px;height:45px;border-radius:50%;background:#b8f34a;display:flex;align-items:center;justify-content:center;font-size:1.5rem;">🛍️</div>
+  </div>
+
+  <div style="position:relative;margin-top:12px;overflow:hidden;border-radius:22px 22px 14px 14px;background:#e5e7eb;">
+    <img src="proveeduria-kevin.jpeg" alt="Fachada real Proveeduría Kevin Alfar" style="display:block;width:100%;height:clamp(230px,42vw,360px);object-fit:cover;">
+    <div style="position:absolute;left:16px;bottom:15px;padding:8px 12px;border-radius:10px;background:rgba(11,19,43,.88);color:#fff;font-size:.7rem;font-weight:900;text-transform:uppercase;">FOTO REAL DEL LOCAL</div>
+    <div style="position:absolute;right:15px;top:15px;padding:9px 13px;border-radius:999px;background:#b8f34a;color:#0b132b;font-size:.68rem;font-weight:900;transform:rotate(3deg);">Comprá más. Pagá menos.</div>
+  </div>
+
+  <div style="margin-top:12px;padding:10px;border-radius:12px;background:white;border-top:2px dotted #e2e8f0;border-bottom:2px dotted #e2e8f0;text-align:center;">
+    <span style="color:#dc2626;font-weight:900;font-style:italic;">¡Comprá más. Pagá menos. Elegí Kevin!</span>
+    <span style="background:#dc2626;color:white;font-weight:900;font-size:10px;padding:5px 10px;border-radius:20px;margin-left:6px;">PRECIOS DESTACADOS 🏷</span>
+  </div>
+
+  <div style="padding:18px 8px 8px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;">
+      <div style="background:#fff;border-radius:16px;border:1px solid #f1f5f9;box-shadow:0 3px 10px rgba(11,19,43,.06);overflow:hidden;">
+        <div style="background:#f1f5f9;padding:8px 12px;font-weight:900;font-size:11px;">🟢 SUCURSAL ALFAR</div>
+        <div style="padding:12px;font-size:12.5px;font-weight:700;">📍 Diagonal Estados Unidos 474</div>
+      </div>
+      <div style="background:#fff;border-radius:16px;border:1px solid #f1f5f9;box-shadow:0 3px 10px rgba(11,19,43,.06);overflow:hidden;">
+        <div style="background:#fff7ed;padding:8px 12px;font-weight:900;font-size:11px;">🟠 SUCURSAL ACANTILADOS</div>
+        <div style="padding:12px;font-size:12px;font-weight:700;">📍 Calle 493 entre 6 y 8<br><span style="font-size:10px;color:#64748b;">(en el kiosko de diario)</span></div>
+      </div>
+    </div>
+
+    <a href="https://www.instagram.com/autoserviciokevin" target="_blank" style="display:block;margin-bottom:14px;padding:11px;border-radius:12px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:white;font-weight:900;text-align:center;text-decoration:none;">📸 @autoserviciokevin</a>
+
+    <a href="https://wa.me/5492230000000?text=Hola%20Kevin!" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:17px;border-radius:18px;background:#25D366;color:white;text-decoration:none;font-weight:900;box-shadow:0 7px 0 #159447;">💬 ¡Hacé tu pedido por WhatsApp!</a>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px;">
+      <a href="https://www.google.com/maps/search/?api=1&query=Diagonal+Estados+Unidos+600+Alfar+Mar+del+Plata" target="_blank" style="padding:12px;border-radius:999px;background:#eef0f2;text-align:center;font-weight:900;text-decoration:none;color:#263244;">🗺 Ver Mapa Alfar</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Calle+493+entre+6+y+8+Acantilados" target="_blank" style="padding:12px;border-radius:999px;background:#eef0f2;text-align:center;font-weight:900;text-decoration:none;color:#263244;">🗺 Ver Mapa Acantilados</a>
+    </div>
+  </div>
+</div></div></div>
+
   <div class="card"><h3>🏛️ Asociación Vecinal de Fomento Los Acantilados</h3><div class="info-box"><b>📍 Dirección:</b> Calle 20 esquina 497 - Parque Los Acantilados<br><b>📌 Datos:</b> Reserva forestal y acceso a playa</div></div>
   <div class="card"><h3>🎯 Actividades en ACANTILADOS</h3><div id="acts-acantilados" style="font-size:13px">Cargando...</div></div>
   <div class="card" style="background:#f0fdf4;border:2px solid #22c55e"><h3>📢 Notificaciones - ACANTILADOS</h3><div id="noti-acantilados" style="margin-top:10px;font-size:13px;color:#64748b;padding:12px;background:white;border-radius:10px;border:1px solid #e2e8f0">No hay notificaciones por el momento.</div></div>
@@ -450,15 +699,15 @@ const selectFecha=document.getElementById('q-fecha');
 for(let i=0;i>=-29;i--){const f=fechaARG(i);const opt=document.createElement('option');opt.value=f;opt.textContent=etiquetaFecha(i,f);selectFecha.appendChild(opt);}
 selectFecha.value=fechaARG(0);
 selectFecha.addEventListener('change',()=>cargarDia(selectFecha.value));
-function cargarDia(fecha){const esHoy=fecha===fechaARG(0);document.getElementById('q-titulo').textContent=esHoy?'Quiniela Hoy - 6 Loterías':'Quiniela del '+fecha.split('-').reverse().join('/');const ruta=esHoy?'/quiniela.json':`/historial/${fecha}.json`;fetch(ruta+'?v='+Date.now()).then(r=>{if(!r.ok)throw new Error(esHoy?"quiniela.json no encontrado ("+r.status+")":"Sin datos guardados para ese dia");return r.json();}).then(raw=>{let d=Array.isArray(raw)?raw[0]:raw;let fuente=d.completo||d;let norm={};Object.keys(fuente).forEach(k=>{norm[k.toLowerCase()]=fuente[k];});datosCompletos=norm;render();}).catch(e=>{console.error(e);datosCompletos=null;document.getElementById('qg').innerHTML=`<div style="grid-column:1/-1;background:#fee2e2;border:2px solid #dc2626;padding:12px;border-radius:10px;color:#991b1b;font-size:12px"><b>${esHoy?'Error':'Sin datos'}:</b> ${e.message}</div>`;});}
+function cargarDia(fecha){const esHoy=fecha===fechaARG(0);document.getElementById('q-titulo').textContent=esHoy?'Quiniela Hoy - 6 Loterías':'Quiniela del '+fecha.split('-').reverse().join('/');const ruta=esHoy?'./quiniela.json':`./historial/${fecha}.json`;fetch(ruta+'?v='+Date.now()).then(r=>{if(!r.ok)throw new Error(esHoy?"quiniela.json no encontrado ("+r.status+")":"Sin datos guardados para ese dia");return r.json();}).then(raw=>{let d=Array.isArray(raw)?raw[0]:raw;let fuente=d.completo||d;let norm={};Object.keys(fuente).forEach(k=>{norm[k.toLowerCase()]=fuente[k];});datosCompletos=norm;render();}).catch(e=>{console.error(e);datosCompletos=null;document.getElementById('qg').innerHTML=`<div style="grid-column:1/-1;background:#fee2e2;border:2px solid #dc2626;padding:12px;border-radius:10px;color:#991b1b;font-size:12px"><b>${esHoy?'Error':'Sin datos'}:</b> ${e.message}</div>`;});}
 cargarDia(selectFecha.value);
-document.getElementById('btn-edea').onclick=function(){document.getElementById('modal-edea').style.display='block';document.getElementById('texto-edea').innerText='Cargando datos oficiales de EDEA...';fetch('/cortes-edea.json?v='+Date.now()).then(r=>r.json()).then(d=>{let txt=d.info_oficial||(d.cortes?d.cortes.join("\n\n"):"")||"";if(!txt||txt.trim().length<10)txt="Hoy EDEA no publicó cortes programados.";document.getElementById('texto-edea').innerText=txt;document.getElementById('fecha-edea').innerText="Actualizado: "+(d.actualizado||"");}).catch(()=>{document.getElementById('texto-edea').innerText='No se pudo cargar ahora. Probá en unos minutos.';});}
+document.getElementById('btn-edea').onclick=function(){document.getElementById('modal-edea').style.display='block';document.getElementById('texto-edea').innerText='Cargando datos oficiales de EDEA...';fetch('./cortes-edea.json?v='+Date.now()).then(r=>r.json()).then(d=>{let txt=d.info_oficial||(d.cortes?d.cortes.join("\n\n"):"")||"";if(!txt||txt.trim().length<10)txt="Hoy EDEA no publicó cortes programados.";document.getElementById('texto-edea').innerText=txt;document.getElementById('fecha-edea').innerText="Actualizado: "+(d.actualizado||"");}).catch(()=>{document.getElementById('texto-edea').innerText='No se pudo cargar ahora. Probá en unos minutos.';});}
 document.getElementById('btn-511').onclick=function(){document.getElementById('modal-511').style.display='block'}
 document.getElementById('btn-221').onclick=function(){document.getElementById('modal-221').style.display='block'}
 let actsCache=[];
 async function cargarActsJSON(){
   try{
-    const r=await fetch('/actividades.json?v='+Date.now());
+    const r=await fetch('./actividades.json?v='+Date.now());
     if(!r.ok) throw 0;
     actsCache=await r.json();
     return actsCache;
@@ -537,5 +786,38 @@ window.addEventListener('appinstalled', () => {
   if(btnInstalar) btnInstalar.style.display = 'none';
 });
 </script>
+
+<script>
+// V9 - RESTAURADO V6 VISUAL + FIX REAL BUSCADOR Y QUINIELA
+document.addEventListener('DOMContentLoaded', function(){
+  const sel = document.getElementById('q-fecha');
+  const btn1 = document.getElementById('btn-ver-fechas');
+  const btn2 = document.getElementById('btn-buscar-otra');
+  function abrirCalendario(){
+    if(!sel) return;
+    try{
+      if(typeof sel.showPicker === 'function'){ sel.showPicker(); }
+      else { sel.focus(); sel.click(); }
+    }catch(e){ sel.focus(); }
+  }
+  if(btn1) btn1.addEventListener('click', abrirCalendario);
+  if(btn2) btn2.addEventListener('click', abrirCalendario);
+  console.log('Quiniela botones OK', !!sel, !!btn1, !!btn2);
+});
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', async function(){
+  try{
+    const r = await fetch('./actividades.json?v='+Date.now());
+    console.log('actividades.json status', r.status);
+    const j = await r.json();
+    console.log('actividades.json count', j.length);
+    if(j.length>0) console.log('ejemplo', j[0]);
+  }catch(e){ console.error('Error cargando actividades.json', e); }
+});
+</script>
+
 </body>
 </html>
