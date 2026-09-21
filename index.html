@@ -263,8 +263,6 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
     </a>
   </div>
 
-  <a href="https://www.INSTAGRAM.com/farmaciavaraok/" target="_blank" style="display:block;margin:0 14px 10px 14px;padding:11px;border-radius:12px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:white;font-weight:900;text-align:center;text-decoration:none;">📸 @farmaciavaraok</a>
-
   <div style="text-align:center;font-size:11px;color:#64748b;font-weight:700;padding:0 14px 14px 14px">Atención personalizada · Productos de calidad</div>
 </div></div>
 <div style="grid-column:1/-1;max-width:760px;margin:0 auto 14px auto;"><div style="box-sizing:border-box;width:100%;max-width:760px;margin:0 auto;padding:12px;background:#fafafa;border:1px solid #e5e7eb;border-radius:28px;font-family:Inter,Arial,sans-serif;color:#0b132b;box-shadow:0 14px 35px rgba(11,19,43,.12);">
@@ -451,8 +449,6 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
       <div style="color:#05210f;font-weight:900;font-size:10.5px;line-height:1.2;text-align:center">Estados Unidos<br><b style="font-size:10.5px">Nº 779</b></div>
     </a>
   </div>
-
-  <a href="https://www.INSTAGRAM_PLACEHOLDER/farmaciavaraok/" target="_blank" style="display:block;margin:0 14px 10px 14px;padding:11px;border-radius:12px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:white;font-weight:900;text-align:center;text-decoration:none;">📸 @farmaciavaraok</a>
 
   <div style="text-align:center;font-size:11px;color:#64748b;font-weight:700;padding:0 14px 14px 14px">Atención personalizada · Productos de calidad</div>
 </div></div><div style="box-sizing:border-box;width:100%;max-width:760px;margin:0 auto;padding:12px;background:#fafafa;border:1px solid #e5e7eb;border-radius:28px;font-family:Inter,Arial,sans-serif;color:#0b132b;box-shadow:0 14px 35px rgba(11,19,43,.12);">
@@ -703,7 +699,57 @@ const selectFecha=document.getElementById('q-fecha');
 for(let i=0;i>=-29;i--){const f=fechaARG(i);const opt=document.createElement('option');opt.value=f;opt.textContent=etiquetaFecha(i,f);selectFecha.appendChild(opt);}
 selectFecha.value=fechaARG(0);
 selectFecha.addEventListener('change',()=>cargarDia(selectFecha.value));
-function cargarDia(fecha){const esHoy=fecha===fechaARG(0);document.getElementById('q-titulo').textContent=esHoy?'Quiniela Hoy - 6 Loterías':'Quiniela del '+fecha.split('-').reverse().join('/');const ruta=esHoy?'./quiniela.json':`./historial/${fecha}.json`;fetch(ruta+'?v='+Date.now()).then(r=>{if(!r.ok)throw new Error(esHoy?"quiniela.json no encontrado ("+r.status+")":"Sin datos guardados para ese dia");return r.json();}).then(raw=>{let d=Array.isArray(raw)?raw[0]:raw;let fuente=d.completo||d;let norm={};Object.keys(fuente).forEach(k=>{norm[k.toLowerCase()]=fuente[k];});datosCompletos=norm;render();}).catch(e=>{console.error(e);datosCompletos=null;document.getElementById('qg').innerHTML=`<div style="grid-column:1/-1;background:#fee2e2;border:2px solid #dc2626;padding:12px;border-radius:10px;color:#991b1b;font-size:12px"><b>${esHoy?'Error':'Sin datos'}:</b> ${e.message}</div>`;});}
+function cargarDia(fecha){
+  const esHoy=fecha===fechaARG(0);
+  document.getElementById('q-titulo').textContent=esHoy?'Quiniela Hoy - 6 Loterías':'Quiniela del '+fecha.split('-').reverse().join('/');
+  const ruta=esHoy?'./quiniela.json':`./historial/${fecha}.json`;
+  fetch(ruta+'?v='+Date.now()).then(r=>{
+    if(!r.ok) throw new Error(esHoy?"quiniela.json no encontrado ("+r.status+")":"Sin datos guardados para ese dia");
+    return r.json();
+  }).then(raw=>{
+    let d=Array.isArray(raw)?raw[0]:raw;
+    // FIX: detectar si quiniela.json trae fecha vieja (ej sábado) y hoy es domingo/lunes sin sorteo
+    let fechaEnJson = (d.fecha || d.fecha_str || d.dia || d.date || "").toString().slice(0,10);
+    // Si es hoy y el json trae otra fecha (ej: sábado), no mostrar esos números como si fueran de hoy
+    if(esHoy && fechaEnJson && fechaEnJson !== fecha){
+      console.warn("quiniela.json es de", fechaEnJson, "pero se pidió", fecha, "- mostrando como sin sorteo");
+      // Si el json no tiene flag de sorteos de hoy, lo tratamos como que todavía no sorteó
+      // Buscamos si tiene al menos un sorteo con números de hoy
+      let tieneNumerosHoy = false;
+      try{
+        let fuenteTmp = d.completo||d;
+        // si tiene alguna lotería con datos, asumimos que son viejos, no de hoy
+        // Para hoy mostramos cartel de "todavía no sorteó"
+        if(fechaEnJson !== fecha){
+          throw new Error("Todavía no hay sorteos para hoy ("+fecha.split('-').reverse().join('/')+"). Último sorteo: "+fechaEnJson.split('-').reverse().join('/'));
+        }
+      }catch(err){
+        throw err;
+      }
+    }
+    let fuente=d.completo||d;
+    let norm={};
+    Object.keys(fuente).forEach(k=>{norm[k.toLowerCase()]=fuente[k];});
+    // Si norm está vacío o no tiene loterías, es que no sorteó
+    let keys = Object.keys(norm).filter(k=>!['fecha','fecha_str','dia','date','actualizado'].includes(k));
+    if(esHoy && keys.length===0){
+      throw new Error("Todavía no hay sorteos para hoy - Aún no sorteó");
+    }
+    datosCompletos=norm;
+    render();
+  }).catch(e=>{
+    console.error(e);
+    datosCompletos=null;
+    let msg = e.message||"Sin datos";
+    let esHoyMsg = fecha===fechaARG(0);
+    let esSinSorteo = msg.toLowerCase().includes("todavía no hay") || msg.toLowerCase().includes("no sorteó") || msg.toLowerCase().includes("aún no");
+    if(esHoyMsg && esSinSorteo){
+      document.getElementById('qg').innerHTML=`<div style="grid-column:1/-1;background:#fef9c3;border:2px dashed #ca8a04;padding:16px;border-radius:12px;color:#854d0e;text-align:center"><b>⏳ ${msg}</b><br><span style="font-size:12px;font-weight:600">Los números aparecerán acá cuando se haga el sorteo. Podés ver el del sábado en el historial.</span></div>`;
+    }else{
+      document.getElementById('qg').innerHTML=`<div style="grid-column:1/-1;background:#fee2e2;border:2px solid #dc2626;padding:12px;border-radius:10px;color:#991b1b;font-size:12px"><b>${esHoyMsg?'':''} ${esSinSorteo?'Aviso':'Sin datos'}:</b> ${msg}</div>`;
+    }
+  });
+}
 cargarDia(selectFecha.value);
 document.getElementById('btn-edea').onclick=function(){document.getElementById('modal-edea').style.display='block';document.getElementById('texto-edea').innerText='Cargando datos oficiales de EDEA...';fetch('./cortes-edea.json?v='+Date.now()).then(r=>r.json()).then(d=>{let txt=d.info_oficial||(d.cortes?d.cortes.join("\n\n"):"")||"";if(!txt||txt.trim().length<10)txt="Hoy EDEA no publicó cortes programados.";document.getElementById('texto-edea').innerText=txt;document.getElementById('fecha-edea').innerText="Actualizado: "+(d.actualizado||"");}).catch(()=>{document.getElementById('texto-edea').innerText='No se pudo cargar ahora. Probá en unos minutos.';});}
 document.getElementById('btn-511').onclick=function(){document.getElementById('modal-511').style.display='block'}
@@ -718,14 +764,12 @@ async function cargarActsJSON(){
   }catch{actsCache=[];return[];}
 }
 function abrirModalActividad(barrio,nombre){
-  const a=actsCache.find(x=> x.barrio===barrio && x.nombre.trim().toLowerCase()===nombre.trim().toLowerCase());
+  const a=actsCache.find(x=> x.barrio===barrio && x.nombre===nombre);
   if(!a) return;
   document.getElementById('modal-acts').style.display='block';
   document.getElementById('act-titulo').textContent=a.nombre;
   const img=document.getElementById('act-img');
-  const nn=(a.nombre||'').toLowerCase();
-  const aa=(a.actividad||'').toLowerCase();
-  if(nn.includes('ritmos')||aa.includes('ritmos')||aa.includes('salsa')){img.src='ritmos-faro.jpg';img.style.display='block';}else if(nn.includes('pilates')||aa.includes('pilates')){img.src='pilates-faro.jpg';img.style.display='block';}else{img.style.display='none';}
+  if(a.barrio==='faro'){img.src='ritmos-faro.jpg';img.style.display='block';}else{img.style.display='none';}
   document.getElementById('act-info').innerHTML=`
     <div style="display:inline-block;background:#e0f2fe;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800">${a.actividad.toUpperCase()}</div><br><br>
     <b>📍 Lugar:</b> ${a.lugar}<br>
