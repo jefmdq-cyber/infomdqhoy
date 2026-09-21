@@ -23,7 +23,7 @@ jobs:
           from urllib.parse import urlparse
           from bs4 import BeautifulSoup
 
-          HEADERS = {"User-Agent": "Mozilla/5.0 Chrome/122","Referer":"https://www.google.com/"}
+          HEADERS = {"User-Agent": "Mozilla/5.0 Chrome/122","Referer":"https://google.com"}
           TZ_ARG = ZoneInfo("America/Argentina/Buenos_Aires")
           AHORA = datetime.now(TZ_ARG)
           HOY = AHORA.strftime("%Y-%m-%d")
@@ -32,23 +32,15 @@ jobs:
           os.makedirs("historial", exist_ok=True)
           ARCHIVO_HOY = f"historial/{HOY}.json"
 
-          # URLs REALES verificadas contra el menu del sitio (15/9/2026).
-          # OJO: si el sitio vuelve a cambiar de nombre de pagina, la validacion
-          # "mismo_path" de abajo evita que agarremos la portada por error.
           LOTERIAS_4CIFRAS = {
-            "nacional":   "https://www.tujugada.com.ar/quiniela-nacional.asp",
-            "provincia":  "https://www.tujugada.com.ar/quiniela_provincia_buenos_aires.asp",
-            "santafe":    "https://www.tujugada.com.ar/quiniela_santa_fe.asp",
-            "cordoba":    "https://www.tujugada.com.ar/quiniela_cordoba.asp",
-            "entrerios":  "https://www.tujugada.com.ar/quiniela_entre_rios.asp",
+            "nacional":   "https://tujugada.com.ar",
+            "provincia":  "https://tujugada.com.ar",
+            "santafe":    "https://tujugada.com.ar",
+            "cordoba":    "https://tujugada.com.ar",
+            "entrerios":  "https://tujugada.com.ar",
           }
           ORDEN_4CIFRAS = ["previa","primera","matutina","vespertina","nocturna"]
 
-          # Horarios oficiales de cada sorteo + minutos de margen para que el
-          # sitio termine de publicar el resultado. Antes de esa hora, aunque
-          # el sitio muestre numeros (son los de AYER, que tujugada deja
-          # "pegados" hasta que sale el nuevo), no los usamos como si fueran
-          # de hoy.
           MARGEN_MIN = 20
           HORA_SORTEO_ARG = {"previa":(10,15), "primera":(12,0), "matutina":(15,0), "vespertina":(18,0), "nocturna":(21,0)}
           HORA_SORTEO_UY  = {"vespertina":(15,0), "nocturna":(21,0)}
@@ -58,11 +50,9 @@ jobs:
               limite = AHORA.replace(hour=h, minute=m, second=0, microsecond=0) + timedelta(minutes=MARGEN_MIN)
               return AHORA >= limite
 
-          # Uruguay es aparte: 3 cifras and solo 2 sorteos por dia.
-          URUGUAY_URL = "https://www.tujugada.com.ar/quiniela_uruguay.asp"
+          URUGUAY_URL = "https://tujugada.com.ar"
           ORDEN_URUGUAY = ["vespertina","nocturna"]
 
-          # carga viejo para no pisar nunca con datos vacios.
           viejo = {}
           if os.path.exists(ARCHIVO_HOY):
             try:
@@ -70,7 +60,7 @@ jobs:
             except: pass
 
           def limpiar(html):
-              return html.replace("---MENSAJE PARA EL VISITANTE DE ESTE SITIO--- SI VES ESTE MENSAJE ES PORQUE VISITAS UN SITIO QUE ESTA COPIANDO CODIGO FUENTE AUTORIA DE TUJUGADA.COM.AR SIN AUTORIZACION. VISITA AL SITIO REAL QUE ACTUALIZA ESTOS DATOS EN WWW.TUJUGADA.COM.AR!!!", "")
+              return html.replace("---MENSAJE PARA EL VISITANTE DE ESTE SITIO--- SI VES ESTE MENSAJE ES PORQUE VISITAS UN SITIO QUE ESTA COPIANDO CODIGO FUENTE AUTORIA DE TUJUGADA.COM.AR SIN AUTORIZACION. VISITA AL SITIO REAL QUE ACTUALIZA ESTOS DATOS EN ://tujugada.com.AR!!!", "")
 
           def mismo_path(url_pedido, url_final):
               return urlparse(url_pedido).path.lower() == urlparse(url_final).path.lower()
@@ -87,8 +77,8 @@ jobs:
               if len(lista) < 20:
                   return lista
               veinte = lista[:20]
-              izquierda = veinte[0::2]  # posiciones reales 1-10
-              derecha = veinte[1::2]    # posiciones reales 11-20
+              izquierda = veinte[0::2]
+              derecha = veinte[1::2]
               return izquierda + derecha
 
           def extraer_sorteos(url, orden, digitos):
@@ -101,8 +91,19 @@ jobs:
                       print(f"AVISO: {url} redirigio a {r.url} -> pagina no existe, se ignora")
                       return sorteos
 
-                  low = texto_plano(r.text).lower()
+                  texto_completo = texto_plano(r.text)
+                  low = texto_completo.lower()
+                  
+                  # Filtro estricto: Si la pagina tiene fecha vieja de sorteo, la ignoramos
+                  fecha_actual_str = AHORA.strftime("%d/%m/%Y")
+                  pag_tiene_fecha_hoy = fecha_actual_str in texto_completo
+
                   for key in orden:
+                      # Si no es la hora o la pagina es vieja, tiramos casillero vacio
+                      if not ya_deberia_haber_salido(key, HORA_SORTEO_ARG if digitos==4 else HORA_SORTEO_UY) or not pag_tiene_fecha_hoy:
+                          sorteos[key] = []
+                          continue
+
                       m = re.search(rf'\b{key}\b\s+\d{{1,2}}:\d{{2}}\s*hs\b', low)
                       if m:
                           idx = m.start()
@@ -113,7 +114,6 @@ jobs:
                               if n not in uniq:
                                   uniq.append(n)
                           if len(uniq) >= 15:
-                              # Ajuste Quirurgico: Uruguay (3 cifras) no se reordena; Argentina (4 cifras) si.
                               if digitos == 3:
                                   sorteos[key] = uniq[:20]
                               else:
@@ -124,11 +124,9 @@ jobs:
           
           resultado_final = {}
           for cly, url_lot in LOTERIAS_4CIFRAS.items():
-              if ya_deberia_haber_salido(cly_key := ORDEN_4CIFRAS[0], HORA_SORTEO_ARG):
-                  resultado_final[cly] = extraer_sorteos(url_lot, ORDEN_4CIFRAS, 4)
+              resultado_final[cly] = extraer_sorteos(url_lot, ORDEN_4CIFRAS, 4)
           
-          if ya_deberia_haber_salido(ORDEN_URUGUAY[0], HORA_SORTEO_UY):
-              resultado_final["uruguay"] = extraer_sorteos(URUGUAY_URL, ORDEN_URUGUAY, 3)
+          resultado_final["uruguay"] = extraer_sorteos(URUGUAY_URL, ORDEN_URUGUAY, 3)
 
           output_data = {
             "completo": resultado_final,
@@ -146,5 +144,5 @@ jobs:
           git config user.email "bot@infomdq.com"
           git add historial/ || true
           git add quiniela.json || true
-          git commit -m "Update Quiniela oficial fin de semana" || true
+          git commit -m "Update Quiniela limpieza absoluta" || true
           git push
