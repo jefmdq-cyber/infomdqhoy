@@ -77,40 +77,22 @@ jobs:
               if len(lista) < 20:
                   return lista
               veinte = lista[:20]
-              izquierda = veinte[0::2]
-              derecha = veinte[1::2]
+              izquierda = veinte[0::2]  # posiciones reales 1-10
+              derecha = veinte[1::2]    # posiciones reales 11-20
               return izquierda + derecha
 
-          def extraer_sorteos(url, orden, digitos, cly_key):
+          def extraer_sorteos(url, orden, digitos):
               sorteos = {k: [] for k in orden}
               patron = r'\b\d{%d}\b' % digitos
-              
-              sorteos_guardados = viejo.get(cly_key, {})
-              
               try:
                   r = requests.get(url, headers=HEADERS, timeout=30, allow_redirects=True)
+
                   if not mismo_path(url, r.url):
-                      return sorteos_guardados if sorteos_guardados else sorteos
+                      print(f"AVISO: {url} redirigio a {r.url} -> pagina no existe, se ignora")
+                      return sorteos
 
-                  texto_completo = texto_plano(r.text)
-                  low = texto_completo.lower()
-                  
-                  fecha_actual_str = AHORA.strftime("%d/%m/%Y")
-                  pag_tiene_fecha_hoy = fecha_actual_str in texto_completo
-
+                  low = texto_plano(r.text).lower()
                   for key in orden:
-                      if sorteos_guardados and len(sorteos_guardados.get(key, [])) >= 15:
-                          sorteos[key] = sorteos_guardados[key]
-                          continue
-                          
-                      if not ya_deberia_haber_salido(key, HORA_SORTEO_ARG if digitos==4 else HORA_SORTEO_UY):
-                          sorteos[key] = []
-                          continue
-
-                      if not pag_tiene_fecha_hoy:
-                          sorteos[key] = []
-                          continue
-
                       m = re.search(rf'\b{key}\b\s+\d{{1,2}}:\d{{2}}\s*hs\b', low)
                       if m:
                           idx = m.start()
@@ -124,14 +106,15 @@ jobs:
                               sorteos[key] = reordenar_columnas(uniq)
               except Exception as e:
                   print(f"Error en {url}: {e}")
-                  return sorteos_guardados if sorteos_guardados else sorteos
               return sorteos
           
           resultado_final = {}
           for cly, url_lot in LOTERIAS_4CIFRAS.items():
-              resultado_final[cly] = extraer_sorteos(url_lot, ORDEN_4CIFRAS, 4, cly)
+              if ya_deberia_haber_salido(ORDEN_4CIFRAS, HORA_SORTEO_ARG):
+                  resultado_final[cly] = extraer_sorteos(url_lot, ORDEN_4CIFRAS, 4)
           
-          resultado_final["uruguay"] = extraer_sorteos(URUGUAY_URL, ORDEN_URUGUAY, 3, "uruguay")
+          if ya_deberia_haber_salido(ORDEN_URUGUAY, HORA_SORTEO_UY):
+              resultado_final["uruguay"] = extraer_sorteos(URUGUAY_URL, ORDEN_URUGUAY, 3)
 
           output_data = {
             "completo": resultado_final,
@@ -149,6 +132,5 @@ jobs:
           git config user.email "bot@infomdq.com"
           git add historial/ || true
           git add quiniela.json || true
-          git commit -m "Update Quiniela final" || true
+          git commit -m "Update Quiniela oficial fin de semana" || true
           git push
-
