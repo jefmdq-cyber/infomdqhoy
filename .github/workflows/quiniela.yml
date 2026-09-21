@@ -1,15 +1,13 @@
-name: Quiniela 20 TODOS los sorteos
 on:
   schedule:
-    # 1. Lunes a Viernes: Cada 20 minutos de 13:00 a 23:40 (Hora UTC)
+    # 1. De Lunes a Viernes: Cada 20 minutos de 10:00 AM a 20:40 PM (De 13:00 a 23:40 UTC)
     - cron: '*/20 13-23 * * 1-5'
-    # 2. Sábados: Cada 20 minutos de 13:00 a 22:00 (Corte estricto a las 10 PM UTC)
+    # 2. Sábados: Cada 20 minutos de 10:00 AM a 19:00 PM (Corte estricto a las 22:00 UTC)
     - cron: '*/20 13-22 * * 6'
-    # 3. Lunes: Reactivación demorada a partir de las 12:00 hs del mediodía (Hora UTC)
-    - cron: '*/20 12-23 * * 1'
   workflow_dispatch:
 jobs:
   actualizar:
+
     runs-on: ubuntu-latest
     permissions:
       contents: write
