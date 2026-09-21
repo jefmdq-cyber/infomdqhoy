@@ -1,11 +1,10 @@
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '*/20 13-23 * * 1-5'
     - cron: '*/20 13-22 * * 6'
-    # FIX: Agregar domingo también para limpiar sábado, pero mostrando en blanco
     - cron: '*/30 13-22 * * 0'
-  workflow_dispatch:
 jobs:
   actualizar:
     runs-on: ubuntu-latest
@@ -23,125 +22,98 @@ jobs:
           import requests, re, json, os
           from datetime import datetime, timedelta
           from zoneinfo import ZoneInfo
-          from urllib.parse import urlparse
           from bs4 import BeautifulSoup
+          from urllib.parse import urlparse
 
-          HEADERS = {"User-Agent": "Mozilla/5.0 Chrome/122","Referer":"https://google.com"}
+          HEADERS = {"User-Agent": "Mozilla/5.0 Chrome/122"}
           TZ_ARG = ZoneInfo("America/Argentina/Buenos_Aires")
           AHORA = datetime.now(TZ_ARG)
           HOY = AHORA.strftime("%Y-%m-%d")
           os.makedirs("historial", exist_ok=True)
           ARCHIVO_HOY = f"historial/{HOY}.json"
 
-          LOTERIAS_4CIFRAS = {
-            "nacional": "https://tujugada.com.ar",
-            "provincia": "https://tujugada.com.ar",
-            "santafe": "https://tujugada.com.ar",
-            "cordoba": "https://tujugada.com.ar",
-            "entrerios": "https://tujugada.com.ar",
-          }
-          ORDEN_4CIFRAS = ["previa","primera","matutina","vespertina","nocturna"]
-          HORA_SORTEO_ARG = {"previa":(10,15), "primera":(12,0), "matutina":(15,0), "vespertina":(18,0), "nocturna":(21,0)}
-          HORA_SORTEO_UY  = {"vespertina":(15,0), "nocturna":(21,0)}
-          MARGEN_MIN = 20
+          LOTERIAS = ["nacional","provincia","santafe","cordoba","entrerios"]
+          ORDEN = ["previa","primera","matutina","vespertina","nocturna"]
+          HORA = {"previa":(10,15), "primera":(12,0), "matutina":(15,0), "vespertina":(18,0), "nocturna":(21,0)}
+          HORA_UY = {"vespertina":(15,0), "nocturna":(21,0)}
+          MARGEN = 20
 
-          def ya_deberia_haber_salido(key, tabla):
+          def ya_deberia(key, tabla):
               h,m = tabla[key]
-              limite = AHORA.replace(hour=h, minute=m, second=0, microsecond=0) + timedelta(minutes=MARGEN_MIN)
+              limite = AHORA.replace(hour=h, minute=m, second=0, microsecond=0) + timedelta(minutes=MARGEN)
               return AHORA >= limite
 
-          def limpiar(html):
-              return html.replace("---MENSAJE PARA EL VISITANTE DE ESTE SITIO--- SI VES ESTE MENSAJE ES PORQUE VISITAS UN SITIO QUE ESTA COPIANDO CODIGO FUENTE AUTORIA DE TUJUGADA.COM.AR SIN AUTORIZACION. VISITA AL SITIO REAL QUE ACTUALIZA ESTOS DATOS EN ://tujugada.com.AR!!!", "")
+          def texto_plano(html):
+              soup = BeautifulSoup(html, "lxml")
+              for t in soup(["script","style"]): t.decompose()
+              return re.sub(r'\s+', ' ', soup.get_text(" "))
 
-          def mismo_path(a,b):
-              return urlparse(a).path.lower() == urlparse(b).path.lower()
-
-          def texto_plano(html_crudo):
-              soup = BeautifulSoup(limpiar(html_crudo), "lxml")
-              for tag in soup(["script","style"]): tag.decompose()
-              texto = re.sub(r'\s+', ' ', soup.get_text(separator=" "))
-              return texto
-
-          def reordenar_columnas(lista):
-              if len(lista) < 20: return lista
-              veinte = lista[:20]
-              return veinte[0::2] + veinte[1::2]
+          def reordenar(lista):
+              if len(lista)<20: return lista
+              return lista[0::2] + lista[1::2]
 
           viejo = {}
           if os.path.exists(ARCHIVO_HOY):
               try: viejo = json.load(open(ARCHIVO_HOY,encoding="utf-8")).get("completo",{})
               except: pass
+          # Si no hay historial de hoy, intentar cargar quiniela.json viejo como respaldo para no perder numeros de hoy ya sorteados
+          if not viejo and os.path.exists("quiniela.json"):
+              try: 
+                  qold = json.load(open("quiniela.json",encoding="utf-8")).get("completo",{})
+                  # Solo usarlo si tiene fecha de hoy en ultima_actualizacion
+                  ult = json.load(open("quiniela.json",encoding="utf-8")).get("ultima_actualizacion","")
+                  if HOY in ult or datetime.now().strftime("%d/%m/%Y") in ult or len(qold)>0:
+                      # No usarlo como viejo para no arrastrar sabado, pero si como emergencia lo dejamos vacio y re-scrapeamos
+                      pass
+              except: pass
 
-          def extraer_sorteos(url, orden, digitos, cly_key, tabla_horarios):
+          def extraer(url, orden, digitos, cly_key, tabla):
               sorteos = {k: [] for k in orden}
-              sorteos_guardados = viejo.get(cly_key, {})
+              guard = viejo.get(cly_key, {})
               try:
-                  r = requests.get(url, headers=HEADERS, timeout=30, allow_redirects=True)
-                  if not mismo_path(url, r.url):
-                      # Si redirige, no hay datos de hoy, dejar vacio (no arrastrar sabado)
-                      return sorteos
-
-                  texto_completo = texto_plano(r.text)
-                  low = texto_completo.lower()
-                  fecha_actual_str = AHORA.strftime("%d/%m/%Y")
-                  pag_tiene_fecha_hoy = fecha_actual_str in texto_completo
-
+                  r = requests.get(url, headers=HEADERS, timeout=30)
+                  txt = texto_plano(r.text)
+                  low = txt.lower()
                   for key in orden:
-                      # FIX REAL: 1. Si todavia no es la hora, BLANCO OBLIGATORIO (no respetar guardado)
-                      if not ya_deberia_haber_salido(key, tabla_horarios):
+                      # FIX: Si todavia no es la hora, BLANCO SIEMPRE
+                      if not ya_deberia(key, tabla):
                           sorteos[key] = []
                           continue
-
-                      # 2. Si ya es la hora pero la pagina no tiene la fecha de hoy, BLANCO (no mostrar sabado)
-                      if not pag_tiene_fecha_hoy:
-                          sorteos[key] = []
+                      # Si ya es la hora y teniamos guardado hoy, respetarlo (para no perder lo ya sorteado)
+                      if guard and len(guard.get(key, [])) >= 15:
+                          sorteos[key] = guard[key]
                           continue
-
-                      # 3. Recien ahora, si ya teniamos numeros guardados hoy, respetarlos
-                      if sorteos_guardados and len(sorteos_guardados.get(key, [])) >= 15:
-                          sorteos[key] = sorteos_guardados[key]
-                          continue
-
-                      # 4. Extraer fresco
-                      m = re.search(rf'\b{key}\b\s+\d{{1,2}}:\d{{2}}\s*hs\b', low)
+                      # Si no teniamos guardado, extraer fresco de la pagina sin exigir fecha exacta
+                      m = re.search(rf'\b{key}\b', low)
                       if m:
-                          idx = m.start()
-                          trozo = low[idx: idx+1500]
+                          trozo = low[m.start(): m.start()+2000]
                           nums = re.findall(rf'\b\d{{{digitos}}}\b', trozo)
-                          uniq = []
+                          uniq=[]
                           for n in nums:
                               if n not in uniq: uniq.append(n)
-                          if len(uniq) >= 15:
-                              sorteos[key] = reordenar_columnas(uniq)
+                          if len(uniq)>=15:
+                              sorteos[key]=reordenar(uniq)
               except Exception as e:
                   print(f"Error {cly_key} {e}")
-                  # En error, no arrastrar sabado, dejar vacio
+                  # En error, devolver lo guardado si existe para no borrar todo
+                  if guard:
+                      return {k: guard.get(k,[]) for k in orden}
                   return sorteos
               return sorteos
 
-          resultado_final = {}
-          for cly, url_lot in LOTERIAS_4CIFRAS.items():
-              resultado_final[cly] = extraer_sorteos(url_lot, ORDEN_4CIFRAS, 4, cly, HORA_SORTEO_ARG)
-          
-          resultado_final["uruguay"] = extraer_sorteos("https://tujugada.com.ar", ["vespertina","nocturna"], 3, "uruguay", HORA_SORTEO_UY)
+          res={}
+          for cly in LOTERIAS:
+              res[cly]=extraer("https://tujugada.com.ar", ORDEN, 4, cly, HORA)
+          res["uruguay"]=extraer("https://tujugada.com.ar", ["vespertina","nocturna"], 3, "uruguay", HORA_UY)
 
-          output_data = {
-            "fecha": HOY,
-            "fecha_arg": AHORA.strftime("%d/%m/%Y"),
-            "completo": resultado_final,
-            "ultima_actualizacion": AHORA.strftime("%d/%m/%Y %H:%M")
-          }
-
-          with open(ARCHIVO_HOY, "w", encoding="utf-8") as f:
-              json.dump(output_data, f, ensure_ascii=False, indent=2)
-          with open("quiniela.json", "w", encoding="utf-8") as f:
-              json.dump(output_data, f, ensure_ascii=False, indent=2)
-
-          print(f"OK {HOY} generado")
+          out={"fecha":HOY,"fecha_arg":AHORA.strftime("%d/%m/%Y"),"completo":res,"ultima_actualizacion":AHORA.strftime("%d/%m/%Y %H:%M")}
+          with open(ARCHIVO_HOY,"w",encoding="utf-8") as f: json.dump(out,f,ensure_ascii=False,indent=2)
+          with open("quiniela.json","w",encoding="utf-8") as f: json.dump(out,f,ensure_ascii=False,indent=2)
+          print(f"Restaurado {HOY} -> { {k: len(v.get('previa',[])) for k,v in res.items()} }")
           PY
       - run: |
           git config user.name "bot"
           git config user.email "bot@infomdq.com"
-          git add historial/ quiniela.json || true
-          git commit -m "Update quiniela fix blanco sin arrastrar sabado" || true
+          git add historial/ quiniela.json
+          git commit -m "Restaurar quiniela hoy sin borrar sorteados" || true
           git push
