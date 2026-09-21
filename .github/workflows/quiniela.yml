@@ -1,8 +1,11 @@
-name: Quiniela 20 TODOS los sorteos
+
+name: Actualizar quiniela - V3 FINAL sin futuros ni mezcla Uruguay
+
 on:
   schedule:
-      - cron: '*/20 13-23,0-1 * * *'
+    - cron: "*/20 * * * *"
   workflow_dispatch:
+
 jobs:
   actualizar:
     runs-on: ubuntu-latest
@@ -13,175 +16,108 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Scrapear sorteos
+      - name: Scrapear quiniela V3 - respeta horarios y no mezcla Uruguay
         run: |
           pip install requests beautifulsoup4 lxml
           python << 'PY'
-          import requests, re, json, os, glob
+          import requests, re, json, os
           from datetime import datetime, timedelta
           from zoneinfo import ZoneInfo
-          from urllib.parse import urlparse
           from bs4 import BeautifulSoup
 
-          HEADERS = {"User-Agent": "Mozilla/5.0 Chrome/122","Referer":"https://www.google.com/"}
+          HEADERS = {"User-Agent": "Mozilla/5.0 Chrome/122"}
           TZ_ARG = ZoneInfo("America/Argentina/Buenos_Aires")
           AHORA = datetime.now(TZ_ARG)
           HOY = AHORA.strftime("%Y-%m-%d")
-          DIAS_A_CONSERVAR = 30
-
           os.makedirs("historial", exist_ok=True)
           ARCHIVO_HOY = f"historial/{HOY}.json"
 
-          # URLs REALES verificadas contra el menu del sitio (15/9/2026).
-          # OJO: si el sitio vuelve a cambiar de nombre de pagina, la validacion
-          # "mismo_path" de abajo evita que agarremos la portada por error.
-          LOTERIAS_4CIFRAS = {
-            "nacional":   "https://www.tujugada.com.ar/quiniela-nacional.asp",
-            "provincia":  "https://www.tujugada.com.ar/quiniela_provincia_buenos_aires.asp",
-            "santafe":    "https://www.tujugada.com.ar/quiniela_santa_fe.asp",
-            "cordoba":    "https://www.tujugada.com.ar/quiniela_cordoba.asp",
-            "entrerios":  "https://www.tujugada.com.ar/quiniela_entre_rios.asp",
-          }
-          ORDEN_4CIFRAS = ["previa","primera","matutina","vespertina","nocturna"]
+          LOTERIAS = ["nacional","provincia","santafe","cordoba","entrerios"]
+          ORDEN = ["previa","primera","matutina","vespertina","nocturna"]
+          HORA = {"previa":(10,15), "primera":(12,0), "matutina":(15,0), "vespertina":(18,0), "nocturna":(21,0)}
+          HORA_UY = {"vespertina":(15,0), "nocturna":(21,0)}
+          MARGEN = 25  # minutos de tolerancia despues del horario
 
-          # Horarios oficiales de cada sorteo + minutos de margen para que el
-          # sitio termine de publicar el resultado. Antes de esa hora, aunque
-          # el sitio muestre numeros (son los de AYER, que tujugada deja
-          # "pegados" hasta que sale el nuevo), no los usamos como si fueran
-          # de hoy.
-          MARGEN_MIN = 20
-          HORA_SORTEO_ARG = {"previa":(10,15), "primera":(12,0), "matutina":(15,0), "vespertina":(18,0), "nocturna":(21,0)}
-          HORA_SORTEO_UY  = {"vespertina":(15,0), "nocturna":(21,0)}
-
-          def ya_deberia_haber_salido(key, tabla_horarios):
-              h, m = tabla_horarios[key]
-              limite = AHERA = AHORA.replace(hour=h, minute=m, second=0, microsecond=0) + timedelta(minutes=MARGEN_MIN)
+          def ya_deberia(key, tabla):
+              h,m = tabla[key]
+              limite = AHORA.replace(hour=h, minute=m, second=0, microsecond=0) + timedelta(minutes=MARGEN)
               return AHORA >= limite
 
-          # Uruguay es aparte: 3 cifras y solo 2 sorteos por dia.
-          URUGUAY_URL = "https://www.tujugada.com.ar/quiniela_uruguay.asp"
-          ORDEN_URUGUAY = ["vespertina","nocturna"]
+          def texto_plano(html):
+              soup = BeautifulSoup(html, "lxml")
+              for t in soup(["script","style"]): t.decompose()
+              return re.sub(r'\s+', ' ', soup.get_text(" "))
 
-          # carga viejo para no pisar nunca con datos vacios.
-          # OJO: se carga del archivo de HOY (historial/2026-09-15.json), no de
-          # quiniela.json a secas. Asi, when cambia el dia, arranca en blanco
-          # en vez de arrastrar los numeros de ayer para siempre.
+          def reordenar_arg(lista):
+              # Para loterias argentinas 4 cifras que vienen en 2 columnas
+              if len(lista)<20: return lista
+              return lista[0::2] + lista[1::2]
+
+          def reordenar_uy(lista):
+              # Uruguay no se reordena, viene ya ordenado 1..20
+              return lista
+
+          # Cargar guardado por si falla tujugada
           viejo = {}
           if os.path.exists(ARCHIVO_HOY):
-            try:
-              viejo = json.load(open(ARCHIVO_HOY,encoding="utf-8")).get("completo",{})
-            except: pass
+              try: viejo = json.load(open(ARCHIVO_HOY,encoding="utf-8")).get("completo",{})
+              except: pass
 
-          def limpiar(html):
-              return html.replace("---MENSAJE PARA EL VISITANTE DE ESTE SITIO--- SI VES ESTE MENSAJE ES PORQUE VISITAS UN SITIO QUE ESTA COPIANDO CODIGO FUENTE AUTORIA DE TUJUGADA.COM.AR SIN AUTORIZACION. VISITA AL SITIO REAL QUE ACTUALIZA ESTOS DATOS EN WWW.TUJUGADA.COM.AR!!!", "")
-
-          def mismo_path(url_pedido, url_final):
-              # Si la pagina no existe mas, tujugada redirige a la portada
-              # (inicio_new.asp). Si el path final no coincide con el pedido,
-              # es una redirección y NO hay que usar ese contenido.
-              return urlparse(url_pedido).path.lower() == urlparse(url_final).path.lower()
-
-          def texto_plano(html_crudo):
-              # Convertimos el HTML a texto plano (sin scripts/estilos) para que
-              # la frase "Nocturna 21:00 hs." quede como texto continuo sin
-              # importar que en el HTML crudo la palabra y la hora esten separadas
-              # por etiquetas (<b>, <td>, etc). Buscar directo sobre el HTML crudo
-              # con regex de solo-espacios fallaba por eso (matches vacios o, peor,
-              # matcheaba por casualidad texto de script/head y pegaba numeros
-              # que no eran de ninguna tabla real).
-              soup = BeautifulSoup(limpiar(html_crudo), "lxml")
-              for tag in soup(["script", "style"]):
-                  tag.decompose()
-              texto = soup.get_text(separator=" ")
-              texto = re.sub(r'\s+', ' ', texto)
-              return texto
-
-          def reordenar_columnas(lista):
-              # El sitio muestra los 20 numeros en 2 columnas (posiciones 1-10 a
-              # la izquierda, 11-20 a la derecha). Al convertir a texto plano
-              # quedan intercalados en el orden de lectura: pos1, pos11, pos2,
-              # pos12, pos3, pos13... Hay que "destrenzarlos" para que la
-              # posicion en nuestro JSON coincida con la posicion real del sitio.
-              if len(lista) < 20:
-                  return lista  # sin las 20 completas no forzamos el reorden
-              veinte = lista[:20]
-              izquierda = veinte[0::2]  # posiciones reales 1-10
-              derecha = veinte[1::2]    # posiciones reales 11-20
-              return izquierda + derecha
-
-          def extraer_sorteos(url, orden, digitos):
+          def extraer(url, orden, digitos, cly_key, tabla, reordenar_fn):
               sorteos = {k: [] for k in orden}
-              patron = r'\b\d{%d}\b' % digitos
+              guard = viejo.get(cly_key, {})
               try:
-                  r = requests.get(url, headers=HEADERS, timeout=30, allow_redirects=True)
-
-                  if not mismo_path(url, r.url):
-                      print(f"AVISO: {url} redirigio a {r.url} -> pagina no existe, se ignora")
-                      return sorteos
-
-                  low = texto_plano(r.text).lower()
+                  r = requests.get(url, headers=HEADERS, timeout=30)
+                  txt = texto_plano(r.text)
+                  low = txt.lower()
                   for key in orden:
-                      # OJO: la palabra sola (ej. "nocturna") aparece DOS veces en el
-                      # texto: en la frase de intro ("Nocturna: 21:00 hs.", con los
-                      # ":" pegados a la palabra) Y en el titulo real de la tabla de
-                      # esa tirada ("Nocturna 21:00 hs. 35 - El Pajarito", SIN ":").
-                      # Anclamos la busqueda al titulo real: palabra + hora SIN ":".
-                      m = re.search(rf'\b{key}\b\s+\d{{1,2}}:\d{{2}}\s*hs\b', low)
+                      # REGLA CLAVE: si todavia no es la hora, SIEMPRE blanco, aunque tengamos guardado futuro
+                      if not ya_deberia(key, tabla):
+                          sorteos[key] = []
+                          print(f"{cly_key} {key} todavia no sorteado -> blanco")
+                          continue
+                      # Si ya es la hora, intentar extraer
+                      m = re.search(rf'\b{key}\b', low)
+                      nums = []
                       if m:
-                          idx = m.start()
-                          # Ventana chica: alcanza de sobra para las 20 filas de
-                          # la tabla + el mensaje anti-copia que a veces se
-                          # inserta en el medio, pero es lo bastante chica para
-                          # NO llegar a la seccion de "cabezas de dias anteriores"
-                          # que esta mas abajo en la pagina (esa seccion tiene
-                          # fechas como "14/9/2026" que se podrian confundir con
-                          # numeros de la quiniela).
-                          trozo = low[idx: idx+1500]
-                          nums = re.findall(patron, trozo)
-                          # OJO: antes se descartaban los numeros que empezaban
-                          # con "202" pensando que eran años de fecha (tipo
-                          # "2026"). Pero un numero real de la quiniela puede
-                          # perfectamente empezar con 202 (ej: 2022, 2025), y
-                          # ese filtro los borraba por error, corriendo todo el
-                          # resto de la lista un lugar. Como ahora la busqueda
-                          # esta anclada justo al titulo de la tabla (despues
-                          # de cualquier fecha), no hace falta este filtro.
-                          uniq = []
-                          for n in nums:
-                              if n not in uniq:
-                                  uniq.append(n)
-                          if len(uniq) >= 15:
-                              if digitos == 3:
-                                  sorteos[key] = uniq[:20]
-                              else:
-                                  sorteos[key] = reordenar_columnas(uniq[:20])
+                          trozo = low[m.start(): m.start()+3000]
+                          raw = re.findall(rf'\b\d{{{digitos}}}\b', trozo)
+                          uniq=[]
+                          for n in raw:
+                              if n not in uniq: uniq.append(n)
+                          nums = uniq[:20]
+                      if len(nums) >= 10:  # minimo para considerar valido
+                          sorteos[key] = reordenar_fn(nums)
+                          print(f"{cly_key} {key} OK {len(nums)} numeros")
+                      else:
+                          # Si no pudimos extraer pero ya deberia haber salido, conservar guardado viejo si existe
+                          if guard.get(key) and len(guard.get(key))>=10:
+                              sorteos[key]=guard[key]
+                              print(f"{cly_key} {key} fallo extraccion, conservo guardado")
+                          else:
+                              sorteos[key]=[]
               except Exception as e:
-                  print(f"Error {url}: {e}")
+                  print(f"Error {cly_key} {e}")
+                  for k in orden:
+                      if ya_deberia(k, tabla) and viejo.get(cly_key, {}).get(k):
+                          sorteos[k]=viejo[cly_key][k]
               return sorteos
-          
-          resultado_final = {}
-          for cly, url_lot in LOTERIAS_4CIFRAS.items():
-              if ya_deberia_haber_salido(ORDEN_4CIFRAS[0], HORA_SORTEO_ARG):
-                  resultado_final[cly] = extraer_sorteos(url_lot, ORDEN_4CIFRAS, 4)
-          
-          if ya_deberia_haber_salido(ORDEN_URUGUAY[0], HORA_SORTEO_UY):
-              resultado_final["uruguay"] = extraer_sorteos(URUGUAY_URL, ORDEN_URUGUAY, 3)
 
-          output_data = {
-            "completo": resultado_final,
-            "ultima_actualizacion": AHORA.strftime("%d/%m/%Y %H:%M")
-          }
+          res={}
+          for cly in LOTERIAS:
+              res[cly]=extraer("https://tujugada.com.ar", ORDEN, 4, cly, HORA, reordenar_arg)
+          # Uruguay separado con logica distinta sin reordenar
+          res["uruguay"]=extraer("https://tujugada.com.ar", ["vespertina","nocturna"], 3, "uruguay", HORA_UY, reordenar_uy)
 
-          with open(ARCHIVO_HOY, "w", encoding="utf-8") as f:
-              json.dump(output_data, f, ensure_ascii=False, indent=2)
-              
-          with open("quiniela.json", "w", encoding="utf-8") as f:
-              json.dump(output_data, f, ensure_ascii=False, indent=2)
+          out={"fecha":HOY,"fecha_arg":AHORA.strftime("%d/%m/%Y"),"completo":res,"ultima_actualizacion":AHORA.strftime("%d/%m/%Y %H:%M")}
+          with open(ARCHIVO_HOY,"w",encoding="utf-8") as f: json.dump(out,f,ensure_ascii=False,indent=2)
+          with open("quiniela.json","w",encoding="utf-8") as f: json.dump(out,f,ensure_ascii=False,indent=2)
+          print(f"OK {HOY} generado V3")
           PY
-      - run: |
+      - name: Commit
+        run: |
           git config user.name "bot"
           git config user.email "bot@infomdq.com"
-          git add historial/ || true
-          git add quiniela.json || true
-          git commit -m "Update Quiniela oficial fin de semana" || true
+          git add historial/ quiniela.json
+          git commit -m "V3 fix: respeta horarios y Uruguay sin mezcla" || true
           git push
