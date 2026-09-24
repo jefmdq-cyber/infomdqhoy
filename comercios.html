@@ -345,8 +345,32 @@ function filtrarBarrio(b){
   const secs=['alfar','faro','serena','acantilados'];
   if(b==='todos'){secs.forEach(id=>document.getElementById('sec-'+id).style.display='block');return}
   secs.forEach(id=>{document.getElementById('sec-'+id).style.display=(id===b?'block':'none')});
-  window.scrollTo({top:document.getElementById('sec-'+b).offsetTop-20,behavior:'smooth'})
+  const el=document.getElementById('sec-'+b);
+  if(el) window.scrollTo({top:el.offsetTop-20,behavior:'smooth'})
 }
+// NUEVO: Lee ?barrio=alfar de la URL y filtra automático
+(function(){
+  const params=new URLSearchParams(window.location.search);
+  let barrio=params.get('barrio');
+  if(barrio){
+    barrio=barrio.toLowerCase().trim();
+    // compatibilidad con #faro o nombres con espacios
+    barrio=barrio.replace('#','');
+    if(['faro','alfar','serena','acantilados'].includes(barrio)){
+      // esperar a que cargue DOM
+      window.addEventListener('DOMContentLoaded',()=>{filtrarBarrio(barrio)});
+      // por si ya cargó
+      setTimeout(()=>{try{filtrarBarrio(barrio)}catch(e){}},300);
+    }
+  } else {
+    // también soportar #alfar por si viene del viejo formato
+    const hash=window.location.hash.replace('#','').toLowerCase();
+    if(['faro','alfar','serena','acantilados'].includes(hash)){
+      window.addEventListener('DOMContentLoaded',()=>{filtrarBarrio(hash)});
+      setTimeout(()=>{try{filtrarBarrio(hash)}catch(e){}},300);
+    }
+  }
+})();
 document.getElementById('buscadorRubros').addEventListener('input',e=>{
   const q=e.target.value.toLowerCase();
   document.querySelectorAll('.comercios-grid > div').forEach(card=>{
