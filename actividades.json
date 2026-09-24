@@ -1,17 +1,92 @@
 [
   {
     "barrio": "faro",
-    "nombre": "Ritmos Latinos - Cumbia, Salsa, Reggaeton",
-    "actividad": "ritmos latinos zumba baile",
-    "dias": "Próximamente",
-    "lugar": "Asoc. Vecinal de Fomento Faro Norte",
-    "contacto": "WhatsApp 223 6782263"
-  },  {
+    "nombre": "Bachata Ladies - Celeste Eddi",
+    "actividad": "bachata ladies dance",
+    "dias": "Miércoles 19:45 hs",
+    "lugar": "Asoc. Vecinal Fomento Faro Norte - Sánchez de Bustamante 3460",
+    "contacto": "Celeste Eddi",
+    "imagen": "bachata-ladies.jpeg"
+  },
+  {
+    "barrio": "faro",
+    "nombre": "Reggaeton Femme - Aimé Wenner",
+    "actividad": "reggaeton femme baile",
+    "dias": "Lunes y Miércoles 16:00 hs",
+    "lugar": "Asoc. Vecinal Fomento Faro Norte - Sánchez de Bustamante 3460",
+    "contacto": "Aimé Wenner",
+    "imagen": "reggeaton-femme.jpeg"
+  },
+  {
+    "barrio": "faro",
+    "nombre": "Ritmos Adultas - Celeste Eddi",
+    "actividad": "ritmos adultas baile",
+    "dias": "Lunes y Miércoles 15:00 hs",
+    "lugar": "Asoc. Vecinal Fomento Faro Norte - Sánchez de Bustamante 3460",
+    "contacto": "Celeste Eddi",
+    "imagen": "ritmos-adultos.jpeg"
+  },
+  {
+    "barrio": "faro",
+    "nombre": "Urbano Teens - Aimé Wenner",
+    "actividad": "urbano teens baile",
+    "dias": "Lunes y Miércoles 18:45 hs",
+    "lugar": "Asoc. Vecinal Fomento Faro Norte - Sánchez de Bustamante 3460",
+    "contacto": "Aimé Wenner",
+    "imagen": "urbanoteens.jpeg"
+  },
+  {
+    "barrio": "faro",
+    "nombre": "Zumba - ¡Vení a moverte!",
+    "actividad": "zumba baile",
+    "dias": "Lun - Mié - Vie 18:30 hs",
+    "lugar": "Soc. de Fomento Faro Norte - Sánchez de Bustamante 3460",
+    "contacto": "Instagram Zumbalu.mdq - Tel 2234383622",
+    "imagen": "zumba.jpeg"
+  },
+  {
+    "barrio": "faro",
+    "nombre": "Curso de Joyería Inicial - Actividad libre y gratuita",
+    "actividad": "joyeria curso taller",
+    "dias": "Martes y Jueves 8:30 a 11:30 hs",
+    "lugar": "Soc. de Fomento Faro Norte - Sánchez de Bustamante 3460",
+    "contacto": "Prof. Walter Molina - 2235652480 / 2235622845 - PEBA",
+    "imagen": "joyeria.jpeg"
+  },
+  {
+    "barrio": "faro",
+    "nombre": "Taller de Dibujo - ¡Animate a desarrollar tu creatividad!",
+    "actividad": "dibujo taller arte",
+    "dias": "Viernes 7 de agosto - 15:00 a 18:00 hs",
+    "lugar": "Asoc. de Fomento Faro Norte - Sánchez de Bustamante 3460",
+    "contacto": "Docente Iara - @larabogace - (0223)512-5340",
+    "imagen": "taller-dibujo.jpeg"
+  },
+  {
+    "barrio": "faro",
+    "nombre": "Taller de Escritura Creativa - Prof. Ulises Cuenca",
+    "actividad": "escritura creativa taller",
+    "dias": "Lunes 10 a 12 hs",
+    "lugar": "Sociedad de Fomento Faro Norte",
+    "contacto": "Soc. de Fomento Faro Norte",
+    "imagen": "escritura-creativa.jpeg"
+  },
+  {
     "barrio": "faro",
     "nombre": "Pilates Mat",
     "actividad": "pilates",
     "lugar": "Soc. de Fomento Faro Norte - Sánchez de Bustamante 3460",
     "dias": "Martes y jueves 14hs y 15hs",
-    "contacto": "223 546-6679 - Cupos limitados"
+    "contacto": "223 546-6679 - Cupos limitados",
+    "imagen": "pilates-faro.jpg"
+  },
+  {
+    "barrio": "faro",
+    "nombre": "Hacete Socio - Asoc. Vecinal Faro Norte",
+    "actividad": "socios asociacion",
+    "dias": "Lunes a Viernes 9 a 11 hs o 17 a 19 hs",
+    "lugar": "Sánchez de Bustamante 3460 - Faro Norte",
+    "contacto": "223-5333768",
+    "imagen": "socios.jpeg"
   }
 ]
