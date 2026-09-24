@@ -4,73 +4,69 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Guía de Comercios - INFO MDQ SUR HOY</title>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3L9SZ6YVFT"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-3L9SZ6YVFT');</script>
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-window.OneSignalDeferred = window.OneSignalDeferred || [];
-OneSignalDeferred.push(async function(OneSignal) {
-  await OneSignal.init({appId: "5ad4c72f-3373-44b0-b64f-0ecadf1a6223"});
-});
-</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,'Segoe UI',system-ui,sans-serif}
 body{background:#f8fafc;color:#0b132b}
 .container{max-width:520px;margin:0 auto;padding:14px}
 @media(min-width:900px){.container{max-width:1140px;display:grid;grid-template-columns:1fr 1fr;gap:18px}}
-.btn-volver{display:inline-flex;align-items:center;gap:6px;background:#fff;border:2px solid #0b132b;color:#0b132b;padding:10px 18px;border-radius:999px;font-weight:900;font-size:12px;text-decoration:none;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,.06)}
+.btn-volver{display:inline-flex;align-items:center;gap:6px;background:#fff;border:2px solid #0b132b;color:#0b132b;padding:10px 18px;border-radius:999px;font-weight:900;font-size:12px;text-decoration:none;margin-bottom:14px}
 .search-wrap{position:relative;max-width:560px;margin:0 auto 14px auto;grid-column:1/-1;width:100%}
-.search-wrap input{width:100%;padding:16px 18px 16px 48px;border-radius:999px;border:2px solid #e2e8f0;background:#fff;font-weight:700;font-size:14px;box-shadow:0 4px 14px rgba(11,19,43,.06);outline:none}
+.search-wrap input{width:100%;padding:16px 18px 16px 48px;border-radius:999px;border:2px solid #e2e8f0;background:#fff;font-weight:700;font-size:14px}
 .search-wrap span{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:18px}
 .barrios-nav{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 16px 0;grid-column:1/-1}
 @media(min-width:900px){.barrios-nav{grid-template-columns:repeat(4,1fr)}}
-.barrio-btn{padding:18px 8px;border-radius:16px;font-weight:900;font-size:13px;text-align:center;color:#0b132b;cursor:pointer;border:2px solid rgba(255,255,255,.95);box-shadow:0 8px 18px rgba(11,19,43,.10);transition:.15s;text-decoration:none;display:block}
+.barrio-btn{padding:18px 8px;border-radius:16px;font-weight:900;font-size:13px;text-align:center;cursor:pointer;border:2px solid rgba(255,255,255,.95);box-shadow:0 8px 18px rgba(11,19,43,.10);text-decoration:none;display:block}
 .barrio-btn span{display:block;font-size:26px;margin-bottom:4px}
 .btn-faro{background:linear-gradient(135deg,#dbeafe 0%,#bfdbfe 100%);color:#1e3a8a}
 .btn-alfar{background:linear-gradient(135deg,#dcfce7 0%,#bbf7d0 100%);color:#14532d}
 .btn-serena{background:linear-gradient(135deg,#fef9c3 0%,#fde68a 100%);color:#854d0e}
 .btn-acantilados{background:linear-gradient(135deg,#ffedd5 0%,#fed7aa 100%);color:#7c2d12}
 .barrio-section{grid-column:1/-1;margin-bottom:18px}
-.barrio-title{font-weight:900;font-size:18px;margin:18px 0 10px 0;display:flex;align-items:center;gap:8px}
-.comercios-grid{display:grid;gap:14px}
-
-
+.barrio-title{font-weight:900;font-size:18px;margin:18px 0 10px 0;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.comercios-grid{display:grid;gap:16px}
+@media(min-width:700px){.comercios-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+.comercios-grid > div:last-child:nth-child(odd){grid-column:1 / -1;justify-self:center;width:100%;max-width:560px;}}
+.badge-count{background:#0b132b;color:#fff;padding:5px 12px;border-radius:999px;font-size:12px;font-weight:900;display:inline-block;margin-left:6px}
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
-.pana-card{background:#EFCB8E;border-radius:24px;box-shadow:0 10px 25px rgba(122,28,60,0.08);max-width:420px;margin:0 auto 18px auto;position:relative;overflow:visible;font-family:'Segoe UI',system-ui,sans-serif}
+.pana-card{background:#EFCB8E;border-radius:24px;box-shadow:0 10px 25px rgba(122,28,60,0.08);max-width:560px;margin:0 auto;position:relative;overflow:visible}
 .pana-title{font-family:'Dancing Script',cursive;font-size:30px;font-weight:700;color:#7A1C3C;line-height:1;margin-bottom:6px}
 .pana-pill{background:rgba(122,28,60,.1);color:#7A1C3C;font-size:11px;font-weight:700;padding:5px 12px;border-radius:999px}
-.pana-wsp-btn{display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;background:#25D366;color:#fff;font-weight:900;font-size:15px;padding:14px;border-radius:999px;text-decoration:none;margin-bottom:8px;box-shadow:0 4px 14px rgba(37,211,102,0.4);text-shadow:1px 1px 2px rgba(0,0,0,0.2);border:1px solid rgba(0,0,0,0.15);transition:transform .12s ease}
-.pana-wsp-btn:active{transform:scale(.97)}
-.pana-maps-btn{display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;background:#E8F0FE;color:#1A73E8;font-weight:800;font-size:14px;padding:12px;border-radius:999px;text-decoration:none;border:1px solid rgba(0,0,0,0.15);margin-bottom:8px;transition:transform .12s ease}
-.pana-maps-btn:active{transform:scale(.97)}
-.pana-ig-btn{display:block;text-align:center;background:linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);color:#fff;font-weight:800;font-size:14px;padding:12px;border-radius:999px;text-decoration:none;border:1px solid rgba(0,0,0,0.15);box-shadow:0 4px 12px rgba(220,39,67,.3)}
-
+.pana-wsp-btn{display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;background:#25D366;color:#fff;font-weight:900;font-size:15px;padding:14px;border-radius:999px;text-decoration:none;margin-bottom:8px}
+.pana-maps-btn{display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;background:#E8F0FE;color:#1A73E8;font-weight:800;font-size:14px;padding:12px;border-radius:999px;text-decoration:none;margin-bottom:8px}
+.pana-ig-btn{display:block;text-align:center;background:linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);color:#fff;font-weight:800;font-size:14px;padding:12px;border-radius:999px;text-decoration:none}
+.amapola-card{width:100%;max-width:560px;background:linear-gradient(135deg,#e8f5e9 0%,#c8e6c9 40%,#a5d6a7 100%);border-radius:20px;box-shadow:0 8px 24px rgba(46,125,50,0.15);border:1.5px solid #81C784;overflow:hidden;padding:16px;margin:0 auto}
+.amapola-fachada-wrap{position:relative}
+.amapola-fachada{width:100%;height:210px;object-fit:cover;background:white;border-radius:14px;margin-bottom:12px;display:block}
+.amapola-logo-circle{position:absolute;top:8px;right:8px;background:white;border-radius:50%;width:84px;height:84px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(0,0,0,.18);border:3px solid white;overflow:hidden}
+.amapola-logo-circle img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.35)}
+.amapola-badge-top{position:absolute;bottom:22px;left:10px;background:rgba(27,94,32,.90);color:white;font-size:10px;font-weight:900;padding:6px 12px;border-radius:999px}
+.amapola-title{font-weight:900;font-size:22px;color:#1B5E20;text-align:center;margin-bottom:2px}
+.amapola-subtitle{text-align:center;font-size:13px;font-weight:700;color:#33691E;margin-bottom:12px}
+.amapola-badges{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:14px}
+.amapola-pill{font-size:11px;font-weight:800;padding:6px 11px;border-radius:999px;display:inline-flex;align-items:center;gap:4px}
+.pill-vegano{background:#4CAF50;color:white}.pill-celiaco{background:#FFF8E1;color:#5D4037;border:1px solid #FFECB3}.pill-diabetico{background:#FFF3E0;color:#4E342E;border:1px solid #FFE0B2}.pill-hiper{background:#E3F2FD;color:#1A237E;border:1px solid #BBDEFB}.pill-extra{background:white;color:#2E7D32;border:1px solid #C8E6C9}
+.amapola-ubicacion{background:white;border-radius:12px;border:1.5px solid #A5D6A7;padding:9px 12px;margin-bottom:14px;text-align:center}
+.amapola-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;border-radius:999px;font-weight:900;font-size:14px;text-decoration:none;margin-bottom:8px}
+.btn-wsp{background:#25D366;color:white}.btn-maps{background:#E8F0FE;color:#1A73E8}.btn-ig{background:linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);color:white}
+.amapola-footer{text-align:center;font-size:12px;color:#2E7D32;font-weight:800;margin-top:12px;background:white;border-radius:999px;padding:6px 10px;border:1px solid #C8E6C9}
 </style>
 </head>
 <body>
 <div class="container">
 <a href="index.html" class="btn-volver">⬅ Volver al Inicio</a>
-
-<h1 style="grid-column:1/-1;font-weight:900;font-size:28px;letter-spacing:-.5px;margin:6px 0 14px 0;">🛍 Guía de Comercios<br><span style="font-size:14px;font-weight:600;color:#64748b;">Alfar, Faro, Serena, Acantilados</span></h1>
-
-<div class="search-wrap">
-<span>🔍</span>
-<input id="buscadorRubros" type="search" placeholder="Buscar por rubro (Almacén, Farmacia, Heladería...)">
-</div>
-
+<h1 style="grid-column:1/-1;font-weight:900;font-size:28px;margin:6px 0 14px 0;">🛍 Guía de Comercios<br><span style="font-size:14px;font-weight:600;color:#64748b;">Alfar, Faro, Serena, Acantilados</span></h1>
+<div class="search-wrap"><span>🔍</span><input id="buscadorRubros" type="search" placeholder="Buscar por rubro..."></div>
 <div class="barrios-nav">
 <a href="#alfar" class="barrio-btn btn-alfar" onclick="filtrarBarrio('alfar');return false;"><span>🟢</span>ALFAR</a>
 <a href="#faro" class="barrio-btn btn-faro" onclick="filtrarBarrio('faro');return false;"><span>🔵</span>FARO NORTE</a>
 <a href="#serena" class="barrio-btn btn-serena" onclick="filtrarBarrio('serena');return false;"><span>🟡</span>PLAYA SERENA</a>
 <a href="#acantilados" class="barrio-btn btn-acantilados" onclick="filtrarBarrio('acantilados');return false;"><span>🟠</span>ACANTILADOS</a>
 </div>
-
 <button onclick="filtrarBarrio('todos')" style="grid-column:1/-1;padding:12px;border-radius:999px;border:2px dashed #cbd5e1;background:#fff;font-weight:800;font-size:12px;cursor:pointer;margin-bottom:10px;">Ver todos los barrios</button>
 
 <div id="sec-alfar" class="barrio-section">
-<div class="barrio-title">🟢 Alfar - 2 comercios</div>
+<div class="barrio-title">🟢 Alfar</div>
 <div class="comercios-grid">
-<!-- FARMACIA VARA -->
 <div style="background:white;border-radius:22px;overflow:hidden;border:1px solid #e2e8f0;box-shadow:0 8px 24px rgba(0,0,0,.1);max-width:560px;margin:0 auto 14px auto;font-family:Inter,'Segoe UI',system-ui,sans-serif;grid-column:1 / -1">
 
   <div style="background: radial-gradient(circle at center, #1e1e1e 0%, #111111 100%); border-radius: 40px; padding: clamp(14px,4vw,22px) clamp(18px,6vw,36px); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: inset 0 2px 4px rgba(255,255,255,0.05), 0 8px 24px rgba(0,0,0,0.4); margin: 10px; font-family: 'Arial Black', Impact, sans-serif; border: 2px solid #222222;">
@@ -122,49 +118,7 @@ body{background:#f8fafc;color:#0b132b}
       <div style="color:#05210f;font-weight:900;font-size:10.5px;line-height:1.2;text-align:center">Estados Unidos<br><b style="font-size:10.5px">Nº 779</b></div>
     </a>
   </div>
-<style>
-.amapola-card{width:100%;max-width:560px;background:linear-gradient(135deg,#e8f5e9 0%,#c8e6c9 40%,#a5d6a7 100%);border-radius:20px;box-shadow:0 8px 24px rgba(46,125,50,0.15);border:1.5px solid #81C784;overflow:hidden;padding:16px;margin:20px auto;font-family:Inter,'Segoe UI',system-ui,sans-serif;grid-column:1/-1; }
-.amapola-fachada-wrap{position:relative}
-.amapola-fachada{width:100%;height:210px;object-fit:cover;object-position:center;background:white;border-radius:14px;margin-bottom:12px;display:block;border:1px solid rgba(0,0,0,0.06)}
-.amapola-logo-circle{
-  position:absolute;
-  top:8px;right:8px;
-  background:white;
-  border-radius:50%;
-  width:84px;
-  height:84px;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 6px 16px rgba(0,0,0,.18);
-  border:3px solid white;
-  overflow:hidden;
-  padding:0;
-  box-sizing:border-box}
-.amapola-logo-circle img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-  transform:scale(1.35);
-}
-/* SOLO AGREGO ESTO PARA EL ICONO NUEVO */
-.icon-gmaps{width:18px;height:18px;object-fit:contain;vertical-align:middle;margin-right:4px;display:inline-block}
-.amapola-badge-top{position:absolute;bottom:22px;left:10px;background:rgba(27,94,32,.90);color:white;font-size:10px;font-weight:900;padding:6px 12px;border-radius:999px;letter-spacing:.4px;box-shadow:0 3px 8px rgba(0,0,0,.2)}
-.amapola-title{font-weight:900;font-size:22px;color:#1B5E20;text-align:center;margin-bottom:2px;letter-spacing:-.4px}
-.amapola-subtitle{text-align:center;font-size:13px;font-weight:700;color:#33691E;margin-bottom:12px;line-height:1.35}
-.amapola-badges{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:14px}
-.amapola-pill{font-size:11px;font-weight:800;padding:6px 11px;border-radius:999px;display:inline-flex;align-items:center;gap:4px;line-height:1}
-.pill-vegano{background:#4CAF50;color:white}.pill-celiaco{background:#FFF8E1;color:#5D4037;border:1px solid #FFECB3}.pill-diabetico{background:#FFF3E0;color:#4E342E;border:1px solid #FFE0B2}.pill-hiper{background:#E3F2FD;color:#1A237E;border:1px solid #BBDEFB}.pill-extra{background:white;color:#2E7D32;border:1px solid #C8E6C9;font-weight:700}
-.amapola-ubicacion{background:white;border-radius:12px;border:1.5px solid #A5D6A7;box-shadow:0 3px 10px rgba(76,175,80,.12);padding:9px 12px;margin-bottom:14px;text-align:center;line-height:1.4}
-.amapola-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;border-radius:999px;font-weight:900;font-size:14px;text-decoration:none;margin-bottom:8px;border:1px solid rgba(0,0,0,0.08);transition:transform .15s;box-sizing:border-box}
-.btn-wsp{background:#25D366;color:white;box-shadow:0 4px 14px rgba(37,211,102,0.4)}
-.btn-maps{background:#E8F0FE;color:#1A73E8;font-weight:800}
-.btn-ig{background:linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);color:white;box-shadow:0 4px 12px rgba(220,39,67,.3)}
-.amapola-footer{text-align:center;font-size:12px;color:#2E7D32;font-weight:800;margin-top:12px;letter-spacing:.3px;background:white;border-radius:999px;padding:6px 10px;border:1px solid #C8E6C9}
-
-</style>
-</head>
-<body>
-
+</div>
 <div class="amapola-card">
   <div class="amapola-fachada-wrap">
     <img src="amapolas.jpg" alt="Amapola's Dietetica Fachada" class="amapola-fachada">
@@ -184,18 +138,15 @@ body{background:#f8fafc;color:#0b132b}
   </div>
   <div class="amapola-ubicacion">
     <div style="font-size:14px;color:#1E293B;">
-      <img src="https://www.edigitalagency.com.au/wp-content/uploads/Google-Maps-icon-png-large-size.png" class="icon-gmaps" alt="Maps"> <b>Diagonal Estados Unidos y Santa María de Oro</b><br>
+      <span style="display:inline-flex;vertical-align:middle;margin-right:4px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="#EA4335"/></svg></span> <b>Diagonal Estados Unidos y Santa María de Oro</b><br>
       <small>Feria Comercial - Barrio Alfar • Mar del Plata</small><br>
       <small style="font-size:12px;color:#2E7D32;font-weight:700;">🍓 Frutas Congeladas • 🧉 Artesanales • 🌿 Agroecológicos</small>
     </div>
   </div>
   <a href="https://wa.me/5492234236502" target="_blank" rel="noopener noreferrer" class="amapola-btn btn-wsp">💬 ¡Hacé tu pedido saludable aquí!</a>
-  <a href="https://www.google.com/maps/search/?api=1&query=-38.092005,-57.556356" target="_blank" rel="noopener noreferrer" class="amapola-btn btn-maps"><img src="https://www.edigitalagency.com.au/wp-content/uploads/Google-Maps-icon-png-large-size.png" class="icon-gmaps" alt="Maps"> Ver en el mapa - Feria Comercial Alfar</a>
+  <a href="https://www.google.com/maps/search/?api=1&query=-38.092005,-57.556356" target="_blank" rel="noopener noreferrer" class="amapola-btn btn-maps"><span style="display:inline-flex;vertical-align:middle;margin-right:4px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="#EA4335"/></svg></span> Ver en el mapa - Feria Comercial Alfar</a>
   <a href="https://instagram.com/amapolasdiet__" target="_blank" rel="noopener noreferrer" class="amapola-btn btn-ig">📸 @amapolasdiet__</a>
   <div class="amapola-footer">🌿 Productos naturales • Atención personalizada • Todo suelto</div>
-</div>
-
-  <div style="text-align:center;font-size:11px;color:#64748b;font-weight:700;padding:0 14px 14px 14px">Atención personalizada · Productos de calidad</div>
 </div>
 <div style="box-sizing:border-box;width:100%;max-width:760px;margin:0 auto;padding:12px;background:#fafafa;border:1px solid #e5e7eb;border-radius:28px;font-family:Inter,Arial,sans-serif;color:#0b132b;box-shadow:0 14px 35px rgba(11,19,43,.12);">
   <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 16px;background:linear-gradient(135deg,#7e22ce,#581c87);border-radius:18px;">
@@ -225,160 +176,139 @@ body{background:#f8fafc;color:#0b132b}
         <div style="padding:12px;font-size:12px;font-weight:700;">📍 Calle 493 entre 6 y 8<br><span style="font-size:10px;color:#64748b;">(en el kiosko de diario)</span></div>
       </div>
     </div>
-
-    <a href="https://www.instagram.com/autoserviciokevin" target="_blank" style="display:block;margin-bottom:14px;padding:11px;border-radius:12px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:white;font-weight:900;text-align:center;text-decoration:none;">📸 @autoserviciokevin</a>
-
-    <a href="https://wa.me/5492230000000?text=Hola%20Kevin!" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:17px;border-radius:18px;background:#25D366;color:white;text-decoration:none;font-weight:900;box-shadow:0 7px 0 #159447;">💬 ¡Hacé tu pedido por WhatsApp!</a>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px;">
-      <a href="https://www.google.com/maps/search/?api=1&query=Diagonal+Estados+Unidos+474+Alfar" target="_blank" style="padding:12px;border-radius:999px;background:#eef0f2;text-align:center;font-weight:900;text-decoration:none;color:#263244;">🗺 Ver Mapa Alfar</a>
-      <a href="https://www.google.com/maps/search/?api=1&query=Calle+493+entre+6+y+8+Acantilados" target="_blank" style="padding:12px;border-radius:999px;background:#eef0f2;text-align:center;font-weight:900;text-decoration:none;color:#263244;">🗺 Ver Mapa Acantilados</a>
-    </div>
-  </div>
+</div>
 </div>
 </div>
 </div>
 
 <div id="sec-faro" class="barrio-section">
-<div class="barrio-title">🔵 Faro Norte / Punta Mogotes - 1 comercio</div>
+<div class="barrio-title">🔵 Faro Norte / Punta Mogotes</div>
 <div class="comercios-grid">
-
-<div style="max-width:560px;margin:0 auto 14px auto;" class="comercio-card" data-rubro="rotiseria panaderia despensa comidas para llevar pizzas empanadas tartas sandwiches" data-barrio="faro" data-nombre="La Pana de Flor">
+<div class="comercio-card" data-barrio="faro" data-nombre="La Pana de Flor" data-rubro="rotiseria panaderia despensa comidas para llevar pizzas empanadas tartas sandwiches" style="max-width:560px;margin:0 auto 14px auto;">
 <div class="pana-card" style="grid-column:1 / -1">
-
-  <!-- CABECERA: FOTO A LA IZQUIERDA / LOGO + MENU A LA DERECHA -->
-  <div style="display:flex;gap:12px;padding:16px 20px 24px 20px">
-    <div style="position:relative;width:55%;flex-shrink:0">
-      <img src="fachada-pana.jpg" alt="La Pana de Flor" style="width:100%;height:195px;object-fit:cover;object-position:center center;border-radius:12px;filter:brightness(1.05) contrast(1.08) saturate(1.15);display:block">
-    </div>
-    <div style="flex:1;padding-top:2px">
-      <img src="logo-pana.png" alt="Logo La Pana de Flor" style="width:56px;height:56px;border-radius:50%;border:3px solid white;box-shadow:0 6px 14px rgba(0,0,0,.25);object-fit:cover;display:block;margin-bottom:8px">
-      <div style="font-size:12px;font-weight:800;color:#1E293B;margin-bottom:4px">🥡 Comidas para llevar:</div>
-      <div style="font-size:12px;font-weight:700;color:#1E293B;line-height:1.45">
-        🍕 Pizzas<br>
-        🥟 Empanadas<br>
-        🥧 Tartas<br>
+<!-- CABECERA: FOTO A LA IZQUIERDA / LOGO + MENU A LA DERECHA -->
+<div style="display:flex;gap:12px;padding:16px 20px 24px 20px">
+<div style="position:relative;width:55%;flex-shrink:0">
+<img alt="La Pana de Flor" src="fachada-pana.jpg" style="width:100%;height:195px;object-fit:cover;object-position:center center;border-radius:12px;filter:brightness(1.05) contrast(1.08) saturate(1.15);display:block"/>
+</div>
+<div style="flex:1;padding-top:2px">
+<img alt="Logo La Pana de Flor" src="logo-pana.png" style="width:56px;height:56px;border-radius:50%;border:3px solid white;box-shadow:0 6px 14px rgba(0,0,0,.25);object-fit:cover;display:block;margin-bottom:8px"/>
+<div style="font-size:12px;font-weight:800;color:#1E293B;margin-bottom:4px">🥡 Comidas para llevar:</div>
+<div style="font-size:12px;font-weight:700;color:#1E293B;line-height:1.45">
+        🍕 Pizzas<br/>
+        🥟 Empanadas<br/>
+        🥧 Tartas<br/>
         🥪 Sándwiches de miga
       </div>
-      <div style="margin-top:10px;background:#D4AF37;color:#2D141E;font-weight:800;font-size:10px;padding:6px 10px;border-radius:999px;box-shadow:0 3px 8px rgba(0,0,0,.15);display:inline-flex;align-items:center;gap:4px">🛵 Envío gratis</div>
-    </div>
-  </div>
-
-  <!-- CONTENIDO -->
-  <div style="padding:8px 20px 20px 20px">
-    <div class="pana-title">La Pana de Flor</div>
-
-    <div style="display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 14px 0">
-      <span class="pana-pill">🧁 Comidas para llevar</span>
-      <span class="pana-pill">🍞 Panadería</span>
-      <span class="pana-pill">🛒 Despensa</span>
-    </div>
-
-    <div style="background:white;border-radius:12px;border:1.5px solid #7A1C3C;box-shadow:0 3px 10px rgba(122,28,60,.12);padding:12px 14px;margin-bottom:16px">
-      <div style="font-size:15px;color:#1E293B;line-height:2">
-        <span style="vertical-align:middle;display:inline-flex;margin-right:4px">
-          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="gmapsAddr" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#EA4335"/><stop offset="33%" stop-color="#FBBC05"/><stop offset="66%" stop-color="#34A853"/><stop offset="100%" stop-color="#4285F4"/></linearGradient></defs><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="url(#gmapsAddr)"/></svg>
-        </span>
-        <b style="font-weight:800;color:#7A1C3C">Av. Los Trabajadores 5455</b>, <b style="font-weight:800;color:#7A1C3C">Faro Norte</b><br>
-        <span style="font-size:19.5px">⏰</span> Abierto todos los días <b style="font-weight:800;color:#7A1C3C">8 a 22 hs</b><br>
-        <span style="font-size:19.5px">✨</span> <b style="font-weight:800;color:#7A1C3C">"Todo casero y rico"</b>
-      </div>
-    </div>
-
-    <a href="https://wa.me/5492233408206?text=Hola%2C%20quiero%20hacer%20un%20pedido%20a%20La%20Pana%20de%20Flor" target="_blank" class="pana-wsp-btn">
-      <svg viewBox="0 0 32 32" width="18" height="18" fill="white"><path d="M19.11 17.2c-.31-.16-1.84-.9-2.12-1.01-.29-.11-.5-.16-.7.16-.21.31-.82 1.01-1 1.22-.19.21-.37.23-.69.08-.31-.16-1.32-.48-2.51-1.54-.93-.83-1.55-1.85-1.74-2.16-.18-.31-.02-.48.14-.64.14-.14.31-.37.47-.55.16-.18.21-.31.31-.52.1-.21.05-.39-.03-.54-.08-.16-.7-1.69-.96-2.31-.25-.6-.51-.52-.7-.53h-.6c-.21 0-.54.08-.82.39-.29.31-1.08 1.06-1.08 2.58s1.11 2.99 1.26 3.2c.16.21 2.18 3.33 5.28 4.67.74.32 1.31.51 1.76.65.74.23 1.41.2 1.94.12.59-.09 1.84-.75 2.1-1.48.26-.72.26-1.34.18-1.47-.08-.13-.29-.21-.6-.36zM16 2.04c-7.7 0-13.94 6.24-13.94 13.94 0 2.46.64 4.86 1.86 6.97L2.05 30l7.25-1.9A13.9 13.9 0 0 0 16 30.08c7.7 0 13.94-6.24 13.94-13.94S23.7 2.04 16 2.04zm0 25.33A11.35 11.35 0 0 1 10.22 26l-.42-.25-4.31 1.13 1.15-4.2-.27-.43a11.35 11.35 0 0 1-1.74-6.02c0-6.28 5.11-11.39 11.39-11.39a11.33 11.33 0 0 1 8.05 3.33 11.33 11.33 0 0 1 3.33 8.05c0 6.28-5.11 11.39-11.4 11.39z"/></svg>
+<div style="margin-top:10px;background:#D4AF37;color:#2D141E;font-weight:800;font-size:10px;padding:6px 10px;border-radius:999px;box-shadow:0 3px 8px rgba(0,0,0,.15);display:inline-flex;align-items:center;gap:4px">🛵 Envío gratis</div>
+</div>
+</div>
+<!-- CONTENIDO -->
+<div style="padding:8px 20px 20px 20px">
+<div class="pana-title">La Pana de Flor</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 14px 0">
+<span class="pana-pill">🧁 Comidas para llevar</span>
+<span class="pana-pill">🍞 Panadería</span>
+<span class="pana-pill">🛒 Despensa</span>
+</div>
+<div style="background:white;border-radius:12px;border:1.5px solid #7A1C3C;box-shadow:0 3px 10px rgba(122,28,60,.12);padding:12px 14px;margin-bottom:16px">
+<div style="font-size:15px;color:#1E293B;line-height:2">
+<span style="vertical-align:middle;display:inline-flex;margin-right:4px">
+<svg fill="none" height="19" viewbox="0 0 24 24" width="19" xmlns="http://www.w3.org/2000/svg"><defs><lineargradient id="gmapsAddr" x1="0%" x2="100%" y1="0%" y2="100%"><stop offset="0%" stop-color="#EA4335"></stop><stop offset="33%" stop-color="#FBBC05"></stop><stop offset="66%" stop-color="#34A853"></stop><stop offset="100%" stop-color="#4285F4"></stop></lineargradient></defs><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="url(#gmapsAddr)"></path></svg>
+</span>
+<b style="font-weight:800;color:#7A1C3C">Av. Los Trabajadores 5455</b>, <b style="font-weight:800;color:#7A1C3C">Faro Norte</b><br/>
+<span style="font-size:19.5px">⏰</span> Abierto todos los días <b style="font-weight:800;color:#7A1C3C">8 a 22 hs</b><br/>
+<span style="font-size:19.5px">✨</span> <b style="font-weight:800;color:#7A1C3C">"Todo casero y rico"</b>
+</div>
+</div>
+<a class="pana-wsp-btn" href="https://wa.me/5492233408206?text=Hola%2C%20quiero%20hacer%20un%20pedido%20a%20La%20Pana%20de%20Flor" target="_blank">
+<svg fill="white" height="18" viewbox="0 0 32 32" width="18"><path d="M19.11 17.2c-.31-.16-1.84-.9-2.12-1.01-.29-.11-.5-.16-.7.16-.21.31-.82 1.01-1 1.22-.19.21-.37.23-.69.08-.31-.16-1.32-.48-2.51-1.54-.93-.83-1.55-1.85-1.74-2.16-.18-.31-.02-.48.14-.64.14-.14.31-.37.47-.55.16-.18.21-.31.31-.52.1-.21.05-.39-.03-.54-.08-.16-.7-1.69-.96-2.31-.25-.6-.51-.52-.7-.53h-.6c-.21 0-.54.08-.82.39-.29.31-1.08 1.06-1.08 2.58s1.11 2.99 1.26 3.2c.16.21 2.18 3.33 5.28 4.67.74.32 1.31.51 1.76.65.74.23 1.41.2 1.94.12.59-.09 1.84-.75 2.1-1.48.26-.72.26-1.34.18-1.47-.08-.13-.29-.21-.6-.36zM16 2.04c-7.7 0-13.94 6.24-13.94 13.94 0 2.46.64 4.86 1.86 6.97L2.05 30l7.25-1.9A13.9 13.9 0 0 0 16 30.08c7.7 0 13.94-6.24 13.94-13.94S23.7 2.04 16 2.04zm0 25.33A11.35 11.35 0 0 1 10.22 26l-.42-.25-4.31 1.13 1.15-4.2-.27-.43a11.35 11.35 0 0 1-1.74-6.02c0-6.28 5.11-11.39 11.39-11.39a11.33 11.33 0 0 1 8.05 3.33 11.33 11.33 0 0 1 3.33 8.05c0 6.28-5.11 11.39-11.4 11.39z"></path></svg>
       💬 ¡Hacé tu pedido por WhatsApp!
     </a>
-
-    <a href="https://www.google.com/maps/search/?api=1&query=La+Pana+de+Flor+Av+Los+Trabajadores+5455+Faro+Norte+Mar+del+Plata" target="_blank" class="pana-maps-btn">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle"><defs><linearGradient id="googleMaps2026b" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#EA4335"/><stop offset="33%" stop-color="#FBBC05"/><stop offset="66%" stop-color="#34A853"/><stop offset="100%" stop-color="#4285F4"/></linearGradient></defs><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="url(#googleMaps2026b)"/></svg>
+<a class="pana-maps-btn" href="https://www.google.com/maps/search/?api=1&amp;query=La+Pana+de+Flor+Av+Los+Trabajadores+5455+Faro+Norte+Mar+del+Plata" target="_blank">
+<svg fill="none" height="20" style="vertical-align:middle" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><defs><lineargradient id="googleMaps2026b" x1="0%" x2="100%" y1="0%" y2="100%"><stop offset="0%" stop-color="#EA4335"></stop><stop offset="33%" stop-color="#FBBC05"></stop><stop offset="66%" stop-color="#34A853"></stop><stop offset="100%" stop-color="#4285F4"></stop></lineargradient></defs><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="url(#googleMaps2026b)"></path></svg>
       Ver en el mapa
     </a>
-
-    <a href="https://instagram.com/lapanadeflor" target="_blank" class="pana-ig-btn">📸 @lapanadeflor</a>
-  </div>
+<a class="pana-ig-btn" href="https://instagram.com/lapanadeflor" target="_blank">📸 @lapanadeflor</a>
 </div>
 </div>
-
+</div>
 </div>
 </div>
 
 <div id="sec-serena" class="barrio-section">
-<div class="barrio-title">🟡 Playa Serena - Próximamente</div>
-<div style="background:#fff;border:2px dashed #fbbf24;border-radius:16px;padding:24px;text-align:center;color:#854d0e;font-weight:800;box-shadow:0 4px 12px rgba(251,191,36,.15)"><span style="font-size:32px;display:block;margin-bottom:8px">🏗️</span>Próximamente más comercios de tu barrio<br><span style="font-size:12px;font-weight:600;color:#64748b">¿Tenés un comercio en Playa Serena? ¡Escribinos!</span><br><a href="https://wa.me/5492235820394" style="display:inline-block;margin-top:10px;background:#f59e0b;color:#451a03;padding:8px 16px;border-radius:999px;font-weight:900;text-decoration:none;font-size:12px">📲 Quiero publicitar</a></div>
+<div class="barrio-title">🟡 Playa Serena</div>
+<div style="background:#fff;border:2px dashed #fbbf24;border-radius:16px;padding:24px;text-align:center;color:#854d0e;font-weight:800;">Próximamente más comercios de tu barrio</div>
 </div>
 
 <div id="sec-acantilados" class="barrio-section">
-<div class="barrio-title">🟠 Los Acantilados - 1 comercio</div>
+<div class="barrio-title">🟠 Los Acantilados</div>
 <div class="comercios-grid">
-
 <div style="box-sizing:border-box;width:100%;max-width:760px;margin:0 auto;padding:14px;background:linear-gradient(135deg,#fff7ed 0%,#ffedd5 100%);border:2px solid #f97316;border-radius:28px;font-family:Inter,Arial,sans-serif;color:#0b132b;box-shadow:0 14px 35px rgba(249,115,22,.25);">
-  <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-    <div style="background:#f97316;color:white;padding:6px 12px;border-radius:999px;font-weight:900;font-size:11px;letter-spacing:.5px">DESTACADA</div>
-    <div style="font-weight:900;font-size:13px;color:#7c2d12">SUCURSAL ACANTILADOS</div>
-  </div>
-  <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 16px;background:linear-gradient(135deg,#7e22ce,#581c87);border-radius:18px;">
-    <div style="font-size:1.3rem;font-weight:900;color:#fff;text-transform:uppercase;">Proveeduría Kevin - Acantilados</div>
-    <div style="width:45px;height:45px;border-radius:50%;background:#b8f34a;display:flex;align-items:center;justify-content:center;font-size:1.5rem;">🛍️</div>
-  </div>
-  <div style="position:relative;margin-top:12px;overflow:hidden;border-radius:22px;background:#e5e7eb;">
-    <img src="proveeduria-kevin.jpeg" alt="Proveeduría Kevin Acantilados" style="display:block;width:100%;height:clamp(230px,42vw,360px);object-fit:cover;">
-    <div style="position:absolute;left:16px;bottom:15px;padding:8px 12px;border-radius:10px;background:rgba(11,19,43,.88);color:#fff;font-size:.7rem;font-weight:900">SUCURSAL ACANTILADOS</div>
-  </div>
-  <div style="padding:16px 8px 8px;">
-    <div style="background:#fff;border-radius:16px;border:1px solid #f1f5f9;padding:12px;font-weight:800;font-size:13px;box-shadow:0 3px 10px rgba(11,19,43,.06);">📍 Calle 493 entre 6 y 8 (en el kiosko de diario)<br><span style="font-size:11px;color:#64748b;font-weight:600">Acantilados - Mar del Plata</span></div>
-    <a href="https://www.google.com/maps/search/?api=1&query=Calle+493+entre+6+y+8+Acantilados" target="_blank" style="display:block;margin-top:12px;padding:12px;border-radius:999px;background:#f97316;color:white;text-align:center;font-weight:900;text-decoration:none;">🗺 Ver Mapa Acantilados</a>
-    <a href="https://www.instagram.com/autoserviciokevin" target="_blank" style="display:block;margin-top:10px;padding:11px;border-radius:12px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:white;font-weight:900;text-align:center;text-decoration:none;">📸 @autoserviciokevin</a>
-  </div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+<div style="background:#f97316;color:white;padding:6px 12px;border-radius:999px;font-weight:900;font-size:11px;letter-spacing:.5px">DESTACADA</div>
+<div style="font-weight:900;font-size:13px;color:#7c2d12">SUCURSAL ACANTILADOS</div>
 </div>
-
+<div style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 16px;background:linear-gradient(135deg,#7e22ce,#581c87);border-radius:18px;">
+<div style="font-size:1.3rem;font-weight:900;color:#fff;text-transform:uppercase;">Proveeduría Kevin - Acantilados</div>
+<div style="width:45px;height:45px;border-radius:50%;background:#b8f34a;display:flex;align-items:center;justify-content:center;font-size:1.5rem;">🛍️</div>
+</div>
+<div style="position:relative;margin-top:12px;overflow:hidden;border-radius:22px;background:#e5e7eb;">
+<img alt="Proveeduría Kevin Acantilados" src="proveeduria-kevin.jpeg" style="display:block;width:100%;height:clamp(230px,42vw,360px);object-fit:cover;"/>
+<div style="position:absolute;left:16px;bottom:15px;padding:8px 12px;border-radius:10px;background:rgba(11,19,43,.88);color:#fff;font-size:.7rem;font-weight:900">SUCURSAL ACANTILADOS</div>
+</div>
+<div style="padding:16px 8px 8px;">
+<div style="background:#fff;border-radius:16px;border:1px solid #f1f5f9;padding:12px;font-weight:800;font-size:13px;box-shadow:0 3px 10px rgba(11,19,43,.06);">📍 Calle 493 entre 6 y 8 (en el kiosko de diario)<br/><span style="font-size:11px;color:#64748b;font-weight:600">Acantilados - Mar del Plata</span></div>
+<a href="https://www.google.com/maps/search/?api=1&amp;query=Calle+493+entre+6+y+8+Acantilados" style="display:block;margin-top:12px;padding:12px;border-radius:999px;background:#f97316;color:white;text-align:center;font-weight:900;text-decoration:none;" target="_blank">🗺 Ver Mapa Acantilados</a>
+<a href="https://www.instagram.com/autoserviciokevin" style="display:block;margin-top:10px;padding:11px;border-radius:12px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:white;font-weight:900;text-align:center;text-decoration:none;" target="_blank">📸 @autoserviciokevin</a>
 </div>
 </div>
 </div>
 </div>
 
 </div>
-
 <script>
-// Filtro inteligente por rubro y barrio
+function actualizarContadores(){
+  document.querySelectorAll('.barrio-section').forEach(sec=>{
+    const grid = sec.querySelector('.comercios-grid');
+    const titleEl = sec.querySelector('.barrio-title');
+    if(!titleEl) return;
+    if(!titleEl.dataset.base){let txt=titleEl.textContent.trim(); let base=txt.split('-')[0].trim(); titleEl.dataset.base=base;}
+    const base=titleEl.dataset.base;
+    let count=grid?grid.children.length:0;
+    if(sec.id==='sec-serena'){titleEl.innerHTML=base+' - <span style="background:#fef3c7;color:#92400e;padding:5px 12px;border-radius:999px;font-size:12px;font-weight:900">Próximamente</span>'; return;}
+    if(count===1) titleEl.innerHTML=base+' - <span class="badge-count">'+count+' comercio</span>';
+    else titleEl.innerHTML=base+' - <span class="badge-count">'+count+' comercios</span>';
+  });
+}
 function filtrarBarrio(b){
   const secs=['alfar','faro','serena','acantilados'];
-  if(b==='todos'){secs.forEach(id=>document.getElementById('sec-'+id).style.display='block');return}
-  secs.forEach(id=>{document.getElementById('sec-'+id).style.display=(id===b?'block':'none')});
+  if(b==='todos'){secs.forEach(id=>{let el=document.getElementById('sec-'+id); if(el) el.style.display='block'}); return}
+  secs.forEach(id=>{let el=document.getElementById('sec-'+id); if(el) el.style.display=(id===b?'block':'none')});
   const el=document.getElementById('sec-'+b);
   if(el) window.scrollTo({top:el.offsetTop-20,behavior:'smooth'})
 }
-// NUEVO: Lee ?barrio=alfar de la URL y filtra automático
 (function(){
   const params=new URLSearchParams(window.location.search);
   let barrio=params.get('barrio');
   if(barrio){
-    barrio=barrio.toLowerCase().trim();
-    // compatibilidad con #faro o nombres con espacios
-    barrio=barrio.replace('#','');
+    barrio=barrio.toLowerCase().trim().replace('#','');
     if(['faro','alfar','serena','acantilados'].includes(barrio)){
-      // esperar a que cargue DOM
-      window.addEventListener('DOMContentLoaded',()=>{filtrarBarrio(barrio)});
-      // por si ya cargó
-      setTimeout(()=>{try{filtrarBarrio(barrio)}catch(e){}},300);
-    }
-  } else {
-    // también soportar #alfar por si viene del viejo formato
-    const hash=window.location.hash.replace('#','').toLowerCase();
-    if(['faro','alfar','serena','acantilados'].includes(hash)){
-      window.addEventListener('DOMContentLoaded',()=>{filtrarBarrio(hash)});
-      setTimeout(()=>{try{filtrarBarrio(hash)}catch(e){}},300);
+      window.addEventListener('DOMContentLoaded',()=>{filtrarBarrio(barrio); actualizarContadores();});
+      setTimeout(()=>{try{filtrarBarrio(barrio); actualizarContadores();}catch(e){}},600);
     }
   }
 })();
-document.getElementById('buscadorRubros').addEventListener('input',e=>{
-  const q=e.target.value.toLowerCase();
-  document.querySelectorAll('.comercios-grid > div').forEach(card=>{
-    const txt=card.innerText.toLowerCase();
-    card.style.display= txt.includes(q) ? 'block':'none';
-  });
-  if(q.length>1){
-    document.querySelectorAll('.barrio-section').forEach(s=>s.style.display='block')
+document.addEventListener('DOMContentLoaded', ()=>{
+  actualizarContadores();
+  const busc=document.getElementById('buscadorRubros');
+  if(busc){
+    busc.addEventListener('input',e=>{
+      const q=e.target.value.toLowerCase().trim();
+      document.querySelectorAll('.comercios-grid').forEach(grid=>{
+        Array.from(grid.children).forEach(card=>{card.style.display=card.innerText.toLowerCase().includes(q)?'':'none'});
+      });
+    });
   }
 });
 </script>
