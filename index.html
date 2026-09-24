@@ -281,6 +281,78 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
 
   <div style="text-align:center;font-size:11px;color:#64748b;font-weight:700;padding:0 14px 14px 14px">Atención personalizada · Productos de calidad</div>
 </div></div>
+<style>
+.amapola-card{width:100%;max-width:760px;background:linear-gradient(135deg,#e8f5e9 0%,#c8e6c9 40%,#a5d6a7 100%);border-radius:20px;box-shadow:0 8px 24px rgba(46,125,50,0.15);border:1.5px solid #81C784;overflow:hidden;padding:16px;margin:0 auto 14px auto;grid-column:1/-1;font-family:Inter,'Segoe UI',system-ui,sans-serif}
+.amapola-fachada-wrap{position:relative}
+.amapola-fachada{width:100%;height:210px;object-fit:cover;object-position:center;background:white;border-radius:14px;margin-bottom:12px;display:block;border:1px solid rgba(0,0,0,0.06)}
+.amapola-logo-circle{
+  position:absolute;
+  top:8px;right:8px;
+  background:white;
+  border-radius:50%;
+  width:84px;
+  height:84px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px rgba(0,0,0,.18);
+  border:3px solid white;
+  overflow:hidden;
+  padding:0;
+  box-sizing:border-box}
+.amapola-logo-circle img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transform:scale(1.35);
+}
+/* SOLO AGREGO ESTO PARA EL ICONO NUEVO */
+.icon-gmaps{width:18px;height:18px;object-fit:contain;vertical-align:middle;margin-right:4px;display:inline-block}
+.amapola-badge-top{position:absolute;bottom:22px;left:10px;background:rgba(27,94,32,.90);color:white;font-size:10px;font-weight:900;padding:6px 12px;border-radius:999px;letter-spacing:.4px;box-shadow:0 3px 8px rgba(0,0,0,.2)}
+.amapola-title{font-weight:900;font-size:22px;color:#1B5E20;text-align:center;margin-bottom:2px;letter-spacing:-.4px}
+.amapola-subtitle{text-align:center;font-size:13px;font-weight:700;color:#33691E;margin-bottom:12px;line-height:1.35}
+.amapola-badges{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:14px}
+.amapola-pill{font-size:11px;font-weight:800;padding:6px 11px;border-radius:999px;display:inline-flex;align-items:center;gap:4px;line-height:1}
+.pill-vegano{background:#4CAF50;color:white}.pill-celiaco{background:#FFF8E1;color:#5D4037;border:1px solid #FFECB3}.pill-diabetico{background:#FFF3E0;color:#4E342E;border:1px solid #FFE0B2}.pill-hiper{background:#E3F2FD;color:#1A237E;border:1px solid #BBDEFB}.pill-extra{background:white;color:#2E7D32;border:1px solid #C8E6C9;font-weight:700}
+.amapola-ubicacion{background:white;border-radius:12px;border:1.5px solid #A5D6A7;box-shadow:0 3px 10px rgba(76,175,80,.12);padding:9px 12px;margin-bottom:14px;text-align:center;line-height:1.4}
+.amapola-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;border-radius:999px;font-weight:900;font-size:14px;text-decoration:none;margin-bottom:8px;border:1px solid rgba(0,0,0,0.08);transition:transform .15s;box-sizing:border-box}
+.btn-wsp{background:#25D366;color:white;box-shadow:0 4px 14px rgba(37,211,102,0.4)}
+.btn-maps{background:#E8F0FE;color:#1A73E8;font-weight:800}
+.btn-ig{background:linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);color:white;box-shadow:0 4px 12px rgba(220,39,67,.3)}
+.amapola-footer{text-align:center;font-size:12px;color:#2E7D32;font-weight:800;margin-top:12px;letter-spacing:.3px;background:white;border-radius:999px;padding:6px 10px;border:1px solid #C8E6C9}
+
+</style>
+
+
+<div class="amapola-card">
+  <div class="amapola-fachada-wrap">
+    <img src="amapolas.jpg" alt="Amapola's Dietetica Fachada" class="amapola-fachada">
+    <div class="amapola-logo-circle"><img src="amapola_logo_transparente.png" alt="Logo Amapolas"></div>
+    <div class="amapola-badge-top">🌿 ALMACÉN NATURAL</div>
+  </div>
+  <div class="amapola-title">Amapola's Dietética</div>
+  <div class="amapola-subtitle">🌿 Almacén Natural • Productos de Dietética y Todo Suelto</div>
+  <div class="amapola-badges">
+    <span class="amapola-pill pill-vegano">🌱 Apto Veganos</span>
+    <span class="amapola-pill pill-celiaco">🌾 Celíacos / Sin TACC</span>
+    <span class="amapola-pill pill-diabetico">🍎 Diabéticos / Sin Azúcar</span>
+    <span class="amapola-pill pill-hiper">💓 Hipertensos & Suplementos</span>
+    <span class="amapola-pill pill-extra">🥜 Semillas • Cereales • Legumbres</span>
+    <span class="amapola-pill pill-extra">🌸 Cosmética Natural • Hierbas</span>
+    <span class="amapola-pill pill-extra">🍯 Repostería • Condimentos</span>
+  </div>
+  <div class="amapola-ubicacion">
+    <div style="font-size:14px;color:#1E293B;">
+      <img src="https://www.edigitalagency.com.au/wp-content/uploads/Google-Maps-icon-png-large-size.png" class="icon-gmaps" alt="Maps"> <b>Diagonal Estados Unidos y Santa María de Oro</b><br>
+      <small>Feria Comercial - Barrio Alfar • Mar del Plata</small><br>
+      <small style="font-size:12px;color:#2E7D32;font-weight:700;">🍓 Frutas Congeladas • 🧉 Artesanales • 🌿 Agroecológicos</small>
+    </div>
+  </div>
+  <a href="https://wa.me/5492234236502" target="_blank" rel="noopener noreferrer" class="amapola-btn btn-wsp">💬 ¡Hacé tu pedido saludable aquí!</a>
+  <a href="https://www.google.com/maps/search/?api=1&query=-38.092005,-57.556356" target="_blank" rel="noopener noreferrer" class="amapola-btn btn-maps"><img src="https://www.edigitalagency.com.au/wp-content/uploads/Google-Maps-icon-png-large-size.png" class="icon-gmaps" alt="Maps"> Ver en el mapa - Feria Comercial Alfar</a>
+  <a href="https://instagram.com/amapolasdiet__" target="_blank" rel="noopener noreferrer" class="amapola-btn btn-ig">📸 @amapolasdiet__</a>
+  <div class="amapola-footer">🌿 Productos naturales • Atención personalizada • Todo suelto</div>
+</div>
+
 <div style="grid-column:1/-1;max-width:760px;margin:0 auto 14px auto;"><div style="box-sizing:border-box;width:100%;max-width:760px;margin:0 auto;padding:12px;background:#fafafa;border:1px solid #e5e7eb;border-radius:28px;font-family:Inter,Arial,sans-serif;color:#0b132b;box-shadow:0 14px 35px rgba(11,19,43,.12);">
   <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 16px;background:linear-gradient(135deg,#7e22ce,#581c87);border-radius:18px;">
     <div style="font-size:1.4rem;font-weight:900;color:#fff;text-transform:uppercase;">Proveeduría Kevin</div>
