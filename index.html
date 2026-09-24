@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="es">
 <head>
 <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script>
@@ -180,6 +182,40 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
 .btn-guia{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:8px;padding:16px 20px;border-radius:20px;background:linear-gradient(135deg,#7e22ce,#581c87);color:#fff !important;font-weight:800;font-size:14px;text-decoration:none;box-shadow:0 8px 20px rgba(126,34,206,.35);margin:0 0 14px 0;transition:.15s}
 .btn-guia:active{transform:scale(.97)}
 
+
+/* === COMERCIOS COLORES POR BARRIO - TONO FUERTE === */
+.comercio-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  border-radius:16px;padding:14px 10px;
+  font-size:13px;font-weight:900;
+  text-decoration:none;
+  box-shadow:0 6px 16px rgba(11,19,43,.12), inset 0 1px 0 rgba(255,255,255,.8);
+  border:2px solid rgba(255,255,255,.95);
+  transition:.15s;
+}
+.comercio-btn:active{transform:scale(.96)}
+.comercio-alfar{background:linear-gradient(135deg,#86efac 0%,#4ade80 100%) !important;color:#052e16 !important;border-color:#22c55e !important}
+.comercio-faro{background:linear-gradient(135deg,#93c5fd 0%,#60a5fa 100%) !important;color:#1e3a8a !important;border-color:#3b82f6 !important}
+.comercio-serena{background:linear-gradient(135deg,#fde68a 0%,#facc15 100%) !important;color:#451a03 !important;border-color:#eab308 !important}
+.comercio-acantilados{background:linear-gradient(135deg,#fdba74 0%,#fb923c 100%) !important;color:#431407 !important;border-color:#ea580c !important}
+
+/* === VOLVER GLOBAL FIJO DEBAJO DEL BUSCADOR === */
+#volver-global{
+  grid-column:1/-1;
+  position:sticky;
+  top:8px;
+  z-index:60;
+  max-width:560px;
+  width:100%;
+  margin:0 auto 14px auto;
+  display:none;
+}
+#volver-global .btn-volver-global{
+  display:block;width:100%;background:white;border:2.5px solid #0f172a;color:#0f172a;
+  padding:13px 22px;border-radius:999px;font-weight:900;font-size:14px;cursor:pointer;
+  text-align:center;box-shadow:0 8px 20px rgba(15,23,42,.15);letter-spacing:.2px;
+}
+
 </style>
 </head>
 <body>
@@ -198,20 +234,25 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
   <div id="resultadoBuscador" style="margin-top:10px"></div>
 </div>
 
-<!-- COMERCIOS POR BARRIO - 4 BOTONES MEDIANOS -->
+<!-- COMERCIOS POR BARRIO - COLORES POR BARRIO -->
 <div style="grid-column:1/-1; display:grid; grid-template-columns:1fr 1fr; gap:10px; max-width:560px; margin:0 auto 16px auto; width:100%;">
-  <a href="comercios.html?barrio=alfar" style="display:flex; align-items:center; justify-content:center; gap:8px; background:white; border:2px solid #0f172a; border-radius:14px; padding:14px 10px; font-size:13px; font-weight:900; color:#0f172a; text-decoration:none; box-shadow:0 3px 10px rgba(0,0,0,.08);">
-    🛍️ ALFAR
+  <a href="comercios.html?barrio=alfar" class="comercio-btn comercio-alfar">
+    🛍️ Comercios Alfar
   </a>
-  <a href="comercios.html?barrio=serena" style="display:flex; align-items:center; justify-content:center; gap:8px; background:white; border:2px solid #0f172a; border-radius:14px; padding:14px 10px; font-size:13px; font-weight:900; color:#0f172a; text-decoration:none; box-shadow:0 3px 10px rgba(0,0,0,.08);">
-    🛍️ SERENA
+  <a href="comercios.html?barrio=faro" class="comercio-btn comercio-faro">
+    🛍️ Comercios de Faro Norte
   </a>
-  <a href="comercios.html?barrio=acantilados" style="display:flex; align-items:center; justify-content:center; gap:8px; background:white; border:2px solid #0f172a; border-radius:14px; padding:14px 10px; font-size:13px; font-weight:900; color:#0f172a; text-decoration:none; box-shadow:0 3px 10px rgba(0,0,0,.08);">
-    🛍️ ACANTILADOS
+  <a href="comercios.html?barrio=serena" class="comercio-btn comercio-serena">
+    🛍️ Comercios de Serena
   </a>
-  <a href="comercios.html?barrio=faro" style="display:flex; align-items:center; justify-content:center; gap:8px; background:white; border:2px solid #0f172a; border-radius:14px; padding:14px 10px; font-size:13px; font-weight:900; color:#0f172a; text-decoration:none; box-shadow:0 3px 10px rgba(0,0,0,.08);">
-    🛍️ FARO NORTE
+  <a href="comercios.html?barrio=acantilados" class="comercio-btn comercio-acantilados">
+    🛍️ Comercios de Acantilados
   </a>
+</div>
+
+<!-- VOLVER GLOBAL FIJO DEBAJO DEL BUSCADOR -->
+<div id="volver-global">
+  <button class="btn-volver-global" onclick="volverHome()">← Volver al inicio</button>
 </div>
 
 
@@ -476,6 +517,7 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
     </div>
   </div>
   <a href="https://wa.me/5492235820394" target="_blank" style="display:block;text-align:center;background:#f97316;color:#0b1f4d;font-weight:900;padding:12px;border-radius:12px;margin-top:12px;text-decoration:none">📲 WhatsApp 223 582-0394</a>
+</div>
 
 <div class="card" style="padding:0;overflow:hidden;border:2px solid #ff00ff">
 <a href="https://maps.google.com/?q=Guillermo+Magrassi+4299+Mar+del+Plata" target="_blank" style="text-decoration:none;display:block;">
@@ -488,36 +530,12 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
 </a>
 </div>
 </div>
-</div>
 <div id="page-faro" class="barrio-page">
   <div class="btn-volver" onclick="volverHome()">← Volver al inicio</div>
   <div class="barrio-header faro"><img src="faro-nuevo.jpg"><div class="barrio-header-overlay"></div><div class="barrio-header-text"><h2>🗼 FARO NORTE</h2><p>Sánchez de Bustamante 3460 - Mar del Plata</p></div></div>
   <div class="card"><h3>🏛️ Sociedad de Fomento Faro Norte</h3><div class="info-box"><b>📍 Dirección:</b> Sánchez de Bustamante 3460<br><b>🚌 Colectivo:</b> 511<br><b>📌 Actividades:</b> Salud, talleres, RCP, vacunaciones y castraciones</div></div>
-  <div class="card" style="border:3px solid #0f172a; position:relative; overflow:hidden; background: linear-gradient(135deg,#ffffff 0%, #f0fdf4 100%);">
-    <div style="position:absolute;top:0;right:0;background:#22c55e;color:white;padding:5px 12px;border-radius:0 0 0 14px;font-size:10px;font-weight:900;letter-spacing:.5px">● NUEVO</div>
-    <div style="display:flex; gap:14px; align-items:flex-start;">
-      <div style="width:56px;height:56px;min-width:56px;background:linear-gradient(135deg,#0f172a,#22c55e);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 6px 14px rgba(0,0,0,.15)">🧘‍♀️</div>
-      <div style="flex:1">
-        <span style="background:#dcfce7;color:#15803d;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:900">FARO NORTE · SOC. DE FOMENTO</span>
-        <h3 style="margin-top:6px;font-size:19px;line-height:1.2;font-weight:900">Pilates Mat</h3>
-        <div style="font-size:13px;line-height:1.5;margin-top:6px;color:#334155">
-          <b>📍</b> Asoc. Vecinal de Fomento Faro Norte<br>
-          <b>🗓️</b> Martes y jueves - <b>14hs y 15hs</b><br>
-          <b>👥</b> Todas las edades y niveles<br>
-          <b style="color:#dc2626">Cupos limitados</b>
-        </div>
-        <a href="https://wa.me/5492235466679?text=Hola%20quiero%20info%20de%20Pilates%20en%20Faro%20Norte" target="_blank" style="display:block;background:#0f172a;color:white;text-align:center;padding:12px;border-radius:12px;text-decoration:none;font-weight:900;margin-top:12px;font-size:14px">📲 Reservar: 223 546-6679</a>
-      </div>
-    </div>
-<img src="pilates-faro.jpg" alt="Pilates Faro Norte" style="width:100%; max-width:380px; border-radius:12px; display:block; margin:0 auto">
-    <p style="font-size:11px;color:#64748b;text-align:center;margin:6px 0 0 0">Info: Asoc. Vecinal de Fomento Faro Norte</p>
-  </div>
-  <div class="card" style="padding:10px; display:flex; flex-direction:column; align-items:center; border:2px solid #000">
-    <img src="ritmos-faro.jpg" style="width:100%; max-width:380px; border-radius:12px; display:block">
-    <p style="font-size:11px; color:#777; text-align:center; margin:6px 0 0 0">Info: Asoc. Vecinal de Fomento Faro Norte</p>
-  </div>
   <div class="card"><h3>🎯 Actividades en FARO NORTE</h3><div id="acts-faro" style="font-size:13px">Cargando...</div></div>
-  <div class="card" style="background:#fffbe6;border:2px solid #facc15"><h3>📢 Notificaciones - FARO</h3><div id="noti-faro" style="margin-top:10px;font-size:13px;color:#64748b;padding:12px;background:white;border-radius:10px;border:1px solid #e2e8f0">No hay notificaciones por el momento.</div></div>
+  <div class="card" style="background:#fffbe6;border:2px solid #facc15"><h3>📢 Notificaciones - FARO</h3><div id="noti-faro" style="margin-top:10px;padding:12px;background:white;border-radius:10px;border:1px solid #e2e8f0"><div style="background:#0f172a;color:white;border-radius:12px;padding:14px"><div style="font-weight:900;font-size:14px;letter-spacing:.5px">🏛️ ANSES - Operativo de Atención Faro Norte</div><div style="margin-top:10px;display:grid;gap:8px;font-size:13px;line-height:1.4"><div>📅 <b>Fecha:</b> 08 de Octubre</div><div>🕒 <b>Hora:</b> 09 a 14 hs</div><div>📍 <b>Dirección:</b> Sánchez de Bustamante 3460 - Faro Norte</div></div><div style="margin-top:10px;font-size:11px;opacity:.8;border-top:1px solid rgba(255,255,255,.2);padding-top:8px">Ministerio de Capital Humano - República Argentina</div></div></div></div>
 </div>
 <div id="page-alfar" class="barrio-page">
   <div class="btn-volver" onclick="volverHome()">← Volver al inicio</div>
@@ -710,9 +728,43 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
 </div>
 <script>
 document.getElementById('f').textContent=new Date().toLocaleDateString('es-AR');
-function abrirBarrio(nombre){document.getElementById('page-home').style.display='none';document.querySelectorAll('.barrio-page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+nombre).classList.add('active');document.querySelectorAll('.barrio-btn').forEach(b=>b.classList.remove('activo'));const btn=document.querySelector('.btn-'+nombre);if(btn)btn.classList.add('activo');window.scrollTo({top:0,behavior:'smooth'});history.pushState(null,null,'#'+nombre);}
-function volverHome(){document.getElementById('page-home').style.display='contents';document.querySelectorAll('.barrio-page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.barrio-btn').forEach(b=>b.classList.remove('activo'));window.scrollTo({top:0,behavior:'smooth'});history.pushState(null,null,'#');}
-function aplicarHash(){const h=location.hash.replace('#','');const validos=['faro','alfar','serena','acantilados'];document.querySelectorAll('.barrio-page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.barrio-btn').forEach(b=>b.classList.remove('activo'));if(validos.includes(h)){document.getElementById('page-home').style.display='none';document.getElementById('page-'+h).classList.add('active');const btn=document.querySelector('.btn-'+h);if(btn)btn.classList.add('activo');}else{document.getElementById('page-home').style.display='contents';}}
+function abrirBarrio(nombre){
+  document.getElementById('page-home').style.display='none';
+  document.querySelectorAll('.barrio-page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+nombre).classList.add('active');
+  document.querySelectorAll('.barrio-btn').forEach(b=>b.classList.remove('activo'));
+  const btn=document.querySelector('.btn-'+nombre);if(btn)btn.classList.add('activo');
+  const vg=document.getElementById('volver-global');if(vg){vg.style.display='block';}
+  // ocultar los volver internos para no duplicar
+  document.querySelectorAll('.barrio-page .btn-volver').forEach(b=>b.style.display='none');
+  window.scrollTo({top:0,behavior:'smooth'});
+  history.pushState(null,null,'#'+nombre);
+}
+function volverHome(){
+  document.getElementById('page-home').style.display='contents';
+  document.querySelectorAll('.barrio-page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.barrio-btn').forEach(b=>b.classList.remove('activo'));
+  const vg=document.getElementById('volver-global');if(vg){vg.style.display='none';}
+  window.scrollTo({top:0,behavior:'smooth'});
+  history.pushState(null,null,'#');
+}
+function aplicarHash(){
+  const h=location.hash.replace('#','');
+  const validos=['faro','alfar','serena','acantilados'];
+  document.querySelectorAll('.barrio-page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.barrio-btn').forEach(b=>b.classList.remove('activo'));
+  const vg=document.getElementById('volver-global');
+  if(validos.includes(h)){
+    document.getElementById('page-home').style.display='none';
+    document.getElementById('page-'+h).classList.add('active');
+    const btn=document.querySelector('.btn-'+h);if(btn)btn.classList.add('activo');
+    if(vg){vg.style.display='block';}
+    document.querySelectorAll('.barrio-page .btn-volver').forEach(b=>b.style.display='none');
+  }else{
+    document.getElementById('page-home').style.display='contents';
+    if(vg){vg.style.display='none';}
+  }
+}
 window.addEventListener('popstate', aplicarHash);aplicarHash();
 let s=0;setInterval(()=>{s=s===0?1:0;document.getElementById('slide1').style.opacity=s===0?1:0;document.getElementById('slide2').style.opacity=s===1?1:0;},4000);
 async function dolar(){try{const r=await fetch('https://dolarapi.com/v1/dolares');const d=await r.json();let m={};d.forEach(x=>m[x.casa]=x);document.getElementById('dolar-g').innerHTML=`<div class="dolar-item blue"><div style="font-size:10px;color:#64748b;font-weight:700">BLUE</div><div style="font-size:22px;font-weight:900">$${m.blue.venta}</div><div style="font-size:11px">Compra $${m.blue.compra}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">OFICIAL</div><div style="font-size:22px;font-weight:900">$${m.oficial.venta}</div><div style="font-size:11px">Compra $${m.oficial.compra}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">MEP</div><div style="font-size:22px;font-weight:900">$${m.bolsa.venta}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">TARJETA</div><div style="font-size:22px;font-weight:900">$${m.tarjeta.venta}</div></div>`;document.getElementById('dolar-t').textContent='Actualizado '+new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});}catch(e){}}dolar();
@@ -797,7 +849,15 @@ function abrirModalActividad(barrio,nombre){
   document.getElementById('modal-acts').style.display='block';
   document.getElementById('act-titulo').textContent=a.nombre;
   const img=document.getElementById('act-img');
-  if(a.barrio==='faro'){img.src='ritmos-faro.jpg';img.style.display='block';}else{img.style.display='none';}
+  if(a.imagen){
+    img.src=a.imagen;
+    img.style.display='block';
+    img.onerror=function(){this.src='faro-nuevo.jpg'};
+  } else if(a.barrio==='faro'){
+    img.src='ritmos-faro.jpg';img.style.display='block';
+  } else {
+    img.style.display='none';
+  }
   document.getElementById('act-info').innerHTML=`
     <div style="display:inline-block;background:#e0f2fe;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800">${a.actividad.toUpperCase()}</div><br><br>
     <b>📍 Lugar:</b> ${a.lugar}<br>
@@ -814,10 +874,14 @@ async function pintarActividadesPorBarrio(){
     if(!el) return;
     const mias=acts.filter(a=>a.barrio===b);
     el.innerHTML=mias.length?mias.map(a=>`
-      <div onclick="abrirModalActividad('${a.barrio}','${a.nombre.replace(/'/g,"\\'")}')" style="cursor:pointer;padding:12px 0;border-bottom:1px solid #eee">
-        <b>${a.nombre}</b> - <span style="background:#e0f2fe;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:800">${a.actividad.toUpperCase()}</span><br>
-        <small>📍 ${a.lugar} - ${a.dias}</small>
-        <div style="margin-top:6px"><span style="background:#0f172a;color:white;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800">👉 Ver info</span></div>
+      <div onclick="abrirModalActividad('${a.barrio}','${a.nombre.replace(/'/g,"\\'")}')" style="cursor:pointer;display:flex;gap:12px;padding:12px;border:1px solid #e2e8f0;border-radius:14px;margin-bottom:10px;background:white;align-items:center">
+        <img src="${a.imagen||'ritmos-faro.jpg'}" onerror="this.src='faro-nuevo.jpg'" style="width:64px;height:64px;object-fit:cover;border-radius:12px;flex-shrink:0;border:1px solid #e2e8f0">
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:900;font-size:13.5px;line-height:1.25;color:#0f172a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${a.nombre}</div>
+          <div style="margin-top:4px"><span style="background:#e0f2fe;padding:3px 8px;border-radius:20px;font-size:10px;font-weight:800;color:#1e40af">${a.actividad.toUpperCase()}</span></div>
+          <div style="margin-top:4px;font-size:11px;color:#64748b;line-height:1.3">📍 ${a.lugar} • ${a.dias}</div>
+        </div>
+        <div style="background:#0f172a;color:white;padding:6px 10px;border-radius:20px;font-size:10px;font-weight:800;flex-shrink:0">Ver →</div>
       </div>
     `).join(''):'<div style="color:#64748b;padding:10px;background:#f8fafc;border-radius:8px">No hay actividades cargadas aún para este barrio.</div>';
   });
@@ -874,7 +938,15 @@ if(q.includes('natural') || q.includes('dietet') || q.includes('frutos secos') |
   }else{
     resEl.innerHTML = '<div style="font-size:12px;color:#64748b">No encontré nada con "'+e.target.value+'"</div>';
   }
-});{
+});
+let instalacionPrompt = null;
+const btnInstalar = document.getElementById('btn-instalar');
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  instalacionPrompt = e;
+  if(btnInstalar) btnInstalar.style.display = 'block';
+});
+if(btnInstalar){
   btnInstalar.addEventListener('click', async () => {
     if (!instalacionPrompt) return;
     instalacionPrompt.prompt();
