@@ -55,10 +55,7 @@ body{background:#f8fafc;color:#0b132b}
 <div class="container">
 <a href="index.html" class="btn-volver">⬅ Volver al Inicio</a>
 <h1 style="grid-column:1/-1;font-weight:900;font-size:28px;margin:6px 0 14px 0;">🛍 Guía de Comercios<br><span style="font-size:14px;font-weight:600;color:#64748b;">Alfar, Faro, Serena, Acantilados</span></h1>
-<div class="search-wrap" style="position:relative;max-width:560px;margin:0 auto 14px auto;grid-column:1/-1;width:100%;z-index:20;">
-<span>🔍</span><input id="buscadorRubros" type="search" placeholder="Buscar por rubro: farmacia, almacén, kiosco, rotisería, dietética...">
-<div id="resultadosComerciosFlotante" style="display:none; position:absolute; top:54px; left:0; right:0; background:#fff; border-radius:20px; box-shadow:0 18px 40px rgba(0,0,0,.18); border:2px solid #0f172a; max-height:60vh; overflow-y:auto; z-index:50; padding:12px;"></div>
-</div>
+<div class="search-wrap"><span>🔍</span><input id="buscadorRubros" type="search" placeholder="Buscar por rubro..."></div>
 <div class="barrios-nav">
 <a href="#alfar" class="barrio-btn btn-alfar" onclick="filtrarBarrio('alfar');return false;"><span>🟢</span>ALFAR</a>
 <a href="#faro" class="barrio-btn btn-faro" onclick="filtrarBarrio('faro');return false;"><span>🔵</span>FARO NORTE</a>
@@ -270,14 +267,13 @@ body{background:#f8fafc;color:#0b132b}
 </div>
 
 </div>
-
 <script>
-// BUSCADOR MEJORADO v3 - con tarjeta flotante + filtro en grilla
-function normalizar(t){return (t||'').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();}
+// BUSCADOR MEJORADO v2 - liviano
+function normalizar(t){return t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();}
 function actualizarContadores(filtrado){
   document.querySelectorAll('.barrio-section').forEach(sec=>{
-    const grid = sec.querySelector('.comercios-grid');
-    const titleEl = sec.querySelector('.barrio-title');
+    const grid=sec.querySelector('.comercios-grid');
+    const titleEl=sec.querySelector('.barrio-title');
     if(!titleEl) return;
     if(!titleEl.dataset.base){let txt=titleEl.textContent.trim(); let base=txt.split('-')[0].trim(); titleEl.dataset.base=base;}
     const base=titleEl.dataset.base;
@@ -314,69 +310,52 @@ function filtrarBarrio(b){
   if(q){
     window.addEventListener('DOMContentLoaded',()=>{
       const busc=document.getElementById('buscadorRubros');
-      if(busc){busc.value=q; busc.dispatchEvent(new Event('input'));}
+      if(busc){busc.value=q; busc.dispatchEvent(new Event('input')); setTimeout(()=>busc.dispatchEvent(new Event('input')),300);}
     });
   }
 })();
 document.addEventListener('DOMContentLoaded', ()=>{
   actualizarContadores(false);
   const busc=document.getElementById('buscadorRubros');
-  const flotante=document.getElementById('resultadosComerciosFlotante');
   let t=null;
   if(busc){
     busc.addEventListener('input',e=>{
       clearTimeout(t);
       t=setTimeout(()=>{
         const q=normalizar(e.target.value);
-        const palabras=q.split(/\s+/).filter(w=>w.length>=2);
+        const palabras=q.split(/\s+/).filter(w=>w.length>1);
         if(palabras.length===0){
           document.querySelectorAll('.comercios-grid > div').forEach(c=>c.style.display='');
           document.querySelectorAll('.barrio-section').forEach(s=>s.style.display='block');
           actualizarContadores(false);
-          if(flotante){flotante.style.display='none'; flotante.innerHTML='';}
-          const msg=document.getElementById('msg-sin-resultados'); if(msg) msg.style.display='none';
+          const m=document.getElementById('msg-sin-resultados'); if(m) m.style.display='none';
           return;
         }
         let totalVis=0;
-        const resultados=[];
         document.querySelectorAll('.comercios-grid').forEach(grid=>{
           Array.from(grid.children).forEach(card=>{
             const txt=normalizar((card.getAttribute('data-search')||'')+' '+(card.innerText||''));
             const ok=palabras.every(p=>txt.includes(p));
             card.style.display= ok ? '' : 'none';
-            if(ok){
-              totalVis++;
-              const nombre = (card.getAttribute('data-search')||'').split(' ').slice(0,3).join(' ') || 'Comercio';
-              resultados.push({el:card, nombre: nombre, barrio: card.closest('.barrio-section')?.id || ''});
-            }
+            if(ok) totalVis++;
           });
         });
         document.querySelectorAll('.barrio-section').forEach(s=>s.style.display='block');
         actualizarContadores(true);
-        if(flotante){
-          if(totalVis>0){
-            let htmlFlotante = '<div style="font-weight:900;font-size:12px;color:#0f172a;margin:4px 0 10px 4px">🛍️ ENCONTRADOS ('+totalVis+') - tocá para ir</div>';
-            htmlFlotante += resultados.slice(0,8).map(r=>{
-              const barrio = r.barrio.replace('sec-','');
-              return `<div onclick="document.getElementById('${r.barrio}')?.scrollIntoView({behavior:'smooth'}); document.getElementById('resultadosComerciosFlotante').style.display='none';" style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:12px;background:#f8fafc;border:2px solid #e2e8f0;margin-bottom:6px;cursor:pointer;">
-                <div style="font-weight:900;font-size:13px;flex:1">${r.nombre}</div>
-                <span style="background:#0f172a;color:white;padding:3px 8px;border-radius:999px;font-size:10px">${barrio.toUpperCase()}</span>
-              </div>`;
-            }).join('');
-            htmlFlotante += '<div style="text-align:center;margin-top:8px"><button onclick="document.getElementById(\'resultadosComerciosFlotante\').style.display=\'none\'" style="background:#f1f5f9;border:2px solid #e2e8f0;padding:6px 14px;border-radius:999px;font-weight:800;font-size:11px;cursor:pointer">✕ Cerrar</button></div>';
-            flotante.innerHTML = htmlFlotante;
-            flotante.style.display = 'block';
-          } else {
-            flotante.innerHTML = '<div style="text-align:center;padding:14px;color:#64748b;font-weight:700">😕 No encontré "'+e.target.value+'"<br><small>Probá: farmacia, almacen, kiosco, rotiseria, dietetica</small></div><div style="text-align:center;margin-top:8px"><button onclick="document.getElementById(\'resultadosComerciosFlotante\').style.display=\'none\'" style="background:#f1f5f9;border:2px solid #e2e8f0;padding:6px 14px;border-radius:999px;font-weight:800;font-size:11px;cursor:pointer">✕ Cerrar</button></div>';
-            flotante.style.display = 'block';
-          }
+        let msg=document.getElementById('msg-sin-resultados');
+        if(!msg){
+          msg=document.createElement('div');
+          msg.id='msg-sin-resultados';
+          msg.style.cssText='grid-column:1/-1;text-align:center;padding:18px;background:#fff;border:2px dashed #e2e8f0;border-radius:16px;font-weight:800;color:#64748b;margin-top:10px';
+          document.querySelector('.container').appendChild(msg);
+        }
+        if(totalVis===0){
+          msg.textContent='No encontramos comercios para "'+e.target.value+'" - proba con farmacia, alfar, kiosco, rotiseria';
+          msg.style.display='block';
+        } else {
+          msg.style.display='none';
         }
       },150);
-    });
-    document.addEventListener('click', (e)=>{
-      if(flotante && !busc.contains(e.target) && !flotante.contains(e.target)){
-        flotante.style.display='none';
-      }
     });
   }
 });
