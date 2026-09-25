@@ -88,5 +88,141 @@
     "lugar": "Sánchez de Bustamante 3460 - Faro Norte",
     "contacto": "223-5333768",
     "imagen": "socios.jpeg"
+  },
+  {
+    "barrio": "alfar",
+    "nombre": "Apoyo Escolar Inglés - Teacher Mirko",
+    "actividad": "apoyo escolar ingles primaria secundaria",
+    "dias": "SÁBADOS 10:30 A 11:30HS",
+    "lugar": "Asociación Vecinal de Fomento Barrio Alfar - Luis Franco 750 entre Cayetano Rodríguez y Pacheco de Melo",
+    "contacto": "Teacher Mirko",
+    "telefono": "",
+    "direccion": "Luis Franco 750",
+    "imagen": "apoyoingles.jpeg"
+  },
+  {
+    "barrio": "alfar",
+    "nombre": "Clases de Circo para Niñes - Sami Bustos",
+    "actividad": "circo niñes",
+    "dias": "Martes y jueves de 17:30 a 19 hs. - Comienza martes 10 de marzo",
+    "lugar": "Sociedad de Fomento Alfar",
+    "contacto": "Sami Bustos - @Alfarfomento @Delmarcirco",
+    "guia": "Sami Bustos",
+    "imagen": "circo-niñes.jpeg"
+  },
+  {
+    "barrio": "alfar",
+    "nombre": "Danza Árabe - Prof. Aisha",
+    "actividad": "danza arabe",
+    "dias": "Inscripciones abiertas - Consultar",
+    "lugar": "Sociedad de Fomento Alfar",
+    "contacto": "2236337024",
+    "telefono": "2236337024",
+    "imagen": "danza-_arabe.jpeg"
+  },
+  {
+    "barrio": "alfar",
+    "nombre": "Entrenamiento Funcional - Profe Celi",
+    "actividad": "entrenamiento funcional",
+    "dias": "LUNES, MIÉRCOLES Y VIERNES 8hs.",
+    "lugar": "SEDE ALFAR - CALLE LUIS FRANCO 750",
+    "contacto": "@Alfar_fitness - Profe Celi",
+    "imagen": "entrenamientofuncional.jpeg"
+  },
+  {
+    "barrio": "alfar",
+    "nombre": "Festival ALFAR",
+    "actividad": "festival alfar show en vivo feria emprendedores",
+    "dias": "Domingo 11 de Octubre de 14 a 18hs",
+    "lugar": "Luis Franco 750 - Sociedad de Fomento Alfar-Mar del Plata",
+    "contacto": "2236337024 / 2235594652",
+    "telefonos": [
+      "2236337024",
+      "2235594652"
+    ],
+    "direccion": "Luis Franco 750",
+    "imagen": "festival.jpeg"
+  },
+  {
+    "barrio": "alfar",
+    "nombre": "Clases de guitarra Gratuito - Leonardo Benitez",
+    "actividad": "guitarra clases gratuitas",
+    "dias": "Martes De 16 a 18h - Inicio 14 de abril",
+    "lugar": "Soc de fomento Alfar - Calle franco 350",
+    "contacto": "Leonardo benitez - 2235991573",
+    "telefono": "2235991573",
+    "direccion": "Calle franco 350 (textual flyer)",
+    "imagen": "guitarra.jpeg"
+  },
+  {
+    "barrio": "alfar",
+    "nombre": "Yoga / Masaje Ayurveda / Meditación - Hisi Diaz",
+    "actividad": "yoga masaje ayurveda meditacion",
+    "dias": "Yoga: Martes y Jueves 15 a 16hs / Masaje: Lunes 14 a 16 hs / Meditación: 1 vez por semana a confirmar",
+    "lugar": "Sociedad de Fomento Barrio Alfar - Luis Franco 750",
+    "contacto": "2235242743",
+    "telefono": "2235242743",
+    "profesora": "HISI DIAZ",
+    "imagen": "hisi_diaz.jpeg"
+  },
+  {
+    "barrio": "alfar",
+    "nombre": "Termina tus estudios primarios - Certificado oficial BsAs",
+    "actividad": "primaria estudios oficial",
+    "dias": "TURNO MAÑANA DE LUNES A VIERNES De 9 a 12",
+    "lugar": "Sociedad de fomento Calle Luis Franco Nº 750 - Barrio Alfar - Pase gratuito colectivo",
+    "contacto": "2234213985",
+    "telefono": "2234213985",
+    "imagen": "primaria.jpeg"
+  },
+  {
+    "barrio": "alfar",
+    "nombre": "Psicología Social - Centro Psicosocial Argentino",
+    "actividad": "psicologia social",
+    "dias": "INICIO EN JUNIO - INSCRIPCION 2026",
+    "lugar": "Asociación Vecinal de Fomento del Barrio Alfar - Luis Franco 750",
+    "contacto": "2236906341 - cpsasedemardelplata",
+    "telefono": "2236906341",
+    "imagen": "psicologia.jpeg"
+  },
+  {
+    "barrio": "alfar",
+    "nombre": "Reggaeton Kids y Adolescentes - Profe Agus",
+    "actividad": "reggaeton kids adolescentes",
+    "dias": "Viernes 17hs a 18hs (KIDS) / 18hs a 19hs (adol.)",
+    "lugar": "Sociedad de fomento BARRIO ALFAR (Luis franco 750)",
+    "contacto": "AGUS - 2236015567",
+    "telefono": "2236015567",
+    "imagen": "reggaeton.jpeg"
+  },
+  {
+    "barrio": "alfar",
+    "nombre": "Taller de cerámica - Cupos limitados",
+    "actividad": "taller ceramica",
+    "dias": "LUNES 10 HS / MIERCOLES 15 HS / MIÉRCOLES 17 HS",
+    "lugar": "Sociedad de fomento Alfar - luis Franco 750",
+    "contacto": "2235594652",
+    "telefono": "2235594652",
+    "imagen": "taller_ceramica.jpeg"
+  },
+  {
+    "barrio": "alfar",
+    "nombre": "Terracota taller de cerámica - Niñ@s desde 5 años",
+    "actividad": "terracota ceramica niños",
+    "dias": "Comienza primera semana de marzo - Distintos horarios - Vacantes limitadas",
+    "lugar": "Alfar",
+    "contacto": "2235594652",
+    "telefono": "2235594652",
+    "descripcion": "Fomenta la creatividad. Favorece la motricidad fina y la paciencia.",
+    "imagen": "terracota.jpeg"
+  },
+  {
+    "barrio": "alfar",
+    "nombre": "Tela, Trapecio, Lira - Sami Bustos",
+    "actividad": "tela trapecio lira acrobacia",
+    "dias": "JUEVES DE 9 A 11HS.",
+    "lugar": "SOC.DE FOMENTO ALFAR - LUIS FRANCO 750",
+    "contacto": "SAMI BUSTOS - @DELMARCIRCO",
+    "imagen": "trapecio.jpeg"
   }
 ]
