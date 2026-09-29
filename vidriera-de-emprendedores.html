@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vidriera de Emprendedores - Faro, Alfar, Serena y Acantilados</title>
+<meta name="theme-color" content="#0f172a">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
+body{background:#f0f4f8;color:#1a202c;padding-bottom:90px}
+.hero{position:relative;height:260px;overflow:hidden;background:#0f172a}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,23,42,.95) 0%,rgba(0,0,0,.2) 60%)}
+.hero-text{position:absolute;bottom:18px;left:16px;right:16px;color:white;z-index:2}
+.hero-text h1{font-size:30px;font-weight:900;letter-spacing:-1px;line-height:1.1}
+.hero-text p{font-size:13px;opacity:.9;margin-top:6px}
+.contenedor{max-width:1000px;margin:0 auto;padding:14px}
+.card{background:white;border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,.06);border:1px solid #e2e8f0}
+.buscador-wrap{position:sticky;top:0;z-index:20;background:#f0f4f8;padding:10px 0 8px 0;margin:0 0 12px 0}
+.buscador{width:100%;padding:14px 16px 14px 44px;border-radius:999px;border:2px solid #0f172a;background:white;font-weight:700;font-size:14px;outline:none;box-shadow:0 4px 12px rgba(0,0,0,.06)}
+.buscador-wrap::before{content:"🔍";position:absolute;left:16px;top:50%;transform:translateY(-50%);z-index:2;font-size:18px;margin-top:2px}
+.resultados{position:absolute;top:56px;left:0;right:0;background:white;border-radius:18px;border:2px solid #0f172a;box-shadow:0 12px 28px rgba(0,0,0,.18);max-height:68vh;overflow-y:auto;display:none;z-index:30}
+.grid{display:flex;flex-direction:column;gap:14px;margin-top:14px}
+.card-emp{background:white;border-radius:14px;overflow:hidden;display:flex;flex-direction:row;box-shadow:0 4px 12px rgba(0,0,0,.06);border:1px solid #e2e8f0;text-align:left;transition:.15s}
+.card-emp.gratis{border-left:4px solid #22c55e;display:block}
+.card-emp.destacado{border:2px solid #facc15;box-shadow:0 6px 20px rgba(250,204,21,.22)}
+.card-emp:hover{transform:translateY(-2px)}
+.img-box{width:38%;min-width:140px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.img-box img{width:100%;height:100%;object-fit:cover;display:block}
+.info{flex:1;padding:16px 16px 14px;display:flex;flex-direction:column;justify-content:flex-start}
+.card-emp h3{margin:6px 0 6px 0;font-size:19px;font-weight:900;color:#0f172a;line-height:1.2;letter-spacing:-.2px}
+.card-emp .desc{font-size:14.5px;color:#334155;line-height:1.45;margin:8px 0;font-weight:500}
+.badge-barrio{display:inline-block;padding:4px 10px;border-radius:999px;font-size:10px;font-weight:900;margin-bottom:6px}
+.badge-faro{background:#0f172a;color:white}
+.badge-alfar{background:#dbeafe;color:#1e40af}
+.badge-serena{background:#cffafe;color:#0e7490}
+.badge-acantilados{background:#dcfce7;color:#15803d}
+.btn-wsp{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;background:#25D366;color:white;padding:13px 18px;border-radius:999px;text-decoration:none;font-weight:900;font-size:15px;width:100%;box-shadow:0 6px 16px rgba(37,211,102,.28)}
+.redes-row{display:flex;gap:8px;margin-top:8px}
+.btn-red{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:9px 10px;border-radius:999px;font-weight:800;font-size:12px;text-decoration:none;border:1px solid #e2e8f0;background:white}
+.btn-ig{background:#fff0f6;border-color:#f9a8d4;color:#be185d}
+.btn-map{background:#eff6ff;border-color:#93c5fd;color:#1d4ed8}
+.top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:8px}
+.badge-gratis{background:#dcfce7;color:#15803d;padding:4px 10px;border-radius:999px;font-size:10px;font-weight:900}
+.badge-dest{background:#facc15;color:#000;padding:4px 10px;border-radius:999px;font-size:10px;font-weight:900}
+@media(max-width:520px){.card-emp{flex-direction:column}.img-box{width:100%;height:200px}}
+.btn-flotante{position:fixed;bottom:18px;right:18px;z-index:50;background:#0f172a;color:white;border:none;padding:14px 20px;border-radius:999px;font-weight:900;font-size:13px;cursor:pointer;box-shadow:0 8px 24px rgba(15,23,42,.35)}
+.barrios-nav{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+.barrio-btn{padding:22px 8px;border-radius:18px;font-weight:900;font-size:14px;text-align:center;color:white;cursor:pointer;border:none;box-shadow:0 6px 16px rgba(0,0,0,.15)}
+.barrio-btn span{display:block;font-size:28px;margin-bottom:6px}
+.btn-faro{background:linear-gradient(135deg,#0f172a,#334155)}
+.btn-alfar{background:linear-gradient(135deg,#1e40af,#3b82f6)}
+.btn-serena{background:linear-gradient(135deg,#0e7490,#06b6d4)}
+.btn-acantilados{background:linear-gradient(135deg,#15803d,#22c55e)}
+.barrio-page{display:none}
+.barrio-page.active{display:block}
+.filtros{display:flex;gap:8px;flex-wrap:wrap;padding:6px 0 10px 0;justify-content:flex-start}
+.filtro{display:flex;flex-direction:column;align-items:flex-start;white-space:normal;padding:10px 12px;border-radius:14px;border:2px solid #e2e8f0;background:white;font-weight:900;font-size:12px;cursor:pointer;flex:1 1 calc(50% - 8px);min-width:150px;line-height:1.2;box-shadow:0 2px 6px rgba(0,0,0,.04)}
+.filtro.activo{background:#0f172a;color:white;border-color:#0f172a}
+.filtro.activo small{color:#cbd5e1 !important}
+.filtro small{letter-spacing:0.1px}
+.oculto{display:none !important}
+.btn-volver-barrio{display:inline-block;background:white;border:2px solid #0f172a;color:#0f172a;padding:8px 16px;border-radius:999px;font-weight:900;font-size:12px;cursor:pointer;margin-bottom:12px}
+
+.btn-flotante-info{position:fixed;bottom:18px;left:18px;z-index:50;background:white;color:#0f172a;border:2px solid #0f172a;padding:12px 18px;border-radius:999px;font-weight:900;font-size:12px;cursor:pointer;box-shadow:0 8px 24px rgba(15,23,42,.15);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.modal-bg{position:fixed;inset:0;background:rgba(15,23,42,.78);z-index:200;display:none;align-items:center;justify-content:center;padding:16px}
+.modal-bg.activo{display:flex}
+.modal-card{background:white;border-radius:22px;max-width:620px;width:100%;overflow:hidden;box-shadow:0 24px 48px rgba(0,0,0,.4);animation:pop .22s ease}
+@keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-card img{width:100%;height:380px;object-fit:cover}
+
+</style>
+</head>
+<body>
+<div class="hero">
+  <img src="https://infomdqhoy.pages.dev/banner1.jpg" alt="Faro">
+  <div class="hero-overlay"></div>
+  <div class="hero-text">
+    <h1>✨ VIDRIERA DE EMPRENDEDORES</h1>
+    <p>Faro, Alfar, Serena y Acantilados - Elegí tu barrio</p>
+  </div>
+</div>
+<div class="contenedor">
+  <div class="buscador-wrap" style="position:relative">
+    <input id="buscadorUnificado" class="buscador" type="search" placeholder="Buscar en toda la vidriera... Ej: tortas, uñas, electricista">
+    <div id="resultadosUnificados" class="resultados"></div>
+  </div>
+  <div id="page-home">
+    <div class="card" style="text-align:center;padding:12px">
+      <div style="font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;gap:6px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2a7 7 0 00-7 7c0 5.25 7 12 7 12s7-6.75 7-12a7 7 0 00-7-7z" fill="#0f172a"/><circle cx="12" cy="9" r="2.5" fill="white"/></svg> ELEGÍ TU BARRIO</div>
+      <div style="font-size:11px;color:#64748b;margin-top:4px">Tocá un barrio para ver sus emprendedores por categoría</div>
+    </div>
+    <div class="barrios-nav">
+      <button class="barrio-btn btn-faro" onclick="abrirBarrio('faro')"><span>🔵</span>FARO NORTE</button>
+      <button class="barrio-btn btn-alfar" onclick="abrirBarrio('alfar')"><span>🟢</span>ALFAR</button>
+      <button class="barrio-btn btn-serena" onclick="abrirBarrio('serena')"><span>🟡</span>SERENA</button>
+      <button class="barrio-btn btn-acantilados" onclick="abrirBarrio('acantilados')"><span>🟠</span>ACANTILADOS</button>
+    </div>
+  </div>
+  <div id="page-faro" class="barrio-page">
+    <div class="card" style="background:#0f172a;color:white;text-align:center"><div style="font-weight:900;font-size:18px">🔵 FARO NORTE</div></div>
+        <div class="filtros" data-barrio="faro">
+      <button class="filtro activo" data-cat="todos" style="flex-direction:row;align-items:center;justify-content:center">Todos</button>
+      <button class="filtro" data-cat="sabores">🍰 Sabores del Sur <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Tortas / Mermeladas / Viandas / Panificados</small></button>
+      <button class="filtro" data-cat="belleza">💅 Belleza y Bienestar <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Peluquería / Uñas / Barbería / Pestañas / Masajes / Gym</small></button>
+      <button class="filtro" data-cat="servicios">🔧 Servicios y Mant. <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Electricista / Plomero / Albañil / Jardín / Limpieza / Niñera / Fletes</small></button>
+      <button class="filtro" data-cat="artesanias">🎨 Artesanías y Deco <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Velas / Tejidos / Mates / Souvenirs / Cuadros</small></button>
+      <button class="filtro" data-cat="moda">👗 Moda y Accesorios <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Ropa / Calzado / Carteras / Bijou / Ropa peques</small></button>
+    </div>
+    <div id="grid-faro" class="grid"></div>
+  </div>
+  <div id="page-alfar" class="barrio-page">
+    <div class="card" style="background:linear-gradient(135deg,#1e40af,#3b82f6);color:white;text-align:center"><div style="font-weight:900;font-size:18px">🟢 ALFAR</div></div>
+        <div class="filtros" data-barrio="alfar">
+      <button class="filtro activo" data-cat="todos" style="flex-direction:row;align-items:center;justify-content:center">Todos</button>
+      <button class="filtro" data-cat="sabores">🍰 Sabores del Sur <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Tortas / Mermeladas / Viandas / Panificados</small></button>
+      <button class="filtro" data-cat="belleza">💅 Belleza y Bienestar <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Peluquería / Uñas / Barbería / Pestañas / Masajes / Gym</small></button>
+      <button class="filtro" data-cat="servicios">🔧 Servicios y Mant. <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Electricista / Plomero / Albañil / Jardín / Limpieza / Niñera / Fletes</small></button>
+      <button class="filtro" data-cat="artesanias">🎨 Artesanías y Deco <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Velas / Tejidos / Mates / Souvenirs / Cuadros</small></button>
+      <button class="filtro" data-cat="moda">👗 Moda y Accesorios <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Ropa / Calzado / Carteras / Bijou / Ropa peques</small></button>
+    </div>
+    <div id="grid-alfar" class="grid"></div>
+  </div>
+  <div id="page-serena" class="barrio-page">
+    <div class="card" style="background:linear-gradient(135deg,#0e7490,#06b6d4);color:white;text-align:center"><div style="font-weight:900;font-size:18px">🟡 SERENA</div></div>
+        <div class="filtros" data-barrio="serena">
+      <button class="filtro activo" data-cat="todos" style="flex-direction:row;align-items:center;justify-content:center">Todos</button>
+      <button class="filtro" data-cat="sabores">🍰 Sabores del Sur <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Tortas / Mermeladas / Viandas / Panificados</small></button>
+      <button class="filtro" data-cat="belleza">💅 Belleza y Bienestar <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Peluquería / Uñas / Barbería / Pestañas / Masajes / Gym</small></button>
+      <button class="filtro" data-cat="servicios">🔧 Servicios y Mant. <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Electricista / Plomero / Albañil / Jardín / Limpieza / Niñera / Fletes</small></button>
+      <button class="filtro" data-cat="artesanias">🎨 Artesanías y Deco <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Velas / Tejidos / Mates / Souvenirs / Cuadros</small></button>
+      <button class="filtro" data-cat="moda">👗 Moda y Accesorios <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Ropa / Calzado / Carteras / Bijou / Ropa peques</small></button>
+    </div>
+    <div id="grid-serena" class="grid"></div>
+  </div>
+  <div id="page-acantilados" class="barrio-page">
+    <div class="card" style="background:linear-gradient(135deg,#15803d,#22c55e);color:white;text-align:center"><div style="font-weight:900;font-size:18px">🟠 ACANTILADOS</div></div>
+        <div class="filtros" data-barrio="acantilados">
+      <button class="filtro activo" data-cat="todos" style="flex-direction:row;align-items:center;justify-content:center">Todos</button>
+      <button class="filtro" data-cat="sabores">🍰 Sabores del Sur <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Tortas / Mermeladas / Viandas / Panificados</small></button>
+      <button class="filtro" data-cat="belleza">💅 Belleza y Bienestar <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Peluquería / Uñas / Barbería / Pestañas / Masajes / Gym</small></button>
+      <button class="filtro" data-cat="servicios">🔧 Servicios y Mant. <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Electricista / Plomero / Albañil / Jardín / Limpieza / Niñera / Fletes</small></button>
+      <button class="filtro" data-cat="artesanias">🎨 Artesanías y Deco <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Velas / Tejidos / Mates / Souvenirs / Cuadros</small></button>
+      <button class="filtro" data-cat="moda">👗 Moda y Accesorios <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Ropa / Calzado / Carteras / Bijou / Ropa peques</small></button>
+    </div>
+    <div id="grid-acantilados" class="grid"></div>
+  </div>
+  <div id="sinResultados" class="card oculto" style="text-align:center;padding:22px">
+    <div style="font-size:28px">🔍</div>
+    <div style="font-weight:800;margin-top:6px">No encontré nada</div>
+    <button onclick="limpiarBusqueda()" style="margin-top:12px;background:#0f172a;color:white;border:none;padding:8px 16px;border-radius:999px;font-weight:800;font-size:12px;cursor:pointer">Limpiar</button>
+  </div>
+  <div class="card" style="margin-top:18px;text-align:center;padding:18px">
+    <div class="footer" style="padding:0;text-align:center">
+      <a href="/terminos.html" style="color:#64748b;text-decoration:none;margin:0 6px;font-size:12px;font-weight:700">Términos</a> | 
+      <a href="/privacidad.html" style="color:#64748b;text-decoration:none;margin:0 6px;font-size:12px;font-weight:700">Privacidad</a> | 
+      <a href="/contacto.html" style="color:#64748b;text-decoration:none;margin:0 6px;font-size:12px;font-weight:700">Contacto</a>
+      <p style="margin-top:12px;font-size:11px;color:#94a3b8">© 2026 INFO MDQ SUR HOY</p>
+    </div>
+  </div>
+</div>
+<a class="btn-flotante-info" href="/">← INFO MDQ HOY</a>
+<button class="btn-flotante" onclick="volverHome()">🏠 VIDRIERA</button>
+
+<!-- MODAL PARA AVISO DESTACADO - PRO -->
+<div id="modalAviso" class="modal-bg" onclick="if(event.target===this) cerrarModal()">
+  <div class="modal-card">
+    <img id="modalImg" src="" alt="">
+    <div style="padding:20px 20px 16px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div id="modalBarrio" style="font-size:11px;font-weight:900;background:#0f172a;color:white;display:inline-block;padding:5px 12px;border-radius:999px;letter-spacing:.5px">ALFAR</div>
+        <div style="font-size:11px;font-weight:900;background:#facc15;color:#000;padding:5px 12px;border-radius:999px">⭐ DESTACADO</div>
+      </div>
+      <h3 id="modalTitulo" style="font-size:22px;font-weight:900;line-height:1.2;color:#0f172a">Ghanima MDQ - Velas Souvenirs</h3>
+      <p id="modalDesc" style="font-size:15px;color:#334155;margin:12px 0;line-height:1.5;font-weight:500">Souvenirs personalizados para todo tipo de evento con cera de soja aromática.</p>
+      <p id="modalPrecio" style="font-size:15px;font-weight:800;margin:10px 0;color:#0f172a"></p>
+      <a id="modalWsp" href="#" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:white;text-align:center;padding:14px 18px;border-radius:999px;font-weight:900;font-size:15px;text-decoration:none;margin-top:16px;box-shadow:0 6px 16px rgba(37,211,102,.3)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.82 9.82 0 0012.03 2C6.48 2 2 6.44 2 11.93c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.37a9.82 9.82 0 004.78 1.22h.01c5.54 0 10.03-4.44 10.03-9.93a9.75 9.75 0 00-3.02-7.98zM12.04 20.17h-.01a8.12 8.12 0 01-4.14-1.13l-.3-.18-3.12.82.83-3.02-.2-.31a8.18 8.18 0 01-1.26-4.42c0-4.54 3.73-8.23 8.32-8.23a8.27 8.27 0 015.87 2.41 8.14 8.14 0 012.43 5.78c0 4.54-3.73 8.28-8.32 8.28zm4.56-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.22-.74-.65-1.23-1.45-1.38-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05s.89 2.38 1.01 2.54c.12.17 1.75 2.66 4.23 3.73.59.25 1.05.4 1.41.51.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+        Consultar por WhatsApp
+      </a>
+      <div style="display:flex;gap:10px;margin-top:12px">
+        <a id="modalIG" href="#" target="_blank" style="flex:1;display:none;align-items:center;justify-content:center;gap:6px;background:#fff0f6;border:1.5px solid #f9a8d4;color:#be185d;padding:11px;border-radius:999px;font-weight:800;font-size:13px;text-decoration:none">Instagram</a>
+        <a id="modalMap" href="#" target="_blank" style="flex:1;display:none;align-items:center;justify-content:center;gap:6px;background:#eff6ff;border:1.5px solid #93c5fd;color:#1d4ed8;padding:11px;border-radius:999px;font-weight:800;font-size:13px;text-decoration:none">Ver en Mapa</a>
+      </div>
+      <button onclick="cerrarModal()" style="width:100%;margin-top:14px;background:#f1f5f9;border:none;padding:12px;border-radius:999px;font-weight:800;cursor:pointer;font-size:13px">Cerrar</button>
+    </div>
+  </div>
+</div>
+<script>
+const EMPRENDEDORES = [
+  {
+    barrio:'alfar',
+    cat:'artesanias',
+    sub:'velas y souvenirs',
+    nombre:'🕯️ Ghanima MDQ - Velas Souvenirs',
+    desc:'Souvenirs personalizados para todo tipo de evento con cera de soja aromática. Promo a partir de 20 unidades. Aromáticas y personalizadas.',
+    precio:'Promo x 20 unidades - Consultar',
+    foto:'ghanimamdq.jpg',
+    foto_web:'ghanimamdq.jpg',
+    destacado:true,
+    wsp:'5492235863277',
+    instagram:'https://www.instagram.com/ghanimamdq',
+    facebook:'',
+       ubicacion:'Astor Piazzolla 899, Barrio Alfar - Mar del Plata',
+    maps:'https://www.google.com/maps/place/Astor+piazzola+899,+B7600+Mar+del+Plata,+Provincia+de+Buenos+Aires/@-38.0966142,-57.5680966,17z',
+    keywords:'ghanima velas souvenirs aromáticas personalizadas cera soja alfar astor piazzolla baby shower xv bautismo'
+  }
+];
+
+function crearCard(e){
+  const badge = {faro:'badge-faro', alfar:'badge-alfar', serena:'badge-serena', acantilados:'badge-acantilados'}[e.barrio];
+  const esGratis = !e.foto;
+  const clase = esGratis ? 'gratis' : 'destacado';
+  const fotoSrc = e.foto_web || e.foto || '';
+  // si es la de ghanima y no tiene foto_web valida, usar base64
+  const fotoFinal = (e.nombre && e.nombre.includes('Ghanima') && !e.foto_web.startsWith('http')) ? `ghanimamdq.jpg` : fotoSrc;
+  const imgBox = esGratis ? '' : `<div class="img-box"><img src="${fotoFinal}" alt="${e.nombre}" loading="lazy" onerror="this.src='ghanimamdq.jpg'"></div>`;
+  const precioHtml = e.precio ? `<div style="font-size:14px;font-weight:900;margin:8px 0 2px">${e.precio}</div>` : '';
+  const ubiHtml = e.ubicacion ? `<div style="font-size:11px;color:#64748b;margin:4px 0;display:flex;align-items:center;gap:4px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M12 2a7 7 0 00-7 7c0 5 7 11 7 11s7-6 7-11a7 7 0 00-7-7z" fill="#64748b"/><circle cx="12" cy="9" r="2" fill="white"/></svg> ${e.ubicacion}</div>` : '';
+  const redes = !esGratis ? `<div class="redes-row">
+      ${e.instagram ? `<a class="btn-red btn-ig" href="${e.instagram}" target="_blank" onclick="event.stopPropagation()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg> Instagram</a>` : ''}
+      ${e.maps ? `<a class="btn-red btn-map" href="${e.maps}" target="_blank" onclick="event.stopPropagation()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2a7 7 0 00-7 7c0 5 7 11 7 11s7-6 7-11a7 7 0 00-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2" fill="white"/></svg> Mapa</a>` : ''}
+    </div>` : '';
+  return `<div class="card-emp ${clase}" data-barrio="${e.barrio}" data-cat="${e.cat}" data-keywords="${e.keywords}" data-precio="${e.precio || ""}" ${!esGratis ? 'onclick="abrirModalDirecto(this)"' : ''} style="${!esGratis ? 'cursor:pointer' : ''}">
+    ${imgBox}
+    <div class="info">
+      <div class="top-row">
+        <span class="${esGratis ? 'badge-gratis' : 'badge-dest'}">${esGratis ? 'GRATIS • SOLO TEXTO' : '⭐ DESTACADO'}</span>
+        <span class="badge-barrio ${badge}">${e.barrio.toUpperCase()}</span>
+      </div>
+      <h3>${e.nombre}</h3>
+      <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase">${e.cat} • ${e.sub}</div>
+      <div class="desc">${e.desc}</div>
+      ${ubiHtml}
+      ${precioHtml}
+      <a href="https://wa.me/${e.wsp}" class="btn-wsp" onclick="event.stopPropagation()" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.82 9.82 0 0012.03 2C6.48 2 2 6.44 2 11.93c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.37a9.82 9.82 0 004.78 1.22h.01c5.54 0 10.03-4.44 10.03-9.93a9.75 9.75 0 00-3.02-7.98zM12.04 20.17h-.01a8.12 8.12 0 01-4.14-1.13l-.3-.18-3.12.82.83-3.02-.2-.31a8.18 8.18 0 01-1.26-4.42c0-4.54 3.73-8.23 8.32-8.23a8.27 8.27 0 015.87 2.41 8.14 8.14 0 012.43 5.78c0 4.54-3.73 8.28-8.32 8.28zm4.56-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.22-.74-.65-1.23-1.45-1.38-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05s.89 2.38 1.01 2.54c.12.17 1.75 2.66 4.23 3.73.59.25 1.05.4 1.41.51.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+        WhatsApp
+      </a>
+      ${redes}
+    </div>
+  </div>`;
+}
+
+
+function abrirModalDirecto(card){
+  const img = card.querySelector('.img-box img') || card.querySelector('img');
+  document.getElementById('modalImg').src = img ? img.src : 'https://infomdqhoy.pages.dev/banner1.jpg';
+  document.getElementById('modalBarrio').innerText = card.querySelector('.badge-barrio')?.innerText || 'ALFAR';
+  document.getElementById('modalTitulo').innerText = card.querySelector('h3')?.innerText || '';
+  document.getElementById('modalDesc').innerText = card.querySelector('.desc')?.innerText || card.querySelectorAll('p')[0]?.innerText || '';
+  const precio = card.dataset.precio || '';
+  document.getElementById('modalPrecio').innerText = precio;
+  const wsp = card.querySelector('.btn-wsp')?.href || '#';
+  document.getElementById('modalWsp').href = wsp;
+  // copiar redes si existen
+  const ig = card.querySelector('.btn-ig')?.href;
+  const mp = card.querySelector('.btn-map')?.href;
+  const modalIG = document.getElementById('modalIG');
+  const modalMap = document.getElementById('modalMap');
+  if(modalIG){
+    if(ig){ modalIG.href = ig; modalIG.style.display='flex'; } else { modalIG.style.display='none'; }
+  }
+  if(modalMap){
+    if(mp){ modalMap.href = mp; modalMap.style.display='flex'; } else { modalMap.style.display='none'; }
+  }
+  document.getElementById('modalAviso').classList.add('activo');
+}
+function cerrarModal(){ document.getElementById('modalAviso').classList.remove('activo'); }
+
+function pintarTodo(){
+  ['faro','alfar','serena','acantilados'].forEach(b=>{
+    const grid=document.getElementById('grid-'+b);
+    const list=EMPRENDEDORES.filter(e=>e.barrio===b);
+    grid.innerHTML = list.length ? list.map(crearCard).join('') : `<div class="card" style="grid-column:1/-1;text-align:center;color:#64748b">Aún no hay emprendedores en ${b.toUpperCase()}</div>`;
+  });
+}
+pintarTodo();
+function abrirBarrio(n){document.getElementById('page-home').style.display='none';document.querySelectorAll('.barrio-page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+n).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+function volverHome(){document.getElementById('page-home').style.display='block';document.querySelectorAll('.barrio-page').forEach(p=>p.classList.remove('active'));window.scrollTo({top:0,behavior:'smooth'});}
+document.querySelectorAll('.filtros').forEach(w=>{
+  const barrio=w.dataset.barrio;
+  w.querySelectorAll('.filtro').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      w.querySelectorAll('.filtro').forEach(b=>b.classList.remove('activo'));btn.classList.add('activo');
+      const cat=btn.dataset.cat;
+      const cards=document.getElementById('grid-'+barrio).querySelectorAll('.card-emp');
+      cards.forEach(c=>{if(cat==='todos'||c.dataset.cat===cat) c.classList.remove('oculto'); else c.classList.add('oculto');});
+    });
+  });
+});
+(function(){
+  const input=document.getElementById('buscadorUnificado');
+  const resultados=document.getElementById('resultadosUnificados');
+  function normalizar(s){return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();}
+  input.addEventListener('input',(e)=>{
+    const q=normalizar(e.target.value);
+    if(q.length<2){resultados.style.display='none';pintarTodo();volverHome();return;}
+    const filtrados=EMPRENDEDORES.filter(em=>normalizar(em.keywords).includes(q));
+    resultados.innerHTML=filtrados.map(em=>`<div onclick="abrirBarrio('${em.barrio}');resultados.style.display='none'" style="padding:10px;border-bottom:1px solid #e2e8f0;cursor:pointer"><b>${em.nombre}</b><br><small>${em.barrio} • ${em.cat}</small></div>`).join('')||'<div style="padding:12px">Sin resultados</div>';
+    resultados.style.display='block';
+  });
+})();
+</script>
+</body>
+</html>
