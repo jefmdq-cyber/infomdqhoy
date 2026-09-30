@@ -37,9 +37,14 @@ body{background:#f0f4f8;color:#1a202c;padding-bottom:90px}
 .badge-acantilados{background:#dcfce7;color:#15803d}
 .btn-wsp{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;background:#25D366;color:white;padding:13px 18px;border-radius:999px;text-decoration:none;font-weight:900;font-size:15px;width:100%;box-shadow:0 6px 16px rgba(37,211,102,.28)}
 .redes-row{display:flex;gap:8px;margin-top:8px}
-.btn-red{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:9px 10px;border-radius:999px;font-weight:800;font-size:12px;text-decoration:none;border:1px solid #e2e8f0;background:white}
-.btn-ig{background:#fff0f6;border-color:#f9a8d4;color:#be185d}
-.btn-map{background:#eff6ff;border-color:#93c5fd;color:#1d4ed8}
+.btn-red{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 14px;border-radius:999px;font-weight:900;font-size:12.5px;text-decoration:none;border:none;color:white;box-shadow:0 4px 12px rgba(0,0,0,.15);transition:.15s}
+.btn-red:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.2)}
+.btn-ig{background:linear-gradient(135deg,#f857a6 0%,#ff5858 25%,#d62976 55%,#962fbf 85%,#4f5bd5 100%);color:white;box-shadow:0 4px 14px rgba(214,41,118,.32)}
+.btn-ig svg{fill:white;stroke:white}
+.btn-map{background:linear-gradient(135deg,#3b82f6 0%,#1d4ed8 100%);color:white;box-shadow:0 4px 14px rgba(29,78,216,.28)}
+.btn-map svg{fill:white}
+.btn-wsp{background:#25D366;background:linear-gradient(135deg,#25D366,#128C7E);box-shadow:0 4px 14px rgba(37,211,102,.32)}
+.redes-row{gap:10px}
 .top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:8px}
 .badge-gratis{background:#dcfce7;color:#15803d;padding:4px 10px;border-radius:999px;font-size:10px;font-weight:900}
 .badge-dest{background:#facc15;color:#000;padding:4px 10px;border-radius:999px;font-size:10px;font-weight:900}
@@ -55,9 +60,29 @@ body{background:#f0f4f8;color:#1a202c;padding-bottom:90px}
 .barrio-page{display:none}
 .barrio-page.active{display:block}
 .filtros{display:flex;gap:8px;flex-wrap:wrap;padding:6px 0 10px 0;justify-content:flex-start}
-.filtro{display:flex;flex-direction:column;align-items:flex-start;white-space:normal;padding:10px 12px;border-radius:14px;border:2px solid #e2e8f0;background:white;font-weight:900;font-size:12px;cursor:pointer;flex:1 1 calc(50% - 8px);min-width:150px;line-height:1.2;box-shadow:0 2px 6px rgba(0,0,0,.04)}
-.filtro.activo{background:#0f172a;color:white;border-color:#0f172a}
+.filtros-global{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:12px 0 14px 0;overflow:visible}
+.filtro{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;white-space:normal;padding:14px 8px;border-radius:18px;border:1.5px solid #e2e8f0;background:white;font-weight:900;font-size:11.5px;cursor:pointer;line-height:1.1;box-shadow:0 4px 14px rgba(15,23,42,.06);transition:all .18s cubic-bezier(.2,.8,.2,1);position:relative;overflow:hidden}
+.filtro::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.8),transparent);pointer-events:none;opacity:.7}
+.filtro-chip{flex:none;min-width:auto;white-space:normal;text-align:center}
+.filtro .ico{font-size:26px;line-height:1;filter:drop-shadow(0 2px 4px rgba(0,0,0,.1));position:relative;z-index:1}
+.filtro .label{position:relative;z-index:1;letter-spacing:-.2px}
+.filtro:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(15,23,42,.12);border-color:#cbd5e1}
+.filtro:active{transform:translateY(0px) scale(.97)}
+.filtro.activo{background:#0f172a;color:white;border-color:#0f172a;box-shadow:0 10px 24px rgba(15,23,42,.28);transform:translateY(-1px)}
+.filtro.activo::after{opacity:0}
 .filtro.activo small{color:#cbd5e1 !important}
+/* Colores pasteles modernos por categoria - sutil, no chato */
+.filtro[data-cat="todos"]{background:#ffffff}
+.filtro[data-cat="sabores"]{background:linear-gradient(180deg,#fffbeb,#ffffff);border-color:#fde68a}
+.filtro[data-cat="belleza"]{background:linear-gradient(180deg,#fdf2f8,#ffffff);border-color:#f9a8d4}
+.filtro[data-cat="servicios"]{background:linear-gradient(180deg,#eff6ff,#ffffff);border-color:#93c5fd}
+.filtro[data-cat="artesanias"]{background:linear-gradient(180deg,#f0fdf4,#ffffff);border-color:#86efac}
+.filtro[data-cat="moda"]{background:linear-gradient(180deg,#fefce8,#ffffff);border-color:#fde68a}
+.filtro[data-cat="salud"]{background:linear-gradient(180deg,#f5f3ff,#ffffff);border-color:#c4b5fd}
+.filtro.activo[data-cat]{background:#0f172a !important;border-color:#0f172a !important}
+.barrio-seccion{margin:18px 0}
+.barrio-seccion-titulo{margin-bottom:8px}
+@media(min-width:700px){.filtros-global{grid-template-columns:repeat(6,1fr)}}
 .filtro small{letter-spacing:0.1px}
 .oculto{display:none !important}
 .btn-volver-barrio{display:inline-block;background:white;border:2px solid #0f172a;color:#0f172a;padding:8px 16px;border-radius:999px;font-weight:900;font-size:12px;cursor:pointer;margin-bottom:12px}
@@ -87,65 +112,41 @@ body{background:#f0f4f8;color:#1a202c;padding-bottom:90px}
     <div id="resultadosUnificados" class="resultados"></div>
   </div>
   <div id="page-home">
-    <div class="card" style="text-align:center;padding:12px">
-      <div style="font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;gap:6px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2a7 7 0 00-7 7c0 5.25 7 12 7 12s7-6.75 7-12a7 7 0 00-7-7z" fill="#0f172a"/><circle cx="12" cy="9" r="2.5" fill="white"/></svg> ELEGÍ TU BARRIO</div>
-      <div style="font-size:11px;color:#64748b;margin-top:4px">Tocá un barrio para ver sus emprendedores por categoría</div>
+    <!-- FILTROS GLOBALES ARRIBA - compactos para celu -->
+    <div class="filtros filtros-global" id="filtros-global">
+      <button class="filtro filtro-chip" data-cat="sabores"><span class="ico">🍰</span><span class="label">Sabores</span></button>
+      <button class="filtro filtro-chip" data-cat="belleza"><span class="ico">💅</span><span class="label">Belleza</span></button>
+      <button class="filtro filtro-chip" data-cat="servicios"><span class="ico">🛠️</span><span class="label">Servicios</span></button>
+      <button class="filtro filtro-chip" data-cat="artesanias"><span class="ico">🎨</span><span class="label">Deco & Arte</span></button>
+      <button class="filtro filtro-chip" data-cat="moda"><span class="ico">👗</span><span class="label">Moda</span></button>
+      <button class="filtro filtro-chip" data-cat="salud"><span class="ico">🌈</span><span class="label">Salud y Bienestar</span></button>
     </div>
-    <div class="barrios-nav">
-      <button class="barrio-btn btn-faro" onclick="abrirBarrio('faro')"><span>🔵</span>FARO NORTE</button>
-      <button class="barrio-btn btn-alfar" onclick="abrirBarrio('alfar')"><span>🟢</span>ALFAR</button>
-      <button class="barrio-btn btn-serena" onclick="abrirBarrio('serena')"><span>🟡</span>SERENA</button>
-      <button class="barrio-btn btn-acantilados" onclick="abrirBarrio('acantilados')"><span>🟠</span>ACANTILADOS</button>
+
+    <!-- LOS 4 BARRIOS YA VISIBLES EN LA PRIMERA PAGINA -->
+    <div id="seccion-faro" class="barrio-seccion">
+      <div class="card barrio-seccion-titulo" style="background:#0f172a;color:white;text-align:center;padding:12px"><div style="font-weight:900;font-size:15px">🔵 FARO NORTE</div></div>
+      <div id="grid-faro" class="grid"></div>
+    </div>
+
+    <div id="seccion-alfar" class="barrio-seccion">
+      <div class="card barrio-seccion-titulo" style="background:linear-gradient(135deg,#1e40af,#3b82f6);color:white;text-align:center;padding:12px"><div style="font-weight:900;font-size:15px">🟢 ALFAR</div></div>
+      <div id="grid-alfar" class="grid"></div>
+    </div>
+
+    <div id="seccion-serena" class="barrio-seccion">
+      <div class="card barrio-seccion-titulo" style="background:linear-gradient(135deg,#0e7490,#06b6d4);color:white;text-align:center;padding:12px"><div style="font-weight:900;font-size:15px">🟡 SERENA</div></div>
+      <div id="grid-serena" class="grid"></div>
+    </div>
+
+    <div id="seccion-acantilados" class="barrio-seccion">
+      <div class="card barrio-seccion-titulo" style="background:linear-gradient(135deg,#15803d,#22c55e);color:white;text-align:center;padding:12px"><div style="font-weight:900;font-size:15px">🟠 ACANTILADOS</div></div>
+      <div id="grid-acantilados" class="grid"></div>
     </div>
   </div>
-  <div id="page-faro" class="barrio-page">
-    <div class="card" style="background:#0f172a;color:white;text-align:center"><div style="font-weight:900;font-size:18px">🔵 FARO NORTE</div></div>
-        <div class="filtros" data-barrio="faro">
-      <button class="filtro activo" data-cat="todos" style="flex-direction:row;align-items:center;justify-content:center">Todos</button>
-      <button class="filtro" data-cat="sabores">🍰 Sabores del Sur <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Tortas / Mermeladas / Viandas / Panificados</small></button>
-      <button class="filtro" data-cat="belleza">💅 Belleza y Bienestar <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Peluquería / Uñas / Barbería / Pestañas / Masajes / Gym</small></button>
-      <button class="filtro" data-cat="servicios">🔧 Servicios y Mant. <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Electricista / Plomero / Albañil / Jardín / Limpieza / Niñera / Fletes</small></button>
-      <button class="filtro" data-cat="artesanias">🎨 Artesanías y Deco <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Velas / Tejidos / Mates / Souvenirs / Cuadros</small></button>
-      <button class="filtro" data-cat="moda">👗 Moda y Accesorios <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Ropa / Calzado / Carteras / Bijou / Ropa peques</small></button>
-    </div>
-    <div id="grid-faro" class="grid"></div>
-  </div>
-  <div id="page-alfar" class="barrio-page">
-    <div class="card" style="background:linear-gradient(135deg,#1e40af,#3b82f6);color:white;text-align:center"><div style="font-weight:900;font-size:18px">🟢 ALFAR</div></div>
-        <div class="filtros" data-barrio="alfar">
-      <button class="filtro activo" data-cat="todos" style="flex-direction:row;align-items:center;justify-content:center">Todos</button>
-      <button class="filtro" data-cat="sabores">🍰 Sabores del Sur <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Tortas / Mermeladas / Viandas / Panificados</small></button>
-      <button class="filtro" data-cat="belleza">💅 Belleza y Bienestar <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Peluquería / Uñas / Barbería / Pestañas / Masajes / Gym</small></button>
-      <button class="filtro" data-cat="servicios">🔧 Servicios y Mant. <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Electricista / Plomero / Albañil / Jardín / Limpieza / Niñera / Fletes</small></button>
-      <button class="filtro" data-cat="artesanias">🎨 Artesanías y Deco <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Velas / Tejidos / Mates / Souvenirs / Cuadros</small></button>
-      <button class="filtro" data-cat="moda">👗 Moda y Accesorios <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Ropa / Calzado / Carteras / Bijou / Ropa peques</small></button>
-    </div>
-    <div id="grid-alfar" class="grid"></div>
-  </div>
-  <div id="page-serena" class="barrio-page">
-    <div class="card" style="background:linear-gradient(135deg,#0e7490,#06b6d4);color:white;text-align:center"><div style="font-weight:900;font-size:18px">🟡 SERENA</div></div>
-        <div class="filtros" data-barrio="serena">
-      <button class="filtro activo" data-cat="todos" style="flex-direction:row;align-items:center;justify-content:center">Todos</button>
-      <button class="filtro" data-cat="sabores">🍰 Sabores del Sur <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Tortas / Mermeladas / Viandas / Panificados</small></button>
-      <button class="filtro" data-cat="belleza">💅 Belleza y Bienestar <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Peluquería / Uñas / Barbería / Pestañas / Masajes / Gym</small></button>
-      <button class="filtro" data-cat="servicios">🔧 Servicios y Mant. <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Electricista / Plomero / Albañil / Jardín / Limpieza / Niñera / Fletes</small></button>
-      <button class="filtro" data-cat="artesanias">🎨 Artesanías y Deco <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Velas / Tejidos / Mates / Souvenirs / Cuadros</small></button>
-      <button class="filtro" data-cat="moda">👗 Moda y Accesorios <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Ropa / Calzado / Carteras / Bijou / Ropa peques</small></button>
-    </div>
-    <div id="grid-serena" class="grid"></div>
-  </div>
-  <div id="page-acantilados" class="barrio-page">
-    <div class="card" style="background:linear-gradient(135deg,#15803d,#22c55e);color:white;text-align:center"><div style="font-weight:900;font-size:18px">🟠 ACANTILADOS</div></div>
-        <div class="filtros" data-barrio="acantilados">
-      <button class="filtro activo" data-cat="todos" style="flex-direction:row;align-items:center;justify-content:center">Todos</button>
-      <button class="filtro" data-cat="sabores">🍰 Sabores del Sur <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Tortas / Mermeladas / Viandas / Panificados</small></button>
-      <button class="filtro" data-cat="belleza">💅 Belleza y Bienestar <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Peluquería / Uñas / Barbería / Pestañas / Masajes / Gym</small></button>
-      <button class="filtro" data-cat="servicios">🔧 Servicios y Mant. <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Electricista / Plomero / Albañil / Jardín / Limpieza / Niñera / Fletes</small></button>
-      <button class="filtro" data-cat="artesanias">🎨 Artesanías y Deco <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Velas / Tejidos / Mates / Souvenirs / Cuadros</small></button>
-      <button class="filtro" data-cat="moda">👗 Moda y Accesorios <small style="font-weight:700;font-size:10.5px;color:#334155;margin-top:4px;line-height:1.25;display:block">Ropa / Calzado / Carteras / Bijou / Ropa peques</small></button>
-    </div>
-    <div id="grid-acantilados" class="grid"></div>
-  </div>
+  
+  
+  
+  
   <div id="sinResultados" class="card oculto" style="text-align:center;padding:22px">
     <div style="font-size:28px">🔍</div>
     <div style="font-weight:800;margin-top:6px">No encontré nada</div>
@@ -180,8 +181,8 @@ body{background:#f0f4f8;color:#1a202c;padding-bottom:90px}
         Consultar por WhatsApp
       </a>
       <div style="display:flex;gap:10px;margin-top:12px">
-        <a id="modalIG" href="#" target="_blank" style="flex:1;display:none;align-items:center;justify-content:center;gap:6px;background:#fff0f6;border:1.5px solid #f9a8d4;color:#be185d;padding:11px;border-radius:999px;font-weight:800;font-size:13px;text-decoration:none">Instagram</a>
-        <a id="modalMap" href="#" target="_blank" style="flex:1;display:none;align-items:center;justify-content:center;gap:6px;background:#eff6ff;border:1.5px solid #93c5fd;color:#1d4ed8;padding:11px;border-radius:999px;font-weight:800;font-size:13px;text-decoration:none">Ver en Mapa</a>
+        <a id="modalIG" href="#" target="_blank" style="flex:1;display:none;align-items:center;justify-content:center;gap:6px;background:linear-gradient(135deg,#f857a6 0%,#d62976 55%,#962fbf 85%);color:white;padding:11px;border-radius:999px;font-weight:900;font-size:13px;text-decoration:none;box-shadow:0 4px 14px rgba(214,41,118,.28);border:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="white" stroke-width="1.7"/><circle cx="12" cy="12" r="4.2" stroke="white" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1" fill="white"/></svg> Instagram</a>
+        <a id="modalMap" href="#" target="_blank" style="flex:1;display:none;align-items:center;justify-content:center;gap:6px;background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:white;padding:11px;border-radius:999px;font-weight:900;font-size:13px;text-decoration:none;box-shadow:0 4px 14px rgba(29,78,216,.28);border:none"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2a7 7 0 00-7 7c0 5 7 11 7 11s7-6 7-11a7 7 0 00-7-7z" fill="white"/><circle cx="12" cy="9" r="2" fill="#1d4ed8"/></svg> Mapa</a>
       </div>
       <button onclick="cerrarModal()" style="width:100%;margin-top:14px;background:#f1f5f9;border:none;padding:12px;border-radius:999px;font-weight:800;cursor:pointer;font-size:13px">Cerrar</button>
     </div>
@@ -205,10 +206,32 @@ const EMPRENDEDORES = [
        ubicacion:'Astor Piazzolla 899, Barrio Alfar - Mar del Plata',
     maps:'https://www.google.com/maps/place/Astor+piazzola+899,+B7600+Mar+del+Plata,+Provincia+de+Buenos+Aires/@-38.0966142,-57.5680966,17z',
     keywords:'ghanima velas souvenirs aromáticas personalizadas cera soja alfar astor piazzolla baby shower xv bautismo'
+  }  ,
+  {
+    barrio:'alfar',
+    cat:'salud',
+    sub:'terapias holísticas',
+    nombre:'🌈 Luz del Arco Iris - Orit Savelski',
+    desc:'Terapeuta Floral • Master Aqualead • Instructora en Registros Akáshicos • Operadora de máquina de energía escalar. Consultas: modo presencial, on line, individual y grupal.Para consultas y turnos, la vía más directa es por WhatsApp.',
+    precio:'Consultas presenciales y online - Alfar',
+    foto:'luz-del-arco-iris-800.webp',
+    foto_web:'luz-del-arco-iris-800.webp',
+    destacado:true,
+    plantilla:'arcoiris',
+    wsp:'5492235797361',
+    instagram:'https://www.instagram.com/luz.delarcoiris',
+    facebook:'',
+    ubicacion:'Diagonal EEUU esq. De la Maza, Barrio Alfar - Mar del Plata',
+    maps:'https://www.google.com/maps/place/De+la+Maza+%26+Diagonal+Estados+Unidos+Norte,+B7600+Mar+del+Plata,+Provincia+de+Buenos+Aires/@-38.0908354,-57.5650424,17.68z/data=!4m6!3m5!1s0x9584e0b807570fb3:0xdc79407a13894947!8m2!3d-38.090577!4d-57.5652038!16s%2Fg%2F11gdm0p4qy?entry=ttu&g_ep=EgoyMDI2MDkyNy4xIKXMDSoASAFQAw%3D%3D',
+    keywords:'orit savelski luz del arco iris terapeuta floral master aqualead registros akashicos akáshicos energia escalar maquina escalar mat 2377 diagonal eeuu de la maza alfar presencial online individual grupal reiki'
   }
 ];
 
 function crearCard(e){
+  if(e.plantilla==='arcoiris'){
+    return crearCardArcoiris(e);
+  }
+
   const badge = {faro:'badge-faro', alfar:'badge-alfar', serena:'badge-serena', acantilados:'badge-acantilados'}[e.barrio];
   const esGratis = !e.foto;
   const clase = esGratis ? 'gratis' : 'destacado';
@@ -244,7 +267,104 @@ function crearCard(e){
 }
 
 
+
+
+function crearCardArcoiris(e){
+  const fotoFinal = e.foto_web || e.foto || 'https://infomdqhoy.pages.dev/banner1.jpg';
+  const mapsLink = e.maps;
+  return `
+  <div class="card-emp destacado" data-barrio="${e.barrio}" data-cat="${e.cat}" data-keywords="${e.keywords}" onclick="abrirModalArcoiris(this)" style="cursor:pointer;display:block;padding:0;overflow:visible;border:2px solid #facc15;background:white;border-radius:22px;position:relative;">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700;800&family=Great+Vibes&display=swap" rel="stylesheet">
+    <div style="height:8px;background:linear-gradient(90deg,#FFB86A 0%,#FFD93D 20%,#6BCB77 40%,#4D96FF 65%,#C77DFF 85%,#FF6B9D 100%);border-radius:20px 20px 0 0;"></div>
+    <div style="position:absolute;top:18px;right:12px;background:linear-gradient(135deg,#facc15,#f59e0b);color:#000;padding:5px 10px;border-radius:999px;font-size:10px;font-weight:900;display:flex;align-items:center;gap:4px;box-shadow:0 4px 12px rgba(250,204,21,0.3);border:1px solid #fff;z-index:5;font-family:'Poppins',sans-serif;"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.2h7.6l-6.2 4.5 2.4 7.2L12 16.5l-6.2 4.4 2.4-7.2-6.2-4.5h7.6z"/></svg> DESTACADO</div>
+    <div style="display:flex;flex-wrap:wrap;position:relative;background:#fff;border-radius:0 0 20px 20px;overflow:hidden;">
+      <div style="flex:1 1 240px;min-width:220px;padding:12px;">
+        <div style="position:relative;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#fdf2f8,#f5f3ff);min-height:150px;">
+          <img src="${fotoFinal}" alt="${e.nombre}" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none'">
+          <div style="position:absolute;top:8px;left:8px;background:rgba(255,255,255,0.95);padding:4px 9px;border-radius:999px;font-size:10px;font-weight:900;color:#4A1230;display:flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(0,0,0,0.1);font-family:'Poppins',sans-serif;"><span style="width:5px;height:5px;background:#22c55e;border-radius:50%;display:inline-block;"></span> ALFAR</div>
+        </div>
+        <div style="margin-top:8px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 10px;display:flex;gap:6px;align-items:center;font-family:'Poppins',sans-serif;">
+          <span style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);width:22px;height:22px;border-radius:999px;display:grid;place-items:center;flex-shrink:0;"><svg width="11" height="11" viewBox="0 0 24 24" fill="white"><path d="M12 2a7 7 0 00-7 7c0 5 7 11 7 11s7-6 7-11a7 7 0 00-7-7z"/></svg></span>
+          <div><div style="font-weight:800;color:#1e293b;font-size:11px;">De la Maza & Diagonal Estados Unidos </div><div style="font-size:10px;color:#64748b;">Alfar • Mar del Plata</div></div>
+        </div>
+      </div>
+      <div style="flex:1 1 300px;min-width:250px;padding:14px 14px 12px;font-family:'Poppins',sans-serif;overflow:visible;">
+        <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;">
+          <div style="font-family:'Playfair Display',serif;font-size:24px;color:#4A1230;font-weight:700;line-height:1;">Orit Savelski</div>
+          <span style="font-size:10px;font-weight:800;color:#9ca3af;background:#f3f4f6;padding:2px 7px;border-radius:999px;">MAT. 2377</span>
+        </div>
+        <div style="overflow:visible;margin:2px 0 10px -8px;"><div style="font-family:'Great Vibes',cursive;font-size:28px;color:#B47B1A;line-height:1.4;padding:8px 12px 8px 10px;white-space:nowrap;">Luz del Arco Iris</div></div>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:8px;">
+          <div style="display:flex;align-items:center;gap:8px;padding:5px 8px;background:#fdf2f8;border-radius:9px;border:1px solid #fce7f3;"><span style="width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,#f9a8d4,#ec4899);display:grid;place-items:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></span><span style="font-size:11px;font-weight:600;color:#4A1230;">Terapeuta Floral</span></div>
+          <div style="display:flex;align-items:center;gap:8px;padding:5px 8px;background:#eff6ff;border-radius:9px;border:1px solid #dbeafe;"><span style="width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,#60a5fa,#3b82f6);display:grid;place-items:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg></span><span style="font-size:11px;font-weight:600;color:#1e3a5f;">Master Aqualead</span></div>
+          <div style="display:flex;align-items:center;gap:8px;padding:5px 8px;background:#f5f3ff;border-radius:9px;border:1px solid #ddd6fe;"><span style="width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,#a78bfa,#7c3aed);display:grid;place-items:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></span><span style="font-size:11px;font-weight:600;color:#4c1d95;">Instructora en Registros Akáshicos</span></div>
+          <div style="display:flex;align-items:center;gap:8px;padding:5px 8px;background:#fffbeb;border-radius:9px;border:1px solid #fde68a;"><span style="width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,#fbbf24,#f59e0b);display:grid;place-items:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></span><span style="font-size:11px;font-weight:600;color:#78350f;">Operadora de máquina de energía escalar</span></div>
+        </div>
+        <div style="background:linear-gradient(135deg,#f8fafc,#f1f5f9);border:1.5px dashed #cbd5e1;border-radius:9px;padding:7px 9px;margin-bottom:8px;">
+          <div style="font-size:9px;font-weight:900;color:#0f172a;display:flex;align-items:center;gap:4px;"><span style="width:14px;height:14px;border-radius:4px;background:#0f172a;display:grid;place-items:center;"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></span>CONSULTAS: MODO PRESENCIAL, ON LINE, INDIVIDUAL Y GRUPAL<div style="margin-bottom:8px;background:#dcfce7;border-left:4px solid #128C7E;border-radius:8px;padding:8px 10px;font-size:12px;color:#0f172a;font-weight:900;line-height:1.35;">
+  Para consultas y turnos, la vía más directa es por WhatsApp y resolvemos cualquier duda.
+</div></div>
+          <div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:5px;"><span style="background:#dcfce7;color:#166534;padding:2px 6px;border-radius:999px;font-size:8px;font-weight:800;">PRESENCIAL</span><span style="background:#dbeafe;color:#1e40af;padding:2px 6px;border-radius:999px;font-size:8px;font-weight:800;">ON LINE</span><span style="background:#fef3c7;color:#92400e;padding:2px 6px;border-radius:999px;font-size:8px;font-weight:800;">INDIVIDUAL</span><span style="background:#fce7f3;color:#9d174d;padding:2px 6px;border-radius:999px;font-size:8px;font-weight:800;">GRUPAL</span></div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <a href="https://wa.me/${e.wsp}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;padding:6px 12px;border-radius:999px;font-weight:900;font-size:10px;display:inline-flex;align-items:center;gap:4px;box-shadow:0 3px 8px rgba(37,211,102,.28);text-decoration:none;">WhatsApp</a>
+          <a href="${e.instagram}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="background:linear-gradient(135deg,#f857a6,#ff5858 25%,#d62976 55%,#962fbf 85%,#4f5bd5 100%);color:#fff;padding:6px 12px;border-radius:999px;font-weight:900;font-size:10px;display:inline-flex;align-items:center;gap:4px;box-shadow:0 3px 8px rgba(214,41,118,.28);text-decoration:none;">Instagram</a>
+          <a href="${e.maps}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff;padding:6px 12px;border-radius:999px;font-weight:900;font-size:10px;display:inline-flex;align-items:center;gap:4px;box-shadow:0 3px 8px rgba(29,78,216,.28);text-decoration:none;">Mapa</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  `;
+}
+
+
+function abrirModalArcoiris(card){
+  // Abre el modal con el aviso lindo completo, no el generico - AHORA SI MUESTRA FOTO
+  const e = EMPRENDEDORES.find(x=>x.plantilla==='arcoiris');
+  if(!e) return;
+  const fotoFinal = e.foto_web || e.foto;
+  const modalImg = document.getElementById('modalImg');
+  if(modalImg){
+    modalImg.src = fotoFinal;
+    modalImg.style.display='block';
+    modalImg.style.maxHeight='42vh';
+    modalImg.style.objectFit='contain';
+    modalImg.style.background='linear-gradient(135deg,#fdf2f8,#f5f3ff)';
+  }
+  document.getElementById('modalBarrio').innerText='ALFAR • DESTACADO';
+  document.getElementById('modalTitulo').innerText='🌈 Luz del Arco Iris - Orit Savelski';
+  document.getElementById('modalDesc').innerHTML = `
+    <div style="font-family:'Poppins',sans-serif;">
+      <div style="display:flex;flex-direction:column;gap:8px;margin:12px 0;">
+        <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:#fdf2f8;border-radius:12px;border:1px solid #fce7f3;"><span style="width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#f9a8d4,#ec4899);display:grid;place-items:center;">🌸</span><span style="font-size:14px;font-weight:600;">Terapeuta Floral</span></div>
+        <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:#eff6ff;border-radius:12px;border:1px solid #dbeafe;"><span style="width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#60a5fa,#3b82f6);display:grid;place-items:center;">💧</span><span style="font-size:14px;font-weight:600;">Master Aqualead</span></div>
+        <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:#f5f3ff;border-radius:12px;border:1px solid #ddd6fe;"><span style="width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#a78bfa,#7c3aed);display:grid;place-items:center;">📖</span><span style="font-size:14px;font-weight:600;">Instructora en Registros Akáshicos</span></div>
+        <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:#fffbeb;border-radius:12px;border:1px solid #fde68a;"><span style="width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#fbbf24,#f59e0b);display:grid;place-items:center;">✨</span><span style="font-size:14px;font-weight:600;">Operadora de máquina de energía escalar</span></div>
+      </div>
+      <div style="background:#f8fafc;border:1.5px dashed #cbd5e1;border-radius:12px;padding:12px;margin:12px 0;">
+        <div style="font-size:11px;font-weight:900;">CONSULTAS: MODO PRESENCIAL, ON LINE, INDIVIDUAL Y GRUPAL</div>
+        <div style="font-size:12px;color:#475569;margin-top:4px;">Diagonal EEUU esq. De la Maza, Alfar - Mar del Plata<div style="margin-top:8px;font-size:13px;color:#0f172a;font-weight:800;font-style:italic;background:white;padding:7px 10px;border-radius:8px;border-left:4px solid #25D366;">Para consultas y turnos, la vía más directa es por WhatsApp  y resolvemos cualquier duda.</div></div>
+      </div>
+    </div>
+  `;
+  
+  document.getElementById('modalWsp').href='https://wa.me/'+e.wsp;
+  document.getElementById('modalIG').href=e.instagram;
+  document.getElementById('modalIG').style.display='flex';
+  document.getElementById('modalMap').href=e.maps;
+  document.getElementById('modalMap').style.display='flex';
+  document.getElementById('modalAviso').classList.add('activo');
+}
+
 function abrirModalDirecto(card){
+  const isArcoiris = card.innerHTML.includes('Luz del Arco Iris') || card.dataset.plantilla==='arcoiris' || (card.querySelector && card.querySelector('[style*="Great Vibes"]'));
+  if(isArcoiris){
+    abrirModalArcoiris(card);
+    return;
+  }
+  abrirModalDirecto_ORIGINAL(card);
+}
+function abrirModalDirecto_ORIGINAL(card){
   const img = card.querySelector('.img-box img') || card.querySelector('img');
   document.getElementById('modalImg').src = img ? img.src : 'https://infomdqhoy.pages.dev/banner1.jpg';
   document.getElementById('modalBarrio').innerText = card.querySelector('.badge-barrio')?.innerText || 'ALFAR';
@@ -277,30 +397,161 @@ function pintarTodo(){
   });
 }
 pintarTodo();
-function abrirBarrio(n){document.getElementById('page-home').style.display='none';document.querySelectorAll('.barrio-page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+n).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
-function volverHome(){document.getElementById('page-home').style.display='block';document.querySelectorAll('.barrio-page').forEach(p=>p.classList.remove('active'));window.scrollTo({top:0,behavior:'smooth'});}
-document.querySelectorAll('.filtros').forEach(w=>{
-  const barrio=w.dataset.barrio;
-  w.querySelectorAll('.filtro').forEach(btn=>{
+function abrirBarrio(n){
+  // ahora scrollea a la seccion del barrio en la misma home
+  const sec=document.getElementById('seccion-'+n);
+  if(sec){ sec.scrollIntoView({behavior:'smooth', block:'start'}); }
+}
+function volverHome(){
+  window.scrollTo({top:0,behavior:'smooth'});
+  // reset filtros
+  const global=document.getElementById('filtros-global');
+  if(global){
+    global.querySelectorAll('.filtro').forEach(b=>b.classList.remove('activo'));
+  }
+  document.querySelectorAll('.card-emp').forEach(c=>c.classList.remove('oculto'));
+  ['faro','alfar','serena','acantilados'].forEach(b=>{
+    const seccion=document.getElementById('seccion-'+b);
+    if(seccion) seccion.style.display='block';
+  });
+}
+// FILTRO GLOBAL SIN BOTON TODOS - toggle para volver a mostrar todo
+(function(){
+  const global = document.getElementById('filtros-global');
+  if(!global) return;
+  global.querySelectorAll('.filtro').forEach(btn=>{
     btn.addEventListener('click',()=>{
-      w.querySelectorAll('.filtro').forEach(b=>b.classList.remove('activo'));btn.classList.add('activo');
+      const yaActivo = btn.classList.contains('activo');
+      global.querySelectorAll('.filtro').forEach(b=>b.classList.remove('activo'));
+      if(yaActivo){
+        // si tocas el mismo activo, mostras todo de nuevo
+        document.querySelectorAll('.grid .card-emp').forEach(c=>c.classList.remove('oculto'));
+        ['faro','alfar','serena','acantilados'].forEach(b=>{
+          const seccion=document.getElementById('seccion-'+b);
+          if(seccion) seccion.style.display='block';
+        });
+        return;
+      }
+      btn.classList.add('activo');
       const cat=btn.dataset.cat;
-      const cards=document.getElementById('grid-'+barrio).querySelectorAll('.card-emp');
-      cards.forEach(c=>{if(cat==='todos'||c.dataset.cat===cat) c.classList.remove('oculto'); else c.classList.add('oculto');});
+      document.querySelectorAll('.grid .card-emp').forEach(c=>{
+        if(c.dataset.cat===cat) c.classList.remove('oculto');
+        else c.classList.add('oculto');
+      });
+      ['faro','alfar','serena','acantilados'].forEach(b=>{
+        const grid=document.getElementById('grid-'+b);
+        if(!grid) return;
+        const visibles = grid.querySelectorAll('.card-emp:not(.oculto)').length;
+        const seccion=document.getElementById('seccion-'+b);
+        if(seccion) seccion.style.display = visibles===0 ? 'none' : 'block';
+      });
     });
   });
-});
+})();
+// FUNCION PARA ABRIR MODAL DIRECTO DESDE OBJETO (para buscador)
+function abrirModalDesdeObjeto(e){
+  const fotoFinal = e.foto_web || e.foto || 'https://infomdqhoy.pages.dev/banner1.jpg';
+  document.getElementById('modalImg').src = fotoFinal;
+  document.getElementById('modalBarrio').innerText = (e.barrio||'').toUpperCase();
+  document.getElementById('modalTitulo').innerText = e.nombre||'';
+  document.getElementById('modalDesc').innerText = e.desc||'';
+  document.getElementById('modalPrecio').innerText = e.precio||'';
+  const wsp = e.wsp ? 'https://wa.me/'+e.wsp : '#';
+  document.getElementById('modalWsp').href = wsp;
+  const modalIG = document.getElementById('modalIG');
+  const modalMap = document.getElementById('modalMap');
+  if(modalIG){
+    if(e.instagram){ modalIG.href = e.instagram; modalIG.style.display='flex'; } else { modalIG.style.display='none'; }
+  }
+  if(modalMap){
+    if(e.maps){ modalMap.href = e.maps; modalMap.style.display='flex'; } else { modalMap.style.display='none'; }
+  }
+  document.getElementById('modalAviso').classList.add('activo');
+}
+
+function limpiarBusqueda(){
+  const input=document.getElementById('buscadorUnificado');
+  const resultados=document.getElementById('resultadosUnificados');
+  if(input) input.value='';
+  if(resultados){ resultados.style.display='none'; resultados.innerHTML=''; }
+  // mostrar todo de nuevo
+  document.querySelectorAll('.grid .card-emp').forEach(c=>c.classList.remove('oculto'));
+  ['faro','alfar','serena','acantilados'].forEach(b=>{
+    const seccion=document.getElementById('seccion-'+b);
+    if(seccion) seccion.style.display='block';
+  });
+}
+
 (function(){
   const input=document.getElementById('buscadorUnificado');
   const resultados=document.getElementById('resultadosUnificados');
-  function normalizar(s){return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();}
+  function normalizar(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();}
+  if(!input || !resultados) return;
+  
   input.addEventListener('input',(e)=>{
     const q=normalizar(e.target.value);
-    if(q.length<2){resultados.style.display='none';pintarTodo();volverHome();return;}
+    if(q.length<2){
+      resultados.style.display='none';
+      resultados.innerHTML='';
+      // si borra, vuelve a mostrar todo
+      document.querySelectorAll('.grid .card-emp').forEach(c=>c.classList.remove('oculto'));
+      ['faro','alfar','serena','acantilados'].forEach(b=>{
+        const seccion=document.getElementById('seccion-'+b);
+        if(seccion) seccion.style.display='block';
+      });
+      return;
+    }
     const filtrados=EMPRENDEDORES.filter(em=>normalizar(em.keywords).includes(q));
-    resultados.innerHTML=filtrados.map(em=>`<div onclick="abrirBarrio('${em.barrio}');resultados.style.display='none'" style="padding:10px;border-bottom:1px solid #e2e8f0;cursor:pointer"><b>${em.nombre}</b><br><small>${em.barrio} • ${em.cat}</small></div>`).join('')||'<div style="padding:12px">Sin resultados</div>';
+    if(filtrados.length===0){
+      resultados.innerHTML='<div style="padding:14px;text-align:center;color:#64748b;font-weight:700">Sin resultados para "'+e.target.value+'"</div>';
+      resultados.style.display='block';
+      return;
+    }
+    resultados.innerHTML=filtrados.map((em, idx)=>`<div data-idx="${idx}" class="resultado-item" style="padding:12px 14px;border-bottom:1px solid #e2e8f0;cursor:pointer;display:flex;justify-content:space-between;align-items:center"><div><b style="font-size:13px">${em.nombre}</b><br><small style="color:#64748b">${em.barrio.toUpperCase()} • ${em.cat}</small></div><span style="font-size:14px">↗️</span></div>`).join('');
     resultados.style.display='block';
+    // click en cada resultado -> abre modal y limpia buscador
+    resultados.querySelectorAll('.resultado-item').forEach((div, i)=>{
+      div.addEventListener('click',()=>{
+        const em = filtrados[i];
+        resultados.style.display='none';
+        resultados.innerHTML='';
+        input.value = ''; // limpia el texto para que no quede cargado
+        // scrollea a su barrio por las dudas y abre modal
+        const sec=document.getElementById('seccion-'+em.barrio);
+        if(sec) sec.style.display='block';
+        // mostrar solo su barrio un segundo para contexto
+        document.querySelectorAll('.grid .card-emp').forEach(c=>c.classList.remove('oculto'));
+        abrirModalDesdeObjeto(em);
+      });
+    });
   });
+
+  // cerrar resultados si hace click afuera
+  document.addEventListener('click',(ev)=>{
+    if(!ev.target.closest('.buscador-wrap')){
+      resultados.style.display='none';
+    }
+  });
+
+  // si toca Enter, abre el primero
+  input.addEventListener('keydown',(e)=>{
+    if(e.key==='Enter'){
+      const primer=filtradosCache();
+      if(primer){ 
+        e.preventDefault();
+        input.value='';
+        resultados.style.display='none';
+        resultados.innerHTML='';
+        abrirModalDesdeObjeto(primer);
+      }
+    }
+  });
+
+  function filtradosCache(){
+    const q=normalizar(input.value);
+    const filtrados=EMPRENDEDORES.filter(em=>normalizar(em.keywords).includes(q));
+    return filtrados[0]||null;
+  }
 })();
 </script>
 </body>
