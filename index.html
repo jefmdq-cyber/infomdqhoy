@@ -284,11 +284,7 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
     ✨ VIDRIERA DE EMPRENDEDORES
   </button>
 </div>
-<div style="grid-column:1 / -1; background:white; border:3px solid black; border-radius:12px; padding:12px 10px; text-align:center; height:fit-content; align-self:start;">
-  <div style="font-size:15px; font-weight:900; color:black; line-height:1.2; font-family:Arial Black, Arial, sans-serif;">+18 | EL JUGAR COMPULSIVAMENTE ES PERJUDICIAL PARA LA SALUD</div>
-  <div style="font-size:12px; font-weight:700; margin-top:4px;">Prohibido para menores de 18 años - Resultados con fines informativos</div>
-  <div style="font-size:10px; color:#666; margin-top:2px;">Ayuda: 0800-444-4000 | No organizamos apuestas</div>
-</div>
+
 <div id="page-home" style="display:contents">
 <div style="grid-column:1/-1;max-width:560px;margin:0 auto 14px auto;"><!-- FARMACIA VARA -->
 
@@ -468,6 +464,7 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
 
 
 <div class="card"><span class="badge" style="background:#dcfce7;color:#15803d">QUINIELA - RESULTADOS OFICIALES</span><h2 style="margin-top:6px;font-size:18px" id="q-titulo">Quiniela Hoy - 6 Loterías</h2>
+<div id="toast-quiniela" style="display:none;margin-top:8px;background:#dcfce7;border:1px solid #16a34a;color:#15803d;padding:8px 12px;border-radius:10px;font-size:12px;font-weight:800;text-align:center"></div>
 <div style="display:flex;align-items:center;gap:8px;margin-top:10px;background:#f0f9ff;border:2px solid #0ea5e9;border-radius:12px;padding:8px 12px;box-shadow:0 4px 12px rgba(14,165,233,.15);">
   <span style="font-family:Inter,sans-serif;font-weight:600;font-size:12px;color:#0c4a6e;white-space:nowrap;">📅 Fecha:</span>
   <select id="q-fecha" style="flex:1;padding:8px 10px;border-radius:8px;border:2px solid #0ea5e9;font-weight:700;font-size:13px;background:white;color:#0b132b;outline:none;cursor:pointer;font-family:Inter,sans-serif;"></select>
@@ -483,6 +480,12 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
     <a href="https://wa.me/5492235820394?text=Hola%20Jorge,%20quiero%20publicitar%20mi%20negocio%20en%20INFOMDQHOY%20Zona%20Sur" target="_blank" style="display:inline-block; background:#25D366; color:white; padding:10px 18px; text-decoration:none; font-weight:bold; border-radius:30px; margin-top:6px; font-size:13px;">📲 Consultar por WhatsApp</a>
   </div>
 </div>
+</div><!-- FIN CARD QUINIELA -->
+
+<!-- CARTEL +18 DEBAJO DE QUINIELA - BLOQUE INDEPENDIENTE -->
+<div class="card" style="background:#f1f5f9; border:1.5px solid #cbd5e1; padding:10px 14px; text-align:center; margin-bottom:14px;">
+  <div style="font-size:11px; font-weight:900; color:#0f172a; line-height:1.3;">🔞 +18 | EL JUGAR COMPULSIVAMENTE ES PERJUDICIAL PARA LA SALUD</div>
+  <div style="font-size:10px; color:#475569; font-weight:600; margin-top:3px; line-height:1.3;">Prohibido menores de 18 años - Resultados con fines informativos - Ayuda: 0800-444-4000 | No organizamos apuestas</div>
 </div>
 <!-- AVISO KIOSCO LOS MELLI - FONDO MOSTAZA SUAVE - CENTRADO -->
 <div id="card-melli" data-search="kiosco los melli mellis alfar golosinas snacks cigarrillos bebidas frias carga virtual sube billeteras mercado pago guillermo magrassi 4295 mar del plata" style="box-sizing:border-box;width:100%;max-width:760px;margin:0 auto;background:#F5E6C8;border-radius:26px;border:1.5px solid #E8D5B5;box-shadow:0 8px 30px rgba(92,46,14,0.12);padding:18px 18px 18px 18px;font-family:'Fredoka','Nunito',Inter,sans-serif;position:relative;overflow:hidden;">
@@ -825,6 +828,8 @@ const selectFecha=document.getElementById('q-fecha');
 for(let i=0;i>=-29;i--){const f=fechaARG(i);const opt=document.createElement('option');opt.value=f;opt.textContent=etiquetaFecha(i,f);selectFecha.appendChild(opt);}
 selectFecha.value=fechaARG(0);
 selectFecha.addEventListener('change',()=>cargarDia(selectFecha.value));
+let ultimoHashQuiniela = "";
+let intervaloQuiniela = null;
 function cargarDia(fecha){
   const esHoy=fecha===fechaARG(0);
   document.getElementById('q-titulo').textContent=esHoy?'Quiniela Hoy - 6 Loterías':'Quiniela del '+fecha.split('-').reverse().join('/');
@@ -841,21 +846,63 @@ function cargarDia(fecha){
     if(m){ fechaUltAct = `${m[3]}-${m[2]}-${m[1]}`; }
     if(esHoy){
       if(fechaJsonStr && fechaJsonStr !== fecha){
-        datosCompletos={}; render(); return;
+        datosCompletos={}; render(); ultimoHashQuiniela=""; return;
       }
       if(!fechaJsonStr && fechaUltAct && fechaUltAct !== fecha){
-        datosCompletos={}; render(); return;
+        datosCompletos={}; render(); ultimoHashQuiniela=""; return;
       }
     }
     let fuente=d.completo||d;
     let norm={}; Object.keys(fuente).forEach(k=>{norm[k.toLowerCase()]=fuente[k];});
-    datosCompletos=norm; render();
+    datosCompletos=norm;
+    try{ ultimoHashQuiniela = JSON.stringify(norm); }catch(e){ ultimoHashQuiniela=""; }
+    render();
   }).catch(e=>{
     console.error(e);
     datosCompletos={}; render();
+    ultimoHashQuiniela="";
   });
 }
 cargarDia(selectFecha.value);
+function verificarActualizacionSilenciosa(){
+  if(document.hidden) return;
+  const hoy = fechaARG(0);
+  if(selectFecha.value !== hoy) return;
+  fetch('./quiniela.json?v='+Date.now()).then(r=>{
+    if(!r.ok) return null;
+    return r.json();
+  }).then(raw=>{
+    if(!raw) return;
+    let d = Array.isArray(raw)?raw[0]:raw;
+    let fuente = d.completo || d;
+    let norm = {}; Object.keys(fuente).forEach(k=>{norm[k.toLowerCase()]=fuente[k];});
+    let nuevoHash = "";
+    try{ nuevoHash = JSON.stringify(norm); }catch(e){ return; }
+    if(ultimoHashQuiniela && nuevoHash !== ultimoHashQuiniela){
+      datosCompletos = norm;
+      ultimoHashQuiniela = nuevoHash;
+      render();
+      const toast = document.getElementById('toast-quiniela');
+      if(toast){
+        toast.textContent = '✅ Quiniela actualizada - ' + new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});
+        toast.style.display='block';
+        setTimeout(()=>{toast.style.display='none';}, 5000);
+      }
+    } else if(!ultimoHashQuiniela){
+      ultimoHashQuiniela = nuevoHash;
+    }
+  }).catch(()=>{});
+}
+function iniciarAutoActualizacionQuiniela(){
+  if(intervaloQuiniela) clearInterval(intervaloQuiniela);
+  intervaloQuiniela = setInterval(verificarActualizacionSilenciosa, 90000);
+}
+iniciarAutoActualizacionQuiniela();
+document.addEventListener('visibilitychange', ()=>{
+  if(!document.hidden){
+    verificarActualizacionSilenciosa();
+  }
+});
 document.getElementById('btn-edea').onclick=function(){document.getElementById('modal-edea').style.display='block';document.getElementById('texto-edea').innerText='Cargando datos oficiales de EDEA...';fetch('./cortes-edea.json?v='+Date.now()).then(r=>r.json()).then(d=>{let txt=d.info_oficial||(d.cortes?d.cortes.join("\n\n"):"")||"";if(!txt||txt.trim().length<10)txt="Hoy EDEA no publicó cortes programados.";document.getElementById('texto-edea').innerText=txt;document.getElementById('fecha-edea').innerText="Actualizado: "+(d.actualizado||"");}).catch(()=>{document.getElementById('texto-edea').innerText='No se pudo cargar ahora. Probá en unos minutos.';});}
 document.getElementById('btn-511').onclick=function(){document.getElementById('modal-511').style.display='block'}
 document.getElementById('btn-221').onclick=function(){document.getElementById('modal-221').style.display='block'}
@@ -1123,4 +1170,3 @@ document.addEventListener('DOMContentLoaded', function(){
 
 </body>
 </html>
-
