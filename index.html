@@ -299,7 +299,7 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
 <div id="page-home" style="display:contents">
 <div style="grid-column:1/-1;max-width:560px;margin:0 auto 14px auto;"><!-- FARMACIA VARA -->
 
-<div style="background:white;border-radius:22px;overflow:hidden;border:1px solid #e2e8f0;box-shadow:0 8px 24px rgba(0,0,0,.1);max-width:560px;margin:0 auto 14px auto;font-family:Inter,'Segoe UI',system-ui,sans-serif;grid-column:1 / -1">
+<div onclick="document.getElementById('modal-farmacia').style.display='block'" style="background:white;border-radius:22px;overflow:hidden;border:1px solid #e2e8f0;box-shadow:0 8px 24px rgba(0,0,0,.1);max-width:560px;margin:0 auto 14px auto;font-family:Inter,'Segoe UI',system-ui,sans-serif;grid-column:1 / -1;cursor:pointer">
 
   <div style="background: radial-gradient(circle at center, #1e1e1e 0%, #111111 100%); border-radius: 40px; padding: clamp(14px,4vw,22px) clamp(18px,6vw,36px); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: inset 0 2px 4px rgba(255,255,255,0.05), 0 8px 24px rgba(0,0,0,0.4); margin: 10px; font-family: 'Arial Black', Impact, sans-serif; border: 2px solid #222222;">
     <div style="color: #ffffff; font-size: clamp(20px,6vw,34px); font-weight: 900; letter-spacing: -0.8px; line-height: 1; text-transform: uppercase; text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c5c5c5, 0 3px 0 #bbb, 0 4px 0 #b0b0b0, 0 5px 0 #a5a5a5, 0 6px 1px rgba(0,0,0,0.1), 0 0 5px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.3), 0 3px 5px rgba(0,0,0,0.2), 0 5px 10px rgba(0,0,0,0.25);">
@@ -450,7 +450,7 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
 </style>
 
 <div class="avisos-destacados-grid">
-<div class="amapola-card">
+<div class="amapola-card" onclick="abrirModalAmapola(this)" style="cursor:pointer">
   <div class="amapola-fachada-wrap">
     <img src="amapolas.jpg" alt="Amapola's Dietetica Fachada" class="amapola-fachada">
     <div class="amapola-logo-circle"><img src="amapola_logo_transparente.png" alt="Logo Amapolas"></div>
@@ -584,7 +584,7 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
   </div>
 <!-- FIN AVISO FONOAUDIOLOGIA EXACTO -->
 
-<div style="grid-column:1/-1;max-width:760px;margin:0 auto 14px auto;"><div style="box-sizing:border-box;width:100%;max-width:760px;margin:0 auto;padding:12px;background:#fafafa;border:1px solid #e5e7eb;border-radius:28px;font-family:Inter,Arial,sans-serif;color:#0b132b;box-shadow:0 14px 35px rgba(11,19,43,.12);">
+<div style="grid-column:1/-1;max-width:760px;margin:0 auto 14px auto;"><div onclick="abrirModalKevin(this)" style="cursor:pointer;box-sizing:border-box;width:100%;max-width:760px;margin:0 auto;padding:12px;background:#fafafa;border:1px solid #e5e7eb;border-radius:28px;font-family:Inter,Arial,sans-serif;color:#0b132b;box-shadow:0 14px 35px rgba(11,19,43,.12);">
   <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 16px;background:linear-gradient(135deg,#7e22ce,#581c87);border-radius:18px;">
     <div style="font-size:1.4rem;font-weight:900;color:#fff;text-transform:uppercase;">Proveeduría Kevin</div>
     <div style="width:45px;height:45px;border-radius:50%;background:#b8f34a;display:flex;align-items:center;justify-content:center;font-size:1.5rem;">🛍️</div>
@@ -1332,6 +1332,40 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   });
 })();
+</script>
+
+
+<script>
+// === ARREGLO QUIRÚRGICO - MODAL ORIGINAL COMO ESTABA ===
+function abrirModalClon(el){
+  try{
+    var existing=document.getElementById('modal-clon-temp');
+    if(existing) existing.remove();
+    var overlay=document.createElement('div');
+    overlay.id='modal-clon-temp';
+    overlay.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:99999;padding:15px;overflow:auto;display:flex;align-items:flex-start;justify-content:center;';
+    var box=document.createElement('div');
+    box.style.cssText='background:transparent;max-width:760px;width:100%;margin:20px auto;position:relative;';
+    // Clonar el aviso completo original
+    var clon=el.cloneNode(true);
+    clon.style.cursor='default';
+    clon.removeAttribute('onclick');
+    // Agregar boton X
+    var btnX=document.createElement('button');
+    btnX.innerHTML='X';
+    btnX.style.cssText='position:absolute;top:10px;right:10px;background:#0f172a;color:white;border:none;width:32px;height:32px;border-radius:50%;font-weight:900;cursor:pointer;z-index:10;box-shadow:0 4px 12px rgba(0,0,0,.3)';
+    btnX.onclick=function(){ overlay.remove(); };
+    box.appendChild(clon);
+    box.appendChild(btnX);
+    overlay.appendChild(box);
+    overlay.addEventListener('click', function(e){ if(e.target===overlay) overlay.remove(); });
+    document.body.appendChild(overlay);
+  }catch(err){ console.error('abrirModalClon', err); }
+}
+// Julia usa el mismo clonador para que se vea original
+function abrirModalJulia(el){ abrirModalClon(el); }
+function abrirModalAmapola(el){ abrirModalClon(el); }
+function abrirModalKevin(el){ abrirModalClon(el); }
 </script>
 
 </body>
