@@ -1,9 +1,12 @@
 name: Quiniela 20 TODOS los sorteos
 on:
   schedule:
-    # Un solo cron cada 3 minutos todo el dia. El Python filtra si es horario de sorteo.
-    # GitHub dice minimo 5 min pero con 1 sola linea */3 lo ejecuta cada 3-5 min sin fallar.
-    - cron: '*/3 * * * *'
+    # HORARIO ARG 10:00 a 23:00 = UTC 13:00 a 02:00
+    # Cada 3 min SOLO cuando hay sorteos. De noche no gasta Project.
+    # Previa 10:15 ART=13:15 UTC, Primera 12:00 ART=15:00 UTC, Matutina 15:00 ART=18:00 UTC
+    # Vespertina 18:00 ART=21:00 UTC, Nocturna 21:00 ART=00:00 UTC
+    - cron: '*/3 13-15,17-23 * * *'
+    - cron: '*/3 0-1 * * *'
   workflow_dispatch:
 
 jobs:
@@ -30,13 +33,11 @@ jobs:
           TZ_ARG = ZoneInfo("America/Argentina/Buenos_Aires")
           AHORA = datetime.now(TZ_ARG)
           HOY = AHORA.strftime("%Y-%m-%d")
-          # FIX DOMINGO: los domingos no hay sorteos en Argentina, no generar nada
-          if AHORA.weekday() == 6:  # 6 = domingo
-              print(f"Hoy es domingo {HOY} - no hay sorteos, se omite actualizacion para no pisar con datos del sabado")
+          if AHORA.weekday() == 6:
+              print(f"Hoy es domingo {HOY} - no hay sorteos, se omite")
               exit(0)
 
           DIAS_A_CONSERVAR = 30
-
           os.makedirs("historial", exist_ok=True)
           ARCHIVO_HOY = f"historial/{HOY}.json"
 
@@ -48,7 +49,6 @@ jobs:
             "entrerios":  "https://www.tujugada.com.ar/quiniela_entre_rios.asp",
           }
           ORDEN_4CIFRAS = ["previa","primera","matutina","vespertina","nocturna"]
-
           MARGEN_MIN = 20
           HORA_SORTEO_ARG = {"previa":(10,15), "primera":(12,0), "matutina":(15,0), "vespertina":(18,0), "nocturna":(21,0)}
           HORA_SORTEO_UY  = {"vespertina":(15,0), "nocturna":(21,0)}
@@ -116,7 +116,6 @@ jobs:
               return sorteos
 
           completo = {}
-
           for nombre, url in LOTERIAS_4CIFRAS.items():
               nuevo = extraer_sorteos(url, ORDEN_4CIFRAS, digitos=4)
               completo[nombre] = {}
