@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ofertas de Negocios | INFO MDQ SUR HOY</title>
+<meta name="theme-color" content="#0f172a">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
+body{background:#f0f4f8;color:#1a202c;padding-bottom:90px}
+.hero{position:relative;height:220px;overflow:hidden;background:linear-gradient(135deg,#f59e0b,#ec4899)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,23,42,.85) 0%,rgba(0,0,0,.1) 60%)}
+.hero-text{position:absolute;bottom:18px;left:16px;right:16px;color:white;z-index:2}
+.hero-text h1{font-size:28px;font-weight:900;letter-spacing:-1px;line-height:1.1}
+.hero-text p{font-size:13px;opacity:.9;margin-top:6px}
+.contenedor{max-width:1000px;margin:0 auto;padding:14px}
+.buscador-wrap{position:sticky;top:0;z-index:20;background:#f0f4f8;padding:10px 0 8px 0;margin:0 0 12px 0}
+.buscador{width:100%;padding:14px 16px 14px 44px;border-radius:999px;border:2px solid #0f172a;background:white;font-weight:700;font-size:14px;outline:none;box-shadow:0 4px 12px rgba(0,0,0,.06)}
+.buscador-wrap::before{content:"🔍";position:absolute;left:16px;top:50%;transform:translateY(-50%);z-index:2;font-size:18px;margin-top:2px}
+.resultados{position:absolute;top:56px;left:0;right:0;background:white;border-radius:18px;border:2px solid #0f172a;box-shadow:0 12px 28px rgba(0,0,0,.18);max-height:68vh;overflow-y:auto;display:none;z-index:30}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}}
+.card-oferta{background:white;border-radius:16px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,.06);border:1px solid #e2e8f0;text-align:left;transition:.15s;cursor:pointer;position:relative}
+.card-oferta:hover{transform:translateY(-3px);box-shadow:0 10px 20px rgba(0,0,0,.1)}
+.badge-oferta{position:absolute;top:10px;left:10px;z-index:2;padding:5px 10px;border-radius:999px;font-size:11px;font-weight:900;color:white}
+.badge-desc{background:#ef4444}
+.badge-reintegro{background:#22c55e}
+.badge-2x1{background:#3b82f6}
+.img-box{width:100%;height:160px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.img-box img{width:100%;height:100%;object-fit:cover;display:block}
+.info{padding:14px 14px 12px;display:flex;flex-direction:column}
+.info h3{font-size:16px;font-weight:900;color:#0f172a;line-height:1.2;margin-bottom:4px}
+.info .negocio{font-size:11px;font-weight:800;color:#64748b;text-transform:uppercase;letter-spacing:.5px}
+.info .desc{font-size:13px;color:#334155;line-height:1.4;margin:8px 0 10px 0;font-weight:500}
+.info .vigencia{font-size:11px;color:#94a3b8;font-weight:700}
+.btn-ver{background:#0f172a;color:white;padding:10px 14px;border-radius:999px;text-align:center;font-weight:900;font-size:12px;margin-top:8px}
+.filtros-global{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:12px 0 14px 0}
+@media(max-width:520px){.filtros-global{grid-template-columns:repeat(2,1fr)}}
+.filtro{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:14px 8px;border-radius:18px;border:1.5px solid #e2e8f0;background:white;font-weight:900;font-size:11.5px;cursor:pointer;box-shadow:0 4px 14px rgba(15,23,42,.06);transition:.18s}
+.filtro.activo{background:#0f172a;color:white;border-color:#0f172a}
+.filtro .ico{font-size:22px}
+#modalAviso{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:100;padding:16px}
+#modalAviso.activo{display:flex}
+.modal-box{background:white;border-radius:20px;max-width:420px;width:100%;overflow:hidden;max-height:90vh;overflow-y:auto}
+.modal-img{width:100%;height:220px;object-fit:cover}
+.modal-content{padding:18px}
+</style>
+</head>
+<body>
+
+<div class="hero">
+<div class="hero-overlay"></div>
+<div class="hero-text">
+<h1>🔥 OFERTAS DE NEGOCIOS</h1>
+<p>Descuentos, reintegros y promos de la zona sur</p>
+</div>
+</div>
+
+<div class="contenedor">
+
+<div class="buscador-wrap">
+<input id="buscadorUnificado" class="buscador" placeholder="Buscar oferta: farmacia, carnicería, descuento...">
+<div id="resultadosUnificados" class="resultados"></div>
+</div>
+
+<div class="filtros-global" id="filtrosGlobal">
+<div class="filtro activo" data-filtro="todos"><span class="ico">🔥</span><span class="label">TODOS</span></div>
+<div class="filtro" data-filtro="promociones"><span class="ico">🏷️</span><span class="label">PROMOCIONES</span></div>
+<div class="filtro" data-filtro="reintegro"><span class="ico">💳</span><span class="label">REINTEGRO</span></div>
+<div class="filtro" data-filtro="ofertas"><span class="ico">🎁</span><span class="label">OFERTAS</span></div>
+</div>
+
+<div class="grid" id="gridOfertas">
+<!-- ACA VA A APARECER EL CARTEL UNICO DE PROXIMAMENTE -->
+</div>
+
+</div>
+
+<div id="modalAviso" onclick="if(event.target.id==='modalAviso') cerrarModal()">
+<div class="modal-box">
+<img id="modalImg" class="modal-img" src="">
+<div class="modal-content">
+<div id="modalBarrio" style="font-size:10px;font-weight:900;color:#64748b"></div>
+<h2 id="modalTitulo" style="font-size:18px;font-weight:900;margin:6px 0"></h2>
+<div id="modalDesc" style="font-size:13px;color:#334155;line-height:1.5"></div>
+<a id="modalWsp" href="#" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;background:#25D366;color:white;padding:13px 18px;border-radius:999px;text-decoration:none;font-weight:900;font-size:15px;width:100%;">Consultar por WhatsApp</a>
+</div>
+</div>
+</div>
+
+<div class="footer" style="text-align:center; padding:24px 16px; margin-top:40px; background:#fff; border-top:1px solid #e2e8f0; font-size:13px; font-weight:700;"><a href="/terminos.html">Términos</a> | <a href="/privacidad.html">Privacidad</a> | <a href="/contacto.html">Contacto</a><div style="margin-top:8px; font-size:11px; color:#94a3b8; font-weight:500;">INFO MDQ SUR HOY - jefmdq@gmail.com - © 2026</div></div>
+
+<script>
+const OFERTAS = [
+  {
+    id: 'proximamente',
+    nombre: 'Próximamente las mejores ofertas',
+    negocio: 'INFO MDQ SUR HOY - Zona Sur',
+    tipo: 'promociones',
+    barrio: 'ZONA SUR',
+    desc: 'Estamos preparando las mejores promos, reintegros y ofertas de los comercios de Faro, Alfar, Serena y Acantilados.',
+    vigencia: 'Muy pronto...',
+    foto: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=500',
+    foto_web: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=500',
+    keywords: 'ofertas promociones reintegro descuentos proximamente',
+    wsp: '5492230000000'
+  }
+];
+
+function crearCard(o){
+  const badgeClass = o.tipo==='promociones'?'badge-desc':o.tipo==='reintegro'?'badge-reintegro':'badge-2x1';
+  const badgeTxt = o.tipo.toUpperCase();
+  return `<div class="card-oferta" data-tipo="${o.tipo}" data-keywords="${o.keywords}" onclick="abrirModal('${o.id}')">
+    <div class="badge-oferta ${badgeClass}">${badgeTxt}</div>
+    <div class="img-box"><img src="${o.foto_web || o.foto}" loading="lazy"></div>
+    <div class="info">
+      <div class="negocio">${o.negocio}</div>
+      <h3>${o.nombre}</h3>
+      <div class="desc">${o.desc}</div>
+      <div class="vigencia">${o.vigencia}</div>
+      <div class="btn-ver">Ver oferta →</div>
+    </div>
+  </div>`;
+}
+
+function renderGrid(lista){
+  document.getElementById('gridOfertas').innerHTML = lista.map(crearCard).join('');
+}
+renderGrid(OFERTAS);
+
+// Filtros
+document.querySelectorAll('.filtro').forEach(f=>{
+  f.addEventListener('click',()=>{
+    document.querySelectorAll('.filtro').forEach(x=>x.classList.remove('activo'));
+    f.classList.add('activo');
+    const tipo=f.dataset.filtro;
+    if(tipo==='todos') renderGrid(OFERTAS);
+    else renderGrid(OFERTAS.filter(o=>o.tipo===tipo));
+  });
+});
+
+// Modal
+function abrirModal(id){
+  const o = OFERTAS.find(x=>x.id===id);
+  if(!o) return;
+  document.getElementById('modalImg').src=o.foto_web||o.foto;
+  document.getElementById('modalBarrio').innerText=o.barrio+' • '+o.tipo.toUpperCase();
+  document.getElementById('modalTitulo').innerText=o.nombre;
+  document.getElementById('modalDesc').innerHTML=`<b>${o.negocio}</b><br><br>${o.desc}<br><br><small>${o.vigencia}</small><br><br><i>Presentá esta captura en el comercio.</i>`;
+  document.getElementById('modalWsp').href='https://wa.me/'+o.wsp;
+  document.getElementById('modalAviso').classList.add('activo');
+}
+function cerrarModal(){ document.getElementById('modalAviso').classList.remove('activo'); }
+
+// Buscador EXACTO igual que profesionales
+(function(){
+  const input=document.getElementById('buscadorUnificado');
+  const resultados=document.getElementById('resultadosUnificados');
+  function normalizar(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();}
+  if(!input || !resultados) return;
+  input.addEventListener('input',(e)=>{
+    const q=normalizar(e.target.value);
+    if(q.length<2){
+      resultados.style.display='none';
+      resultados.innerHTML='';
+      return;
+    }
+    const filtrados = OFERTAS.filter(o=>normalizar(o.keywords).includes(q));
+    if(filtrados.length===0){
+      resultados.innerHTML='<div style="padding:14px;text-align:center;color:#64748b;font-weight:700">Sin resultados para "'+e.target.value+'"</div>';
+      resultados.style.display='block';
+      return;
+    }
+    resultados.innerHTML=filtrados.map(em=>`<div class="resultado-item" style="padding:12px 14px;border-bottom:1px solid #e2e8f0;cursor:pointer;display:flex;justify-content:space-between;align-items:center"><div><b style="font-size:13px">${em.nombre}</b><br><small style="color:#64748b">${em.negocio}</small></div><span style="font-size:14px">↗️</span></div>`).join('');
+    resultados.style.display='block';
+    resultados.querySelectorAll('.resultado-item').forEach((div,i)=>{
+      div.addEventListener('click',()=>{
+        const em=filtrados[i];
+        resultados.style.display='none';
+        input.value='';
+        abrirModal(em.id);
+      });
+    });
+  });
+  document.addEventListener('click',(ev)=>{
+    if(!ev.target.closest('.buscador-wrap')) resultados.style.display='none';
+  });
+})();
+</script>
+</body>
+</html>
