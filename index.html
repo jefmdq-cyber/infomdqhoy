@@ -356,6 +356,54 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
   <div style="text-align:center;font-size:11px;color:#64748b;font-weight:700;padding:0 14px 14px 14px">Atención personalizada · Productos de calidad</div>
 </div></div>
 
+<div style="grid-column:1/-1;max-width:560px;margin:0 auto 14px auto;">
+  <!-- CARTELITO PODOLOGA - ABRE MODAL DIRECTO EN ESTA MISMA PAGINA + OPCION IR A PROFESIONALES -->
+  <div onclick="document.getElementById('modal-podologa-index').style.display='block'" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 14px;background:linear-gradient(135deg,#fdf2f8 0%,#fce7f3 100%);border:1.5px solid #f9a8d4;border-radius:14px;cursor:pointer;box-shadow:0 4px 12px rgba(236,72,153,.12);box-sizing:border-box;">
+    <span style="width:28px;height:28px;background:linear-gradient(135deg,#ec4899,#be185d);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">🦶</span>
+    <span style="font-size:12.5px;font-weight:900;color:#831843;letter-spacing:.2px;text-transform:uppercase;">Podóloga barrio Bosque / Alfar / Faro</span>
+    <span style="margin-left:auto;background:#831843;color:white;padding:4px 10px;border-radius:999px;font-size:10px;font-weight:900;flex-shrink:0;">VER →</span>
+  </div>
+</div>
+
+<!-- MODAL PODOLOGA EN INDEX PRINCIPAL - COPIA EXACTA DEL AVISO -->
+<div id="modal-podologa-index" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto;" onclick="this.style.display='none'">
+  <div style="background:#FFFEFB;border:2px solid #C9B8A3;border-radius:26px;overflow:hidden;max-width:440px;width:100%;margin:20px auto;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.4);" onclick="event.stopPropagation()">
+    <button onclick="document.getElementById('modal-podologa-index').style.display='none'" style="position:absolute;top:10px;right:10px;background:#0f172a;color:white;border:none;width:32px;height:32px;border-radius:50%;font-weight:900;cursor:pointer;z-index:10;box-shadow:0 4px 12px rgba(0,0,0,.3)">X</button>
+    
+    <div style="width:100%;background:#F6F1EB;line-height:0;">
+      <img src="podologia.webp" onerror="this.src='https://via.placeholder.com/440x400/F6F1EB/8C4A2F?text=Podologia'" alt="Podología Nadia Camelia" style="width:100%;height:auto;max-height:420px;object-fit:contain;display:block;">
+    </div>
+    <div style="background:#D0B78F;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;">
+      <span style="background:#FFFEFB;color:#8C4A2F;font-size:10px;font-weight:800;letter-spacing:0.14em;padding:6px 11px;border-radius:999px;border:1px solid #C9B8A3;">✦ TURNOS ABIERTOS</span>
+      <span style="background:#8C4A2F;color:#FFFEFB;font-size:10px;font-weight:800;letter-spacing:0.12em;padding:6px 11px;border-radius:999px;">20 AÑOS EXP.</span>
+    </div>
+    <div style="background:#D0B78F;padding:0 22px 14px 22px;border-bottom:1px solid #C9B8A3;">
+      <p style="font-family:'Playfair Display',serif;font-style:italic;font-weight:600;color:#8C4A2F;font-size:21px;line-height:1.1;margin:0;">Tus pies en buenas manos</p>
+      <h2 style="color:#1E1A16;font-size:32px;font-weight:800;line-height:0.95;margin:6px 0 0 0;letter-spacing:-0.03em;">Nadia Camelia</h2>
+      <p style="margin:6px 0 0 0;font-size:11.5px;font-weight:800;letter-spacing:0.28em;color:#8C4A2F;">PODOLOGÍA PROFESIONAL</p>
+    </div>
+    <div style="padding:16px 18px;display:flex;flex-direction:column;gap:14px;background:#FFFEFB;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;">
+        <div style="background:#FCE8E9;border:1.5px solid #F5C6C8;border-radius:15px;padding:12px 11px;"><span style="font-size:12.5px;font-weight:700;color:#1A1A1A;">Clínica integral</span></div>
+        <div style="background:#FCE8E9;border:1.5px solid #F5C6C8;border-radius:15px;padding:12px 11px;"><span style="font-size:12.5px;font-weight:700;color:#1A1A1A;">Uña encarnada</span></div>
+        <div style="background:#FCE8E9;border:1.5px solid #F5C6C8;border-radius:15px;padding:12px 11px;"><span style="font-size:12.5px;font-weight:700;color:#1A1A1A;">Onicomicosis</span></div>
+        <div style="background:#FCE8E9;border:1.5px solid #F5C6C8;border-radius:15px;padding:12px 11px;"><span style="font-size:12.5px;font-weight:700;color:#1A1A1A;">Pie diabético</span></div>
+      </div>
+      <div style="background:#E8DCC8;border:1.5px solid #C9B8A3;border-radius:16px;padding:12px 16px;text-align:center;">
+        <p style="margin:0;font-family:'Playfair Display',serif;font-style:italic;font-weight:600;color:#8C4A2F;font-size:15px;">Atención en Gabinete</p>
+        <p style="margin:3px 0 0 0;color:#1E1A16;font-size:14.5px;font-weight:800;">Bosque Peralta Ramos</p>
+        <p style="margin:5px 0 0 0;color:#8C4A2F;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;opacity:0.9;">Benito Juárez 156 - Alfar | Bosque</p>
+      </div>
+      <a href="https://wa.me/5492234984778?text=Hola%20Nadia,%20vi%20tu%20aviso%20en%20INFO%20MDQ%20HOY%20y%20quiero%20un%20turno" target="_blank" style="background:#8C4A2F;color:#FFFEFB;text-decoration:none;text-align:center;font-size:15px;font-weight:800;padding:15px 18px;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 8px 20px rgba(140,74,47,0.28);">
+        PEDIR TURNO WHATSAPP
+      </a>
+      <a href="/Profesionales.html" style="display:block;text-align:center;font-size:12px;font-weight:800;color:#8C4A2F;text-decoration:none;padding:8px;border:1.5px solid #C9B8A3;border-radius:999px;">Ver más en Profesionales →</a>
+    </div>
+  </div>
+</div>
+
+
+
 <div class="card"><span class="badge" style="background:#dbeafe;color:#1d4ed8">DÓLAR HOY</span><h2 style="margin-top:6px">Dólar Hoy Mar del Plata</h2><p id="dolar-t" style="font-size:12px;color:#64748b"></p><div class="dolar-grid" id="dolar-g"></div>
 </div>
 
