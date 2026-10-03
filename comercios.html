@@ -70,7 +70,7 @@ body{background:#f8fafc;color:#0b132b}
 <a href="#serena" class="barrio-btn btn-serena" onclick="filtrarBarrio('serena');return false;"><span>🟡</span>PLAYA SERENA</a>
 <a href="#acantilados" class="barrio-btn btn-acantilados" onclick="filtrarBarrio('acantilados');return false;"><span>🟠</span>ACANTILADOS</a>
 </div>
-<button onclick="filtrarBarrio('todos')" style="grid-column:1/-1;padding:12px;border-radius:999px;border:2px dashed #cbd5e1;background:#fff;font-weight:800;font-size:12px;cursor:pointer;margin-bottom:10px;">Ver todos los barrios</button>
+<button onclick="filtrarBarrio('todos', event)" style="grid-column:1/-1;padding:12px;border-radius:999px;border:2px dashed #cbd5e1;background:#fff;font-weight:800;font-size:12px;cursor:pointer;margin-bottom:10px;">Ver todos los barrios</button>
 
 <!-- ALFAR -->
 <div id="sec-alfar" class="barrio-section">
@@ -78,7 +78,7 @@ body{background:#f8fafc;color:#0b132b}
 <div class="comercios-grid">
 
 <!-- FARMACIA VARA -->
-<div id="card-vara" style="background:white;border-radius:22px;overflow:hidden;border:1px solid #e2e8f0;box-shadow:0 8px 24px rgba(0,0,0,.1);max-width:560px;margin:0 auto 14px auto;font-family:Inter,'Segoe UI',system-ui,sans-serif;grid-column:1 / -1" data-search="farmacia vara alfar estados unidos 779 pami ioma envios perfumeria cosmetica magistrales">
+<div id="card-vara" onclick="abrirModalComercio('vara', event)" style="cursor:pointer;background:white;border-radius:22px;overflow:hidden;border:1px solid #e2e8f0;box-shadow:0 8px 24px rgba(0,0,0,.1);max-width:560px;margin:0 auto 14px auto;font-family:Inter,'Segoe UI',system-ui,sans-serif;grid-column:1 / -1" data-search="farmacia vara alfar estados unidos 779 pami ioma envios perfumeria cosmetica magistrales">
   <div style="background: radial-gradient(circle at center, #1e1e1e 0%, #111111 100%); border-radius: 40px; padding: clamp(14px,4vw,22px) clamp(18px,6vw,36px); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: inset 0 2px 4px rgba(255,255,255,0.05), 0 8px 24px rgba(0,0,0,0.4); margin: 10px; font-family: 'Arial Black', Impact, sans-serif; border: 2px solid #222222;">
     <div style="color: #ffffff; font-size: clamp(20px,6vw,34px); font-weight: 900; letter-spacing: -0.8px; line-height: 1; text-transform: uppercase; text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c5c5c5, 0 3px 0 #bbb, 0 4px 0 #b0b0b0, 0 5px 0 #a5a5a5, 0 6px 1px rgba(0,0,0,0.1), 0 0 5px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.3), 0 3px 5px rgba(0,0,0,0.2), 0 5px 10px rgba(0,0,0,0.25);">FARMACIA VARA</div>
     <div style="width: 52px; height: 52px; background: linear-gradient(135deg, #a7f3d0 0%, #10b981 50%, #047857 100%); border-radius: 16px; display: flex; align-items: center; justify-content: center; position: relative; border: 3px solid #ffffff; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.35);">
@@ -126,7 +126,7 @@ body{background:#f8fafc;color:#0b132b}
 </div>
 
 <!-- AMAPOLA -->
-<div id="card-amapola" class="amapola-card" data-search="amapola dietetica alfar almacen natural vegano celiaco sin tacc diabetico sin azucar hipertenso semillas cereales legumbres cosmestica natural hierbas reposteria condimentos feria comercial">
+<div id="card-amapola" class="amapola-card" data-search="amapola dietetica alfar almacen natural vegano celiaco sin tacc diabetico sin azucar hipertenso semillas cereales legumbres cosmestica natural hierbas reposteria condimentos feria comercial" onclick="abrirModalComercio('amapola', event)" style="cursor:pointer;">
   <div class="amapola-fachada-wrap">
     <img src="amapolas.jpg" alt="Amapola's Dietetica Fachada" class="amapola-fachada">
     <div class="amapola-logo-circle"><img src="amapola_logo_transparente.png" alt="Logo Amapolas"></div>
@@ -157,7 +157,7 @@ body{background:#f8fafc;color:#0b132b}
 </div>
 
 <!-- KEVIN ALFAR - CORREGIDO -->
-<div id="card-kevin-alfar" data-search="proveeduria kevin alfar autoservicio almacen despensa kiosco diagonal estados unidos 474" style="box-sizing:border-box;width:100%;max-width:560px;margin:0 auto;padding:12px;background:#fafafa;border:1px solid #e5e7eb;border-radius:28px;font-family:Inter,Arial,sans-serif;color:#0b132b;box-shadow:0 14px 35px rgba(11,19,43,.12);">
+<div id="card-kevin-alfar" data-search="proveeduria kevin alfar autoservicio almacen despensa kiosco diagonal estados unidos 474" onclick="abrirModalComercio('kevin-alfar', event)" style="cursor:pointer;box-sizing:border-box;width:100%;max-width:560px;margin:0 auto;padding:12px;background:#fafafa;border:1px solid #e5e7eb;border-radius:28px;font-family:Inter,Arial,sans-serif;color:#0b132b;box-shadow:0 14px 35px rgba(11,19,43,.12);">
   <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 16px;background:linear-gradient(135deg,#7e22ce,#581c87);border-radius:18px;">
     <div style="font-size:1.4rem;font-weight:900;color:#fff;text-transform:uppercase;">Proveeduría Kevin</div>
     <div style="width:45px;height:45px;border-radius:50%;background:#b8f34a;display:flex;align-items:center;justify-content:center;font-size:1.5rem;">🛍️</div>
@@ -188,7 +188,7 @@ body{background:#f8fafc;color:#0b132b}
 </div>
 
 <!-- KIOSCO LOS MELLI - RESTAURADO EXACTO DEL ORIGINAL SIN BERMU/BEBIDAS -->
-<div id="card-melli" data-search="kiosco los melli mellis alfar golosinas snacks cigarrillos bebidas frias carga virtual sube billeteras mercado pago guillermo magrassi 4295 mar del plata" style="box-sizing:border-box;width:100%;max-width:760px;margin:0 auto;background:#F5E6C8;border-radius:26px;border:1.5px solid #E8D5B5;box-shadow:0 8px 30px rgba(92,46,14,0.12);padding:18px 18px 18px 18px;font-family:'Fredoka','Nunito',Inter,sans-serif;position:relative;overflow:hidden;">
+<div id="card-melli" data-search="kiosco los melli mellis alfar golosinas snacks cigarrillos bebidas frias carga virtual sube billeteras mercado pago guillermo magrassi 4295 mar del plata" onclick="abrirModalComercio('melli', event)" style="cursor:pointer;box-sizing:border-box;width:100%;max-width:760px;margin:0 auto;background:#F5E6C8;border-radius:26px;border:1.5px solid #E8D5B5;box-shadow:0 8px 30px rgba(92,46,14,0.12);padding:18px 18px 18px 18px;font-family:'Fredoka','Nunito',Inter,sans-serif;position:relative;overflow:hidden;">
   <!-- HEADER CENTRADO? No, left icon + title -->
   <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
     <div style="width:64px;height:64px;min-width:64px;background:#FFFFFF;border-radius:16px;border:1.5px solid #E8D5B5;box-shadow:0 3px 10px rgba(92,46,14,0.12);display:flex;align-items:center;justify-content:center;">
@@ -237,7 +237,7 @@ body{background:#f8fafc;color:#0b132b}
 <div id="sec-faro" class="barrio-section">
 <div class="barrio-title">🔵 Faro Norte / Punta Mogotes</div>
 <div class="comercios-grid">
-<div id="card-pana" data-search="pana flor faro norte punta mogotes rotiseria panaderia despensa comidas llevar pizza pizzas empanada empanadas tartas tarta sandwich sandwiches miga envios gratis sanguches bizcochos facturas trabajadores 5455" class="comercio-card" data-barrio="faro" data-nombre="La Pana de Flor" data-rubro="rotiseria panaderia despensa comidas para llevar pizzas empanadas tartas sandwiches" style="max-width:560px;margin:0 auto 14px auto;">
+<div id="card-pana" data-search="pana flor faro norte punta mogotes rotiseria panaderia despensa comidas llevar pizza pizzas empanada empanadas tartas tarta sandwich sandwiches miga envios gratis sanguches bizcochos facturas trabajadores 5455" class="comercio-card" data-barrio="faro" data-nombre="La Pana de Flor" data-rubro="rotiseria panaderia despensa comidas para llevar pizzas empanadas tartas sandwiches" onclick="abrirModalComercio('pana', event)" style="cursor:pointer;max-width:560px;margin:0 auto 14px auto;">
 <div class="pana-card" style="grid-column:1 / -1">
 <div style="display:flex;gap:12px;padding:16px 20px 24px 20px">
 <div style="position:relative;width:55%;flex-shrink:0">
@@ -295,7 +295,7 @@ body{background:#f8fafc;color:#0b132b}
 <div id="sec-acantilados" class="barrio-section">
 <div class="barrio-title">🟠 Los Acantilados</div>
 <div class="comercios-grid">
-<div id="card-kevin-aca" data-search="proveeduria kevin acantilados kiosco diario calle 493 autoservicio almacen" style="box-sizing:border-box;width:100%;max-width:760px;margin:0 auto;padding:14px;background:linear-gradient(135deg,#fff7ed 0%,#ffedd5 100%);border:2px solid #f97316;border-radius:28px;font-family:Inter,Arial,sans-serif;color:#0b132b;box-shadow:0 14px 35px rgba(249,115,22,.25);">
+<div id="card-kevin-aca" data-search="proveeduria kevin acantilados kiosco diario calle 493 autoservicio almacen" onclick="abrirModalComercio('kevin-aca', event)" style="cursor:pointer;box-sizing:border-box;width:100%;max-width:760px;margin:0 auto;padding:14px;background:linear-gradient(135deg,#fff7ed 0%,#ffedd5 100%);border:2px solid #f97316;border-radius:28px;font-family:Inter,Arial,sans-serif;color:#0b132b;box-shadow:0 14px 35px rgba(249,115,22,.25);">
 <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
 <div style="background:#f97316;color:white;padding:6px 12px;border-radius:999px;font-weight:900;font-size:11px;letter-spacing:.5px">DESTACADA</div>
 <div style="font-weight:900;font-size:13px;color:#7c2d12">SUCURSAL ACANTILADOS</div>
@@ -330,7 +330,7 @@ body{background:#f8fafc;color:#0b132b}
 </div>
 
 
-<!-- MODAL FLOTANTE COMERCIOS -->
+<!-- MODAL FLOTANTE COMERCIOS - FIXED -->
 <div id="modalComercio" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.65);backdrop-filter:blur(4px);padding:16px;overflow-y:auto;">
   <div style="max-width:560px;margin:20px auto;background:white;border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.3);position:relative;">
     <button onclick="cerrarModalComercio()" style="position:absolute;top:12px;right:12px;z-index:10;background:rgba(0,0,0,0.7);color:white;border:none;width:36px;height:36px;border-radius:50%;font-weight:900;cursor:pointer;font-size:18px;">✕</button>
@@ -339,79 +339,74 @@ body{background:#f8fafc;color:#0b132b}
 </div>
 
 <script>
-// FUNCIONES GLOBALES PARA MODAL - FUERA DE DOMContentLoaded PARA QUE ONCLICK LAS ENCUENTRE
+// FUNCIONES GLOBALES MODAL - DEFINIDAS FUERA DE DOMContentLoaded
 function cerrarModalComercio(){
-  const m = document.getElementById('modalComercio');
+  var m = document.getElementById('modalComercio');
   if(m) m.style.display='none';
   document.body.style.overflow='';
 }
-function abrirModalComercio(id){
-  const modal = document.getElementById('modalComercio');
-  const content = document.getElementById('modalComercioContent');
+function abrirModalComercio(id, evt){
+  try{
+    var ev = evt || window.event;
+    if(ev){
+      var tgt = ev.target || ev.srcElement;
+      if(tgt && tgt.closest && tgt.closest('a')) return;
+      ev.stopPropagation();
+    }
+  }catch(e){}
+  var modal = document.getElementById('modalComercio');
+  var content = document.getElementById('modalComercioContent');
   if(!modal || !content){ console.error('Modal no encontrado'); return; }
   
-  // MAPEO ESTABLE POR ID - NO DEPENDE DE QUERYSELECTOR FRAGIL
-  const mapaCards = {
-    'vara': document.getElementById('card-vara'),
-    'amapola': document.getElementById('card-amapola'),
-    'kevin-alfar': document.getElementById('card-kevin-alfar'),
-    'melli': document.getElementById('card-melli'),
-    'pana': document.getElementById('card-pana'),
-    'kevin-aca': document.getElementById('card-kevin-aca')
+  var mapa = {
+    'vara': document.querySelector('#sec-alfar #card-vara') || document.getElementById('card-vara'),
+    'amapola': document.querySelector('#sec-alfar #card-amapola') || document.getElementById('card-amapola'),
+    'kevin-alfar': document.querySelector('#sec-alfar #card-kevin-alfar') || document.getElementById('card-kevin-alfar'),
+    'melli': document.querySelector('#sec-alfar #card-melli') || document.getElementById('card-melli'),
+    'pana': document.querySelector('#sec-faro #card-pana') || document.getElementById('card-pana'),
+    'kevin-aca': document.querySelector('#sec-acantilados #card-kevin-aca') || document.getElementById('card-kevin-aca')
   };
   
-  let el = mapaCards[id];
-  let html = '';
+  var el = mapa[id];
+  var html = '';
   if(el){
-    html = el.outerHTML;
-  } else {
-    // fallback por data-search
-    const q = (sel) => document.querySelector(sel);
-    if(id==='vara') html = q('[data-search*="farmacia vara"]')?.outerHTML || '';
-    else if(id==='amapola') html = q('.amapola-card')?.outerHTML || '';
-    else if(id==='kevin-alfar') html = q('[data-search*="kevin alfar"]')?.outerHTML || '';
-    else if(id==='melli') html = document.getElementById('card-melli')?.outerHTML || q('[data-search*="melli"]')?.outerHTML || '';
-    else if(id==='pana') html = document.getElementById('card-pana')?.outerHTML || q('[data-search*="pana flor"]')?.outerHTML || '';
-    else if(id==='kevin-aca') html = document.getElementById('card-kevin-aca')?.outerHTML || q('[data-search*="kevin acantilados"]')?.outerHTML || '';
+    // CLON EXACTO DEL AVISO - sin modificar nada del aviso original
+    html = el.outerHTML.replace(/onclick="abrirModalComercio[^"]*"/g, '').replace(/cursor:\s*pointer;?/g, '');
   }
+  if(!html) html = '<div style="padding:40px;text-align:center;font-weight:800;color:#64748b">No se encontró el comercio: '+id+'</div>';
   
-  if(!html) html = '<div style="padding:40px;text-align:center;font-weight:800;color:#64748b">No se encontró el comercio</div>';
+  content.innerHTML = '<div style="padding:16px">'+html+'</div><div style="padding:0 16px 16px"><button onclick="cerrarModalComercio()" style="width:100%;padding:14px;border-radius:999px;background:#0f172a;color:white;font-weight:900;border:none;cursor:pointer;font-size:14px;">Cerrar ✕</button></div>';
   
-  content.innerHTML = '<div style="padding:16px">'+html+'</div><div style="padding:0 16px 16px"><button onclick="cerrarModalComercio()" style="width:100%;padding:14px;border-radius:999px;background:#0f172a;color:white;font-weight:900;border:none;cursor:pointer;font-size:14px;">Cerrar</button></div>';
-  
-  // Forzar visibilidad dentro del modal
-  const innerCard = content.querySelector('[data-search]');
-  if(innerCard){
-    innerCard.style.display='block';
-    // quitar max-width auto centrado conflictivo
-    innerCard.style.margin='0 auto';
+  var inner = content.querySelector('[data-search]');
+  if(inner){
+    inner.style.display='block';
+    inner.style.margin='0 auto';
+    inner.style.cursor='default';
   }
-  const amapolaInside = content.querySelector('.amapola-card');
-  if(amapolaInside) amapolaInside.style.display='block';
-  
   modal.style.display='block';
   document.body.style.overflow='hidden';
-  
-  const res = document.getElementById('resultadosUnificados');
+  var res = document.getElementById('resultadosUnificados');
   if(res) res.style.display='none';
 }
+window.abrirModalComercio = abrirModalComercio;
+window.cerrarModalComercio = cerrarModalComercio;
 
 document.addEventListener('DOMContentLoaded', function(){
   function normalizar(t){
     return (t||'').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9\s]/g,' ').trim().replace(/\s+/g,' ');
   }
-  const input = document.getElementById('buscadorUnificado');
-  const resultados = document.getElementById('resultadosUnificados');
+  var input = document.getElementById('buscadorUnificado');
+  var resultados = document.getElementById('resultadosUnificados');
   if(!input || !resultados) return;
   
-  let barrioActual = null;
+  var barrioActual = null;
   try{
-    const p = new URLSearchParams(window.location.search);
-    let b = p.get('barrio');
+    var p = new URLSearchParams(window.location.search);
+    var b = p.get('barrio');
     if(b){ b = normalizar(b); if(['alfar','faro','serena','acantilados'].includes(b)) barrioActual = b; }
   }catch(e){}
-
-  const comercios = [
+  
+  var comercios = [
     {id:'vara', nombre:'Farmacia Vara', barrio:'alfar', rubro:'farmacia perfumeria', keywords:'farmacia vara alfar estados unidos 779 pami ioma osecac osde envios domicilio remedios medicamentos recetas magistrales perfumeria cosmetica pañales', color:'#14532d', icon:'💊'},
     {id:'amapola', nombre:"Amapola Dietética", barrio:'alfar', rubro:'dietetica almacen natural', keywords:'amapola amapolas dietetica alfar feria comercial vegano vegana celiaco sin tacc diabetico sin azucar hipertenso semillas cereales legumbres harinas frutos secos miel reposteria condimentos hierbas cosmestica natural suplementos frutas congeladas', color:'#2E7D32', icon:'🌿'},
     {id:'kevin-alfar', nombre:'Proveeduría Kevin Alfar', barrio:'alfar', rubro:'almacen kiosco autoservicio despensa', keywords:'proveeduria kevin alfar autoservicio almacen despensa kiosco diagonal estados unidos 474 bebidas lacteos fiambres pan facturas golosinas limpieza precios baratos', color:'#581c87', icon:'🛒'},
@@ -419,91 +414,73 @@ document.addEventListener('DOMContentLoaded', function(){
     {id:'pana', nombre:'La Pana de Flor', barrio:'faro', rubro:'rotiseria panaderia comidas', keywords:'pana flor faro norte punta mogotes trabajadores 5455 rotiseria panaderia despensa comidas llevar casero casera pizza pizzas empanadas tartas sandwich sandwiches miga sanguches bizcochos facturas envio gratis delivery', color:'#7A1C3C', icon:'🥟'},
     {id:'kevin-aca', nombre:'Proveeduría Kevin Acantilados', barrio:'acantilados', rubro:'almacen kiosco diario', keywords:'proveeduria kevin acantilados 493 calle 493 entre 6 y 8 kiosco diario canillita autoservicio almacen despensa bebidas almacen acantilados', color:'#7c2d12', icon:'🛒'},
   ];
-
+  
   function aplicarFiltro(qRaw){
-    const q = normalizar(qRaw);
-    const palabras = q.split(' ').filter(w=>w.length>=2);
-    const buscando = palabras.length>0;
-
-    // Filtrar tarjetas visibles en página - SI ESTA BUSCANDO, IGNORA barrioActual y busca en TODOS
-    document.querySelectorAll('[data-search]').forEach(card=>{
+    var q = normalizar(qRaw);
+    var palabras = q.split(' ').filter(function(w){return w.length>=2;});
+    var buscando = palabras.length>0;
+    document.querySelectorAll('[data-search]').forEach(function(card){
       if(card.closest('#modalComercioContent')) return;
       if(!buscando){
-        const sec = card.closest('.barrio-section');
-        const secId = sec ? sec.id.replace('sec-','') : '';
+        var sec = card.closest('.barrio-section');
+        var secId = sec ? sec.id.replace('sec-','') : '';
         if(barrioActual && secId && secId!==barrioActual){ card.style.display='none'; return; }
         card.style.display='block';
         return;
       }
-      const txt = normalizar((card.getAttribute('data-search')||'')+' '+(card.innerText||''));
-      const ok = palabras.every(p=>txt.includes(p));
+      var txt = normalizar((card.getAttribute('data-search')||'')+' '+(card.innerText||''));
+      var ok = palabras.every(function(p){return txt.includes(p);});
       card.style.display = ok ? 'block' : 'none';
     });
-
-    document.querySelectorAll('.barrio-section').forEach(sec=>{
+    document.querySelectorAll('.barrio-section').forEach(function(sec){
       if(!buscando){
-        const id = sec.id.replace('sec-','');
+        var id = sec.id.replace('sec-','');
         if(barrioActual && id!==barrioActual){ sec.style.display='none'; return; }
         sec.style.display='block';
         return;
       }
-      const visibles = Array.from(sec.querySelectorAll('[data-search]')).filter(c=>c.style.display!=='none' && !c.closest('#modalComercioContent')).length;
+      var visibles = Array.from(sec.querySelectorAll('[data-search]')).filter(function(c){return c.style.display!=='none' && !c.closest('#modalComercioContent');}).length;
       sec.style.display = visibles===0 ? 'none' : 'block';
     });
-
     if(!buscando){ resultados.style.display='none'; resultados.innerHTML=''; return; }
-
-    // Dropdown flotante - BUSCA EN TODOS LOS BARRIOS, sin filtrar por barrioActual
-    let scored = comercios.map(c=>{
-      const txt = normalizar(c.nombre+' '+c.barrio+' '+c.rubro+' '+c.keywords);
-      if(!palabras.every(p=>txt.includes(p))) return null;
+    var scored = comercios.map(function(c){
+      var txt = normalizar(c.nombre+' '+c.barrio+' '+c.rubro+' '+c.keywords);
+      if(!palabras.every(function(p){return txt.includes(p);})) return null;
       return c;
     }).filter(Boolean);
-
     if(scored.length===0){
       resultados.innerHTML='<div style="padding:16px;text-align:center;color:#64748b;font-weight:700">No encontré resultados para "'+qRaw+'"</div>';
       resultados.style.display='block';
       return;
     }
-
-    let h='<div style="font-weight:900;font-size:11px;color:#64748b;margin-bottom:8px">🛍️ '+scored.length+' comercios - tocá para ver tarjeta flotante</div>';
-    h+=scored.map(c=>`
-      <div onclick="abrirModalComercio('${c.id}')" style="display:flex;align-items:center;gap:10px;padding:12px;border-radius:14px;background:white;border:2px solid #e2e8f0;margin-bottom:8px;cursor:pointer;transition:all 0.15s" onmouseover="this.style.borderColor='#0f172a'" onmouseout="this.style.borderColor='#e2e8f0'">
-        <div style="width:44px;height:44px;border-radius:12px;background:#f8fafc;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">${c.icon}</div>
-        <div style="flex:1;min-width:0"><div style="font-weight:900;font-size:13px;color:${c.color};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${c.nombre}</div><div style="font-size:11px;color:#64748b">${c.rubro} • ${c.barrio.toUpperCase()}</div></div>
-        <span style="background:#0f172a;color:white;padding:6px 12px;border-radius:999px;font-size:10px;font-weight:900;flex-shrink:0">VER</span>
-      </div>
-    `).join('');
+    var h='<div style="font-weight:900;font-size:11px;color:#64748b;margin-bottom:8px">🛍️ '+scored.length+' comercios - tocá para ver tarjeta flotante</div>';
+    h+=scored.map(function(c){
+      return '<div onclick="abrirModalComercio(\''+c.id+'\', event)" style="display:flex;align-items:center;gap:10px;padding:12px;border-radius:14px;background:white;border:2px solid #e2e8f0;margin-bottom:8px;cursor:pointer"><div style="width:44px;height:44px;border-radius:12px;background:#f8fafc;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">'+c.icon+'</div><div style="flex:1;min-width:0"><div style="font-weight:900;font-size:13px;color:'+c.color+';white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+c.nombre+'</div><div style="font-size:11px;color:#64748b">'+c.rubro+' • '+c.barrio.toUpperCase()+'</div></div><span style="background:#0f172a;color:white;padding:6px 12px;border-radius:999px;font-size:10px;font-weight:900;flex-shrink:0">VER</span></div>';
+    }).join('');
     resultados.innerHTML=h;
     resultados.style.display='block';
   }
-
-  input.addEventListener('input', (e)=> aplicarFiltro(e.target.value));
-  input.addEventListener('focus', (e)=> { if(e.target.value.trim().length>=2) aplicarFiltro(e.target.value); });
-  
-  // Cerrar resultados al clickear fuera
-  document.addEventListener('click', (e)=>{
+  input.addEventListener('input', function(e){ aplicarFiltro(e.target.value); });
+  input.addEventListener('focus', function(e){ if(e.target.value.trim().length>=2) aplicarFiltro(e.target.value); });
+  document.addEventListener('click', function(e){
     if(!e.target.closest('#resultadosUnificados') && e.target.id!=='buscadorUnificado'){
       resultados.style.display='none';
     }
   });
-
   window.filtrarBarrio = function(b){
     b = normalizar(b);
-    const secs=['alfar','faro','serena','acantilados'];
-    if(b==='todos' || b===''){ barrioActual=null; secs.forEach(id=>{let el=document.getElementById('sec-'+id); if(el) el.style.display='block'}); }
-    else { barrioActual=b; secs.forEach(id=>{let el=document.getElementById('sec-'+id); if(el) el.style.display=(id===b?'block':'none')}); }
-    const inp = document.getElementById('buscadorUnificado');
+    var secs=['alfar','faro','serena','acantilados'];
+    if(b==='todos' || b===''){ barrioActual=null; secs.forEach(function(id){var el=document.getElementById('sec-'+id); if(el) el.style.display='block';}); }
+    else { barrioActual=b; secs.forEach(function(id){var el=document.getElementById('sec-'+id); if(el) el.style.display=(id===b?'block':'none');}); }
+    var inp = document.getElementById('buscadorUnificado');
     if(inp && inp.value.trim().length>=2) aplicarFiltro(inp.value); else aplicarFiltro('');
   };
-
   if(barrioActual) window.filtrarBarrio(barrioActual);
-
-  const modal = document.getElementById('modalComercio');
+  var modal = document.getElementById('modalComercio');
   if(modal){
-    modal.addEventListener('click', (e)=>{ if(e.target===modal){ cerrarModalComercio(); }});
+    modal.addEventListener('click', function(e){ if(e.target===modal){ cerrarModalComercio(); }});
   }
-  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ cerrarModalComercio(); if(resultados) resultados.style.display='none'; }});
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ cerrarModalComercio(); if(resultados) resultados.style.display='none'; }});
 });
 </script>
 </body>
