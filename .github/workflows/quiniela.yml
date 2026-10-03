@@ -1,160 +1,193 @@
-nombre : Quiniela 20 TODOS los sorteos
-en :
-  cronograma :
-    # HORARIO ARG 10:00 a 23:00 = UTC 13:00 a 02:00
-    # Cada 3 min SOLO cuando hay sorteos. Proyecto De noche no gasta.
-    # Previa 10:15 ART=13:15 UTC, Primera 12:00 ART=15:00 UTC, Matutina 15:00 ART=18:00 UTC
-    # Vespertina 18:00 ART=21:00 UTC, Nocturna 21:00 ART=00:00 UTC
-    - cron : ' */3 13-15,17-23 * * * '
-    - cron : ' */3 0-1 * * * '
-  flujo_de_trabajo :
+name: Quiniela 20 TODOS los sorteos
+on:
+  schedule:
+    # ULTRA VELOZ: Rango horario validado
+    - cron: '15-59/3 13 * * 1-6'
+    - cron: '0-59/3 15 * * 1-6'
+    - cron: '0-59/3 18 * * 1-6'
+    - cron: '0-59/3 21 * * 1-6'
+    - cron: '0-59/3 0 * * 0,2-6'
+    - cron: '0-30/3 1 * * 0,2-6'
+  workflow_dispatch:
 
-empleos :
-  actualizar :
-    se ejecuta en : ubuntu-latest
-    permisos :
-      Contenido : escribir
-    pasos :
-      - usos : actions/checkout@v6
-      - usos : actions/setup-python@v6
-        con :
-          Versión de Python : ' 3.11 '
-      - nombre : sorteos de Scrapear
-        correr : |
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: Scrapear sorteos
+        id: scrape
+        run: |
           pip install requests beautifulsoup4 lxml
-          Python << 'PY'
-          importar solicitudes, re, json, os, glob
+          python << 'PY'
+          import requests, re, json, os, glob
           from datetime import datetime, timedelta
           from zoneinfo import ZoneInfo
           from urllib.parse import urlparse
           from bs4 import BeautifulSoup
-          ENCABEZADOS = {"User-Agent": "Mozilla/5.0 Chrome/122","Referer":"https://www.google.com/"}
-          TZ_ARG = ZoneInfo("América/Argentina/Buenos_Aires")
+
+          HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36","Referer":"https://google.com"}
+          TZ_ARG = ZoneInfo("America/Argentina/Buenos_Aires")
           AHORA = datetime.now(TZ_ARG)
           HOY = AHORA.strftime("%Y-%m-%d")
-          Si AHORA.weekday() == 6:
-              print(f"Hoy es domingo {HOY} - no hay sorteos, se omite")
-              salir(0)
+
+          if AHORA.weekday() == 6 and AHORA.hour >= 2:
+              print(f"Domingo {HOY} - sin sorteos, se omite")
+              exit(0)
+
           DIAS_A_CONSERVAR = 30
           os.makedirs("historial", exist_ok=True)
           ARCHIVO_HOY = f"historial/{HOY}.json"
+
           LOTERIAS_4CIFRAS = {
-            "nacional": "https://www.tujugada.com.ar/quiniela-nacional.asp",
-            "provincia": "https://www.tujugada.com.ar/quiniela_provincia_buenos_aires.asp",
-            "santafe": "https://www.tujugada.com.ar/quiniela_santa_fe.asp",
-            "cordoba": "https://www.tujugada.com.ar/quiniela_cordoba.asp",
-            "entrerios": "https://www.tujugada.com.ar/quiniela_entre_rios.asp",
+            "nacional":   "https://tujugada.com.ar",
+            "provincia":  "https://tujugada.com.ar",
+            "santafe":    "https://tujugada.com.ar",
+            "cordoba":    "https://tujugada.com.ar",
+            "entrerios":  "https://tujugada.com.ar",
           }
           ORDEN_4CIFRAS = ["previa","primera","matutina","vespertina","nocturna"]
-          MARGEN_MIN = 20
+          MARGEN_MIN = 1  
           HORA_SORTEO_ARG = {"previa":(10,15), "primera":(12,0), "matutina":(15,0), "vespertina":(18,0), "nocturna":(21,0)}
-          HORA_SORTEO_UY = {"vespertina":(15,0), "nocturna":(21,0)}
-          def ya_deberia_haber_salido(clave, tabla_horarios):
-              h, m = tabla_horarios[clave]
-              límite = AHORA.replace(hour=h, minute=m, second=0, microsecond=0) + timedelta(minutes=MARGEN_MIN)
-              devolver AHORA >= límite
-          URUGUAY_URL = "https://www.tujugada.com.ar/quiniela_uruguay.asp"
+          HORA_SORTEO_UY  = {"vespertina":(15,0), "nocturna":(21,0)}
+
+          def ya_deberia_haber_salido(key, tabla_horarios):
+              h, m = tabla_horarios[key]
+              limite = AHORA.replace(hour=h, minute=m, second=0, microsecond=0) + timedelta(minutes=MARGEN_MIN)
+              return AHORA >= limite
+
+          URUGUAY_URL = "https://tujugada.com.ar"
           ORDEN_URUGUAY = ["vespertina","nocturna"]
+
           viejo = {}
-          si os.path.exists (ARCHIVO_HOY):
-            intentar:
-              viejo = json.load(open(ARCHIVO_HOY,encoding="utf-8")).get("completo",{})
-            excepto: pasar
+          viejo_raw = {}
+          if os.path.exists(ARCHIVO_HOY):
+            try:
+              viejo_raw = json.load(open(ARCHIVO_HOY,encoding="utf-8"))
+              viejo = viejo_raw.get("completo",{})
+            except: pass
+
           def limpiar(html):
-              return html.replace("---MENSAJE PARA EL VISITANTE DE ESTE SITIO--- SI VES ESTE MENSAJE ES PORQUE VISITAS UN SITIO QUE ESTA COPIANDO CODIGO FUENTE AUTORIA DE TUJUGADA.COM.AR SIN AUTORIZACION. VISITA AL SITIO REAL QUE ACTUALIZA ESTOS DATOS EN WWW.TUJUGADA.COM.AR!!!", "")
+              return html.replace("---MENSAJE PARA EL VISITANTE DE ESTE SITIO--- SI VES ESTE MENSAJE ES PORQUE VISITAS UN SITIO QUE ESTA COPIANDO CODIGO FUENTE AUTORIA DE TUJUGADA.COM.AR SIN AUTORIZACION. VISITA AL SITIO REAL QUE ACTUALIZA ESTOS DATOS EN ://tujugada.com.AR!!!", "")
+
           def mismo_path(url_pedido, url_final):
               return urlparse(url_pedido).path.lower() == urlparse(url_final).path.lower()
+
           def texto_plano(html_crudo):
-              sopa = BeautifulSoup(limpiar(html_crudo), "lxml")
-              para etiqueta en sopa(["script", "style"]):
-                  etiqueta.descomponer()
-              texto = sopa.get_text(separador=" ")
+              soup = BeautifulSoup(limpiar(html_crudo), "lxml")
+              for tag in soup(["script", "style"]):
+                  tag.decompose()
+              texto = soup.get_text(separator=" ")
               texto = re.sub(r'\s+', ' ', texto)
-              texto de retorno
+              return texto
+
           def reordenar_columnas(lista):
-              Si len(lista) < 20:
-                  lista de retorno
+              if len(lista) < 20:
+                  return lista
               veinte = lista[:20]
               izquierda = veinte[0::2]
               derecha = veinte[1::2]
-              regresar izquierda + derecha
-          def extraer_sorteos(url, orden, dígitos):
-              sorteos = {k: [] para k en orden}
-              patrón = r'\b\d{%d}\b' % dígitos
-              intentar:
+              return izquierda + derecha
+
+          def extraer_sorteos(url, orden, digitos):
+              sorteos = {k: [] for k in orden}
+              patron = r'\b\d{%d}\b' % digitos
+              try:
                   r = requests.get(url, headers=HEADERS, timeout=30, allow_redirects=True)
-                  si no mismo_path(url, r.url):
+                  if not mismo_path(url, r.url):
                       print(f"AVISO: {url} redirigio a {r.url} -> pagina no existe, se ignora")
-                      sorteos de devolución
-                  bajo = texto_plano(r.text).lower()
-                  para clave en orden:
-                      m = re.search(rf'\b{key}\b\s+\d{{1,2}}:\d{{2}}\s*hs\b', low)
-                      si m:
+                      return sorteos
+                  low = texto_plano(r.text).lower()
+                  for key in orden:
+                      m = re.search(rf'\b{key}\b', low)
+                      if m:
                           idx = m.start()
-                          trozo = bajo[idx: idx+1500]
-                          nums = re.findall(patrón, trozo)
+                          trozo = low[idx: idx+1800]
+                          nums = re.findall(patron, trozo)
                           uniq = []
-                          para n en nums:
-                              Si n no está en uniq:
+                          for n in nums:
+                              if n not in uniq:
                                   uniq.append(n)
-                          Si len(uniq) >= 15:
-                              sorteos[clave] = reordenar_columnas(uniq[:20])
-                  print(f"{url} -> {sorteos}")
-              excepto Exception como e:
+                          if len(uniq) >= 15:
+                              sorteos[key] = reordenar_columnas(uniq[:20])
+                  print(f"{url} -> { {k: len(v) for k,v in sorteos.items()} }")
+              except Exception as e:
                   print(f"Error {url}: {e}")
-              sorteos de devolución
+              return sorteos
+
           completo = {}
-          para nombre, url en LOTERIAS_4CIFRAS.items():
+          for nombre, url in LOTERIAS_4CIFRAS.items():
               nuevo = extraer_sorteos(url, ORDEN_4CIFRAS, digitos=4)
               completo[nombre] = {}
-              para k en ORDEN_4CIFRAS:
-                  si no ya_deberia_haber_salido(k, HORA_SORTEO_ARG):
-                      completo[nombre][k] = []
+              for k in ORDEN_4CIFRAS:
+                  if not ya_deberia_haber_salido(k, HORA_SORTEO_ARG):
+                      completo[nombre][k] = viejo.get(nombre,{}).get(k, [])
                   elif nuevo.get(k):
                       completo[nombre][k] = nuevo[k]
                   elif viejo.get(nombre,{}).get(k):
                       completo[nombre][k] = viejo[nombre][k]
-                  demás:
+                  else:
                       completo[nombre][k] = []
+
           nuevo_uy = extraer_sorteos(URUGUAY_URL, ORDEN_URUGUAY, digitos=3)
           completo["uruguay"] = {}
-          para k en ORDEN_URUGUAY:
-              si no ya_deberia_haber_salido(k, HORA_SORTEO_UY):
-                  completo["uruguay"][k] = []
+          for k in ORDEN_URUGUAY:
+              if not ya_deberia_haber_salido(k, HORA_SORTEO_UY):
+                  completo["uruguay"][k] = viejo.get("uruguay",{}).get(k, [])
               elif nuevo_uy.get(k):
                   completo["uruguay"][k] = nuevo_uy[k]
               elif viejo.get("uruguay",{}).get(k):
                   completo["uruguay"][k] = viejo["uruguay"][k]
-              demás:
+              else:
                   completo["uruguay"][k] = []
-          salida = {
+
+          if viejo and completo == viejo:
+              print("Sin cambios en numeros - no se escribe para ahorrar deploy en Cloudflare")
+              with open(os.environ.get('GITHUB_OUTPUT','/tmp/out'), 'a') as out:
+                  out.write("cambio=no\n")
+              exit(0)
+
+          output = {
               "fecha": HOY,
               "actualizado": AHORA.strftime("%d/%m/%Y %H:%M"),
               "completo": completo,
-              "nacional": completo["nacional"].get("nocturna",[]),
+              "nacional":  completo["nacional"].get("nocturna",[]),
               "provincia": completo["provincia"].get("nocturna",[]),
-              "santafe": completo["santafe"].get("nocturna",[]),
-              "cordoba": completo["cordoba"].get("nocturna",[]),
+              "santafe":   completo["santafe"].get("nocturna",[]),
+              "cordoba":   completo["cordoba"].get("nocturna",[]),
               "entrerios": completo["entrerios"].get("nocturna",[]),
-              "uruguay": completo["uruguay"].get("nocturna",[]),
+              "uruguay":   completo["uruguay"].get("nocturna",[]),
           }
-          con open(ARCHIVO_HOY,"w",encoding="utf-8") como f:
+
+          with open(ARCHIVO_HOY,"w",encoding="utf-8") as f:
               json.dump(output,f,ensure_ascii=False,indent=2)
-          con open("quiniela.json","w",encoding="utf-8") como f:
+          with open("quiniela.json","w",encoding="utf-8") as f:
               json.dump(output,f,ensure_ascii=False,indent=2)
-          limite = AHORA.date() - timedelta(dias=DIAS_A_CONSERVAR)
-          para ruta en glob.glob("historial/*.json"):
+
+          limite = AHORA.date() - timedelta(days=DIAS_A_CONSERVAR)
+          for ruta in glob.glob("historial/*.json"):
               nombre = os.path.basename(ruta).replace(".json","")
-              intentar:
+              try:
                   fecha_archivo = datetime.strptime(nombre, "%Y-%m-%d").date()
-                  si fecha_archivo < límite:
+                  if fecha_archivo < limite:
                       os.remove(ruta)
-                      print(f"Borrado por antigüedad: {ruta}")
-              excepto ValueError:
-                  aprobar
-          print(f"OK JSON generado para {HOY} (historial + quiniela.json)")
+                      print(f"Borrado por antiguedad: {ruta}")
+              except ValueError:
+                  pass
+
+          print(f"OK JSON generado con cambios para {HOY}")
+          with open(os.environ.get('GITHUB_OUTPUT','/tmp/out'), 'a') as out:
+              out.write("cambio=si\n")
           PY
-      - utiliza : stefanzweifel/git-auto-commit-action@v6
-        con :
-          commit_message : " Actualización quiniela + historial diario (30 días) "
-          file_pattern : ' quiniela.json historial/ '
+
+      - name: Commit solo si hay numeros nuevos
+        if: steps.scrape.outputs.cambio == 'si'
+        uses: stefanzweifel/git-auto-commit-action@v6
+        with:
+          commit_message: "Actualizacion quiniela"
+          file_pattern: 'quiniela.json historial/'
