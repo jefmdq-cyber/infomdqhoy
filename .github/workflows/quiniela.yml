@@ -22,6 +22,7 @@ jobs:
           from zoneinfo import ZoneInfo
           from urllib.parse import urlparse
           from bs4 import BeautifulSoup
+
           HEADERS = {"User-Agent": "Mozilla/5.0 Chrome/122","Referer":"https://www.google.com/"}
           TZ_ARG = ZoneInfo("America/Argentina/Buenos_Aires")
           AHORA = datetime.now(TZ_ARG)
@@ -30,9 +31,13 @@ jobs:
           if AHORA.weekday() == 6:  # 6 = domingo
               print(f"Hoy es domingo {HOY} - no hay sorteos, se omite actualizacion para no pisar con datos del sabado")
               exit(0)
+
+
           DIAS_A_CONSERVAR = 30
+
           os.makedirs("historial", exist_ok=True)
           ARCHIVO_HOY = f"historial/{HOY}.json"
+
           # URLs REALES verificadas contra el menu del sitio (15/9/2026).
           # OJO: si el sitio vuelve a cambiar de nombre de pagina, la validacion
           # "mismo_path" de abajo evita que agarremos la portada por error.
@@ -44,6 +49,7 @@ jobs:
             "entrerios":  "https://www.tujugada.com.ar/quiniela_entre_rios.asp",
           }
           ORDEN_4CIFRAS = ["previa","primera","matutina","vespertina","nocturna"]
+
           # Horarios oficiales de cada sorteo + minutos de margen para que el
           # sitio termine de publicar el resultado. Antes de esa hora, aunque
           # el sitio muestre numeros (son los de AYER, que tujugada deja
@@ -52,13 +58,16 @@ jobs:
           MARGEN_MIN = 20
           HORA_SORTEO_ARG = {"previa":(10,15), "primera":(12,0), "matutina":(15,0), "vespertina":(18,0), "nocturna":(21,0)}
           HORA_SORTEO_UY  = {"vespertina":(15,0), "nocturna":(21,0)}
+
           def ya_deberia_haber_salido(key, tabla_horarios):
               h, m = tabla_horarios[key]
               limite = AHORA.replace(hour=h, minute=m, second=0, microsecond=0) + timedelta(minutes=MARGEN_MIN)
               return AHORA >= limite
+
           # Uruguay es aparte: 3 cifras y solo 2 sorteos por dia.
           URUGUAY_URL = "https://www.tujugada.com.ar/quiniela_uruguay.asp"
           ORDEN_URUGUAY = ["vespertina","nocturna"]
+
           # carga viejo para no pisar nunca con datos vacios.
           # OJO: se carga del archivo de HOY (historial/2026-09-15.json), no de
           # quiniela.json a secas. Asi, cuando cambia el dia, arranca en blanco
@@ -68,13 +77,16 @@ jobs:
             try:
               viejo = json.load(open(ARCHIVO_HOY,encoding="utf-8")).get("completo",{})
             except: pass
+
           def limpiar(html):
               return html.replace("---MENSAJE PARA EL VISITANTE DE ESTE SITIO--- SI VES ESTE MENSAJE ES PORQUE VISITAS UN SITIO QUE ESTA COPIANDO CODIGO FUENTE AUTORIA DE TUJUGADA.COM.AR SIN AUTORIZACION. VISITA AL SITIO REAL QUE ACTUALIZA ESTOS DATOS EN WWW.TUJUGADA.COM.AR!!!", "")
+
           def mismo_path(url_pedido, url_final):
               # Si la pagina no existe mas, tujugada redirige a la portada
               # (inicio_new.asp). Si el path final no coincide con el pedido,
               # es una redirección y NO hay que usar ese contenido.
               return urlparse(url_pedido).path.lower() == urlparse(url_final).path.lower()
+
           def texto_plano(html_crudo):
               # Convertimos el HTML a texto plano (sin scripts/estilos) para que
               # la frase "Nocturna 21:00 hs." quede como texto continuo sin
@@ -89,6 +101,7 @@ jobs:
               texto = soup.get_text(separator=" ")
               texto = re.sub(r'\s+', ' ', texto)
               return texto
+
           def reordenar_columnas(lista):
               # El sitio muestra los 20 numeros en 2 columnas (posiciones 1-10 a
               # la izquierda, 11-20 a la derecha). Al convertir a texto plano
@@ -101,14 +114,17 @@ jobs:
               izquierda = veinte[0::2]  # posiciones reales 1-10
               derecha = veinte[1::2]    # posiciones reales 11-20
               return izquierda + derecha
+
           def extraer_sorteos(url, orden, digitos):
               sorteos = {k: [] for k in orden}
               patron = r'\b\d{%d}\b' % digitos
               try:
                   r = requests.get(url, headers=HEADERS, timeout=30, allow_redirects=True)
+
                   if not mismo_path(url, r.url):
                       print(f"AVISO: {url} redirigio a {r.url} -> pagina no existe, se ignora")
                       return sorteos
+
                   low = texto_plano(r.text).lower()
                   for key in orden:
                       # OJO: la palabra sola (ej. "nocturna") aparece DOS veces en el
@@ -146,7 +162,9 @@ jobs:
               except Exception as e:
                   print(f"Error {url}: {e}")
               return sorteos
+
           completo = {}
+
           # --- Loterias de 4 cifras / 5 sorteos ---
           for nombre, url in LOTERIAS_4CIFRAS.items():
               nuevo = extraer_sorteos(url, ORDEN_4CIFRAS, digitos=4)
@@ -164,6 +182,7 @@ jobs:
                       completo[nombre][k] = viejo[nombre][k]
                   else:
                       completo[nombre][k] = []
+
           # --- Uruguay: 3 cifras / 2 sorteos (Vespertina y Nocturna) ---
           nuevo_uy = extraer_sorteos(URUGUAY_URL, ORDEN_URUGUAY, digitos=3)
           completo["uruguay"] = {}
@@ -176,6 +195,7 @@ jobs:
                   completo["uruguay"][k] = viejo["uruguay"][k]
               else:
                   completo["uruguay"][k] = []
+
           output = {
               "fecha": HOY,
               "actualizado": AHORA.strftime("%d/%m/%Y %H:%M"),
@@ -187,6 +207,7 @@ jobs:
               "entrerios": completo["entrerios"].get("nocturna",[]),
               "uruguay":   completo["uruguay"].get("nocturna",[]),
           }
+
           # Guardamos DOS copias: el archivo con fecha (historial, para poder
           # elegir un dia anterior desde la pagina) y quiniela.json (siempre
           # el dia de hoy, para no romper nada que ya lo estuviera leyendo).
@@ -194,6 +215,7 @@ jobs:
               json.dump(output,f,ensure_ascii=False,indent=2)
           with open("quiniela.json","w",encoding="utf-8") as f:
               json.dump(output,f,ensure_ascii=False,indent=2)
+
           # Poda: borramos del historial los archivos de mas de 30 dias asi el
           # repo no crece para siempre.
           limite = AHORA.date() - timedelta(days=DIAS_A_CONSERVAR)
@@ -206,6 +228,7 @@ jobs:
                       print(f"Borrado por antiguedad: {ruta}")
               except ValueError:
                   pass  # nombre de archivo que no es una fecha, se ignora
+
           print(f"OK JSON generado para {HOY} (historial + quiniela.json)")
           PY
       - uses: stefanzweifel/git-auto-commit-action@v5
