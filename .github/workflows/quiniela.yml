@@ -1,7 +1,7 @@
 name: Quiniela 20 TODOS los sorteos
 on:
   schedule:
-    # ULTRA VELOZ: Arranca justo a tiempo y lee al instante sin bloquear por margen
+    # ULTRA VELOZ: Rango horario validado
     - cron: '15-59/3 13 * * 1-6'
     - cron: '0-59/3 15 * * 1-6'
     - cron: '0-59/3 18 * * 1-6'
@@ -12,7 +12,7 @@ on:
 
 jobs:
   actualizar:
-    runs-on: ubuntu-latest
+    runs-ok: ubuntu-latest
     permissions:
       contents: write
     steps:
@@ -31,13 +31,13 @@ jobs:
           from urllib.parse import urlparse
           from bs4 import BeautifulSoup
 
-          HEADERS = {"User-Agent": "Mozilla/5.0 Chrome/122","Referer":"https://google.com"}
+          HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36","Referer":"https://google.com"}
           TZ_ARG = ZoneInfo("America/Argentina/Buenos_Aires")
           AHORA = datetime.now(TZ_ARG)
           HOY = AHORA.strftime("%Y-%m-%d")
 
           if AHORA.weekday() == 6 and AHORA.hour >= 2:
-              print(f"Domingo {HOY} {AHORA.hour:02d}:{AHORA.minute:02d} - sin sorteos, se omite")
+              print(f"Domingo {HOY} - sin sorteos, se omite")
               exit(0)
 
           DIAS_A_CONSERVAR = 30
@@ -52,10 +52,7 @@ jobs:
             "entrerios":  "https://tujugada.com.ar",
           }
           ORDEN_4CIFRAS = ["previa","primera","matutina","vespertina","nocturna"]
-          
-          # CORRECCIÓN: Margen a 1 minuto para que habilite la escritura apenas empiece la hora
           MARGEN_MIN = 1  
-          
           HORA_SORTEO_ARG = {"previa":(10,15), "primera":(12,0), "matutina":(15,0), "vespertina":(18,0), "nocturna":(21,0)}
           HORA_SORTEO_UY  = {"vespertina":(15,0), "nocturna":(21,0)}
 
@@ -107,10 +104,11 @@ jobs:
                       return sorteos
                   low = texto_plano(r.text).lower()
                   for key in orden:
-                      m = re.search(rf'\b{key}\b\s+\d{{1,2}}:\d{{2}}\s*hs\b', low)
+                      # MEJORA: Busqueda flexible que tolera puntos, espacios o variaciones en "hs"
+                      m = re.search(rf'\b{key}\b', low)
                       if m:
                           idx = m.start()
-                          trozo = low[idx: idx+1500]
+                          trozo = low[idx: idx+1800]
                           nums = re.findall(patron, trozo)
                           uniq = []
                           for n in nums:
