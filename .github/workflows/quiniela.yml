@@ -1,13 +1,8 @@
 name: Quiniela 20 TODOS los sorteos
 on:
   schedule:
-    # QUIRURGICO FINAL - Validado
-    # ARG: Previa 10:15-11:15, Primera 12:00-13:00, Matutina 15:00-16:00, Vespertina 18:00-19:00, Nocturna 21:00-22:30
-    # UTC: 13:15-14:15, 15:00-16:00, 18:00-19:00, 21:00-22:00, 00:00-01:30
-    # Lun a Sab. Domingo apagado salvo madrugada para nocturna del sab atrasada
-    # 7 crons - sin error 2-0, usa 0,2-6
+    # ULTRA VELOZ: Arranca justo a tiempo y lee al instante sin bloquear por margen
     - cron: '15-59/3 13 * * 1-6'
-    - cron: '0-15/3 14 * * 1-6'
     - cron: '0-59/3 15 * * 1-6'
     - cron: '0-59/3 18 * * 1-6'
     - cron: '0-59/3 21 * * 1-6'
@@ -36,13 +31,11 @@ jobs:
           from urllib.parse import urlparse
           from bs4 import BeautifulSoup
 
-          HEADERS = {"User-Agent": "Mozilla/5.0 Chrome/122","Referer":"https://www.google.com/"}
+          HEADERS = {"User-Agent": "Mozilla/5.0 Chrome/122","Referer":"https://google.com"}
           TZ_ARG = ZoneInfo("America/Argentina/Buenos_Aires")
           AHORA = datetime.now(TZ_ARG)
           HOY = AHORA.strftime("%Y-%m-%d")
 
-          # LOGICA DOMINGO: domingo no hay sorteos.
-          # Solo permitimos 00:00 a 01:29 del domingo para agarrar la nocturna del sabado atrasada.
           if AHORA.weekday() == 6 and AHORA.hour >= 2:
               print(f"Domingo {HOY} {AHORA.hour:02d}:{AHORA.minute:02d} - sin sorteos, se omite")
               exit(0)
@@ -52,14 +45,17 @@ jobs:
           ARCHIVO_HOY = f"historial/{HOY}.json"
 
           LOTERIAS_4CIFRAS = {
-            "nacional":   "https://www.tujugada.com.ar/quiniela-nacional.asp",
-            "provincia":  "https://www.tujugada.com.ar/quiniela_provincia_buenos_aires.asp",
-            "santafe":    "https://www.tujugada.com.ar/quiniela_santa_fe.asp",
-            "cordoba":    "https://www.tujugada.com.ar/quiniela_cordoba.asp",
-            "entrerios":  "https://www.tujugada.com.ar/quiniela_entre_rios.asp",
+            "nacional":   "https://tujugada.com.ar",
+            "provincia":  "https://tujugada.com.ar",
+            "santafe":    "https://tujugada.com.ar",
+            "cordoba":    "https://tujugada.com.ar",
+            "entrerios":  "https://tujugada.com.ar",
           }
           ORDEN_4CIFRAS = ["previa","primera","matutina","vespertina","nocturna"]
-          MARGEN_MIN = 15  # esperamos 15 min despues de la hora oficial para no borrar
+          
+          # CORRECCIÓN: Margen a 1 minuto para que habilite la escritura apenas empiece la hora
+          MARGEN_MIN = 1  
+          
           HORA_SORTEO_ARG = {"previa":(10,15), "primera":(12,0), "matutina":(15,0), "vespertina":(18,0), "nocturna":(21,0)}
           HORA_SORTEO_UY  = {"vespertina":(15,0), "nocturna":(21,0)}
 
@@ -68,7 +64,7 @@ jobs:
               limite = AHORA.replace(hour=h, minute=m, second=0, microsecond=0) + timedelta(minutes=MARGEN_MIN)
               return AHORA >= limite
 
-          URUGUAY_URL = "https://www.tujugada.com.ar/quiniela_uruguay.asp"
+          URUGUAY_URL = "https://tujugada.com.ar"
           ORDEN_URUGUAY = ["vespertina","nocturna"]
 
           viejo = {}
@@ -80,7 +76,7 @@ jobs:
             except: pass
 
           def limpiar(html):
-              return html.replace("---MENSAJE PARA EL VISITANTE DE ESTE SITIO--- SI VES ESTE MENSAJE ES PORQUE VISITAS UN SITIO QUE ESTA COPIANDO CODIGO FUENTE AUTORIA DE TUJUGADA.COM.AR SIN AUTORIZACION. VISITA AL SITIO REAL QUE ACTUALIZA ESTOS DATOS EN WWW.TUJUGADA.COM.AR!!!", "")
+              return html.replace("---MENSAJE PARA EL VISITANTE DE ESTE SITIO--- SI VES ESTE MENSAJE ES PORQUE VISITAS UN SITIO QUE ESTA COPIANDO CODIGO FUENTE AUTORIA DE TUJUGADA.COM.AR SIN AUTORIZACION. VISITA AL SITIO REAL QUE ACTUALIZA ESTOS DATOS EN ://tujugada.com.AR!!!", "")
 
           def mismo_path(url_pedido, url_final):
               return urlparse(url_pedido).path.lower() == urlparse(url_final).path.lower()
@@ -127,14 +123,12 @@ jobs:
                   print(f"Error {url}: {e}")
               return sorteos
 
-          # --- LOGICA QUIRURGICA: no borrar lo ya guardado hoy ---
           completo = {}
           for nombre, url in LOTERIAS_4CIFRAS.items():
               nuevo = extraer_sorteos(url, ORDEN_4CIFRAS, digitos=4)
               completo[nombre] = {}
               for k in ORDEN_4CIFRAS:
                   if not ya_deberia_haber_salido(k, HORA_SORTEO_ARG):
-                      # Si todavia no deberia haber salido, CONSERVAMOS lo que ya teniamos hoy
                       completo[nombre][k] = viejo.get(nombre,{}).get(k, [])
                   elif nuevo.get(k):
                       completo[nombre][k] = nuevo[k]
@@ -155,7 +149,6 @@ jobs:
               else:
                   completo["uruguay"][k] = []
 
-          # --- AHORRO DE DEPLOYS: solo escribir si cambiaron numeros ---
           if viejo and completo == viejo:
               print("Sin cambios en numeros - no se escribe para ahorrar deploy en Cloudflare")
               with open(os.environ.get('GITHUB_OUTPUT','/tmp/out'), 'a') as out:
