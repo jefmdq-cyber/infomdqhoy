@@ -226,8 +226,57 @@ body{background:#f0f4f8;color:#1a202c;padding-bottom:90px}
     </div>
   </div>
 </div>
-<a class="btn-flotante-info" href="/">← INFO MDQ HOY</a>
-<button class="btn-flotante" onclick="volverHome()">🏠 VIDRIERA</button>
+<!-- ESTILOS EXCLUSIVOS AISLADOS PARA LA BARRA INFERIOR DE EMPRENDEDORES -->
+<style>
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 62px;
+    background: #0b132b; /* Azul oscuro Premium */
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 99999;
+    padding-bottom: env(safe-area-inset-bottom);
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 500;
+    width: 25%;
+    height: 100%;
+    gap: 4px;
+    transition: color 0.2s ease;
+  }
+  .nav-item svg {
+    width: 21px;
+    height: 21px;
+    opacity: 0.7;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .nav-item:hover, .nav-item.active {
+    color: #38bdf8; /* Azul brillante cuando está seleccionado */
+  }
+  .nav-item:hover svg, .nav-item.active svg {
+    opacity: 1;
+    transform: translateY(-1px);
+  }
+  @media (min-width: 769px) {
+    .bottom-nav { display: none; }
+  }
+  body {
+    padding-bottom: 74px !important; /* Espacio para que no tape el footer */
+  }
+</style>
 
 <!-- MODAL PARA AVISO DESTACADO - PRO -->
 <div id="modalAviso" class="modal-bg" onclick="if(event.target===this) cerrarModal()">
@@ -842,5 +891,24 @@ function limpiarBusqueda(){
   }
 })();
 </script>
+<!-- NAV INFERIOR PREMIUM -->
+<div class="bottom-nav">
+  <a href="index.html" class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+    <span>Inicio</span>
+  </a>
+  <a href="#" class="nav-item active">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7h-3V4c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v3H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2M9 4h6v3H9V4zm11 15H4V9h16v10z"></path></svg>
+    <span>Emprendedores</span>
+  </a>
+  <a href="profesionales.html" class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+    <span>Profesionales</span>
+  </a>
+  <a href="ofertas.html" class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+    <span>Ofertas</span>
+  </a>
+</div>
 </body>
 </html>
