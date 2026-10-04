@@ -1,8 +1,10 @@
 name: Quiniela 20 TODOS los sorteos
 on:
   schedule:
-      - cron: '*/20 13-23,0-1 * * *'
+    - cron: '*/20 * * * *'
   workflow_dispatch:
+  push:
+    branches: [principal]
 jobs:
   actualizar:
     runs-on: ubuntu-latest
@@ -15,7 +17,6 @@ jobs:
           python-version: '3.11'
       - name: Scrapear sorteos
         run: |
-          pip install requests beautifulsoup4 lxml
           python << 'PY'
           import requests, re, json, os, glob
           from datetime import datetime, timedelta
