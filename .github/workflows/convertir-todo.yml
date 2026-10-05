@@ -1,0 +1,45 @@
+name: Convertir a WEBP (fotos si, logos no)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  convertir:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar cwebp y Go
+        run: |
+          sudo apt-get update && sudo apt-get install -y webp
+          go install github.com/adnenre/img2webp@latest
+
+      - name: 1. Convertir solo fotos JPG/JPEG (no logos)
+        run: |
+          # Convierte JPG de raiz y subcarpetas
+          find. -type f \( -iname "*.jpg" -o -iname "*.jpeg" \)! -path "./.git/*"! -path "./.github/*" -exec sh -c '
+            for file; do
+              webp="${file%.*}.webp"
+              if [! -f "$webp" ]; then
+                echo "Foto -> $file"
+                cwebp -q 75 "$file" -o "$webp"
+              fi
+            done
+          ' sh {} +
+
+      - name: 2. Reescribir HTML solo donde ya existe WEBP
+        run: |
+          # Esto es lo que te cambia el index.html solo para las fotos convertidas
+          ~/go/bin/img2webp --input. --q 75 --replace
+
+      - name: 3. Subir
+        run: |
+          git config user.name "webp-bot"
+          git config user.email "bot@github.com"
+          git add -A
+          git diff --staged --quiet || git commit -m "feat: fotos a webp, logos intactos + html actualizado [skip ci]"
+          git push
