@@ -13,33 +13,42 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Instalar cwebp y Go
-        run: |
-          sudo apt-get update && sudo apt-get install -y webp
-          go install github.com/adnenre/img2webp@latest
+      - name: Instalar webp
+        run: sudo apt-get update && sudo apt-get install -y webp
 
-      - name: 1. Convertir solo fotos JPG/JPEG (no logos)
+      - name: Convertir JPG a WEBP (sin tocar logos ni webp existentes)
         run: |
-          # Convierte JPG de raiz y subcarpetas
-          find. -type f \( -iname "*.jpg" -o -iname "*.jpeg" \)! -path "./.git/*"! -path "./.github/*" -exec sh -c '
-            for file; do
+          find. -type f \( -iname "*.jpg" -o -iname "*.jpeg" \) \
+           ! -path "./.git/*"! -path "./.github/*" \
+           ! -iname "*logo*"! -iname "*Logo*" | while read file; do
               webp="${file%.*}.webp"
               if [! -f "$webp" ]; then
-                echo "Foto -> $file"
+                echo "Convirtiendo $file -> $webp"
                 cwebp -q 75 "$file" -o "$webp"
+              else
+                echo "Ya existe $webp, lo salteo"
+              fi
+          done
+
+      - name: Actualizar HTML para usar webp donde ya existe
+        run: |
+          # Solo cambia jpg->webp si el webp existe
+          find. -type f -name "*.html" | while read html; do
+            # busca todos los jpg en el html y si existe su webp lo reemplaza
+            grep -oE '[^"]+\.jpe?g' "$html" | sort -u | while read jpg; do
+              webp="${jpg%.jpg}.webp"
+              webp="${webp%.jpeg}.webp"
+              if [ -f "./$webp" ] || [ -f "$webp" ]; then
+                echo "En $html: $jpg -> $webp"
+                sed -i "s|$jpg|$webp|g" "$html"
               fi
             done
-          ' sh {} +
+          done
 
-      - name: 2. Reescribir HTML solo donde ya existe WEBP
-        run: |
-          # Esto es lo que te cambia el index.html solo para las fotos convertidas
-          ~/go/bin/img2webp --input. --q 75 --replace
-
-      - name: 3. Subir
+      - name: Subir cambios
         run: |
           git config user.name "webp-bot"
           git config user.email "bot@github.com"
           git add -A
-          git diff --staged --quiet || git commit -m "feat: fotos a webp, logos intactos + html actualizado [skip ci]"
+          git diff --staged --quiet || git commit -m "feat: fotos a webp, logos intactos [skip ci]"
           git push
