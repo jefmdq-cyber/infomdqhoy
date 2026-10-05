@@ -99,7 +99,7 @@ body{background:#f0f4f8;color:#1a202c;padding-bottom:90px}
 </head>
 <body>
 <div class="hero">
-  <img src="https://infomdqhoy.pages.dev/banner1.jpg" alt="Faro">
+  <img src="https://infomdqhoy.pages.dev/banner1.webp" alt="Faro">
   <div class="hero-overlay"></div>
   <div class="hero-text">
     <h1>✨ VIDRIERA DE EMPRENDEDORES</h1>
@@ -585,7 +585,7 @@ function cerrarModalJuliaFix(){
 
 
 function crearCardArcoiris(e){
-  const fotoFinal = e.foto_web || e.foto || 'https://infomdqhoy.pages.dev/banner1.jpg';
+  const fotoFinal = e.foto_web || e.foto || 'https://infomdqhoy.pages.dev/banner1.webp';
   const mapsLink = e.maps;
   return `
   <div class="card-emp destacado" data-barrio="${e.barrio}" data-cat="${e.cat}" data-keywords="${e.keywords}" onclick="abrirModalArcoiris(this)" style="cursor:pointer;display:block;padding:0;overflow:visible;border:2px solid #facc15;background:white;border-radius:22px;position:relative;">
@@ -681,7 +681,7 @@ function abrirModalDirecto(card){
 }
 function abrirModalDirecto_ORIGINAL(card){
   const img = card.querySelector('.img-box img') || card.querySelector('img');
-  document.getElementById('modalImg').src = img ? img.src : 'https://infomdqhoy.pages.dev/banner1.jpg';
+  document.getElementById('modalImg').src = img ? img.src : 'https://infomdqhoy.pages.dev/banner1.webp';
   document.getElementById('modalBarrio').innerText = card.querySelector('.badge-barrio')?.innerText || 'ALFAR';
   document.getElementById('modalTitulo').innerText = card.querySelector('h3')?.innerText || '';
   document.getElementById('modalDesc').innerText = card.querySelector('.desc')?.innerText || card.querySelectorAll('p')[0]?.innerText || '';
@@ -772,7 +772,7 @@ function volverHome(){
 })();
 // FUNCION PARA ABRIR MODAL DIRECTO DESDE OBJETO (para buscador)
 function abrirModalDesdeObjeto(e){
-  const fotoFinal = e.foto_web || e.foto || 'https://infomdqhoy.pages.dev/banner1.jpg';
+  const fotoFinal = e.foto_web || e.foto || 'https://infomdqhoy.pages.dev/banner1.webp';
   document.getElementById('modalImg').src = fotoFinal;
   document.getElementById('modalBarrio').innerText = (e.barrio||'').toUpperCase();
   document.getElementById('modalTitulo').innerText = e.nombre||'';
