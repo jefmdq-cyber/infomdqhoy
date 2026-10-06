@@ -1,13 +1,12 @@
-name: Quiniela 20 V5 Final - Sin tocar ordenamiento
+name: Quiniela 20 V5.1 Fix Cron
 
 on:
   schedule:
-    # 1 solo disparo por sorteo -> ahorra tus 5000 de project
-    - cron: '20 13 * * 1-6' # Previa 10:20 ART
-    - cron: '5 15 * * 1-6'  # Primera 12:05 ART
-    - cron: '5 18 * * 1-6'  # Matutina 15:05 ART
-    - cron: '5 21 * * 1-6'  # Vespertina 18:05 ART
-    - cron: '10 0 * * 2-7'  # Nocturna 21:10 ART = 00:10 UTC dia siguiente
+    - cron: '20 13 * * 1-6'   # Previa 10:20 ART
+    - cron: '5 15 * * 1-6'    # Primera 12:05 ART
+    - cron: '5 18 * * 1-6'    # Matutina 15:05 ART
+    - cron: '5 21 * * 1-6'    # Vespertina 18:05 ART
+    - cron: '10 0 * * 0,2-6'  # Nocturna 21:10 ART = 00:10 UTC del dia siguiente (Mar-Dom en UTC)
   workflow_dispatch:
 
 concurrency:
@@ -59,7 +58,6 @@ jobs:
           ORDEN_4CIFRAS = ["previa","primera","matutina","vespertina","nocturna"]
           ORDEN_URUGUAY = ["vespertina","nocturna"]
 
-          # --- TU LOGICA ORIGINAL INTACTA - NO TOCADA ---
           def limpiar(html): 
               return html.replace("---MENSAJE PARA EL VISITANTE DE ESTE SITIO--- SI VES ESTE MENSAJE ES PORQUE VISITAS UN SITIO QUE ESTA COPIANDO CODIGO FUENTE AUTORIA DE TUJUGADA.COM.AR SIN AUTORIZACION. VISITA AL SITIO REAL QUE ACTUALIZA ESTOS DATOS EN WWW.TUJUGADA.COM.AR!!!", "")
 
@@ -95,7 +93,6 @@ jobs:
               except Exception as e: 
                   print(f"Error {url}: {e}")
               return sorteos
-          # --- FIN LOGICA INTACTA ---
 
           def get_sorteo_objetivo():
               h = AHORA.hour
@@ -109,28 +106,25 @@ jobs:
               sorteo = get_sorteo_objetivo()
               print(f"Sorteo objetivo ART {AHORA.strftime('%H:%M')}: {sorteo}")
 
-              # Cargar viejo para NO borrar sorteos previos del dia
               viejo = {}
               if os.path.exists(ARCHIVO_HOY):
                   try: 
                       viejo = json.load(open(ARCHIVO_HOY,encoding="utf-8")).get("completo",{})
                   except: pass
 
-              # ANTI-GASTO: Si ya esta completo para este sorteo, salir en 5 seg
               if viejo:
                   todas_previas = all(len(viejo.get(lot,{}).get(sorteo,[])) >= 20 for lot in LOTERIAS_4CIFRAS.keys())
                   if todas_previas:
-                      print(f"Ya completo para {sorteo} hoy -> exit 0 sin gastar minutos")
+                      print(f"Ya completo para {sorteo} hoy -> exit 0")
                       return viejo
 
-              # VENTANA DE 60 MIN EN UN SOLO JOB - Ahorra tus 5000
-              intentos_seg = [0, 300, 600, 900, 900] # 0, 5, 10, 15, 15 = 45 min max
+              intentos_seg = [0, 300, 600, 900, 900]
               completo_final = viejo if viejo else {lot: {k:[] for k in ORDEN_4CIFRAS} for lot in LOTERIAS_4CIFRAS}
               completo_final["uruguay"] = completo_final.get("uruguay", {k:[] for k in ORDEN_URUGUAY})
 
               for idx, sleep_sec in enumerate(intentos_seg):
                   if idx > 0:
-                      print(f"--> Atraso detectado, durmiendo {sleep_sec//60} min (intento {idx+1}/5)")
+                      print(f"--> Atraso, esperando {sleep_sec//60} min (intento {idx+1}/5)")
                       time.sleep(sleep_sec)
 
                   print(f"--- Intento {idx+1}/5 para {sorteo} ---")
@@ -140,42 +134,28 @@ jobs:
                   
                   nuevo_uy = extraer_sorteos(URUGUAY_URL, ORDEN_URUGUAY, 3)
 
-                  # VALIDACION FIX BUG 2: Uruguay solo se valida si es vespertina/nocturna
                   def validar_todas_con_20():
                       for lot in LOTERIAS_4CIFRAS.keys():
                           cant = len(nuevo.get(lot,{}).get(sorteo,[]))
                           if cant < 20:
                               print(f"  Falta {lot} {sorteo}: {cant}/20")
                               return False
-                      # Uruguay es opcional y solo en sus horarios
-                      if sorteo in ORDEN_URUGUAY:
-                          cant_uy = len(nuevo_uy.get(sorteo,[]))
-                          if cant_uy < 3: # Uruguay a veces tarda mas
-                              print(f"  Falta uruguay {sorteo}: {cant_uy}/3")
-                              # No bloqueamos por Uruguay para no frenar las otras
-                              pass
-                      print(f"  OK: Todas las provincias argentinas tienen 20 para {sorteo}")
+                      print(f"  OK: Todas las provincias con 20 para {sorteo}")
                       return True
 
                   if validar_todas_con_20():
-                      print(f"COMPLETO! {sorteo} listo. Guardando y ahorrando sleeps restantes.")
-                      # FIX BUG 1: Solo pisar el sorteo objetivo, no borrar los anteriores
+                      print(f"COMPLETO! {sorteo} listo.")
                       for lot in LOTERIAS_4CIFRAS.keys():
                           completo_final[lot][sorteo] = nuevo[lot][sorteo]
                       if sorteo in ORDEN_URUGUAY:
                           completo_final["uruguay"][sorteo] = nuevo_uy.get(sorteo,[])
                       return completo_final
-                  else:
-                      print(f"Incompleto, sigo en ventana de atraso...")
 
               print(f"ATRASO EXTREMO >45min para {sorteo}")
-              with open(f"ATRASO_EXTREMO_{HOY}_{sorteo}.log","w",encoding="utf-8") as f:
-                  f.write(json.dumps(nuevo, ensure_ascii=False))
               return completo_final
 
           resultado = esperar_resultados_completos_con_atraso()
 
-          # Guardado final - usa resultado que ya preserva sorteos previos
           output = {"fecha": HOY, "actualizado": AHORA.strftime("%d/%m/%Y %H:%M"), "completo": resultado,
                     "nacional": resultado.get("nacional",{}).get("nocturna",[]),
                     "provincia": resultado.get("provincia",{}).get("nocturna",[]),
@@ -187,7 +167,6 @@ jobs:
           with open(ARCHIVO_HOY,"w",encoding="utf-8") as f: json.dump(output,f,ensure_ascii=False,indent=2)
           with open("quiniela.json","w",encoding="utf-8") as f: json.dump(output,f,ensure_ascii=False,indent=2)
 
-          # Limpieza historial
           limite = AHORA.date() - timedelta(days=DIAS_A_CONSERVAR)
           for ruta in glob.glob("historial/*.json"):
               try:
