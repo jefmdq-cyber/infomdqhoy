@@ -1,10 +1,19 @@
-name: Quiniela 20 TODOS los sorteos
+name: Quiniela 20 V5 Final - Sin tocar ordenamiento
+
 on:
   schedule:
-    - cron: '*/20 * * * *'
+    # 1 solo disparo por sorteo -> ahorra tus 5000 de project
+    - cron: '20 13 * * 1-6' # Previa 10:20 ART
+    - cron: '5 15 * * 1-6'  # Primera 12:05 ART
+    - cron: '5 18 * * 1-6'  # Matutina 15:05 ART
+    - cron: '5 21 * * 1-6'  # Vespertina 18:05 ART
+    - cron: '10 0 * * 2-7'  # Nocturna 21:10 ART = 00:10 UTC dia siguiente
   workflow_dispatch:
-  push:
-    branches: [principal, main]
+
+concurrency:
+  group: quiniela-v5
+  cancel-in-progress: false
+
 jobs:
   actualizar:
     runs-on: ubuntu-latest
@@ -15,25 +24,30 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Scrapear sorteos
+          cache: 'pip'
+      - name: Scrapear con ventana de atraso - Sin tocar ordenamiento
         run: |
           pip install requests beautifulsoup4 lxml
           python << 'PY'
-          import requests, re, json, os, glob
+          import requests, re, json, os, glob, time
           from datetime import datetime, timedelta
           from zoneinfo import ZoneInfo
           from urllib.parse import urlparse
           from bs4 import BeautifulSoup
+
           HEADERS = {"User-Agent": "Mozilla/5.0 Chrome/122","Referer":"https://www.google.com/"}
           TZ_ARG = ZoneInfo("America/Argentina/Buenos_Aires")
           AHORA = datetime.now(TZ_ARG)
           HOY = AHORA.strftime("%Y-%m-%d")
+
           if AHORA.weekday() == 6:
               print(f"Domingo {HOY} - sin sorteos")
               exit(0)
+
           DIAS_A_CONSERVAR = 30
           os.makedirs("historial", exist_ok=True)
           ARCHIVO_HOY = f"historial/{HOY}.json"
+
           LOTERIAS_4CIFRAS = {
             "nacional": "https://www.tujugada.com.ar/quiniela-nacional.asp",
             "provincia": "https://www.tujugada.com.ar/quiniela_provincia_buenos_aires.asp",
@@ -41,30 +55,27 @@ jobs:
             "cordoba": "https://www.tujugada.com.ar/quiniela_cordoba.asp",
             "entrerios": "https://www.tujugada.com.ar/quiniela_entre_rios.asp",
           }
-          ORDEN_4CIFRAS = ["previa","primera","matutina","vespertina","nocturna"]
-          MARGEN_MIN = 20
-          HORA_SORTEO_ARG = {"previa":(10,15), "primera":(12,0), "matutina":(15,0), "vespertina":(18,0), "nocturna":(21,0)}
-          HORA_SORTEO_UY = {"vespertina":(15,0), "nocturna":(21,0)}
-          def ya_deberia_haber_salido(k, tabla):
-              h, m = tabla[k]
-              limite = AHORA.replace(hour=h, minute=m, second=0, microsecond=0) + timedelta(minutes=MARGEN_MIN)
-              return AHORA >= limite
           URUGUAY_URL = "https://www.tujugada.com.ar/quiniela_uruguay.asp"
+          ORDEN_4CIFRAS = ["previa","primera","matutina","vespertina","nocturna"]
           ORDEN_URUGUAY = ["vespertina","nocturna"]
-          viejo = {}
-          if os.path.exists(ARCHIVO_HOY):
-            try: viejo = json.load(open(ARCHIVO_HOY,encoding="utf-8")).get("completo",{})
-            except: pass
-          def limpiar(html): return html.replace("---MENSAJE PARA EL VISITANTE DE ESTE SITIO--- SI VES ESTE MENSAJE ES PORQUE VISITAS UN SITIO QUE ESTA COPIANDO CODIGO FUENTE AUTORIA DE TUJUGADA.COM.AR SIN AUTORIZACION. VISITA AL SITIO REAL QUE ACTUALIZA ESTOS DATOS EN WWW.TUJUGADA.COM.AR!!!", "")
-          def mismo_path(a,b): return urlparse(a).path.lower() == urlparse(b).path.lower()
+
+          # --- TU LOGICA ORIGINAL INTACTA - NO TOCADA ---
+          def limpiar(html): 
+              return html.replace("---MENSAJE PARA EL VISITANTE DE ESTE SITIO--- SI VES ESTE MENSAJE ES PORQUE VISITAS UN SITIO QUE ESTA COPIANDO CODIGO FUENTE AUTORIA DE TUJUGADA.COM.AR SIN AUTORIZACION. VISITA AL SITIO REAL QUE ACTUALIZA ESTOS DATOS EN WWW.TUJUGADA.COM.AR!!!", "")
+
+          def mismo_path(a,b): 
+              return urlparse(a).path.lower() == urlparse(b).path.lower()
+
           def texto_plano(h):
               soup = BeautifulSoup(limpiar(h), "lxml")
               for t in soup(["script","style"]): t.decompose()
               tx = soup.get_text(separator=" ")
               return re.sub(r'\s+', ' ', tx)
+
           def reordenar_columnas(l):
               if len(l) < 20: return l
               return l[0::2] + l[1::2]
+
           def extraer_sorteos(url, orden, digitos):
               sorteos = {k: [] for k in orden}
               patron = r'\b\d{%d}\b' % digitos
@@ -81,36 +92,112 @@ jobs:
                           for n in nums:
                               if n not in uniq: uniq.append(n)
                           if len(uniq) >= 15: sorteos[key] = reordenar_columnas(uniq[:20])
-              except Exception as e: print(f"Error {url}: {e}")
+              except Exception as e: 
+                  print(f"Error {url}: {e}")
               return sorteos
-          completo = {}
-          for nombre, url in LOTERIAS_4CIFRAS.items():
-              nuevo = extraer_sorteos(url, ORDEN_4CIFRAS, 4)
-              completo[nombre] = {}
-              for k in ORDEN_4CIFRAS:
-                  if not ya_deberia_haber_salido(k, HORA_SORTEO_ARG): completo[nombre][k] = []
-                  elif nuevo.get(k): completo[nombre][k] = nuevo[k]
-                  elif viejo.get(nombre,{}).get(k): completo[nombre][k] = viejo[nombre][k]
-                  else: completo[nombre][k] = []
-          nuevo_uy = extraer_sorteos(URUGUAY_URL, ORDEN_URUGUAY, 3)
-          completo["uruguay"] = {}
-          for k in ORDEN_URUGUAY:
-              if not ya_deberia_haber_salido(k, HORA_SORTEO_UY): completo["uruguay"][k] = []
-              elif nuevo_uy.get(k): completo["uruguay"][k] = nuevo_uy[k]
-              elif viejo.get("uruguay",{}).get(k): completo["uruguay"][k] = viejo["uruguay"][k]
-              else: completo["uruguay"][k] = []
-          output = {"fecha": HOY, "actualizado": AHORA.strftime("%d/%m/%Y %H:%M"), "completo": completo, "nacional": completo["nacional"].get("nocturna",[]), "provincia": completo["provincia"].get("nocturna",[]), "santafe": completo["santafe"].get("nocturna",[]), "cordoba": completo["cordoba"].get("nocturna",[]), "entrerios": completo["entrerios"].get("nocturna",[]), "uruguay": completo["uruguay"].get("nocturna",[])}
+          # --- FIN LOGICA INTACTA ---
+
+          def get_sorteo_objetivo():
+              h = AHORA.hour
+              if h < 11: return "previa"
+              if h < 13: return "primera"
+              if h < 16: return "matutina"
+              if h < 19: return "vespertina"
+              return "nocturna"
+
+          def esperar_resultados_completos_con_atraso():
+              sorteo = get_sorteo_objetivo()
+              print(f"Sorteo objetivo ART {AHORA.strftime('%H:%M')}: {sorteo}")
+
+              # Cargar viejo para NO borrar sorteos previos del dia
+              viejo = {}
+              if os.path.exists(ARCHIVO_HOY):
+                  try: 
+                      viejo = json.load(open(ARCHIVO_HOY,encoding="utf-8")).get("completo",{})
+                  except: pass
+
+              # ANTI-GASTO: Si ya esta completo para este sorteo, salir en 5 seg
+              if viejo:
+                  todas_previas = all(len(viejo.get(lot,{}).get(sorteo,[])) >= 20 for lot in LOTERIAS_4CIFRAS.keys())
+                  if todas_previas:
+                      print(f"Ya completo para {sorteo} hoy -> exit 0 sin gastar minutos")
+                      return viejo
+
+              # VENTANA DE 60 MIN EN UN SOLO JOB - Ahorra tus 5000
+              intentos_seg = [0, 300, 600, 900, 900] # 0, 5, 10, 15, 15 = 45 min max
+              completo_final = viejo if viejo else {lot: {k:[] for k in ORDEN_4CIFRAS} for lot in LOTERIAS_4CIFRAS}
+              completo_final["uruguay"] = completo_final.get("uruguay", {k:[] for k in ORDEN_URUGUAY})
+
+              for idx, sleep_sec in enumerate(intentos_seg):
+                  if idx > 0:
+                      print(f"--> Atraso detectado, durmiendo {sleep_sec//60} min (intento {idx+1}/5)")
+                      time.sleep(sleep_sec)
+
+                  print(f"--- Intento {idx+1}/5 para {sorteo} ---")
+                  nuevo = {}
+                  for nombre, url in LOTERIAS_4CIFRAS.items():
+                      nuevo[nombre] = extraer_sorteos(url, ORDEN_4CIFRAS, 4)
+                  
+                  nuevo_uy = extraer_sorteos(URUGUAY_URL, ORDEN_URUGUAY, 3)
+
+                  # VALIDACION FIX BUG 2: Uruguay solo se valida si es vespertina/nocturna
+                  def validar_todas_con_20():
+                      for lot in LOTERIAS_4CIFRAS.keys():
+                          cant = len(nuevo.get(lot,{}).get(sorteo,[]))
+                          if cant < 20:
+                              print(f"  Falta {lot} {sorteo}: {cant}/20")
+                              return False
+                      # Uruguay es opcional y solo en sus horarios
+                      if sorteo in ORDEN_URUGUAY:
+                          cant_uy = len(nuevo_uy.get(sorteo,[]))
+                          if cant_uy < 3: # Uruguay a veces tarda mas
+                              print(f"  Falta uruguay {sorteo}: {cant_uy}/3")
+                              # No bloqueamos por Uruguay para no frenar las otras
+                              pass
+                      print(f"  OK: Todas las provincias argentinas tienen 20 para {sorteo}")
+                      return True
+
+                  if validar_todas_con_20():
+                      print(f"COMPLETO! {sorteo} listo. Guardando y ahorrando sleeps restantes.")
+                      # FIX BUG 1: Solo pisar el sorteo objetivo, no borrar los anteriores
+                      for lot in LOTERIAS_4CIFRAS.keys():
+                          completo_final[lot][sorteo] = nuevo[lot][sorteo]
+                      if sorteo in ORDEN_URUGUAY:
+                          completo_final["uruguay"][sorteo] = nuevo_uy.get(sorteo,[])
+                      return completo_final
+                  else:
+                      print(f"Incompleto, sigo en ventana de atraso...")
+
+              print(f"ATRASO EXTREMO >45min para {sorteo}")
+              with open(f"ATRASO_EXTREMO_{HOY}_{sorteo}.log","w",encoding="utf-8") as f:
+                  f.write(json.dumps(nuevo, ensure_ascii=False))
+              return completo_final
+
+          resultado = esperar_resultados_completos_con_atraso()
+
+          # Guardado final - usa resultado que ya preserva sorteos previos
+          output = {"fecha": HOY, "actualizado": AHORA.strftime("%d/%m/%Y %H:%M"), "completo": resultado,
+                    "nacional": resultado.get("nacional",{}).get("nocturna",[]),
+                    "provincia": resultado.get("provincia",{}).get("nocturna",[]),
+                    "santafe": resultado.get("santafe",{}).get("nocturna",[]),
+                    "cordoba": resultado.get("cordoba",{}).get("nocturna",[]),
+                    "entrerios": resultado.get("entrerios",{}).get("nocturna",[]),
+                    "uruguay": resultado.get("uruguay",{}).get("nocturna",[])}
+
           with open(ARCHIVO_HOY,"w",encoding="utf-8") as f: json.dump(output,f,ensure_ascii=False,indent=2)
           with open("quiniela.json","w",encoding="utf-8") as f: json.dump(output,f,ensure_ascii=False,indent=2)
+
+          # Limpieza historial
           limite = AHORA.date() - timedelta(days=DIAS_A_CONSERVAR)
           for ruta in glob.glob("historial/*.json"):
               try:
                   fa = datetime.strptime(os.path.basename(ruta).replace(".json",""), "%Y-%m-%d").date()
                   if fa < limite: os.remove(ruta)
               except: pass
-          print(f"OK {HOY}")
+
+          print(f"OK {HOY} - {get_sorteo_objetivo()}")
           PY
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Actualizacion quiniela"
-          file_pattern: 'quiniela.json historial/'
+          file_pattern: 'quiniela.json historial/ ATRASO_EXTREMO*'
