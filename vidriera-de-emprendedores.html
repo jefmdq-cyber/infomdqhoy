@@ -104,7 +104,7 @@ body{background:#f0f4f8;color:#1a202c;padding-bottom:90px}
   <div class="hero-overlay"></div>
   <div class="hero-text">
     <h1>✨ VIDRIERA DE EMPRENDEDORES</h1>
-    <p>Faro, Alfar, Serena y Acantilados - Elegí tu barrio</p>
+    <p>Mar del Plata • Toda la ciudad en un solo lugar</p>
   </div>
 </div>
 <div class="contenedor">
@@ -123,29 +123,14 @@ body{background:#f0f4f8;color:#1a202c;padding-bottom:90px}
       <button class="filtro filtro-chip" data-cat="hogar"><span class="ico">🏠</span><span class="label">Productos para el hogar</span></button>
     </div>
 
-    <!-- LOS 4 BARRIOS YA VISIBLES EN LA PRIMERA PAGINA -->
-    <div id="seccion-faro" class="barrio-seccion">
-      <div class="card barrio-seccion-titulo" style="background:#0f172a;color:white;text-align:center;padding:12px"><div style="font-weight:900;font-size:15px">🔵 FARO NORTE</div></div>
-      <div id="grid-faro" class="grid"></div>
-    </div>
-
-    <div id="seccion-alfar" class="barrio-seccion">
-      <div class="card barrio-seccion-titulo" style="background:linear-gradient(135deg,#1e40af,#3b82f6);color:white;text-align:center;padding:12px"><div style="font-weight:900;font-size:15px">🟢 ALFAR</div></div>
-      <div id="grid-alfar" class="grid"></div>
-    </div>
-
-    <div id="seccion-serena" class="barrio-seccion">
-      <div class="card barrio-seccion-titulo" style="background:linear-gradient(135deg,#0e7490,#06b6d4);color:white;text-align:center;padding:12px"><div style="font-weight:900;font-size:15px">🟡 SERENA</div></div>
-      <div id="grid-serena" class="grid"></div>
-    </div>
-
-    <div id="seccion-acantilados" class="barrio-seccion">
-      <div class="card barrio-seccion-titulo" style="background:linear-gradient(135deg,#15803d,#22c55e);color:white;text-align:center;padding:12px"><div style="font-weight:900;font-size:15px">🟠 ACANTILADOS</div></div>
-      <div id="grid-acantilados" class="grid"></div>
+    <!-- VIDRIERA UNIFICADA - TODA MAR DEL PLATA - 14 AVISOS -->
+    <div id="seccion-todos" class="barrio-seccion">
+      <div class="card barrio-seccion-titulo" style="background:#0f172a;color:white;text-align:center;padding:14px;letter-spacing:.5px"><div style="font-weight:900;font-size:14px">✨ MAR DEL PLATA • EMPRENDIMIENTOS</div><div style="font-size:11px;opacity:.8;margin-top:2px;font-weight:600">Todos los avisos en un solo lugar</div></div>
+      <div id="grid-todos" class="grid"></div>
     </div>
 
     <!-- AVISO SOLO SERVICIOS - PINTURERIA - GRATUITO - SOLO EN FILTRO SERVICIOS -->
-    <div id="aviso-pintura-servicios" class="card-emp oculto" data-barrio="alfar" data-cat="servicios" data-solo="true" data-keywords="pintura pintureria pintor latex interior exterior pared casa mantenimiento maxim tomas mar del plata servicios presupuesto sin cargo" style="display:block; max-width:480px; margin:14px auto;">
+    <div id="aviso-pintura-servicios" class="card-emp" data-barrio="alfar" data-cat="servicios" data-solo="true" data-keywords="pintura pintureria pintor latex interior exterior pared casa mantenimiento maxim tomas mar del plata servicios presupuesto sin cargo" style="display:block; max-width:480px; margin:14px auto;">
       <div style="max-width:480px;width:100%;background:white;border-radius:16px;border:1px solid #e2e8f0;box-shadow:0 4px 12px rgba(0,0,0,0.06);overflow:hidden;font-family:sans-serif;margin:0 auto;">
   <div style="background:#1e3a8a;color:white;padding:16px 20px;text-align:center;">
     <h1 style="margin:0;font-size:22px;font-weight:900;line-height:1.1;">PINTURERÍA <span style="color:#facc15;">EN GENERAL</span></h1>
@@ -179,7 +164,7 @@ body{background:#f0f4f8;color:#1a202c;padding-bottom:90px}
   </div>
 
     <!-- AVISO SOLO SERVICIOS - PODA DE ARBOLES - GRATUITO - SOLO EN FILTRO SERVICIOS -->
-    <div id="aviso-poda-servicios" class="card-emp oculto" data-barrio="alfar" data-cat="servicios" data-solo="true" data-keywords="poda arboles plantas jardinero tala desmalezado parque zona sur maxim tomas mar del plata servicios presupuesto sin cargo arbolado tiempo de poda" style="display:block; max-width:480px; margin:14px auto;">
+    <div id="aviso-poda-servicios" class="card-emp" data-barrio="alfar" data-cat="servicios" data-solo="true" data-keywords="poda arboles plantas jardinero tala desmalezado parque zona sur maxim tomas mar del plata servicios presupuesto sin cargo arbolado tiempo de poda" style="display:block; max-width:480px; margin:14px auto;">
       <div style="max-width:480px;width:100%;background:white;border-radius:16px;border:1px solid #e2e8f0;box-shadow:0 4px 12px rgba(0,0,0,0.06);overflow:hidden;font-family:sans-serif;margin:0 auto;">
         <div style="background:#14532d;color:white;padding:16px 20px;text-align:center;">
           <h1 style="margin:0;font-size:22px;font-weight:900;line-height:1.1;">ES TIEMPO DE <span style="color:#86efac;">PODA!</span></h1>
@@ -210,7 +195,7 @@ body{background:#f0f4f8;color:#1a202c;padding-bottom:90px}
     </div>
     </div>
 
-<div id="aviso-pintura-martin-larrea" class="card-emp oculto" data-barrio="faro" data-cat="servicios" data-solo="true" data-keywords="martin larrea pintura decoracion casas frentes interiores exteriores mar del plata presupuesto whatsapp 2235802027 pintor" style="display:block; max-width:520px; margin:14px auto; overflow:hidden; border-radius:20px; border:2px solid #0f172a; box-shadow:0 8px 24px rgba(0,0,0,.15);">
+<div id="aviso-pintura-martin-larrea" class="card-emp" data-barrio="faro" data-cat="servicios" data-solo="true" data-keywords="martin larrea pintura decoracion casas frentes interiores exteriores mar del plata presupuesto whatsapp 2235802027 pintor" style="display:block; max-width:520px; margin:14px auto; overflow:hidden; border-radius:20px; border:2px solid #0f172a; box-shadow:0 8px 24px rgba(0,0,0,.15);">
   <!-- Imagen superior con overlay -->
   <div style="position:relative; width:100%; height:280px; overflow:hidden; background:#e2e8f0;">
     <img src="martin-larrea-pintura.webp" alt="Trabajo de pintura Martin Larrea" style="width:100%; height:100%; object-fit:cover; object-position:center;" onerror="this.src='https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&h=400&fit=crop'">
@@ -244,7 +229,7 @@ body{background:#f0f4f8;color:#1a202c;padding-bottom:90px}
 </div>
 
 
-<div id="aviso-lye-hogar" class="card-emp oculto" data-barrio="faro" data-cat="hogar" data-solo="true" data-keywords="papeles lye papel higienico rollos pack familiar distribuidora mar del plata envios domicilio hogar productos" style="display:block; max-width:480px; margin:14px auto;">
+<div id="aviso-lye-hogar" class="card-emp" data-barrio="faro" data-cat="hogar" data-solo="true" data-keywords="papeles lye papel higienico rollos pack familiar distribuidora mar del plata envios domicilio hogar productos" style="display:block; max-width:480px; margin:14px auto;">
 <div class="aviso-gratis-lye" style="width:100%; max-width:500px; background:#f8fafc; border:2px solid #22c55e; border-radius:20px; padding:20px; margin:16px auto; font-family:system-ui,-apple-system,sans-serif; box-shadow:0 4px 12px rgba(0,0,0,0.05);">
   <div style="display:inline-block; background:#22c55e; color:white; font-size:10px; font-weight:800; padding:3px 8px; border-radius:6px; margin-bottom:10px;">DISTRIBUIDORA</div>
   <h2 style="font-size:20px; font-weight:800; color:#0f172a; line-height:1.2;">Papeles LyE • Pack Familiar</h2>
@@ -273,7 +258,7 @@ body{background:#f0f4f8;color:#1a202c;padding-bottom:90px}
 </div>
 </div>
 <!-- AVISO GRATIS - LOS SABORES DE MADY - REPOSTERIA - SOLO TEXTO - SIN FOTO -->
-<div id="aviso-sabores-mady" class="card-emp oculto" data-barrio="faro" data-cat="sabores" data-solo="true" data-keywords="los sabores de mady reposteria casera tortas mundo creativo macarons pasteleria dulce casero mady mar del plata sabores 2235385753 instagram lossaboresdemady" style="display:block; max-width:480px; margin:14px auto;">
+<div id="aviso-sabores-mady" class="card-emp" data-barrio="faro" data-cat="sabores" data-solo="true" data-keywords="los sabores de mady reposteria casera tortas mundo creativo macarons pasteleria dulce casero mady mar del plata sabores 2235385753 instagram lossaboresdemady" style="display:block; max-width:480px; margin:14px auto;">
   <div style="max-width:480px;width:100%;background:white;border-radius:20px;border:2px solid #f9a8d4;box-shadow:0 6px 18px rgba(0,0,0,0.08);overflow:hidden;font-family:sans-serif;margin:0 auto;">
     <div style="background:linear-gradient(135deg,#fdf2f8 0%, #fce7f3 100%);padding:18px 20px;text-align:center;border-bottom:2px dashed #f9a8d4;">
       <div style="font-size:11px;font-weight:900;letter-spacing:2px;color:#ec4899;margin-bottom:6px;">MUNDO CREATIVO ✨</div>
@@ -308,7 +293,7 @@ body{background:#f0f4f8;color:#1a202c;padding-bottom:90px}
   </div>
 </div>
 <!-- AVISO GRATIS - CONSTRUCCION ROMERO E HIJOS - SERVICIOS -->
-<div id="aviso-construccion-romero" class="card-emp oculto" data-barrio="faro" data-cat="servicios" data-solo="true" data-keywords="construccion romero e hijos juan romero plomeria electricidad gas ampliaciones refacciones durlock revestimiento texturado pintura microcemento albañil obra mar del plata 2236680231" style="display:block; max-width:480px; margin:14px auto;">
+<div id="aviso-construccion-romero" class="card-emp" data-barrio="faro" data-cat="servicios" data-solo="true" data-keywords="construccion romero e hijos juan romero plomeria electricidad gas ampliaciones refacciones durlock revestimiento texturado pintura microcemento albañil obra mar del plata 2236680231" style="display:block; max-width:480px; margin:14px auto;">
   <div style="max-width:480px;width:100%;background:white;border-radius:18px;border:2px solid #1f2937;box-shadow:0 6px 18px rgba(0,0,0,0.1);overflow:hidden;font-family:sans-serif;margin:0 auto;">
     <!-- Header obra -->
     <div style="background:#1f2937;color:white;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;">
@@ -343,7 +328,7 @@ body{background:#f0f4f8;color:#1a202c;padding-bottom:90px}
   </div>
 </div>
 <!-- AVISO GRATIS - MANTENIMIENTO PADILLA - SERVICIOS / JARDIN -->
-<div id="aviso-padilla-jardin" class="card-emp oculto" data-barrio="faro" data-cat="servicios" data-solo="true" data-keywords="mantenimiento padilla jardineria jardin desmalezado poda terrenos mensual presupuesto sin cargo mar del plata 2233419568" style="display:block; max-width:480px; margin:14px auto;">
+<div id="aviso-padilla-jardin" class="card-emp" data-barrio="faro" data-cat="servicios" data-solo="true" data-keywords="mantenimiento padilla jardineria jardin desmalezado poda terrenos mensual presupuesto sin cargo mar del plata 2233419568" style="display:block; max-width:480px; margin:14px auto;">
   <div style="max-width:480px;width:100%;background:white;border-radius:26px;border:2px solid #14532d;box-shadow:0 8px 20px rgba(0,0,0,0.08);overflow:hidden;font-family:system-ui,sans-serif;margin:0 auto;">
     <!-- Header -->
     <div style="background:#0f3d22;color:white;padding:18px 20px 14px;text-align:center;border-radius:24px 24px 0 0;position:relative;">
@@ -384,7 +369,7 @@ body{background:#f0f4f8;color:#1a202c;padding-bottom:90px}
   </div>
 </div>
 <!-- AVISO GRATIS - CONGELADOS 2X15000 - SABORES -->
-<div id="aviso-congelados-promo" class="card-emp oculto" data-barrio="" data-cat="sabores" data-solo="true" data-keywords="congelados promo 2 kilos 15000 patitas pollo dinosaurios bastoncitos muzza nuggets medallones bocaditos mar del plata 2235912568" style="display:block; max-width:480px; margin:14px auto;">
+<div id="aviso-congelados-promo" class="card-emp" data-barrio="" data-cat="sabores" data-solo="true" data-keywords="congelados promo 2 kilos 15000 patitas pollo dinosaurios bastoncitos muzza nuggets medallones bocaditos mar del plata 2235912568" style="display:block; max-width:480px; margin:14px auto;">
   <div style="max-width:480px;width:100%;background:#fffbe6;border-radius:22px;border:2px solid #f97316;box-shadow:0 8px 20px rgba(0,0,0,0.08);overflow:hidden;font-family:system-ui,sans-serif;margin:0 auto;">
     <div style="background:#ea580c;color:white;padding:14px;text-align:center;">
       <div style="font-size:20px;font-weight:1000;line-height:1;">🔥 PROMO IMPERDIBLE 🔥</div>
@@ -569,7 +554,7 @@ body{background:#f0f4f8;color:#1a202c;padding-bottom:90px}
     <button onclick="limpiarBusqueda()" style="margin-top:12px;background:#0f172a;color:white;border:none;padding:8px 16px;border-radius:999px;font-weight:800;font-size:12px;cursor:pointer">Limpiar</button>
   </div>
   
-<div id="aviso-albanil-emiliano" class="card-emp oculto" data-barrio="faro" data-cat="servicios" data-solo="true" data-keywords="albañileria cimientos muros losa revoques techos ampliaciones reformas baños cocinas emiliano mar del plata 2235518166" style="display:block; max-width:480px; margin:14px auto;">
+<div id="aviso-albanil-emiliano" class="card-emp" data-barrio="faro" data-cat="servicios" data-solo="true" data-keywords="albañileria cimientos muros losa revoques techos ampliaciones reformas baños cocinas emiliano mar del plata 2235518166" style="display:block; max-width:480px; margin:14px auto;">
 <div style="width:100%; background:#1e293b; border:2px solid #f59e0b; border-radius:20px; padding:20px; font-family:system-ui,sans-serif; box-shadow:0 4px 12px rgba(0,0,0,0.15);">
   <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
     <div style="background:#f59e0b; color:#0f172a; font-size:10px; font-weight:900; padding:4px 10px; border-radius:999px;">DE CIMIENTO AL TECHO</div>
@@ -1089,11 +1074,15 @@ function abrirModalDirecto_ORIGINAL(card){
 function cerrarModal(){ document.getElementById('modalAviso').classList.remove('activo'); }
 
 function pintarTodo(){
-  ['faro','alfar','serena','acantilados'].forEach(b=>{
-    const grid=document.getElementById('grid-'+b);
-    const list=EMPRENDEDORES.filter(e=>e.barrio===b);
-    grid.innerHTML = list.length ? list.map(crearCard).join('') : `<div class="card" style="grid-column:1/-1;text-align:center;color:#64748b">Aún no hay emprendedores en ${b.toUpperCase()}</div>`;
-  });
+  const grid=document.getElementById('grid-todos');
+  if(grid){
+    grid.innerHTML = EMPRENDEDORES.length ? EMPRENDEDORES.map(crearCard).join('') : `<div class="card" style="grid-column:1/-1;text-align:center;color:#64748b">Aún no hay emprendedores</div>`;
+  }
+  // Mostrar TODOS los avisos, incluidos los gratuitos (PlantArte, MobiCare, etc) en la principal
+  document.querySelectorAll('.card-emp[data-solo="true"]').forEach(c=>c.classList.remove('oculto'));
+  document.querySelectorAll('.grid .card-emp').forEach(c=>c.classList.remove('oculto'));
+  const seccion=document.getElementById('seccion-todos');
+  if(seccion) seccion.style.display='block';
 }
 pintarTodo();
 function abrirBarrio(n){
@@ -1108,13 +1097,11 @@ function volverHome(){
   if(global){
     global.querySelectorAll('.filtro').forEach(b=>b.classList.remove('activo'));
   }
-  document.querySelectorAll('.card-emp').forEach(c=>{ if(c.dataset.solo==='true') c.classList.add('oculto'); else c.classList.remove('oculto'); });
-  ['faro','alfar','serena','acantilados'].forEach(b=>{
-    const seccion=document.getElementById('seccion-'+b);
-    if(seccion) seccion.style.display='block';
-  });
+  document.querySelectorAll('.card-emp').forEach(c=>c.classList.remove('oculto'));
+  const seccion=document.getElementById('seccion-todos');
+  if(seccion) seccion.style.display='block';
 }
-// FILTRO GLOBAL SIN BOTON TODOS - toggle para volver a mostrar todo
+ // FILTRO GLOBAL SIN BOTON TODOS - toggle para volver a mostrar todo
 (function(){
   const global = document.getElementById('filtros-global');
   if(!global) return;
@@ -1202,10 +1189,9 @@ function limpiarBusqueda(){
       resultados.innerHTML='';
       // si borra, vuelve a mostrar todo
       document.querySelectorAll('.grid .card-emp').forEach(c=>c.classList.remove('oculto'));
-      ['faro','alfar','serena','acantilados'].forEach(b=>{
-        const seccion=document.getElementById('seccion-'+b);
-        if(seccion) seccion.style.display='block';
-      });
+      document.querySelectorAll('.card-emp[data-solo="true"]').forEach(c=>c.classList.remove('oculto'));
+      const seccionT=document.getElementById('seccion-todos');
+      if(seccionT) seccionT.style.display='block';
       return;
     }
     // Buscar en EMPRENDEDORES y tambien en avisos custom solo-servicios (pintura, poda, etc) - no toca visual
