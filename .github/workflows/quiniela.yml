@@ -19,14 +19,14 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Scrapear con ventana de atraso
+      - name: Scrapear V6 Final
         run: |
           pip install requests beautifulsoup4 lxml
-          python - << 'PY'
+          python << 'PY'
           import requests, re, json, os, glob, time
           from datetime import datetime, timedelta
           from zoneinfo import ZoneInfo
@@ -37,12 +37,10 @@ jobs:
           TZ_ARG = ZoneInfo("America/Argentina/Buenos_Aires")
           AHORA = datetime.now(TZ_ARG)
           HOY = AHORA.strftime("%Y-%m-%d")
-
           if AHORA.weekday() == 6:
               print(f"Domingo {HOY} - sin sorteos")
               exit(0)
 
-          DIAS_A_CONSERVAR = 30
           os.makedirs("historial", exist_ok=True)
           ARCHIVO_HOY = f"historial/{HOY}.json"
 
@@ -57,39 +55,66 @@ jobs:
           ORDEN_4CIFRAS = ["previa","primera","matutina","vespertina","nocturna"]
           ORDEN_URUGUAY = ["vespertina","nocturna"]
 
-          def limpiar(html):
+          def limpiar(html): 
               return html.replace("---MENSAJE PARA EL VISITANTE DE ESTE SITIO--- SI VES ESTE MENSAJE ES PORQUE VISITAS UN SITIO QUE ESTA COPIANDO CODIGO FUENTE AUTORIA DE TUJUGADA.COM.AR SIN AUTORIZACION. VISITA AL SITIO REAL QUE ACTUALIZA ESTOS DATOS EN WWW.TUJUGADA.COM.AR!!!", "")
-
-          def mismo_path(a,b):
+          def mismo_path(a,b): 
               return urlparse(a).path.lower() == urlparse(b).path.lower()
-
           def texto_plano(h):
               soup = BeautifulSoup(limpiar(h), "lxml")
               for t in soup(["script","style"]): t.decompose()
-              tx = soup.get_text(separator=" ")
-              return re.sub(r'\s+', ' ', tx)
+              return re.sub(r'\s+', ' ', soup.get_text(separator=" "))
 
+          # FIX 1 - V6: EXACTO a 20, no <20
           def reordenar_columnas(l):
-              if len(l) < 20: return l
+              if len(l) != 20: return l
               return l[0::2] + l[1::2]
 
-          def extraer_sorteos(url, orden, digitos):
+          # Cargar viejo global para filtro anti-basura
+          VIEJO_GLOBAL = {}
+          if os.path.exists(ARCHIVO_HOY):
+              try: VIEJO_GLOBAL = json.load(open(ARCHIVO_HOY,encoding="utf-8")).get("completo",{})
+              except: pass
+
+          def extraer_sorteos(url, orden, digitos, nombre_lot):
               sorteos = {k: [] for k in orden}
               patron = r'\b\d{%d}\b' % digitos
               try:
                   r = requests.get(url, headers=HEADERS, timeout=30, allow_redirects=True)
                   if not mismo_path(url, r.url): return sorteos
                   low = texto_plano(r.text).lower()
+                  posiciones = {}
+                  for k in orden:
+                      m = re.search(rf'\b{k}\b\s+\d{{1,2}}:\d{{2}}\s*hs\b', low)
+                      if m: posiciones[k] = m.start()
                   for key in orden:
-                      m = re.search(rf'\b{key}\b\s+\d{{1,2}}:\d{{2}}\s*hs\b', low)
-                      if m:
-                          trozo = low[m.start(): m.start()+1500]
-                          nums = re.findall(patron, trozo)
-                          uniq = []
-                          for n in nums:
-                              if n not in uniq: uniq.append(n)
-                          if len(uniq) >= 15: sorteos[key] = reordenar_columnas(uniq[:20])
-              except Exception as e:
+                      if key not in posiciones: continue
+                      start = posiciones[key]
+                      end = len(low)
+                      for k2, pos2 in posiciones.items():
+                          if pos2 > start and pos2 < end: end = pos2
+                      trozo = low[start:end][:1200]
+                      nums = re.findall(patron, trozo)
+                      uniq = []
+                      for n in nums:
+                          if n not in uniq: uniq.append(n)
+                      
+                      # FIX 2 - V6: Filtro anti-basura
+                      # Si este trozo es de "primera" pero tiene >5 números de la previa ya guardada, es reciclado
+                      if VIEJO_GLOBAL.get(nombre_lot, {}).get(key) == [] or len(VIEJO_GLOBAL.get(nombre_lot, {}).get(key, [])) == 0:
+                          # Solo aplicar filtro si tenemos historial previo de otros sorteos hoy
+                          for otro_sorteo, numeros_previos in VIEJO_GLOBAL.get(nombre_lot, {}).items():
+                              if otro_sorteo == key: continue
+                              if len(numeros_previos) < 10: continue
+                              # Cuantos numeros de este trozo ya estaban en otro sorteo?
+                              overlap = len(set(uniq[:20]) & set(numeros_previos))
+                              if overlap > 5:
+                                  print(f"  ANTI-BASURA: {nombre_lot} {key} tiene {overlap} nums de {otro_sorteo} -> trozo reciclado, descarto")
+                                  uniq = [] # descarta este trozo
+                                  break
+
+                      if len(uniq) >= 15: 
+                          sorteos[key] = reordenar_columnas(uniq[:20])
+              except Exception as e: 
                   print(f"Error {url}: {e}")
               return sorteos
 
@@ -101,19 +126,13 @@ jobs:
               if h < 19: return "vespertina"
               return "nocturna"
 
-          def esperar_resultados_completos_con_atraso():
+          def esperar():
               sorteo = get_sorteo_objetivo()
               print(f"Sorteo objetivo ART {AHORA.strftime('%H:%M')}: {sorteo}")
-              viejo = {}
-              if os.path.exists(ARCHIVO_HOY):
-                  try: viejo = json.load(open(ARCHIVO_HOY,encoding="utf-8")).get("completo",{})
-                  except: pass
-
-              if viejo:
-                  todas_previas = all(len(viejo.get(lot,{}).get(sorteo,[])) >= 20 for lot in LOTERIAS_4CIFRAS.keys())
-                  if todas_previas:
-                      print(f"Ya completo para {sorteo} -> exit")
-                      return viejo
+              viejo = VIEJO_GLOBAL
+              if viejo and all(len(viejo.get(lot,{}).get(sorteo,[])) >= 20 for lot in LOTERIAS_4CIFRAS.keys()):
+                  print(f"Ya completo para {sorteo} -> exit 0")
+                  return viejo
 
               intentos_seg = [0, 300, 600, 900, 900]
               completo_final = viejo if viejo else {lot: {k:[] for k in ORDEN_4CIFRAS} for lot in LOTERIAS_4CIFRAS}
@@ -121,21 +140,18 @@ jobs:
 
               for idx, sleep_sec in enumerate(intentos_seg):
                   if idx > 0:
-                      print(f"Atraso, durmiendo {sleep_sec//60} min intento {idx+1}/5")
+                      print(f"Atraso, durmiendo {sleep_sec//60} min (intento {idx+1}/5)")
                       time.sleep(sleep_sec)
-                  print(f"--- Intento {idx+1}/5 para {sorteo} ---")
+                  print(f"Intento {idx+1}/5 para {sorteo}")
                   nuevo = {}
                   for nombre, url in LOTERIAS_4CIFRAS.items():
-                      nuevo[nombre] = extraer_sorteos(url, ORDEN_4CIFRAS, 4)
-                  nuevo_uy = extraer_sorteos(URUGUAY_URL, ORDEN_URUGUAY, 3)
-
+                      nuevo[nombre] = extraer_sorteos(url, ORDEN_4CIFRAS, 4, nombre)
+                  nuevo_uy = extraer_sorteos(URUGUAY_URL, ORDEN_URUGUAY, 3, "uruguay")
                   ok = True
                   for lot in LOTERIAS_4CIFRAS.keys():
-                      cant = len(nuevo.get(lot,{}).get(sorteo,[]))
-                      if cant < 20:
-                          print(f" Falta {lot} {sorteo}: {cant}/20")
+                      if len(nuevo.get(lot,{}).get(sorteo,[])) < 20:
+                          print(f" Falta {lot} {sorteo}: {len(nuevo.get(lot,{}).get(sorteo,[]))}/20")
                           ok = False
-
                   if ok:
                       print(f"COMPLETO {sorteo}")
                       for lot in LOTERIAS_4CIFRAS.keys():
@@ -143,12 +159,9 @@ jobs:
                       if sorteo in ORDEN_URUGUAY:
                           completo_final["uruguay"][sorteo] = nuevo_uy.get(sorteo,[])
                       return completo_final
-
-              print(f"ATRASO EXTREMO {sorteo}")
               return completo_final
 
-          resultado = esperar_resultados_completos_con_atraso()
-
+          resultado = esperar()
           output = {"fecha": HOY, "actualizado": AHORA.strftime("%d/%m/%Y %H:%M"), "completo": resultado,
                     "nacional": resultado.get("nacional",{}).get("nocturna",[]),
                     "provincia": resultado.get("provincia",{}).get("nocturna",[]),
@@ -159,17 +172,9 @@ jobs:
 
           with open(ARCHIVO_HOY,"w",encoding="utf-8") as f: json.dump(output,f,ensure_ascii=False,indent=2)
           with open("quiniela.json","w",encoding="utf-8") as f: json.dump(output,f,ensure_ascii=False,indent=2)
-
-          limite = AHORA.date() - timedelta(days=DIAS_A_CONSERVAR)
-          for ruta in glob.glob("historial/*.json"):
-              try:
-                  fa = datetime.strptime(os.path.basename(ruta).replace(".json",""), "%Y-%m-%d").date()
-                  if fa < limite: os.remove(ruta)
-              except: pass
-
           print(f"OK {HOY} - {get_sorteo_objetivo()}")
           PY
-      - uses: stefanzweifel/git-auto-commit-action@v6
+      - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Actualizacion quiniela"
+          commit_message: "Actualizacion quiniela V6 Final"
           file_pattern: 'quiniela.json historial/'
