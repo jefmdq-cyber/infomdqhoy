@@ -1,16 +1,16 @@
-name: Quiniela 20 V5.1 Fix Cron
+name: Quiniela 20 V6 Final
 
 on:
   schedule:
-    - cron: '20 13 * * 1-6'   # Previa 10:20 ART
-    - cron: '5 15 * * 1-6'    # Primera 12:05 ART
-    - cron: '5 18 * * 1-6'    # Matutina 15:05 ART
-    - cron: '5 21 * * 1-6'    # Vespertina 18:05 ART
-    - cron: '10 0 * * 0,2-6'  # Nocturna 21:10 ART = 00:10 UTC del dia siguiente (Mar-Dom en UTC)
+    - cron: '20 13 * * 1-6'
+    - cron: '5 15 * * 1-6'
+    - cron: '5 18 * * 1-6'
+    - cron: '5 21 * * 1-6'
+    - cron: '10 0 * * 0,2-6'
   workflow_dispatch:
 
 concurrency:
-  group: quiniela-v5
+  group: quiniela-v6
   cancel-in-progress: false
 
 jobs:
@@ -19,14 +19,14 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Scrapear con ventana de atraso - Sin tocar ordenamiento
+      - name: Scrapear con ventana de atraso
         run: |
           pip install requests beautifulsoup4 lxml
-          python << 'PY'
+          python - << 'PY'
           import requests, re, json, os, glob, time
           from datetime import datetime, timedelta
           from zoneinfo import ZoneInfo
@@ -57,10 +57,10 @@ jobs:
           ORDEN_4CIFRAS = ["previa","primera","matutina","vespertina","nocturna"]
           ORDEN_URUGUAY = ["vespertina","nocturna"]
 
-          def limpiar(html): 
+          def limpiar(html):
               return html.replace("---MENSAJE PARA EL VISITANTE DE ESTE SITIO--- SI VES ESTE MENSAJE ES PORQUE VISITAS UN SITIO QUE ESTA COPIANDO CODIGO FUENTE AUTORIA DE TUJUGADA.COM.AR SIN AUTORIZACION. VISITA AL SITIO REAL QUE ACTUALIZA ESTOS DATOS EN WWW.TUJUGADA.COM.AR!!!", "")
 
-          def mismo_path(a,b): 
+          def mismo_path(a,b):
               return urlparse(a).path.lower() == urlparse(b).path.lower()
 
           def texto_plano(h):
@@ -89,7 +89,7 @@ jobs:
                           for n in nums:
                               if n not in uniq: uniq.append(n)
                           if len(uniq) >= 15: sorteos[key] = reordenar_columnas(uniq[:20])
-              except Exception as e: 
+              except Exception as e:
                   print(f"Error {url}: {e}")
               return sorteos
 
@@ -104,17 +104,15 @@ jobs:
           def esperar_resultados_completos_con_atraso():
               sorteo = get_sorteo_objetivo()
               print(f"Sorteo objetivo ART {AHORA.strftime('%H:%M')}: {sorteo}")
-
               viejo = {}
               if os.path.exists(ARCHIVO_HOY):
-                  try: 
-                      viejo = json.load(open(ARCHIVO_HOY,encoding="utf-8")).get("completo",{})
+                  try: viejo = json.load(open(ARCHIVO_HOY,encoding="utf-8")).get("completo",{})
                   except: pass
 
               if viejo:
                   todas_previas = all(len(viejo.get(lot,{}).get(sorteo,[])) >= 20 for lot in LOTERIAS_4CIFRAS.keys())
                   if todas_previas:
-                      print(f"Ya completo para {sorteo} hoy -> exit 0")
+                      print(f"Ya completo para {sorteo} -> exit")
                       return viejo
 
               intentos_seg = [0, 300, 600, 900, 900]
@@ -123,34 +121,30 @@ jobs:
 
               for idx, sleep_sec in enumerate(intentos_seg):
                   if idx > 0:
-                      print(f"--> Atraso, esperando {sleep_sec//60} min (intento {idx+1}/5)")
+                      print(f"Atraso, durmiendo {sleep_sec//60} min intento {idx+1}/5")
                       time.sleep(sleep_sec)
-
                   print(f"--- Intento {idx+1}/5 para {sorteo} ---")
                   nuevo = {}
                   for nombre, url in LOTERIAS_4CIFRAS.items():
                       nuevo[nombre] = extraer_sorteos(url, ORDEN_4CIFRAS, 4)
-                  
                   nuevo_uy = extraer_sorteos(URUGUAY_URL, ORDEN_URUGUAY, 3)
 
-                  def validar_todas_con_20():
-                      for lot in LOTERIAS_4CIFRAS.keys():
-                          cant = len(nuevo.get(lot,{}).get(sorteo,[]))
-                          if cant < 20:
-                              print(f"  Falta {lot} {sorteo}: {cant}/20")
-                              return False
-                      print(f"  OK: Todas las provincias con 20 para {sorteo}")
-                      return True
+                  ok = True
+                  for lot in LOTERIAS_4CIFRAS.keys():
+                      cant = len(nuevo.get(lot,{}).get(sorteo,[]))
+                      if cant < 20:
+                          print(f" Falta {lot} {sorteo}: {cant}/20")
+                          ok = False
 
-                  if validar_todas_con_20():
-                      print(f"COMPLETO! {sorteo} listo.")
+                  if ok:
+                      print(f"COMPLETO {sorteo}")
                       for lot in LOTERIAS_4CIFRAS.keys():
                           completo_final[lot][sorteo] = nuevo[lot][sorteo]
                       if sorteo in ORDEN_URUGUAY:
                           completo_final["uruguay"][sorteo] = nuevo_uy.get(sorteo,[])
                       return completo_final
 
-              print(f"ATRASO EXTREMO >45min para {sorteo}")
+              print(f"ATRASO EXTREMO {sorteo}")
               return completo_final
 
           resultado = esperar_resultados_completos_con_atraso()
@@ -175,7 +169,7 @@ jobs:
 
           print(f"OK {HOY} - {get_sorteo_objetivo()}")
           PY
-      - uses: stefanzweifel/git-auto-commit-action@v5
+      - uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: "Actualizacion quiniela"
-          file_pattern: 'quiniela.json historial/ ATRASO_EXTREMO*'
+          file_pattern: 'quiniela.json historial/'
