@@ -6,7 +6,7 @@
     "dias": "Miércoles 19:45 hs",
     "lugar": "Asoc. Vecinal Fomento Faro Norte - Sánchez de Bustamante 3460",
     "contacto": "Celeste Eddi",
-    "imagen": "bachata-ladies.jpeg"
+    "imagen": "bachata-ladies.webp"
   },
   {
     "barrio": "faro",
@@ -15,7 +15,7 @@
     "dias": "Lunes y Miércoles 16:00 hs",
     "lugar": "Asoc. Vecinal Fomento Faro Norte - Sánchez de Bustamante 3460",
     "contacto": "Aimé Wenner",
-    "imagen": "reggeaton-femme.jpeg"
+    "imagen": "reggeaton-femme.webp"
   },
   {
     "barrio": "faro",
@@ -24,7 +24,7 @@
     "dias": "Lunes y Miércoles 15:00 hs",
     "lugar": "Asoc. Vecinal Fomento Faro Norte - Sánchez de Bustamante 3460",
     "contacto": "Celeste Eddi",
-    "imagen": "ritmos-adultos.jpeg"
+    "imagen": "ritmos-adultos.webp"
   },
   {
     "barrio": "faro",
@@ -33,7 +33,7 @@
     "dias": "Lunes y Miércoles 18:45 hs",
     "lugar": "Asoc. Vecinal Fomento Faro Norte - Sánchez de Bustamante 3460",
     "contacto": "Aimé Wenner",
-    "imagen": "urbanoteens.jpeg"
+    "imagen": "urbanoteens.webp"
   },
   {
     "barrio": "faro",
@@ -42,7 +42,7 @@
     "dias": "Lun - Mié - Vie 18:30 hs",
     "lugar": "Soc. de Fomento Faro Norte - Sánchez de Bustamante 3460",
     "contacto": "Instagram Zumbalu.mdq - Tel 2234383622",
-    "imagen": "zumba.jpeg"
+    "imagen": "zumba.webp"
   },
   {
     "barrio": "faro",
@@ -51,7 +51,7 @@
     "dias": "Martes y Jueves 8:30 a 11:30 hs",
     "lugar": "Soc. de Fomento Faro Norte - Sánchez de Bustamante 3460",
     "contacto": "Prof. Walter Molina - 2235652480 / 2235622845 - PEBA",
-    "imagen": "joyeria.jpeg"
+    "imagen": "joyeria.webp"
   },
   {
     "barrio": "faro",
@@ -60,7 +60,7 @@
     "dias": "Viernes 7 de agosto - 15:00 a 18:00 hs",
     "lugar": "Asoc. de Fomento Faro Norte - Sánchez de Bustamante 3460",
     "contacto": "Docente Iara - @larabogace - (0223)512-5340",
-    "imagen": "taller-dibujo.jpeg"
+    "imagen": "taller-dibujo.webp"
   },
   {
     "barrio": "faro",
@@ -69,7 +69,7 @@
     "dias": "Lunes 10 a 12 hs",
     "lugar": "Sociedad de Fomento Faro Norte",
     "contacto": "Soc. de Fomento Faro Norte",
-    "imagen": "escritura-creativa.jpeg"
+    "imagen": "escritura-creativa.webp"
   },
   {
     "barrio": "faro",
@@ -78,7 +78,7 @@
     "lugar": "Soc. de Fomento Faro Norte - Sánchez de Bustamante 3460",
     "dias": "Martes y jueves 14hs y 15hs",
     "contacto": "223 546-6679 - Cupos limitados",
-    "imagen": "pilates-faro.jpg"
+    "imagen": "pilates-faro.webp"
   },
   {
     "barrio": "faro",
@@ -87,7 +87,7 @@
     "dias": "Lunes a Viernes 9 a 11 hs o 17 a 19 hs",
     "lugar": "Sánchez de Bustamante 3460 - Faro Norte",
     "contacto": "223-5333768",
-    "imagen": "socios.jpeg"
+    "imagen": "socios.webp"
   },
   {
     "barrio": "alfar",
@@ -98,7 +98,7 @@
     "contacto": "Teacher Mirko",
     "telefono": "",
     "direccion": "Luis Franco 750",
-    "imagen": "apoyoingles.jpeg"
+    "imagen": "apoyoingles.webp"
   },
   {
     "barrio": "alfar",
@@ -108,7 +108,7 @@
     "lugar": "Sociedad de Fomento Alfar",
     "contacto": "Sami Bustos - @Alfarfomento @Delmarcirco",
     "guia": "Sami Bustos",
-    "imagen": "circo-niñes.jpeg"
+    "imagen": "circo-niñes.webp"
   },
   {
     "barrio": "alfar",
@@ -118,7 +118,7 @@
     "lugar": "Sociedad de Fomento Alfar",
     "contacto": "2236337024",
     "telefono": "2236337024",
-    "imagen": "danza-_arabe.jpeg"
+    "imagen": "danza-_arabe.webp"
   },
   {
     "barrio": "alfar",
@@ -127,7 +127,7 @@
     "dias": "LUNES, MIÉRCOLES Y VIERNES 8hs.",
     "lugar": "SEDE ALFAR - CALLE LUIS FRANCO 750",
     "contacto": "@Alfar_fitness - Profe Celi",
-    "imagen": "entrenamientofuncional.jpeg"
+    "imagen": "entrenamientofuncional.webp"
   },
   {
     "barrio": "alfar",
@@ -141,7 +141,7 @@
       "2235594652"
     ],
     "direccion": "Luis Franco 750",
-    "imagen": "festival.jpeg"
+    "imagen": "festival.webp"
   },
   {
     "barrio": "alfar",
@@ -152,7 +152,7 @@
     "contacto": "Leonardo benitez - 2235991573",
     "telefono": "2235991573",
     "direccion": "Calle franco 350 (textual flyer)",
-    "imagen": "guitarra.jpeg"
+    "imagen": "guitarra.webp"
   },
   {
     "barrio": "alfar",
@@ -163,7 +163,7 @@
     "contacto": "2235242743",
     "telefono": "2235242743",
     "profesora": "HISI DIAZ",
-    "imagen": "hisi_diaz.jpeg"
+    "imagen": "hisi_diaz.webp"
   },
   {
     "barrio": "alfar",
@@ -173,7 +173,7 @@
     "lugar": "Sociedad de fomento Calle Luis Franco Nº 750 - Barrio Alfar - Pase gratuito colectivo",
     "contacto": "2234213985",
     "telefono": "2234213985",
-    "imagen": "primaria.jpeg"
+    "imagen": "primaria.webp"
   },
   {
     "barrio": "alfar",
@@ -183,7 +183,7 @@
     "lugar": "Asociación Vecinal de Fomento del Barrio Alfar - Luis Franco 750",
     "contacto": "2236906341 - cpsasedemardelplata",
     "telefono": "2236906341",
-    "imagen": "psicologia.jpeg"
+    "imagen": "psicologia.webp"
   },
   {
     "barrio": "alfar",
@@ -193,7 +193,7 @@
     "lugar": "Sociedad de fomento BARRIO ALFAR (Luis franco 750)",
     "contacto": "AGUS - 2236015567",
     "telefono": "2236015567",
-    "imagen": "reggaeton.jpeg"
+    "imagen": "reggaeton.webp"
   },
   {
     "barrio": "alfar",
@@ -203,7 +203,7 @@
     "lugar": "Sociedad de fomento Alfar - luis Franco 750",
     "contacto": "2235594652",
     "telefono": "2235594652",
-    "imagen": "taller_ceramica.jpeg"
+    "imagen": "taller_ceramica.webp"
   },
   {
     "barrio": "alfar",
@@ -214,7 +214,7 @@
     "contacto": "2235594652",
     "telefono": "2235594652",
     "descripcion": "Fomenta la creatividad. Favorece la motricidad fina y la paciencia.",
-    "imagen": "terracota.jpeg"
+    "imagen": "terracota.webp"
   },
   {
     "barrio": "alfar",
@@ -223,6 +223,6 @@
     "dias": "JUEVES DE 9 A 11HS.",
     "lugar": "SOC.DE FOMENTO ALFAR - LUIS FRANCO 750",
     "contacto": "SAMI BUSTOS - @DELMARCIRCO",
-    "imagen": "trapecio.jpeg"
+    "imagen": "trapecio.webp"
   }
 ]
