@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLASIFICADOS INFO MDQ SUR HOY | Avisos directos en Mar del Plata</title>
+    <meta name="description" content="Clasificados INFO MDQ SUR HOY. Avisos directos de Mar del Plata Sur. Sin registro, sin comisiones, contacto directo por WhatsApp.">
+    <meta name="color-scheme" content="dark light">
+    <style>
+        :root{
+            --bg:#171717; --bg-card:#262626; --bg-card-hover:#2e2e2e;
+            --orange:#ff6600; --orange-dark:#e65c00;
+            --text:#ffffff; --text-muted:#a3a3a3; --text-dim:#71717a;
+            --border:#2a2a2a; --border-dashed:#3f3f46; --accent:#2dd4bf;
+            --radius:12px; --radius-pill:999px;
+        }
+        *{box-sizing:border-box}
+        html{-webkit-text-size-adjust:100%; scrollbar-gutter:stable}
+        body{background:var(--bg); color:var(--text); font-family: ui-sans-system,-apple-system,Segoe UI,Roboto,Arial,sans-serif; margin:0; line-height:1.5; -webkit-font-smoothing:antialiased}
+        :focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+
+        header{background:var(--orange); padding:20px; position:sticky; top:0; z-index:10}
+        .header-top{display:flex; flex-wrap:wrap; align-items:baseline; gap:12px 16px}
+        header h1{margin:0; font-size:clamp(24px,5vw,32px); font-weight:900; letter-spacing:-0.03em; line-height:1}
+        .slogan{font-weight:800; font-size:13px}
+        .sub-bar{display:flex; flex-wrap:wrap; align-items:center; gap:10px 15px; margin-top:14px; font-size:13px}
+        .badge-fecha{background:#fff; color:var(--orange); padding:4px 12px; border-radius:var(--radius-pill); font-weight:800; text-transform:uppercase; font-size:11px}
+
+        .features-bar{background:var(--orange-dark); padding:10px 20px; display:flex; flex-wrap:wrap; gap:12px 24px; font-size:11px; font-weight:700; letter-spacing:0.05em}
+
+        .nav-container{padding:16px 20px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:16px; border-bottom:1px solid var(--border)}
+        nav[aria-label="Categorias"]{display:contents}
+        .categorias{display:flex; flex-wrap:wrap; gap:8px}
+        .btn-cat{background:#fff; color:#000; padding:7px 14px; border-radius:var(--radius-pill); border:1px solid transparent; font-weight:700; cursor:pointer; font-size:12px; transition: transform .12s, background .12s}
+        .btn-cat:hover{background:#f4f4f5; transform:translateY(-1px)}
+        .btn-cat:active{transform:translateY(0)}
+        .btn-cat[aria-pressed="true"]{background:var(--text); box-shadow: inset 0 0 0 2px var(--orange)}
+        .contador{color:var(--accent); font-size:12px; font-weight:700; white-space:nowrap}
+
+        .diario-header{text-align:center; border-block:1px dashed var(--border-dashed); padding:8px 12px; margin:12px 20px; font-size:10px; letter-spacing:0.2em; color:var(--text-muted); text-transform:uppercase}
+
+        .grilla-avisos{display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%,340px),1fr)); gap:16px; padding:0 20px 24px; align-items:start}
+        .aviso-card{
+            background:var(--bg-card); border-radius:var(--radius); padding:14px; border:1px solid var(--border);
+            transition: background .15s, border-color .15s, transform .12s, opacity .2s; contain: content;
+            cursor:pointer; text-align:left; width:100%; appearance:none; -webkit-appearance:none;
+        }
+        .aviso-card:hover{background:var(--bg-card-hover); border-color:#3a3a3a; transform:translateY(-1px)}
+        .aviso-card:active{transform:translateY(0)}
+        .aviso-card[hidden]{display:none !important}
+        .aviso-card.is-filtered{opacity:0.3; transform:scale(0.98)}
+        .aviso-card.destacado{background:#fefce8; color:#18181b; border:1px dashed #d6c08d}
+        .aviso-card.destacado:hover{background:#fffbeb}
+
+        .aviso-top{display:flex; gap:12px}
+        .aviso-icon{width:40px; height:40px; background:#333; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0}
+        .destacado .aviso-icon{background:#fff; border:1px solid #e7e5e4}
+        .aviso-detalles{flex:1; min-width:0}
+        .aviso-detalles h3{margin:0; font-size:13px; font-weight:800; text-transform:uppercase; line-height:1.3}
+        .aviso-detalles p{margin:6px 0 0; font-size:13px; color:var(--text-muted); line-height:1.45; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden}
+        .destacado .aviso-detalles p{color:#52525b}
+        .aviso-footer{display:flex; justify-content:space-between; align-items:center; gap:8px; margin-top:12px; padding-top:10px; border-top:1px solid var(--border); font-size:10px; color:var(--text-dim); font-weight:700; letter-spacing:0.04em; text-transform:uppercase; flex-wrap:wrap}
+        .destacado .aviso-footer{border-top-color:#e7e5e4; color:#71717a}
+        .badge-precio{background:#333; color:#fff; padding:3px 8px; border-radius:4px; font-size:11px}
+        .destacado .badge-precio{background:#18181b; color:#fff}
+
+        /* --- MODAL --- */
+        dialog#aviso-modal{
+            border:none; padding:0; background:transparent; max-width:min(560px, calc(100vw - 32px)); width:100%;
+            margin:auto; position:fixed; inset:0; height:fit-content; max-height:90vh; overflow:visible;
+        }
+        dialog#aviso-modal::backdrop{background:rgba(0,0,0,.75); backdrop-filter:blur(4px)}
+        .modal-card{
+            background:#1e1e1e; border:1px solid #333; border-radius:16px; padding:0; overflow:hidden;
+            box-shadow:0 20px 60px rgba(0,0,0,.6); animation: modalIn .18s ease-out;
+        }
+        @keyframes modalIn{from{transform:translateY(10px) scale(.98); opacity:0} to{transform:translateY(0) scale(1); opacity:1}}
+        .modal-head{background:var(--orange); color:#fff; padding:16px 20px; display:flex; justify-content:space-between; align-items:center}
+        .modal-head h2{margin:0; font-size:16px; font-weight:900; text-transform:uppercase; line-height:1.2}
+        .modal-close{background:#fff; color:#000; border:none; width:32px; height:32px; border-radius:999px; font-weight:900; cursor:pointer; display:grid; place-items:center}
+        .modal-body{padding:20px; display:grid; gap:16px}
+        .modal-meta{display:flex; flex-wrap:wrap; gap:8px; font-size:11px; font-weight:700; text-transform:uppercase; color:var(--text-muted)}
+        .modal-meta span{background:#2a2a2a; padding:4px 10px; border-radius:999px; border:1px solid #333}
+        .modal-desc{font-size:15px; line-height:1.6; color:#e5e5e5; white-space:pre-wrap}
+        .modal-actions{display:flex; gap:10px; flex-wrap:wrap}
+        .btn-whatsapp{background:#25D366; color:#000; border:none; padding:12px 18px; border-radius:999px; font-weight:800; font-size:14px; cursor:pointer; flex:1; text-align:center; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:8px}
+        .btn-whatsapp:hover{filter:brightness(1.05)}
+        .btn-sec{background:#fff; color:#000; border:none; padding:12px 18px; border-radius:999px; font-weight:700; cursor:pointer}
+        .empty-state{grid-column:1/-1; text-align:center; padding:40px 20px; color:var(--text-muted); border:1px dashed var(--border-dashed); border-radius:var(--radius)}
+
+        @media (max-width:480px){header{padding:16px} .nav-container{padding:12px 16px} .grilla-avisos{padding:0 16px 20px} .modal-body{padding:16px}}
+    .faja-seguridad {
+    max-width: 1200px;
+    margin: 40px auto 10px auto;
+    padding: 20px;
+    background-color: var(--bg-card) !important;
+    border: 1px dashed var(--border-dashed) !important;
+    border-radius: var(--radius) !important;
+    font-family: ui-sans-system, -apple-system, system-ui, sans-serif;
+    box-sizing: border-box;
+}
+.faja-titulo {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: var(--orange) !important;
+    text-transform: uppercase;
+}
+    
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-top"><h1>CLASIFICADOS INFO MDQ SUR HOY</h1><span class="slogan"> — LOS CLÁSICOS DE SIEMPRE</span></div>
+        <div class="sub-bar"><span class="badge-fecha">• MAR DEL PLATA • 07-OCT</span><span>sin vueltas. Directo, prolijo y económico.</span></div>
+    </header>
+
+    <div class="features-bar" aria-label="Características"><span>✓ SIN REGISTRO</span><span>✓ SIN COMISIONES</span><span>✓ CONTACTO DIRECTO POR WHATSAPP</span></div>
+
+    <div class="nav-container">
+        <nav aria-label="Categorias">
+     <div class="categorias" role="group" aria-label="Filtrar por categoria">
+                <button type="button" class="btn-cat" data-filter="todos" aria-pressed="true">TODOS</button>
+                <button type="button" class="btn-cat" data-filter="inmuebles" aria-pressed="false">INMUEBLES</button>
+                <button type="button" class="btn-cat" data-filter="automotores" aria-pressed="false">AUTOMOTORES</button>
+                <button type="button" class="btn-cat" data-filter="empleos" aria-pressed="false">EMPLEOS</button>
+                <button type="button" class="btn-cat" data-filter="servicios" aria-pressed="false">SERVICIOS</button>
+                <button type="button" class="btn-cat" data-filter="compra-venta" aria-pressed="false">COMPRA-VENTA</button>
+                <button type="button" class="btn-cat" data-filter="mascotas" aria-pressed="false">MASCOTAS</button>
+                <button type="button" class="btn-cat" data-filter="clases" aria-pressed="false">CLASES</button>
+                <button type="button" class="btn-cat" data-filter="oficios" aria-pressed="false">OFICIOS</button>
+            </div>
+        </nav>
+        <div class="contador" id="contador" aria-live="polite">• 0 avisos • </div>
+    </div>
+
+    <div class="diario-header" role="separator">CLASIFICADOS DIGITALES — MAR DEL PLATA SUR</div>
+  <a href="https://wa.me/5492235820394?text=Hola!%20Quiero%20publicar%20mi%20aviso%20en%20INFO%20MDQ%20HOY" target="_blank" rel="noopener" style="text-decoration:none; display:block; max-width:460px; margin:14px auto;">
+  <div style="background:#FFF8E1; border:2px dashed #FF7A00; border-radius:12px; padding:12px 16px; text-align:center; animation: latido 2.2s ease-in-out infinite;">
+    <div style="color:#111; font-weight:800; font-size:15px;">📢 PUBLICÁ TU AVISO AQUÍ</div>
+    <div style="color:#555; font-size:12px; margin-top:3px;">Contacto directo por WhatsApp - Sin vueltas</div>
+  </div>
+
+<style>
+@keyframes latido {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(255,122,0,0); }
+  50% { transform: scale(1.02); box-shadow: 0 0 12px rgba(255,122,0,0.25); }
+}
+</style>
+</a> 
+
+<main class="grilla-avisos" id="grilla" aria-label="Listado de avisos">
+        <button type="button" class="aviso-card destacado" data-category="oficios" data-barrio="Mar del Plata y Zona" data-precio="Presup. s/cargo" data-contacto="2236680231" data-titulo="ROMERO & HIJOS - CONSTRUCCION INTEGRAL" data-desc="Construcción integral: Plomería, Electricidad, Gas, Ampliaciones, Refacciones, Durlock, Revestimiento Texturado y Microcemento. Presupuestos sin cargo. Mar del Plata y zona.">
+            <div class="aviso-top"><div class="aviso-icon" aria-hidden="true">🏗️</div><div class="aviso-detalles"><h3>ROMERO & HIJOS - CONSTRUCCION</h3><p>Plomería, Electricidad, Gas, Ampliaciones, Durlock, Texturado, Microcemento. Presup. s/cargo.</p></div></div>
+            <footer class="aviso-footer"><span>OFICIOS</span><span>Mar del Plata y Zona</span><span class="badge-precio">Presup. s/cargo</span></footer>
+        </button>
+        <button type="button" class="aviso-card" data-category="servicios" data-barrio="Mar del Plata" data-precio="Presup. s/cargo" data-contacto="2235504431" data-titulo="MOBICARE - SERVICIO TECNICO DE CELULARES" data-desc="Reparación de celulares: pantallas, baterías, conectores y servicio técnico completo. Tu celu tiene solución. Presupuesto y diagnóstico. Mar del Plata.">
+            <div class="aviso-top"><div class="aviso-icon" aria-hidden="true">📱</div><div class="aviso-detalles"><h3>MOBICARE - SERV. TECNICO CELULAR</h3><p>Reparación de celulares, pantallas y baterías. Tu celu tiene solución. Presup. s/cargo.</p></div></div>
+            <footer class="aviso-footer"><span>SERVICIOS</span><span>Mar del Plata</span><span class="badge-precio">Presup. s/cargo</span></footer>
+        </button>
+                <button type="button" class="aviso-card destacado" data-category="empleos" data-barrio="Mar del Plata" data-precio="Disponible" data-contacto="2281575415" data-titulo="ABRIL M. - NIÑERA / CUIDADO DE NIÑOS" data-desc="Experiencia en cuidado de niños en casas particulares. Responsable y con referencias.">
+            <div class="aviso-top"><div class="aviso-icon" aria-hidden="true">👶</div><div class="aviso-detalles"><h3>ABRIL M. - NIÑERA / CUIDADO</h3><p>Busco trabajo - Niñera. Experiencia en cuidado de niños en casas particulares.</p></div></div>
+            <footer class="aviso-footer"><span>EMPLEOS</span><span>Mar del Plata</span><span class="badge-precio">Disponible</span></footer>
+        </button>
+</main>      
+    <!-- MODAL NATIVO -->
+    <dialog id="aviso-modal" aria-labelledby="modal-titulo">
+        <div class="modal-card">
+            <div class="modal-head">
+                <h2 id="modal-titulo">TITULO</h2>
+                <button class="modal-close" id="modal-close" aria-label="Cerrar">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-meta" id="modal-meta"></div>
+                <p class="modal-desc" id="modal-desc"></p>
+                <div class="modal-actions">
+                    <a class="btn-whatsapp" id="modal-wsp" href="#" target="_blank" rel="noopener">💬 WhatsApp directo</a>
+                    <button class="btn-sec" id="modal-copy">Copiar aviso</button>
+                </div>
+            </div>
+        </div>
+
+    </dialog>
+<!-- ESTILOS EXCLUSIVOS AISLADOS PARA LA BARRA INFERIOR DE EMPRENDEDORES -->
+<style>
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 62px;
+    background: #0b132b; /* Azul oscuro Premium */
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 99999;
+    padding-bottom: env(safe-area-inset-bottom);
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 500;
+    width: 25%;
+    height: 100%;
+    gap: 4px;
+    transition: color 0.2s ease;
+  }
+  .nav-item svg {
+    width: 21px;
+    height: 21px;
+    opacity: 0.7;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .nav-item:hover, .nav-item.active {
+    color: #38bdf8; /* Azul brillante cuando está seleccionado */
+  }
+  .nav-item:hover svg, .nav-item.active svg {
+    opacity: 1;
+    transform: translateY(-1px);
+  }
+  @media (min-width: 769px) {
+    .bottom-nav { display: none; }
+  }
+  body {
+      padding-bottom: 74px !important; /* Espacio para que no tape el footer */
+  }
+</style>
+<script>
+/* --- V3 - JS QUIRURGICO < 2KB --- */
+const grilla = document.getElementById('grilla');
+const cards = [...grilla.querySelectorAll('.aviso-card')];
+const btns = [...document.querySelectorAll('.btn-cat')];
+const contador = document.getElementById('contador');
+const modal = document.getElementById('aviso-modal');
+const mTitulo = document.getElementById('modal-titulo');
+const mDesc = document.getElementById('modal-desc');
+const mMeta = document.getElementById('modal-meta');
+const mWsp = document.getElementById('modal-wsp');
+
+function actualizarContador(){
+  const visibles = cards.filter(c => !c.hidden).length;
+  contador.textContent = `• ${visibles} avisos • ${visibles===0?'sin resultados':'filtrados'}`;
+}
+
+btns.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const filtro = btn.dataset.filter;
+    btns.forEach(b=> b.setAttribute('aria-pressed','false'));
+    btn.setAttribute('aria-pressed','true');
+    cards.forEach(card=>{
+      const cat = card.dataset.category;
+      const show = filtro==='todos' || cat===filtro;
+      card.hidden = !show;
+    });
+    // Empty state
+    let empty = document.getElementById('empty');
+    const hay = cards.some(c=>!c.hidden);
+    if(!hay){
+      if(!empty){
+        empty = document.createElement('div');
+        empty.id='empty'; empty.className='empty-state';
+        empty.textContent='No hay avisos en este rubro. Probá con TODOS.';
+        grilla.appendChild(empty);
+      }
+    } else if(empty){ empty.remove(); }
+    actualizarContador();
+  });
+});
+
+// Modal logic
+cards.forEach(card=>{
+  card.addEventListener('click', ()=>{
+    const {titulo, desc, precio, barrio, category, contacto} = card.dataset;
+    mTitulo.textContent = titulo;
+    mDesc.textContent = desc;
+    mMeta.innerHTML = `<span>${category}</span><span>${barrio}</span><span>${precio}</span>`;
+    const msg = encodeURIComponent(`Hola! Te vi en INFO MDQ SUR HOY y queria consultarte por tu aviso.`);
+    mWsp.href = `https://wa.me/549${contacto}?text=${msg}`;
+    modal.showModal();
+  });
+});
+
+document.getElementById('modal-close').addEventListener('click', ()=> modal.close());
+modal.addEventListener('click', (e)=>{
+  const rect = modal.getBoundingClientRect();
+  if(e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom){
+    modal.close();
+  }
+});
+document.getElementById('modal-copy').addEventListener('click', async ()=>{
+  const txt = `${mTitulo.textContent} - ${mDesc.textContent}`;
+  try{ await navigator.clipboard.writeText(txt); }catch{}
+  const b = document.getElementById('modal-copy'); b.textContent='¡Copiado!'; setTimeout(()=>b.textContent='Copiar aviso',1500);
+});
+</script>
+<!-- FAJA DE ADVERTENCIA CON VARIABLES DEL SISTEMA -->
+<div class="faja-seguridad">
+    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+        <span style="color: var(--orange); font-size: 14px;">⚠️</span>
+        <h4 class="faja-titulo">Guía de Seguridad para Operaciones Seguras</h4>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+        <div style="display: flex; gap: 8px; align-items: flex-start;">
+            <span style="color: var(--text-muted); font-size: 11px; font-weight: bold;">01.</span>
+            <p style="margin: 0; font-size: 12px; color: var(--text); opacity: 0.8; line-height: 1.4;">
+                <strong style="color: var(--text);">Evitá señas o adelantos:</strong> Nunca envíes dinero ni pagues por transferencias sin antes haber visto y verificado físicamente el estado real del producto.
+            </p>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: flex-start;">
+            <span style="color: var(--text-muted); font-size: 11px; font-weight: bold;">02.</span>
+            <p style="margin: 0; font-size: 12px; color: var(--text); opacity: 0.8; line-height: 1.4;">
+                <strong style="color: var(--text);">Encuentros públicos:</strong> Coordiná el retiro o entrega exclusivamente en lugares públicos, concurridos y seguros de Mar del Plata.
+            </p>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: flex-start;">
+            <span style="color: var(--text-muted); font-size: 11px; font-weight: bold;">03.</span>
+            <p style="margin: 0; font-size: 12px; color: var(--text); opacity: 0.8; line-height: 1.4;">
+                <strong style="color: var(--text);">Plataforma pasiva:</strong> Recordá que este sitio no interviene, inspecciona ni se responsabiliza por las transacciones o productos ofrecidos por terceros.
+            </p>
+        </div>
+    </div>
+</div>
+<!-- PIE DE PÁGINA CON ENLACES LEGALES CORREGIDOS -->
+<footer style="
+    text-align: center; 
+    padding: 30px 20px 20px 20px; 
+    border-top: 1px dashed #333333; 
+    margin-top: 40px; 
+    font-family: system-ui, -apple-system, sans-serif;
+">
+    <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 15px;">
+        <a href="contacto.html" style="color: #b3b3b3; text-decoration: none; font-size: 13px; font-weight: bold; transition: color 0.2s;" onmouseover="this.style.color='#ff6600'" onmouseout="this.style.color='#b3b3b3'">Contacto Legal</a>
+        <a href="privacidad.html" style="color: #b3b3b3; text-decoration: none; font-size: 13px; font-weight: bold; transition: color 0.2s;" onmouseover="this.style.color='#ff6600'" onmouseout="this.style.color='#b3b3b3'">Privacidad</a>
+        <a href="terminos.html" style="color: #b3b3b3; text-decoration: none; font-size: 13px; font-weight: bold; transition: color 0.2s;" onmouseover="this.style.color='#ff6600'" onmouseout="this.style.color='#b3b3b3'">Términos y Condiciones</a>
+    </div>
+    <p style="margin: 0; font-size: 11px; color: #666666;">&copy; 2026 INFO MDQ HOY. Todos los derechos reservados. El uso de esta sección implica la aceptación de los términos.</p>
+</footer>
+
+<div class="bottom-nav">
+  <a href="index.html" class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+    <span>Inicio</span>
+  </a>
+  <a href="vidriera-de-emprendedores.html" class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7h-3V4c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v3H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2M9 4h6v3H9V4zm11 15H4V9h16v10z"></path></svg>
+    <span>Emprendedores</span>
+  </a>
+  <a href="profesionales.html" class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+    <span>Profesionales</span>
+  </a>
+ <a href="ofertas.html" class="nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+    <span>Ofertas</span>
+  </a>
+</div>
+</div>
+</body>
+</html>
