@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
     
     <!-- SEO e Indexación Básica de Google -->
     <title>INFO MDQ SUR HOY | Alfar, Faro, Serena, Acantilados y Chapadmalal</title>
-    <meta name="description" content="Dólar hoy, quiniela completa de 6 loterías, clima y empleos en Alfar, Faro, Serena, Acantilados y Chapadmalal. Actualizado todo el día." />
-    <link rel="canonical" href="https://infomdqhoy.pages.dev/" />
-    <meta name="robots" content="index, follow" />
-    <meta name="google-site-verification" content="7e64033b70480c67" />
+    <meta name="description" content="Dólar hoy, quiniela completa de 6 loterías, clima y empleos en Alfar, Faro, Serena, Acantilados y Chapadmalal. Actualizado todo el día." >
+    <link rel="canonical" href="https://infomdqhoy.pages.dev/" >
+    <meta name="robots" content="index, follow" >
+    <meta name="google-site-verification" content="7e64033b70480c67" >
 
     <!-- Notificaciones Push - OneSignal -->
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
@@ -351,6 +351,224 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
   .ticker-item { padding: 0 16px; }
 }
 </style>
+<style>
+.amapola-card{width:100%;max-width:760px;background:linear-gradient(135deg,#e8f5e9 0%,#c8e6c9 40%,#a5d6a7 100%);border-radius:20px;box-shadow:0 8px 24px rgba(46,125,50,0.15);border:1.5px solid #81C784;overflow:hidden;padding:16px;margin:0 auto 14px auto;grid-column:1/-1;font-family:Inter,'Segoe UI',system-ui,sans-serif}
+.amapola-fachada-wrap{position:relative}
+.amapola-fachada{width:100%;height:210px;object-fit:cover;object-position:center;background:white;border-radius:14px;margin-bottom:12px;display:block;border:1px solid rgba(0,0,0,0.06)}
+.amapola-logo-circle{
+  position:absolute;
+  top:8px;right:8px;
+  background:white;
+  border-radius:50%;
+  width:84px;
+  height:84px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px rgba(0,0,0,.18);
+  border:3px solid white;
+  overflow:hidden;
+  padding:0;
+  box-sizing:border-box}
+.amapola-logo-circle img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transform:scale(1.35);
+}
+/* SOLO AGREGO ESTO PARA EL ICONO NUEVO */
+.icon-gmaps{width:18px;height:18px;object-fit:contain;vertical-align:middle;margin-right:4px;display:inline-block}
+.amapola-badge-top{position:absolute;bottom:22px;left:10px;background:rgba(27,94,32,.90);color:white;font-size:10px;font-weight:900;padding:6px 12px;border-radius:999px;letter-spacing:.4px;box-shadow:0 3px 8px rgba(0,0,0,.2)}
+.amapola-title{font-weight:900;font-size:22px;color:#1B5E20;text-align:center;margin-bottom:2px;letter-spacing:-.4px}
+.amapola-subtitle{text-align:center;font-size:13px;font-weight:700;color:#33691E;margin-bottom:12px;line-height:1.35}
+.amapola-badges{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:14px}
+.amapola-pill{font-size:11px;font-weight:800;padding:6px 11px;border-radius:999px;display:inline-flex;align-items:center;gap:4px;line-height:1}
+.pill-vegano{background:#4CAF50;color:white}.pill-celiaco{background:#FFF8E1;color:#5D4037;border:1px solid #FFECB3}.pill-diabetico{background:#FFF3E0;color:#4E342E;border:1px solid #FFE0B2}.pill-hiper{background:#E3F2FD;color:#1A237E;border:1px solid #BBDEFB}.pill-extra{background:white;color:#2E7D32;border:1px solid #C8E6C9;font-weight:700}
+.amapola-ubicacion{background:white;border-radius:12px;border:1.5px solid #A5D6A7;box-shadow:0 3px 10px rgba(76,175,80,.12);padding:9px 12px;margin-bottom:14px;text-align:center;line-height:1.4}
+.amapola-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;border-radius:999px;font-weight:900;font-size:14px;text-decoration:none;margin-bottom:8px;border:1px solid rgba(0,0,0,0.08);transition:transform .15s;box-sizing:border-box}
+.btn-wsp{background:#25D366;color:white;box-shadow:0 4px 14px rgba(37,211,102,0.4)}
+.btn-maps{background:#E8F0FE;color:#1A73E8;font-weight:800}
+.btn-ig{background:linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);color:white;box-shadow:0 4px 12px rgba(220,39,67,.3)}
+.amapola-footer{text-align:center;font-size:12px;color:#2E7D32;font-weight:800;margin-top:12px;letter-spacing:.3px;background:white;border-radius:999px;padding:6px 10px;border:1px solid #C8E6C9}
+
+</style>
+<style>
+/* V3 - DISTRIBUCION SEGURA - SIN BACHES - QUINIELA+18 PEGADOS */
+.avisos-destacados-grid{
+  display:block;
+}
+.quiniela-plus18-wrapper{
+  display:block;
+  grid-column:1/-1;
+}
+@media (min-width: 900px){
+  .avisos-destacados-grid{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:16px;
+    width:100%;
+    max-width:1180px;
+    margin:0 auto 16px auto;
+    box-sizing:border-box;
+    padding:0 8px;
+    grid-column:1/-1;
+  }
+  .avisos-destacados-grid > .amapola-card,
+  .avisos-destacados-grid > .card-emp,
+  .avisos-destacados-grid > div{
+    flex:0 1 350px;
+    max-width:360px !important;
+    min-width:320px;
+    margin:0 !important;
+    box-sizing:border-box;
+  }
+  /* Quiniela y +18 siempre juntos, full width, sin separarse */
+  .quiniela-plus18-wrapper{
+    display:block;
+    grid-column:1/-1;
+    width:100%;
+    max-width:760px;
+    margin:0 auto 14px auto;
+  }
+  .quiniela-plus18-wrapper .card{
+    margin-bottom:8px !important;
+  }
+}
+</style>
+<style>
+
+.nannin-card{max-width:420px;margin:0 auto;background:#FFFEF7;border:3px solid #2DD4BF;border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.nannin-hero{position:relative;background:#FFFEF7}
+.nannin-hero img{width:100%;height:auto;display:block}
+.nannin-badge{position:absolute;top:12px;right:12px;left:auto;background:#0F5132;color:#fff;font-weight:800;font-size:10px;letter-spacing:.06em;padding:6px 10px;border-radius:999px;display:flex;align-items:center;gap:6px}
+.nannin-badge span{width:6px;height:6px;border-radius:50%;background:#2DD4BF;display:inline-block}
+.nannin-body{padding:14px 16px 16px}
+.nannin-title{margin:0;text-align:center;font-weight:900;font-size:30px;line-height:.95;color:#FFC700;-webkit-text-stroke:2.2px #1E1B4B;text-shadow:3px 3px 0 #1E1B4B,0 2px 0 #1E1B4B;text-transform:uppercase}
+.nannin-subtitle{margin:8px 0 0;text-align:center;background:#5B3CB3;color:#fff;font-weight:700;font-size:11px;letter-spacing:.04em;padding:8px 10px;border-radius:999px}
+.nannin-pills{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.pill{border-radius:999px;padding:8px 12px;text-align:center;font-weight:900;font-size:11px;letter-spacing:.02em;border:1.5px solid #1E1B4B}
+.pill-yellow{background:#FFC700;color:#1E1B4B}
+.pill-lila{background:#EDE9FE;color:#5B3CB3;border-color:#A78BFA}
+.nannin-promo{margin-top:10px;background:linear-gradient(180deg,#7AC5B0 0%,#6BBDA6 100%);border-radius:16px;padding:14px;border:2px dashed #fff;outline:2px dashed #A78BFA;outline-offset:-6px;position:relative}
+.nannin-promo h3{margin:0;text-align:center;color:#fff;font-size:14px;line-height:1.2}
+.nannin-promo h3 span{color:#FFC700;font-size:16px}
+.grid6{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:12px}
+.grid6 div{background:#fff;border-radius:10px;padding:7px 2px 6px;text-align:center;border:1.5px solid #E9D5FF}
+.grid6 .free{background:#FFC700;border:2px solid #1E1B4B;transform:scale(1.05);box-shadow:0 2px 0 #1E1B4B}
+.grid6 b{font-size:12px;color:#5B3CB3;display:block}
+.grid6 .free b{color:#1E1B4B}
+.grid6 small{font-size:8.5px;font-weight:800;color:#6B7280}
+.grid6 .heart{color:#FF5A8A;font-size:12px}
+.badges{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:14px 0}
+.badge{border-radius:999px;padding:7px 12px;font-size:11px;font-weight:900;display:inline-flex;align-items:center;gap:6px;border:1.5px solid #1E1B4B}
+.badge-y{background:#FFC700;color:#1E1B4B}
+.badge-v{background:#5E3BB0;color:#fff}
+.buttons{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.btn{border-radius:14px;padding:13px 16px;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;cursor:pointer;border:1.5px solid transparent;transition:transform .15s}
+.btn:active{transform:scale(.98)}
+.btn-wa{background:#25D366;color:#fff;border-color:#128C7E;box-shadow:0 4px 12px rgba(37,211,102,.35)}
+.btn-ig{background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);color:#fff;box-shadow:0 4px 14px rgba(214,41,118,.35)}
+.btn-fb{background:#1877F2;color:#fff;box-shadow:0 4px 12px rgba(24,119,242,.35)}
+.btn-map{background:#fff;color:#111827;border-color:#E5E7EB;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.footer{margin:14px 0 2px;text-align:center;font-size:11px;color:#9CA3AF;font-weight:600}
+/* Modal */
+.nannin-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:16px;z-index:9999}
+.nannin-overlay.open{display:flex}
+.nannin-modal{max-width:440px;width:100%;background:#FFFEF7;border:3px solid #2DD4BF;border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.25);position:relative;animation:pop .35s cubic-bezier(.2,1.2,.4,1)}
+.close{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;background:#111827;border:2px solid #fff;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10}
+@keyframes pop{from{transform:scale(.92) translateY(12px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+</style>
+<!-- ESTILOS TOTALMENTE AISLADOS PARA LA BARRA INFERIOR -->
+<style>
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 62px;
+  background: #0b132b; /* Azul oscuro Premium del ticker */
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 99999;
+  padding-bottom: env(safe-area-inset-bottom);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 500;
+  width: 25%;
+  height: 100%;
+  gap: 4px;
+  transition: color 0.2s ease;
+}
+.nav-item svg {
+  width: 21px;
+  height: 21px;
+  opacity: 0.7;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.nav-item:hover, .nav-item.active {
+  color: #38bdf8; /* Azul brillante Premium */
+}
+.nav-item:hover svg, .nav-item.active svg {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+@media (min-width: 769px) {
+  .bottom-nav { display: none; }
+}
+body {
+  padding-bottom: 74px !important;
+}
+  /* Ocultamos los botones del medio solo en celulares de forma ultra-precisa */
+  @media (max-width: 768px) {
+    #btn-vidriera,
+    #btn-profesionales,
+    #btn-ofertas { 
+      display: none !important; 
+    }
+  }
+
+</style>
+<style>
+  /* Bordes redondeados más suaves y limpios para las tarjetas */
+  .card {
+    border-radius: 18px !important;
+    box-shadow: 0 4px 20px rgba(11, 19, 43, 0.03) !important;
+    border: 1px solid #edf2f7 !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  }
+  /* Respuesta visual táctil al presionar una tarjeta en el celular */
+  .card:active {
+    transform: scale(0.99) !important;
+    box-shadow: 0 2px 10px rgba(11, 19, 43, 0.01) !important;
+  }
+
+  /* Animación táctil de hundimiento para los cuadros de quiniela */
+  .q-box {
+    transition: transform 0.1s ease, box-shadow 0.1s ease !important;
+  }
+  .q-box:active {
+    transform: translateY(2px) !important;
+    box-shadow: none !important;
+  }
+
+  /* Transición suave para el botón de WhatsApp */
+  .btn-wsp {
+    transition: background 0.2s ease !important;
+  }
+  .btn-wsp:active {
+    background: #1ebd59 !important;
+  }
+</style>
 </head>
 <body>
 <div id="ticker-real">
@@ -518,16 +736,16 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
   <div style="margin:0 14px 10px 14px;background:#86d391;border-radius:14px;padding:12px 6px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px">
     <a href="https://wa.me/5492235808030?text=Hola%20Farmacia%20Vara%2C%20los%20vi%20en%20InfoMDQHoy" target="_blank" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:5px;border-right:2px solid #5aa867;padding-right:4px;justify-content:center;min-width:0">
       <div style="width:30px;height:30px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 5px rgba(0,0,0,.2)">
-        <svg viewBox="0 0 32 32" width="17" height="17" fill="white"><path d="M19.11 17.2c-.31-.16-1.84-.9-2.12-1.01-.29-.11-.5-.16-.7.16-.21.31-.82 1.01-1 1.22-.19.21-.37.23-.69.08-.31-.16-1.32-.48-2.51-1.54-.93-.83-1.55-1.85-1.74-2.16-.18-.31-.02-.48.14-.64.14-.14.31-.37.47-.55.16-.18.21-.31.31-.52.1-.21.05-.39-.03-.54-.08-.16-.7-1.69-.96-2.31-.25-.6-.51-.52-.7-.53h-.6c-.21 0-.54.08-.82.39-.29.31-1.08 1.06-1.08 2.58s1.11 2.99 1.26 3.2c.16.21 2.18 3.33 5.28 4.67.74.32 1.31.51 1.76.65.74.23 1.41.2 1.94.12.59-.09 1.84-.75 2.1-1.48.26-.72.26-1.34.18-1.47-.08-.13-.29-.21-.6-.36zM16 2.04c-7.7 0-13.94 6.24-13.94 13.94 0 2.46.64 4.86 1.86 6.97L2.05 30l7.25-1.9A13.9 13.9 0 0 0 16 30.08c7.7 0 13.94-6.24 13.94-13.94S23.7 2.04 16 2.04zm0 25.33A11.35 11.35 0 0 1 10.22 26l-.42-.25-4.31 1.13 1.15-4.2-.27-.43a11.35 11.35 0 0 1-1.74-6.02c0-6.28 5.11-11.39 11.39-11.39a11.33 11.33 0 0 1 8.05 3.33 11.33 11.33 0 0 1 3.33 8.05c0 6.28-5.11 11.39-11.4 11.39z"/></svg>
+        <svg viewBox="0 0 32 32" width="17" height="17" fill="white"><path d="M19.11 17.2c-.31-.16-1.84-.9-2.12-1.01-.29-.11-.5-.16-.7.16-.21.31-.82 1.01-1 1.22-.19.21-.37.23-.69.08-.31-.16-1.32-.48-2.51-1.54-.93-.83-1.55-1.85-1.74-2.16-.18-.31-.02-.48.14-.64.14-.14.31-.37.47-.55.16-.18.21-.31.31-.52.1-.21.05-.39-.03-.54-.08-.16-.7-1.69-.96-2.31-.25-.6-.51-.52-.7-.53h-.6c-.21 0-.54.08-.82.39-.29.31-1.08 1.06-1.08 2.58s1.11 2.99 1.26 3.2c.16.21 2.18 3.33 5.28 4.67.74.32 1.31.51 1.76.65.74.23 1.41.2 1.94.12.59-.09 1.84-.75 2.1-1.48.26-.72.26-1.34.18-1.47-.08-.13-.29-.21-.6-.36zM16 2.04c-7.7 0-13.94 6.24-13.94 13.94 0 2.46.64 4.86 1.86 6.97L2.05 30l7.25-1.9A13.9 13.9 0 0 0 16 30.08c7.7 0 13.94-6.24 13.94-13.94S23.7 2.04 16 2.04zm0 25.33A11.35 11.35 0 0 1 10.22 26l-.42-.25-4.31 1.13 1.15-4.2-.27-.43a11.35 11.35 0 0 1-1.74-6.02c0-6.28 5.11-11.39 11.39-11.39a11.33 11.33 0 0 1 8.05 3.33 11.33 11.33 0 0 1 3.33 8.05c0 6.28-5.11 11.39-11.4 11.39z"></svg>
       </div>
       <div style="color:#05210f;font-weight:900;font-size:10.5px;line-height:1.2;text-align:center">WhatsApp<br><b style="font-size:11px">2235808030</b></div>
     </a>
     <a href="https://www.google.com/maps/search/?api=1&query=Estados+Unidos+779+Alfar+Mar+del+Plata" target="_blank" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:5px;border-right:2px solid #5aa867;padding-right:4px;justify-content:center;min-width:0">
-      <div style="width:30px;height:30px;background:#0f172a;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+      <div style="width:30px;height:30px;background:#0f172a;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"><circle cx="12" cy="9" r="2.5"></svg></div>
       <div style="color:#05210f;font-weight:900;font-size:10.5px;line-height:1.2;text-align:center">Ver en<br>el mapa</div>
     </a>
     <a href="https://www.google.com/maps/search/?api=1&query=Diagonal+Estados+Unidos+779+Alfar+Mar+del+Plata" target="_blank" style="text-decoration:none;display:flex;flex-direction:column;align-items:center;gap:5px;justify-content:center;min-width:0">
-      <div style="width:30px;height:30px;background:#14532d;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 21s-6-5.373-6-10a6 6 0 0 1 12 0c0 4.627-6 10-6 10z"/><circle cx="12" cy="11" r="2"/></svg></div>
+      <div style="width:30px;height:30px;background:#14532d;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 21s-6-5.373-6-10a6 6 0 0 1 12 0c0 4.627-6 10-6 10z"><circle cx="12" cy="11" r="2"></svg></div>
       <div style="color:#05210f;font-weight:900;font-size:10.5px;line-height:1.2;text-align:center">Estados Unidos<br><b style="font-size:10.5px">Nº 779</b></div>
     </a>
   </div>
@@ -588,94 +806,6 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
 </div>
 
 <div class="card" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);color:white"><h2>🌤️ Clima Mar del Plata</h2><div style="display:flex;align-items:center;gap:14px;margin-top:12px"><div style="font-size:54px;line-height:1" id="c-icon">⛅</div><div><div style="font-size:46px;font-weight:900;line-height:1" id="c-t">--°</div><div style="font-size:13px;opacity:.9;margin-top:2px" id="c-desc">Cargando...</div></div></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px"><div style="background:rgba(255,255,255,.18);border-radius:10px;padding:8px 4px;text-align:center"><div style="font-size:9px;opacity:.85;font-weight:700;letter-spacing:.5px">SENSACIÓN</div><div style="font-weight:800;font-size:15px;margin-top:2px" id="c-st">--°</div></div><div style="background:rgba(255,255,255,.18);border-radius:10px;padding:8px 4px;text-align:center"><div style="font-size:9px;opacity:.85;font-weight:700;letter-spacing:.5px">HUMEDAD</div><div style="font-weight:800;font-size:15px;margin-top:2px" id="c-hum">--%</div></div><div style="background:rgba(255,255,255,.18);border-radius:10px;padding:8px 4px;text-align:center"><div style="font-size:9px;opacity:.85;font-weight:700;letter-spacing:.5px">VIENTO</div><div style="font-weight:800;font-size:15px;margin-top:2px" id="c-wind">-- km/h</div></div></div><div style="display:flex;justify-content:space-between;margin-top:12px;font-size:13px;opacity:.95;border-top:1px solid rgba(255,255,255,.25);padding-top:10px"><span>🔽 Mínima <b id="c-min">--°</b></span><span>🔼 Máxima <b id="c-max">--°</b></span></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px;border-top:1px solid rgba(255,255,255,.25);padding-top:10px" id="c-forecast"></div></div>
-
-<style>
-.amapola-card{width:100%;max-width:760px;background:linear-gradient(135deg,#e8f5e9 0%,#c8e6c9 40%,#a5d6a7 100%);border-radius:20px;box-shadow:0 8px 24px rgba(46,125,50,0.15);border:1.5px solid #81C784;overflow:hidden;padding:16px;margin:0 auto 14px auto;grid-column:1/-1;font-family:Inter,'Segoe UI',system-ui,sans-serif}
-.amapola-fachada-wrap{position:relative}
-.amapola-fachada{width:100%;height:210px;object-fit:cover;object-position:center;background:white;border-radius:14px;margin-bottom:12px;display:block;border:1px solid rgba(0,0,0,0.06)}
-.amapola-logo-circle{
-  position:absolute;
-  top:8px;right:8px;
-  background:white;
-  border-radius:50%;
-  width:84px;
-  height:84px;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 6px 16px rgba(0,0,0,.18);
-  border:3px solid white;
-  overflow:hidden;
-  padding:0;
-  box-sizing:border-box}
-.amapola-logo-circle img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-  transform:scale(1.35);
-}
-/* SOLO AGREGO ESTO PARA EL ICONO NUEVO */
-.icon-gmaps{width:18px;height:18px;object-fit:contain;vertical-align:middle;margin-right:4px;display:inline-block}
-.amapola-badge-top{position:absolute;bottom:22px;left:10px;background:rgba(27,94,32,.90);color:white;font-size:10px;font-weight:900;padding:6px 12px;border-radius:999px;letter-spacing:.4px;box-shadow:0 3px 8px rgba(0,0,0,.2)}
-.amapola-title{font-weight:900;font-size:22px;color:#1B5E20;text-align:center;margin-bottom:2px;letter-spacing:-.4px}
-.amapola-subtitle{text-align:center;font-size:13px;font-weight:700;color:#33691E;margin-bottom:12px;line-height:1.35}
-.amapola-badges{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:14px}
-.amapola-pill{font-size:11px;font-weight:800;padding:6px 11px;border-radius:999px;display:inline-flex;align-items:center;gap:4px;line-height:1}
-.pill-vegano{background:#4CAF50;color:white}.pill-celiaco{background:#FFF8E1;color:#5D4037;border:1px solid #FFECB3}.pill-diabetico{background:#FFF3E0;color:#4E342E;border:1px solid #FFE0B2}.pill-hiper{background:#E3F2FD;color:#1A237E;border:1px solid #BBDEFB}.pill-extra{background:white;color:#2E7D32;border:1px solid #C8E6C9;font-weight:700}
-.amapola-ubicacion{background:white;border-radius:12px;border:1.5px solid #A5D6A7;box-shadow:0 3px 10px rgba(76,175,80,.12);padding:9px 12px;margin-bottom:14px;text-align:center;line-height:1.4}
-.amapola-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px;border-radius:999px;font-weight:900;font-size:14px;text-decoration:none;margin-bottom:8px;border:1px solid rgba(0,0,0,0.08);transition:transform .15s;box-sizing:border-box}
-.btn-wsp{background:#25D366;color:white;box-shadow:0 4px 14px rgba(37,211,102,0.4)}
-.btn-maps{background:#E8F0FE;color:#1A73E8;font-weight:800}
-.btn-ig{background:linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);color:white;box-shadow:0 4px 12px rgba(220,39,67,.3)}
-.amapola-footer{text-align:center;font-size:12px;color:#2E7D32;font-weight:800;margin-top:12px;letter-spacing:.3px;background:white;border-radius:999px;padding:6px 10px;border:1px solid #C8E6C9}
-
-</style>
-
-
-
-<style>
-/* V3 - DISTRIBUCION SEGURA - SIN BACHES - QUINIELA+18 PEGADOS */
-.avisos-destacados-grid{
-  display:block;
-}
-.quiniela-plus18-wrapper{
-  display:block;
-  grid-column:1/-1;
-}
-@media (min-width: 900px){
-  .avisos-destacados-grid{
-    display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:16px;
-    width:100%;
-    max-width:1180px;
-    margin:0 auto 16px auto;
-    box-sizing:border-box;
-    padding:0 8px;
-    grid-column:1/-1;
-  }
-  .avisos-destacados-grid > .amapola-card,
-  .avisos-destacados-grid > .card-emp,
-  .avisos-destacados-grid > div{
-    flex:0 1 350px;
-    max-width:360px !important;
-    min-width:320px;
-    margin:0 !important;
-    box-sizing:border-box;
-  }
-  /* Quiniela y +18 siempre juntos, full width, sin separarse */
-  .quiniela-plus18-wrapper{
-    display:block;
-    grid-column:1/-1;
-    width:100%;
-    max-width:760px;
-    margin:0 auto 14px auto;
-  }
-  .quiniela-plus18-wrapper .card{
-    margin-bottom:8px !important;
-  }
-}
-</style>
 
 <div class="avisos-destacados-grid">
 <div class="amapola-card" onclick="abrirModalAmapola(this)" style="cursor:pointer">
@@ -745,7 +875,7 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
       <div style="display:flex;flex-direction:column;gap:8px;">
         <div style="display:flex;align-items:center;gap:10px;background:white;border:1.5px solid #fde68a;border-left:4px solid #0f766e;padding:9px 10px;border-radius:12px;box-shadow:0 2px 8px rgba(15,23,42,0.04);">
           <div style="width:32px;height:32px;min-width:32px;background:#ccfbf1;border-radius:10px;display:flex;align-items:center;justify-content:center;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0f766e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h6"/><path d="M12 9v6"/><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 7a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" opacity="0.3"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0f766e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h6"><path d="M12 9v6"><path d="M12 3a9 9 0 1 0 9 9"><path d="M12 7a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" opacity="0.3"></svg>
           </div>
           <div style="flex:1;">
             <div style="font-size:13px;font-weight:800;color:#0f172a;line-height:1.1;">Intervención temprana</div>
@@ -754,7 +884,7 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
         </div>
         <div style="display:flex;align-items:center;gap:10px;background:white;border:1.5px solid #fde68a;border-left:4px solid #d97706;padding:9px 10px;border-radius:12px;box-shadow:0 2px 8px rgba(15,23,42,0.04);">
           <div style="width:32px;height:32px;min-width:32px;background:#fef3c7;border-radius:10px;display:flex;align-items:center;justify-content:center;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#92400e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2.08C10.5 3.5 9.5 3 7.75 3A5.5 5.5 0 0 0 2.25 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#92400e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2.08C10.5 3.5 9.5 3 7.75 3A5.5 5.5 0 0 0 2.25 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></svg>
           </div>
           <div style="flex:1;">
             <div style="font-size:13px;font-weight:800;color:#0f172a;line-height:1.1;">Discapacidad infantil</div>
@@ -763,7 +893,7 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
         </div>
         <div style="display:flex;align-items:center;gap:10px;background:white;border:1.5px solid #fde68a;border-left:4px solid #be185d;padding:9px 10px;border-radius:12px;box-shadow:0 2px 8px rgba(15,23,42,0.04);">
           <div style="width:32px;height:32px;min-width:32px;background:#fce7f3;border-radius:10px;display:flex;align-items:center;justify-content:center;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#be185d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 10a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/><path d="M12 2a10 10 0 0 0-10 10c0 5 4.5 10 10 10s10-5 10-10A10 10 0 0 0 12 2z" opacity="0.3"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#be185d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 10a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"><path d="M12 2a10 10 0 0 0-10 10c0 5 4.5 10 10 10s10-5 10-10A10 10 0 0 0 12 2z" opacity="0.3"><path d="M8 14s1.5 2 4 2 4-2 4-2"></svg>
           </div>
           <div style="flex:1;">
             <div style="font-size:13px;font-weight:800;color:#0f172a;line-height:1.1;">Niños y adolescentes</div>
@@ -804,7 +934,7 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
         </div>
       </div>
       <a href="https://wa.me/5492235753221?text=Hola%20Julia,%20vi%20tu%20aviso%20de%20Fonoaudiologia%20en%20Vidriera" class="btn-wsp" onclick="event.stopPropagation()" target="_blank" style="margin-top:14px;background:linear-gradient(135deg,#22c55e,#15803d);box-shadow:0 6px 20px rgba(34,197,94,0.35);display:flex;align-items:center;justify-content:center;gap:8px;color:white;padding:13px 18px;border-radius:999px;text-decoration:none;font-weight:900;font-size:15px;width:100%;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.82 9.82 0 0012.03 2C6.48 2 2 6.44 2 11.93c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.37a9.82 9.82 0 004.78 1.22h.01c5.54 0 10.03-4.44 10.03-9.93a9.75 9.75 0 00-3.02-7.98zM12.04 20.17h-.01a8.12 8.12 0 01-4.14-1.13l-.3-.18-3.12.82.83-3.02-.2-.31a8.18 8.18 0 01-1.26-4.42c0-4.54 3.73-8.23 8.32-8.23a8.27 8.27 0 015.87 2.41 8.14 8.14 0 012.43 5.78c0 4.54-3.73 8.28-8.32 8.28zm4.56-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.22-.74-.65-1.23-1.45-1.38-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05s.89 2.38 1.01 2.54c.12.17 1.75 2.66 4.23 3.73.59.25 1.05.4 1.41.51.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.82 9.82 0 0012.03 2C6.48 2 2 6.44 2 11.93c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.37a9.82 9.82 0 004.78 1.22h.01c5.54 0 10.03-4.44 10.03-9.93a9.75 9.75 0 00-3.02-7.98zM12.04 20.17h-.01a8.12 8.12 0 01-4.14-1.13l-.3-.18-3.12.82.83-3.02-.2-.31a8.18 8.18 0 01-1.26-4.42c0-4.54 3.73-8.23 8.32-8.23a8.27 8.27 0 015.87 2.41 8.14 8.14 0 012.43 5.78c0 4.54-3.73 8.28-8.32 8.28zm4.56-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.22-.74-.65-1.23-1.45-1.38-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05s.89 2.38 1.01 2.54c.12.17 1.75 2.66 4.23 3.73.59.25 1.05.4 1.41.51.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"></svg>
         Consultar por WhatsApp
       </a>
       <div style="text-align:center;font-size:10px;font-weight:600;color:#78716c;margin-top:8px;letter-spacing:0.2px;">Respuesta rápida • Atención profesional y cercana</div>
@@ -887,11 +1017,11 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
   <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
     <div style="width:64px;height:64px;min-width:64px;background:#FFFFFF;border-radius:16px;border:1.5px solid #E8D5B5;box-shadow:0 3px 10px rgba(92,46,14,0.12);display:flex;align-items:center;justify-content:center;">
       <svg width="42" height="32" viewBox="0 0 64 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="6" y="6" width="52" height="8" rx="3" stroke="#8B5A2B" stroke-width="2.2" fill="#FFF8E6"/>
-        <rect x="14" y="18" width="36" height="16" rx="2" stroke="#8B5A2B" stroke-width="2" fill="none"/>
-        <rect x="18" y="22" width="10" height="5" rx="1" stroke="#8B5A2B" stroke-width="1.5" fill="#FFF8E6"/>
-        <rect x="36" y="28" width="10" height="4" rx="1" stroke="#8B5A2B" stroke-width="1.3" fill="#FFF8E6"/>
-        <path d="M8 34 H56" stroke="#8B5A2B" stroke-width="2" stroke-linecap="round"/>
+        <rect x="6" y="6" width="52" height="8" rx="3" stroke="#8B5A2B" stroke-width="2.2" fill="#FFF8E6">
+        <rect x="14" y="18" width="36" height="16" rx="2" stroke="#8B5A2B" stroke-width="2" fill="none">
+        <rect x="18" y="22" width="10" height="5" rx="1" stroke="#8B5A2B" stroke-width="1.5" fill="#FFF8E6">
+        <rect x="36" y="28" width="10" height="4" rx="1" stroke="#8B5A2B" stroke-width="1.3" fill="#FFF8E6">
+        <path d="M8 34 H56" stroke="#8B5A2B" stroke-width="2" stroke-linecap="round">
       </svg>
     </div>
     <div style="font-family:'Fredoka',Inter,sans-serif;font-weight:900;font-size:clamp(18px,3.2vw,26px);color:#3D2314;letter-spacing:-0.01em;text-transform:uppercase;line-height:1;">KIOSCO LOS MELLI</div>
@@ -911,13 +1041,13 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
   </div>
 
   <div style="display:flex;align-items:center;justify-content:center;gap:5px;margin-bottom:14px;color:#5C4033;font-weight:600;font-size:12px;">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5C4033" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5C4033" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"><circle cx="12" cy="10" r="3"></svg>
     <span>Guillermo Magrassi 4295 - Mar del Plata</span>
   </div>
 
   <div style="display:flex;justify-content:center;">
     <a href="https://maps.google.com/?q=Guillermo+Magrassi+4299+Mar+del+Plata" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;background:#7A4A2E;color:#FFFFFF;padding:10px 22px;border-radius:999px;font-weight:800;font-size:13px;text-decoration:none;box-shadow:0 3px 10px rgba(92,46,14,0.22);">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"><circle cx="12" cy="10" r="3"></svg>
       VER EN EL MAPA
     </a>
   </div>
@@ -926,50 +1056,6 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
 <div class="card" style="background:linear-gradient(135deg,#0891b2,#0e7490);color:white"><h2>🌊 Mareas Mar del Plata</h2><div id="mareas-lista" style="margin-top:10px;font-size:13px">Cargando mareas...</div></div>
 
 <div class="card" style="border-left:5px solid #25D366"><h2>💼 Empleos MDQ HOY</h2><div style="margin-top:10px"><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Mozo/a</b> - Güemes - NUEVO HOY</div><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Cajero/a</b> - Constitución</div><div style="padding:10px 0"><b>Vendedor/a</b> - Peatonal</div></div><a href="https://empleos-mdq.pages.dev/" target="_blank" class="btn-wsp">Ver todos los empleos →</a></div>
-
-<style>
-
-.nannin-card{max-width:420px;margin:0 auto;background:#FFFEF7;border:3px solid #2DD4BF;border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.15)}
-.nannin-hero{position:relative;background:#FFFEF7}
-.nannin-hero img{width:100%;height:auto;display:block}
-.nannin-badge{position:absolute;top:12px;right:12px;left:auto;background:#0F5132;color:#fff;font-weight:800;font-size:10px;letter-spacing:.06em;padding:6px 10px;border-radius:999px;display:flex;align-items:center;gap:6px}
-.nannin-badge span{width:6px;height:6px;border-radius:50%;background:#2DD4BF;display:inline-block}
-.nannin-body{padding:14px 16px 16px}
-.nannin-title{margin:0;text-align:center;font-weight:900;font-size:30px;line-height:.95;color:#FFC700;-webkit-text-stroke:2.2px #1E1B4B;text-shadow:3px 3px 0 #1E1B4B,0 2px 0 #1E1B4B;text-transform:uppercase}
-.nannin-subtitle{margin:8px 0 0;text-align:center;background:#5B3CB3;color:#fff;font-weight:700;font-size:11px;letter-spacing:.04em;padding:8px 10px;border-radius:999px}
-.nannin-pills{display:flex;flex-direction:column;gap:8px;margin:12px 0}
-.pill{border-radius:999px;padding:8px 12px;text-align:center;font-weight:900;font-size:11px;letter-spacing:.02em;border:1.5px solid #1E1B4B}
-.pill-yellow{background:#FFC700;color:#1E1B4B}
-.pill-lila{background:#EDE9FE;color:#5B3CB3;border-color:#A78BFA}
-.nannin-promo{margin-top:10px;background:linear-gradient(180deg,#7AC5B0 0%,#6BBDA6 100%);border-radius:16px;padding:14px;border:2px dashed #fff;outline:2px dashed #A78BFA;outline-offset:-6px;position:relative}
-.nannin-promo h3{margin:0;text-align:center;color:#fff;font-size:14px;line-height:1.2}
-.nannin-promo h3 span{color:#FFC700;font-size:16px}
-.grid6{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:12px}
-.grid6 div{background:#fff;border-radius:10px;padding:7px 2px 6px;text-align:center;border:1.5px solid #E9D5FF}
-.grid6 .free{background:#FFC700;border:2px solid #1E1B4B;transform:scale(1.05);box-shadow:0 2px 0 #1E1B4B}
-.grid6 b{font-size:12px;color:#5B3CB3;display:block}
-.grid6 .free b{color:#1E1B4B}
-.grid6 small{font-size:8.5px;font-weight:800;color:#6B7280}
-.grid6 .heart{color:#FF5A8A;font-size:12px}
-.badges{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:14px 0}
-.badge{border-radius:999px;padding:7px 12px;font-size:11px;font-weight:900;display:inline-flex;align-items:center;gap:6px;border:1.5px solid #1E1B4B}
-.badge-y{background:#FFC700;color:#1E1B4B}
-.badge-v{background:#5E3BB0;color:#fff}
-.buttons{display:flex;flex-direction:column;gap:10px;margin-top:14px}
-.btn{border-radius:14px;padding:13px 16px;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;cursor:pointer;border:1.5px solid transparent;transition:transform .15s}
-.btn:active{transform:scale(.98)}
-.btn-wa{background:#25D366;color:#fff;border-color:#128C7E;box-shadow:0 4px 12px rgba(37,211,102,.35)}
-.btn-ig{background:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5);color:#fff;box-shadow:0 4px 14px rgba(214,41,118,.35)}
-.btn-fb{background:#1877F2;color:#fff;box-shadow:0 4px 12px rgba(24,119,242,.35)}
-.btn-map{background:#fff;color:#111827;border-color:#E5E7EB;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.footer{margin:14px 0 2px;text-align:center;font-size:11px;color:#9CA3AF;font-weight:600}
-/* Modal */
-.nannin-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:16px;z-index:9999}
-.nannin-overlay.open{display:flex}
-.nannin-modal{max-width:440px;width:100%;background:#FFFEF7;border:3px solid #2DD4BF;border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.25);position:relative;animation:pop .35s cubic-bezier(.2,1.2,.4,1)}
-.close{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;background:#111827;border:2px solid #fff;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10}
-@keyframes pop{from{transform:scale(.92) translateY(12px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
-</style>
 
 <!-- AVISO FIJO LIVIANO -->
 <div class="nannin-card" id="avisoNannin" style="cursor:pointer" title="Tocá para ver más grande">
@@ -1007,22 +1093,22 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
     <div class="buttons">
       <!-- WhatsApp solo ícono oficial 2026, sin número visible -->
       <a class="btn btn-wa" href="https://wa.me/5492233541631" target="_blank" rel="noopener">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.82 9.82 0 0012.04 2C6.58 2 2.15 6.44 2.15 11.9c0 1.75.46 3.45 1.33 4.96L2 22l5.26-1.38a9.84 9.84 0 004.78 1.22h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.65-1.03-5.13-2.9-7zM12.05 20.3h-.01a8.19 8.19 0 01-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 01-1.27-4.54c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 012.41 5.82c0 4.54-3.7 8.24-8.24 8.24zm4.52-6.15c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13s-.64.81-.79.97-.29.19-.54.06c-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.14-.25-.02-.38.1-.51.11-.11.25-.29.37-.43.12-.15.16-.25.24-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07s.89 2.4 1.01 2.57c.12.17 1.75 2.67 4.24 3.75.59.26 1.05.41 1.41.52.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.82 9.82 0 0012.04 2C6.58 2 2.15 6.44 2.15 11.9c0 1.75.46 3.45 1.33 4.96L2 22l5.26-1.38a9.84 9.84 0 004.78 1.22h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.65-1.03-5.13-2.9-7zM12.05 20.3h-.01a8.19 8.19 0 01-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 01-1.27-4.54c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 012.41 5.82c0 4.54-3.7 8.24-8.24 8.24zm4.52-6.15c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13s-.64.81-.79.97-.29.19-.54.06c-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.14-.25-.02-.38.1-.51.11-.11.25-.29.37-.43.12-.15.16-.25.24-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07s.89 2.4 1.01 2.57c.12.17 1.75 2.67 4.24 3.75.59.26 1.05.41 1.41.52.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z"></svg>
         WhatsApp
       </a>
 
       <a class="btn btn-ig" id="linkIG" href="https://www.instagram.com/lavanderiananin/" target="_blank" rel="noopener">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="6" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="4.2" stroke="white" stroke-width="2"/><circle cx="17.5" cy="6.8" r="1.2" fill="white"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="6" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="4.2" stroke="white" stroke-width="2"><circle cx="17.5" cy="6.8" r="1.2" fill="white"></svg>
         @lavanderiananin
       </a>
 
       <a class="btn btn-fb" id="linkFB" href="https://www.facebook.com/feriantes.somoss" target="_blank" rel="noopener">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.095 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.49 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.095 24 18.1 24 12.073z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.095 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.49 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.095 24 18.1 24 12.073z"></svg>
         Feriantes Somos - Facebook
       </a>
 
       <a class="btn btn-map" href="https://www.google.com/maps?q=-38.1003682,-57.5622021&z=17&hl=es" target="_blank" rel="noopener">
-        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#EA4335"/><circle cx="12" cy="9" r="3" fill="white"/><circle cx="12" cy="9" r="1.6" fill="#4285F4"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#EA4335"><circle cx="12" cy="9" r="3" fill="white"><circle cx="12" cy="9" r="1.6" fill="#4285F4"></svg>
         Retiro y Entrega a Domicilio - Mar del Plata
       </a>
     </div>
@@ -1035,7 +1121,7 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
 <div class="nannin-overlay" id="overlay">
   <div class="nannin-modal" id="modalCard" style="max-width:380px;width:92%;max-height:90vh;overflow-y:auto">
     <div class="close" id="closeBtn" style="top:10px;right:10px;width:36px;height:36px;background:#000;border:3px solid #fff;box-shadow:0 2px 10px rgba(0,0,0,.3)"> 
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1L13 13M13 1L1 13" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1L13 13M13 1L1 13" stroke="white" stroke-width="2.5" stroke-linecap="round"></svg>
     </div>
     <div class="nannin-hero" style="background:#FFFEF7">
       <img src="lavadero.webp" alt="Lavandería De Nannin" style="width:100%;height:auto;display:block">
@@ -1841,97 +1927,5 @@ tickerDesdePagina();
     <span>Ofertas</span>
   </a>
 </div>
-<!-- ESTILOS TOTALMENTE AISLADOS PARA LA BARRA INFERIOR -->
-<style>
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 62px;
-  background: #0b132b; /* Azul oscuro Premium del ticker */
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  z-index: 99999;
-  padding-bottom: env(safe-area-inset-bottom);
-  font-family: system-ui, -apple-system, sans-serif;
-}
-.nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #94a3b8;
-  text-decoration: none;
-  font-size: 11px;
-  font-weight: 500;
-  width: 25%;
-  height: 100%;
-  gap: 4px;
-  transition: color 0.2s ease;
-}
-.nav-item svg {
-  width: 21px;
-  height: 21px;
-  opacity: 0.7;
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-.nav-item:hover, .nav-item.active {
-  color: #38bdf8; /* Azul brillante Premium */
-}
-.nav-item:hover svg, .nav-item.active svg {
-  opacity: 1;
-  transform: translateY(-1px);
-}
-@media (min-width: 769px) {
-  .bottom-nav { display: none; }
-}
-body {
-  padding-bottom: 74px !important;
-}
-  /* Ocultamos los botones del medio solo en celulares de forma ultra-precisa */
-  @media (max-width: 768px) {
-    #btn-vidriera,
-    #btn-profesionales,
-    #btn-ofertas { 
-      display: none !important; 
-    }
-  }
-
-</style>
-<style>
-  /* Bordes redondeados más suaves y limpios para las tarjetas */
-  .card {
-    border-radius: 18px !important;
-    box-shadow: 0 4px 20px rgba(11, 19, 43, 0.03) !important;
-    border: 1px solid #edf2f7 !important;
-    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
-  }
-  /* Respuesta visual táctil al presionar una tarjeta en el celular */
-  .card:active {
-    transform: scale(0.99) !important;
-    box-shadow: 0 2px 10px rgba(11, 19, 43, 0.01) !important;
-  }
-
-  /* Animación táctil de hundimiento para los cuadros de quiniela */
-  .q-box {
-    transition: transform 0.1s ease, box-shadow 0.1s ease !important;
-  }
-  .q-box:active {
-    transform: translateY(2px) !important;
-    box-shadow: none !important;
-  }
-
-  /* Transición suave para el botón de WhatsApp */
-  .btn-wsp {
-    transition: background 0.2s ease !important;
-  }
-  .btn-wsp:active {
-    background: #1ebd59 !important;
-  }
-</style>
-
 </body>
 </html>
