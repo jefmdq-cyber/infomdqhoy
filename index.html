@@ -13,41 +13,39 @@
 
     <!-- Notificaciones Push - OneSignal -->
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-    <script>
-      window.OneSignalDeferred = window.OneSignalDeferred || [];
-      OneSignalDeferred.push(async function(OneSignal) {
-        await OneSignal.init({
-          appId: "5ad4c72f-3373-44b0-b64f-0ecadf1a6223",
-          promptOptions: {
-            slidedown: {
-              prompts: [
-                {
-                  type: "push",
-                  autoPrompt: true,
-                  text: {
-                    actionMessage: "¿De qué barrio sos? Seleccioná para recibir alertas críticas de tu zona (Cortes de luz, colectivos, clima):",
-                    acceptButton: "Activar Alertas",
-                    cancelButton: "No, gracias"
-                  },
-                  delay: {
-                    pageViews: 1,
-                    timeDelay: 1
-                  },
-                  categories: [
-                    { id: "barrio_alfar", label: "🟢 Barrio Alfar" },
-                    { id: "barrio_faro", label: "🔵 Faro Norte / Punta Mogotes" },
-                    { id: "barrio_serena", label: "🟡 Playa Serena" },
-                    { id: "barrio_acantilados", label: "🟠 Los Acantilados" }
-                  ]
-                }
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "5ad4c72f-3373-44b0-b64f-0ecadf1a6223",
+      promptOptions: {
+        slidedown: {
+          prompts: [
+            {
+              type: "push",
+              autoPrompt: true,
+              text: {
+                actionMessage: "¿De qué barrio sos? Seleccioná para recibir alertas críticas de tu zona",
+                acceptButton: "Activar Alertas",
+                cancelButton: "No, gracias"
+              },
+              delay: {
+                pageViews: 1,
+                timeDelay: 1
+              },
+              categories: [
+                { id: "barrio_alfar", label: "🟢 Barrio Alfar" },
+                { id: "barrio_faro", label: "🔵 Faro Norte / Punta Mogotes" },
+                { id: "barrio_serena", label: "🟡 Playa Serena" },
+                { id: "barrio_acantilados", label: "🟠 Los Acantilados" }
               ]
             }
           ]
         }
-      });
+      }
     });
-    </script>
-
+  });
+</script>
     <!-- Google Analytics (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3L9SZ6YVFT"></script>
     <script>
