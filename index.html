@@ -1,94 +1,115 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "5ad4c72f-3373-44b0-b64f-0ecadf1a6223",
-      promptOptions: {
-        slidedown: {
-          prompts: [
-            {
-              type: "push",
-              autoPrompt: true,
-              text: {
-                actionMessage: "¿De qué barrio sos? Seleccioná para recibir alertas críticas de tu zona (Cortes de luz, colectivos, clima):",
-                acceptButton: "Activar Alertas",
-                cancelButton: "No, gracias"
-              },
-              delay: {
-                pageViews: 1,
-                timeDelay: 1
-              },
-              categories: [
-                { id: "barrio_alfar", label: "🟢 Barrio Alfar" },
-                { id: "barrio_faro", label: "🔵 Faro Norte / Punta Mogotes" },
-                { id: "barrio_serena", label: "🟡 Playa Serena" },
-                { id: "barrio_acantilados", label: "🟠 Los Acantilados" }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- SEO e Indexación Básica de Google -->
+    <title>INFO MDQ SUR HOY | Alfar, Faro, Serena, Acantilados y Chapadmalal</title>
+    <meta name="description" content="Dólar hoy, quiniela completa de 6 loterías, clima y empleos en Alfar, Faro, Serena, Acantilados y Chapadmalal. Actualizado todo el día." />
+    <link rel="canonical" href="https://infomdqhoy.pages.dev/" />
+    <meta name="robots" content="index, follow" />
+    <meta name="google-site-verification" content="7e64033b70480c67" />
+
+    <!-- Notificaciones Push - OneSignal -->
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script>
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(async function(OneSignal) {
+        await OneSignal.init({
+          appId: "5ad4c72f-3373-44b0-b64f-0ecadf1a6223",
+          promptOptions: {
+            slidedown: {
+              prompts: [
+                {
+                  type: "push",
+                  autoPrompt: true,
+                  text: {
+                    actionMessage: "¿De qué barrio sos? Seleccioná para recibir alertas críticas de tu zona (Cortes de luz, colectivos, clima):",
+                    acceptButton: "Activar Alertas",
+                    cancelButton: "No, gracias"
+                  },
+                  delay: {
+                    pageViews: 1,
+                    timeDelay: 1
+                  },
+                  categories: [
+                    { id: "barrio_alfar", label: "🟢 Barrio Alfar" },
+                    { id: "barrio_faro", label: "🔵 Faro Norte / Punta Mogotes" },
+                    { id: "barrio_serena", label: "🟡 Playa Serena" },
+                    { id: "barrio_acantilados", label: "🟠 Los Acantilados" }
+                  ]
+                }
               ]
             }
           ]
         }
-      }
+      });
     });
-  });
-</script>
+    </script>
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3L9SZ6YVFT"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3L9SZ6YVFT');</script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="google-site-verification" content="7e64033b70480c67" />
-<link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#0f172a">
-<link rel="apple-touch-icon" href="/icon-192.png">
-<title>INFO MDQ SUR HOY | Alfar, Faro, Serena, Acantilados y Chapadmalal - Dólar y Quiniela</title>
-<meta name="description" content="Dólar hoy, quiniela completa de 6 loterías, clima, cortes de EDEA y empleos en Alfar, Faro, Serena, Acantilados y Chapadmalal, actualizado todo el día.">
-<link rel="canonical" href="https://infomdqhoy.pages.dev/"> 
-<meta property="og:title" content="INFO MDQ SUR HOY | Alfar, Faro, Serena, Acantilados y Chapadmalal">
-<meta property="og:description" content="Dólar hoy, quiniela completa de 6 loterías, clima y empleos en Alfar, Faro, Serena, Acantilados y Chapadmalal, actualizado todo el día.">
-<meta property="og:image" content="https://infomdqhoy.pages.dev/banner1.webp">
-<meta property="og:url" content="https://infomdqhoy.pages.dev/">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="INFO MDQ SUR HOY | Alfar, Faro, Serena, Acantilados y Chapadmalal">
-<meta name="twitter:description" content="Dólar hoy, quiniela completa de 6 loterías, clima y empleos en Alfar, Faro, Serena, Acantilados y Chapadmalal.">
-<meta name="twitter:image" content="https://infomdqhoy.pages.dev/banner1.webp">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4997896017063436" crossorigin="anonymous"></script>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800;900&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
-body{background:#f0f4f8;color:#1a202c}
-.hero{position:relative;height:320px;overflow:hidden;background:#0f172a}
-.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1s ease}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,23,42,.95) 0%,rgba(0,0,0,.2) 60%)}
-.hero-text{position:absolute;bottom:18px;left:16px;right:16px;color:white;z-index:2}
-.hero-text h1{font-size:36px;font-weight:900;letter-spacing:-1px}
-/* base container handled in grid */
-.card{background:white;border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,.06);border:1px solid #e2e8f0}
-.barrios-nav{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
-.barrio-btn{padding:18px 8px;border-radius:18px;font-weight:900;font-size:14px;text-align:center;color:white;cursor:pointer;border:none;box-shadow:0 6px 16px rgba(0,0,0,.15);transition:.15s;text-decoration:none;display:block}
-.barrio-btn span{display:block;font-size:26px;margin-bottom:4px}
-.barrio-btn:active{transform:scale(.96)}
-.barrio-btn.activo{background:#000 !important;color:#fff !important;border:2px solid #000 !important;box-shadow:0 0 0 3px #fff, 0 0 0 6px #000 !important;transform:scale(.97)}
-.btn-faro{background:linear-gradient(135deg,#0f172a,#334155)}
-.btn-alfar{background:linear-gradient(135deg,#1e40af,#3b82f6)}
-.btn-serena{background:linear-gradient(135deg,#0e7490,#06b6d4)}
-.btn-acantilados{background:linear-gradient(135deg,#15803d,#22c55e)}
-.barrio-page{display:none}
-.barrio-page.active{display:block}
-.barrio-header{border-radius:18px;overflow:hidden;position:relative;height:240px;background:#0f172a;margin-bottom:14px}
-.barrio-header.faro{height:340px}
-.barrio-header img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.barrio-header.faro img{object-position:75% top}
-.barrio-header-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.85),rgba(0,0,0,.1))}
-.barrio-header-text{position:absolute;bottom:16px;left:16px;right:16px;color:white}
-.barrio-header-text h2{font-size:30px;font-weight:900}
-.btn-volver{display:block !important;width:100% !important;max-width:320px !important;margin:0 auto 18px auto !important;background:white !important;border:2px solid #0f172a !important;color:#0f172a !important;padding:12px 22px !important;border-radius:999px !important;font-weight:900 !important;font-size:13px !important;cursor:pointer !important;text-align:center !important;box-shadow:0 4px 12px rgba(15,23,42,.08) !important;}
-.info-box{padding:14px;background:#f8fafc;border-radius:12px;border:2px solid #e2e8f0;font-size:13px;line-height:1.6;margin-top:10px}
-.badge{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800}
+    <!-- Google Analytics (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3L9SZ6YVFT"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-3L9SZ6YVFT');
+    </script>
+
+    <!-- PWA y Configuración de Pantalla -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="apple-touch-icon" href="/icon-192.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="INFO MDQ SUR HOY | Alfar, Faro, Serena, Acantilados y Chapadmalal">
+    <meta property="og:description" content="Dólar hoy, quiniela completa de 6 loterías, clima y empleos en Alfar, Faro, Serena, Acantilados y Chapadmalal, actualizado todo el día.">
+    <meta property="og:image" content="https://infomdqhoy.pages.dev/banner1.webp">
+    <meta property="og:url" content="https://infomdqhoy.pages.dev/">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="INFO MDQ SUR HOY | Alfar, Faro, Serena, Acantilados y Chapadmalal">
+    <meta name="twitter:description" content="Dólar hoy, quiniela completa de 6 loterías, clima y empleos en Alfar, Faro, Serena, Acantilados y Chapadmalal.">
+    <meta name="twitter:image" content="https://infomdqhoy.pages.dev/banner1.webp">
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4997896017063436" crossorigin="anonymous"></script>
+
+    <!-- Fuentes y Estilos CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
+    body{background:#f0f4f8;color:#1a202c}
+    .hero{position:relative;height:320px;overflow:hidden;background:#0f172a}
+    .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1s ease}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,23,42,.95) 0%,rgba(0,0,0,.2) 60%)}
+    .hero-text{position:absolute;bottom:18px;left:16px;right:16px;color:white;z-index:2}
+    .hero-text h1{font-size:36px;font-weight:900;letter-spacing:-1px}
+    .card{background:white;border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,.06);border:1px solid #e2e8f0}
+    .barrios-nav{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+    .barrio-btn{padding:18px 8px;border-radius:18px;font-weight:900;font-size:14px;text-align:center;color:white;cursor:pointer;border:none;box-shadow:0 6px 16px rgba(0,0,0,.15);transition:.15s;text-decoration:none;display:block}
+    .barrio-btn span{display:block;font-size:26px;margin-bottom:4px}
+    .barrio-btn:active{transform:scale(.96)}
+    .barrio-btn.activo{background:#000 !important;color:#fff !important;border:2px solid #000 !important;box-shadow:0 0 0 3px #fff, 0 0 0 6px #000 !important;transform:scale(.97)}
+    .btn-faro{background:linear-gradient(135deg,#0f172a,#334155)}
+    .btn-alfar{background:linear-gradient(135deg,#1e40af,#3b82f6)}
+    .btn-serena{background:linear-gradient(135deg,#0e7490,#06b6d4)}
+    .btn-acantilados{background:linear-gradient(135deg,#15803d,#22c55e)}
+    .barrio-page{display:none}
+    .barrio-page.active{display:block}
+    .barrio-header{border-radius:18px;overflow:hidden;position:relative;height:240px;background:#0f172a;margin-bottom:14px}
+    .barrio-header.faro{height:340px}
+    .barrio-header img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .barrio-header.faro img{object-position:75% top}
+    .barrio-header-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.85),rgba(0,0,0,.1))}
+    .barrio-header-text{position:absolute;bottom:16px;left:16px;right:16px;color:white}
+    .barrio-header-text h2{font-size:30px;font-weight:900}
+    .btn-volver{display:block !important;width:100% !important;max-width:320px !important;margin:0 auto 18px auto !important;background:white !important;border:2px solid #0f172a !important;color:#0f172a !important;padding:12px 22px !important;border-radius:999px !important;font-weight:900 !important;font-size:13px !important;cursor:pointer !important;text-align:center !important;box-shadow:0 4px 12px rgba(15,23,42,.08) !important;}
+    .info-box{padding:14px;background:#f8fafc;border-radius:12px;border:2px solid #e2e8f0;font-size:13px;line-height:1.6;margin-top:10px}
+    .badge{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800}
 .dolar-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
 .dolar-item{background:#f8fafc;border-radius:12px;padding:14px;text-align:center;border:2px solid #e2e8f0}
 .dolar-item.blue{background:#eff6ff;border-color:#3b82f6}
@@ -905,82 +926,8 @@ box-shadow:0 10px 30px rgba(11,19,43,.08) !important;border:1px solid #e2e8f0 !i
 
 <div class="card" style="border-left:5px solid #25D366"><h2>💼 Empleos MDQ HOY</h2><div style="margin-top:10px"><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Mozo/a</b> - Güemes - NUEVO HOY</div><div style="padding:10px 0;border-bottom:1px solid #eee"><b>Cajero/a</b> - Constitución</div><div style="padding:10px 0"><b>Vendedor/a</b> - Peatonal</div></div><a href="https://empleos-mdq.pages.dev/" target="_blank" class="btn-wsp">Ver todos los empleos →</a></div>
 
-
-
-
-</div>
-<div id="page-faro" class="barrio-page">
-  <div class="barrio-header faro"><img src="faro-nuevo.webp"><div class="barrio-header-overlay"></div><div class="barrio-header-text"><h2>🗼 FARO NORTE</h2><p>Sánchez de Bustamante 3460 - Mar del Plata</p></div></div>
-  <div class="card"><h3>🏛️ Sociedad de Fomento Faro Norte</h3><div class="info-box"><b>📍 Dirección:</b> Sánchez de Bustamante 3460<br><b>🚌 Colectivo:</b> 522/523<br><b>📌 Actividades:</b> Salud, talleres, vacunaciones y castraciones</div></div>
-  <div class="card"><h3>🎯 Actividades en FARO NORTE</h3><div id="acts-faro" style="font-size:13px">Cargando...</div></div>
-<div class="card" style="background:#fffbe6;border:2px solid #facc15; border-radius:12px; padding:12px;">
-  <h3>📢 Notificaciones - FARO</h3>
-  <div id="noti-faro" style="margin-top:10px; display:grid; gap:12px;">
-    
-    <!-- AVISO ANSES - RESTAURADO -->
-    <div style="background:#1a2e35; border:1px solid #1a2e35; border-radius:12px; padding:18px 20px; color:white;">
-      <div style="font-weight:800; font-size:15px; margin-bottom:14px;">ANSES - Operativo de Atención Faro Norte</div>
-      <div style="display:grid; gap:8px; font-size:13px; line-height:1.4;">
-        <div><b>Fecha:</b> 8 de Octubre</div>
-        <div><b>Hora:</b> de 9 Hs a 14 Hs</div>
-        <div><b>Lugar:</b> Sociedad de Fomento Faro Norte Sánchez de Bustamante 3460 - Faro Norte</div>
-      </div>
-    </div>
-
-    <!-- AVISO SEGURIDAD - NUEVO -->
-    <div style="background:#0e3446; border:1px solid #0e3446; border-radius:12px; padding:18px 20px; color:white; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
-      <div style="font-weight:800; font-size:15px; margin-bottom:14px; display:flex; align-items:center; gap:8px;">
-        <span style="font-size:18px;">🛡️</span> SEGURIDAD - Operativo Faro Norte
-      </div>
-      <div style="display:grid; gap:8px; font-size:13px; line-height:1.4;">
-        <div><b>Fecha:</b> Sábado 17 de Octubre</div>
-        <div><b>Hora:</b> 14:30 hs</div>
-        <div><b>Dirección:</b> Sánchez de Bustamante 3460 - Faro Norte</div>
-      </div>
-      <div style="margin-top:14px; background: rgba(255,255,255,0.12); border-radius:8px; padding:10px 12px; font-size:13px; font-weight:600;">
-        Es MUY IMPORTANTE tu participación. La seguridad la logramos entre todos.
-      </div>
-      <div style="margin-top:12px; border-top:1px solid rgba(255,255,255,0.15); padding-top:10px; font-size:11px; opacity:0.7;">
-        Comisión Directiva AVF Faro Norte
-      </div>
-    </div>
-
-  </div>
-</div>
-</div>
-<div id="page-alfar" class="barrio-page">
-  <div class="barrio-header"><img src="banner2.webp"><div class="barrio-header-overlay"></div><div class="barrio-header-text"><h2>🌲 ALFAR</h2><p>Luis Franco 750 - Mar del Plata</p></div></div>
-
-  <div class="card"><h3>🏛 Sociedad de Fomento Alfar</h3><div class="info-box"><b>📍 Dirección:</b> Luis Franco 750<br><b>📌 Servicios:</b> Vacunación, pediatría, odontología y castraciones</div></div>
-  <div class="card"><h3>🎯 Actividades en ALFAR</h3><div id="acts-alfar" style="font-size:13px">Cargando...</div></div>
-<div class="card" style="background:#eff6ff;border:2px solid #3b82f6"><h3>📢 Notificaciones - ALFAR</h3><div id="noti-alfar" style="margin-top:10px;"><div style="background:#ec4899;border-radius:12px;padding:14px 16px;color:#0f172a;"><div style="font-weight:900;font-size:15px;margin-bottom:8px;">🎉 FESTIVAL ALFAR</div><div style="font-size:14px;line-height:1.4;">📅 <b>Fecha:</b> Domingo 11 de Octubre<br>⏰ <b>Hora:</b> 14 a 18 hs<br>📍 <b>Dirección:</b> Luis Franco 750 - Soc. Fomento Alfar</div><div style="margin-top:10px;border-top:1px solid rgba(0,0,0,.2);padding-top:8px;font-size:12px;font-weight:700;">📲 Consultas: 2236337024 / 2235594652</div></div></div></div>
-
-<div style="background:#E93A4D; color:white; border-radius:16px; padding:24px; font-family:sans-serif; max-width:500px;">
-  <div style="text-align:right; font-weight:bold; font-size:20px; margin-bottom:20px;">ANSES</div>
-  <h2 style="font-size:32px; margin:0; line-height:1.2;">Operativo de atención<br>Alfar</h2>
-  <hr style="border:1px solid #FFD166; margin:16px 0;">
-  <p><strong>📅 Fecha</strong><br>16 de Octubre</p>
-  <p><strong>🕘 Hora</strong><br>09 a 14 hs</p>
-  <p><strong>📍 Dirección</strong><br>LUIS FRANCO S/N E/ PACHECO DE MELO Y CAYETANO RODRIGUEZ</p>
-  <div style="margin-top:24px; font-size:14px; opacity:0.9;">Ministerio de Capital Humano<br>República Argentina</div>
- </div>
- </div>
-</div>
-<div id="page-serena" class="barrio-page">
-  <div class="barrio-header"><img src="banner1.webp"><div class="barrio-header-overlay"></div><div class="barrio-header-text"><h2>🏖️ PLAYA SERENA</h2><p>Calle 544 frente a la plaza</p></div></div>
-  <div class="card"><h3>🏛️ Sociedad de Fomento y Biblioteca Playa Serena</h3><div class="info-box"><b>📍 Dirección:</b> Calle 11 (ex 544) frente a la plaza<br><b>🚌 Colectivos:</b> 511, 221, Costa Azul<br><b>📌 Actividades:</b> Talleres culturales y biblioteca</div></div>
-  <div class="card"><h3>🎯 Actividades en SERENA</h3><div id="acts-serena" style="font-size:13px">Cargando...</div></div>
-  <div class="card" style="background:#ecfeff;border:2px solid #06b6d4"><h3>📢 Notificaciones - SERENA</h3><div id="noti-serena" style="margin-top:10px;font-size:13px;color:#64748b;padding:12px;background:white;border-radius:10px;border:1px solid #e2e8f0">No hay notificaciones por el momento.</div></div>
-</div>
-<div id="page-acantilados" class="barrio-page">
-  <div class="barrio-header"><img src="banner2.webp"><div class="barrio-header-overlay"></div><div class="barrio-header-text"><h2>🌊 ACANTILADOS</h2><p>Calle 20 esquina 497</p></div></div>
-
-  <div class="card"><h3>🏛 Asociación Vecinal de Fomento Los Acantilados</h3><div class="info-box"><b>📍 Dirección:</b> Calle 20 esquina 497 - Parque Los Acantilados<br><b>📌 Datos:</b> Reserva forestal y acceso a playa</div></div>
-  <div class="card"><h3>🎯 Actividades en ACANTILADOS</h3><div id="acts-acantilados" style="font-size:13px">Cargando...</div></div>
-  <div class="card" style="background:#f0fdf4;border:2px solid #22c55e"><h3>📢 Notificaciones - ACANTILADOS</h3><div id="noti-acantilados" style="margin-top:10px;font-size:13px;color:#64748b;padding:12px;background:white;border-radius:10px;border:1px solid #e2e8f0">No hay notificaciones por el momento.</div></div></div>
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:'Fredoka',system-ui,sans-serif;background:transparent}
+
 .nannin-card{max-width:420px;margin:0 auto;background:#FFFEF7;border:3px solid #2DD4BF;border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.15)}
 .nannin-hero{position:relative;background:#FFFEF7}
 .nannin-hero img{width:100%;height:auto;display:block}
@@ -1022,8 +969,6 @@ body{margin:0;font-family:'Fredoka',system-ui,sans-serif;background:transparent}
 .close{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;background:#111827;border:2px solid #fff;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10}
 @keyframes pop{from{transform:scale(.92) translateY(12px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
 </style>
-</head>
-<body>
 
 <!-- AVISO FIJO LIVIANO -->
 <div class="nannin-card" id="avisoNannin" style="cursor:pointer" title="Tocá para ver más grande">
@@ -1126,6 +1071,82 @@ document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') overlay.classLi
 // Hace que todos los links externos abran en nueva pestaña
 document.querySelectorAll('a[href^="http"]').forEach(a=>{ a.target="_blank"; a.rel="noopener noreferrer"; });
 </script>
+
+
+
+
+
+</div>
+<div id="page-faro" class="barrio-page">
+  <div class="barrio-header faro"><img src="faro-nuevo.webp"><div class="barrio-header-overlay"></div><div class="barrio-header-text"><h2>🗼 FARO NORTE</h2><p>Sánchez de Bustamante 3460 - Mar del Plata</p></div></div>
+  <div class="card"><h3>🏛️ Sociedad de Fomento Faro Norte</h3><div class="info-box"><b>📍 Dirección:</b> Sánchez de Bustamante 3460<br><b>🚌 Colectivo:</b> 522/523<br><b>📌 Actividades:</b> Salud, talleres, vacunaciones y castraciones</div></div>
+  <div class="card"><h3>🎯 Actividades en FARO NORTE</h3><div id="acts-faro" style="font-size:13px">Cargando...</div></div>
+<div class="card" style="background:#fffbe6;border:2px solid #facc15; border-radius:12px; padding:12px;">
+  <h3>📢 Notificaciones - FARO</h3>
+  <div id="noti-faro" style="margin-top:10px; display:grid; gap:12px;">
+    
+    <!-- AVISO ANSES - RESTAURADO -->
+    <div style="background:#1a2e35; border:1px solid #1a2e35; border-radius:12px; padding:18px 20px; color:white;">
+      <div style="font-weight:800; font-size:15px; margin-bottom:14px;">ANSES - Operativo de Atención Faro Norte</div>
+      <div style="display:grid; gap:8px; font-size:13px; line-height:1.4;">
+        <div><b>Fecha:</b> 8 de Octubre</div>
+        <div><b>Hora:</b> de 9 Hs a 14 Hs</div>
+        <div><b>Lugar:</b> Sociedad de Fomento Faro Norte Sánchez de Bustamante 3460 - Faro Norte</div>
+      </div>
+    </div>
+
+    <!-- AVISO SEGURIDAD - NUEVO -->
+    <div style="background:#0e3446; border:1px solid #0e3446; border-radius:12px; padding:18px 20px; color:white; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+      <div style="font-weight:800; font-size:15px; margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+        <span style="font-size:18px;">🛡️</span> SEGURIDAD - Operativo Faro Norte
+      </div>
+      <div style="display:grid; gap:8px; font-size:13px; line-height:1.4;">
+        <div><b>Fecha:</b> Sábado 17 de Octubre</div>
+        <div><b>Hora:</b> 14:30 hs</div>
+        <div><b>Dirección:</b> Sánchez de Bustamante 3460 - Faro Norte</div>
+      </div>
+      <div style="margin-top:14px; background: rgba(255,255,255,0.12); border-radius:8px; padding:10px 12px; font-size:13px; font-weight:600;">
+        Es MUY IMPORTANTE tu participación. La seguridad la logramos entre todos.
+      </div>
+      <div style="margin-top:12px; border-top:1px solid rgba(255,255,255,0.15); padding-top:10px; font-size:11px; opacity:0.7;">
+        Comisión Directiva AVF Faro Norte
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+<div id="page-alfar" class="barrio-page">
+  <div class="barrio-header"><img src="banner2.webp"><div class="barrio-header-overlay"></div><div class="barrio-header-text"><h2>🌲 ALFAR</h2><p>Luis Franco 750 - Mar del Plata</p></div></div>
+
+  <div class="card"><h3>🏛 Sociedad de Fomento Alfar</h3><div class="info-box"><b>📍 Dirección:</b> Luis Franco 750<br><b>📌 Servicios:</b> Vacunación, pediatría, odontología y castraciones</div></div>
+  <div class="card"><h3>🎯 Actividades en ALFAR</h3><div id="acts-alfar" style="font-size:13px">Cargando...</div></div>
+<div class="card" style="background:#eff6ff;border:2px solid #3b82f6"><h3>📢 Notificaciones - ALFAR</h3><div id="noti-alfar" style="margin-top:10px;"><div style="background:#ec4899;border-radius:12px;padding:14px 16px;color:#0f172a;"><div style="font-weight:900;font-size:15px;margin-bottom:8px;">🎉 FESTIVAL ALFAR</div><div style="font-size:14px;line-height:1.4;">📅 <b>Fecha:</b> Domingo 11 de Octubre<br>⏰ <b>Hora:</b> 14 a 18 hs<br>📍 <b>Dirección:</b> Luis Franco 750 - Soc. Fomento Alfar</div><div style="margin-top:10px;border-top:1px solid rgba(0,0,0,.2);padding-top:8px;font-size:12px;font-weight:700;">📲 Consultas: 2236337024 / 2235594652</div></div></div></div>
+
+<div style="background:#E93A4D; color:white; border-radius:16px; padding:24px; font-family:sans-serif; max-width:500px;">
+  <div style="text-align:right; font-weight:bold; font-size:20px; margin-bottom:20px;">ANSES</div>
+  <h2 style="font-size:32px; margin:0; line-height:1.2;">Operativo de atención<br>Alfar</h2>
+  <hr style="border:1px solid #FFD166; margin:16px 0;">
+  <p><strong>📅 Fecha</strong><br>16 de Octubre</p>
+  <p><strong>🕘 Hora</strong><br>09 a 14 hs</p>
+  <p><strong>📍 Dirección</strong><br>LUIS FRANCO S/N E/ PACHECO DE MELO Y CAYETANO RODRIGUEZ</p>
+  <div style="margin-top:24px; font-size:14px; opacity:0.9;">Ministerio de Capital Humano<br>República Argentina</div>
+ </div>
+ </div>
+</div>
+<div id="page-serena" class="barrio-page">
+  <div class="barrio-header"><img src="banner1.webp"><div class="barrio-header-overlay"></div><div class="barrio-header-text"><h2>🏖️ PLAYA SERENA</h2><p>Calle 544 frente a la plaza</p></div></div>
+  <div class="card"><h3>🏛️ Sociedad de Fomento y Biblioteca Playa Serena</h3><div class="info-box"><b>📍 Dirección:</b> Calle 11 (ex 544) frente a la plaza<br><b>🚌 Colectivos:</b> 511, 221, Costa Azul<br><b>📌 Actividades:</b> Talleres culturales y biblioteca</div></div>
+  <div class="card"><h3>🎯 Actividades en SERENA</h3><div id="acts-serena" style="font-size:13px">Cargando...</div></div>
+  <div class="card" style="background:#ecfeff;border:2px solid #06b6d4"><h3>📢 Notificaciones - SERENA</h3><div id="noti-serena" style="margin-top:10px;font-size:13px;color:#64748b;padding:12px;background:white;border-radius:10px;border:1px solid #e2e8f0">No hay notificaciones por el momento.</div></div>
+</div>
+<div id="page-acantilados" class="barrio-page">
+  <div class="barrio-header"><img src="banner2.webp"><div class="barrio-header-overlay"></div><div class="barrio-header-text"><h2>🌊 ACANTILADOS</h2><p>Calle 20 esquina 497</p></div></div>
+
+  <div class="card"><h3>🏛 Asociación Vecinal de Fomento Los Acantilados</h3><div class="info-box"><b>📍 Dirección:</b> Calle 20 esquina 497 - Parque Los Acantilados<br><b>📌 Datos:</b> Reserva forestal y acceso a playa</div></div>
+  <div class="card"><h3>🎯 Actividades en ACANTILADOS</h3><div id="acts-acantilados" style="font-size:13px">Cargando...</div></div>
+  <div class="card" style="background:#f0fdf4;border:2px solid #22c55e"><h3>📢 Notificaciones - ACANTILADOS</h3><div id="noti-acantilados" style="margin-top:10px;font-size:13px;color:#64748b;padding:12px;background:white;border-radius:10px;border:1px solid #e2e8f0">No hay notificaciones por el momento.</div></div></div>
+
 <div class="card" style="background:#f8fafc;border:1px solid #e2e8f0">
 <div style="font-size:11px;color:#64748b;line-height:1.6">🔞 <b>Juego responsable:</b> este sitio publica resultados de quiniela con fines informativos. No somos un operador de juego, no vendemos apuestas ni tomamos jugadas. Actividad exclusiva para mayores de 18 años. El juego en exceso puede ser perjudicial para la salud. Si vos o alguien cercano necesita ayuda, comunicate a la línea gratuita del Instituto Provincial de Lotería y Casinos de Buenos Aires: <b>0800-444-4000</b> (24 hs, los 365 días).</div>
 </div>
