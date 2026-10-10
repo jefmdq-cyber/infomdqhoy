@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiniela Hoy - Resultados Oficiales de las 6 Loterías | INFO MDQ HOY</title>
+<meta name="description" content="Resultados oficiales de la Quiniela Hoy: Ciudad, Provincia, Santa Fe, Córdoba, Entre Ríos y Uruguay. Loto, Quini 6, Brinco y Telekino.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800;900&family=Fredoka:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0b1329;color:#f8fafc;font-family:'Inter',sans-serif;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.top-bar{background:#0f172a;border-bottom:1px solid #1e293b;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:20}
+.top-bar .logo{font-family:'Fredoka',sans-serif;font-weight:800;font-size:18px;letter-spacing:-.5px}
+.top-bar .logo span{color:#38bdf8}
+.top-bar .back{background:#1e293b;border:1px solid #334155;padding:8px 16px;border-radius:999px;font-size:13px;font-weight:800;color:#e2e8f0;cursor:pointer}
+.container{max-width:720px;margin:0 auto;padding:16px}
+.badge{display:inline-flex;background:#1e3a8a;border:1.5px solid #3b82f6;color:#93c5fd;font-size:10px;font-weight:900;letter-spacing:1px;padding:5px 12px;border-radius:999px;text-transform:uppercase}
+h1{font-family:'Fredoka',sans-serif;font-size:28px;font-weight:800;margin-top:12px;letter-spacing:-.8px;line-height:1.1}
+.sub{color:#94a3b8;font-size:13px;margin-top:6px;line-height:1.4}
+.q-card{background:#1e293b;border-radius:24px;border:1px solid #334155;overflow:hidden;box-shadow:0 25px 50px -12px rgba(0,0,0,0.5);margin-top:18px}
+.q-header{padding:20px}
+.q-date-bar{margin:16px 0 0;display:flex;align-items:center;gap:10px;background:#0f172a;border:1.5px solid #38bdf8;border-radius:14px;padding:10px 12px;flex-wrap:wrap;max-width:100%}
+.q-date-label{font-size:13px;font-weight:800;color:#38bdf8;white-space:nowrap}
+.q-select{flex:1;min-width:0;border:1.5px solid #334155;background:#1e293b;border-radius:10px;padding:8px 12px;font-weight:700;font-size:14px;color:#f8fafc;outline:none;cursor:pointer}
+.q-btn{flex-shrink:0;background:linear-gradient(135deg,#0ea5e9,#0284c7);color:#fff;border:none;padding:10px 16px;border-radius:10px;font-weight:800;font-size:12px;cursor:pointer}
+.q-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:16px;background:#0f172a;padding:6px;border-radius:14px;border:1px solid #334155}
+.q-tab{padding:10px 2px;border-radius:10px;font-size:12px;font-weight:800;text-align:center;color:#94a3b8;cursor:pointer;transition:.2s}
+.q-tab.active{background:#334155;color:#38bdf8}
+.q-detail{padding:0 20px 20px}
+.q-detail-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px}
+.q-detail-head b{font-size:14px;font-weight:900;color:#38bdf8;letter-spacing:.5px}
+.q-detail-head span{font-size:11px;background:#0f172a;border:1px solid #334155;padding:4px 10px;border-radius:999px;color:#94a3b8}
+.q-sorteo-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.q-sorteo-tab{padding:6px 12px;border-radius:999px;font-size:11px;font-weight:800;background:#0f172a;border:1px solid #334155;color:#94a3b8;cursor:pointer}
+.q-sorteo-tab.active{background:#38bdf8;color:#0f172a;border-color:#38bdf8}
+.q-grid-20{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.q-item{background:#0f172a;border:1px solid #334155;border-radius:14px;padding:10px;display:flex;align-items:center;gap:10px}
+.q-item.cabeza{grid-column:1/-1;background:linear-gradient(135deg,#78350f,#451a03);border-color:#f59e0b;padding:14px}
+.q-pos{font-size:11px;font-weight:900;color:#94a3b8;background:#1e293b;min-width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:10px}
+.q-item.cabeza .q-pos{background:#f59e0b;color:#451a03}
+.q-num{font-family:'Fredoka',sans-serif;font-size:22px;font-weight:800;color:#f8fafc}
+.q-item.cabeza .q-num{font-size:36px;color:#fbbf24}
+.section-title{font-family:'Fredoka',sans-serif;font-size:20px;font-weight:800;margin:28px 0 12px;letter-spacing:-.5px;display:flex;align-items:center;gap:8px}
+.loto-grid{display:grid;grid-template-columns:1fr;gap:12px}
+.loto-card{background:#1e293b;border:1px solid #334155;border-radius:18px;padding:16px;display:flex;gap:14px;align-items:center}
+.loto-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;font-weight:900}
+.loto-info b{display:block;font-size:14px;font-weight:900}
+.loto-info span{display:block;font-size:12px;color:#94a3b8;margin-top:2px}
+.loto-nums{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.loto-ball{width:32px;height:32px;border-radius:50%;background:#0f172a;border:1px solid #334155;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#f8fafc}
+.seo-text{margin-top:32px;background:#0f172a;border:1px solid #1e293b;border-radius:16px;padding:16px;font-size:12px;line-height:1.6;color:#94a3b8}
+.seo-text b{color:#e2e8f0}
+</style>
+</head>
+<body>
+<div class="top-bar">
+  <div style="display:flex;align-items:center;gap:10px">
+    <img src="./icon-192.png" alt="INFO MDQ HOY" style="height:28px;width:28px;border-radius:6px;background:#0d182e">
+    <div class="logo">INFO <span>MDQ HOY</span></div>
+  </div>
+  <a href="./index.html" class="back">← Inicio</a>
+</div>
+<div style="background:#0b1329;border-bottom:1px solid #1e293b;padding:8px 12px;display:flex;gap:6px;overflow-x:auto;position:sticky;top:49px;z-index:29">
+  <a href="./quiniela.html" style="white-space:nowrap;padding:8px 14px;border-radius:999px;font-size:11px;font-weight:900;border:1px solid #38bdf8;color:#0f172a;background:#38bdf8">QUINIELA</a>
+  <a href="./quini6.html" style="white-space:nowrap;padding:8px 14px;border-radius:999px;font-size:11px;font-weight:900;border:1px solid #334155;color:#94a3b8;background:#1e293b">QUINI 6</a>
+  <a href="./loto.html" style="white-space:nowrap;padding:8px 14px;border-radius:999px;font-size:11px;font-weight:900;border:1px solid #334155;color:#94a3b8;background:#1e293b">LOTO PLUS</a>
+  <a href="./brinco.html" style="white-space:nowrap;padding:8px 14px;border-radius:999px;font-size:11px;font-weight:900;border:1px solid #334155;color:#94a3b8;background:#1e293b">BRINCO</a>
+  <a href="./telekino.html" style="white-space:nowrap;padding:8px 14px;border-radius:999px;font-size:11px;font-weight:900;border:1px solid #334155;color:#94a3b8;background:#1e293b">TELEKINO</a>
+</div>
+<div class="container">
+  <span class="badge">RESULTADOS OFICIALES • EN VIVO</span>
+  <h1 id="main-title">Quiniela Hoy - 6 Loterías Completas</h1>
+  <p class="sub">Resultados oficiales actualizados cada 90 segundos. Seleccioná lotería y sorteo para ver los 20 premios completos.</p>
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-date-bar">
+        <span class="q-date-label">📅 Fecha:</span>
+        <select id="q-fecha" class="q-select"></select>
+        <button type="button" id="btn-ver-fechas" class="q-btn">Anteriores ▼</button>
+      </div>
+      <div class="q-tabs" id="qt"></div>
+    </div>
+    <div class="q-detail">
+      <div class="q-detail-head">
+        <b id="detail-loto">CIUDAD - NOCTURNA</b>
+        <span id="detail-fecha">Hoy</span>
+      </div>
+      <div class="q-sorteo-tabs" id="q-sorteo-tabs"></div>
+      <div class="q-grid-20" id="qg20"></div>
+      <p id="info-uy" style="display:none;margin-top:14px;font-size:12px;color:#34d399;font-weight:800;text-align:center;background:#064e3b;padding:8px;border-radius:10px;border:1px dashed #059669">🇺🇾 Uruguay solo tiene 2 sorteos oficiales: 15:00 y 21:00</p>
+    </div>
+  </div>
+ 
+<script>
+let todas={Ciudad:[],Provincia:[],SantaFe:[],Cordoba:[],EntreRios:[],Uruguay:[]};
+const MAP={nacional:'Ciudad',ciudad:'Ciudad',provincia:'Provincia',santafe:'SantaFe',cordoba:'Cordoba',entrerios:'EntreRios',uruguay:'Uruguay'};
+let datosCompletos=null;
+let actual="Ciudad";
+let actualSorteo="nocturna";
+function getListaSorteos(){return actual==="Uruguay"?["vespertina","nocturna"]:["previa","primera","matutina","vespertina","nocturna"]}
+function renderTabs(){document.getElementById('qt').innerHTML=Object.keys(todas).map(k=>`<div class="q-tab ${k===actual?'active':''}" onclick="cambiarLoteria('${k}')">${k}</div>`).join('');}
+function renderSorteoTabs(){
+  let lista=getListaSorteos();
+  document.getElementById('q-sorteo-tabs').innerHTML=lista.map(s=>`<div class="q-sorteo-tab ${s===actualSorteo?'active':''}" onclick="cambiarSorteo('${s}')">${s.toUpperCase()}</div>`).join('');
+}
+function cambiarLoteria(k){
+  actual=k;
+  let lista=getListaSorteos();
+  if(!lista.includes(actualSorteo)){actualSorteo=lista[lista.length-1];}
+  renderTodo();
+}
+function cambiarSorteo(s){actualSorteo=s;renderTodo();}
+function renderTodo(){
+  renderTabs();renderSorteoTabs();
+  document.getElementById('info-uy').style.display=actual==="Uruguay"?'block':'none';
+  let key=actual.toLowerCase();
+  let arr=[];
+  if(datosCompletos && datosCompletos[key] && datosCompletos[key][actualSorteo]){arr=datosCompletos[key][actualSorteo];}
+  if((!arr||arr.length===0) && datosCompletos && datosCompletos[key]){
+    for(let s of [...getListaSorteos()].reverse()){
+      if(datosCompletos[key][s] && datosCompletos[key][s].length>0){arr=datosCompletos[key][s];actualSorteo=s;break;}
+    }
+    renderSorteoTabs();
+  }
+  if(!Array.isArray(arr)) arr=[arr];
+  document.getElementById('detail-loto').textContent=actual.toUpperCase()+' - '+actualSorteo.toUpperCase();
+  document.getElementById('qg20').innerHTML=arr.map((n,i)=>i===0?`<div class="q-item cabeza"><div class="q-pos">1°</div><div class="q-num">${n||'--'}</div></div>`:`<div class="q-item"><div class="q-pos">${i+1}°</div><div class="q-num">${n||'--'}</div></div>`).join('') || "<div style='grid-column:1/-1;color:#94a3b8;padding:20px;text-align:center'>Aún sin sorteo - Probá otro sorteo arriba</div>";
+  const params=new URLSearchParams({loteria:actual.toLowerCase(),sorteo:actualSorteo,fecha:document.getElementById('q-fecha').value});
+  history.replaceState(null,null,'?'+params.toString());
+}
+function fechaARG(off){
+  const ahora=new Date();
+  const partes=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Argentina/Buenos_Aires',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(ahora);
+  const obj={};partes.forEach(p=>obj[p.type]=p.value);
+  const base=new Date(Date.UTC(obj.year,obj.month-1,obj.day));
+  base.setUTCDate(base.getUTCDate()+off);
+  return base.toISOString().slice(0,10);
+}
+function etiquetaFecha(off,f){if(off===0)return 'Hoy - '+f.split('-').reverse().slice(0,2).join('/');if(off===-1)return 'Ayer - '+f.split('-').reverse().slice(0,2).join('/');const [y,m,d]=f.split('-');return `${d}/${m}/${y}`;}
+const sel=document.getElementById('q-fecha');
+for(let i=0;i>=-29;i--){const f=fechaARG(i);const o=document.createElement('option');o.value=f;o.textContent=etiquetaFecha(i,f);sel.appendChild(o);}
+const urlParams=new URLSearchParams(window.location.search);
+let fechaParam=urlParams.get('fecha')||fechaARG(0);
+let lotoParam=urlParams.get('loteria');
+let sorteoParam=urlParams.get('sorteo');
+if(lotoParam){let found=Object.keys(todas).find(k=>k.toLowerCase()===lotoParam.toLowerCase());if(found)actual=found;}
+if(sorteoParam)actualSorteo=sorteoParam.toLowerCase();
+sel.value=fechaParam;
+document.getElementById('detail-fecha').textContent=fechaParam.split('-').reverse().join('/');
+let histAbierto=false;
+document.getElementById('btn-ver-fechas').onclick=()=>{histAbierto=!histAbierto;sel.size=histAbierto?7:1;if(histAbierto)sel.focus();document.getElementById('btn-ver-fechas').textContent=histAbierto?'Cerrar ▲':'Anteriores ▼';};
+sel.addEventListener('change',()=>{sel.size=1;histAbierto=false;document.getElementById('btn-ver-fechas').textContent='Anteriores ▼';document.getElementById('detail-fecha').textContent=sel.value.split('-').reverse().join('/');cargarDia(sel.value);});
+function cargarDia(fecha){
+  const esHoy=fecha===fechaARG(0);
+  document.getElementById('main-title').textContent=esHoy?'Quiniela Hoy - 6 Loterías Completas':'Quiniela del '+fecha.split('-').reverse().join('/')+' - 6 Loterías';
+  const ruta=esHoy?'./quiniela.json':`./historial/${fecha}.json`;
+  fetch(ruta+'?v='+Date.now()).then(r=>{if(!r.ok)throw 0;return r.json()}).then(raw=>{
+    let d=Array.isArray(raw)?raw[0]:raw,fuente=d.completo||d,norm={};
+    Object.keys(fuente).forEach(k=>{norm[(MAP[k.toLowerCase()]||k).toLowerCase()]=fuente[k]});
+    if(!norm['ciudad']&&norm['nacional'])norm['ciudad']=norm['nacional'];
+    datosCompletos=norm;renderTodo();
+  }).catch(()=>{datosCompletos={};renderTodo();});
+}
+
+cargarDia(sel.value);
+</script>
+<!-- PIE DE PÁGINA CON ENLACES LEGALES CORREGIDOS -->
+<footer style="
+    text-align: center; 
+    padding: 30px 20px 20px 20px; 
+    border-top: 1px dashed #333333; 
+    margin-top: 40px; 
+    font-family: system-ui, -apple-system, sans-serif;
+">
+    <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 15px;">
+        <a href="contacto.html" style="color: #b3b3b3; text-decoration: none; font-size: 13px; font-weight: bold; transition: color 0.2s;" onmouseover="this.style.color='#ff6600'" onmouseout="this.style.color='#b3b3b3'">Contacto Legal</a>
+        <a href="privacidad.html" style="color: #b3b3b3; text-decoration: none; font-size: 13px; font-weight: bold; transition: color 0.2s;" onmouseover="this.style.color='#ff6600'" onmouseout="this.style.color='#b3b3b3'">Privacidad</a>
+        <a href="terminos.html" style="color: #b3b3b3; text-decoration: none; font-size: 13px; font-weight: bold; transition: color 0.2s;" onmouseover="this.style.color='#ff6600'" onmouseout="this.style.color='#b3b3b3'">Términos y Condiciones</a>
+    </div>
+    <p style="margin: 0; font-size: 11px; color: #666666;">&copy; 2026 INFO MDQ HOY. Todos los derechos reservados. El uso de esta sección implica la aceptación de los términos.</p>
+</footer>
+</body>
+</html>
