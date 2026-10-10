@@ -1,0 +1,35 @@
+{
+  "fecha": "Miércoles 7 de octubre",
+  "numero": "3415",
+  "tradicional": {
+    "pozo": "1.854.657.756",
+    "resultados": [3, 10, 12, 14, 36, 38],
+    "ganadores": [
+      { "aciertos": "6", "cantidad": 0, "monto": "Vacante" },
+      { "aciertos": "5", "cantidad": 11, "monto": "3.745.891" }
+    ]
+  },
+  "segunda": {
+    "pozo": "4.932.562.597",
+    "resultados": [5, 12, 13, 23, 24, 35],
+    "ganadores": [
+      { "aciertos": "6", "cantidad": 0, "monto": "Vacante" },
+      { "aciertos": "5", "cantidad": 38, "monto": "1.084.337" }
+    ]
+  },
+  "revancha": {
+    "pozo": "2.572.821.792",
+    "resultados": [6, 7, 8, 39, 40, 41],
+    "ganadores": [
+      { "aciertos": "6", "cantidad": 0, "monto": "Vacante" }
+    ]
+  },
+  "siempre_sale": {
+    "pozo": "369.528.480 (Total Repartido)",
+
+    "resultados": [4, 7, 19, 32, 34, 42],
+    "ganadores": [
+      { "aciertos": "5", "cantidad": 31, "monto": "11.920.273" }
+    ]
+  }
+}

@@ -983,34 +983,100 @@ body {
 </div></div>
 </div>
 
+<style>
+.q-card{width:100%;max-width:540px;background:#1e293b;border-radius:24px;border:1px solid #334155;overflow:hidden;box-shadow:0 25px 50px -12px rgba(0,0,0,0.5);margin-bottom:14px}
+.q-header{padding:20px}
+.badge{display:inline-flex;background:#1e3a8a;border:1.5px solid #3b82f6;color:#93c5fd;font-size:11px;font-weight:900;letter-spacing:1px;padding:5px 14px;border-radius:999px;text-transform:uppercase}
+.title{font-size:24px;font-weight:900;color:#f8fafc;margin-top:12px;letter-spacing:-0.5px}
+.q-date-bar{margin:16px 0 0;display:flex;align-items:center;gap:10px;background:#0f172a;border:1.5px solid #38bdf8;border-radius:14px;padding:10px 12px}
+.q-date-label{font-size:13px;font-weight:800;color:#38bdf8;white-space:nowrap}
+.q-select{flex:1;border:1.5px solid #334155;background:#1e293b;border-radius:10px;padding:8px 12px;font-weight:700;font-size:14px;color:#f8fafc;outline:none;cursor:pointer}
+.q-btn{flex-shrink:0;background:linear-gradient(135deg,#0ea5e9,#0284c7);color:#fff;border:none;padding:10px 16px;border-radius:10px;font-weight:800;font-size:12px;cursor:pointer;box-shadow:0 4px 12px rgba(14,165,233,0.3)}
+.q-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:16px;background:#0f172a;padding:6px;border-radius:14px;border:1px solid #334155}
+.q-tab{padding:10px 2px;border-radius:10px;font-size:12px;font-weight:800;text-align:center;color:#94a3b8;cursor:pointer;transition:all 0.2s}
+.q-tab.active{background:#334155;color:#38bdf8;box-shadow:0 4px 6px rgba(0,0,0,0.2)}
+.q-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.q-box{background:#0f172a;border:1.5px solid #334155;border-radius:16px;padding:14px 10px;text-align:center;position:relative}
+.q-box-head{font-size:11px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px}
+.q-box b{display:block;font-family:'Fredoka',sans-serif;font-size:32px;font-weight:800;color:#f8fafc;letter-spacing:1px}
+.q-box.nocturna{grid-column:1/-1;background:linear-gradient(135deg,#78350f,#451a03);border-color:#f59e0b}
+.q-box.nocturna .q-box-head{color:#fef3c7}
+.q-box.nocturna b{font-size:48px;color:#fbbf24;text-shadow:0 2px 8px rgba(251,191,36,0.3)}
+#toast-quiniela{display:none;margin-top:14px;background:#064e3b;border:1px solid #059669;color:#a7f3d0;padding:10px 14px;border-radius:12px;font-size:13px;font-weight:800;text-align:center}
+</style>
 <div class="quiniela-plus18-wrapper">
-<div class="card"><span class="badge" style="background:#dcfce7;color:#15803d">QUINIELA - RESULTADOS OFICIALES</span><h2 style="margin-top:6px;font-size:18px" id="q-titulo">Quiniela Hoy - 6 Loterías</h2>
-<div id="toast-quiniela" style="display:none;margin-top:8px;background:#dcfce7;border:1px solid #16a34a;color:#15803d;padding:8px 12px;border-radius:10px;font-size:12px;font-weight:800;text-align:center"></div>
-<div style="display:flex;align-items:center;gap:8px;margin-top:10px;background:#f0f9ff;border:2px solid #0ea5e9;border-radius:12px;padding:8px 12px;box-shadow:0 4px 12px rgba(14,165,233,.15);">
-  <span style="font-family:Inter,sans-serif;font-weight:600;font-size:12px;color:#0c4a6e;white-space:nowrap;">📅 Fecha:</span>
-  <select id="q-fecha" style="flex:1;padding:8px 10px;border-radius:8px;border:2px solid #0ea5e9;font-weight:700;font-size:13px;background:white;color:#0b132b;outline:none;cursor:pointer;font-family:Inter,sans-serif;"></select>
-  <button type="button" id="btn-ver-fechas" style="font-family:Inter,sans-serif;font-weight:700;font-size:11px;color:#fff;background:linear-gradient(135deg,#0ea5e9,#0284c7);padding:6px 12px;border-radius:999px;cursor:pointer;white-space:nowrap;box-shadow:0 2px 8px rgba(14,165,233,.3);border:none;">Ver fechas anteriores ▼</button>
-</div>
-
-<div class="q-tabs" id="qt"></div><div class="q-grid" id="qg"></div><a href="#" class="btn-outline" onclick="openM();return false">Ver 20 números de <span id="qn">Nacional</span></a><p id="info-uy" style="display:none;font-size:11px;color:#15803d;font-weight:700;margin-top:8px">🇺🇾 Uruguay solo tiene 2 sorteos oficiales: 15:00 y 21:00</p>
-<div style="background:#FFD500; border-radius:12px; overflow:hidden; border:2px solid #000; font-family:Arial; margin-top:16px;">
-  <div style="background:#FFD500; padding:10px; text-align:center; font-weight:900; font-size:15px;">📢 PUBLICITE AQUI - Zona Sur</div>
-  <div style="background:white; padding:12px; text-align:center;">
-    <div style="font-weight:bold; font-size:13px;">Faro - Alfar - Serena - Acantilados - Chapadmalal</div>
-    <div style="font-size:12px; margin:6px 0; color:#333;">Tu negocio visto por +500 vecinos por día</div>
-    <a href="https://wa.me/5492235820394?text=Hola%20Jorge,%20quiero%20publicitar%20mi%20negocio%20en%20INFOMDQHOY%20Zona%20Sur" target="_blank" style="display:inline-block; background:#25D366; color:white; padding:10px 18px; text-decoration:none; font-weight:bold; border-radius:30px; margin-top:6px; font-size:13px;">📲 Consultar por WhatsApp</a>
+<div class="q-card">
+  <div class="q-header">
+    <span class="badge">QUINIELA - RESULTADOS OFICIALES</span>
+    <div class="title" id="q-titulo">Quiniela Hoy - 6 Loterías</div>
+    <div class="q-date-bar">
+      <span class="q-date-label">📅 Fecha:</span>
+      <select id="q-fecha" class="q-select"></select>
+      <button type="button" id="btn-ver-fechas" class="q-btn">Anteriores ▼</button>
+    </div>
+    <div id="toast-quiniela"></div>
+    <div class="q-tabs" id="qt"></div>
+    <div class="q-grid" id="qg"></div>
+    <p id="info-uy" style="display:none;margin-top:14px;font-size:12px;color:#34d399;font-weight:800;text-align:center;background:#064e3b;padding:8px;border-radius:10px;border:1px dashed #059669">🇺🇾 Uruguay solo tiene 2 sorteos oficiales: 15:00 y 21:00</p>
   </div>
 </div>
 </div><!-- FIN CARD QUINIELA -->
+<script>
+let todas={Ciudad:[],Provincia:[],SantaFe:[],Cordoba:[],EntreRios:[],Uruguay:[]};
+const MAP={nacional:'Ciudad',ciudad:'Ciudad',provincia:'Provincia',santafe:'SantaFe',cordoba:'Cordoba',entrerios:'EntreRios',uruguay:'Uruguay'};
+let datosCompletos=null;
+const horsARG=["Previa 10:15","Primera 12:00","Matutina 15:00","Vespertina 18:00","Nocturna 21:00"];
+const horsUY=["Vespertina 15:00","Nocturna 21:00"];
+let actual="Ciudad";
+function getHors(){return actual==="Uruguay"?horsUY:horsARG}
+function getListaSorteos(){return actual==="Uruguay"?["vespertina","nocturna"]:["previa","primera","matutina","vespertina","nocturna"]}
+function renderT(){document.getElementById('qt').innerHTML=Object.keys(todas).map(k=>`<div class="q-tab ${k===actual?'active':''}" onclick="actual='${k}';render()">${k}</div>`).join('');}
+function render(){
+  renderT();
+  document.getElementById('info-uy').style.display=actual==="Uruguay"?'block':'none';
+  let hors=getHors(),listaIds=getListaSorteos();
+  document.getElementById('qg').innerHTML=hors.map((h,i)=>{
+    let idSorteo=listaIds[i],key=actual.toLowerCase(),num="--";
+    if(datosCompletos&&datosCompletos[key]&&datosCompletos[key][idSorteo]){ let v=datosCompletos[key][idSorteo]; num=Array.isArray(v)?(v[0]||"--"):v; }
+    let extra=h.includes('Nocturna')?' nocturna':'';
+  return `<a href="./quiniela.html?loteria=${actual.toLowerCase()}&sorteo=${idSorteo}&fecha=${sel.value}" class="q-box${extra}" style="text-decoration:none"><div class="q-box-head">${h}</div><b>${num}</b></a>`;
+  }).join('');
+}
+function fechaARG(off){
+  const ahora=new Date();
+  const partes=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Argentina/Buenos_Aires',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(ahora);
+  const obj={};partes.forEach(p=>obj[p.type]=p.value);
+  const base=new Date(Date.UTC(obj.year,obj.month-1,obj.day));
+  base.setUTCDate(base.getUTCDate()+off);
+  return base.toISOString().slice(0,10);
+}
+function etiquetaFecha(off,f){ if(off===0) return 'Hoy - '+f.split('-').reverse().slice(0,2).join('/'); if(off===-1) return 'Ayer - '+f.split('-').reverse().slice(0,2).join('/'); const [y,m,d]=f.split('-'); return `${d}/${m}/${y}`; }
+const sel=document.getElementById('q-fecha');
+for(let i=0;i>=-29;i--){const f=fechaARG(i);const o=document.createElement('option');o.value=f;o.textContent=etiquetaFecha(i,f);sel.appendChild(o);}
+sel.value=fechaARG(0);
+let histAbierto=false;
+document.getElementById('btn-ver-fechas').onclick=()=>{ histAbierto=!histAbierto; sel.size=histAbierto?7:1; if(histAbierto) sel.focus(); document.getElementById('btn-ver-fechas').textContent=histAbierto?'Cerrar ▲':'Anteriores ▼'; };
+sel.addEventListener('change',()=>{ sel.size=1; histAbierto=false; document.getElementById('btn-ver-fechas').textContent='Anteriores ▼'; cargarDia(sel.value); });
+function cargarDia(fecha){
+  const esHoy=fecha===fechaARG(0);
+  document.getElementById('q-titulo').textContent=esHoy?'Quiniela Hoy - 6 Loterías':'Quiniela del '+fecha.split('-').reverse().join('/');
+  const ruta=esHoy?'./quiniela.json':`./historial/${fecha}.json`;
+  fetch(ruta+'?v='+Date.now()).then(r=>{ if(!r.ok) throw 0; return r.json() }).then(raw=>{
+    let d=Array.isArray(raw)?raw[0]:raw,fuente=d.completo||d,norm={};
+    Object.keys(fuente).forEach(k=>{ norm[(MAP[k.toLowerCase()]||k).toLowerCase()]=fuente[k] });
+    if(!norm['ciudad']&&norm['nacional']) norm['ciudad']=norm['nacional'];
+    datosCompletos=norm; render();
+  }).catch(()=>{ datosCompletos={}; render(); });
+}
+cargarDia(sel.value);
+</script>
+
 
 <!-- CARTEL +18 DEBAJO DE QUINIELA - BLOQUE INDEPENDIENTE -->
 <div class="card" style="background:#f1f5f9; border:1.5px solid #cbd5e1; padding:10px 14px; text-align:center; margin-bottom:14px;">
   <div style="font-size:11px; font-weight:900; color:#0f172a; line-height:1.3;">🔞 +18 | EL JUGAR COMPULSIVAMENTE ES PERJUDICIAL PARA LA SALUD</div>
   <div style="font-size:10px; color:#475569; font-weight:600; margin-top:3px; line-height:1.3;">Prohibido menores de 18 años - Resultados con fines informativos - Ayuda: 0800-444-4000 | No organizamos apuestas</div>
 </div>
-</div>
-
-
 <!-- AVISO KIOSCO LOS MELLI - FONDO MOSTAZA SUAVE - CENTRADO -->
 <div id="card-melli" data-search="kiosco los melli mellis alfar golosinas snacks cigarrillos bebidas frias carga virtual sube billeteras mercado pago guillermo magrassi 4295 mar del plata" style="box-sizing:border-box;width:100%;max-width:760px;margin:0 auto;background:#F5E6C8;border-radius:26px;border:1.5px solid #E8D5B5;box-shadow:0 8px 30px rgba(92,46,14,0.12);padding:18px 18px 18px 18px;font-family:'Fredoka','Nunito',Inter,sans-serif;position:relative;overflow:hidden;">
 
@@ -1459,98 +1525,10 @@ async function clima(){try{const r=await fetch('https://api.open-meteo.com/v1/fo
       <div style="font-size:12px;font-weight:700">${mx}° <span style="opacity:.75">${mn}°</span></div>
     </div>`;
   }).join('');
-}catch(e){console.error(e);}}clima();
+}catch(e){console.error(e);}
+}
+clima();
 async function mareas(){try{const r=await fetch('https://marine-api.open-meteo.com/v1/marine?latitude=-38.0055&longitude=-57.5426&hourly=sea_level_height_msl&timezone=America%2FArgentina%2FBuenos_Aires&forecast_days=2&cell_selection=sea');const j=await r.json();const horas=j.hourly.time;const alturas=j.hourly.sea_level_height_msl;const hoyStr=fechaARG(0);const eventos=[];for(let i=1;i<alturas.length-1;i++){const prev=alturas[i-1],cur=alturas[i],next=alturas[i+1];const esAlta=cur>prev&&cur>=next;const esBaja=cur<prev&&cur<=next;if((esAlta||esBaja)&&horas[i].startsWith(hoyStr)){eventos.push({hora:horas[i].slice(11,16),altura:cur.toFixed(2),tipo:esAlta?'Alta':'Baja'});}}const cont=document.getElementById('mareas-lista');if(eventos.length===0){cont.textContent='Sin datos de marea para hoy.';return;}cont.innerHTML=eventos.map(e=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.25)"><span>${e.tipo==='Alta'?'🔼':'🔽'} Marea ${e.tipo}</span><b>${e.hora} hs · ${e.altura} m</b></div>`).join('');}catch(e){document.getElementById('mareas-lista').textContent='No se pudo cargar la marea.';}}mareas();
-let todas={Nacional:[],Provincia:[],SantaFe:[],Cordoba:[],EntreRios:[],Uruguay:[]};let datosCompletos=null;
-const horsARG=["Previa 10:15","Primera 12:00","Matutina 15:00","Vespertina 18:00","Nocturna 21:00"];const horsUY=["Vespertina 15:00","Nocturna 21:00"];let actual="Nacional";let actualSorteo="nocturna";
-function getHors(){return actual==="Uruguay"?horsUY:horsARG;}
-function getListaSorteos(){return actual==="Uruguay"?["vespertina","nocturna"]:["previa","primera","matutina","vespertina","nocturna"];}
-function renderT(){document.getElementById('qt').innerHTML=Object.keys(todas).map(k=>`<div class="q-tab ${k===actual?'active':''}" onclick="actual='${k}';render()">${k}</div>`).join('');}
-function render(){renderT();document.getElementById('qn').textContent=actual;document.getElementById('info-uy').style.display=actual==="Uruguay"?'block':'none';let hors=getHors();let listaIds=getListaSorteos();document.getElementById('qg').innerHTML=hors.map((h,i)=>{let idSorteo=listaIds[i];let key=actual.toLowerCase();let num="--";if(datosCompletos&&datosCompletos[key]&&datosCompletos[key][idSorteo]){num=datosCompletos[key][idSorteo][0]||"--";}return `<div class="q-box" onclick="actualSorteo='${idSorteo}';openM()"><div style="font-size:11px;color:#64748b;font-weight:700">${h}</div><b>${num}</b></div>`;}).join('');}
-function openM(){document.getElementById('modal').classList.add('active');let key=actual.toLowerCase();let arr=(datosCompletos&&datosCompletos[key]&&datosCompletos[key][actualSorteo])?datosCompletos[key][actualSorteo]:[];document.getElementById('mt').textContent=actual+' - '+actualSorteo.toUpperCase()+' - 20 números';document.getElementById('ml').innerHTML=arr.map((n,i)=>i===0?`<b class="q-pos cabeza">1°</b><span class="q-num cabeza">${n}</span>`:`<b class="q-pos">${i+1}°</b><span class="q-num">${n}</span>`).join('')||"Aún sin sorteo";}
-function closeM(){document.getElementById('modal').classList.remove('active');}
-render();
-function fechaARG(offsetDias){const ahora=new Date();const partes=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Argentina/Buenos_Aires',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(ahora);const obj={};partes.forEach(p=>obj[p.type]=p.value);const base=new Date(Date.UTC(obj.year,obj.month-1,obj.day));base.setUTCDate(base.getUTCDate()+offsetDias);return base.toISOString().slice(0,10);}
-function etiquetaFecha(offsetDias,fechaStr){if(offsetDias===0)return 'Hoy - '+fechaStr.split('-').reverse().slice(0,2).join('/');if(offsetDias===-1)return 'Ayer - '+fechaStr.split('-').reverse().slice(0,2).join('/');const [y,m,d]=fechaStr.split('-');return `${d}/${m}/${y}`;}
-const selectFecha=document.getElementById('q-fecha');
-for(let i=0;i>=-29;i--){const f=fechaARG(i);const opt=document.createElement('option');opt.value=f;opt.textContent=etiquetaFecha(i,f);selectFecha.appendChild(opt);}
-selectFecha.value=fechaARG(0);
-selectFecha.addEventListener('change',()=>cargarDia(selectFecha.value));
-let ultimoHashQuiniela = "";
-let intervaloQuiniela = null;
-function cargarDia(fecha){
-  const esHoy=fecha===fechaARG(0);
-  document.getElementById('q-titulo').textContent=esHoy?'Quiniela Hoy - 6 Loterías':'Quiniela del '+fecha.split('-').reverse().join('/');
-  const ruta=esHoy?'./quiniela.json':`./historial/${fecha}.json`;
-  fetch(ruta+'?v='+Date.now()).then(r=>{
-    if(!r.ok) throw new Error(esHoy?"quiniela.json no encontrado ("+r.status+")":"Sin datos guardados para ese dia");
-    return r.json();
-  }).then(raw=>{
-    let d=Array.isArray(raw)?raw[0]:raw;
-    let fechaJsonStr = (d.fecha || d.fecha_arg || "").toString().slice(0,10);
-    let ultAct = (d.ultima_actualizacion || "").toString();
-    let m = ultAct.match(/(\d{2})\/(\d{2})\/(\d{4})/);
-    let fechaUltAct = "";
-    if(m){ fechaUltAct = `${m[3]}-${m[2]}-${m[1]}`; }
-    if(esHoy){
-      if(fechaJsonStr && fechaJsonStr !== fecha){
-        datosCompletos={}; render(); ultimoHashQuiniela=""; return;
-      }
-      if(!fechaJsonStr && fechaUltAct && fechaUltAct !== fecha){
-        datosCompletos={}; render(); ultimoHashQuiniela=""; return;
-      }
-    }
-    let fuente=d.completo||d;
-    let norm={}; Object.keys(fuente).forEach(k=>{norm[k.toLowerCase()]=fuente[k];});
-    datosCompletos=norm;
-    try{ ultimoHashQuiniela = JSON.stringify(norm); }catch(e){ ultimoHashQuiniela=""; }
-    render();
-  }).catch(e=>{
-    console.error(e);
-    datosCompletos={}; render();
-    ultimoHashQuiniela="";
-  });
-}
-cargarDia(selectFecha.value);
-function verificarActualizacionSilenciosa(){
-  if(document.hidden) return;
-  const hoy = fechaARG(0);
-  if(selectFecha.value !== hoy) return;
-  fetch('./quiniela.json?v='+Date.now()).then(r=>{
-    if(!r.ok) return null;
-    return r.json();
-  }).then(raw=>{
-    if(!raw) return;
-    let d = Array.isArray(raw)?raw[0]:raw;
-    let fuente = d.completo || d;
-    let norm = {}; Object.keys(fuente).forEach(k=>{norm[k.toLowerCase()]=fuente[k];});
-    let nuevoHash = "";
-    try{ nuevoHash = JSON.stringify(norm); }catch(e){ return; }
-    if(ultimoHashQuiniela && nuevoHash !== ultimoHashQuiniela){
-      datosCompletos = norm;
-      ultimoHashQuiniela = nuevoHash;
-      render();
-      const toast = document.getElementById('toast-quiniela');
-      if(toast){
-        toast.textContent = '✅ Quiniela actualizada - ' + new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});
-        toast.style.display='block';
-        setTimeout(()=>{toast.style.display='none';}, 5000);
-      }
-    } else if(!ultimoHashQuiniela){
-      ultimoHashQuiniela = nuevoHash;
-    }
-  }).catch(()=>{});
-}
-function iniciarAutoActualizacionQuiniela(){
-  if(intervaloQuiniela) clearInterval(intervaloQuiniela);
-  intervaloQuiniela = setInterval(verificarActualizacionSilenciosa, 90000);
-}
-iniciarAutoActualizacionQuiniela();
-document.addEventListener('visibilitychange', ()=>{
-  if(!document.hidden){
-    verificarActualizacionSilenciosa();
-  }
-});
 document.getElementById('btn-edea').onclick=function(){document.getElementById('modal-edea').style.display='block';document.getElementById('texto-edea').innerText='Cargando datos oficiales de EDEA...';fetch('./cortes-edea.json?v='+Date.now()).then(r=>r.json()).then(d=>{let txt=d.info_oficial||(d.cortes?d.cortes.join("\n\n"):"")||"";if(!txt||txt.trim().length<10)txt="Hoy EDEA no publicó cortes programados.";document.getElementById('texto-edea').innerText=txt;document.getElementById('fecha-edea').innerText="Actualizado: "+(d.actualizado||"");}).catch(()=>{document.getElementById('texto-edea').innerText='No se pudo cargar ahora. Probá en unos minutos.';});}
 document.getElementById('btn-511').onclick=function(){document.getElementById('modal-511').style.display='block'}
 document.getElementById('btn-221').onclick=function(){document.getElementById('modal-221').style.display='block'}
