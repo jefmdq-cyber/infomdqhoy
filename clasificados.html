@@ -133,7 +133,7 @@
 
     <header>
         <div class="header-top"><h1>CLASIFICADOS INFO MDQ SUR HOY</h1><span class="slogan"> — LOS CLÁSICOS DE SIEMPRE</span></div>
-        <div class="sub-bar"><span class="badge-fecha">• MAR DEL PLATA • 07-OCT</span><span>sin vueltas. Directo, prolijo y económico.</span></div>
+     <div class="sub-bar"><span class="badge-fecha" id="badge-fecha"> MAR DEL PLATA • -- </span><span>sin vueltas. Directo, prolijo y económico.</span></div>
     </header>
 
     <div class="features-bar" aria-label="Características"><span>✓ SIN REGISTRO</span><span>✓ SIN COMISIONES</span><span>✓ CONTACTO DIRECTO POR WHATSAPP</span></div>
@@ -400,5 +400,16 @@ document.getElementById('modal-copy').addEventListener('click', async ()=>{
   </a>
 </div>
 </div>
+<script>
+  (function(){
+    const el = document.getElementById('badge-fecha');
+    if(!el) return;
+    const ahora = new Date();
+    const dia = String(ahora.getDate()).padStart(2,'0');
+    const meses = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+    const mes = meses[ahora.getMonth()];
+    el.textContent = ` MAR DEL PLATA • ${dia}-${mes} `;
+  })();
+</script>
 </body>
 </html>
