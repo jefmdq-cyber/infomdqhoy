@@ -1,0 +1,37 @@
+{
+  "fecha": "04/10/2026",
+  "numero": "2448",
+  "proximo_fecha": "11/10/2026",
+  "proximo_numero": "2449",
+  "proximo_pozo": "Supera los $1.005 millones",
+  "proximo_carton_color": "celeste",
+  "tradicional": {
+    "resultados": [1, 2, 3, 7, 8, 9, 10, 11, 12, 13, 14, 15, 18, 21, 23],
+    "pozo": "$1.005.140.928 (acumulado - vacante)",
+    "ganadores": [
+      { "aciertos": 15, "cantidad": 0, "monto": "0 (Vacante - Acumula)" },
+      { "aciertos": 14, "cantidad": 21, "monto": "676.013" },
+      { "aciertos": 13, "cantidad": 636, "monto": "67.376" },
+      { "aciertos": 12, "cantidad": 7733, "monto": "19.003" },
+      { "aciertos": 11, "cantidad": 79244, "monto": "3.000" }
+    ]
+  },
+  "rekino": {
+    "resultados": [4, 5, 6, 7, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23],
+    "pozo": "Repartido en 14 aciertos (resolución obligatoria)",
+    "ganadores": [
+      { "aciertos": 15, "cantidad": 0, "monto": "0" },
+      { "aciertos": 14, "cantidad": 25, "monto": "1.003.200" }
+    ]
+  },
+  "carton": {
+    "premios_efectivo": "5 premios de $3.000.000 c/u al número de cartón",
+    "numeros_ganadores_carton": [
+      "75.152",
+      "108.992",
+      "122.817",
+      "593.241",
+      "628.320"
+    ]
+  }
+}
