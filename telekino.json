@@ -1,111 +1,87 @@
 {
-  "fecha": "04/10/2026",
-  "numero": "2448",
-  "proximo_fecha": "11/10/2026",
-  "proximo_numero": "2449",
-  "proximo_pozo": "Supera los $1.005 millones",
+  "fecha": "11/10/2026",
+  "numero": "2449",
+  "proximo_fecha": "",
+  "proximo_numero": "",
+  "proximo_pozo": "Supera los $1.000 millones",
   "proximo_carton_color": "celeste",
   "tradicional": {
     "resultados": [
       1,
-      2,
-      3,
+      4,
+      6,
       7,
       8,
-      9,
-      10,
-      11,
       12,
       13,
       14,
       15,
       18,
-      21,
-      23
+      19,
+      20,
+      23,
+      24,
+      25
     ],
-    "pozo": "$1.005.140.928 (acumulado - vacante)",
+    "pozo": "$1.269.721.818 (1 ganador)",
     "ganadores": [
       {
         "aciertos": 15,
-        "cantidad": 0,
-        "monto": "0 (Vacante - Acumula)"
+        "cantidad": 1,
+        "monto": "1.269.721.818"
       },
       {
         "aciertos": 14,
         "cantidad": 21,
-        "monto": "676.013"
+        "monto": "694.235"
       },
       {
         "aciertos": 13,
-        "cantidad": 636,
-        "monto": "67.376"
+        "cantidad": 693,
+        "monto": "63.501"
       },
       {
         "aciertos": 12,
-        "cantidad": 7733,
-        "monto": "19.003"
-      },
-      {
-        "aciertos": 11,
-        "cantidad": 79244,
-        "monto": "3.000"
+        "cantidad": 7753,
+        "monto": "19.465"
       }
     ]
   },
   "rekino": {
     "resultados": [
+      2,
       4,
-      5,
-      6,
-      7,
+      4,
+      8,
+      10,
+      11,
       12,
       13,
       14,
-      15,
       16,
-      17,
-      18,
       19,
-      20,
       21,
-      23
+      23,
+      24,
+      25
     ],
-    "pozo": "Repartido en 14 aciertos (resolución obligatoria)",
+    "pozo": "$5.399.610",
     "ganadores": [
       {
-        "aciertos": 15,
-        "cantidad": 0,
-        "monto": "0"
-      },
-      {
         "aciertos": 14,
-        "cantidad": 25,
-        "monto": "1.003.200"
+        "cantidad": 1,
+        "monto": "5.399.610"
       }
     ]
   },
   "carton": {
     "premios_efectivo": "5 premios de $3.000.000 c/u al número de cartón",
-    "premios_especie": [
-      "Casa estilo americana amueblada + Auto 0km + Viaje a Europa",
-      "Camioneta 0km",
-      "Moto 0km",
-      "Viaje a Cancún",
-      "Crucero por el Mediterráneo"
-    ],
     "numeros_ganadores_carton": [
-      "75.152",
-      "108.992",
-      "122.817",
-      "593.241",
-      "628.320"
-    ],
-    "numeros_ganadores_especie": [
-      "124.550 (Casa + Auto + Viaje)",
-      "445.902 (Camioneta)",
-      "671.223 (Moto)",
-      "509.774 (Cancún)",
-      "811.002 (Crucero)"
+      "529 295 - Santiago del Estero",
+      "396 444 - Corrientes",
+      "507 109 - Jujuy",
+      "855 356 - Santa Fe",
+      "500 553 - La Rioja"
     ]
   }
 }
