@@ -1,9 +1,7 @@
 name: Run Google Indexing API
 
 on:
-  push:
-    branches:
-      - main  # O la rama principal de tu repositorio
+  workflow_dispatch:# O la rama principal de tu repositorio
 
 jobs:
   index-urls:
