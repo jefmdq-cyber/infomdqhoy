@@ -1,7 +1,7 @@
-name: Run Google Indexing API
+name: Indexar sitio en Google
 
 on:
-  workflow_dispatch:# O la rama principal de tu repositorio
+  workflow_dispatch:
 
 jobs:
   index-urls:
