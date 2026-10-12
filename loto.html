@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Loto Plus Hoy - Resultados Oficiales | INFO MDQ HOY</title>
-<meta name="description" content="Loto Plus Hoy: Resultados oficiales, Tradicional, Match, Desquite, Sale o Sale y Número Plus. Pozo acumulado para el próximo sorteo en Mar del Plata.">
+<title id="meta-title">Loto Plus Hoy - Resultados Oficiales | INFO MDQ HOY</title>
+<meta name="description" id="meta-desc" content="Loto Plus Hoy: Resultados oficiales, Tradicional, Match, Desquite, Sale o Sale y el Número Plus. Pozo acumulado para el próximo sorteo en Mar del Plata.">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700;800&family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -101,7 +101,7 @@ h1{font-family:'Fredoka',sans-serif;font-size:28px;font-weight:800;margin-top:12
 </div>
 
 <div class="container">
-  <span class="badge" id="badge-sorteo">Loto Plus</span>
+
   <h1>Loto Plus Hoy - Resultados</h1>
   <p class="sub">Sorteo oficial de Loto Plus. Tradicional, Match, Desquite, Sale o Sale y el Número Plus.</p>
   
@@ -112,7 +112,6 @@ h1{font-family:'Fredoka',sans-serif;font-size:28px;font-weight:800;margin-top:12
       <div class="q-date-bar">
         <span class="q-date-label">📅 Sorteo:</span>
         <select class="q-select" id="sorteo-select"><option>Cargando...</option></select>
-        <button class="q-btn">Anteriores ▼</button>
       </div>
       <div class="q-tabs">
         <div class="q-tab active" onclick="cambiarModalidad('tradicional', this)">Tradicional</div>
@@ -174,29 +173,63 @@ h1{font-family:'Fredoka',sans-serif;font-size:28px;font-weight:800;margin-top:12
 let miDataJson = null; 
 let modalidadActual = 'tradicional';
 
+// Carga inicial del sorteo actual de Loto Plus
 fetch('loto.json')
   .then(r => { if(!r.ok) throw new Error('no json'); return r.json(); })
   .then(data => { 
     miDataJson = data; 
-    
-    // Cargamos el badge y el select con el número de sorteo y fecha reales
-    document.getElementById('badge-sorteo').innerText = `Sorteo ${data.numero} • ${data.fecha}`;
-    const selectSorteo = document.getElementById('sorteo-select');
-    selectSorteo.innerHTML = `<option value="${data.numero}">Sorteo N° ${data.numero} (${data.fecha})</option>`;
-
-    // Banner del próximo pozo
-    document.getElementById('pozo-banner').innerText = `Próximo pozo estimado: ${data.proximo_pozo}`;
-    
-    // Seteamos el Número Plus independiente
-    document.getElementById('numero-plus-val').innerText = data.numero_plus || '-';
-
+    actualizarCabecerasDinamicas();
     renderResultados(); 
   })
   .catch(e => { 
     console.error(e); 
-    document.getElementById('sorteo-select').innerHTML = '<option>Error al cargar datos</option>';
+    const select = document.getElementById('sorteo-select');
+    if(select) select.innerHTML = '<option>Error al cargar datos</option>';
     document.getElementById('sorteo-ganadores').innerHTML = '⚠ Error al cargar loto.json'; 
   });
+
+function actualizarCabecerasDinamicas(){
+  if(!miDataJson) return;
+  // Actualiza dinámicamente títulos, badges y banner superior desde el JSON
+  document.getElementById('meta-title').innerText = `Loto Plus Hoy - Resultados Oficiales Sorteo ${miDataJson.numero} | INFO MDQ HOY`;
+  document.getElementById('meta-desc').content = `Loto Plus Hoy: Resultados sorteo ${miDataJson.numero} del ${miDataJson.fecha}. Tradicional, Match, Desquite, Sale o Sale y Número Plus.`;
+
+  
+  // Banner dinámico ajustado para indicar el día miércoles del próximo sorteo
+  document.getElementById('pozo-banner').innerText = `Pozo próximo miércoles ${miDataJson.proximo_fecha} (${miDataJson.proximo_numero}): ${miDataJson.proximo_pozo}`;
+  
+  // Seteamos el Número Plus independiente
+  document.getElementById('numero-plus-val').innerText = miDataJson.numero_plus || '-';
+
+  const select = document.getElementById('sorteo-select');
+  if (select) {
+    // Si es la primera vez que carga, armamos las opciones y el evento
+    if (!select.dataset.loaded) {
+      select.innerHTML = `
+        <option value="loto.json">Sorteo ${miDataJson.numero} - ${miDataJson.fecha}</option>
+        <option value="historial/loto_xxxx.json">Sorteo Anterior - Fecha</option>
+      `;
+      select.dataset.loaded = "true";
+      
+      select.onchange = (e) => {
+        const archivoSeleccionado = e.target.value;
+        fetch(archivoSeleccionado)
+          .then(r => { if(!r.ok) throw new Error('no json'); return r.json(); })
+          .then(data => {
+            miDataJson = data;
+            actualizarCabecerasDinamicas();
+            renderResultados();
+          })
+          .catch(err => console.error("Error al cargar el histórico:", err));
+      };
+    }
+    
+    // Sincroniza el valor visual del select según el número de sorteo activo
+    if (miDataJson.numero) {
+      select.value = "loto.json";
+    }
+  }
+}
 
 function cambiarModalidad(modalidad, el){
   document.querySelectorAll('.q-tab').forEach(t=>t.classList.remove('active'));
@@ -226,11 +259,13 @@ function renderResultados(){
   const pozoLimpio = (datos.pozo || 'Pozo en juego').replace(/\s*\(Vacante\)/i, '');
   estado.innerText = pozoLimpio;
   
-  // Renderizamos las 6 bolillas de la modalidad
+  // Renderizamos las bolillas de la modalidad
   let bolasHTML = '';
-  datos.resultados.forEach(num=>{
-    bolasHTML += `<div class="q-ball">${String(num).padStart(2,'0')}</div>`;
-  });
+  if(datos.resultados && Array.isArray(datos.resultados)){
+    datos.resultados.forEach(num=>{
+      bolasHTML += `<div class="q-ball">${String(num).padStart(2,'0')}</div>`;
+    });
+  }
   bolas.innerHTML = bolasHTML;
 
   // Renderizamos ganadores abajo

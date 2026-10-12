@@ -7,32 +7,34 @@
   "numero_plus": "4",
   "tradicional": {
     "resultados": [9, 16, 20, 24, 30, 37],
-    "pozo": "$4.262.263.651 (Vacante)",
+    "pozo": "$4.262.263.650,72 (Vacante)",
     "ganadores": [
       { "aciertos": 6, "cantidad": 0, "monto": "Vacante" },
-      { "aciertos": 5, "cantidad": 11, "monto": "1.899.520" }
+      { "aciertos": 5, "cantidad": 11, "monto": "$20.894.722,20" },
+      { "aciertos": 4, "cantidad": 379, "monto": "$4.178.944,44" }
     ]
   },
   "match": {
     "resultados": [3, 6, 27, 43, 44, 45],
-    "pozo": "$2.130.164.277 (Vacante)",
+    "pozo": "$2.130.164.276,96 (Vacante)",
     "ganadores": [
       { "aciertos": 6, "cantidad": 0, "monto": "Vacante" },
-      { "aciertos": 5, "cantidad": 2, "monto": "10.447.361" }
+      { "aciertos": 5, "cantidad": 2, "monto": "$20.894.722,20" },
+      { "aciertos": 4, "cantidad": 175, "monto": "$4.178.944,44" }
     ]
   },
   "desquite": {
     "resultados": [0, 3, 4, 28, 29, 32],
-    "pozo": "$2.677.609.648 (Vacante)",
+    "pozo": "$2.677.609.648,00 (Vacante)",
     "ganadores": [
       { "aciertos": 6, "cantidad": 0, "monto": "Vacante" }
     ]
   },
   "sale_o_sale": {
     "resultados": [2, 3, 35, 36, 41, 44],
-    "pozo": "Siempre Sale",
+    "pozo": "$53.819.739,00",
     "ganadores": [
-      { "aciertos": 5, "cantidad": 2, "monto": "26.909.869" }
+      { "aciertos": 5, "cantidad": 2, "monto": "$26.909.869,50" }
     ]
   }
 }
