@@ -1,0 +1,85 @@
+{
+  "numero": "1375",
+  "fecha": "11/10/2026",
+  "hora": "21:00",
+  "lugar": "Santa Fe",
+  "sorteo_completo": "Concurso 1375 • 11/10/2026 - 21:00hs - Santa Fe",
+  "proximo_numero": "1376",
+  "proximo_fecha": "18/10/2026",
+  "proximo_hora": "21:00",
+  "proximo_pozo": "$580.000.000",
+  "proximo_valor_apuesta": "$1.500",
+  "fecha_caducidad": "26/10/2026",
+  "extracto_oficial": "RINALDI, GISELA ESCRIBANA C/ REG.ESP. - ORECCHIA, MARIA JOSE AUTORIDAD DE SORTEO",
+  "tradicional": {
+    "resultados": [
+      8,
+      13,
+      20,
+      28,
+      29,
+      35
+    ],
+    "resultados_formateados": [
+      "08",
+      "13",
+      "20",
+      "28",
+      "29",
+      "35"
+    ],
+    "pozo_texto": "VACANTE 6 aciertos",
+    "ganadores": [
+      {
+        "premio": "1º Premio 6 aciertos",
+        "cantidad": "VACANTE*",
+        "monto": "487.133.682,65"
+      },
+      {
+        "premio": "2º Premio 5 aciertos",
+        "cantidad": 6,
+        "monto": "1.104.015,84"
+      },
+      {
+        "premio": "3º Premio 4 aciertos",
+        "cantidad": 261,
+        "monto": "8.375,29"
+      },
+      {
+        "premio": "4º Premio 3 aciertos",
+        "cantidad": 4380,
+        "monto": "1.500,00"
+      },
+      {
+        "premio": "Premio Estímulo Agenciero",
+        "cantidad": "VACANTE",
+        "monto": "5.357.395,68"
+      }
+    ],
+    "nota": "Dicho pozo pasa a incrementar el primer premio del concurso siguiente según artículo 33º del reglamento"
+  },
+  "junior": {
+    "resultados": [
+      2,
+      4,
+      13,
+      21,
+      33,
+      39
+    ],
+    "resultados_formateados": [
+      "02",
+      "04",
+      "13",
+      "21",
+      "33",
+      "39"
+    ],
+    "pozo": "33.110.082,86",
+    "aciertos": 5,
+    "ganadores": 25,
+    "premio_por_apuesta": "1.324.403,31",
+    "estimulo": "331.100,83",
+    "nota": "Premio NO acumulable - Siempre Sale"
+  }
+}
