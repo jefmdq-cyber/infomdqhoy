@@ -1,17 +1,19 @@
-// Versión 2.1 - Forzar actualización post-incidente 15-10-2026
+// Fuerza la autodestrucción de la aplicación instalada trabada
 self.addEventListener('install', (e) => {
   self.skipWaiting();
 });
 
 self.addEventListener('activate', (e) => {
   e.waitUntil(
-    caches.keys().then((names) => {
-      return Promise.all(names.map((name) => caches.delete(name)));
-    }).then(() => self.clients.claim())
+    self.registration.unregister()
+      .then(() => self.clients.matchAll())
+      .then((clients) => {
+        clients.forEach((client) => {
+          if (client.url && 'navigate' in client) {
+            client.navigate(client.url);
+          }
+        });
+      })
   );
 });
 
-self.addEventListener('fetch', (e) => {
-  // No cachea nada, obliga a la aplicación a buscar siempre en internet
-  e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
-});
