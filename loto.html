@@ -196,7 +196,7 @@ function actualizarCabecerasDinamicas(){
 
   
   // Banner dinámico ajustado para indicar el día miércoles del próximo sorteo
-  document.getElementById('pozo-banner').innerText = `Pozo próximo miércoles ${miDataJson.proximo_fecha} (${miDataJson.proximo_numero}): ${miDataJson.proximo_pozo}`;
+ document.getElementById('pozo-banner').innerText = `Pozo próximo Sorteo ${miDataJson.proximo_fecha} (${miDataJson.proximo_numero}): ${miDataJson.proximo_pozo}`;
   
   // Seteamos el Número Plus independiente
   document.getElementById('numero-plus-val').innerText = miDataJson.numero_plus || '-';
