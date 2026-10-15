@@ -1,4 +1,4 @@
-// Fuerza la autodestrucción de la aplicación instalada trabada
+// Versión de emergencia para destrabar el barrio 15-10-2026
 self.addEventListener('install', (e) => {
   self.skipWaiting();
 });
@@ -16,4 +16,3 @@ self.addEventListener('activate', (e) => {
       })
   );
 });
-
