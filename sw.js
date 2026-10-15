@@ -1,9 +1,10 @@
-self.addEventListener('install', e => self.skipWaiting());
-self.addEventListener('activate', e => {
+self.addEventListener('install', (e) => {
+  self.skipWaiting();
+});
+self.addEventListener('activate', (e) => {
   e.waitUntil(
-    caches.keys().then(k => Promise.all(k.map(x => caches.delete(x))))
-      .then(() => self.registration.unregister())
-      .then(() => self.clients.matchAll())
-      .then(clients => clients.forEach(c => c.navigate(c.url)))
+    caches.keys().then((names) => {
+      return Promise.all(names.map((name) => caches.delete(name)));
+    }).then(() => self.clients.claim())
   );
 });
