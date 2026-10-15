@@ -1,40 +1,161 @@
 {
-  "fecha": "10/10/2026",
-  "numero": "3925",
-  "proximo_fecha": "14/10/2026",
-  "proximo_numero": "3926",
-  "proximo_pozo": "Estimado $27.493.000.000",
-  "numero_plus": "4",
+  "fecha": "14/10/2026",
+  "numero": "3417",
+  "dia": "miércoles",
+  "fuente_oficial": "Lotería de Santa Fe - C5N y 0223 - 14/10/2026",
+  "hora": "21:15",
+  "proximo_numero": "3418",
+  "proximo_fecha": "18/10/2026",
+  "proximo_pozo_estimado": "$9.100.000.000",
   "tradicional": {
-    "resultados": [9, 16, 20, 24, 30, 37],
-    "pozo": "$4.262.263.650,72 (Vacante)",
+    "resultados": [
+      1,
+      9,
+      23,
+      24,
+      32,
+      37
+    ],
+    "resultados_formateados": [
+      "01",
+      "09",
+      "23",
+      "24",
+      "32",
+      "37"
+    ],
+    "pozo": "$2.469.571.272 (Vacante)",
     "ganadores": [
-      { "aciertos": 6, "cantidad": 0, "monto": "Vacante" },
-      { "aciertos": 5, "cantidad": 11, "monto": "$20.894.722,20" },
-      { "aciertos": 4, "cantidad": 379, "monto": "$4.178.944,44" }
+      {
+        "aciertos": 6,
+        "cantidad": 0,
+        "monto": "Vacante $2.469.571.272"
+      },
+      {
+        "aciertos": 5,
+        "cantidad": 18,
+        "monto": "$2.257.006"
+      },
+      {
+        "aciertos": 4,
+        "cantidad": 1350,
+        "monto": "$9.028"
+      }
     ]
   },
-  "match": {
-    "resultados": [3, 6, 27, 43, 44, 45],
-    "pozo": "$2.130.164.276,96 (Vacante)",
+  "segunda": {
+    "resultados": [
+      5,
+      8,
+      13,
+      23,
+      43,
+      44
+    ],
+    "resultados_formateados": [
+      "05",
+      "08",
+      "13",
+      "23",
+      "43",
+      "44"
+    ],
+    "pozo": "$1.100.000.000 (Vacante)",
     "ganadores": [
-      { "aciertos": 6, "cantidad": 0, "monto": "Vacante" },
-      { "aciertos": 5, "cantidad": 2, "monto": "$20.894.722,20" },
-      { "aciertos": 4, "cantidad": 175, "monto": "$4.178.944,44" }
+      {
+        "aciertos": 6,
+        "cantidad": 0,
+        "monto": "Vacante"
+      },
+      {
+        "aciertos": 5,
+        "cantidad": 55,
+        "monto": "$738.656"
+      },
+      {
+        "aciertos": 4,
+        "cantidad": 1580,
+        "monto": "$7.713"
+      }
     ]
   },
-  "desquite": {
-    "resultados": [0, 3, 4, 28, 29, 32],
-    "pozo": "$2.677.609.648,00 (Vacante)",
+  "revancha": {
+    "resultados": [
+      4,
+      6,
+      10,
+      25,
+      30,
+      37
+    ],
+    "resultados_formateados": [
+      "04",
+      "06",
+      "10",
+      "25",
+      "30",
+      "37"
+    ],
+    "pozo": "$3.625.515.763 (Vacante)",
     "ganadores": [
-      { "aciertos": 6, "cantidad": 0, "monto": "Vacante" }
+      {
+        "aciertos": 6,
+        "cantidad": 0,
+        "monto": "Vacante"
+      }
     ]
   },
-  "sale_o_sale": {
-    "resultados": [2, 3, 35, 36, 41, 44],
-    "pozo": "$53.819.739,00",
+  "siempre_sale": {
+    "resultados": [
+      1,
+      14,
+      18,
+      41,
+      43,
+      44
+    ],
+    "resultados_formateados": [
+      "01",
+      "14",
+      "18",
+      "41",
+      "43",
+      "44"
+    ],
+    "pozo": "$364.419.972",
     "ganadores": [
-      { "aciertos": 5, "cantidad": 2, "monto": "$26.909.869,50" }
+      {
+        "aciertos": 5,
+        "cantidad": 7,
+        "monto": "$52.059.996"
+      }
+    ]
+  },
+  "pozo_extra": {
+    "resultados": [
+      1,
+      4,
+      5,
+      6,
+      8,
+      9,
+      10,
+      13,
+      23,
+      24,
+      25,
+      30,
+      32,
+      37,
+      43,
+      44
+    ],
+    "ganadores": [
+      {
+        "aciertos": 6,
+        "cantidad": 994,
+        "monto": "$201.207"
+      }
     ]
   }
 }
