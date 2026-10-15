@@ -1,66 +1,70 @@
 {
   "fecha": "14/10/2026",
-  "numero": "3417",
+  "numero": "3926",
   "dia": "miércoles",
-  "fuente_oficial": "Lotería de Santa Fe - C5N y 0223 - 14/10/2026",
-  "hora": "21:15",
-  "proximo_numero": "3418",
-  "proximo_fecha": "18/10/2026",
-  "proximo_pozo_estimado": "$9.100.000.000",
+  "hora": "22:00",
+  "fuente_oficial": "https://loto.loteriadelaciudad.gob.ar/ - Ruta1000, La Voz, FM Riel",
+  "numero_plus": "2",
+  "proximo_numero": "3927",
+  "proximo_fecha": "17/10/2026",
+  "proximo_pozo": "$27.804.000.000",
+  "proximo_pozo_estimado": "$27.804.000.000",
+  "extracto_verificado": true,
   "tradicional": {
     "resultados": [
-      1,
-      9,
-      23,
-      24,
-      32,
-      37
-    ],
-    "resultados_formateados": [
-      "01",
-      "09",
-      "23",
-      "24",
-      "32",
-      "37"
-    ],
-    "pozo": "$2.469.571.272 (Vacante)",
-    "ganadores": [
-      {
-        "aciertos": 6,
-        "cantidad": 0,
-        "monto": "Vacante $2.469.571.272"
-      },
-      {
-        "aciertos": 5,
-        "cantidad": 18,
-        "monto": "$2.257.006"
-      },
-      {
-        "aciertos": 4,
-        "cantidad": 1350,
-        "monto": "$9.028"
-      }
-    ]
-  },
-  "segunda": {
-    "resultados": [
-      5,
-      8,
       13,
-      23,
-      43,
-      44
+      19,
+      31,
+      35,
+      41,
+      42
     ],
     "resultados_formateados": [
-      "05",
-      "08",
       "13",
-      "23",
-      "43",
-      "44"
+      "19",
+      "31",
+      "35",
+      "41",
+      "42"
     ],
-    "pozo": "$1.100.000.000 (Vacante)",
+    "pozo": "Vacante - $4.294.822.988",
+    "estado": "Vacante 6 aciertos",
+    "ganadores": [
+      {
+        "aciertos": 6,
+        "cantidad": 0,
+        "monto": "Vacante $4.294.822.988"
+      },
+      {
+        "aciertos": 5,
+        "cantidad": 4,
+        "monto": "$3.822.301"
+      },
+      {
+        "aciertos": 4,
+        "cantidad": 166,
+        "monto": "$18.421"
+      }
+    ]
+  },
+  "match": {
+    "resultados": [
+      0,
+      1,
+      3,
+      14,
+      23,
+      39
+    ],
+    "resultados_formateados": [
+      "00",
+      "01",
+      "03",
+      "14",
+      "23",
+      "39"
+    ],
+    "pozo": "Vacante - $2.162.723.614",
     "ganadores": [
       {
         "aciertos": 6,
@@ -69,34 +73,34 @@
       },
       {
         "aciertos": 5,
-        "cantidad": 55,
-        "monto": "$738.656"
+        "cantidad": 11,
+        "monto": "$1.389.928"
       },
       {
         "aciertos": 4,
-        "cantidad": 1580,
-        "monto": "$7.713"
+        "cantidad": 195,
+        "monto": "$15.681"
       }
     ]
   },
-  "revancha": {
+  "desquite": {
     "resultados": [
-      4,
+      1,
       6,
-      10,
+      11,
       25,
-      30,
-      37
+      34,
+      44
     ],
     "resultados_formateados": [
-      "04",
+      "01",
       "06",
-      "10",
+      "11",
       "25",
-      "30",
-      "37"
+      "34",
+      "44"
     ],
-    "pozo": "$3.625.515.763 (Vacante)",
+    "pozo": "Vacante - $2.709.608.997",
     "ganadores": [
       {
         "aciertos": 6,
@@ -105,56 +109,34 @@
       }
     ]
   },
-  "siempre_sale": {
+  "sale_o_sale": {
     "resultados": [
-      1,
-      14,
-      18,
-      41,
-      43,
-      44
+      2,
+      10,
+      12,
+      27,
+      35,
+      41
     ],
     "resultados_formateados": [
-      "01",
-      "14",
-      "18",
-      "41",
-      "43",
-      "44"
+      "02",
+      "10",
+      "12",
+      "27",
+      "35",
+      "41"
     ],
-    "pozo": "$364.419.972",
+    "pozo": "$39.381.282",
     "ganadores": [
       {
         "aciertos": 5,
         "cantidad": 7,
-        "monto": "$52.059.996"
-      }
-    ]
-  },
-  "pozo_extra": {
-    "resultados": [
-      1,
-      4,
-      5,
-      6,
-      8,
-      9,
-      10,
-      13,
-      23,
-      24,
-      25,
-      30,
-      32,
-      37,
-      43,
-      44
-    ],
-    "ganadores": [
+        "monto": "$5.625.897"
+      },
       {
         "aciertos": 6,
-        "cantidad": 994,
-        "monto": "$201.207"
+        "cantidad": 0,
+        "monto": "-"
       }
     ]
   }
