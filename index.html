@@ -1943,26 +1943,6 @@ tickerDesdePagina();
     <span>Ofertas</span>
   </a>
 </div>
-<script>
-// FIX EMERGENCIA PWA - limpia la versión rota de ayer
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.getRegistrations().then(function(regs) {
-    for (let reg of regs) {
-      reg.unregister();
-    }
-  });
-}
-if (window.caches) {
-  caches.keys().then(function(keys) {
-    keys.forEach(function(key) {
-      caches.delete(key);
-    });
-  });
-}
-if (!sessionStorage.getItem('pwa-fix-v2')) {
-  sessionStorage.setItem('pwa-fix-v2', '1');
-  location.reload();
-}
-</script>          
+ 
 </body>
 </html>
