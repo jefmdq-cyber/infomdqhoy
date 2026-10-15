@@ -1942,5 +1942,14 @@ tickerDesdePagina();
     <span>Ofertas</span>
   </a>
 </div>
+<script>
+if ('serviceWorker' in navigator) {
+  setInterval(() => {
+    fetch(window.location.href, {cache: "no-store"}).then(r => {
+      if (r.ok) location.reload();
+    });
+  }, 300000); // cada 5 minutos prueba solo
+}
+</script>            
 </body>
 </html>
