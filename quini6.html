@@ -68,12 +68,10 @@ footer .links a:hover{color:#38bdf8}
 
   <div class="q-card">
     <div class="q-header">
-      <div class="q-date-bar">
-        <span class="q-date-label">📅 Fecha:</span>
-        <select class="q-select">
-          <option>Miércoles 07/10/2026 (Sorteo 3400)</option>
-        </select>
-      </div>
+<div class="q-date-bar">
+    <span class="q-date-label">📅 Sorteo:</span>
+    <select class="q-select" id="sorteo-select"><option>Cargando...</option></select>
+</div>
 
       <!-- Pestañas interactivas -->
       <!-- PESTAÑAS CORREGIDAS QUE LLAMAN AL NUEVO SCRIPT -->
@@ -154,14 +152,30 @@ fetch('quini6.json')
     document.getElementById('contenido-card').innerHTML = `<div class="error-msg">⚠️ Error al cargar los resultados oficiales.</div>`;
   });
 
-// 2. CONFIGURAR LA FECHA Y SORTEO
+// 2. CONFIGURAR LA FECHA Y SORTEO (Con soporte para historial)
 function inicializarEncabezado() {
   const select = document.getElementById('sorteo-select');
   if (select) {
-    select.innerHTML = '';
-    const option = document.createElement('option');
-    option.textContent = `${miDataJson.fecha} (Sorteo ${miDataJson.numero})`;
-    select.appendChild(option);
+    if (!select.dataset.loaded) {
+      select.innerHTML = `
+        <option value="quini6.json">Sorteo ${miDataJson.numero} - ${miDataJson.fecha}</option>
+        <option value="historial/quini6_2026-10-11.json">Sorteo 3416 - 11/10/2026</option>
+        <option value="historial/quini6_2026-10-07.json">Sorteo 3400 - 07/10/2026</option>
+      `;
+      select.dataset.loaded = "true";
+      
+      select.onchange = (e) => {
+        const archivoSeleccionado = e.target.value;
+        fetch(archivoSeleccionado)
+          .then(r => { if(!r.ok) throw new Error('no json'); return r.json(); })
+          .then(data => {
+            miDataJson = data;
+            if (typeof actualizarCabecerasDinamicas === 'function') actualizarCabecerasDinamicas();
+            if (typeof renderResultados === 'function') renderResultados();
+          })
+          .catch(err => console.error("Error al cargar el histórico de Quini 6:", err));
+      };
+    }
   }
 }
 
