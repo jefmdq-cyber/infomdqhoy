@@ -1,0 +1,36 @@
+{
+  "fecha": "Domingo 11 de octubre",
+  "numero": "3416",
+  "tradicional": {
+    "pozo": "2.225.118.974",
+    "resultados": [13, 14, 15, 18, 20, 29],
+    "ganadores": [
+      { "aciertos": "6", "cantidad": 0, "monto": "Vacante" },
+      { "aciertos": "5", "cantidad": 48, "monto": "1.188.406" },
+      { "aciertos": "4", "cantidad": 2550, "monto": "6.711" }
+    ]
+  },
+  "segunda": {
+    "pozo": "5.303.023.815",
+    "resultados": [0, 4, 5, 6, 8, 26],
+    "ganadores": [
+      { "aciertos": "6", "cantidad": 2, "monto": "2.651.511.907" },
+      { "aciertos": "5", "cantidad": 40, "monto": "1.426.087" },
+      { "aciertos": "4", "cantidad": 2245, "monto": "7.622" }
+    ]
+  },
+  "revancha": {
+    "pozo": "3.206.956.233",
+    "resultados": [0, 1, 6, 27, 42, 45],
+    "ganadores": [
+      { "aciertos": "6", "cantidad": 0, "monto": "Vacante" }
+    ]
+  },
+  "siempre_sale": {
+"pozo": "17.636.538 (Premio Individual)",
+    "resultados": [4, 7, 19, 32, 34, 42],
+    "ganadores": [
+      { "aciertos": "5", "cantidad": 31, "monto": "11.920.273" }
+    ]
+  }
+}
