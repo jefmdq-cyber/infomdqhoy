@@ -654,12 +654,19 @@ body {
   <button class="btn-volver-global" onclick="volverHome()">← Volver al inicio</button>
 </div>
 
+
+
+
 <div class="barrios-nav">
-  <a href="./faro.html" class="barrio-btn btn-faro"><span>🏛️</span>SOC. FOMENTO FARO</a>
-  <a href="./alfar.html" class="barrio-btn btn-alfar"><span>🏛️</span>SOC. FOMENTO ALFAR</a>
-  <a href="./serena.html" class="barrio-btn btn-serena"><span>🏛️</span>SOC. FOMENTO SERENA</a>
- <a href="./acantilados.html" class="barrio-btn btn-acantilados"><span>🏛️</span>SOC. FOMENTO ACANTILADOS</a>
+  <a href="#faro" class="barrio-btn btn-faro" onclick="abrirBarrio('faro');return false;"><span>🏛️</span>SOC. FOMENTO FARO</a>
+  <a href="#alfar" class="barrio-btn btn-alfar" onclick="abrirBarrio('alfar');return false;"><span>🏛️</span>SOC. FOMENTO ALFAR</a>
+  <a href="#serena" class="barrio-btn btn-serena" onclick="abrirBarrio('serena');return false;"><span>🏛️</span>SOC. FOMENTO SERENA</a>
+  <a href="#acantilados" class="barrio-btn btn-acantilados" onclick="abrirBarrio('acantilados');return false;"><span>🏛️</span>SOC. FOMENTO ACANTILADOS</a>
 </div>
+
+<!-- FARMACIA REMOVIDA -->
+
+
 
 <div style="grid-column:1 / -1; display:flex; gap:10px; justify-content:center; margin:0 0 12px 0;">
   <button id="btn-edea" style="flex:1; background:#facc15;color:#000;font-weight:900;padding:12px 18px;border:none;border-radius:20px;font-size:14px;cursor:pointer;box-shadow:0 3px 8px rgba(0,0,0,.15)">⚡ Cortes de EDEA</button>
@@ -1487,12 +1494,56 @@ document.querySelectorAll('a[href^="http"]').forEach(a=>{ a.target="_blank"; a.r
     </div>
   </div>
 </div>
-function aplicarHash() {
-  // Lógica para manejar las vistas según el hash de la URL
-  const hash = window.location.hash || '#home';
-  document.querySelectorAll('.barrio-page').forEach(p => p.classList.remove('active'));
-  const target = document.getElementById('page-' + hash.replace('#', ''));
-  if(target) target.classList.add('active');
+<div id="modal-acts" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto" onclick="this.style.display='none'">
+  <div style="background:white;border:3px solid #0f172a;border-radius:16px;padding:18px;max-width:420px;margin:20px auto;color:#1a202c" onclick="event.stopPropagation()">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <b id="act-titulo" style="font-size:16px">Actividad</b>
+      <button onclick="document.getElementById('modal-acts').style.display='none'" style="background:#0f172a;color:white;border:none;padding:6px 12px;border-radius:20px;font-weight:800">X</button>
+    </div>
+    <img id="act-img" src="ritmos-faro.webp" style="width:100%;border-radius:12px;margin-top:12px;display:none">
+    <div id="act-info" style="margin-top:12px;font-size:13px;line-height:1.6"></div>
+    <div style="margin-top:14px;font-size:11px;color:#64748b;text-align:center;border-top:1px solid #e2e8f0;padding-top:10px">Info: Asoc. Vecinal de Fomento Faro Norte</div>
+  </div>
+</div>
+</div>
+<script>
+document.getElementById('f').textContent=new Date().toLocaleDateString('es-AR');
+function abrirBarrio(nombre){
+  document.getElementById('page-home').style.display='none';
+  document.querySelectorAll('.barrio-page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+nombre).classList.add('active');
+  document.querySelectorAll('.barrio-btn').forEach(b=>b.classList.remove('activo'));
+  const btn=document.querySelector('.btn-'+nombre);if(btn)btn.classList.add('activo');
+  const vg=document.getElementById('volver-global');if(vg){vg.style.display='block';}
+  // ocultar los volver internos para no duplicar
+  document.querySelectorAll('.barrio-page .btn-volver').forEach(b=>b.style.display='none');
+  window.scrollTo({top:0,behavior:'smooth'});
+  history.pushState(null,null,'#'+nombre);
+}
+function volverHome(){
+  document.getElementById('page-home').style.display='contents';
+  document.querySelectorAll('.barrio-page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.barrio-btn').forEach(b=>b.classList.remove('activo'));
+  const vg=document.getElementById('volver-global');if(vg){vg.style.display='none';}
+  window.scrollTo({top:0,behavior:'smooth'});
+  history.pushState(null,null,'#');
+}
+function aplicarHash(){
+  const h=location.hash.replace('#','');
+  const validos=['faro','alfar','serena','acantilados'];
+  document.querySelectorAll('.barrio-page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.barrio-btn').forEach(b=>b.classList.remove('activo'));
+  const vg=document.getElementById('volver-global');
+  if(validos.includes(h)){
+    document.getElementById('page-home').style.display='none';
+    document.getElementById('page-'+h).classList.add('active');
+    const btn=document.querySelector('.btn-'+h);if(btn)btn.classList.add('activo');
+    if(vg){vg.style.display='block';}
+    document.querySelectorAll('.barrio-page .btn-volver').forEach(b=>b.style.display='none');
+  }else{
+    document.getElementById('page-home').style.display='contents';
+    if(vg){vg.style.display='none';}
+  }
 }
 window.addEventListener('popstate', aplicarHash);aplicarHash();
 let s=0;setInterval(()=>{s=s===0?1:0;document.getElementById('slide1').style.opacity=s===0?1:0;document.getElementById('slide2').style.opacity=s===1?1:0;},4000);
@@ -1515,6 +1566,64 @@ async function clima(){try{const r=await fetch('https://api.open-meteo.com/v1/fo
 }catch(e){console.error(e);}
 }
 clima();
+async function mareas(){try{const r=await fetch('https://marine-api.open-meteo.com/v1/marine?latitude=-38.0055&longitude=-57.5426&hourly=sea_level_height_msl&timezone=America%2FArgentina%2FBuenos_Aires&forecast_days=2&cell_selection=sea');const j=await r.json();const horas=j.hourly.time;const alturas=j.hourly.sea_level_height_msl;const hoyStr=fechaARG(0);const eventos=[];for(let i=1;i<alturas.length-1;i++){const prev=alturas[i-1],cur=alturas[i],next=alturas[i+1];const esAlta=cur>prev&&cur>=next;const esBaja=cur<prev&&cur<=next;if((esAlta||esBaja)&&horas[i].startsWith(hoyStr)){eventos.push({hora:horas[i].slice(11,16),altura:cur.toFixed(2),tipo:esAlta?'Alta':'Baja'});}}const cont=document.getElementById('mareas-lista');if(eventos.length===0){cont.textContent='Sin datos de marea para hoy.';return;}cont.innerHTML=eventos.map(e=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.25)"><span>${e.tipo==='Alta'?'🔼':'🔽'} Marea ${e.tipo}</span><b>${e.hora} hs · ${e.altura} m</b></div>`).join('');}catch(e){document.getElementById('mareas-lista').textContent='No se pudo cargar la marea.';}}mareas();
+document.getElementById('btn-edea').onclick=function(){document.getElementById('modal-edea').style.display='block';document.getElementById('texto-edea').innerText='Cargando datos oficiales de EDEA...';fetch('./cortes-edea.json?v='+Date.now()).then(r=>r.json()).then(d=>{let txt=d.info_oficial||(d.cortes?d.cortes.join("\n\n"):"")||"";if(!txt||txt.trim().length<10)txt="Hoy EDEA no publicó cortes programados.";document.getElementById('texto-edea').innerText=txt;document.getElementById('fecha-edea').innerText="Actualizado: "+(d.actualizado||"");}).catch(()=>{document.getElementById('texto-edea').innerText='No se pudo cargar ahora. Probá en unos minutos.';});}
+document.getElementById('btn-511').onclick=function(){document.getElementById('modal-511').style.display='block'}
+document.getElementById('btn-221').onclick=function(){document.getElementById('modal-221').style.display='block'}
+let actsCache=[];
+async function cargarActsJSON(){
+  try{
+    const r=await fetch('./actividades.json?v='+Date.now());
+    if(!r.ok) throw 0;
+    actsCache=await r.json();
+    return actsCache;
+  }catch{actsCache=[];return[];}
+}
+function abrirModalActividad(barrio,nombre){
+  const a=actsCache.find(x=> x.barrio===barrio && x.nombre===nombre);
+  if(!a) return;
+  document.getElementById('modal-acts').style.display='block';
+  document.getElementById('act-titulo').textContent=a.nombre;
+  const img=document.getElementById('act-img');
+  if(a.imagen){
+    img.src=a.imagen;
+    img.style.display='block';
+    img.onerror=function(){this.src='faro-nuevo.webp'};
+  } else if(a.barrio==='faro'){
+    img.src='ritmos-faro.webp';img.style.display='block';
+  } else {
+    img.style.display='none';
+  }
+  document.getElementById('act-info').innerHTML=`
+    <div style="display:inline-block;background:#e0f2fe;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800">${a.actividad.toUpperCase()}</div><br><br>
+    <b>📍 Lugar:</b> ${a.lugar}<br>
+    <b>🗓️ Días:</b> ${a.dias}<br>
+    <b>📞 Contacto:</b> ${a.contacto||'Ver en flyer'}<br>
+    <b>🏘️ Barrio:</b> ${a.barrio.toUpperCase()}
+  `;
+}
+async function pintarActividadesPorBarrio(){
+  const acts=await cargarActsJSON();
+  const barrios=['faro','alfar','serena','acantilados'];
+  barrios.forEach(b=>{
+    const el=document.getElementById('acts-'+b);
+    if(!el) return;
+    const mias=acts.filter(a=>a.barrio===b);
+    el.innerHTML=mias.length?mias.map(a=>`
+      <div onclick="abrirModalActividad('${a.barrio}','${a.nombre.replace(/'/g,"\\'")}')" style="cursor:pointer;display:flex;gap:12px;padding:12px;border:1px solid #e2e8f0;border-radius:14px;margin-bottom:10px;background:white;align-items:center">
+        <img src="${a.imagen||'ritmos-faro.webp'}" onerror="this.src='faro-nuevo.webp'" style="width:64px;height:64px;object-fit:cover;border-radius:12px;flex-shrink:0;border:1px solid #e2e8f0">
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:900;font-size:13.5px;line-height:1.25;color:#0f172a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${a.nombre}</div>
+          <div style="margin-top:4px"><span style="background:#e0f2fe;padding:3px 8px;border-radius:20px;font-size:10px;font-weight:800;color:#1e40af">${a.actividad.toUpperCase()}</span></div>
+          <div style="margin-top:4px;font-size:11px;color:#64748b;line-height:1.3">📍 ${a.lugar} • ${a.dias}</div>
+        </div>
+        <div style="background:#0f172a;color:white;padding:6px 10px;border-radius:20px;font-size:10px;font-weight:800;flex-shrink:0">Ver →</div>
+      </div>
+    `).join(''):'<div style="color:#64748b;padding:10px;background:#f8fafc;border-radius:8px">No hay actividades cargadas aún para este barrio.</div>';
+  });
+}
+pintarActividadesPorBarrio();
+
 let instalacionPrompt = null;
 const btnInstalar = document.getElementById('btn-instalar');
 window.addEventListener('beforeinstallprompt', (e) => {
