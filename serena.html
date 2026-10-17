@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sociedad de Fomento Playa Serena - Actividades | INFO MDQ HOY</title>
+<meta name="description" content="Actividades de Sociedad de Fomento y Biblioteca Playa Serena, Mar del Plata. Talleres culturales, biblioteca y deportes frente a la plaza.">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700;800;900&family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0b1329;color:#f8fafc;font-family:'Inter',sans-serif;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.top-bar{background:#0f172a;border-bottom:1px solid #1e293b;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:20;flex-wrap:wrap;gap:12px}
+.top-bar .logo{font-family:'Fredoka',sans-serif;font-weight:800;font-size:18px;letter-spacing:-.5px}
+.top-bar .logo span{color:#34d399}
+.top-bar .back{background:#4dbb32;border:1px solid #334155;padding:8px 16px;border-radius:999px;font-size:13px;font-weight:800;color:#e2e8f0;cursor:pointer;display:inline-block;transition:background 0.2s}
+.top-bar .back:hover{background:#334155}
+.nav-bar{background:#0b1329;border-bottom:1px solid #1e293b;padding:8px 12px;display:flex;gap:6px;overflow-x:auto;position:sticky;top:48px;z-index:9}
+.nav-btn{white-space:nowrap;padding:8px 14px;border-radius:999px;font-size:11px;font-weight:900;border:1px solid #334155;color:#94a3b8;background:#1e293b}
+.nav-btn.active{border-color:#22c55e;color:#0f172a;background:#22c55e}
+.container{max-width:720px;margin:0 auto;padding:16px}
+.badge{display:inline-flex;background:#15803d;border:1.5px solid #22c55e;color:#dcfce7;font-size:10px;font-weight:900;letter-spacing:1px;padding:5px 12px;border-radius:999px;text-transform:uppercase}
+h1{font-family:'Fredoka',sans-serif;font-size:28px;font-weight:800;margin-top:12px;letter-spacing:-.8px;line-height:1.1}
+.sub{color:#94a3b8;font-size:13px;margin-top:6px;line-height:1.4}
+.q-card{background:hsl(120, 60%, 30%);border-radius:24px;border:1px solid hsl(120, 70%, 45%);overflow:hidden;box-shadow:0 25px 50px -12px rgba(0,0,0,0.5);margin-top:18px}
+.q-header{padding:20px}
+.q-date-bar{margin:0;display:flex;align-items:center;gap:10px;background:#0f172a;border:1.5px solid #22c55e;border-radius:14px;padding:10px 12px;flex-wrap:wrap}
+.q-date-label{font-size:13px;font-weight:800;color:#4ade80;white-space:nowrap}
+.q-select{flex:1;min-width:0;border:1.5px solid #334155;background:#1e293b;border-radius:10px;padding:8px 12px;font-weight:700;font-size:14px;color:#f8fafc;outline:none;cursor:pointer}
+.q-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:16px;background:#0f172a;padding:6px;border-radius:14px;border:1px solid #334155}
+.q-tab{padding:10px 2px;border-radius:10px;font-size:11px;font-weight:800;text-align:center;color:#94a3b8;cursor:pointer;transition:.2s;text-transform:uppercase}
+.q-tab.active{background:#334155;color:#4ade80}
+.q-detail{padding:0 20px 20px}
+
+/* TARJETAS DE ACTIVIDADES */
+.lista-actividades{display:flex;flex-direction:column;gap:10px}
+.actividad-card{background:#0f172a;border:1px solid #334155;border-radius:18px;padding:14px;display:flex;gap:12px;transition:border-color .2s, transform .15s;cursor:pointer}
+.actividad-card:hover{border-color:#06b6d4;transform:translateY(-2px)}
+.actividad-thumb{width:72px;height:72px;border-radius:12px;object-fit:cover;flex-shrink:0;background:#1e293b;border:1px solid #334155}
+.actividad-info{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center}
+.actividad-nombre{font-weight:800;font-size:14px;color:#f8fafc;line-height:1.25}
+.actividad-dias{font-size:12px;color:#22d3ee;font-weight:700;margin-top:4px}
+.actividad-lugar{font-size:11px;color:#94a3b8;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.actividad-contacto{font-size:11px;color:#cbd5e1;margin-top:3px}
+
+/* MODAL FLOTANTE CON FLYER COMPLETO */
+.modal-overlay{position:fixed;inset:0;background:rgba(11,19,41,0.85);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:16px;z-index:100}
+.modal-overlay.active{display:flex}
+.modal-card{background:#1e293b;border:1px solid #06b6d4;border-radius:24px;overflow:hidden;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;position:relative}
+.modal-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:999px;background:rgba(15,23,42,0.9);border:1px solid rgba(255,255,255,0.15);color:#f8fafc;font-size:18px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.actividad-modal-img{width:100%;max-height:420px;object-fit:contain;background:#0f172a;display:block;padding:10px}
+.modal-body{padding:20px}
+.modal-badge{display:inline-flex;background:#0e7490;border:1px solid #06b6d4;color:#22d3ee;font-size:10px;font-weight:900;padding:4px 10px;border-radius:999px;text-transform:uppercase}
+.modal-title{font-family:'Fredoka',sans-serif;font-size:22px;font-weight:800;margin-top:10px;color:#f8fafc}
+.modal-lines{display:flex;flex-direction:column;gap:8px;margin-top:14px;font-size:13px;color:#cbd5e1}
+.modal-actions{display:flex;gap:10px;margin-top:18px}
+.btn{flex:1;padding:12px;border-radius:12px;font-size:13px;font-weight:800;cursor:pointer;text-align:center;border:none}
+.btn-ghost{background:#0f172a;color:#cbd5e1;border:1px solid #334155}
+.btn-primary{background:linear-gradient(135deg,#06b6d4,#0891b2);color:white}
+
+footer{margin-top:40px;padding:30px 20px 20px;border-top:1px dashed #333333;text-align:center;font-size:12px;color:#64748b}
+footer .links{display:flex;justify-content:center;gap:20px;margin-bottom:15px}
+footer .links a{color:#b3b3b3;font-weight:700}
+footer .links a:hover{color:#22d3ee}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div style="display:flex;align-items:center;gap:10px">
+    <img src="./icon-192.png" alt="INFO MDQ HOY" style="height:28px;width:28px;border-radius:6px;background:#0d182e">
+    <div class="logo">INFO <span>MDQ HOY</span></div>
+  </div>
+  <a href="./index.html" class="back">← Inicio</a>
+</div>
+
+<!-- NAVEGACIÓN ENTRE SOCIEDADES DE FOMENTO -->
+<div class="nav-bar">
+  <a href="./faro.html" class="nav-btn">SOC. FOMENTO FARO</a>
+  <a href="./alfar.html" class="nav-btn">SOC. FOMENTO ALFAR</a>
+  <a href="./serena.html" class="nav-btn active">LA SERENA</a>
+  <a href="./acantilados.html" class="nav-btn">ACANTILADOS</a>
+</div>
+
+<div class="container">
+  <span class="badge">Sociedad de Fomento y Biblioteca • Playa Serena</span>
+  <h1>Playa Serena - Actividades Barriales</h1>
+  <p class="sub">Talleres culturales, biblioteca y actividades frente a la plaza (Calle 11 / ex 544).</p>
+
+  <div class="q-card">
+    <div class="q-header">
+      <div class="q-date-bar">
+        <span class="q-date-label">🔍 Filtrar:</span>
+        <select class="q-select" id="categoria-select" onchange="filtrarCategoria(this.value)">
+          <option value="TODOS">TODAS LAS ACTIVIDADES</option>
+          <option value="BAILE">BAILE</option>
+          <option value="TALLERES">TALLERES</option>
+          <option value="CURSOS">CURSOS</option>
+        </select>
+      </div>
+
+      <div class="q-tabs">
+        <div class="q-tab active" onclick="filtrarTab('TODOS', this)">Todos</div>
+        <div class="q-tab" onclick="filtrarTab('BAILE', this)">Baile</div>
+        <div class="q-tab" onclick="filtrarTab('TALLERES', this)">Talleres</div>
+        <div class="q-tab" onclick="filtrarTab('CURSOS', this)">Cursos</div>
+      </div>
+    </div>
+<div class="q-detail">
+      <!-- CARTEL AVISO COMUNITARIO / RECLAMO -->
+      <div style="background:#0e3446; border:1px solid #06b6d4; border-radius:12px; padding:18px 20px; color:white; box-shadow: 0 4px 12px rgba(0,0,0,0.15); margin-bottom:16px;">
+        <div style="font-weight:800; font-size:15px; margin-bottom:10px; display:flex; align-items:center; gap:8px;">
+          <span style="font-size:18px;">⚠️</span> AVISO COMUNITARIO - Playa Serena
+        </div>
+        <div style="font-size:13px; line-height:1.5; color:#cbd5e1;">
+          Ante la imposibilidad de comunicarnos con las autoridades de la Sociedad de Fomento Playa Serena y obtener información o actividades para publicar, momentáneamente no tenemos datos para informar en este espacio.
+        </div>
+        <div style="margin-top:14px; background: rgba(255,255,255,0.08); border-radius:8px; padding:10px 12px; font-size:12px; font-weight:600; color:#22d3ee;">
+          💡 Si sos directivo o vecino y querés difundir las actividades del barrio, ponete en contacto con nosotros.
+        </div>
+        <div style="margin-top:12px; border-top:1px solid rgba(255,255,255,0.15); padding-top:10px; font-size:11px; opacity:0.7;">
+          Portal Info MDQ Hoy • Servicio para los vecinos
+        </div>
+      </div>
+
+      <div class="lista-actividades" id="lista-actividades">
+        <!-- Las actividades se cargan automáticamente con JS -->
+      </div>
+    </div>
+    <div class="q-detail">
+      <div class="lista-actividades" id="lista-actividades">
+        <!-- Las actividades se cargan automáticamente con JS -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL FLOTANTE DE DETALLE -->
+<div class="modal-overlay" id="modal-overlay" onclick="cerrarModal()">
+  <div class="modal-card" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="cerrarModal()">✕</button>
+    <img id="modal-img" class="actividad-modal-img" src="" alt="Flyer actividad">
+    <div class="modal-body">
+      <span class="modal-badge" id="modal-categoria">ACTIVIDAD</span>
+      <h2 class="modal-title" id="modal-titulo">Título de la actividad</h2>
+      <div class="modal-lines">
+        <p><strong>🕒 Días y Horarios:</strong> <span id="modal-dias"></span></p>
+        <p><strong>📍 Lugar:</strong> <span id="modal-lugar"></span></p>
+        <p><strong>📱 Contacto:</strong> <span id="modal-contacto"></span></p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" onclick="cerrarModal()">Cerrar</button>
+        <a id="modal-wsp" class="btn btn-primary" href="#" target="_blank">Contactar por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="margin:48px auto 0; max-width:760px; background:linear-gradient(145deg,#0B1120 0%,#111c3a 55%,#0B1120 100%); border:1px solid rgba(6,182,212,.25); border-radius:20px; padding:24px 22px; position:relative; overflow:hidden;">
+  <div style="position:absolute; top:-40px; right:-40px; width:120px; height:120px; background:radial-gradient(circle, rgba(6,182,212,.18), transparent 70%);"></div>
+  <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; position:relative; z-index:2;">
+    <span style="background:rgba(6,182,212,.15); border:1px solid rgba(6,182,212,.35); color:#22d3ee; font-size:10px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; padding:5px 12px; border-radius:999px;">INFORMACIÓN COMUNITARIA</span>
+  </div>
+  <div style="color:#e2e8f0; font-size:12.5px; line-height:1.7; font-weight:500; position:relative; z-index:2; font-family:Inter, system-ui, sans-serif;">
+    <strong style="color:#fff; font-family:Fredoka, sans-serif;">Info MDQ Hoy es un portal digital de servicio comunitario.</strong> Los datos sobre días, horarios y aranceles de las actividades son informativos y proporcionados por cada institución o profesor.<br><br>
+    <span style="color:#94a3b8;">Este sitio colabora en la difusión de las actividades de las Sociedades de Fomento del sur de Mar del Plata para fortalecer la vida barrial y el acceso a la cultura, deportes y educación.</span><br><br>
+    <span style="color:#22d3ee; font-weight:700;">Sociedad de Fomento y Biblioteca Playa Serena • Calle 11 (ex 544) frente a la plaza • Mar del Plata</span>
+  </div>
+</div>
+
+<footer>
+    <div class="links">
+        <a href="contacto.html">Contacto Legal</a>
+        <a href="privacidad.html">Privacidad</a>
+        <a href="terminos.html">Términos y Condiciones</a>
+    </div>
+    <p>&copy; 2026 INFO MDQ HOY. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+// DATOS DE LAS ACTIVIDADES DE PLAYA SERENA
+const actividadesSerena = [
+  { nombre: "Biblioteca Popular Playa Serena", cat: "TALLERES", dias: "Lunes a Viernes", lugar: "Calle 11 frente a la plaza", contacto: "Biblioteca Serena", imagen: "biblioteca-serena.webp" }
+];
+
+let categoriaFiltro = 'TODOS';
+
+function renderizarLista() {
+  const contenedor = document.getElementById('lista-actividades');
+  contenedor.innerHTML = '';
+
+  const filtradas = actividadesSerena.filter(a => categoriaFiltro === 'TODOS' || a.cat === categoriaFiltro);
+
+  if (filtradas.length === 0) {
+    contenedor.innerHTML = '<div style="text-align:center;padding:20px;color:#94a3b8;">Próximamente más actividades en Playa Serena.</div>';
+    return;
+  }
+
+  filtradas.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'actividad-card';
+    card.onclick = () => abrirModal(item);
+    card.innerHTML = `
+      <img src="./serena/${item.imagen}" class="actividad-thumb" alt="${item.nombre}" onerror="this.src='./icon-192.png'">
+      <div class="actividad-info">
+        <div class="actividad-nombre">${item.nombre}</div>
+        <div class="actividad-dias">${item.dias}</div>
+        <div class="actividad-lugar">📍 ${item.lugar}</div>
+        <div class="actividad-contacto">📞 ${item.contacto}</div>
+      </div>
+    `;
+    contenedor.appendChild(card);
+  });
+}
+
+function filtrarTab(cat, elem) {
+  document.querySelectorAll('.q-tab').forEach(t => t.classList.remove('active'));
+  elem.classList.add('active');
+  document.getElementById('categoria-select').value = cat;
+  categoriaFiltro = cat;
+  renderizarLista();
+}
+
+function filtrarCategoria(cat) {
+  categoriaFiltro = cat;
+  renderizarLista();
+}
+
+function abrirModal(item) {
+  document.getElementById('modal-img').src = `./serena/${item.imagen}`;
+  document.getElementById('modal-titulo').innerText = item.nombre;
+  document.getElementById('modal-categoria').innerText = item.cat;
+  document.getElementById('modal-dias').innerText = item.dias;
+  document.getElementById('modal-lugar').innerText = item.lugar;
+  document.getElementById('modal-contacto').innerText = item.contacto;
+  
+  const wspBtn = document.getElementById('modal-wsp');
+  const numLimpio = item.contacto.replace(/\D/g, '');
+  if (numLimpio.length >= 8) {
+    wspBtn.href = `https://wa.me/549${numLimpio}?text=Hola!%20Quiero%20informacion%20sobre%20${encodeURIComponent(item.nombre)}`;
+    wspBtn.style.display = 'inline-block';
+  } else {
+    wspBtn.style.display = 'none';
+  }
+
+  document.getElementById('modal-overlay').classList.add('active');
+}
+
+function cerrarModal() {
+  document.getElementById('modal-overlay').classList.remove('active');
+}
+
+// Carga inicial
+renderizarLista();
+</script>
+</body>
+</html>
