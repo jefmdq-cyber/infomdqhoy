@@ -1487,7 +1487,13 @@ document.querySelectorAll('a[href^="http"]').forEach(a=>{ a.target="_blank"; a.r
     </div>
   </div>
 </div>
-
+function aplicarHash() {
+  // Lógica para manejar las vistas según el hash de la URL
+  const hash = window.location.hash || '#home';
+  document.querySelectorAll('.barrio-page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('page-' + hash.replace('#', ''));
+  if(target) target.classList.add('active');
+}
 window.addEventListener('popstate', aplicarHash);aplicarHash();
 let s=0;setInterval(()=>{s=s===0?1:0;document.getElementById('slide1').style.opacity=s===0?1:0;document.getElementById('slide2').style.opacity=s===1?1:0;},4000);
 async function dolar(){try{const r=await fetch('https://dolarapi.com/v1/dolares');const d=await r.json();let m={};d.forEach(x=>m[x.casa]=x);document.getElementById('dolar-g').innerHTML=`<div class="dolar-item blue"><div style="font-size:10px;color:#64748b;font-weight:700">BLUE</div><div style="font-size:22px;font-weight:900">$${m.blue.venta}</div><div style="font-size:11px">Compra $${m.blue.compra}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">OFICIAL</div><div style="font-size:22px;font-weight:900">$${m.oficial.venta}</div><div style="font-size:11px">Compra $${m.oficial.compra}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">MEP</div><div style="font-size:22px;font-weight:900">$${m.bolsa.venta}</div></div><div class="dolar-item"><div style="font-size:10px;color:#64748b;font-weight:700">TARJETA</div><div style="font-size:22px;font-weight:900">$${m.tarjeta.venta}</div></div>`;document.getElementById('dolar-t').textContent='Actualizado '+new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});}catch(e){}}dolar();
