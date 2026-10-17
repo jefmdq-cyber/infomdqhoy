@@ -24,37 +24,27 @@ jobs:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
         run: |
           python -c '
-          import os
-          import json
+          import os, json, requests, xml.etree.ElementTree as ET
           from google.oauth2 import service_account
           import google.auth.transport.requests
-          import requests
 
-          # Cargar credenciales desde el secreto de GitHub
-          creds_json = os.environ["GOOGLE_CREDENTIALS"]
-          creds_dict = json.loads(creds_json)
-
+          # 1. Cargar credenciales
+          creds_dict = json.loads(os.environ["GOOGLE_CREDENTIALS"])
           SCOPES = ["https://www.googleapis.com/auth/indexing"]
-          credentials = service_account.Credentials.from_service_account_info(
-              creds_dict, scopes=SCOPES
-          )
-          request = google.auth.transport.requests.Request()
-          credentials.refresh(request)
+          credentials = service_account.Credentials.from_service_account_info(creds_dict, scopes=SCOPES)
+          credentials.refresh(google.auth.transport.requests.Request())
 
-          # URL de ejemplo que querés enviar a indexar (puedes adaptarla o automatizarla)
-          url_to_index = "https://infomdqhoy.pages.dev/" 
+          # 2. Leer tu sitemap.xml del repo
+          tree = ET.parse("sitemap.xml")
+          ns = {"ns": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+          urls = [elem.text for elem in tree.findall(".//ns:loc", ns)]
 
           endpoint = "https://indexing.googleapis.com/v3/urlNotifications:publish"
-          headers = {
-              "Content-Type": "application/json",
-              "Authorization": f"Bearer {credentials.token}"
-          }
-          body = {
-              "url": url_to_index,
-              "type": "URL_UPDATED"
-          }
+          headers = {"Content-Type": "application/json", "Authorization": f"Bearer {credentials.token}"}
 
-          response = requests.post(endpoint, headers=headers, json=body)
-          print(f"Status Code: {response.status_code}")
-          print(response.text)
+          # 3. Enviar cada URL
+          for url in urls:
+              body = {"url": url, "type": "URL_UPDATED"}
+              r = requests.post(endpoint, headers=headers, json=body)
+              print(f"{url} -> {r.status_code} - {r.text}")
           '
