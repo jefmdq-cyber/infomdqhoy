@@ -108,25 +108,7 @@ footer .links a:hover{color:#34d399}
       </div>
     </div>
   
-  <div style="margin-top:18px;background:linear-gradient(145deg,#7f1d1d 0%,#991b1b 45%,#7f1d1d 100%);border:1.5px solid #f87171;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -12px rgba(239,68,68,0.4);position:relative;">
-    <div style="position:absolute;top:-30px;left:-30px;width:100px;height:100px;background:radial-gradient(circle,rgba(248,113,113,0.25),transparent 70%);"></div>
-    <div style="padding:18px 20px 16px;position:relative;z-index:2;">
-      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
-        <span style="background:#fef2f2;border:1px solid #fecaca;color:#dc2626;font-size:10px;font-weight:900;letter-spacing:.1em;padding:5px 10px;border-radius:999px;text-transform:uppercase;display:inline-flex;align-items:center;gap:5px;">🔴 HOY - IMPORTANTE</span>
-        <span style="background:rgba(0,0,0,0.3);border:1px solid rgba(248,113,113,0.3);color:#fca5a5;font-size:10px;font-weight:800;padding:5px 10px;border-radius:999px;">14:30 HS</span>
-      </div>
-      <h2 style="font-family:'Fredoka',sans-serif;font-size:22px;font-weight:900;color:#fff;line-height:1.1;letter-spacing:-.5px;">Reunión de Seguridad Barrial</h2>
-      <p style="color:#fecaca;font-size:13px;font-weight:700;margin-top:6px;line-height:1.4;">Vecinos de Faro Norte - Temas de seguridad de la zona sur</p>
-      <div style="margin-top:14px;background:rgba(0,0,0,0.25);border:1px solid rgba(248,113,113,0.25);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:7px;">
-        <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:#fee2e2;"><span style="width:22px;height:22px;background:rgba(248,113,113,0.2);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">🕒</span><strong>Hoy - 14:30 horas</strong></div>
-        <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:#fee2e2;"><span style="width:22px;height:22px;background:rgba(248,113,113,0.2);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">📍</span>Soc. de Fomento Faro Norte - Sánchez de Bustamante 3460</div>
-        <div style="display:flex;align-items:center;gap:8px;font-size:12.5px;color:#fee2e2;"><span style="width:22px;height:22px;background:rgba(248,113,113,0.2);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">👮</span>Participan autoridades y vecinos</div>
-      </div>
-      <div style="margin-top:12px;display:flex;gap:8px;">
-        <div style="flex:1;background:#fff;color:#991b1b;border-radius:12px;padding:10px;text-align:center;font-weight:900;font-size:12px;letter-spacing:.3px;">¡TE ESPERAMOS!</div>
-      </div>
-    </div>
-  </div>
+
 
     <div class="q-detail">
       <div class="lista-actividades" id="lista-actividades">
@@ -178,6 +160,7 @@ footer .links a:hover{color:#34d399}
 
 <script>
 // DATOS DE LAS ACTIVIDADES DE FARO NORTE
+// DATOS DE LAS ACTIVIDADES DE FARO NORTE
 const actividadesFaro = [
   { nombre: "Bachata Ladies - Celeste Eddi", cat: "BAILE", dias: "Miércoles 19:45 hs", lugar: "Sánchez de Bustamante 3460", contacto: "Celeste Eddi", imagen: "bachata-ladies.webp" },
   { nombre: "Reggaeton Femme - Aimé Wenner", cat: "BAILE", dias: "Lunes y Miércoles 16:00 hs", lugar: "Sánchez de Bustamante 3460", contacto: "Aimé Wenner", imagen: "reggeaton-femme.webp" },
@@ -186,7 +169,10 @@ const actividadesFaro = [
   { nombre: "Curso de Joyería Inicial", cat: "CURSOS", dias: "Martes y Jueves 8:30 a 11:30 hs", lugar: "Sánchez de Bustamante 3460", contacto: "Prof. Walter Molina", imagen: "joyeria.webp" },
   { nombre: "Taller de Dibujo Creativo", cat: "TALLERES", dias: "Viernes 15:00 a 18:00 hs", lugar: "Sánchez de Bustamante 3460", contacto: "02235125340", imagen: "taller-dibujo.webp" },
   { nombre: "Taller de Escritura Creativa", cat: "TALLERES", dias: "Lunes 10:00 a 12:00 hs", lugar: "Sánchez de Bustamante 3460", contacto: "Prof. Ulises Cuenca", imagen: "escritura-creativa.webp" },
-  { nombre: "Pilates Mat", cat: "CURSOS", dias: "Martes y Jueves 14hs y 15hs", lugar: "Sánchez de Bustamante 3460", contacto: "2235466679", imagen: "pilates-faro.webp" }
+  { nombre: "Pilates Mat", cat: "CURSOS", dias: "Martes y Jueves 14hs y 15hs", lugar: "Sánchez de Bustamante 3460", contacto: "2235466679", imagen: "pilates-faro.webp" },
+  { nombre: "Ritmos Latinos (Cumbia, Salsa, Reggaeton)", cat: "BAILE", dias: "Próximamente...", lugar: "Asociación vecinal de fomento FARO NORTE", contacto: "223 6782263", imagen: "ritmos-faro.webp" },
+  { nombre: "Urbano Teens - Aimé Wenner", cat: "BAILE", dias: "Lunes y Miércoles 18:45 hs", lugar: "Sánchez de Bustamante 3460", contacto: "Aimé Wenner", imagen: "urbanoteens.webp" },
+  { nombre: "Asociación Vecinal de Fomento Faro Norte - Hacé usted socio", cat: "INSTITUCIONAL", dias: "Lunes a viernes de 9 a 11 hs o de 17 a 19 hs", lugar: "Sánchez de Bustamante 3460", contacto: "2235333768", imagen: "socios.webp" }
 ];
 
 let categoriaFiltro = 'TODOS';
