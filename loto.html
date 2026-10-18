@@ -206,9 +206,10 @@ function actualizarCabecerasDinamicas(){
     // Si es la primera vez que carga, armamos las opciones y el evento
     if (!select.dataset.loaded) {
 select.innerHTML = `
-        <option value="loto.json">Sorteo ${miDataJson.numero} - ${miDataJson.fecha}</option>
-        <option value="historial/loto_2026-10-10.json">Sorteo 3925 - 10/10/2026</option>
-      `;
+    <option value="loto.json">Sorteo ${miDataJson.numero} - ${miDataJson.fecha}</option>
+    <option value="historial/loto_2026-10-14.json">Sorteo 3926 - 14/10/2026</option>
+    <option value="historial/loto_2026-10-10.json">Sorteo 3925 - 10/10/2026</option>
+`;
       select.dataset.loaded = "true";
       
       select.onchange = (e) => {
