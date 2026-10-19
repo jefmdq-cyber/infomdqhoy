@@ -1358,6 +1358,7 @@ document.querySelectorAll('a[href^="http"]').forEach(a=>{ a.target="_blank"; a.r
 </div>
 <!-- MODAL 511 EN TIEMPO REAL DIRECTO -->
 <!-- MODAL 511 EN TIEMPO REAL DIRECTO -->
+<!-- MODAL 511 EN TIEMPO REAL DIRECTO -->
 <div id="modal-511" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto" onclick="this.style.display='none'">
   <div style="background:white;border:3px solid #1e40af;border-radius:18px;padding:18px;max-width:520px;margin:20px auto;color:#1a202c" onclick="event.stopPropagation()">
     <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #e2e8f0;padding-bottom:10px">
@@ -1369,9 +1370,9 @@ document.querySelectorAll('a[href^="http"]').forEach(a=>{ a.target="_blank"; a.r
     </div>
 
     <!-- SELECCIÓN DE PARADAS SUR -->
-    <div style="margin-top:14px;background:#f0f9ff;border:1.5px solid #0284c7;border-radius:14px;padding:12px">
-      <label for="select-parada-511" style="font-size:12px;font-weight:900;color:#0369a1;display:block;margin-bottom:6px">📍 SELECCIONÁ TU ESQUINA EXACTA EN EL SUR:</label>
-      <select id="select-parada-511" onchange="consultarCuandoLlega(this.value)" style="width:100%;padding:10px;border-radius:10px;border:1.5px solid #0284c7;font-weight:800;font-size:13px;color:#0f172a;outline:none;background:#fff;cursor:pointer">
+    <div style="margin-top:14px;background:#f0f9ff;border:1.5px solid #0284c7;border-radius:14px;padding:14px">
+      <label for="select-parada-511" style="font-size:12px;font-weight:900;color:#0369a1;display:block;margin-bottom:8px">📍 SELECCIONÁ TU ESQUINA EXACTA EN EL SUR:</label>
+      <select id="select-parada-511" onchange="actualizarBotonMGP(this.value)" style="width:100%;padding:10px;border-radius:10px;border:1.5px solid #0284c7;font-weight:800;font-size:13px;color:#0f172a;outline:none;background:#fff;cursor:pointer">
         <optgroup label="🌲 ALFAR">
           <option value="1024" selected>Diag. Estados Unidos y Sta. María de Oro (Feria)</option>
           <option value="1025">Ruta 11 y Diag. Estados Unidos (Hotel Alfar)</option>
@@ -1387,21 +1388,14 @@ document.querySelectorAll('a[href^="http"]').forEach(a=>{ a.target="_blank"; a.r
         </optgroup>
       </select>
 
-      <!-- CONTENEDOR DE TIEMPO REAL -->
-      <div id="res-cuando-llega" style="margin-top:12px;border-radius:12px;padding:12px;background:#f8fafc;border:1.5px solid #cbd5e1;min-height:100px">
-        <div style="text-align:center;padding:10px;color:#0369a1;font-weight:700;font-size:13px">
-          📲 Seleccioná una parada para ver el horario en vivo
-        </div>
-      </div>
+      <!-- BOTÓN DIRECTO DINÁMICO -->
+      <a id="btn-mgp-directo" href="https://appsvr.mardelplata.gob.ar/cuando/consultar?parada=1024" target="_blank" rel="noopener noreferrer" style="display:block;text-align:center;background:#16a34a;color:white;font-weight:900;padding:14px;border-radius:12px;margin-top:14px;text-decoration:none;font-size:14px;box-shadow:0 4px 6px -1px rgba(0,0,0,0.1)">
+        📱 Consultar minutos en vivo de esta parada ↗
+      </a>
     </div>
 
-    <!-- BOTÓN ACCESO DIRECTO -->
-    <a id="btn-mgp-directo" href="https://appsvr.mardelplata.gob.ar/cuando/consultar?parada=1024" target="_blank" rel="noopener noreferrer" style="display:block;text-align:center;background:#1e40af;color:white;font-weight:900;padding:10px;border-radius:10px;margin-top:12px;text-decoration:none;font-size:12px">
-      🌐 Abrir sistema oficial de la Municipalidad
-    </a>
-
     <!-- FRECUENCIA TEÓRICA -->
-    <div style="margin-top:12px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:12px;padding:12px">
+    <div style="margin-top:14px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:12px;padding:12px">
       <div style="font-weight:900;font-size:13px;color:#0f172a;margin-bottom:4px">📋 Frecuencia Teórica</div>
       <div style="font-size:11px;color:#64748b">Sale de Alfar / Acantilados hacia el Centro cada 30 minutos (06:10 hs a 23:40 hs).</div>
     </div>
@@ -1409,52 +1403,10 @@ document.querySelectorAll('a[href^="http"]').forEach(a=>{ a.target="_blank"; a.r
 </div>
 
 <script>
-async function consultarCuandoLlega(idParada) {
-  const cont = document.getElementById('res-cuando-llega');
+function actualizarBotonMGP(idParada) {
   const btn = document.getElementById('btn-mgp-directo');
-  
-  if (btn) btn.href = `https://appsvr.mardelplata.gob.ar/cuando/consultar?parada=${idParada}`;
-  cont.innerHTML = '<div style="text-align:center;padding:12px;color:#0284c7;font-weight:800;font-size:12px">🔄 Consultando arribos en vivo...</div>';
-
-  const targetUrl = `https://appsvr.mardelplata.gob.ar/cuando/consultar?parada=${idParada}`;
-  const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`;
-
-  try {
-    const response = await fetch(proxyUrl);
-    const data = await response.json();
-
-    if (data && data.contents) {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(data.contents, 'text/html');
-      const filas = doc.querySelectorAll('table tbody tr');
-
-      if (filas && filas.length > 0) {
-        let htmlResultados = '';
-        filas.forEach(tr => {
-          const celdas = tr.querySelectorAll('td');
-          if (celdas.length >= 2) {
-            const linea = celdas[0].textContent.trim();
-            const arribo = celdas[1].textContent.trim();
-            htmlResultados += `
-              <div style="background:#fff;border:1.5px solid #0284c7;border-radius:10px;padding:8px 12px;display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-                <span style="background:#3b82f6;color:#fff;font-weight:900;padding:3px 8px;border-radius:6px;font-size:12px">${linea}</span>
-                <span style="font-size:14px;font-weight:900;color:#16a34a">${arribo}</span>
-              </div>`;
-          }
-        });
-        cont.innerHTML = htmlResultados || '<div style="text-align:center;font-size:12px;color:#c2410c;font-weight:700">Sin unidades próximas reportadas.</div>';
-      } else {
-        cont.innerHTML = '<div style="text-align:center;font-size:12px;color:#c2410c;font-weight:700">⚠️ No hay datos disponibles para esta parada en este momento.</div>';
-      }
-    } else {
-      throw new Error('Sin respuesta');
-    }
-  } catch (err) {
-    cont.innerHTML = `
-      <div style="text-align:center;padding:8px">
-        <div style="font-size:12px;color:#c2410c;font-weight:800;margin-bottom:6px">⚠️ No se pudo obtener la respuesta automática dentro del modal.</div>
-        <a href="https://appsvr.mardelplata.gob.ar/cuando/consultar?parada=${idParada}" target="_blank" style="display:inline-block;background:#0284c7;color:#fff;padding:6px 12px;border-radius:6px;font-size:11px;font-weight:800;text-decoration:none">Ver directamente en MGP ↗</a>
-      </div>`;
+  if (btn) {
+    btn.href = `https://appsvr.mardelplata.gob.ar/cuando/consultar?parada=${idParada}`;
   }
 }
 </script>
