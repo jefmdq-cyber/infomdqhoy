@@ -1356,60 +1356,46 @@ document.querySelectorAll('a[href^="http"]').forEach(a=>{ a.target="_blank"; a.r
     <div style="margin-top:4px;font-size:11px;color:#555">Fuente oficial: edeaweb.com.ar/obras-en-tu-barrio/</div>
   </div>
 </div>
-<!-- MODAL 511 EN TIEMPO REAL DIRECTO -->
-<!-- MODAL 511 EN TIEMPO REAL DIRECTO -->
-<!-- MODAL 511 EN TIEMPO REAL DIRECTO -->
 <div id="modal-511" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto" onclick="this.style.display='none'">
-  <div style="background:white;border:3px solid #1e40af;border-radius:18px;padding:18px;max-width:520px;margin:20px auto;color:#1a202c" onclick="event.stopPropagation()">
-    <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #e2e8f0;padding-bottom:10px">
-      <div>
-        <b style="color:#1e40af;font-size:17px">🚌 511 - Arribos en Vivo MGP</b>
-        <div style="font-size:11px;color:#64748b;font-weight:700">Línea Urbana Peralta Ramos - Zona Sur</div>
+  <div style="background:white;border:3px solid #1e40af;border-radius:14px;padding:16px;max-width:500px;margin:20px auto;color:#1a202c" onclick="event.stopPropagation()">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <b style="color:#1e40af;font-size:16px">🚌 511 - Salidas desde Zona Sur</b>
+      <button onclick="document.getElementById('modal-511').style.display='none'" style="background:#0f172a;color:#fff;border:none;padding:6px 12px;border-radius:20px;font-weight:800">X</button>
+    </div>
+    <div style="margin-top:6px;font-size:11px;background:#fff3cd;border:1px solid #facc15;padding:8px;border-radius:8px">Todos los días 06:10 a 23:40 cada 30 min. Fuente oficial Moovit / Peralta Ramos</div>
+    <div style="margin-top:12px;background:#eff6ff;border:2px solid #1e40af;border-radius:12px;padding:12px">
+      <div style="font-weight:900;font-size:13px">📍 SALE DE ALFAR hacia el Centro</div>
+      <div style="font-size:11px;color:#64748b;margin-top:2px">Sale de Alfar, pasa por Faro → Centro. Pasa por Bosque pero NO sale del Bosque.</div>
+      <div style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;font-size:11px;font-weight:800;text-align:center">
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">06:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">06:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">07:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">07:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">08:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">08:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">09:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">09:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">10:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">10:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">11:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">11:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">12:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">12:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">13:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">13:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">14:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">14:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">15:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">15:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">16:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">16:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">17:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">17:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">18:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">18:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">19:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">19:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">20:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">20:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">21:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">21:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">22:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">22:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">23:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">23:40</div>
       </div>
-      <button onclick="document.getElementById('modal-511').style.display='none'" style="background:#0f172a;color:#fff;border:none;padding:6px 12px;border-radius:20px;font-weight:800;cursor:pointer">X</button>
     </div>
-
-    <!-- SELECCIÓN DE PARADAS SUR -->
-    <div style="margin-top:14px;background:#f0f9ff;border:1.5px solid #0284c7;border-radius:14px;padding:14px">
-      <label for="select-parada-511" style="font-size:12px;font-weight:900;color:#0369a1;display:block;margin-bottom:8px">📍 SELECCIONÁ TU ESQUINA EXACTA EN EL SUR:</label>
-      <select id="select-parada-511" onchange="actualizarBotonMGP(this.value)" style="width:100%;padding:10px;border-radius:10px;border:1.5px solid #0284c7;font-weight:800;font-size:13px;color:#0f172a;outline:none;background:#fff;cursor:pointer">
-        <optgroup label="🌲 ALFAR">
-          <option value="1024" selected>Diag. Estados Unidos y Sta. María de Oro (Feria)</option>
-          <option value="1025">Ruta 11 y Diag. Estados Unidos (Hotel Alfar)</option>
-        </optgroup>
-        <optgroup label="🗼 FARO NORTE (Líneas 522/523)">
-          <option value="1055">Sánchez de Bustamante 3460 (Soc. Fomento Faro)</option>
-        </optgroup>
-        <optgroup label="🏖️ PLAYA SERENA">
-          <option value="1110">Calle 11 y Calle 12 (Frente a la Plaza Serena)</option>
-        </optgroup>
-        <optgroup label="🌊 LOS ACANTILADOS">
-          <option value="1120">Calle 22 y Calle 493 (Cabecera Acantilados)</option>
-        </optgroup>
-      </select>
-
-      <!-- BOTÓN DIRECTO DINÁMICO -->
-      <a id="btn-mgp-directo" href="https://appsvr.mardelplata.gob.ar/cuando/consultar?parada=1024" target="_blank" rel="noopener noreferrer" style="display:block;text-align:center;background:#16a34a;color:white;font-weight:900;padding:14px;border-radius:12px;margin-top:14px;text-decoration:none;font-size:14px;box-shadow:0 4px 6px -1px rgba(0,0,0,0.1)">
-        📱 Consultar minutos en vivo de esta parada ↗
-      </a>
+    <div style="margin-top:10px;background:#f0fdf4;border:2px solid #15803d;border-radius:12px;padding:12px">
+      <div style="font-weight:900;font-size:13px">📍 SALE DE ACANTILADOS → PASA POR SERENA → Alfar → Centro</div>
+      <div style="font-size:11px;color:#64748b;margin-top:2px">Sale de Calle 22 y 493. Primero Serena, después Alfar/Bosque. Mismo horario.</div>
+      <div style="margin-top:8px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px;font-size:11px;font-weight:800;text-align:center">
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">06:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">06:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">07:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">07:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">08:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">08:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">09:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">09:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">10:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">10:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">11:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">11:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">12:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">12:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">13:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">13:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">14:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">14:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">15:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">15:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">16:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">16:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">17:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">17:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">18:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">18:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">19:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">19:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">20:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">20:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">21:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">21:40</div>
+        <div style="background:#f1f5f9;padding:7px;border-radius:6px">22:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">22:40</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">23:10</div><div style="background:#f1f5f9;padding:7px;border-radius:6px">23:40</div>
+      </div>
     </div>
-
-    <!-- FRECUENCIA TEÓRICA -->
-    <div style="margin-top:14px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:12px;padding:12px">
-      <div style="font-weight:900;font-size:13px;color:#0f172a;margin-bottom:4px">📋 Frecuencia Teórica</div>
-      <div style="font-size:11px;color:#64748b">Sale de Alfar / Acantilados hacia el Centro cada 30 minutos (06:10 hs a 23:40 hs).</div>
-    </div>
+    <a href="https://www.mardelplata.gob.ar/cuandollega" target="_blank" style="display:block;text-align:center;background:#1e40af;color:white;font-weight:900;padding:12px;border-radius:12px;margin-top:12px;text-decoration:none">📍 Ver en vivo dónde viene el 511</a>
   </div>
 </div>
-
-<script>
-function actualizarBotonMGP(idParada) {
-  const btn = document.getElementById('btn-mgp-directo');
-  if (btn) {
-    btn.href = `https://appsvr.mardelplata.gob.ar/cuando/consultar?parada=${idParada}`;
-  }
-}
-</script>
 <div id="modal-221" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto" onclick="this.style.display='none'">
   <div style="background:white;border:3px solid #0e7490;border-radius:14px;padding:16px;max-width:500px;margin:20px auto;color:#1a202c" onclick="event.stopPropagation()">
     <div style="display:flex;justify-content:space-between;align-items:center">
