@@ -1,0 +1,36 @@
+{
+  "fecha": "Miércoles 14 de octubre",
+  "numero": "3417",
+  "tradicional": {
+    "pozo": "2.469.571.272",
+    "resultados": [1, 9, 23, 24, 32, 37],
+    "ganadores": [
+      { "aciertos": "6", "cantidad": 0, "monto": "Vacante" },
+      { "aciertos": "5", "cantidad": 18, "monto": "2.257.006" },
+      { "aciertos": "4", "cantidad": 1350, "monto": "9.028" }
+    ]
+  },
+  "segunda": {
+    "pozo": "1.100.000.000",
+    "resultados": [5, 8, 13, 23, 43, 44],
+    "ganadores": [
+      { "aciertos": "6", "cantidad": 0, "monto": "Vacante" },
+      { "aciertos": "5", "cantidad": 55, "monto": "738.656" },
+      { "aciertos": "4", "cantidad": 1580, "monto": "7.713" }
+    ]
+  },
+  "revancha": {
+    "pozo": "3.625.515.763",
+    "resultados": [4, 6, 10, 25, 30, 37],
+    "ganadores": [
+      { "aciertos": "6", "cantidad": 0, "monto": "Vacante" }
+    ]
+  },
+  "siempre_sale": {
+    "pozo": "52.059.996 (Premio Individual)",
+    "resultados": [1, 14, 18, 41, 43, 44],
+    "ganadores": [
+      { "aciertos": "5", "cantidad": 7, "monto": "52.059.996" }
+    ]
+  }
+}
