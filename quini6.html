@@ -159,8 +159,10 @@ function inicializarEncabezado() {
     if (!select.dataset.loaded) {
       select.innerHTML = `
         <option value="quini6.json">Sorteo ${miDataJson.numero} - ${miDataJson.fecha}</option>
+        <option value="historial/quini6_2026-10-14.json">Sorteo 3417 - 14/10/2026</option>
         <option value="historial/quini6_2026-10-11.json">Sorteo 3416 - 11/10/2026</option>
-        <option value="historial/quini6_2026-10-07.json">Sorteo 3400 - 07/10/2026</option>
+        <option value="historial/quini6_2026-10-07.json">Sorteo 3415 - 07/10/2026</option>
+        
       `;
       select.dataset.loaded = "true";
       
