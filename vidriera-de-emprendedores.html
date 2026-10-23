@@ -1,825 +1,83 @@
 <!DOCTYPE html>
-<html lang="es-AR">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- SEO e Indexación Básica de Google -->
-<title>Vidriera de Emprendedores - Faro, Alfar, Serena y Acantilados | INFO MDQ SUR HOY</title>
-<meta name="description" content="Vidriera de Emprendedores de Mar del Plata Sur: Faro, Alfar, Serena, Acantilados y Chapadmalal. Productos y servicios directos, contacto por WhatsApp." />
-<link rel="canonical" href="https://infomdqhoy.pages.dev/vidriera-de-emprendedores.html" />
-<meta name="robots" content="index, follow" />
-<meta name="google-site-verification" content="7e64033b70480c67" />
-<meta name="color-scheme" content="dark light" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vidriera de Emprendedores | INFO MDQ SUR HOY</title>
+<meta name="description" content="Descubrí los emprendimientos y comercios locales de Alfar, Faro, Serena, Acantilados y Chapadmalal.">
+<link rel="canonical" href="https://infomdqhoy.pages.dev/vidriera-de-emprendedores.html">
+<meta name="robots" content="index, follow">
 <meta name="theme-color" content="#0f172a">
-
-<!-- 1. Código de Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3L9SZ6YVFT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-3L9SZ6YVFT');
-</script>
-
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Fredoka:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif}
-body{background:#f0f4f8;color:#1a202c;padding-bottom:90px}
-.hero{position:relative;height:260px;overflow:hidden;background:#0f172a}
-.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,23,42,.95) 0%,rgba(0,0,0,.2) 60%)}
-.hero-text{position:absolute;bottom:18px;left:16px;right:16px;color:white;z-index:2}
-.hero-text h1{font-size:30px;font-weight:900;letter-spacing:-1px;line-height:1.1}
-.hero-text p{font-size:13px;opacity:.9;margin-top:6px}
-.contenedor{max-width:1000px;margin:0 auto;padding:14px}
-.card{background:white;border-radius:16px;padding:18px;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,.06);border:1px solid #e2e8f0}
-.buscador-wrap{position:sticky;top:0;z-index:20;background:#f0f4f8;padding:10px 0 8px 0;margin:0 0 12px 0}
-.buscador{width:100%;padding:14px 16px 14px 44px;border-radius:999px;border:2px solid #0f172a;background:white;font-weight:700;font-size:14px;outline:none;box-shadow:0 4px 12px rgba(0,0,0,.06)}
-.buscador-wrap::before{content:"🔍";position:absolute;left:16px;top:50%;transform:translateY(-50%);z-index:2;font-size:18px;margin-top:2px}
-.resultados{position:absolute;top:56px;left:0;right:0;background:white;border-radius:18px;border:2px solid #0f172a;box-shadow:0 12px 28px rgba(0,0,0,.18);max-height:68vh;overflow-y:auto;display:none;z-index:30}
-.grid{display:flex;flex-direction:column;gap:14px;margin-top:14px}
-.card-emp{background:white;border-radius:14px;overflow:hidden;display:flex;flex-direction:row;box-shadow:0 4px 12px rgba(0,0,0,.06);border:1px solid #e2e8f0;text-align:left;transition:.15s}
-.card-emp.gratis{border-left:4px solid #22c55e;display:block}
-.card-emp.destacado{border:2px solid #facc15;box-shadow:0 6px 20px rgba(250,204,21,.22)}
-.card-emp:hover{transform:translateY(-2px)}
-.img-box{width:38%;min-width:140px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.img-box img{width:100%;height:100%;object-fit:cover;display:block}
-.info{flex:1;padding:16px 16px 14px;display:flex;flex-direction:column;justify-content:flex-start}
-.card-emp h3{margin:6px 0 6px 0;font-size:19px;font-weight:900;color:#0f172a;line-height:1.2;letter-spacing:-.2px}
-.card-emp .desc{font-size:14.5px;color:#334155;line-height:1.45;margin:8px 0;font-weight:500}
-.badge-barrio{display:inline-block;padding:4px 10px;border-radius:999px;font-size:10px;font-weight:900;margin-bottom:6px}
-.badge-faro{background:#0f172a;color:white}
-.badge-alfar{background:#dbeafe;color:#1e40af}
-.badge-serena{background:#cffafe;color:#0e7490}
-.badge-acantilados{background:#dcfce7;color:#15803d}
-.btn-wsp{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;background:#25D366;color:white;padding:13px 18px;border-radius:999px;text-decoration:none;font-weight:900;font-size:15px;width:100%;box-shadow:0 6px 16px rgba(37,211,102,.28)}
-.redes-row{display:flex;gap:8px;margin-top:8px}
-.btn-red{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 14px;border-radius:999px;font-weight:900;font-size:12.5px;text-decoration:none;border:none;color:white;box-shadow:0 4px 12px rgba(0,0,0,.15);transition:.15s}
-.btn-red:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.2)}
-.btn-ig{background:linear-gradient(135deg,#f857a6 0%,#ff5858 25%,#d62976 55%,#962fbf 85%,#4f5bd5 100%);color:white;box-shadow:0 4px 14px rgba(214,41,118,.32)}
-.btn-ig svg{fill:white;stroke:white}
-.btn-map{background:linear-gradient(135deg,#3b82f6 0%,#1d4ed8 100%);color:white;box-shadow:0 4px 14px rgba(29,78,216,.28)}
-.btn-map svg{fill:white}
-.btn-wsp{background:#25D366;background:linear-gradient(135deg,#25D366,#128C7E);box-shadow:0 4px 14px rgba(37,211,102,.32)}
-.redes-row{gap:10px}
-.top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:8px}
-.badge-gratis{background:#dcfce7;color:#15803d;padding:4px 10px;border-radius:999px;font-size:10px;font-weight:900}
-.badge-dest{background:#facc15;color:#000;padding:4px 10px;border-radius:999px;font-size:10px;font-weight:900}
-@media(max-width:520px){.card-emp{flex-direction:column}.img-box{width:100%;height:200px}}
-.btn-flotante{position:fixed;bottom:18px;right:18px;z-index:50;background:#0f172a;color:white;border:none;padding:14px 20px;border-radius:999px;font-weight:900;font-size:13px;cursor:pointer;box-shadow:0 8px 24px rgba(15,23,42,.35)}
-.barrios-nav{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
-.barrio-btn{padding:22px 8px;border-radius:18px;font-weight:900;font-size:14px;text-align:center;color:white;cursor:pointer;border:none;box-shadow:0 6px 16px rgba(0,0,0,.15)}
-.barrio-btn span{display:block;font-size:28px;margin-bottom:6px}
-.btn-faro{background:linear-gradient(135deg,#0f172a,#334155)}
-.btn-alfar{background:linear-gradient(135deg,#1e40af,#3b82f6)}
-.btn-serena{background:linear-gradient(135deg,#0e7490,#06b6d4)}
-.btn-acantilados{background:linear-gradient(135deg,#15803d,#22c55e)}
-.barrio-page{display:none}
-.barrio-page.active{display:block}
-.filtros{display:flex;gap:8px;flex-wrap:wrap;padding:6px 0 10px 0;justify-content:flex-start}
-.filtros-global{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:12px 0 14px 0;overflow:visible}
-.filtro{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;white-space:normal;padding:14px 8px;border-radius:18px;border:1.5px solid #e2e8f0;background:white;font-weight:900;font-size:11.5px;cursor:pointer;line-height:1.1;box-shadow:0 4px 14px rgba(15,23,42,.06);transition:all .18s cubic-bezier(.2,.8,.2,1);position:relative;overflow:hidden}
-.filtro::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.8),transparent);pointer-events:none;opacity:.7}
-.filtro-chip{flex:none;min-width:auto;white-space:normal;text-align:center}
-.filtro .ico{font-size:26px;line-height:1;filter:drop-shadow(0 2px 4px rgba(0,0,0,.1));position:relative;z-index:1}
-.filtro .label{position:relative;z-index:1;letter-spacing:-.2px}
-.filtro:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(15,23,42,.12);border-color:#cbd5e1}
-.filtro:active{transform:translateY(0px) scale(.97)}
-.filtro.activo{background:#0f172a;color:white;border-color:#0f172a;box-shadow:0 10px 24px rgba(15,23,42,.28);transform:translateY(-1px)}
-.filtro.activo::after{opacity:0}
-.filtro.activo small{color:#cbd5e1 !important}
-/* Colores pasteles modernos por categoria - sutil, no chato */
-.filtro[data-cat="todos"]{background:#ffffff}
-.filtro[data-cat="sabores"]{background:linear-gradient(180deg,#fffbeb,#ffffff);border-color:#fde68a}
-.filtro[data-cat="belleza"]{background:linear-gradient(180deg,#fdf2f8,#ffffff);border-color:#f9a8d4}
-.filtro[data-cat="servicios"]{background:linear-gradient(180deg,#eff6ff,#ffffff);border-color:#93c5fd}
-.filtro[data-cat="artesanias"]{background:linear-gradient(180deg,#f0fdf4,#ffffff);border-color:#86efac}
-.filtro[data-cat="moda"]{background:linear-gradient(180deg,#fefce8,#ffffff);border-color:#fde68a}
-.filtro[data-cat="salud"]{background:linear-gradient(180deg,#f5f3ff,#ffffff);border-color:#c4b5fd}
-.filtro[data-cat="hogar"]{background:linear-gradient(180deg,#f5f3ff,#ffffff);border-color:#c4b5fd}
-.filtro.activo[data-cat]{background:#0f172a !important;border-color:#0f172a !important}
-.barrio-seccion{margin:18px 0}
-.barrio-seccion-titulo{margin-bottom:8px}
-@media(min-width:700px){.filtros-global{grid-template-columns:repeat(6,1fr)}}
-.filtro small{letter-spacing:0.1px}
-.oculto{display:none !important}
-.btn-volver-barrio{display:inline-block;background:white;border:2px solid #0f172a;color:#0f172a;padding:8px 16px;border-radius:999px;font-weight:900;font-size:12px;cursor:pointer;margin-bottom:12px}
+/* ESCUDO VISUAL: Oculta cualquier aviso automático de la home en esta página */
+#contenedor-todos-los-avisos,
+#contenedor-aviso-amapolas,
+#contenedor-aviso-fonoaudiologia,
+#contenedor-aviso-kevin,
+#contenedor-aviso-los-mellis,
+#contenedor-aviso-lavanderia {
+  display: none !important;
+}
 
-.btn-flotante-info{position:fixed;bottom:18px;left:18px;z-index:50;background:white;color:#0f172a;border:2px solid #0f172a;padding:12px 18px;border-radius:999px;font-weight:900;font-size:12px;cursor:pointer;box-shadow:0 8px 24px rgba(15,23,42,.15);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
-.modal-bg{position:fixed;inset:0;background:rgba(15,23,42,.78);z-index:200;display:none;align-items:flex-start;justify-content:center;padding:16px;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.modal-bg.activo{display:flex}
-.modal-card{background:white;border-radius:22px;max-width:620px;width:100%;max-height:90vh;max-height:90dvh;overflow-y:auto;box-shadow:0 24px 48px rgba(0,0,0,.4);animation:pop .22s ease;display:flex;flex-direction:column}
-@keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
-.modal-card img{width:100%;height:auto;max-height:52vh;object-fit:cover;flex-shrink:0}
-@media(max-width:600px){.modal-card img{max-height:42vh}}
+:root{
+  --bg:#f1f5f9;
+  ... 
+:root{
+  --bg:#f1f5f9;
+  --card:#ffffff;
+  --ink: #7244c9;
+  --muted:#64748b;
+  --line:#e2e8f0;
+  --radius:18px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;}
+a{color:inherit;text-decoration:none}
 
-</style>
-</head>
-<body>
-<div class="hero">
-  <img src="https://infomdqhoy.pages.dev/banner1.webp" alt="Faro">
-  <div class="hero-overlay"></div>
-  <div class="hero-text">
-    <h1>✨ VIDRIERA DE EMPRENDEDORES</h1>
-    <p>Mar del Plata • Toda la ciudad en un solo lugar</p>
-  </div>
-</div>
-<div class="contenedor">
-  <div class="buscador-wrap" style="position:relative">
-    <input id="buscadorUnificado" class="buscador" type="search" placeholder="Buscar en toda la vidriera... Ej: tortas, uñas, electricista">
-    <div id="resultadosUnificados" class="resultados"></div>
-  </div>
-  <div id="page-home">
-    <!-- FILTROS GLOBALES ARRIBA - compactos para celu -->
-    <div class="filtros filtros-global" id="filtros-global">
-      <button class="filtro filtro-chip" data-cat="sabores"><span class="ico">🍰</span><span class="label">Sabores</span></button>
-      <button class="filtro filtro-chip" data-cat="belleza"><span class="ico">💅</span><span class="label">Belleza</span></button>
-      <button class="filtro filtro-chip" data-cat="servicios"><span class="ico">🛠️</span><span class="label">Servicios</span></button>
-      <button class="filtro filtro-chip" data-cat="artesanias"><span class="ico">🎨</span><span class="label">Deco & Arte</span></button>
-      <button class="filtro filtro-chip" data-cat="moda"><span class="ico">👗</span><span class="label">Moda</span></button>
-      <button class="filtro filtro-chip" data-cat="hogar"><span class="ico">🏠</span><span class="label">Productos para el hogar</span></button>
-    </div>
+/* HEADER */
+#header-wrapper{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,0.03)}
+#header{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+#logo h1{font-family:Fredoka,sans-serif;font-size:26px;font-weight:800;letter-spacing:-0.5px;color:#0f172a}
+#logo a{text-decoration:none;}
+#logo span{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.6px;text-transform:uppercase;display:block;margin-top:-2px}
 
-    <!-- VIDRIERA UNIFICADA - TODA MAR DEL PLATA - 14 AVISOS -->
-    <div id="seccion-todos" class="barrio-seccion">
-      <div class="card barrio-seccion-titulo" style="background:#0f172a;color:white;text-align:center;padding:14px;letter-spacing:.5px"><div style="font-weight:900;font-size:14px">✨ MAR DEL PLATA • EMPRENDIMIENTOS</div><div style="font-size:11px;opacity:.8;margin-top:2px;font-weight:600">Todos los avisos en un solo lugar</div></div>
-      <div id="grid-todos" class="grid"></div>
-    </div>
+/* BANNER DE SECCIÓN */
+.seccion-banner{background:linear-gradient(135deg,#7244c9 0%,#1e293b 100%);padding:30px 20px;color:white;text-align:center;margin-bottom:20px;border-bottom:4px solid #3b82f6}
+.seccion-banner h2{font-family:Fredoka,sans-serif;font-size:28px;font-weight:800;margin-bottom:6px}
+.seccion-banner p{color:#cbd5e1;font-size:14px}
 
-    <!-- AVISO SOLO SERVICIOS - PINTURERIA - GRATUITO - SOLO EN FILTRO SERVICIOS -->
-    <div id="aviso-pintura-servicios" class="card-emp" data-barrio="alfar" data-cat="servicios" data-solo="true" data-keywords="pintura pintureria pintor latex interior exterior pared casa mantenimiento maxim tomas mar del plata servicios presupuesto sin cargo" style="display:block; max-width:480px; margin:14px auto;">
-      <div style="max-width:480px;width:100%;background:white;border-radius:16px;border:1px solid #e2e8f0;box-shadow:0 4px 12px rgba(0,0,0,0.06);overflow:hidden;font-family:sans-serif;margin:0 auto;">
-  <div style="background:#1e3a8a;color:white;padding:16px 20px;text-align:center;">
-    <h1 style="margin:0;font-size:22px;font-weight:900;line-height:1.1;">PINTURERÍA <span style="color:#facc15;">EN GENERAL</span></h1>
-    <p style="margin:6px 0 0;font-size:14px;opacity:0.9;font-style:italic;">Damos color a tus ideas, transformamos tus espacios.</p>
-  </div>
-  <div style="padding:18px 20px;">
-    <div style="background:#fef9c3;border-left:4px solid #facc15;padding:10px 12px;border-radius:8px;font-size:13.5px;font-weight:700;color:#1e293b;margin-bottom:14px;">
-      Pintamos tus proyectos con dedicación y compromiso. Compromiso, experiencia y seriedad para resultados que duran.
-    </div>
-    <ul style="list-style:none;padding:0;margin:0 0 16px;">
-      <li style="padding:8px 0;border-bottom:1px dashed #e2e8f0;font-size:13.5px;line-height:1.35;color:#334155;"><b style="color:#1e3a8a;display:block;font-size:12px;">✓ TRABAJO DE CALIDAD, GENTE DE CONFIANZA</b> Contamos con gente de confianza y un compromiso real con cada cliente.</li>
-      <li style="padding:8px 0;border-bottom:1px dashed #e2e8f0;font-size:13.5px;line-height:1.35;color:#334155;"><b style="color:#1e3a8a;display:block;font-size:12px;">✓ TRABAJOS PROFESIONALES CON GARANTÍA</b> Realizamos trabajos profesionales con garantía para tu tranquilidad.</li>
-      <li style="padding:8px 0;border-bottom:1px dashed #e2e8f0;font-size:13.5px;line-height:1.35;color:#334155;"><b style="color:#1e3a8a;display:block;font-size:12px;">✓ FLEXIBILIDAD ECONÓMICA</b> Nos adaptamos a tus posibilidades para que puedas concretar tu proyecto.</li>
-      <li style="padding:8px 0;font-size:13.5px;line-height:1.35;color:#334155;"><b style="color:#1e3a8a;display:block;font-size:12px;">✓ RESPONSABILIDAD</b> Cumplimos en tiempo y forma, cuidando cada detalle como si fuera nuestro.</li>
-    </ul>
-    <div style="background:#f8fafc;border:1.5px dashed #cbd5e1;border-radius:10px;padding:10px;text-align:center;font-size:12.5px;font-weight:800;color:#334155;margin-bottom:16px;">📍 MAR DEL PLATA - MAXIM Y TOMAS</div>
-    <div style="display:flex;flex-direction:column;gap:10px;">
-      <a href="https://wa.me/5492233467120?text=Hola%20Maxim%20y%20Tomas,%20vi%20su%20aviso%20de%20Pintureria" target="_blank" class="btn-wsp" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:white;text-decoration:none;font-weight:900;font-size:15px;padding:13px;border-radius:12px;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.82 9.82 0 0012.03 2C6.48 2 2 6.44 2 11.93c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.37a9.82 9.82 0 004.78 1.22h.01c5.54 0 10.03-4.44 10.03-9.93a9.75 9.75 0 00-3.02-7.98zM12.04 20.17h-.01a8.12 8.12 0 01-4.14-1.13l-.3-.18-3.12.82.83-3.02-.2-.31a8.18 8.18 0 01-1.26-4.42c0-4.54 3.73-8.23 8.32-8.23a8.27 8.27 0 015.87 2.41 8.14 8.14 0 012.43 5.78c0 4.54-3.73 8.28-8.32 8.28zm4.56-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.22-.74-.65-1.23-1.45-1.38-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05s.89 2.38 1.01 2.54c.12.17 1.75 2.66 4.23 3.73.59.25 1.05.4 1.41.51.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-        WhatsApp
-      </a>
-      <a href="https://wa.me/5491122628299?text=Hola%20Maxim%20y%20Tomas,%20vi%20su%20aviso%20de%20Pintureria" target="_blank" class="btn-wsp" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#128C7E;color:white;text-decoration:none;font-weight:900;font-size:15px;padding:13px;border-radius:12px;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.82 9.82 0 0012.03 2C6.48 2 2 6.44 2 11.93c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.37a9.82 9.82 0 004.78 1.22h.01c5.54 0 10.03-4.44 10.03-9.93a9.75 9.75 0 00-3.02-7.98zM12.04 20.17h-.01a8.12 8.12 0 01-4.14-1.13l-.3-.18-3.12.82.83-3.02-.2-.31a8.18 8.18 0 01-1.26-4.42c0-4.54 3.73-8.23 8.32-8.23a8.27 8.27 0 015.87 2.41 8.14 8.14 0 012.43 5.78c0 4.54-3.73 8.28-8.32 8.28zm4.56-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.22-.74-.65-1.23-1.45-1.38-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05s.89 2.38 1.01 2.54c.12.17 1.75 2.66 4.23 3.73.59.25 1.05.4 1.41.51.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-        WhatsApp
-      </a>
-    </div>
-  </div>
-</div>
-    </div>
+/* CONTENEDOR PRINCIPAL DE EMPRENDEDORES */
+#emprendedores-wrapper{max-width:760px;margin:0 auto;padding:0 20px;}
 
-  </div>
+/* FOOTER */
+#footer-wrapper{background:#0f172a;color:#94a3b8;margin-top:40px}
+#footer{max-width:1200px;margin:0 auto;padding:36px 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+#footer h3{color:#fff;font-size:14px;margin-bottom:12px;font-weight:800}
+#footer ul{list-style:none}
+#footer ul li{margin-bottom:8px}
+#footer ul li a{color:#94a3b8;font-size:13px;transition:.15s}
+#footer ul li a:hover{color:#fff}
+#copyright{text-align:center;padding:18px;border-top:1px solid rgba(255,255,255,.08);font-size:12px;color:#64748b}
 
-    <!-- AVISO SOLO SERVICIOS - PODA DE ARBOLES - GRATUITO - SOLO EN FILTRO SERVICIOS -->
-    <div id="aviso-poda-servicios" class="card-emp" data-barrio="alfar" data-cat="servicios" data-solo="true" data-keywords="poda arboles plantas jardinero tala desmalezado parque zona sur maxim tomas mar del plata servicios presupuesto sin cargo arbolado tiempo de poda" style="display:block; max-width:480px; margin:14px auto;">
-      <div style="max-width:480px;width:100%;background:white;border-radius:16px;border:1px solid #e2e8f0;box-shadow:0 4px 12px rgba(0,0,0,0.06);overflow:hidden;font-family:sans-serif;margin:0 auto;">
-        <div style="background:#14532d;color:white;padding:16px 20px;text-align:center;">
-          <h1 style="margin:0;font-size:22px;font-weight:900;line-height:1.1;">ES TIEMPO DE <span style="color:#86efac;">PODA!</span></h1>
-          <p style="margin:6px 0 0;font-size:14px;opacity:0.9;font-style:italic;">Cuidamos tus árboles, cuidamos tu espacio</p>
-        </div>
-        <div style="padding:18px 20px;">
-          <div style="background:#dcfce7;border-left:4px solid #22c55e;padding:10px 12px;border-radius:8px;font-size:13.5px;font-weight:700;color:#14532d;margin-bottom:14px;">
-            CUIDADO PROFESIONAL DE TUS ARBOLES Y PLANTAS - Para su salud, seguridad y estética. ¡Tu arbolado en buenas manos!
-          </div>
-          <ul style="list-style:none;padding:0;margin:0 0 16px;">
-            <li style="padding:8px 0;border-bottom:1px dashed #e2e8f0;font-size:13.5px;line-height:1.35;color:#334155;"><b style="color:#14532d;display:block;font-size:12px;">PODA DE ARBOLES Y PLANTAS</b> PRESUPUESTO SIN CARGO - Asesoramiento personalizado.</li>
-            <li style="padding:8px 0;border-bottom:1px dashed #e2e8f0;font-size:13.5px;line-height:1.35;color:#334155;"><b style="color:#14532d;display:block;font-size:12px;">TRABAJO RESPONSABLE Y DE CONFIANZA</b> Nos comprometemos con cada trabajo.</li>
-            <li style="padding:8px 0;border-bottom:1px dashed #e2e8f0;font-size:13.5px;line-height:1.35;color:#334155;"><b style="color:#14532d;display:block;font-size:12px;">REFERENCIAS COMPROBABLES</b> Clientes satisfechos en Zona Sur - Experiencia y confianza.</li>
-          </ul>
-          <div style="background:#f8fafc;border:1.5px dashed #cbd5e1;border-radius:10px;padding:10px;text-align:center;font-size:12.5px;font-weight:800;color:#334155;margin-bottom:16px;">MAR DEL PLATA - MAXIM Y TOMAS - Trabajamos para vos</div>
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <a href="https://wa.me/5492233467120?text=Hola%20Maxim%20y%20Tomas,%20vi%20su%20aviso%20de%20Poda%20en%20Vidriera" target="_blank" class="btn-wsp" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:white;text-decoration:none;font-weight:900;font-size:15px;padding:13px;border-radius:12px;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.82 9.82 0 0012.03 2C6.48 2 2 6.44 2 11.93c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.37a9.82 9.82 0 004.78 1.22h.01c5.54 0 10.03-4.44 10.03-9.93a9.75 9.75 0 00-3.02-7.98zM12.04 20.17h-.01a8.12 8.12 0 01-4.14-1.13l-.3-.18-3.12.82.83-3.02-.2-.31a8.18 8.18 0 01-1.26-4.42c0-4.54 3.73-8.23 8.32-8.23a8.27 8.27 0 015.87 2.41 8.14 8.14 0 012.43 5.78c0 4.54-3.73 8.28-8.32 8.28zm4.56-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.22-.74-.65-1.23-1.45-1.38-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05s.89 2.38 1.01 2.54c.12.17 1.75 2.66 4.23 3.73.59.25 1.05.4 1.41.51.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-              WhatsApp
-            </a>
-            <a href="https://wa.me/5491122628299?text=Hola%20Maxim%20y%20Tomas,%20vi%20su%20aviso%20de%20Poda%20en%20Vidriera" target="_blank" class="btn-wsp" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#128C7E;color:white;text-decoration:none;font-weight:900;font-size:15px;padding:13px;border-radius:12px;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.82 9.82 0 0012.03 2C6.48 2 2 6.44 2 11.93c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.37a9.82 9.82 0 004.78 1.22h.01c5.54 0 10.03-4.44 10.03-9.93a9.75 9.75 0 00-3.02-7.98zM12.04 20.17h-.01a8.12 8.12 0 01-4.14-1.13l-.3-.18-3.12.82.83-3.02-.2-.31a8.18 8.18 0 01-1.26-4.42c0-4.54 3.73-8.23 8.32-8.23a8.27 8.27 0 015.87 2.41 8.14 8.14 0 012.43 5.78c0 4.54-3.73 8.28-8.32 8.28zm4.56-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.22-.74-.65-1.23-1.45-1.38-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05s.89 2.38 1.01 2.54c.12.17 1.75 2.66 4.23 3.73.59.25 1.05.4 1.41.51.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-              WhatsApp
-            </a>
-          </div>
-        </div>
-<!-- AVISO COMPLEMENTARIO GRATIS: PAPELES LYE - HOGAR -->
-    </div>
-    </div>
+/* BOTTOM NAV MÓVIL (OCULTO EN PC) */
+.bottom-nav { display: none; }
 
-<div id="aviso-pintura-martin-larrea" class="card-emp" data-barrio="faro" data-cat="servicios" data-solo="true" data-keywords="martin larrea pintura decoracion casas frentes interiores exteriores mar del plata presupuesto whatsapp 2235802027 pintor" style="display:block; max-width:520px; margin:14px auto; overflow:hidden; border-radius:20px; border:2px solid #0f172a; box-shadow:0 8px 24px rgba(0,0,0,.15);">
-  <!-- Imagen superior con overlay -->
-  <div style="position:relative; width:100%; height:280px; overflow:hidden; background:#e2e8f0;">
-    <img src="martin-larrea-pintura.webp" alt="Trabajo de pintura Martin Larrea" style="width:100%; height:100%; object-fit:cover; object-position:center;" onerror="this.src='https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&h=400&fit=crop'">
-    <!-- Badge superior -->
-    <div style="position:absolute; top:12px; left:12px; background:#0f172a; color:white; padding:8px 14px; border-radius:999px; font-size:11px; font-weight:900; letter-spacing:0.5px; display:flex; align-items:center; gap:6px; box-shadow:0 4px 12px rgba(0,0,0,.3);">
-      <span style="width:8px; height:8px; background:#22c55e; border-radius:50%; display:inline-block;"></span> DISPONIBLE AHORA
-    </div>
-    <!-- Título sobre imagen estilo brocha -->
-    <div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(0deg, rgba(15,23,42,0.95) 0%, transparent 100%); padding:18px 16px 14px;">
-      <div style="background:#facc15; color:#0f172a; display:inline-block; padding:4px 10px; border-radius:8px; font-size:10px; font-weight:900; transform:rotate(-1deg); margin-bottom:6px;">PINTURA PROFESIONAL</div>
-      <h2 style="color:white; font-size:24px; font-weight:900; line-height:1.1; text-shadow:0 2px 8px rgba(0,0,0,.5);">MARTIN LARREA<br><span style="color:#facc15; font-size:18px;">PINTURA Y DECORACIÓN</span></h2>
-    </div>
-  </div>
-  <!-- Info inferior -->
-  <div style="padding:14px 16px; background:white;">
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px;">
-      <div style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:700; color:#334155;"><span style="width:28px; height:28px; background:#f1f5f9; border-radius:8px; display:grid; place-items:center;">🏠</span> Frentes</div>
-      <div style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:700; color:#334155;"><span style="width:28px; height:28px; background:#f1f5f9; border-radius:8px; display:grid; place-items:center;">🎨</span> Interiores</div>
-      <div style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:700; color:#334155;"><span style="width:28px; height:28px; background:#f1f5f9; border-radius:8px; display:grid; place-items:center;">🏢</span> Exteriores</div>
-      <div style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:700; color:#334155;"><span style="width:28px; height:28px; background:#f1f5f9; border-radius:8px; display:grid; place-items:center;">✨</span> Decoración</div>
-    </div>
-    <div style="background:#0f172a; border-radius:14px; padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:10px;">
-      <div>
-        <div style="font-size:10px; font-weight:800; color:#94a3b8; letter-spacing:1px;">PRESUPUESTO AL</div>
-        <div style="font-size:20px; font-weight:900; color:white; letter-spacing:-0.5px;">223 580 20 27</div>
-      </div>
-      <a href="https://wa.me/5492235802027?text=Hola%20Martin,%20vi%20tu%20aviso%20de%20Pintura%20en%20Vidriera" target="_blank" style="background:#25D366; color:white; text-decoration:none; font-weight:900; font-size:14px; padding:12px 18px; border-radius:999px; display:flex; align-items:center; gap:6px; box-shadow:0 4px 12px rgba(37,211,102,.4);">WhatsApp</a>
-    </div>
-    <div style="text-align:center; font-size:10px; font-weight:700; color:#94a3b8; margin-top:10px; letter-spacing:0.5px;">📍 MAR DEL PLATA Y ZONA • TRABAJOS GARANTIZADOS</div>
-  </div>
-</div>
-
-
-<div id="aviso-lye-hogar" class="card-emp" data-barrio="faro" data-cat="hogar" data-solo="true" data-keywords="papeles lye papel higienico rollos pack familiar distribuidora mar del plata envios domicilio hogar productos" style="display:block; max-width:480px; margin:14px auto;">
-<div class="aviso-gratis-lye" style="width:100%; max-width:500px; background:#f8fafc; border:2px solid #22c55e; border-radius:20px; padding:20px; margin:16px auto; font-family:system-ui,-apple-system,sans-serif; box-shadow:0 4px 12px rgba(0,0,0,0.05);">
-  <div style="display:inline-block; background:#22c55e; color:white; font-size:10px; font-weight:800; padding:3px 8px; border-radius:6px; margin-bottom:10px;">DISTRIBUIDORA</div>
-  <h2 style="font-size:20px; font-weight:800; color:#0f172a; line-height:1.2;">Papeles LyE • Pack Familiar</h2>
-  <p style="font-size:13px; color:#475569; font-weight:600; margin-top:4px;">Papel Higiénico Texturado Extra Blanco - Rollos de 30 Metros - 30 ROLLOS</p>
-  <ul style="list-style:none; margin:14px 0; padding:0; display:flex; flex-direction:column; gap:8px;">
-    <li style="font-size:13px; color:#334155;">✓ CALIDAD Y CONFIANZA: Panel texturado suave para el cuidado de tu hogar.</li>
-    <li style="font-size:13px; color:#334155;">✓ ECONOMÍA FAMILIAR: El mejor rendimiento para tu bolsillo.</li>
-    <li style="font-size:13px; color:#334155;">✓ RESPONSABILIDAD: Entrega pactada cuidando cada detalle.</li>
-  </ul>
-  <div style="background:white; border:1px solid #e2e8f0; border-radius:12px; padding:12px; display:flex; flex-direction:column; gap:6px;">
-    <div style="font-size:14px; color:#0f172a; font-weight:600;">📦 Pack de 30 Rollos: <strong style="color:#16a34a;">$15.000</strong></div>
-    <div style="font-size:14px; color:#0f172a; font-weight:600;">🧻 Pack de 4 Rollos: <strong style="color:#16a34a;">$2500</strong></div>
-  </div>
-  <div style="font-size:12px; font-weight:700; color:#1e293b; margin-top:12px; text-align:center;">📍 MAR DEL PLATA - ENVIOS A DOMICILIO<br/>Tel: 2236896480 (Rocío) / 2236636107 (Alex)</div>
-  <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px;">
-    <a href="https://wa.me/5492236896480?text=Hola%20Roc%C3%ADo,%20vi%20tu%20aviso%20de%20Papeles%20LyE" target="_blank" style="display:flex; align-items:center; justify-content:center; gap:8px; background:#25D366; color:white; text-decoration:none; font-weight:800; font-size:13px; padding:12px; border-radius:12px;">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.82 9.82 0 0012.03 2C6.48 2 2 6.44 2 11.93c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.37a9.82 9.82 0 004.78 1.22h.01c5.54 0 10.03-4.44 10.03-9.93a9.75 9.75 0 00-3.02-7.98zM12.04 20.17h-.01a8.12 8.12 0 01-4.14-1.13l-.3-.18-3.12.82.83-3.02-.2-.31a8.18 8.18 0 01-1.26-4.42c0-4.54 3.73-8.23 8.32-8.23a8.27 8.27 0 015.87 2.41 8.14 8.14 0 012.43 5.78c0 4.54-3.73 8.28-8.32 8.28zm4.56-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.22-.74-.65-1.23-1.45-1.38-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05s.89 2.38 1.01 2.54c.12.17 1.75 2.66 4.23 3.73.59.25 1.05.4 1.41.51.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-      Rocío
-    </a>
-    <a href="https://wa.me/5492236636107?text=Hola%20Alex,%20vi%20tu%20aviso%20de%20Papeles%20LyE" target="_blank" style="display:flex; align-items:center; justify-content:center; gap:8px; background:#128C7E; color:white; text-decoration:none; font-weight:800; font-size:13px; padding:12px; border-radius:12px;">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.82 9.82 0 0012.03 2C6.48 2 2 6.44 2 11.93c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.37a9.82 9.82 0 004.78 1.22h.01c5.54 0 10.03-4.44 10.03-9.93a9.75 9.75 0 00-3.02-7.98zM12.04 20.17h-.01a8.12 8.12 0 01-4.14-1.13l-.3-.18-3.12.82.83-3.02-.2-.31a8.18 8.18 0 01-1.26-4.42c0-4.54 3.73-8.23 8.32-8.23a8.27 8.27 0 015.87 2.41 8.14 8.14 0 012.43 5.78c0 4.54-3.73 8.28-8.32 8.28zm4.56-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.22-.74-.65-1.23-1.45-1.38-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05s.89 2.38 1.01 2.54c.12.17 1.75 2.66 4.23 3.73.59.25 1.05.4 1.41.51.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-      Alex
-    </a>
-  </div>
-  <div style="font-size:12px; font-style:italic; color:#64748b; text-align:center; margin-top:12px; font-weight:600;">Cualquier cosa me mandan un mensajito 😉</div>
-</div>
-</div>
-<!-- AVISO GRATIS - LOS SABORES DE MADY - REPOSTERIA - SOLO TEXTO - SIN FOTO -->
-<div id="aviso-sabores-mady" class="card-emp" data-barrio="faro" data-cat="sabores" data-solo="true" data-keywords="los sabores de mady reposteria casera tortas mundo creativo macarons pasteleria dulce casero mady mar del plata sabores 2235385753 instagram lossaboresdemady" style="display:block; max-width:480px; margin:14px auto;">
-  <div style="max-width:480px;width:100%;background:white;border-radius:20px;border:2px solid #f9a8d4;box-shadow:0 6px 18px rgba(0,0,0,0.08);overflow:hidden;font-family:sans-serif;margin:0 auto;">
-    <div style="background:linear-gradient(135deg,#fdf2f8 0%, #fce7f3 100%);padding:18px 20px;text-align:center;border-bottom:2px dashed #f9a8d4;">
-      <div style="font-size:11px;font-weight:900;letter-spacing:2px;color:#ec4899;margin-bottom:6px;">MUNDO CREATIVO ✨</div>
-      <h2 style="margin:0;font-size:24px;font-weight:900;color:#831843;line-height:1.1;">LOS SABORES<br><span style="color:#ec4899;">DE MADY</span></h2>
-      <div style="margin-top:8px;background:white;display:inline-block;padding:5px 12px;border-radius:999px;border:1px solid #f9a8d4;font-size:11px;font-weight:800;color:#be185d;letter-spacing:1px;">REPOSTERÍA CASERA</div>
-    </div>
-    <div style="padding:18px 20px;">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
-        <div style="background:#fdf2f8;border-radius:12px;padding:10px;text-align:center;">
-          <div style="font-size:20px;">🎂</div>
-          <div style="font-size:11px;font-weight:800;color:#831843;margin-top:2px;">TORTAS</div>
-          <div style="font-size:10px;color:#9d174d;">Personalizadas</div>
-        </div>
-        <div style="background:#fdf2f8;border-radius:12px;padding:10px;text-align:center;">
-          <div style="font-size:20px;">🧁</div>
-          <div style="font-size:11px;font-weight:800;color:#831843;margin-top:2px;">MESA DULCE</div>
-          <div style="font-size:10px;color:#9d174d;">Eventos</div>
-        </div>
-      </div>
-      <div style="background:#fff1f2;border-left:4px solid #ec4899;padding:10px 12px;border-radius:10px;font-size:12.5px;font-weight:600;color:#4a044e;margin-bottom:14px;line-height:1.4;">
-        Pastelería artesanal hecha con amor. Consultá por tu diseño, sabores y decoración especial para tu evento.
-      </div>
-      <div style="display:flex;justify-content:center;gap:16px;margin-bottom:14px;font-size:12px;font-weight:700;color:#831843;">
-        <span>📸 @Lossaboresdemady</span>
-        <span>📘 Los Sabores de Mady</span>
-      </div>
-      <a href="https://wa.me/5492235385753?text=Hola%20Mady,%20vi%20tu%20aviso%20de%20Reposteria%20en%20Vidriera" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;background:#ec4899;color:white;text-decoration:none;font-weight:900;font-size:15px;padding:14px;border-radius:14px;box-shadow:0 4px 12px rgba(236,72,153,.3);">
-        WhatsApp: 223 538 57 53
-      </a>
-      <div style="text-align:center;font-size:10px;font-weight:700;color:#f9a8d4;margin-top:10px;">📍 MAR DEL PLATA • PEDIDOS CON ANTICIPACIÓN</div>
-    </div>
-  </div>
-</div>
-<!-- AVISO GRATIS - CONSTRUCCION ROMERO E HIJOS - SERVICIOS -->
-<div id="aviso-construccion-romero" class="card-emp" data-barrio="faro" data-cat="servicios" data-solo="true" data-keywords="construccion romero e hijos juan romero plomeria electricidad gas ampliaciones refacciones durlock revestimiento texturado pintura microcemento albañil obra mar del plata 2236680231" style="display:block; max-width:480px; margin:14px auto;">
-  <div style="max-width:480px;width:100%;background:white;border-radius:18px;border:2px solid #1f2937;box-shadow:0 6px 18px rgba(0,0,0,0.1);overflow:hidden;font-family:sans-serif;margin:0 auto;">
-    <!-- Header obra -->
-    <div style="background:#1f2937;color:white;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;">
-      <div>
-        <div style="font-size:11px;font-weight:900;letter-spacing:1.5px;color:#fb923c;">CONSTRUCCIÓN INTEGRAL</div>
-        <h2 style="margin:2px 0 0;font-size:22px;font-weight:900;line-height:1;">ROMERO<br><span style="color:#fb923c;">& HIJOS</span></h2>
-      </div>
-      <div style="width:44px;height:44px;background:#fb923c;border-radius:12px;display:grid;place-items:center;font-size:22px;">🏗️</div>
-    </div>
-    <!-- Servicios en 2 columnas -->
-    <div style="padding:14px 16px;">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;">
-        <div style="background:#f3f4f6;border-radius:10px;padding:8px 10px;font-size:11.5px;font-weight:800;color:#1f2937;display:flex;align-items:center;gap:6px;"><span>🔧</span> Plomería</div>
-        <div style="background:#f3f4f6;border-radius:10px;padding:8px 10px;font-size:11.5px;font-weight:800;color:#1f2937;display:flex;align-items:center;gap:6px;"><span>⚡</span> Electricidad</div>
-        <div style="background:#f3f4f6;border-radius:10px;padding:8px 10px;font-size:11.5px;font-weight:800;color:#1f2937;display:flex;align-items:center;gap:6px;"><span>🔥</span> Gas</div>
-        <div style="background:#f3f4f6;border-radius:10px;padding:8px 10px;font-size:11.5px;font-weight:800;color:#1f2937;display:flex;align-items:center;gap:6px;"><span>🏠</span> Ampliaciones</div>
-        <div style="background:#f3f4f6;border-radius:10px;padding:8px 10px;font-size:11.5px;font-weight:800;color:#1f2937;display:flex;align-items:center;gap:6px;"><span>🛠️</span> Refacciones</div>
-        <div style="background:#f3f4f6;border-radius:10px;padding:8px 10px;font-size:11.5px;font-weight:800;color:#1f2937;display:flex;align-items:center;gap:6px;"><span>🧱</span> Durlock</div>
-        <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:8px 10px;font-size:11.5px;font-weight:800;color:#7c2d12;display:flex;align-items:center;gap:6px;"><span>🎨</span> Revest. Texturado</div>
-        <div style="background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:8px 10px;font-size:11.5px;font-weight:800;color:#7c2d12;display:flex;align-items:center;gap:6px;"><span>✨</span> Microcemento</div>
-      </div>
-      <div style="background:#1f2937;border-radius:12px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
-        <div>
-          <div style="font-size:9px;font-weight:800;color:#9ca3af;letter-spacing:1px;">LLAMADAS Y WHATSAPP</div>
-          <div style="font-size:17px;font-weight:900;color:white;">223 668 02 31</div>
-          <div style="font-size:10px;color:#d1d5db;">📘 Juan Romero | 📸 Juan Romero</div>
-        </div>
-        <a href="https://wa.me/5492236680231?text=Hola%20Juan,%20vi%20tu%20aviso%20de%20Construccion%20en%20Vidriera" target="_blank" style="background:#25D366;color:white;text-decoration:none;font-weight:900;font-size:13px;padding:11px 16px;border-radius:999px;display:flex;align-items:center;gap:6px;">WhatsApp</a>
-      </div>
-      <div style="text-align:center;font-size:10px;font-weight:700;color:#9ca3af;margin-top:8px;">📍 MAR DEL PLATA Y ZONA • PRESUPUESTOS SIN CARGO</div>
-    </div>
-  </div>
-</div>
-<!-- AVISO GRATIS - MANTENIMIENTO PADILLA - SERVICIOS / JARDIN -->
-<div id="aviso-padilla-jardin" class="card-emp" data-barrio="faro" data-cat="servicios" data-solo="true" data-keywords="mantenimiento padilla jardineria jardin desmalezado poda terrenos mensual presupuesto sin cargo mar del plata 2233419568" style="display:block; max-width:480px; margin:14px auto;">
-  <div style="max-width:480px;width:100%;background:white;border-radius:26px;border:2px solid #14532d;box-shadow:0 8px 20px rgba(0,0,0,0.08);overflow:hidden;font-family:system-ui,sans-serif;margin:0 auto;">
-    <!-- Header -->
-    <div style="background:#0f3d22;color:white;padding:18px 20px 14px;text-align:center;border-radius:24px 24px 0 0;position:relative;">
-      <div style="position:absolute;top:12px;left:16px;font-size:18px;">🍃</div>
-      <div style="position:absolute;top:12px;right:16px;font-size:18px;">🍃</div>
-      <h2 style="margin:0;font-size:28px;font-weight:1000;line-height:0.95;letter-spacing:-0.5px;">MANTENIMIENTO<br>PADILLA</h2>
-      <div style="margin-top:8px;font-size:11px;font-weight:800;letter-spacing:3px;opacity:0.9;">JARDINERÍA PROFESIONAL</div>
-    </div>
-    <!-- Body -->
-    <div style="padding:18px 18px 14px;">
-      <div style="display:flex;flex-direction:column;gap:12px;">
-        <div style="display:flex;align-items:center;gap:12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:10px 12px;">
-          <div style="width:32px;height:32px;background:#14532d;border-radius:8px;display:grid;place-items:center;color:white;font-weight:900;">✓</div>
-          <div style="font-size:14px;font-weight:800;color:#14532d;line-height:1.1;">Mantenimiento de terrenos<br>y jardines</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:10px 12px;">
-          <div style="width:32px;height:32px;background:#14532d;border-radius:8px;display:grid;place-items:center;color:white;font-weight:900;">✓</div>
-          <div style="font-size:14px;font-weight:800;color:#14532d;line-height:1.1;">Desmalezado y podas</div>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:10px 12px;">
-          <div style="width:32px;height:32px;background:#14532d;border-radius:8px;display:grid;place-items:center;color:white;font-weight:900;">✓</div>
-          <div style="font-size:14px;font-weight:800;color:#14532d;line-height:1.1;">Mantenimiento mensual</div>
-        </div>
-      </div>
-      <!-- Presupuesto -->
-      <div style="margin-top:16px;background:#dcfce7;border:2px solid #14532d;border-radius:12px;padding:10px;text-align:center;font-weight:900;color:#14532d;font-size:15px;">Presupuesto sin cargo</div>
-      <!-- WhatsApp -->
-      <div style="margin-top:16px;background:#14532d;border-radius:14px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;">
-        <div>
-          <div style="font-size:9px;font-weight:800;color:#86efac;letter-spacing:1px;">WHATSAPP DIRECTO</div>
-          <div style="font-size:18px;font-weight:900;color:white;">223 341 95 68</div>
-        </div>
-        <a href="https://wa.me/5492233419568?text=Hola!%20Vi%20tu%20aviso%20de%20Mantenimiento%20Padilla%20en%20Vidriera" target="_blank" style="background:#25D366;color:white;text-decoration:none;font-weight:900;font-size:13px;padding:10px 16px;border-radius:999px;">WhatsApp</a>
-      </div>
-      <div style="text-align:center;margin-top:10px;font-size:12px;font-weight:700;color:#14532d;">📍 Mar del Plata y alrededores</div>
-    </div>
-    <div style="background:#0f3d22;color:#bbf7d0;text-align:center;font-size:9px;font-weight:800;letter-spacing:1px;padding:8px;">SERVICIO CONFIABLE • RESPUESTA RÁPIDA</div>
-  </div>
-</div>
-<!-- AVISO GRATIS - CONGELADOS 2X15000 - SABORES -->
-<div id="aviso-congelados-promo" class="card-emp" data-barrio="" data-cat="sabores" data-solo="true" data-keywords="congelados promo 2 kilos 15000 patitas pollo dinosaurios bastoncitos muzza nuggets medallones bocaditos mar del plata 2235912568" style="display:block; max-width:480px; margin:14px auto;">
-  <div style="max-width:480px;width:100%;background:#fffbe6;border-radius:22px;border:2px solid #f97316;box-shadow:0 8px 20px rgba(0,0,0,0.08);overflow:hidden;font-family:system-ui,sans-serif;margin:0 auto;">
-    <div style="background:#ea580c;color:white;padding:14px;text-align:center;">
-      <div style="font-size:20px;font-weight:1000;line-height:1;">🔥 PROMO IMPERDIBLE 🔥</div>
-      <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:#fef08a;margin-top:2px;">EN CONGELADOS DE PRIMERA CALIDAD</div>
-    </div>
-    <div style="background:#fde047;text-align:center;padding:12px;border-bottom:2px dashed #f97316;">
-      <div style="font-size:36px;font-weight:1000;color:#c2410c;line-height:0.9;">2 KILOS X</div>
-      <div style="font-size:48px;font-weight:1000;color:#7c2d12;line-height:1;">$15.000 ⭐</div>
-      <div style="font-size:10px;font-weight:800;color:#7c2d12;margin-top:4px;">ARMÁ TU COMBO COMO QUIERAS</div>
-    </div>
-    <div style="padding:14px 16px;">
-      <div style="font-size:12px;font-weight:900;color:#c2410c;margin-bottom:6px;">❄️ VARIEDAD A ELECCIÓN:</div>
-      <div style="font-size:12px;line-height:1.35;color:#431407;font-weight:600;">
-        • Patitas de pollo (Clásicas y XL con Jamón y Queso)<br>
-        • Formis de dinosaurios<br>
-        • Bastoncitos de Muzza<br>
-        • Nuggets crocantes<br>
-        • Medallones de Pollo (Clásicos, JyQ, Espinaca)<br>
-        • Bocaditos (Espinaca / Calabaza y Queso)
-      </div>
-      <div style="margin-top:12px;background:#fff3c4;border-radius:10px;padding:8px;text-align:center;font-size:11px;font-weight:800;color:#7c2d12;">Resolvé tus almuerzos y cenas en minutos.<br>Prácticos, ricos y de primera calidad.</div>
-      <div style="margin-top:12px;background:#ea580c;border-radius:12px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;">
-        <div style="color:white;font-size:12px;font-weight:800;">📍 Entrega / Retiro<br>Mar del Plata</div>
-        <a href="https://wa.me/5492235912568?text=Hola!%20Vi%20la%20promo%202%20kilos%20x%2015000%20en%20Vidriera" target="_blank" style="background:#25D366;color:white;text-decoration:none;font-weight:900;font-size:12px;padding:8px 14px;border-radius:999px;">WhatsApp: 2235912568</a>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- AVISO PLANTARTE - GRATUITO - ARTESANIAS - DISEÑO RENOVADO -->
-<div id="aviso-plantarte" class="card-emp" data-barrio="alfar" data-cat="artesanias" data-solo="true" data-keywords="plantarte pintado a mano mates macetas porta sahumerios artesanias deco arte alfar mar del plata" style="display:block; max-width:460px; margin:16px auto; font-family: system-ui, sans-serif;">
-
-  <div style="background:white; border-radius:24px; overflow:hidden; box-shadow:0 12px 32px rgba(0,0,0,.12); border:1px solid #ffe4e6;">
-
-    <!-- Header coral PlantArte -->
-    <div style="background:#f87171; background:linear-gradient(135deg,#f87171 0%,#fb7185 100%); padding:0; position:relative;">
-      <div style="background:white; margin:14px 14px 0; border-radius:16px 16px 0 0; padding:14px; display:flex; align-items:center; justify-content:center; gap:12px;">
-        <div style="width:48px; height:48px; background:#f0fdf4; border-radius:12px; display:grid; place-items:center; font-size:24px;">🌿</div>
-        <div style="font-family:'Segoe Script','Comic Sans MS',cursive; font-size:28px; font-weight:700; color:#16a34a; transform:rotate(-3deg);">PlantArte</div>
-      </div>
-      <div style="background:white; margin:0 14px; padding:0 14px 12px; text-align:center; border-radius:0 0 16px 16px;">
-        <div style="font-size:10px; font-weight:900; letter-spacing:1.5px; color:#fb7185; text-transform:uppercase;">Productos pintados a mano • Hecho con amor</div>
-      </div>
-      <div style="padding:14px 20px 16px; text-align:center;">
-        <div style="color:white; font-weight:900; font-size:18px; letter-spacing:.5px; text-transform:uppercase; text-shadow:0 1px 2px rgba(0,0,0,.15);">Precios (Efect / Transf)</div>
-      </div>
-    </div>
-
-    <!-- Lista de precios -->
-    <div style="padding:18px 20px 8px; background:#fff1f2;">
-      <div style="display:grid; gap:10px;">
-        
-        <div style="background:white; border-radius:14px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 2px 8px rgba(0,0,0,.05); border-left:4px solid #f87171;">
-          <span style="font-weight:800; color:#334155; font-size:14.5px;">🧉 Mates</span>
-          <span style="font-weight:1000; color:#0f172a; font-size:16px;">$12.000</span>
-        </div>
-
-        <div style="background:white; border-radius:14px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 2px 8px rgba(0,0,0,.05); border-left:4px solid #fbbf24;">
-          <span style="font-weight:800; color:#334155; font-size:14.5px;">🪔 Porta sahumerios</span>
-          <span style="font-weight:1000; color:#0f172a; font-size:16px;">$10.000</span>
-        </div>
-
-        <div style="background:white; border-radius:14px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 2px 8px rgba(0,0,0,.05); border-left:4px solid #22c55e;">
-          <span style="font-weight:800; color:#334155; font-size:14.5px;">🪴 Macetas grandes</span>
-          <span style="font-weight:1000; color:#0f172a; font-size:16px;">$16.000</span>
-        </div>
-
-        <div style="background:white; border-radius:14px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center; box-shadow:0 2px 8px rgba(0,0,0,.05); border-left:4px solid #38bdf8;">
-          <span style="font-weight:800; color:#334155; font-size:14.5px;">🌵 Macetas chicas</span>
-          <span style="font-weight:1000; color:#0f172a; font-size:16px;">$14.000</span>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Footer con botón WhatsApp sin número visible -->
-    <div style="padding:16px 20px 20px; background:white;">
-      <div style="text-align:center; font-size:12px; font-weight:700; color:#fb7185; margin-bottom:14px; background:#fff1f2; padding:8px; border-radius:999px;">
-        ✨ Cada pieza es única y pintada a mano ✨
-      </div>
-
-      <a href="https://wa.me/5492235418503?text=Hola%20PlantArte!%20Vi%20tu%20aviso%20en%20Vidriera%20de%20Emprendedores%20y%20quiero%20consultar%20por%20tus%20productos" target="_blank" style="display:flex; align-items:center; justify-content:center; gap:9px; background:linear-gradient(135deg,#25D366,#128C7E); color:white; text-decoration:none; font-weight:900; font-size:15px; padding:13px 18px; border-radius:999px; box-shadow:0 8px 20px rgba(37,211,102,.32);">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.82 9.82 0 0012.03 2C6.48 2 2 6.44 2 11.93c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.37a9.82 9.82 0 004.78 1.22h.01c5.54 0 10.03-4.44 10.03-9.93a9.75 9.75 0 00-3.02-7.98zM12.04 20.17h-.01a8.12 8.12 0 01-4.14-1.13l-.3-.18-3.12.82.83-3.02-.2-.31a8.18 8.18 0 01-1.26-4.42c0-4.54 3.73-8.23 8.32-8.23a8.27 8.27 0 015.87 2.41 8.14 8.14 0 012.43 5.78c0 4.54-3.73 8.28-8.32 8.28zm4.56-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.22-.74-.65-1.23-1.45-1.38-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05s.89 2.38 1.01 2.54c.12.17 1.75 2.66 4.23 3.73.59.25 1.05.4 1.41.51.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-        Consultar por WhatsApp
-      </a>
-
-      <div style="text-align:center; margin-top:10px; font-size:10px; font-weight:700; color:#94a3b8; letter-spacing:.3px;">ALFAR • ARTESANÍAS • PRODUCTOS PINTADOS A MANO</div>
-    </div>
-  </div>
-</div>
-<!-- AVISO ABIII - TRATAMIENTOS CAPILARES - PREMIUM -->
-<div id="aviso-abiii-capilar" class="card-emp" data-solo="true" data-barrio="jorge-newbery" data-cat="belleza" data-keywords="abiii tratamientos capilares alisados nutriciones baño crema protector termico biotina keratina shook cabello entrega inmediata envios mar del plata 2234217643 newbery castelli" style="display:block; max-width:480px; margin:14px auto;">
-  <div style="background:#FFF8FB;border:2px solid #1A1220;border-radius:26px;overflow:hidden;box-shadow:0 12px 28px rgba(0,0,0,.08);font-family:system-ui,sans-serif;">
-    <div style="height:5px;background:linear-gradient(90deg,#FF7AB8,#FFB5D8,#FFE0EC);"></div>
-
-    <div style="padding:18px 18px 10px;display:flex;justify-content:space-between;align-items:flex-start;">
-      <div>
-        <div style="display:inline-block;background:#1A1220;color:#FFD6E8;border-radius:999px;padding:5px 12px;font-size:10px;font-weight:900;letter-spacing:1.2px;">ENTREGA INMEDIATA 📦</div>
-        <h2 style="margin:10px 0 0;font-size:30px;font-weight:1000;color:#1A1220;line-height:.95;letter-spacing:-0.8px;">Abiii</h2>
-        <div style="font-size:13px;font-weight:800;color:#8A2A5A;margin-top:4px;letter-spacing:-0.2px;">Tratamientos capilares</div>
-      </div>
-      <div style="width:38px;height:38px;border-radius:50%;background:#FFEFF5;display:grid;place-items:center;font-size:16px;">🩷</div>
-    </div>
-
-    <div style="padding:0 14px 14px;display:grid;gap:8px;">
-      <div style="background:#1A1220;border-radius:16px;padding:12px 14px;display:flex;flex-wrap:wrap;gap:6px;">
-        <span style="background:#fff;color:#1A1220;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:900;">ALISADOS</span>
-        <span style="background:#FF7AB8;color:#fff;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:900;">NUTRICIONES</span>
-        <span style="background:#FFE0EC;color:#7A1A3A;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:900;">BAÑO DE CREMA</span>
-        <span style="background:#2A1A32;color:#FFB5D8;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:800;">PROTECTOR TÉRMICO</span>
-        <span style="background:#fff;color:#1A1220;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:800;">BIOTINA</span>
-        <span style="background:#FFD6E8;color:#1A1220;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:900;">SHOOK KERATINA</span>
-      </div>
-      <div style="background:#fff;border:1.5px dashed #FFB5D8;border-radius:12px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;">
-        <span style="font-size:11.5px;font-weight:700;color:#5A2A3A;">🕛 Lun a Dom 09 a 18 hs</span>
-        <span style="font-size:11.5px;font-weight:800;color:#1A1220;">🛵 Envíos a domicilio</span>
-      </div>
-    </div>
-
-    <div style="border-top:1px solid #F5E1EA;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;background:#FFFCFE;">
-      <div>
-        <div style="font-size:10px;font-weight:800;letter-spacing:1px;color:#A88A96;">WHATSAPP • NEWBERY / CASTELLI Y 212</div>
-        <div style="font-size:15px;font-weight:1000;color:#1A1220;">223 421 7643</div>
-      </div>
-      <a href="https://wa.me/5492234217643?text=Hola%20Abiii!%20Vi%20tu%20aviso%20en%20Vidriera%20-%20Quiero%20info%20de%20tratamientos%20capilares" target="_blank" style="background:#25D366;color:#fff;text-decoration:none;font-weight:900;font-size:14px;padding:12px 20px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;box-shadow:0 6px 16px rgba(37,211,102,.32);">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.82 9.82 0 0012.03 2C6.48 2 2 6.44 2 11.93c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.37a9.82 9.82 0 004.78 1.22h.01c5.54 0 10.03-4.44 10.03-9.93a9.75 9.75 0 00-3.02-7.98zM12.04 20.17h-.01a8.12 8.12 0 01-4.14-1.13l-.3-.18-3.12.82.83-3.02-.2-.31a8.18 8.18 0 01-1.26-4.42c0-4.54 3.73-8.23 8.32-8.23a8.27 8.27 0 015.87 2.41 8.14 8.14 0 012.43 5.78c0 4.54-3.73 8.28-8.32 8.28zm4.56-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.22-.74-.65-1.23-1.45-1.38-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05s.89 2.38 1.01 2.54c.12.17 1.75 2.66 4.23 3.73.59.25 1.05.4 1.41.51.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-        WhatsApp
-      </a>
-    </div>
-  </div>
-</div>
-<!-- AVISO MOBICARE - GRATUITO - SERVICIOS - DISEÑO RENOVADO -->
-<div id="aviso-mobicare-nuevo" class="card-emp" data-barrio="alfar" data-cat="servicios" data-solo="true" data-keywords="mobicare reparacion celular servicio tecnico pantalla mar del plata alfar" style="display:block; max-width:460px; margin:16px auto; font-family: system-ui, sans-serif;">
-
-  <div style="background:white; border-radius:22px; overflow:hidden; box-shadow:0 12px 32px rgba(10,30,74,.18); border:1px solid #e2e8f0;">
-
-    <!-- Header azul MobiCare -->
-    <div style="background: radial-gradient(120% 120% at 0% 0%, #12367a 0%, #0a1e4a 60%); padding:18px 20px 16px; position:relative; overflow:hidden;">
-      <div style="position:absolute; top:-20px; right:-20px; width:120px; height:120px; background:rgba(37,211,102,.12); border-radius:50%;"></div>
-      <div style="display:flex; align-items:center; gap:10px; position:relative; z-index:2;">
-        <div style="width:42px; height:42px; background:#facc15; border-radius:12px; display:grid; place-items:center; font-size:20px; box-shadow:0 4px 12px rgba(0,0,0,.2);">🔧</div>
-        <div>
-          <div style="color:#38bdf8; font-weight:900; font-size:13px; letter-spacing:1.2px;">SERVICIO TÉCNICO</div>
-          <div style="color:white; font-weight:1000; font-size:26px; line-height:.9; letter-spacing:-.5px;">MobiCare</div>
-        </div>
-      </div>
-      <div style="margin-top:14px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12); border-radius:999px; display:inline-block; padding:6px 12px; color:#facc15; font-weight:800; font-size:11px; letter-spacing:.5px; position:relative; z-index:2;">
-        ¡TU CELU TIENE SOLUCIÓN!
-      </div>
-    </div>
-
-    <!-- Cuerpo -->
-    <div style="padding:18px 20px 20px; background:white;">
-      
-      <div style="display:flex; gap:12px; align-items:flex-start; margin-bottom:14px;">
-        <div style="flex-shrink:0; width:54px; height:54px; border-radius:14px; background:linear-gradient(135deg,#e0f2fe,#bae6fd); display:grid; place-items:center; font-size:26px;">📱</div>
-        <div>
-          <h3 style="margin:0; font-size:17px; font-weight:900; color:#0f172a; line-height:1.25;">¿Tu celu necesita una segunda oportunidad?</h3>
-          <p style="margin:6px 0 0; font-size:14px; color:#334155; line-height:1.45; font-weight:500;">
-            En MobiCare lo revisamos y te ayudamos a ponerlo a punto para que vuelvas a disfrutar tus mensajes, fotos y llamadas sin preocupaciones.
-          </p>
-        </div>
-      </div>
-
-      <div style="background:#f8fafc; border:1px dashed #cbd5e1; border-radius:12px; padding:10px 12px; font-size:13px; font-weight:700; color:#1e293b; display:flex; align-items:center; gap:8px;">
-        <span style="background:#0f172a; color:white; width:22px; height:22px; border-radius:50%; display:grid; place-items:center; font-size:12px;">✓</span>
-        Cuidamos ese compañero que te acompaña todos los días
-      </div>
-
-      <!-- Botón WhatsApp sin número visible - estilo 2026 -->
-      <a href="https://wa.me/5492235504431?text=Hola%20MobiCare!%20Vi%20tu%20aviso%20en%20Vidriera%20de%20Emprendedores%20y%20quiero%20consultar%20por%20reparacion%20de%20celular" target="_blank" style="margin-top:16px; display:flex; align-items:center; justify-content:center; gap:9px; background:linear-gradient(135deg,#25D366,#128C7E); color:white; text-decoration:none; font-weight:900; font-size:15px; padding:13px 18px; border-radius:999px; box-shadow:0 8px 20px rgba(37,211,102,.32);">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.82 9.82 0 0012.03 2C6.48 2 2 6.44 2 11.93c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.37a9.82 9.82 0 004.78 1.22h.01c5.54 0 10.03-4.44 10.03-9.93a9.75 9.75 0 00-3.02-7.98zM12.04 20.17h-.01a8.12 8.12 0 01-4.14-1.13l-.3-.18-3.12.82.83-3.02-.2-.31a8.18 8.18 0 01-1.26-4.42c0-4.54 3.73-8.23 8.32-8.23a8.27 8.27 0 015.87 2.41 8.14 8.14 0 012.43 5.78c0 4.54-3.73 8.28-8.32 8.28zm4.56-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.22-.74-.65-1.23-1.45-1.38-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05s.89 2.38 1.01 2.54c.12.17 1.75 2.66 4.23 3.73.59.25 1.05.4 1.41.51.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-        Consultar por WhatsApp
-      </a>
-
-      <div style="text-align:center; margin-top:10px; font-size:10px; font-weight:700; color:#94a3b8; letter-spacing:.3px;">ALFAR • SERVICIOS • RESPUESTA RÁPIDA</div>
-    </div>
-  </div>
-</div>
-<div id="sinResultados" class="card oculto" style="text-align:center;padding:22px">
-    <div style="font-size:28px">🔍</div>
-    <div style="font-weight:800;margin-top:6px">No encontré nada</div>
-    <button onclick="limpiarBusqueda()" style="margin-top:12px;background:#0f172a;color:white;border:none;padding:8px 16px;border-radius:999px;font-weight:800;font-size:12px;cursor:pointer">Limpiar</button>
-  </div>
-  
-<div id="aviso-albanil-emiliano" class="card-emp" data-barrio="faro" data-cat="servicios" data-solo="true" data-keywords="albañileria cimientos muros losa revoques techos ampliaciones reformas baños cocinas emiliano mar del plata 2235518166" style="display:block; max-width:480px; margin:14px auto;">
-<div style="width:100%; background:#1e293b; border:2px solid #f59e0b; border-radius:20px; padding:20px; font-family:system-ui,sans-serif; box-shadow:0 4px 12px rgba(0,0,0,0.15);">
-  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-    <div style="background:#f59e0b; color:#0f172a; font-size:10px; font-weight:900; padding:4px 10px; border-radius:999px;">DE CIMIENTO AL TECHO</div>
-    <div style="color:#fbbf24; font-size:11px; font-weight:800;">✓ TRABAJO GARANTIZADO</div>
-  </div>
-  <h2 style="font-size:22px; font-weight:900; color:white; line-height:1.1;">TRABAJOS DE <span style="color:#fbbf24;">ALBAÑILERÍA</span></h2>
-  <p style="font-size:13px; color:#e2e8f0; font-weight:600; margin-top:4px; font-style:italic;">Tu proyecto, en buenas manos - Calidad, Compromiso y Experiencia</p>
-  <div style="background:#0f172a; border-radius:12px; padding:12px; margin:14px 0; display:grid; grid-template-columns:1fr 1fr; gap:4px 12px;">
-    <div style="font-size:12px; color:#cbd5e1;">✓ Cimientos</div>
-    <div style="font-size:12px; color:#cbd5e1;">✓ Columnas y Vigas</div>
-    <div style="font-size:12px; color:#cbd5e1;">✓ Losa</div>
-    <div style="font-size:12px; color:#cbd5e1;">✓ Muros y tabiques</div>
-    <div style="font-size:12px; color:#cbd5e1;">✓ Revoques</div>
-    <div style="font-size:12px; color:#cbd5e1;">✓ Contrapisos</div>
-    <div style="font-size:12px; color:#cbd5e1;">✓ Pisos y revestimientos</div>
-    <div style="font-size:12px; color:#cbd5e1;">✓ Techos</div>
-    <div style="font-size:12px; color:#cbd5e1;">✓ Ampliaciones</div>
-    <div style="font-size:12px; color:#cbd5e1;">✓ Baños y cocinas</div>
-  </div>
-  <div style="display:flex; align-items:center; justify-content:space-between; background:#f59e0b; border-radius:12px; padding:10px 14px; margin-top:10px;">
-    <div>
-      <div style="font-size:10px; font-weight:800; color:#0f172a;">CONSULTÁ SIN COMPROMISO</div>
-      <div style="font-size:18px; font-weight:900; color:#0f172a;">223 551 81 66</div>
-      <div style="font-size:14px; font-weight:900; color:#0f172a;">Emiliano</div>
-    </div>
-    <a href="https://wa.me/5492235518166?text=Hola%20Emiliano,%20vi%20tu%20aviso%20de%20Alba%C3%B1ileria%20en%20Vidriera" target="_blank" style="display:flex; align-items:center; justify-content:center; gap:6px; background:#25D366; color:white; text-decoration:none; font-weight:900; font-size:14px; padding:12px 16px; border-radius:999px;">WhatsApp</a>
-  </div>
-  <div style="font-size:11px; font-weight:700; color:#94a3b8; text-align:center; margin-top:10px;">📍 MAR DEL PLATA - RESPONSABILIDAD Y PUNTUALIDAD</div>
-</div>
-</div>
-<!-- AVISO MEJORADO - DIEGORO Y SOFIMAR - PREMIUM SIN IMAGEN -->
-<div id="aviso-diegoro-sofimar" class="card-emp gratis" data-barrio="alfar" data-cat="entretenimiento" data-solo="true" data-keywords="diegoro sofimar cantantes show contrataciones cumpleaños reuniones melódico rock cumbias" style="display:block; max-width:480px; margin:14px auto; border-radius:28px; border:2px solid #0b132b; box-shadow:0 10px 28px rgba(0,0,0,.12); overflow:hidden; font-family:system-ui,sans-serif;">
-
-  <!-- HEADER LOGO PREMIUM -->
-  <div style="background:radial-gradient(120% 120% at 50% 0%, #1e293b 0%, #0b132b 75%); padding:20px 20px 16px; position:relative; overflow:hidden;">
-    <div style="position:absolute; inset:0; background:linear-gradient(90deg, transparent, rgba(56,189,248,.10), transparent);"></div>
-    <!-- Badge eslogan llamativo -->
-    <div style="position:absolute; top:10px; right:12px; z-index:2; background:linear-gradient(135deg,#ec4899,#d946ef); color:white; font-size:8.5px; font-weight:900; padding:6px 12px; border-radius:999px; letter-spacing:.8px; box-shadow:0 4px 12px rgba(236,72,153,.35);">LA MÚSICA NOS UNE ♡</div>
-    
-    <div style="display:flex; align-items:center; gap:14px; position:relative; z-index:1;">
-      <div style="width:48px; height:48px; background:linear-gradient(135deg,#fde68a,#d4af37); border-radius:14px; display:grid; place-items:center; font-size:22px; box-shadow:0 6px 16px rgba(212,175,55,.35);">🎙</div>
-      <div>
-        <div style="font-family:'Great Vibes','Brush Script MT',cursive; font-size:30px; line-height:.9; background:linear-gradient(180deg,#fde68a 0%, #f5d76e 40%, #d4af37 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; filter:drop-shadow(0 2px 8px rgba(245,215,110,.3));">DiegoRo y SofiMar</div>
-        <div style="color:#38bdf8; font-weight:900; font-size:10px; letter-spacing:2.5px; margin-top:4px; text-transform:uppercase;">CANTANTES • VARIOS ESTILOS</div>
-      </div>
-    </div>
-  </div>
-
-  <div style="padding:18px 18px 14px; background:#fdf2f8;">
-    <h3 style="margin:0; font-size:15px; font-weight:800; color:#0f172a; line-height:1.4; letter-spacing:-.2px; text-align:center;">Animamos eventos: Cumpleaños, Reuniones, etc.<br><span style="font-weight:600; color:#475569;">Sonido propio y buena onda garantizada.</span></h3>
-    
-    <!-- Estilos en grid - versión premium checks -->
-    <div style="margin-top:14px; display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-      <div style="display:flex; align-items:center; gap:8px; background:white; border:1px solid #fde68a; padding:10px 12px; border-radius:12px; font-size:12.5px; font-weight:800; color:#78350f;">
-        <span style="width:24px; height:24px; background:#0b132b; color:#facc15; border-radius:7px; display:grid; place-items:center; font-size:12px;">♪</span> Melódico
-      </div>
-      <div style="display:flex; align-items:center; gap:8px; background:white; border:1px solid #e2e8f0; padding:10px 12px; border-radius:12px; font-size:12.5px; font-weight:800; color:#334155;">
-        <span style="width:24px; height:24px; background:#0b132b; color:#38bdf8; border-radius:7px; display:grid; place-items:center; font-size:12px;">♫</span> Rock Nacional
-      </div>
-      <div style="display:flex; align-items:center; gap:8px; background:white; border:1px solid #fbcfe8; padding:10px 12px; border-radius:12px; font-size:12.5px; font-weight:800; color:#9d174d;">
-        <span style="width:24px; height:24px; background:#0b132b; color:#f472b6; border-radius:7px; display:grid; place-items:center; font-size:12px;">♡</span> Cumbias
-      </div>
-      <div style="display:flex; align-items:center; gap:8px; background:linear-gradient(180deg,#fffbeb,#fff); border:1.5px solid #facc15; padding:10px 12px; border-radius:12px; font-size:12.5px; font-weight:900; color:#92400e;">
-        <span style="width:24px; height:24px; background:#facc15; color:#000; border-radius:7px; display:grid; place-items:center; font-size:12px;">★</span> Y mucho más...
-      </div>
-    </div>
-
-    <div style="margin-top:18px; font-size:10px; font-weight:900; color:#94a3b8; letter-spacing:1.5px; text-transform:uppercase; text-align:center;">📢 CONTRATACIONES</div>
-    
-    <!-- BOTONES VERDES 2026 - SIN NUMERO VISIBLE -->
-    <div style="margin-top:10px; display:flex; flex-direction:column; gap:8px;">
-      <a href="https://wa.me/5492236936328?text=Hola%20DiegoRo!%20Te%20vi%20en%20InfoMDQ%20Hoy" target="_blank" style="display:flex; align-items:center; justify-content:center; gap:8px; background:linear-gradient(135deg,#25D366,#128C7E); color:white; padding:13px; border-radius:999px; text-decoration:none; font-weight:900; font-size:14px; box-shadow:0 6px 16px rgba(37,211,102,.32);">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.82 9.82 0 0012.03 2C6.48 2 2 6.44 2 11.93c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.37a9.82 9.82 0 004.78 1.22h.01c5.54 0 10.03-4.44 10.03-9.93a9.75 9.75 0 00-3.02-7.98zM12.04 20.17h-.01a8.12 8.12 0 01-4.14-1.13l-.3-.18-3.12.82.83-3.02-.2-.31a8.18 8.18 0 01-1.26-4.42c0-4.54 3.73-8.23 8.32-8.23a8.27 8.27 0 015.87 2.41 8.14 8.14 0 012.43 5.78c0 4.54-3.73 8.28-8.32 8.28zm4.56-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.22-.74-.65-1.23-1.45-1.38-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05s.89 2.38 1.01 2.54c.12.17 1.75 2.66 4.23 3.73.59.25 1.05.4 1.41.51.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-        WhatsApp DiegoRo
-      </a>
-      <a href="https://wa.me/5492235229927?text=Hola%20SofiMar!%20Te%20vi%20en%20InfoMDQ%20Hoy" target="_blank" style="display:flex; align-items:center; justify-content:center; gap:8px; background:linear-gradient(135deg,#25D366,#128C7E); color:white; padding:13px; border-radius:999px; text-decoration:none; font-weight:900; font-size:14px; box-shadow:0 6px 16px rgba(37,211,102,.32);">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.82 9.82 0 0012.03 2C6.48 2 2 6.44 2 11.93c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.37a9.82 9.82 0 004.78 1.22h.01c5.54 0 10.03-4.44 10.03-9.93a9.75 9.75 0 00-3.02-7.98zM12.04 20.17h-.01a8.12 8.12 0 01-4.14-1.13l-.3-.18-3.12.82.83-3.02-.2-.31a8.18 8.18 0 01-1.26-4.42c0-4.54 3.73-8.23 8.32-8.23a8.27 8.27 0 015.87 2.41 8.14 8.14 0 012.43 5.78c0 4.54-3.73 8.28-8.32 8.28zm4.56-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.22-.74-.65-1.23-1.45-1.38-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05s.89 2.38 1.01 2.54c.12.17 1.75 2.66 4.23 3.73.59.25 1.05.4 1.41.51.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-        WhatsApp SofiMar
-      </a>
-    </div>
-  </div>
-
-  <div style="background:#0b132b; color:#94a3b8; text-align:center; font-size:9px; font-weight:800; letter-spacing:1.5px; padding:9px;">MAR DEL PLATA • SONIDO PROPIO • BUENA ONDA</div>
-</div>
-<!-- PONTE BONITA - GRATUITO PREMIUM - LOGO COMERCIAL - 3 ITEMS -->
-<div class="card-emp gratis oculto" data-barrio="faro" data-cat="belleza" data-solo="true" data-keywords="ponte bonita trenzas boxeadoras africanas alisados nutricion madre mar del plata" style="display:block; max-width:480px; margin:14px auto; border-radius:28px; border:2px solid #0b132b; box-shadow:0 10px 28px rgba(0,0,0,.12); overflow:hidden; font-family:system-ui,sans-serif;">
-
-  <!-- HEADER LOGO PREMIUM COMERCIAL -->
-  <div style="background:radial-gradient(120% 120% at 50% 0%, #1e293b 0%, #0b132b 70%); padding:22px 20px 18px; text-align:center; position:relative; overflow:hidden;">
-    <div style="position:absolute; inset:0; background:linear-gradient(90deg, transparent, rgba(56,189,248,.12), transparent);"></div>
-    <div style="position:absolute; top:10px; left:18px; font-size:16px;">💖</div>
-    <div style="position:absolute; top:10px; right:18px; font-size:16px;">💖</div>
-    <!-- LOGO TIPO MARCA -->
-    <div style="position:relative; z-index:1;">
-      <div style="font-family:'Great Vibes', 'Brush Script MT', cursive; font-size:42px; line-height:.9; font-weight:400; background:linear-gradient(180deg,#fde68a 0%, #f5d76e 35%, #d4af37 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; filter:drop-shadow(0 2px 8px rgba(245,215,110,.35)); letter-spacing:.5px;">Ponte.Bonita</div>
-      <div style="margin-top:6px; display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12); padding:5px 12px; border-radius:999px;">
-        <span style="font-size:10px; font-weight:900; letter-spacing:2.5px; color:#38bdf8;">TRENZAS</span>
-        <span style="width:3px; height:3px; background:#38bdf8; border-radius:50%; display:inline-block;"></span>
-        <span style="font-size:10px; font-weight:900; letter-spacing:2.5px; color:#94a3b8;">ALISADOS</span>
-      </div>
-    </div>
-  </div>
-
-  <div style="padding:18px 18px 14px; background:white;">
-    <div style="display:flex; flex-direction:column; gap:10px;">
-      <!-- ITEM 1 -->
-      <div style="display:flex; align-items:center; gap:12px; background:linear-gradient(180deg,#fdf2f8,#fff); border:1px solid #fbcfe8; border-radius:14px; padding:12px 14px;">
-        <div style="width:36px; height:36px; background:#0b132b; border-radius:10px; display:grid; place-items:center; color:#38bdf8; font-weight:900; font-size:16px;">✦</div>
-        <div style="font-size:14px; font-weight:900; color:#0b132b; line-height:1.15;">Trenzas Boxeadoras<br><span style="font-weight:700; color:#64748b; font-size:12px;">Con diseño • Vinchas • Africanas</span></div>
-      </div>
-      <!-- ITEM 2 -->
-      <div style="display:flex; align-items:center; gap:12px; background:linear-gradient(180deg,#f0f9ff,#fff); border:1px solid #bae6fd; border-radius:14px; padding:12px 14px;">
-        <div style="width:36px; height:36px; background:#0b132b; border-radius:10px; display:grid; place-items:center; color:#38bdf8; font-weight:900; font-size:16px;">✦</div>
-        <div style="font-size:14px; font-weight:900; color:#0b132b; line-height:1.15;">Alisados y Nutrición<br><span style="font-weight:700; color:#64748b; font-size:12px;">Ver promos</span></div>
-      </div>
-      <!-- ITEM 3 - NUEVO -->
-      <div style="display:flex; align-items:center; gap:12px; background:linear-gradient(180deg,#fffbeb,#fff); border:1.5px solid #facc15; border-radius:14px; padding:12px 14px; box-shadow:0 4px 12px rgba(250,204,21,.18);">
-        <div style="width:36px; height:36px; background:linear-gradient(135deg,#facc15,#eab308); border-radius:10px; display:grid; place-items:center; color:#000; font-weight:1000; font-size:14px;">♡</div>
-        <div style="font-size:14px; font-weight:900; color:#713f12; line-height:1.15;">Promociones Día de la Madre<br><span style="font-weight:800; color:#a16207; font-size:12px;">¡Consultá combos disponibles!</span></div>
-      </div>
-    </div>
-
-    <!-- 3 BOTONES VERDES WHATSAPP 2026 -->
-    <div style="margin-top:18px; display:flex; flex-direction:column; gap:8px;">
-      <a href="https://wa.me/5492235367336?text=Hola%20Dalma!%20Vi%20tu%20aviso%20de%20Ponte.Bonita%20en%20Vidriera" target="_blank" style="display:flex; align-items:center; justify-content:center; gap:8px; background:linear-gradient(135deg,#25D366,#128C7E); color:white; text-decoration:none; font-weight:900; font-size:14px; padding:13px; border-radius:999px; box-shadow:0 6px 16px rgba(37,211,102,.32);">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.82 9.82 0 0012.03 2C6.48 2 2 6.44 2 11.93c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.37a9.82 9.82 0 004.78 1.22h.01c5.54 0 10.03-4.44 10.03-9.93a9.75 9.75 0 00-3.02-7.98zM12.04 20.17h-.01a8.12 8.12 0 01-4.14-1.13l-.3-.18-3.12.82.83-3.02-.2-.31a8.18 8.18 0 01-1.26-4.42c0-4.54 3.73-8.23 8.32-8.23a8.27 8.27 0 015.87 2.41 8.14 8.14 0 012.43 5.78c0 4.54-3.73 8.28-8.32 8.28zm4.56-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.22-.74-.65-1.23-1.45-1.38-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05s.89 2.38 1.01 2.54c.12.17 1.75 2.66 4.23 3.73.59.25 1.05.4 1.41.51.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-        WhatsApp Dalma
-      </a>
-      <a href="https://wa.me/5492236182154?text=Hola%20Evelyn!%20Vi%20tu%20aviso%20de%20Ponte.Bonita" target="_blank" style="display:flex; align-items:center; justify-content:center; gap:8px; background:linear-gradient(135deg,#25D366,#128C7E); color:white; text-decoration:none; font-weight:900; font-size:14px; padding:13px; border-radius:999px; box-shadow:0 6px 16px rgba(37,211,102,.32);">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.82 9.82 0 0012.03 2C6.48 2 2 6.44 2 11.93c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.37a9.82 9.82 0 004.78 1.22h.01c5.54 0 10.03-4.44 10.03-9.93a9.75 9.75 0 00-3.02-7.98zM12.04 20.17h-.01a8.12 8.12 0 01-4.14-1.13l-.3-.18-3.12.82.83-3.02-.2-.31a8.18 8.18 0 01-1.26-4.42c0-4.54 3.73-8.23 8.32-8.23a8.27 8.27 0 015.87 2.41 8.14 8.14 0 012.43 5.78c0 4.54-3.73 8.28-8.32 8.28zm4.56-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.22-.74-.65-1.23-1.45-1.38-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05s.89 2.38 1.01 2.54c.12.17 1.75 2.66 4.23 3.73.59.25 1.05.4 1.41.51.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-        WhatsApp Evelyn
-      </a>
-      <a href="https://wa.me/5492235724429?text=Hola%20Araceli!%20Vi%20tu%20aviso%20de%20Ponte.Bonita" target="_blank" style="display:flex; align-items:center; justify-content:center; gap:8px; background:linear-gradient(135deg,#25D366,#128C7E); color:white; text-decoration:none; font-weight:900; font-size:14px; padding:13px; border-radius:999px; box-shadow:0 6px 16px rgba(37,211,102,.32);">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.82 9.82 0 0012.03 2C6.48 2 2 6.44 2 11.93c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.37a9.82 9.82 0 004.78 1.22h.01c5.54 0 10.03-4.44 10.03-9.93a9.75 9.75 0 00-3.02-7.98zM12.04 20.17h-.01a8.12 8.12 0 01-4.14-1.13l-.3-.18-3.12.82.83-3.02-.2-.31a8.18 8.18 0 01-1.26-4.42c0-4.54 3.73-8.23 8.32-8.23a8.27 8.27 0 015.87 2.41 8.14 8.14 0 012.43 5.78c0 4.54-3.73 8.28-8.32 8.28zm4.56-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.22-.74-.65-1.23-1.45-1.38-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05s.89 2.38 1.01 2.54c.12.17 1.75 2.66 4.23 3.73.59.25 1.05.4 1.41.51.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-        WhatsApp Araceli
-      </a>
-    </div>
-
-    <div style="text-align:center; margin-top:12px; font-size:12px; font-weight:800; color:#0b132b;">📍 Mar del Plata</div>
-  </div>
-
-  <div style="background:#0b132b; color:#94a3b8; text-align:center; font-size:9px; font-weight:800; letter-spacing:1.5px; padding:9px;">SERVICIO CONFIABLE • RESPUESTA RÁPIDA</div>
-</div>
-<div class="card-emp" data-barrio="" data-cat="sabores" data-solo="true" data-keywords="archys perniles picadas lunch box desayuno navideño" style="background:transparent !important;border:none !important;box-shadow:none !important;padding:0 !important;display:block;">
-<article style="max-width:390px;margin:0 auto;background:#FFFFFF;border:2px solid #e7b08a;border-radius:18px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.15);font-family:Poppins,Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;">
-  <div style="background:#b5451b;padding:18px 16px;text-align:center;">
-    <div style="color:#FFFFFF;font-weight:900;letter-spacing:0.06em;font-size:15px;line-height:1;">🔥 ARCHY'S PERNILES 🔥</div>
-    <div style="color:#fde8d0;font-size:10px;letter-spacing:0.22em;font-weight:700;margin-top:8px;line-height:1.3;">EN PERNILES Y PICADAS DE PRIMERA CALIDAD</div>
-  </div>
-  <div style="background:#FFF2B2;padding:24px 20px 18px;text-align:center;">
-    <div style="font-size:30px;font-weight:900;line-height:0.9;color:#7c2d12;letter-spacing:-0.02em;text-transform:uppercase;">Perniles<br>y Picadas</div>
-    <div style="margin-top:12px;display:inline-flex;align-items:center;gap:7px;background:#FFFFFF;border:2px solid #7c2d12;border-radius:999px;padding:6px 16px;transform:rotate(-1.5deg);">
-      <span style="font-size:14px;line-height:1;">⭐</span>
-      <span style="font-size:12px;font-weight:900;color:#7c2d12;letter-spacing:0.12em;">A TU MEDIDA</span>
-    </div>
-  </div>
-  <div style="height:0;border-top:3px dotted #e7b08a;margin:0 18px;"></div>
-  <div style="padding:18px 20px 10px;background:#FFFFFF;">
-    <div style="color:#b45309;font-weight:800;font-size:11px;letter-spacing:0.1em;margin-bottom:12px;">NUESTRAS ESPECIALIDADES:</div>
-    <div style="display:flex;flex-direction:column;gap:9px;">
-      <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:6px;height:6px;border-radius:999px;background:#a16207;margin-top:7px;flex-shrink:0;"></span><span style="color:#44403c;font-size:14px;line-height:1.4;font-weight:500;">Perniles vacunos y de cerdo</span></div>
-      <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:6px;height:6px;border-radius:999px;background:#a16207;margin-top:7px;flex-shrink:0;"></span><span style="color:#44403c;font-size:14px;line-height:1.4;font-weight:500;">Picadas completas</span></div>
-      <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:6px;height:6px;border-radius:999px;background:#a16207;margin-top:7px;flex-shrink:0;"></span><span style="color:#44403c;font-size:14px;line-height:1.4;font-weight:500;">Lunch gourmet</span></div>
-      <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:6px;height:6px;border-radius:999px;background:#a16207;margin-top:7px;flex-shrink:0;"></span><span style="color:#44403c;font-size:14px;line-height:1.4;font-weight:500;">Box desayuno</span></div>
-      <div style="display:flex;gap:10px;align-items:flex-start;"><span style="width:6px;height:6px;border-radius:999px;background:#a16207;margin-top:7px;flex-shrink:0;"></span><span style="color:#44403c;font-size:14px;line-height:1.4;font-weight:500;">Productos navideños</span></div>
-    </div>
-  </div>
-  <div style="padding:0 16px 16px;background:#FFFFFF;">
-    <div style="background:#FFF8E1;border:1px solid #fde68a;border-radius:12px;padding:13px 14px;text-align:center;">
-      <div style="color:#78350f;font-weight:700;font-size:13px;line-height:1.35;">Resolvé tus eventos y reuniones en minutos.<br>Casero, abundante y de primera calidad.</div>
-    </div>
-  </div>
-  <div style="background:#e85d26;padding:14px 16px 16px;text-align:center;">
-    <div style="color:#FFFFFF;font-size:11px;font-weight:700;letter-spacing:0.08em;margin-bottom:12px;">📍 ENTREGA / RETIRO - MAR DEL PLATA</div>
-    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
-    <div onclick="event.stopPropagation(); event.stopImmediatePropagation(); window.open('https://wa.me/542234979316','_blank');" style="position:relative; z-index:99999; display:inline-flex; align-items:center; justify-content:center; gap:8px; background:#22c55e; color:#FFFFFF; font-weight:800; font-size:13px; padding:10px 18px; border-radius:999px; box-shadow:0 4px 10px rgba(34,197,94,0.3); cursor:pointer;">WhatsApp: 2234979316</div>
-    <div onclick="event.stopPropagation(); event.stopImmediatePropagation(); window.open('https://www.instagram.com/archysperniles','_blank');" style="position:relative; z-index:99999; display:inline-flex; align-items:center; justify-content:center; background:#FFFFFF; color:#b5451b; font-weight:800; font-size:12px; padding:10px 16px; border-radius:999px; cursor:pointer;">@archysperniles</div>
-    </div>
-  </div>
-  </div>
-</article>
-<!-- Aviso Nora Pedicura - InfoMDQHoy - Formato Gratis - SIN NUMEROS -->
-<div class="card-emp gratis oculto" data-cat="belleza" data-solo="true" data-keywords="nora pedicura domicilio jubilados roldan mar del plata" style="background:transparent !important;border:none !important;box-shadow:none !important;padding:0 !important;display:block;">
-<div style="max-width:360px;margin:0 auto;font-family:system-ui,-apple-system,Segoe UI,sans-serif;">
-  <div style="background:white;border:2px solid #4A2C32;border-radius:20px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.08);">
-    <!-- Header -->
-    <div style="background:#4A2C32;padding:18px 16px;text-align:center;">
-      <div style="color:white;font-weight:900;font-size:22px;line-height:1.1;letter-spacing:0.5px;">NORA PEDICURA</div>
-      <div style="color:#F9C5D0;font-size:11px;font-weight:600;letter-spacing:2px;margin-top:4px;">PEDICURA PROFESIONAL</div>
-    </div>
-    <!-- Body -->
-    <div style="padding:16px;background:white;">
-      <!-- Items -->
-      <div style="display:flex;align-items:center;gap:10px;background:#FFF0F3;border-radius:12px;padding:12px 14px;margin-bottom:10px;">
-        <div style="width:28px;height:28px;background:#4A2C32;border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-size:14px;flex-shrink:0;">✓</div>
-        <div style="font-size:14px;font-weight:600;color:#4A2C32;">Servicios a domicilio</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;background:#FFF0F3;border-radius:12px;padding:12px 14px;margin-bottom:10px;">
-        <div style="width:28px;height:28px;background:#4A2C32;border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-size:14px;flex-shrink:0;">✓</div>
-        <div style="font-size:14px;font-weight:600;color:#4A2C32;">Turnos programados</div>
-      </div>
-      <div style="display:flex;align-items:center;gap:10px;background:#FFF0F3;border-radius:12px;padding:12px 14px;margin-bottom:14px;">
-        <div style="width:28px;height:28px;background:#4A2C32;border-radius:8px;display:flex;align-items:center;justify-content:center;color:white;font-size:14px;flex-shrink:0;">✓</div>
-        <div style="font-size:14px;font-weight:600;color:#4A2C32;">Descuentos especiales a jubilados</div>
-      </div>
-
-      <!-- Info pill -->
-      <div style="border:2px solid #4A2C32;border-radius:12px;padding:10px;text-align:center;margin-bottom:14px;">
-        <div style="font-size:13px;font-weight:700;color:#4A2C32;">📍 Roldán · Mar del Plata</div>
-      </div>
-
-      <!-- WhatsApp directo - SIN NUMERO -->
-      <div style="background:#2E3B32;border-radius:14px;padding:14px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
-        <div style="color:white;">
-          <div style="font-size:10px;letter-spacing:1.2px;opacity:0.8;font-weight:700;">WHATSAPP DIRECTO</div>
-          <div style="font-size:13px;font-weight:600;margin-top:2px;">Atención personalizada</div>
-        </div>
-        <a href="https://wa.me/5492235283342" target="_blank" style="background:#25D366;color:white;text-decoration:none;font-weight:800;font-size:14px;padding:10px 18px;border-radius:999px;display:flex;align-items:center;gap:6px;flex-shrink:0;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.87 9.87 0 0 0 12.04 2C6.51 2 2.02 6.49 2.02 12.02c0 1.76.46 3.48 1.33 5L2 22l5.13-1.34a9.9 9.9 0 0 0 4.91 1.32h.01c5.53 0 10.02-4.49 10.02-10.02a9.84 9.84 0 0 0-2.9-7.02l-.14-.14ZM12.05 20.9h-.01a8.2 8.2 0 0 1-4.18-1.14l-.3-.18-3.04.8.81-2.97-.19-.31a8.24 8.24 0 0 1-1.27-4.38c0-4.54 3.69-8.23 8.23-8.23a8.18 8.18 0 0 1 5.82 2.41 8.18 8.18 0 0 1 2.41 5.82c0 4.53-3.69 8.18-8.28 8.18Zm4.52-6.17c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.04-.38-1.99-1.22-.73-.65-1.22-1.45-1.37-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.08s.89 2.41 1.01 2.58c.12.17 1.75 2.67 4.24 3.75.59.25 1.05.4 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29Z"/></svg>
-          WhatsApp
-        </a>
-      </div>
-    </div>
-    <!-- Footer -->
-    <div style="background:#4A2C32;padding:8px;text-align:center;">
-      <div style="color:white;font-size:9px;letter-spacing:1px;opacity:0.9;">SERVICIO CONFIABLE · RESPUESTA RÁPIDA</div>
-    </div>
-  </div>
-  <div style="text-align:center;margin-top:8px;font-size:10px;color:#999;letter-spacing:1px;">INFOMDQHOY | AVISOS MDP</div>
-</div>
-</div>
-
-<!-- ESTILOS EXCLUSIVOS AISLADOS PARA LA BARRA INFERIOR DE EMPRENDEDORES -->
-<style>
+@media (max-width: 768px) {
   .bottom-nav {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     height: 62px;
-    background: #0b132b; /* Azul oscuro Premium */
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: #0f172a;
+    border-top: 1px solid #1e293b;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    z-index: 99999;
+    z-index: 9999;
     padding-bottom: env(safe-area-inset-bottom);
-    font-family: system-ui, -apple-system, sans-serif;
   }
   .nav-item {
     display: flex;
@@ -842,641 +100,87 @@ body{background:#f0f4f8;color:#1a202c;padding-bottom:90px}
     transition: transform 0.2s ease, opacity 0.2s ease;
   }
   .nav-item:hover, .nav-item.active {
-    color: #38bdf8; /* Azul brillante cuando está seleccionado */
+    color: #38bdf8;
   }
   .nav-item:hover svg, .nav-item.active svg {
     opacity: 1;
     transform: translateY(-1px);
   }
-  @media (min-width: 769px) {
-    .bottom-nav { display: none; }
-  }
-  body {
-    padding-bottom: 74px !important; /* Espacio para que no tape el footer */
-  }
+}
+
+@media (max-width: 900px) {
+  #footer { grid-template-columns: 1fr; }
+}
 </style>
+</head>
+<body>
 
-<!-- MODAL PARA AVISO DESTACADO - PRO -->
-<div id="modalAviso" class="modal-bg" onclick="if(event.target===this) cerrarModal()">
-  <div class="modal-card">
-    <img id="modalImg" src="" alt="">
-    <div style="padding:20px 20px 16px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-        <div id="modalBarrio" style="font-size:11px;font-weight:900;background:#0f172a;color:white;display:inline-block;padding:5px 12px;border-radius:999px;letter-spacing:.5px">ALFAR</div>
-        <div style="font-size:11px;font-weight:900;background:#facc15;color:#000;padding:5px 12px;border-radius:999px">⭐ DESTACADO</div>
-      </div>
-      <h3 id="modalTitulo" style="font-size:22px;font-weight:900;line-height:1.2;color:#0f172a">Ghanima MDQ - Velas Souvenirs</h3>
-      <p id="modalDesc" style="font-size:15px;color:#334155;margin:12px 0;line-height:1.5;font-weight:500">Souvenirs personalizados para todo tipo de evento con cera de soja aromática.</p>
-      <p id="modalPrecio" style="font-size:15px;font-weight:800;margin:10px 0;color:#0f172a"></p>
-      <a id="modalWsp" href="#" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:white;text-align:center;padding:14px 18px;border-radius:999px;font-weight:900;font-size:15px;text-decoration:none;margin-top:16px;box-shadow:0 6px 16px rgba(37,211,102,.3)">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.82 9.82 0 0012.03 2C6.48 2 2 6.44 2 11.93c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.37a9.82 9.82 0 004.78 1.22h.01c5.54 0 10.03-4.44 10.03-9.93a9.75 9.75 0 00-3.02-7.98zM12.04 20.17h-.01a8.12 8.12 0 01-4.14-1.13l-.3-.18-3.12.82.83-3.02-.2-.31a8.18 8.18 0 01-1.26-4.42c0-4.54 3.73-8.23 8.32-8.23a8.27 8.27 0 015.87 2.41 8.14 8.14 0 012.43 5.78c0 4.54-3.73 8.28-8.32 8.28zm4.56-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.22-.74-.65-1.23-1.45-1.38-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05s.89 2.38 1.01 2.54c.12.17 1.75 2.66 4.23 3.73.59.25 1.05.4 1.41.51.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-        Consultar por WhatsApp
-      </a>
-      <div style="display:flex;gap:10px;margin-top:12px">
-        <a id="modalIG" href="#" target="_blank" style="flex:1;display:none;align-items:center;justify-content:center;gap:6px;background:linear-gradient(135deg,#f857a6 0%,#d62976 55%,#962fbf 85%);color:white;padding:11px;border-radius:999px;font-weight:900;font-size:13px;text-decoration:none;box-shadow:0 4px 14px rgba(214,41,118,.28);border:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="white" stroke-width="1.7"/><circle cx="12" cy="12" r="4.2" stroke="white" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1" fill="white"/></svg> Instagram</a>
-        <a id="modalMap" href="#" target="_blank" style="flex:1;display:none;align-items:center;justify-content:center;gap:6px;background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:white;padding:11px;border-radius:999px;font-weight:900;font-size:13px;text-decoration:none;box-shadow:0 4px 14px rgba(29,78,216,.28);border:none"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2a7 7 0 00-7 7c0 5 7 11 7 11s7-6 7-11a7 7 0 00-7-7z" fill="white"/><circle cx="12" cy="9" r="2" fill="#1d4ed8"/></svg> Mapa</a>
-      </div>
-      <button onclick="cerrarModal()" style="width:100%;margin-top:14px;background:#f1f5f9;border:none;padding:12px;border-radius:999px;font-weight:800;cursor:pointer;font-size:13px">Cerrar</button>
+<div id="header-wrapper">
+  <header id="header">
+    <div id="logo">
+      <h1><a href="index.html">INFO MDQ SUR HOY</a></h1>
+      <span>Alfar • Faro • Serena • Acantilados • Chapadmalal</span>
     </div>
-  </div>
+  </header>
 </div>
-<script>
-const EMPRENDEDORES = [
-  {
-    barrio:'alfar',
-    cat:'artesanias',
-    sub:'velas y souvenirs',
-    nombre:'🕯️ Ghanima MDQ - Velas Souvenirs',
-    desc:'Souvenirs personalizados para todo tipo de evento con cera de soja aromática. Promo a partir de 20 unidades. Aromáticas y personalizadas.',
-    precio:'Promo x 20 unidades - Consultar',
-    foto:'ghanimamdq.webp',
-    foto_web:'ghanimamdq.webp',
-    destacado:true,
-    wsp:'5492235863277',
-    instagram:'https://www.instagram.com/ghanimamdq',
-    facebook:'',
-       ubicacion:'Astor Piazzolla 899, Barrio Alfar - Mar del Plata',
-    maps:'https://www.google.com/maps/place/Astor+piazzola+899,+B7600+Mar+del+Plata,+Provincia+de+Buenos+Aires/@-38.0966142,-57.5680966,17z',
-    keywords:'ghanima velas souvenirs aromáticas personalizadas cera soja alfar astor piazzolla baby shower xv bautismo'
-  }  ,
 
-];
+<div class="seccion-banner">
+  <h2>🛍️ Vidriera de Emprendedores</h2>
+  <p>Apoyá a los creadores  locales de la zona sur.</p>
+</div>
 
-function crearCard(e){
-  if(e.plantilla==='julia'){
-    return crearCardJulia(e);
-  }
-  if(e.plantilla==='arcoiris'){
-    return crearCardArcoiris(e);
-  }
+<!-- AQUÍ SE CARGARÁN DINÁMICAMENTE LOS EMPRENDEDORES -->
+<div id="contenedor-emprendedores">
+  <div style="text-align:center; padding:40px; color:#64748b; font-weight:700;">Cargando emprendedores...</div>
+</div>
 
-  const badge = {faro:'badge-faro', alfar:'badge-alfar', serena:'badge-serena', acantilados:'badge-acantilados'}[e.barrio];
-  const esGratis = !e.foto;
-  const clase = esGratis ? 'gratis' : 'destacado';
-  const fotoSrc = e.foto_web || e.foto || '';
-  // si es la de ghanima y no tiene foto_web valida, usar base64
-  const fotoFinal = (e.nombre && e.nombre.includes('Ghanima') && !e.foto_web.startsWith('http')) ? `ghanimamdq.webp` : fotoSrc;
-  const imgBox = esGratis ? '' : `<div class="img-box"><img src="${fotoFinal}" alt="${e.nombre}" loading="lazy" onerror="this.src='ghanimamdq.webp'"></div>`;
-  const precioHtml = e.precio ? `<div style="font-size:14px;font-weight:900;margin:8px 0 2px">${e.precio}</div>` : '';
-  const ubiHtml = e.ubicacion ? `<div style="font-size:11px;color:#64748b;margin:4px 0;display:flex;align-items:center;gap:4px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M12 2a7 7 0 00-7 7c0 5 7 11 7 11s7-6 7-11a7 7 0 00-7-7z" fill="#64748b"/><circle cx="12" cy="9" r="2" fill="white"/></svg> ${e.ubicacion}</div>` : '';
-  const redes = !esGratis ? `<div class="redes-row">
-      ${e.instagram ? `<a class="btn-red btn-ig" href="${e.instagram}" target="_blank" onclick="event.stopPropagation()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg> Instagram</a>` : ''}
-      ${e.maps ? `<a class="btn-red btn-map" href="${e.maps}" target="_blank" onclick="event.stopPropagation()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2a7 7 0 00-7 7c0 5 7 11 7 11s7-6 7-11a7 7 0 00-7-7z" fill="currentColor"/><circle cx="12" cy="9" r="2" fill="white"/></svg> Mapa</a>` : ''}
-    </div>` : '';
-  return `<div class="card-emp ${clase}" data-barrio="${e.barrio}" data-cat="${e.cat}" data-keywords="${e.keywords}" data-precio="${e.precio || ""}" ${!esGratis ? 'onclick="abrirModalDirecto(this)"' : ''} style="${!esGratis ? 'cursor:pointer' : ''}">
-    ${imgBox}
-    <div class="info">
-      <div class="top-row">
-        <span class="${esGratis ? 'badge-gratis' : 'badge-dest'}">${esGratis ? 'GRATIS • SOLO TEXTO' : '⭐ DESTACADO'}</span>
-        <span class="badge-barrio ${badge}">${e.barrio.toUpperCase()}</span>
-      </div>
-      <h3>${e.nombre}</h3>
-      <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase">${e.cat} • ${e.sub}</div>
-      <div class="desc">${e.desc}</div>
-      ${ubiHtml}
-      ${precioHtml}
-      <a href="https://wa.me/${e.wsp}" class="btn-wsp" onclick="event.stopPropagation()" target="_blank">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.82 9.82 0 0012.03 2C6.48 2 2 6.44 2 11.93c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.37a9.82 9.82 0 004.78 1.22h.01c5.54 0 10.03-4.44 10.03-9.93a9.75 9.75 0 00-3.02-7.98zM12.04 20.17h-.01a8.12 8.12 0 01-4.14-1.13l-.3-.18-3.12.82.83-3.02-.2-.31a8.18 8.18 0 01-1.26-4.42c0-4.54 3.73-8.23 8.32-8.23a8.27 8.27 0 015.87 2.41 8.14 8.14 0 012.43 5.78c0 4.54-3.73 8.28-8.32 8.28zm4.56-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.22-.74-.65-1.23-1.45-1.38-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05s.89 2.38 1.01 2.54c.12.17 1.75 2.66 4.23 3.73.59.25 1.05.4 1.41.51.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-        WhatsApp
-      </a>
-      ${redes}
+<!-- FOOTER -->
+<div id="footer-wrapper">
+  <footer id="footer">
+    <div>
+      <h3>INFO MDQ SUR HOY</h3>
+      <ul>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="terminos.html">Términos y Condiciones</a></li>
+        <li><a href="privacidad.html">Política de Privacidad</a></li>
+      </ul>
     </div>
-  </div>`;
-}
-
-
-
-
-
-function crearCardJulia(e){
-  const fotoFinal = e.foto_web || e.foto || 'julia-moscoloni.webp';
-  // Tarjeta premium llamativa con fondo color - V2 mejorada
-  return `
-  <div class="card-emp destacado" data-barrio="${e.barrio}" data-cat="${e.cat}" data-keywords="${e.keywords}" onclick="abrirModalJulia(this)" style="cursor:pointer;display:block;padding:0;overflow:hidden;border:2px solid #fde68a;background:linear-gradient(180deg,#fffbeb 0%,#fef3c7 100%);border-radius:24px;position:relative;box-shadow:0 12px 32px rgba(15,23,42,0.12);">
-    <!-- Header oscuro con alto contraste -->
-    <div style="background:linear-gradient(135deg,#0f766e 0%,#115e59 100%);padding:16px 16px 14px;position:relative;overflow:hidden;">
-      <!-- fondo decorativo sutil -->
-      <div style="position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:rgba(255,255,255,0.08);border-radius:50%;"></div>
-      <div style="position:absolute;bottom:-20px;left:40%;width:80px;height:80px;background:rgba(253,230,138,0.12);border-radius:50%;"></div>
-      <div style="display:flex;align-items:center;gap:12px;position:relative;z-index:1;">
-        <div style="width:76px;height:76px;min-width:76px;border-radius:50%;overflow:hidden;border:3px solid white;box-shadow:0 4px 16px rgba(0,0,0,0.2);background:white;position:relative;">
-          <img src="${fotoFinal}" alt="${e.nombre}" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" onerror="this.style.display='none'">
-          <div style="position:absolute;bottom:-2px;right:-2px;width:20px;height:20px;background:#22c55e;border:2px solid white;border-radius:50%;display:flex;align-items:center;justify-content:center;">
-            <div style="width:6px;height:6px;background:white;border-radius:50%;"></div>
-          </div>
-        </div>
-        <div style="flex:1;min-width:0;">
-          <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
-            <span style="background:rgba(253,230,138,0.95);color:#78350f;padding:3px 8px;border-radius:999px;font-size:9px;font-weight:900;letter-spacing:0.5px;display:inline-flex;align-items:center;gap:4px;">
-              <span style="width:5px;height:5px;background:#d97706;border-radius:50%;display:inline-block;animation:pulse 2s infinite;"></span> DESTACADO • SALUD
-            </span>
-            <span style="background:rgba(255,255,255,0.15);color:#fef3c7;padding:3px 7px;border-radius:999px;font-size:8px;font-weight:800;">M.P. 5304</span>
-          </div>
-          <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:#fde68a;text-transform:uppercase;margin-bottom:2px;">FONOAUDIOLOGÍA</div>
-          <h3 style="margin:0;font-size:17px;font-weight:900;color:white;line-height:1.15;letter-spacing:-0.2px;">Julia Elena<br>Moscoloni</h3>
-          <div style="font-size:10.5px;font-weight:700;color:#ccfbf1;margin-top:3px;letter-spacing:0.2px;">FONOAUDIÓLOGA • DOCENTE</div>
-        </div>
-      </div>
+    <div>
+      <h3>Barrios</h3>
+      <ul>
+        <li><a href="faro.html">Faro</a></li>
+        <li><a href="alfar.html">Alfar</a></li>
+        <li><a href="serena.html">Serena</a></li>
+        <li><a href="acantilados.html">Acantilados</a></li>
+      </ul>
     </div>
-    <!-- Body con fondo claro pero con color -->
-    <div style="padding:14px 16px 12px;background:linear-gradient(180deg,#fffbeb 0%,#ffffff 100%);">
-      <div style="font-size:12.5px;font-weight:600;color:#1e293b;line-height:1.45;margin-bottom:12px;">
-        Recibida en <b style="color:#0f172a;">Ciencias Médicas</b>. <b style="color:#0f172a;">Universidad Santo Tomás de Aquino</b> — Mar del Plata
-      </div>
-      <div style="height:1px;background:linear-gradient(90deg,transparent,#fde68a,transparent);margin:10px 0;"></div>
-      <div style="font-size:10px;font-weight:900;letter-spacing:1px;color:#92400e;text-transform:uppercase;margin-bottom:8px;">ESPECIALIDADES</div>
-      <div style="display:flex;flex-direction:column;gap:8px;">
-        <div style="display:flex;align-items:center;gap:10px;background:white;border:1.5px solid #fde68a;border-left:4px solid #0f766e;padding:9px 10px;border-radius:12px;box-shadow:0 2px 8px rgba(15,23,42,0.04);">
-          <div style="width:32px;height:32px;min-width:32px;background:#ccfbf1;border-radius:10px;display:flex;align-items:center;justify-content:center;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0f766e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h6"/><path d="M12 9v6"/><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 7a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" opacity="0.3"/></svg>
-          </div>
-          <div style="flex:1;">
-            <div style="font-size:13px;font-weight:800;color:#0f172a;line-height:1.1;">Intervención temprana</div>
-            <div style="font-size:11px;font-weight:500;color:#57534e;margin-top:1px;">Detección desde los primeros meses</div>
-          </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;background:white;border:1.5px solid #fde68a;border-left:4px solid #d97706;padding:9px 10px;border-radius:12px;box-shadow:0 2px 8px rgba(15,23,42,0.04);">
-          <div style="width:32px;height:32px;min-width:32px;background:#fef3c7;border-radius:10px;display:flex;align-items:center;justify-content:center;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#92400e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2.08C10.5 3.5 9.5 3 7.75 3A5.5 5.5 0 0 0 2.25 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-          </div>
-          <div style="flex:1;">
-            <div style="font-size:13px;font-weight:800;color:#0f172a;line-height:1.1;">Discapacidad infantil</div>
-            <div style="font-size:11px;font-weight:500;color:#57534e;margin-top:1px;">Abordaje integral y familiar</div>
-          </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;background:white;border:1.5px solid #fde68a;border-left:4px solid #be185d;padding:9px 10px;border-radius:12px;box-shadow:0 2px 8px rgba(15,23,42,0.04);">
-          <div style="width:32px;height:32px;min-width:32px;background:#fce7f3;border-radius:10px;display:flex;align-items:center;justify-content:center;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#be185d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 10a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/><path d="M12 2a10 10 0 0 0-10 10c0 5 4.5 10 10 10s10-5 10-10A10 10 0 0 0 12 2z" opacity="0.3"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg>
-          </div>
-          <div style="flex:1;">
-            <div style="font-size:13px;font-weight:800;color:#0f172a;line-height:1.1;">Niños y adolescentes</div>
-            <div style="font-size:11px;font-weight:500;color:#57534e;margin-top:1px;">Lenguaje, audición y aprendizaje</div>
-          </div>
-        </div>
-      </div>
-      <!-- LUGARES DE ATENCION - FIX CORRIMIENTO GRID -->
-      <div style="margin-top:14px;background:#f0fdf4;border:2.5px solid #0f766e;border-radius:16px;padding:12px;box-sizing:border-box;overflow:hidden;">
-        <div style="font-size:11px;font-weight:900;letter-spacing:1.2px;color:#0f766e;text-transform:uppercase;display:flex;align-items:center;gap:8px;">
-          <span style="background:#0f766e;color:white;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:11px;flex-shrink:0;">📍</span> LUGARES DE ATENCIÓN
-        </div>
-        <div style="margin-top:12px;display:flex;flex-direction:column;gap:10px;">
-          <a href="https://www.google.com/maps/search/?api=1&query=Jewett+4200+Alfar+Mar+del+Plata" target="_blank" onclick="event.stopPropagation()" style="display:grid;grid-template-columns:76px 1fr 66px;align-items:center;gap:8px;background:white;border:2px solid #0f766e;border-left:5px solid #0f766e;padding:8px 8px;border-radius:12px;text-decoration:none;box-sizing:border-box;width:100%;">
-            <span style="background:#0f766e;color:white;padding:5px 6px;border-radius:999px;font-size:9.5px;font-weight:900;text-align:center;white-space:nowrap;line-height:1.1;">ALFAR</span>
-            <span style="font-size:12.5px;font-weight:900;color:#0f172a;line-height:1.15;min-width:0;word-break:break-word;">Jewett 4200 - Barrio Alfar</span>
-            <span style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;background:#fefce8;border:1.5px solid #fde68a;padding:5px 2px;border-radius:9px;flex-shrink:0;">
-              <span style="width:12px;height:12px;background:#EA4335;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:grid;place-items:center;"><span style="width:5px;height:5px;background:white;border-radius:50%;transform:rotate(45deg);display:block;"></span></span>
-              <span style="font-size:8px;font-weight:800;color:#92400e;line-height:1;text-align:center;margin-top:2px;">Ver<br>en<br>Maps</span>
-            </span>
-          </a>
-          <a href="https://www.google.com/maps/search/?api=1&query=20+de+Septiembre+2368+Mar+del+Plata" target="_blank" onclick="event.stopPropagation()" style="display:grid;grid-template-columns:76px 1fr 66px;align-items:center;gap:8px;background:white;border:2px solid #0f766e;border-left:5px solid #0f766e;padding:8px 8px;border-radius:12px;text-decoration:none;box-sizing:border-box;width:100%;">
-            <span style="background:#0f766e;color:white;padding:5px 6px;border-radius:999px;font-size:9.5px;font-weight:900;text-align:center;white-space:nowrap;">CINA</span>
-            <span style="font-size:12.5px;font-weight:900;color:#0f172a;line-height:1.15;min-width:0;">20 de Septiembre 2368</span>
-            <span style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;background:#fefce8;border:1.5px solid #fde68a;padding:5px 2px;border-radius:9px;flex-shrink:0;">
-              <span style="width:12px;height:12px;background:#EA4335;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:grid;place-items:center;"><span style="width:5px;height:5px;background:white;border-radius:50%;transform:rotate(45deg);display:block;"></span></span>
-              <span style="font-size:8px;font-weight:800;color:#92400e;line-height:1;text-align:center;margin-top:2px;">Ver<br>en<br>Maps</span>
-            </span>
-          </a>
-          <a href="https://www.google.com/maps/search/?api=1&query=Arenales+2901+Mar+del+Plata" target="_blank" onclick="event.stopPropagation()" style="display:grid;grid-template-columns:76px 1fr 66px;align-items:center;gap:8px;background:white;border:2px solid #0f766e;border-left:5px solid #0f766e;padding:8px 8px;border-radius:12px;text-decoration:none;box-sizing:border-box;width:100%;">
-            <span style="background:#0f766e;color:white;padding:5px 4px;border-radius:999px;font-size:8.5px;font-weight:900;text-align:center;white-space:nowrap;">EQUILIBRAR</span>
-            <span style="font-size:12.5px;font-weight:900;color:#0f172a;line-height:1.15;min-width:0;">Arenales 2901</span>
-            <span style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;background:#fefce8;border:1.5px solid #fde68a;padding:5px 2px;border-radius:9px;flex-shrink:0;">
-              <span style="width:12px;height:12px;background:#EA4335;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:grid;place-items:center;"><span style="width:5px;height:5px;background:white;border-radius:50%;transform:rotate(45deg);display:block;"></span></span>
-              <span style="font-size:8px;font-weight:800;color:#92400e;line-height:1;text-align:center;margin-top:2px;">Ver<br>en<br>Maps</span>
-            </span>
-          </a>
-        </div>
-      </div>
-      <a href="https://wa.me/5492235753221?text=Hola%20Julia,%20vi%20tu%20aviso%20de%20Fonoaudiologia%20en%20Vidriera" class="btn-wsp" onclick="event.stopPropagation()" target="_blank" style="margin-top:14px;background:linear-gradient(135deg,#22c55e,#15803d);box-shadow:0 6px 20px rgba(34,197,94,0.35);">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.82 9.82 0 0012.03 2C6.48 2 2 6.44 2 11.93c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.37a9.82 9.82 0 004.78 1.22h.01c5.54 0 10.03-4.44 10.03-9.93a9.75 9.75 0 00-3.02-7.98zM12.04 20.17h-.01a8.12 8.12 0 01-4.14-1.13l-.3-.18-3.12.82.83-3.02-.2-.31a8.18 8.18 0 01-1.26-4.42c0-4.54 3.73-8.23 8.32-8.23a8.27 8.27 0 015.87 2.41 8.14 8.14 0 012.43 5.78c0 4.54-3.73 8.28-8.32 8.28zm4.56-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.79.97-.15.17-.29.19-.54.06-.25-.12-1.05-.38-2-1.22-.74-.65-1.23-1.45-1.38-1.7-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.47-.41-.41-.56-.42h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.05s.89 2.38 1.01 2.54c.12.17 1.75 2.66 4.23 3.73.59.25 1.05.4 1.41.51.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-        Consultar por WhatsApp
-      </a>
-      <div style="text-align:center;font-size:10px;font-weight:600;color:#78716c;margin-top:8px;letter-spacing:0.2px;">Respuesta rápida • Atención profesional y cercana</div>
+    <div>
+      <h3>Servicios</h3>
+      <ul>
+        <li><a href="index.html#dolar">Dólar</a></li>
+        <li><a href="index.html#quiniela">Quiniela</a></li>
+        <li><a href="index.html#clima">Clima</a></li>
+        <li><a href="clasificados.html">Clasificados</a></li>
+      </ul>
     </div>
-  </div>`;
-}
-
-function abrirModalJulia(el){
-  const e = EMPRENDEDORES.find(x=>x.foto && x.foto.includes('julia-moscoloni')) || EMPRENDEDORES[2];
-  const fotoFinal = e.foto_web || e.foto || 'julia-moscoloni.webp';
-  const modalImg = document.getElementById('modalImg');
-  // FOTO DISCRETA Y PEQUEÑA: ocultamos la imagen grande del modal y usamos avatar pequeño dentro del contenido
-  if(modalImg){
-    modalImg.style.display = 'none';
-  }
-  document.getElementById('modalBarrio').innerText = 'ALFAR • SALUD';
-  document.getElementById('modalTitulo').innerHTML = `
-    <div style="display:flex;align-items:center;gap:12px;text-align:left;">
-      <div style="width:56px;height:56px;min-width:56px;border-radius:50%;overflow:hidden;border:2.5px solid #0f766e;box-shadow:0 3px 12px rgba(0,0,0,0.15);background:white;">
-        <img src="${fotoFinal}" alt="Julia Moscoloni" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" onerror="this.style.display='none'">
-      </div>
-      <div>
-        <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:#0f766e;text-transform:uppercase;">FONOAUDIOLOGÍA</div>
-        <div style="font-size:18px;font-weight:900;color:#0f172a;line-height:1.15;">Julia Elena Moscoloni</div>
-        <div style="font-size:10.5px;font-weight:700;color:#57534e;margin-top:2px;">M.P. 5304 • DOCENTE</div>
-      </div>
+    <div>
+      <h3>Ubicación</h3>
+      <ul>
+        <li>Mar del Plata, BA</li>
+        <li>infomdqhoy.pages.dev</li>
+      </ul>
     </div>
-  `;
-  document.getElementById('modalDesc').innerHTML = `
-    <div style="text-align:left;">
-      <div style="background:linear-gradient(135deg,#fffbeb,#fef3c7);border:1.5px solid #fde68a;border-radius:14px;padding:12px 14px;margin-bottom:12px;">
-        <div style="font-size:11px;font-weight:900;letter-spacing:1px;color:#92400e;margin-bottom:6px;text-transform:uppercase;">Títulos</div>
-        <div style="font-size:13.5px;font-weight:600;color:#1e293b;line-height:1.45;">
-          Fonoaudióloga recibida en <b style="color:#0f172a;">Ciencias Médicas</b>, Universidad Santo Tomás de Aquino. Mar del Plata
-        </div>
-        <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;">
-          <span style="background:#0f766e;color:white;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:800;display:inline-flex;align-items:center;gap:4px;">M.P. 5304</span> 
-          <span style="background:#fef3c7;color:#92400e;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:800;display:inline-block;border:1px solid #fde68a;">DOCENTE</span>
-        </div>
-      </div>
-      <div style="font-size:10px;font-weight:900;letter-spacing:1px;color:#0f766e;margin:14px 0 8px;text-transform:uppercase;">Especialidades</div>
-      <div style="display:flex;flex-direction:column;gap:8px;">
-        <div style="display:flex;gap:10px;align-items:center;background:#f0fdfa;border:1.5px solid #ccfbf1;border-left:4px solid #0f766e;padding:10px 12px;border-radius:12px;">
-          <div style="width:36px;height:36px;min-width:36px;background:#ccfbf1;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0f766e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3"/><path d="M12 10v4"/><path d="M8 14c-1.5 1-2 2.5-2 4h12c0-1.5-.5-3-2-4"/><path d="M9 12h6"/></svg>
-          </div>
-          <div><b style="color:#0f172a;font-size:13px;">Intervención temprana</b><br><span style="font-size:11px;color:#57534e;font-weight:500;">Detección desde los primeros meses</span></div>
-        </div>
-        <div style="display:flex;gap:10px;align-items:center;background:#fffbeb;border:1.5px solid #fef3c7;border-left:4px solid #d97706;padding:10px 12px;border-radius:12px;">
-          <div style="width:36px;height:36px;min-width:36px;background:#fef3c7;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#92400e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2.08C10.5 3.5 9.5 3 7.75 3A5.5 5.5 0 0 0 2.25 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-          </div>
-          <div><b style="color:#0f172a;font-size:13px;">Discapacidad infantil</b><br><span style="font-size:11px;color:#57534e;font-weight:500;">Abordaje integral y familiar</span></div>
-        </div>
-        <div style="display:flex;gap:10px;align-items:center;background:#fdf2f8;border:1.5px solid #fce7f3;border-left:4px solid #be185d;padding:10px 12px;border-radius:12px;">
-          <div style="width:36px;height:36px;min-width:36px;background:#fce7f3;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#be185d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 10a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/><path d="M12 2a10 10 0 0 0-10 10c0 5 4.5 10 10 10s10-5 10-10A10 10 0 0 0 12 2z" opacity="0.3"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg>
-          </div>
-          <div><b style="color:#0f172a;font-size:13px;">Niños y adolescentes</b><br><span style="font-size:11px;color:#57534e;font-weight:500;">Lenguaje, audición y aprendizaje</span></div>
-        </div>
-      </div>
-      <!-- LUGARES MODAL - FIX GRID -->
-      <div style="margin-top:16px;background:#f0fdf4;border:2.5px solid #0f766e;border-radius:16px;padding:12px;box-sizing:border-box;overflow:hidden;">
-        <div style="font-size:11px;font-weight:900;letter-spacing:1px;color:#0f766e;text-transform:uppercase;display:flex;align-items:center;gap:6px;">📍 LUGARES DE ATENCIÓN</div>
-        <div style="margin-top:12px;display:flex;flex-direction:column;gap:10px;">
-          <a href="https://www.google.com/maps/search/?api=1&query=Jewett+4200+Alfar+Mar+del+Plata" target="_blank" onclick="event.stopPropagation()" style="display:grid;grid-template-columns:76px 1fr 66px;align-items:center;gap:8px;background:white;border:2px solid #0f766e;padding:8px 8px;border-radius:12px;text-decoration:none;width:100%;box-sizing:border-box;">
-            <span style="background:#0f766e;color:white;padding:4px 6px;border-radius:999px;font-size:9.5px;font-weight:900;text-align:center;">ALFAR</span>
-            <span style="font-size:12.5px;font-weight:800;color:#0f172a;min-width:0;word-break:break-word;">Jewett 4200 - Barrio Alfar</span>
-            <span style="display:flex;flex-direction:column;align-items:center;gap:1px;background:#fefce8;border:1.5px solid #fde68a;padding:5px 2px;border-radius:9px;flex-shrink:0;"><span style="width:12px;height:12px;background:#EA4335;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:grid;place-items:center;"><span style="width:5px;height:5px;background:white;border-radius:50%;transform:rotate(45deg);display:block;"></span></span><span style="font-size:8px;font-weight:800;color:#92400e;line-height:1;text-align:center;margin-top:2px;">Ver<br>en<br>Maps</span></span>
-          </a>
-          <a href="https://www.google.com/maps/search/?api=1&query=20+de+Septiembre+2368+Mar+del+Plata" target="_blank" onclick="event.stopPropagation()" style="display:grid;grid-template-columns:76px 1fr 66px;align-items:center;gap:8px;background:white;border:2px solid #0f766e;padding:8px 8px;border-radius:12px;text-decoration:none;width:100%;box-sizing:border-box;">
-            <span style="background:#0f766e;color:white;padding:4px 8px;border-radius:999px;font-size:10px;font-weight:900;text-align:center;">CINA</span>
-            <span style="font-size:12.5px;font-weight:800;color:#0f172a;min-width:0;">20 de Septiembre 2368</span>
-            <span style="display:flex;flex-direction:column;align-items:center;gap:1px;background:#fefce8;border:1.5px solid #fde68a;padding:5px 2px;border-radius:9px;flex-shrink:0;"><span style="width:12px;height:12px;background:#EA4335;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:grid;place-items:center;"><span style="width:5px;height:5px;background:white;border-radius:50%;transform:rotate(45deg);display:block;"></span></span><span style="font-size:8px;font-weight:800;color:#92400e;line-height:1;text-align:center;margin-top:2px;">Ver<br>en<br>Maps</span></span>
-          </a>
-          <a href="https://www.google.com/maps/search/?api=1&query=Arenales+2901+Mar+del+Plata" target="_blank" onclick="event.stopPropagation()" style="display:grid;grid-template-columns:76px 1fr 66px;align-items:center;gap:8px;background:white;border:2px solid #0f766e;padding:8px 8px;border-radius:12px;text-decoration:none;width:100%;box-sizing:border-box;">
-            <span style="background:#0f766e;color:white;padding:4px 6px;border-radius:999px;font-size:9px;font-weight:900;text-align:center;">EQUILIBRAR</span>
-            <span style="font-size:12.5px;font-weight:800;color:#0f172a;min-width:0;">Arenales 2901</span>
-            <span style="display:flex;flex-direction:column;align-items:center;gap:1px;background:#fefce8;border:1.5px solid #fde68a;padding:5px 2px;border-radius:9px;flex-shrink:0;"><span style="width:12px;height:12px;background:#EA4335;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:grid;place-items:center;"><span style="width:5px;height:5px;background:white;border-radius:50%;transform:rotate(45deg);display:block;"></span></span><span style="font-size:8px;font-weight:800;color:#92400e;line-height:1;text-align:center;margin-top:2px;">Ver<br>en<br>Maps</span></span>
-          </a>
-        </div>
-      </div>
-    </div>
-  `;
-  document.getElementById('modalPrecio').innerText = ''; document.getElementById('modalPrecio').style.display='none';
-  document.getElementById('modalWsp').href = 'https://wa.me/5492235753221?text=Hola%20Julia,%20vi%20tu%20aviso%20de%20Fonoaudiologia%20en%20Vidriera';
-  const ig = document.getElementById('modalIG');
-  const mp = document.getElementById('modalMap');
-  if(ig) ig.style.display='none';
-  if(mp) mp.style.display='none';
-  // Asegurar que cuando se cierre el modal, la imagen grande vuelva a mostrarse para otros avisos
-  const originalCerrar = window.cerrarModal;
-  document.getElementById('modalAviso').classList.add('activo');
-}
+  </footer>
+  <div id="copyright">© INFO MDQ HOY - Diseño base Verti por HTML5 UP, adaptado.</div>
+</div>
 
-function cerrarModalJuliaFix(){
-  const modalImg = document.getElementById('modalImg');
-  if(modalImg) modalImg.style.display = 'block';
-  document.getElementById('modalAviso').classList.remove('activo');
-}
-
-// Patch cerrarModal para restaurar imagen si es necesario
-(function(){
-  const oldCerrar = window.cerrarModal;
-  window.cerrarModal = function(){
-    const modalImg = document.getElementById('modalImg');
-    if(modalImg) modalImg.style.display = 'block';
-    if(oldCerrar) oldCerrar();
-    else document.getElementById('modalAviso').classList.remove('activo');
-  };
-})();
-
-
-
-function crearCardArcoiris(e){
-  const fotoFinal = e.foto_web || e.foto || 'https://infomdqhoy.pages.dev/banner1.webp';
-  const mapsLink = e.maps;
-  return `
-  <div class="card-emp destacado" data-barrio="${e.barrio}" data-cat="${e.cat}" data-keywords="${e.keywords}" onclick="abrirModalArcoiris(this)" style="cursor:pointer;display:block;padding:0;overflow:visible;border:2px solid #facc15;background:white;border-radius:22px;position:relative;">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600;700;800&family=Great+Vibes&display=swap" rel="stylesheet">
-    <div style="height:8px;background:linear-gradient(90deg,#FFB86A 0%,#FFD93D 20%,#6BCB77 40%,#4D96FF 65%,#C77DFF 85%,#FF6B9D 100%);border-radius:20px 20px 0 0;"></div>
-    <div style="position:absolute;top:18px;right:12px;background:linear-gradient(135deg,#facc15,#f59e0b);color:#000;padding:5px 10px;border-radius:999px;font-size:10px;font-weight:900;display:flex;align-items:center;gap:4px;box-shadow:0 4px 12px rgba(250,204,21,0.3);border:1px solid #fff;z-index:5;font-family:'Poppins',sans-serif;"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.2h7.6l-6.2 4.5 2.4 7.2L12 16.5l-6.2 4.4 2.4-7.2-6.2-4.5h7.6z"/></svg> DESTACADO</div>
-    <div style="display:flex;flex-wrap:wrap;position:relative;background:#fff;border-radius:0 0 20px 20px;overflow:hidden;">
-      <div style="flex:1 1 240px;min-width:220px;padding:12px;">
-        <div style="position:relative;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#fdf2f8,#f5f3ff);min-height:150px;">
-          <img src="${fotoFinal}" alt="${e.nombre}" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="this.style.display='none'">
-          <div style="position:absolute;top:8px;left:8px;background:rgba(255,255,255,0.95);padding:4px 9px;border-radius:999px;font-size:10px;font-weight:900;color:#4A1230;display:flex;align-items:center;gap:4px;box-shadow:0 2px 6px rgba(0,0,0,0.1);font-family:'Poppins',sans-serif;"><span style="width:5px;height:5px;background:#22c55e;border-radius:50%;display:inline-block;"></span> ALFAR</div>
-        </div>
-        <div style="margin-top:8px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 10px;display:flex;gap:6px;align-items:center;font-family:'Poppins',sans-serif;">
-          <span style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);width:22px;height:22px;border-radius:999px;display:grid;place-items:center;flex-shrink:0;"><svg width="11" height="11" viewBox="0 0 24 24" fill="white"><path d="M12 2a7 7 0 00-7 7c0 5 7 11 7 11s7-6 7-11a7 7 0 00-7-7z"/></svg></span>
-          <div><div style="font-weight:800;color:#1e293b;font-size:11px;">De la Maza & Diagonal Estados Unidos </div><div style="font-size:10px;color:#64748b;">Alfar • Mar del Plata</div></div>
-        </div>
-      </div>
-      <div style="flex:1 1 300px;min-width:250px;padding:14px 14px 12px;font-family:'Poppins',sans-serif;overflow:visible;">
-        <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;">
-          <div style="font-family:'Playfair Display',serif;font-size:24px;color:#4A1230;font-weight:700;line-height:1;">Orit Savelski</div>
-          <span style="font-size:10px;font-weight:800;color:#9ca3af;background:#f3f4f6;padding:2px 7px;border-radius:999px;">MAT. 2377</span>
-        </div>
-        <div style="overflow:visible;margin:2px 0 10px -8px;"><div style="font-family:'Great Vibes',cursive;font-size:28px;color:#B47B1A;line-height:1.4;padding:8px 12px 8px 10px;white-space:nowrap;">Luz del Arco Iris</div></div>
-        <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:8px;">
-          <div style="display:flex;align-items:center;gap:8px;padding:5px 8px;background:#fdf2f8;border-radius:9px;border:1px solid #fce7f3;"><span style="width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,#f9a8d4,#ec4899);display:grid;place-items:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></span><span style="font-size:11px;font-weight:600;color:#4A1230;">Terapeuta Floral</span></div>
-          <div style="display:flex;align-items:center;gap:8px;padding:5px 8px;background:#eff6ff;border-radius:9px;border:1px solid #dbeafe;"><span style="width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,#60a5fa,#3b82f6);display:grid;place-items:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg></span><span style="font-size:11px;font-weight:600;color:#1e3a5f;">Master Aqualead</span></div>
-          <div style="display:flex;align-items:center;gap:8px;padding:5px 8px;background:#f5f3ff;border-radius:9px;border:1px solid #ddd6fe;"><span style="width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,#a78bfa,#7c3aed);display:grid;place-items:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></span><span style="font-size:11px;font-weight:600;color:#4c1d95;">Instructora en Registros Akáshicos</span></div>
-          <div style="display:flex;align-items:center;gap:8px;padding:5px 8px;background:#fffbeb;border-radius:9px;border:1px solid #fde68a;"><span style="width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,#fbbf24,#f59e0b);display:grid;place-items:center;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></span><span style="font-size:11px;font-weight:600;color:#78350f;">Operadora de máquina de energía escalar</span></div>
-        </div>
-        <div style="background:linear-gradient(135deg,#f8fafc,#f1f5f9);border:1.5px dashed #cbd5e1;border-radius:9px;padding:7px 9px;margin-bottom:8px;">
-          <div style="font-size:9px;font-weight:900;color:#0f172a;display:flex;align-items:center;gap:4px;"><span style="width:14px;height:14px;border-radius:4px;background:#0f172a;display:grid;place-items:center;"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></span>CONSULTAS: MODO PRESENCIAL, ON LINE, INDIVIDUAL Y GRUPAL<div style="margin-bottom:8px;background:#dcfce7;border-left:4px solid #128C7E;border-radius:8px;padding:8px 10px;font-size:12px;color:#0f172a;font-weight:900;line-height:1.35;">
-  Para consultas y turnos, la vía más directa es por WhatsApp y resolvemos cualquier duda.
-</div></div>
-          <div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:5px;"><span style="background:#dcfce7;color:#166534;padding:2px 6px;border-radius:999px;font-size:8px;font-weight:800;">PRESENCIAL</span><span style="background:#dbeafe;color:#1e40af;padding:2px 6px;border-radius:999px;font-size:8px;font-weight:800;">ON LINE</span><span style="background:#fef3c7;color:#92400e;padding:2px 6px;border-radius:999px;font-size:8px;font-weight:800;">INDIVIDUAL</span><span style="background:#fce7f3;color:#9d174d;padding:2px 6px;border-radius:999px;font-size:8px;font-weight:800;">GRUPAL</span></div>
-        </div>
-        <div style="display:flex;gap:6px;flex-wrap:wrap;">
-          <a href="https://wa.me/${e.wsp}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;padding:6px 12px;border-radius:999px;font-weight:900;font-size:10px;display:inline-flex;align-items:center;gap:4px;box-shadow:0 3px 8px rgba(37,211,102,.28);text-decoration:none;">WhatsApp</a>
-          <a href="${e.instagram}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="background:linear-gradient(135deg,#f857a6,#ff5858 25%,#d62976 55%,#962fbf 85%,#4f5bd5 100%);color:#fff;padding:6px 12px;border-radius:999px;font-weight:900;font-size:10px;display:inline-flex;align-items:center;gap:4px;box-shadow:0 3px 8px rgba(214,41,118,.28);text-decoration:none;">Instagram</a>
-          <a href="${e.maps}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff;padding:6px 12px;border-radius:999px;font-weight:900;font-size:10px;display:inline-flex;align-items:center;gap:4px;box-shadow:0 3px 8px rgba(29,78,216,.28);text-decoration:none;">Mapa</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  `;
-}
-
-
-function abrirModalArcoiris(card){
-  // Abre el modal con el aviso lindo completo, no el generico - AHORA SI MUESTRA FOTO
-  const e = EMPRENDEDORES.find(x=>x.plantilla==='arcoiris');
-  if(!e) return;
-  const fotoFinal = e.foto_web || e.foto;
-  const modalImg = document.getElementById('modalImg');
-  if(modalImg){
-    modalImg.src = fotoFinal;
-    modalImg.style.display='block';
-    modalImg.style.maxHeight='42vh';
-    modalImg.style.objectFit='contain';
-    modalImg.style.background='linear-gradient(135deg,#fdf2f8,#f5f3ff)';
-  }
-  document.getElementById('modalBarrio').innerText='ALFAR • DESTACADO';
-  document.getElementById('modalTitulo').innerText='🌈 Luz del Arco Iris - Orit Savelski';
-  document.getElementById('modalDesc').innerHTML = `
-    <div style="font-family:'Poppins',sans-serif;">
-      <div style="display:flex;flex-direction:column;gap:8px;margin:12px 0;">
-        <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:#fdf2f8;border-radius:12px;border:1px solid #fce7f3;"><span style="width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#f9a8d4,#ec4899);display:grid;place-items:center;">🌸</span><span style="font-size:14px;font-weight:600;">Terapeuta Floral</span></div>
-        <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:#eff6ff;border-radius:12px;border:1px solid #dbeafe;"><span style="width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#60a5fa,#3b82f6);display:grid;place-items:center;">💧</span><span style="font-size:14px;font-weight:600;">Master Aqualead</span></div>
-        <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:#f5f3ff;border-radius:12px;border:1px solid #ddd6fe;"><span style="width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#a78bfa,#7c3aed);display:grid;place-items:center;">📖</span><span style="font-size:14px;font-weight:600;">Instructora en Registros Akáshicos</span></div>
-        <div style="display:flex;align-items:center;gap:10px;padding:8px 10px;background:#fffbeb;border-radius:12px;border:1px solid #fde68a;"><span style="width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,#fbbf24,#f59e0b);display:grid;place-items:center;">✨</span><span style="font-size:14px;font-weight:600;">Operadora de máquina de energía escalar</span></div>
-      </div>
-      <div style="background:#f8fafc;border:1.5px dashed #cbd5e1;border-radius:12px;padding:12px;margin:12px 0;">
-        <div style="font-size:11px;font-weight:900;">CONSULTAS: MODO PRESENCIAL, ON LINE, INDIVIDUAL Y GRUPAL</div>
-        <div style="font-size:12px;color:#475569;margin-top:4px;">Diagonal EEUU esq. De la Maza, Alfar - Mar del Plata<div style="margin-top:8px;font-size:13px;color:#0f172a;font-weight:800;font-style:italic;background:white;padding:7px 10px;border-radius:8px;border-left:4px solid #25D366;">Para consultas y turnos, la vía más directa es por WhatsApp  y resolvemos cualquier duda.</div></div>
-      </div>
-    </div>
-  `;
-  
-  document.getElementById('modalWsp').href='https://wa.me/'+e.wsp;
-  document.getElementById('modalIG').href=e.instagram;
-  document.getElementById('modalIG').style.display='flex';
-  document.getElementById('modalMap').href=e.maps;
-  document.getElementById('modalMap').style.display='flex';
-  document.getElementById('modalAviso').classList.add('activo');
-}
-
-function abrirModalDirecto(card){
-  const isArcoiris = card.innerHTML.includes('Luz del Arco Iris') || card.dataset.plantilla==='arcoiris' || (card.querySelector && card.querySelector('[style*="Great Vibes"]'));
-  if(isArcoiris){
-    abrirModalArcoiris(card);
-    return;
-  }
-  abrirModalDirecto_ORIGINAL(card);
-}
-function abrirModalDirecto_ORIGINAL(card){
-  const img = card.querySelector('.img-box img') || card.querySelector('img');
-  document.getElementById('modalImg').src = img ? img.src : 'https://infomdqhoy.pages.dev/banner1.webp';
-  document.getElementById('modalBarrio').innerText = card.querySelector('.badge-barrio')?.innerText || 'ALFAR';
-  document.getElementById('modalTitulo').innerText = card.querySelector('h3')?.innerText || '';
-  document.getElementById('modalDesc').innerText = card.querySelector('.desc')?.innerText || card.querySelectorAll('p')[0]?.innerText || '';
-  const precio = card.dataset.precio || '';
-  document.getElementById('modalPrecio').innerText = precio;
-  const wsp = card.querySelector('.btn-wsp')?.href || '#';
-  document.getElementById('modalWsp').href = wsp;
-  // copiar redes si existen
-  const ig = card.querySelector('.btn-ig')?.href;
-  const mp = card.querySelector('.btn-map')?.href;
-  const modalIG = document.getElementById('modalIG');
-  const modalMap = document.getElementById('modalMap');
-  if(modalIG){
-    if(ig){ modalIG.href = ig; modalIG.style.display='flex'; } else { modalIG.style.display='none'; }
-  }
-  if(modalMap){
-    if(mp){ modalMap.href = mp; modalMap.style.display='flex'; } else { modalMap.style.display='none'; }
-  }
-  document.getElementById('modalAviso').classList.add('activo');
-}
-function cerrarModal(){ document.getElementById('modalAviso').classList.remove('activo'); }
-
-function pintarTodo(){
-  const grid=document.getElementById('grid-todos');
-  if(grid){
-    grid.innerHTML = EMPRENDEDORES.length ? EMPRENDEDORES.map(crearCard).join('') : `<div class="card" style="grid-column:1/-1;text-align:center;color:#64748b">Aún no hay emprendedores</div>`;
-  }
-  // Mostrar TODOS los avisos, incluidos los gratuitos (PlantArte, MobiCare, etc) en la principal
-  document.querySelectorAll('.card-emp[data-solo="true"]').forEach(c=>c.classList.remove('oculto'));
-  document.querySelectorAll('.grid .card-emp').forEach(c=>c.classList.remove('oculto'));
-  const seccion=document.getElementById('seccion-todos');
-  if(seccion) seccion.style.display='block';
-}
-pintarTodo();
-function abrirBarrio(n){
-  // ahora scrollea a la seccion del barrio en la misma home
-  const sec=document.getElementById('seccion-'+n);
-  if(sec){ sec.scrollIntoView({behavior:'smooth', block:'start'}); }
-}
-function volverHome(){
-  window.scrollTo({top:0,behavior:'smooth'});
-  // reset filtros
-  const global=document.getElementById('filtros-global');
-  if(global){
-    global.querySelectorAll('.filtro').forEach(b=>b.classList.remove('activo'));
-  }
-  document.querySelectorAll('.card-emp').forEach(c=>c.classList.remove('oculto'));
-  const seccion=document.getElementById('seccion-todos');
-  if(seccion) seccion.style.display='block';
-}
- // FILTRO GLOBAL SIN BOTON TODOS - toggle para volver a mostrar todo
-(function(){
-  const global = document.getElementById('filtros-global');
-  if(!global) return;
-  global.querySelectorAll('.filtro').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      const yaActivo = btn.classList.contains('activo');
-      global.querySelectorAll('.filtro').forEach(b=>b.classList.remove('activo'));
-      if(yaActivo){
-        // si tocas el mismo activo, mostras todo de nuevo
-        document.querySelectorAll('.grid .card-emp').forEach(c=>{ if(c.dataset.solo==='true') c.classList.add('oculto'); else c.classList.remove('oculto'); });
-        // tambien manejar avisos custom fuera de grids
-        document.querySelectorAll('.card-emp[data-solo="true"]').forEach(c=>c.classList.add('oculto'));
-        ['faro','alfar','serena','acantilados'].forEach(b=>{
-          const seccion=document.getElementById('seccion-'+b);
-          if(seccion) seccion.style.display='block';
-        });
-        return;
-      }
-      btn.classList.add('activo');
-      const cat=btn.dataset.cat;
-      document.querySelectorAll('.grid .card-emp').forEach(c=>{
-        if(c.dataset.cat===cat) c.classList.remove('oculto');
-        else c.classList.add('oculto');
-      });
-      // avisos custom solo-filtro (como pintura en servicios)
-      document.querySelectorAll('.card-emp[data-solo="true"]').forEach(c=>{
-        if(c.dataset.cat===cat) c.classList.remove('oculto');
-        else c.classList.add('oculto');
-      });
-      ['faro','alfar','serena','acantilados'].forEach(b=>{
-        const grid=document.getElementById('grid-'+b);
-        if(!grid) return;
-        const visibles = grid.querySelectorAll('.card-emp:not(.oculto)').length;
-        const seccion=document.getElementById('seccion-'+b);
-        if(seccion) seccion.style.display = visibles===0 ? 'none' : 'block';
-      });
-    });
-  });
-})();
-// FUNCION PARA ABRIR MODAL DIRECTO DESDE OBJETO (para buscador)
-function abrirModalDesdeObjeto(e){
-  const fotoFinal = e.foto_web || e.foto || 'https://infomdqhoy.pages.dev/banner1.webp';
-  document.getElementById('modalImg').src = fotoFinal;
-  document.getElementById('modalBarrio').innerText = (e.barrio||'').toUpperCase();
-  document.getElementById('modalTitulo').innerText = e.nombre||'';
-  document.getElementById('modalDesc').innerText = e.desc||'';
-  document.getElementById('modalPrecio').innerText = e.precio||'';
-  const wsp = e.wsp ? 'https://wa.me/'+e.wsp : '#';
-  document.getElementById('modalWsp').href = wsp;
-  const modalIG = document.getElementById('modalIG');
-  const modalMap = document.getElementById('modalMap');
-  if(modalIG){
-    if(e.instagram){ modalIG.href = e.instagram; modalIG.style.display='flex'; } else { modalIG.style.display='none'; }
-  }
-  if(modalMap){
-    if(e.maps){ modalMap.href = e.maps; modalMap.style.display='flex'; } else { modalMap.style.display='none'; }
-  }
-  document.getElementById('modalAviso').classList.add('activo');
-}
-
-function limpiarBusqueda(){
-  const input=document.getElementById('buscadorUnificado');
-  const resultados=document.getElementById('resultadosUnificados');
-  if(input) input.value='';
-  if(resultados){ resultados.style.display='none'; resultados.innerHTML=''; }
-  // mostrar todo de nuevo (respetando soloEnFiltro)
-  document.querySelectorAll('.grid .card-emp').forEach(c=>{ if(c.dataset.solo==='true') c.classList.add('oculto'); else c.classList.remove('oculto'); });
-  document.querySelectorAll('.card-emp[data-solo="true"]').forEach(c=>c.classList.add('oculto'));
-  ['faro','alfar','serena','acantilados'].forEach(b=>{
-    const seccion=document.getElementById('seccion-'+b);
-    if(seccion) seccion.style.display='block';
-  });
-}
-
-(function(){
-  const input=document.getElementById('buscadorUnificado');
-  const resultados=document.getElementById('resultadosUnificados');
-  function normalizar(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();}
-  if(!input || !resultados) return;
-  
-  input.addEventListener('input',(e)=>{
-    const q=normalizar(e.target.value);
-    if(q.length<2){
-      resultados.style.display='none';
-      resultados.innerHTML='';
-      // si borra, vuelve a mostrar todo
-      document.querySelectorAll('.grid .card-emp').forEach(c=>c.classList.remove('oculto'));
-      document.querySelectorAll('.card-emp[data-solo="true"]').forEach(c=>c.classList.remove('oculto'));
-      const seccionT=document.getElementById('seccion-todos');
-      if(seccionT) seccionT.style.display='block';
-      return;
-    }
-    // Buscar en EMPRENDEDORES y tambien en avisos custom solo-servicios (pintura, poda, etc) - no toca visual
-    const filtradosEmpr = EMPRENDEDORES.filter(em=>normalizar(em.keywords).includes(q));
-    const filtradosCustom = [...document.querySelectorAll('.card-emp[data-solo="true"]')].filter(c=>normalizar(c.dataset.keywords||'').includes(q)).map(c=>({nombre:(c.querySelector('h1')?.innerText || c.querySelector('h3')?.innerText || 'Servicio').trim(), barrio:c.dataset.barrio||'alfar', cat:c.dataset.cat||'servicios', keywords:c.dataset.keywords||'', esCustom:true, elemento:c}));
-    const filtrados = [...filtradosEmpr, ...filtradosCustom];
-    if(filtrados.length===0){
-      resultados.innerHTML='<div style="padding:14px;text-align:center;color:#64748b;font-weight:700">Sin resultados para "'+e.target.value+'"</div>';
-      resultados.style.display='block';
-      return;
-    }
-    resultados.innerHTML=filtrados.map((em, idx)=>`<div data-idx="${idx}" class="resultado-item" style="padding:12px 14px;border-bottom:1px solid #e2e8f0;cursor:pointer;display:flex;justify-content:space-between;align-items:center"><div><b style="font-size:13px">${em.nombre}</b><br><small style="color:#64748b">${(em.barrio||'').toUpperCase()} • ${em.cat||'servicios'}${em.esCustom?' • solo Servicios':''}</small></div><span style="font-size:14px">↗️</span></div>`).join('');
-    resultados.style.display='block';
-    resultados.querySelectorAll('.resultado-item').forEach((div, i)=>{
-      div.addEventListener('click',()=>{
-        const em = filtrados[i];
-        resultados.style.display='none';
-        resultados.innerHTML='';
-        input.value = '';
-        if(em.esCustom && em.elemento){
-          document.querySelectorAll('.grid .card-emp').forEach(c=>c.classList.add('oculto'));
-          document.querySelectorAll('.card-emp[data-solo="true"]').forEach(c=>c.classList.add('oculto'));
-          em.elemento.classList.remove('oculto');
-          em.elemento.scrollIntoView({behavior:'smooth', block:'center'});
-          ['faro','alfar','serena','acantilados'].forEach(b=>{
-            const seccion=document.getElementById('seccion-'+b);
-            if(seccion) seccion.style.display='block';
-          });
-        } else {
-          const sec=document.getElementById('seccion-'+em.barrio);
-          if(sec) sec.style.display='block';
-          document.querySelectorAll('.grid .card-emp').forEach(c=>{ if(c.dataset.solo==='true') c.classList.add('oculto'); else c.classList.remove('oculto'); });
-          document.querySelectorAll('.card-emp[data-solo="true"]').forEach(c=>c.classList.add('oculto'));
-          abrirModalDesdeObjeto(em);
-        }
-      });
-    });
-  });
-
-  // cerrar resultados si hace click afuera
-  document.addEventListener('click',(ev)=>{
-    if(!ev.target.closest('.buscador-wrap')){
-      resultados.style.display='none';
-    }
-  });
-
-  // si toca Enter, abre el primero
-  input.addEventListener('keydown',(e)=>{
-    if(e.key==='Enter'){
-      const primer=filtradosCache();
-      if(primer){ 
-        e.preventDefault();
-        input.value='';
-        resultados.style.display='none';
-        resultados.innerHTML='';
-        abrirModalDesdeObjeto(primer);
-      }
-    }
-  });
-
-  function filtradosCache(){
-    const q=normalizar(input.value);
-    const filtradosEmpr=EMPRENDEDORES.filter(em=>normalizar(em.keywords).includes(q));
-    const filtradosCustom=[...document.querySelectorAll('.card-emp[data-solo="true"]')].filter(c=>normalizar(c.dataset.keywords||'').includes(q)).map(c=>({nombre:(c.querySelector('h1')?.innerText || c.querySelector('h3')?.innerText || 'Servicio').trim(), barrio:c.dataset.barrio||'alfar', cat:c.dataset.cat||'servicios', esCustom:true, elemento:c}));
-    const filtrados=[...filtradosEmpr, ...filtradosCustom];
-    return filtrados[0]||null;
-  }
-})();
-</script>
-<!-- NAV INFERIOR PREMIUM -->
+<!-- BARRA INFERIOR MÓVIL (Con Emprendedores activo) -->
 <div class="bottom-nav">
   <a href="index.html" class="nav-item">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
     <span>Inicio</span>
   </a>
-  <a href="#" class="nav-item active">
+  <a href="vidriera-de-emprendedores.html" class="nav-item active">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7h-3V4c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v3H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2M9 4h6v3H9V4zm11 15H4V9h16v10z"></path></svg>
     <span>Emprendedores</span>
   </a>
@@ -1489,5 +193,12 @@ function limpiarBusqueda(){
     <span>Ofertas</span>
   </a>
 </div>
+
+<!-- Importamos avisos.js para poder usar la función de los corazones y compartir -->
+<script src="avisos.js?v=1"></script>
+<script>
+  // Aquí luego cargaremos el script o lógica para leer el JSON de emprendedores
+</script>
+<script src="emprendedores.js"></script>
 </body>
 </html>
