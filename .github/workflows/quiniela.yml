@@ -1,4 +1,4 @@
-name: Quiniela 20 TODOS los sorteos2552
+name: Quiniela 20 TODOS los sorteos
 on:
   schedule:
       - cron: '*/20 13-23,0-1 * * *'
