@@ -76,7 +76,7 @@ function crearFooterSinIG(id, nombre){
     +'<button type="button" onclick="event.stopPropagation(); darAmorReal(\''+id+'\', this)" data-like-id="'+id+'" style="display:flex;align-items:center;gap:8px;background:'+(yaLiked ? '#fecaca' : '#fff0f0')+';border:2px solid #fecaca;border-radius:999px;padding:10px 18px;font-weight:900;font-size:16px;cursor:pointer;">'
   +'<span style="font-size:18px;color:#ef4444">❤️</span><span class="corazon-num" style="font-size:16px;color:#be123c">0</span></button>'
     +'<div style="flex:1;text-align:left;padding-left:6px;"><div style="font-weight:900;font-size:13px;color:#0f172a;line-height:1.15;">Dale amor a tu comercio favorito y compartilo</div>'
-    +'<div style="font-weight:600;font-size:11px;color:#64748b;margin-top:2px;">'+nombre+' es del barrio</div></div></div>'
+    +'<div style="font-weight:600;font-size:11px;color:#64748b;margin-top:2px;">'+nombre+'</div></div></div>'
     +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 12px 12px 12px;background:#fff5f5;">'
     +'<button type="button" onclick="event.stopPropagation(); compartirFacebookReal(\''+id+'\')" style="display:flex;align-items:center;justify-content:center;gap:6px;background:#1877f2;color:#fff;border:none;border-radius:12px;padding:11px 6px;font-weight:800;font-size:13px;cursor:pointer;">f Facebook</button>'
     +'<button type="button" onclick="event.stopPropagation(); compartirWhatsAppReal(\''+id+'\',\''+nombre.replace(/'/g,"\\'")+'\')" style="display:flex;align-items:center;justify-content:center;gap:6px;background:#25D366;color:#fff;border:none;border-radius:12px;padding:11px 6px;font-weight:800;font-size:13px;cursor:pointer;">💬 WhatsApp</button></div>';
