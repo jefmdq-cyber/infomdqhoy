@@ -1,0 +1,28 @@
+{
+  "id": "amapolas-dietetica",
+  "tipo": "dietetica",
+  "nombre": "Amapola's Dietética",
+  "subtitulo": "🌿 Almacén Natural • Productos de Dietética y Todo Suelto",
+  "badge_top": "🌿 ALMACÉN NATURAL",
+  "imagen_fachada": "amapolas.webp",
+  "logo_circle": "amapola_logo_transparente.webp",
+  "pills": [
+    { "texto": "🌱 Apto Veganos", "clase": "pill-vegano", "color": "#e8f5e9", "texto_color": "#2e7d32" },
+    { "texto": "🌾 Celíacos / Sin TACC", "clase": "pill-celiaco", "color": "#fff3e0", "texto_color": "#e65100" },
+    { "texto": "🍎 Diabéticos / Sin Azúcar", "clase": "pill-diabetico", "color": "#ffebee", "texto_color": "#c62828" },
+    { "texto": "💓 Hipertensos & Suplementos", "clase": "pill-hiper", "color": "#f3e5f5", "texto_color": "#6a1b9a" },
+    { "texto": "🥜 Semillas • Cereales • Legumbres", "clase": "pill-extra", "color": "#f1f5f9", "texto_color": "#334155" },
+    { "texto": "🌸 Cosmética Natural • Hierbas", "clase": "pill-extra", "color": "#f1f5f9", "texto_color": "#334155" },
+    { "texto": "🍯 Repostería • Condimentos", "clase": "pill-extra", "color": "#f1f5f9", "texto_color": "#334155" }
+  ],
+  "direccion_titulo": "Diagonal Estados Unidos y Santa María de Oro",
+  "direccion_sub1": "Feria Comercial - Barrio Alfar • Mar del Plata",
+  "direccion_sub2": "🍓 Frutas Congeladas • 🧉 Artesanales • 🌿 Agroecológicos",
+  "whatsapp_url": "https://wa.me/5492234236502",
+  "whatsapp_btn_text": "💬 ¡Hacé tu pedido saludable aquí!",
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=-38.092005,-57.556356",
+  "maps_btn_text": "Ver en el mapa - Feria Comercial Alfar",
+  "instagram_url": "https://instagram.com/amapolasdiet__",
+  "instagram_user": "📸 @amapolasdiet__",
+  "pie_texto": "🌿 Productos naturales • Atención personalizada • Todo suelto"
+}

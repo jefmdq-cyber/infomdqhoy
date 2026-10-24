@@ -1,0 +1,30 @@
+{
+  "id": "farmacia-vara",
+  "tipo": "farmacia",
+  "nombre": "FARMACIA VARA",
+  "slogan": "Tu farmacia en Alfar,<br>para toda la Zona Sur",
+  "imagen_frente": "farmacia-vara-frente.webp",
+  "whatsapp": "5492235808030",
+  "whatsapp_texto": "2235808030",
+  "maps": "https://www.google.com/maps/search/?api=1&query=Estados+Unidos+779+Alfar+Mar+del+Plata",
+  "direccion_url": "https://www.google.com/maps/search/?api=1&query=Diagonal+Estados+Unidos+779+Alfar+Mar+del+Plata",
+  "direccion": "Estados Unidos<br><b style=\"font-size:10.5px\">Nº 779</b>",
+  "instagram": "https://www.instagram.com/farmaciavaraok/",
+  "instagram_user": "@farmaciavaraok",
+  "pie_texto": "Atención personalizada · Productos de calidad",
+  "servicios": [
+    "🛵 Envíos a domicilio",
+    "📋 Obras Sociales y Prepagas",
+    "🧴 Perfumería y Cosmética",
+    "🧪 Preparados Magistrales"
+  ],
+  "obras_sociales": [
+    { "nombre": "PAMI", "color": "#14532d" },
+    { "nombre": "IOMA", "color": "#1e40af" }
+  ],
+  "horarios_titulo": "HORARIO DE INVIERNO:",
+  "horarios_lineas": [
+    "• Lun a Vie: 9 a 20 hs.",
+    "• Sáb: 9 a 13 hs. y 17 a 20 hs."
+  ]
+}

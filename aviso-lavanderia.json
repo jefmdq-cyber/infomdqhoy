@@ -1,0 +1,17 @@
+{
+  "id": "lavanderia-de-nannin",
+  "nombre": "LAVANDERÍA DE NANNIN",
+  "badge_top": "LAVANDERÍA A DOMICILIO",
+  "slogan": "ROPA LIMPIA SIN ESFUERZO, SIN MOVERTE DE CASA",
+  "imagen_fachada": "./lavadero.webp",
+  "promo_titulo": "Tu 6ª visita a nuestro local =",
+  "promo_sub": "1 LAVADO GRATIS DE ROPA 🎁",
+  "whatsapp_url": "https://wa.me/5492233541631",
+  "instagram_url": "https://www.instagram.com/lavanderiananin/",
+  "instagram_user": "@lavanderiananin",
+  "facebook_url": "https://www.facebook.com/feriantes.somoss",
+  "facebook_text": "Feriantes Somos - Facebook",
+  "maps_url": "https://www.google.com/maps?q=-38.1003682,-57.5622021&z=17&hl=es",
+  "maps_text": "Retiro y Entrega a Domicilio - Mar del Plata",
+  "pie_texto": "♥ Tu confianza hace la diferencia ♥<br>¡Gracias por confiar siempre en nosotros!"
+}

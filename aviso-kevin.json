@@ -1,0 +1,25 @@
+{
+  "id": "proveeduria-kevin",
+  "nombre": "Proveeduría Kevin",
+  "badge_top": "Comprá más. Pagá menos.",
+  "imagen_fachada": "proveeduria-kevin.webp",
+  "slogan_rojo": "¡Comprá más. Pagá menos. Elegí Kevin!",
+  "sucursales": [
+    {
+      "titulo": "SUCURSAL ALFAR",
+      "header_bg": "#f1f5f9",
+      "direccion": "Diagonal Estados Unidos 474",
+      "maps_url": "https://www.google.com/maps/search/?api=1&query=Diagonal+Estados+Unidos+474+Alfar+Mar+del+Plata",
+      "maps_text": "🗺 Ver Mapa Alfar"
+    },
+    {
+      "titulo": "SUCURSAL ACANTILADOS",
+      "header_bg": "#fff7ed",
+      "direccion": "Calle 493 entre 6 y 8<br><span style=\"font-size:10px;color:#64748b;\">(en el kiosko de diario)</span>",
+      "maps_url": "https://www.google.com/maps/search/?api=1&query=Calle+493+entre+6+y+8+Acantilados",
+      "maps_text": "🗺 Ver Mapa Acantilados"
+    }
+  ],
+  "instagram_url": "https://www.instagram.com/autoserviciokevin",
+  "instagram_user": "📸 @autoserviciokevin"
+}

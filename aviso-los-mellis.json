@@ -1,0 +1,18 @@
+{
+  "id": "kiosco-los-melli",
+  "nombre": "KIOSCO LOS MELLI",
+  "badge_top": "✨ KIOSCO & SERVICIOS • ALFAR",
+  "slogan": "Tu parada obligatoria en el barrio: SUBE, bebidas y golosinas",
+  "direccion": "Guillermo Magrassi 4295",
+  "barrio": "Alfar, Mar del Plata",
+  "servicios": [
+    { "titulo": "Carga SUBE", "desc": "Terminal oficial", "icono": "💳", "bg": "#ecfdf5", "border": "#10b981", "txt": "#065f46" },
+    { "titulo": "Carga Virtual", "desc": "Billeteras y recargas", "icono": "📱", "bg": "#eff6ff", "border": "#3b82f6", "txt": "#1e40af" },
+    { "titulo": "Golosinas & Snacks", "desc": "Amplia variedad", "icono": "🍫", "bg": "#fffbeb", "border": "#f59e0b", "txt": "#b45309" },
+    { "titulo": "Bebidas Frías", "desc": "¡Siempre a punto!", "icono": "🧊", "bg": "#ecfeff", "border": "#06b6d4", "txt": "#155e75" }
+  ],
+  "maps_url": "https://www.google.com/maps/search/?api=1&query=Guillermo+Magrassi+4295+Mar+del+Plata",
+  "maps_btn_text": "Abrir ubicación en Google Maps",
+  "imagen_frente": "frente-kiosco-los-melli.webp",
+  "search_tags": "kiosco los melli mellis alfar golosinas snacks cigarrillos bebidas frias carga virtual sube billeteras mercado pago guillermo magrassi 4295 mar del plata"
+}
