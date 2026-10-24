@@ -1109,16 +1109,14 @@ document.addEventListener('DOMContentLoaded', ()=>{
     grid.querySelectorAll('.footer-amor-auto').forEach(el=>el.remove());
     PROFESIONALES.forEach((prof, idx)=>{
       const nombreLimpio = (prof.nombre||'').replace(/<[^>]*>/g,'');
-      // Buscar la tarjeta que contiene parte del nombre
       const cards = Array.from(grid.querySelectorAll('.card-emp'));
       let cardEncontrada = cards.find(c => {
         const txt = c.textContent || '';
-        // Matchear por palabras clave del nombre
+        if(nombreLimpio.includes('Orit') && (txt.includes('Orit') || txt.includes('Arco Iris') || txt.includes('Luz del'))) return true;
         if(nombreLimpio.includes('Julia') && txt.includes('Julia')) return true;
-        if(nombreLimpio.includes('Podolog') && (txt.includes('Podolog') || txt.includes('Nadia'))) return true;
-        if(nombreLimpio.includes('Eneagrama') && txt.includes('Eneagrama')) return true;
-        if(nombreLimpio.includes('María Inés') && txt.includes('María Inés')) return true;
-        return txt.includes(nombreLimpio.substring(0,15));
+        if(nombreLimpio.includes('Podolog') && (txt.includes('Podolog') || txt.includes('Nadia') || txt.includes('Camelia'))) return true;
+        if(nombreLimpio.includes('Eneagrama') && (txt.includes('Eneagrama') || txt.includes('María Inés') || txt.includes('Issa'))) return true;
+        return txt.includes(nombreLimpio.substring(0,12));
       });
       if(!cardEncontrada) return;
       if(cardEncontrada.nextElementSibling && cardEncontrada.nextElementSibling.classList.contains('footer-amor-auto')) return;
