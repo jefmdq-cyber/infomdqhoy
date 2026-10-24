@@ -1,13 +1,3 @@
-self.addEventListener('install', () => {
-  self.skipWaiting();
-});
-
-self.addEventListener('activate', (e) => {
-  e.waitUntil(
-    caches.keys().then((keys) => {
-      return Promise.all(keys.map((key) => caches.delete(key)));
-    }).then(() => {
-      return self.registration.unregister();
-    })
-  );
-});
+/a/*  /a/:splat  200
+/*.json  /:splat.json  200
+/*  /index.html  200
