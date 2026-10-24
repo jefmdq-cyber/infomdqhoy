@@ -31,8 +31,6 @@ h1{font-family:'Fredoka',sans-serif;font-size:28px;font-weight:800;margin-top:12
 .q-tab{padding:10px 2px;border-radius:10px;font-size:11px;font-weight:800;text-align:center;color:#94a3b8;cursor:pointer;transition:.2s;text-transform:uppercase}
 .q-tab.active{background:#334155;color:#4ade80}
 .q-detail{padding:0 20px 20px}
-
-
 /* TARJETAS DE ACTIVIDADES */
 .lista-actividades{display:flex;flex-direction:column;gap:10px}
 .actividad-card{background:#0f172a;border:1px solid #334155;border-radius:18px;padding:14px;display:flex;gap:12px;transition:border-color .2s, transform .15s;cursor:pointer}
@@ -43,7 +41,6 @@ h1{font-family:'Fredoka',sans-serif;font-size:28px;font-weight:800;margin-top:12
 .actividad-dias{font-size:12px;color:#34d399;font-weight:700;margin-top:4px}
 .actividad-lugar{font-size:11px;color:#94a3b8;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .actividad-contacto{font-size:11px;color:#cbd5e1;margin-top:3px}
-
 /* MODAL FLOTANTE CON FLYER COMPLETO */
 .modal-overlay{position:fixed;inset:0;background:rgba(11,19,41,0.85);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:16px;z-index:100}
 .modal-overlay.active{display:flex}
@@ -58,7 +55,6 @@ h1{font-family:'Fredoka',sans-serif;font-size:28px;font-weight:800;margin-top:12
 .btn{flex:1;padding:12px;border-radius:12px;font-size:13px;font-weight:800;cursor:pointer;text-align:center;border:none}
 .btn-ghost{background:#0f172a;color:#cbd5e1;border:1px solid #334155}
 .btn-primary{background:linear-gradient(135deg,#10b981,#059669);color:white}
-
 footer{margin-top:40px;padding:30px 20px 20px;border-top:1px dashed #333333;text-align:center;font-size:12px;color:#64748b}
 footer .links{display:flex;justify-content:center;gap:20px;margin-bottom:15px}
 footer .links a{color:#b3b3b3;font-weight:700}
@@ -66,7 +62,6 @@ footer .links a:hover{color:#34d399}
 </style>
 </head>
 <body>
-
 <div class="top-bar">
   <div style="display:flex;align-items:center;gap:10px">
     <img src="./icon-192.png" alt="INFO MDQ HOY" style="height:28px;width:28px;border-radius:6px;background:#0d182e">
@@ -74,7 +69,6 @@ footer .links a:hover{color:#34d399}
   </div>
   <a href="./index.html" class="back">← Inicio</a>
 </div>
-
 <!-- NAVEGACIÓN ENTRE SOCIEDADES DE FOMENTO -->
 <div class="nav-bar">
   <a href="./faro.html" class="nav-btn active">SOC. FOMENTO FARO</a>
@@ -82,12 +76,10 @@ footer .links a:hover{color:#34d399}
   <a href="./serena.html" class="nav-btn">LA SERENA</a>
   <a href="./acantilados.html" class="nav-btn">ACANTILADOS</a>
 </div>
-
 <div class="container">
   <span class="badge">Sociedad de Fomento • Faro Norte</span>
   <h1>Faro Norte - Actividades Barriales</h1>
   <p class="sub">Talleres, cursos y actividades en Sánchez de Bustamante 3460.</p>
-
   <div class="q-card">
     <div class="q-header">
       <div class="q-date-bar">
@@ -99,7 +91,6 @@ footer .links a:hover{color:#34d399}
           <option value="CURSOS">CURSOS</option>
         </select>
       </div>
-
       <div class="q-tabs">
         <div class="q-tab active" onclick="filtrarTab('TODOS', this)">Todos</div>
         <div class="q-tab" onclick="filtrarTab('BAILE', this)">Baile</div>
@@ -108,8 +99,6 @@ footer .links a:hover{color:#34d399}
       </div>
     </div>
   
-
-
     <div class="q-detail">
       <div class="lista-actividades" id="lista-actividades">
         <!-- Las actividades se cargan automáticamente con JS -->
@@ -117,7 +106,6 @@ footer .links a:hover{color:#34d399}
     </div>
   </div>
 </div>
-
 <!-- MODAL FLOTANTE DE DETALLE -->
 <div class="modal-overlay" id="modal-overlay" onclick="cerrarModal()">
   <div class="modal-card" onclick="event.stopPropagation()">
@@ -157,7 +145,6 @@ footer .links a:hover{color:#34d399}
     </div>
     <p>&copy; 2026 INFO MDQ HOY. Todos los derechos reservados.</p>
 </footer>
-
 <script>
 // DATOS DE LAS ACTIVIDADES DE FARO NORTE
 // DATOS DE LAS ACTIVIDADES DE FARO NORTE
@@ -172,22 +159,19 @@ const actividadesFaro = [
   { nombre: "Pilates Mat", cat: "CURSOS", dias: "Martes y Jueves 14hs y 15hs", lugar: "Sánchez de Bustamante 3460", contacto: "2235466679", imagen: "pilates-faro.webp" },
   { nombre: "Ritmos Latinos (Cumbia, Salsa, Reggaeton)", cat: "BAILE", dias: "Próximamente...", lugar: "Asociación vecinal de fomento FARO NORTE", contacto: "223 6782263", imagen: "ritmos-faro.webp" },
   { nombre: "Urbano Teens - Aimé Wenner", cat: "BAILE", dias: "Lunes y Miércoles 18:45 hs", lugar: "Sánchez de Bustamante 3460", contacto: "Aimé Wenner", imagen: "urbanoteens.webp" },
+  { nombre: "Equipo de Psicopedagogas - Vanesa y Bárbara", cat: "TALLERES", dias: "Nuevos horarios y cupos disponibles", lugar: "Soc. de Fomento Faro Norte - Sánchez de Bustamante 3460", contacto: "Vanesa 2233482931 - Bárbara 2235113079", imagen: "psicopedagogas.webp" },
+  { nombre: "Clases de Boxeo - @boxeosurmdq", cat: "CURSOS", dias: "Martes y Jueves 19:00 a 20:30 hs", lugar: "Asoc. de Fomento Faro Norte - Sánchez de Bustamante 3460", contacto: "02235125340", imagen: "boxeo.webp" },
   { nombre: "Asociación Vecinal de Fomento Faro Norte - Hacé usted socio", cat: "INSTITUCIONAL", dias: "Lunes a viernes de 9 a 11 hs o de 17 a 19 hs", lugar: "Sánchez de Bustamante 3460", contacto: "2235333768", imagen: "socios.webp" }
 ];
-
 let categoriaFiltro = 'TODOS';
-
 function renderizarLista() {
   const contenedor = document.getElementById('lista-actividades');
   contenedor.innerHTML = '';
-
   const filtradas = actividadesFaro.filter(a => categoriaFiltro === 'TODOS' || a.cat === categoriaFiltro);
-
   if (filtradas.length === 0) {
     contenedor.innerHTML = '<div style="text-align:center;padding:20px;color:#94a3b8;">No hay actividades en esta categoría.</div>';
     return;
   }
-
   filtradas.forEach(item => {
     const card = document.createElement('div');
     card.className = 'actividad-card';
@@ -204,7 +188,6 @@ function renderizarLista() {
     contenedor.appendChild(card);
   });
 }
-
 function filtrarTab(cat, elem) {
   document.querySelectorAll('.q-tab').forEach(t => t.classList.remove('active'));
   elem.classList.add('active');
@@ -212,12 +195,10 @@ function filtrarTab(cat, elem) {
   categoriaFiltro = cat;
   renderizarLista();
 }
-
 function filtrarCategoria(cat) {
   categoriaFiltro = cat;
   renderizarLista();
 }
-
 function abrirModal(item) {
   document.getElementById('modal-img').src = `./faro/${item.imagen}`;
   document.getElementById('modal-titulo').innerText = item.nombre;
@@ -234,14 +215,11 @@ function abrirModal(item) {
   } else {
     wspBtn.style.display = 'none';
   }
-
   document.getElementById('modal-overlay').classList.add('active');
 }
-
 function cerrarModal() {
   document.getElementById('modal-overlay').classList.remove('active');
 }
-
 // Carga inicial
 renderizarLista();
 </script>
