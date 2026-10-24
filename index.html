@@ -187,6 +187,8 @@ a{color:inherit;text-decoration:none}
 .ticker-farmacia{background:rgba(244,114,182,.15);border:1px solid rgba(244,114,182,.3);border-radius:20px;padding:4px 12px !important;margin:0 10px}
 .badge-turn{background:#f472b6;color:#fff;padding:2px 8px;border-radius:10px;font-weight:900;font-size:.85em}
 @media(max-width:600px){.ticker-item{padding:0 14px;font-size:14px}}
+/* Arreglo Chrome - que no estire Sociedades de Fomento */
+.card { height: fit-content !important; align-self: flex-start; }
 </style>
 </head>
 <body>
@@ -230,6 +232,15 @@ a{color:inherit;text-decoration:none}
 </div>
 <div id="features-wrapper">
   <div class="row">
+    <div class="card" id="barrios">
+<h3> Sociedades de Fomento</h3>
+<div class="barrios-grid">
+<a href="faro.html" class="barrio-btn btn-faro">🏛️ FARO</a>
+<a href="alfar.html" class="barrio-btn btn-alfar">🏛️ ALFAR</a>
+<a href="serena.html" class="barrio-btn btn-serena">🏛️ SERENA</a>
+<a href="acantilados.html" class="barrio-btn btn-acantilados">🏛️ ACANTILADOS</a>
+</div>
+</div>
     
     <!-- 1. BLOQUE DÓLAR -->
     <div>
@@ -415,15 +426,7 @@ a{color:inherit;text-decoration:none}
   <div id="mareas-lista" style="margin-top:12px;font-size:13.5px;font-weight:700">Cargando mareas...</div>
 </div>
 
-<div class="card" id="barrios">
-<h3> Sociedades de Fomento</h3>
-<div class="barrios-grid">
-<a href="faro.html" class="barrio-btn btn-faro">🏛️ FARO</a>
-<a href="alfar.html" class="barrio-btn btn-alfar">🏛️ ALFAR</a>
-<a href="serena.html" class="barrio-btn btn-serena">🏛️ SERENA</a>
-<a href="acantilados.html" class="barrio-btn btn-acantilados">🏛️ ACANTILADOS</a>
-</div>
-</div>
+
 <div class="card">
 <h3>🛍️ Comercios</h3>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
