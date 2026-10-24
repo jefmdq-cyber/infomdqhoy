@@ -17,12 +17,10 @@ export async function onRequest({ params, request, env }) {
       return await r2.text();
     }
 
-    // Lee la lista de archivos separados
     const listaTxt = await getText('/lista-avisos.json');
     if (listaTxt.trim().startsWith('<')) throw new Error('lista-avisos.json devuelve HTML, no existe');
     const archivos = JSON.parse(listaTxt);
 
-    // Lee cada archivo separado y lo junta en memoria solo para el Worker
     const lista = [];
     for (const f of archivos) {
       try {
@@ -49,28 +47,42 @@ export async function onRequest({ params, request, env }) {
 
     const titulo = g(a, 'titulo', 'title', 'nombre') || 'Aviso';
     const desc = (g(a, 'descripcion', 'description', 'texto', 'detalle') || '').slice(0, 200) || titulo;
-       // --- BUSCADOR DE FOTO A PRUEBA DE TODO ---
+
+    // --- BUSCADOR DE FOTO A PRUEBA DE TODO (principal + emprendedores) ---
     function buscarImg(o) {
-      // 1. Busca los nombres conocidos primero
-      let directo = g(o, 'imagen_frente', 'imagen', 'image', 'foto', 'foto_frente', 'img', 'foto_perfil');
-      if (directo) return directo;
-      // 2. Si no, busca cualquier campo que contenga una imagen
+      // 1. Campos de la principal (igual que tenías)
+      let directo = g(o, 'imagen_frente', 'imagen', 'image', 'foto', 'foto_frente', 'img', 'foto_perfil', 'fotos', 'imagenes', 'galeria');
+      if (directo) {
+        let txt = Array.isArray(directo) ? directo[0] : (typeof directo === 'object' ? directo.url || directo.src || '' : directo);
+        if (txt && typeof txt === 'string') {
+          let m = txt.match(/src=["']([^"']+\.(?:webp|jpg|jpeg|png))/i);
+          if (m) return m[1];
+          if (/\.(webp|jpg|jpeg|png)/i.test(txt) && !txt.includes('amapola_logo')) return txt;
+        }
+      }
+      // 2. Busca dentro de htmlCustom / html (para emprendedores como Ghanima)
+      let html = g(o, 'htmlCustom', 'html');
+      if (html && typeof html === 'string') {
+        let m = html.match(/src=["']([^"']+\.(?:webp|jpg|jpeg|png))/i);
+        if (m && !m[1].includes('amapola_logo')) return m[1];
+      }
+      // 3. Ultimo recurso: recorre todo
       for (let k in o) {
         let v = o[k];
-        if (typeof v === 'string' && /\.(webp|jpg|jpeg|png)$/i.test(v) && !v.includes('amapola_logo')) {
-          return v;
-        }
-        if (Array.isArray(v) && v.length > 0 && typeof v[0] === 'string' && /\.(webp|jpg|jpeg|png)/i.test(v[0])) {
-          return v[0];
+        if (typeof v === 'string' && /\.(webp|jpg|jpeg|png)/i.test(v) && !v.includes('amapola_logo')) {
+          let m = v.match(/src=["']([^"']+\.(?:webp|jpg|jpeg|png))/i);
+          if (m) return m[1];
+          // solo si es una ruta corta de imagen
+          if (v.length < 200) return v;
         }
       }
       return '';
     }
-    let img = String(buscarImg(a) || 'amapola_logo_transparente.webp');
-    if (img.includes(',')) img = img.split(',')[0].trim();
+
+    let imgCruda = buscarImg(a) || 'amapola_logo_transparente.webp';
+    let img = String(imgCruda).split(',')[0].trim().replace(/^"+|"+$/g, '');
     if (!/^https?:\/\//.test(img)) img = u.origin + '/' + img.replace(/^\.?\//, '');
-    if (img.includes(',')) img = img.split(',')[0].trim();
-    if (!/^https?:\/\//.test(img)) img = u.origin + '/' + img.replace(/^\.?\//, '');
+    
     const destino = u.origin + '/?aviso=' + encodeURIComponent(slug(g(a, 'id', 'slug', 'titulo', 'title', 'nombre')));
 
     return new Response(`<!doctype html><html lang="es"><head><meta charset="utf-8"><title>${esc(titulo)}</title><meta property="og:type" content="article"><meta property="og:site_name" content="Info MDQ Hoy"><meta property="og:title" content="${esc(titulo)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:image" content="${esc(img)}"><meta property="og:url" content="${esc(u.href)}"><meta name="twitter:card" content="summary_large_image"><noscript><meta http-equiv="refresh" content="0;url=${esc(destino)}"></noscript></head><body><script>location.replace(${JSON.stringify(destino)})</script><a href="${esc(destino)}">Ver ${esc(titulo)}</a></body></html>`, { headers: { 'content-type': 'text/html; charset=utf-8' } });
