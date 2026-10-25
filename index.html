@@ -187,6 +187,17 @@ a{color:inherit;text-decoration:none}
 .ticker-farmacia{background:rgba(244,114,182,.15);border:1px solid rgba(244,114,182,.3);border-radius:20px;padding:4px 12px !important;margin:0 10px}
 .badge-turn{background:#f472b6;color:#fff;padding:2px 8px;border-radius:10px;font-weight:900;font-size:.85em}
 @media(max-width:600px){.ticker-item{padding:0 14px;font-size:14px}}
+/* === FIX ANTI-SALTO FARMACIA - Evita que se vea gigante al refrescar === */
+#contenedor-avisos, #contenedor-aviso-amapolas, #contenedor-aviso-fonoaudiologia, #contenedor-aviso-lavanderia, #contenedor-aviso-kevin, #contenedor-aviso-los-mellis {
+  min-height: 180px;
+  display: block;
+}
+#contenedor-avisos img, #contenedor-aviso-amapolas img, #contenedor-aviso-fonoaudiologia img, #contenedor-aviso-lavanderia img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
+}
+/* Arreglo Chrome - que no estire Sociedades de Fomento */
 /* Arreglo Chrome - que no estire Sociedades de Fomento */
 .card { height: fit-content !important; align-self: flex-start; }
 </style>
@@ -208,7 +219,6 @@ a{color:inherit;text-decoration:none}
 <div class="ticker-item ticker-dolar-item">💵 <b>DÓLAR</b> <span id="ticker-dolar">Cargando...</span></div>
 <div class="ticker-item">🌤️ <span id="ticker-clima">Cargando clima...</span></div>
 <div class="ticker-item">🌊 <span id="ticker-marea">Cargando mareas...</span></div>
-
 <!-- LOOP - copia exacta para que no corte -->
 <div class="ticker-item">🕒 <span id="ticker-hora-loop">--:--</span></div>
 <div class="ticker-item ticker-dolar-item">💵 <b>DÓLAR</b> <span id="ticker-dolar-loop">Cargando...</span></div>
@@ -256,7 +266,6 @@ a{color:inherit;text-decoration:none}
         </div>
       </section>
     </div>
-
     <!-- 2. BLOQUE AVISO VIP - FARMACIA -->
     <div>
       <section class="box feature" style="border-top:5px solid #10b981; padding:0; overflow:hidden;">
@@ -270,7 +279,6 @@ a{color:inherit;text-decoration:none}
         <span style="margin-left:auto;background:#831843;color:white;padding:4px 10px;border-radius:999px;font-size:10px;font-weight:900;flex-shrink:0;">VER →</span>
       </div>
     </div>
-
     <!-- 3. BLOQUE CLIMA -->
     <div>
       <section class="box feature box-clima" id="clima">
@@ -285,7 +293,6 @@ a{color:inherit;text-decoration:none}
               <span id="c-desc" style="font-size:14px;font-weight:700;opacity:0.9">Cargando...</span>
             </div>
           </header>
-
           <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px">
             <div style="background:rgba(255,255,255,0.18);backdrop-filter:blur(4px);border-radius:10px;padding:6px 2px;text-align:center">
               <div style="font-size:9px;font-weight:800;opacity:0.85">ST</div>
@@ -300,12 +307,10 @@ a{color:inherit;text-decoration:none}
               <b id="c-wind" style="font-size:12px;font-weight:900">--</b>
             </div>
           </div>
-
           <div style="display:flex;justify-content:space-between;margin-top:10px;font-size:12px;font-weight:700;background:rgba(0,0,0,0.12);padding:6px 10px;border-radius:8px">
             <span>🔽 Mín <b id="c-min">--°</b></span>
-            <span>🔼 Máx <id id="c-max">--°</b></span>
+            <span>🔼 Máx <b id="c-max">--°</b></span>
           </div>
-
           <div id="c-forecast" style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px"></div>
         </div>
       </section>
@@ -316,22 +321,33 @@ a{color:inherit;text-decoration:none}
         <div id="contenedor-aviso-amapolas"></div>
       </section>
     </div>
-<div id="contenedor-aviso-fonoaudiologia"></div>
-<script>
-fetch('./julia-aviso.html?v=' + Date.now())
-  .then(r => {
-    if(!r.ok) throw new Error('No se encontró ' + r.url);
-    return r.text();
-  })
-  .then(html => {
-    document.getElementById('contenedor-aviso-fonoaudiologia').innerHTML = html;
-  })
-  .catch(err => {
-    console.error(err);
-    document.getElementById('contenedor-aviso-fonoaudiologia').innerHTML = '<p style="color:red;padding:10px">Error: ' + err.message + '</p>';
-  });
-</script>
-
+    <!-- 6. BLOQUE AVISO FONOAUDIOLOGÍA - CORREGIDO -->
+    <div>
+      <section class="box feature" style="border-top:5px solid #8b5cf6; padding:0; overflow:hidden;">
+        <div id="contenedor-aviso-fonoaudiologia" style="min-height:180px;"></div>
+      </section>
+    </div>
+    <script>
+    // CORRECCIÓN: antes apuntaba a julia-aviso.html que ya no existe. Ahora apunta al nuevo archivo
+    fetch('./fonoaudiologia.html?v=' + Date.now())
+      .then(r => {
+        if(!r.ok) throw new Error('No se encontró ' + r.url + ' - Revisá que el archivo esté subido a Pages con ese nombre exacto');
+        return r.text();
+      })
+      .then(html => {
+        document.getElementById('contenedor-aviso-fonoaudiologia').innerHTML = html;
+      })
+      .catch(err => {
+        console.error(err);
+        // fallback por si todavía está como julia-aviso.html
+        fetch('./julia-aviso.html?v=' + Date.now()).then(r=>r.text()).then(h=>{
+          if(h.trim()) document.getElementById('contenedor-aviso-fonoaudiologia').innerHTML = h;
+          else throw err;
+        }).catch(()=>{
+          document.getElementById('contenedor-aviso-fonoaudiologia').innerHTML = '<p style="color:#ef4444;padding:16px;font-weight:700;font-size:13px">⚠️ No se pudo cargar fonoaudiología: ' + err.message + '</p>';
+        });
+      });
+    </script>
     <!-- 7. BLOQUE SERVICIOS RÁPIDOS -->
     <div>
       <section class="box feature box-servicios">
@@ -351,18 +367,13 @@ fetch('./julia-aviso.html?v=' + Date.now())
         </div>
       </section>
     </div>
-
   </div> <!-- Cierra .row -->
-
   <!-- Contenedores adicionales de avisos comerciales -->
   <div id="contenedor-aviso-kevin"></div>
   <div id="contenedor-aviso-los-mellis"></div>
-
 </div> <!-- Cierra #features-wrapper -->
-
 <div id="main-wrapper">
 <div id="main-content">
-
 <!-- BLOQUE DE QUINIELA -->
 <div class="q-card" id="quiniela">
   <div class="q-header">
@@ -377,7 +388,6 @@ fetch('./julia-aviso.html?v=' + Date.now())
     <p id="info-uy" style="display:none;margin-top:14px;font-size:12px;color:#34d399;font-weight:800;text-align:center;background:#064e3b;padding:8px;border-radius:10px;border:1px dashed #059669">🇺🇾 Uruguay solo tiene 2 sorteos oficiales: 15:00 y 21:00</p>
   </div>
 </div>
-
 <!-- OTROS JUEGOS COMPLEMENTARIOS -->
 <div style="margin:-6px 0 18px 0">
   <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;padding-left:2px">
@@ -403,7 +413,6 @@ fetch('./julia-aviso.html?v=' + Date.now())
     </a>
   </div>
 </div>
-
 <!-- CARTEL ALQUILO CONSULTORIOS - PREMIUM LLAMATIVO -->
 <a href="./consultorios.html" style="display:block;text-decoration:none;margin:0 0 14px;background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#0f172a 100%);border:1.5px solid #fbbf24;border-radius:18px;padding:14px 16px;position:relative;overflow:hidden;box-shadow:0 8px 24px rgba(251,191,36,.15)">
   <!-- brillo dorado arriba -->
@@ -427,14 +436,11 @@ fetch('./julia-aviso.html?v=' + Date.now())
   <div style="font-size:11px; font-weight:900; color:#0f172a; line-height:1.3;">🔞 +18 | EL JUGAR COMPULSIVAMENTE ES PERJUDICIAL PARA LA SALUD</div>
   <div style="font-size:10px; color:#475569; font-weight:600; margin-top:3px; line-height:1.3;">Prohibido menores de 18 años - Resultados con fines informativos - Ayuda: 0800-444-4000</div>
 </div>
-
 <!-- TARJETA INDEPENDIENTE DE MAREAS -->
 <div class="card" style="background:linear-gradient(135deg,#0891b2,#0e7490);color:white">
   <h2 style="font-size:18px;font-weight:900">🌊 Mareas Mar del Plata</h2>
   <div id="mareas-lista" style="margin-top:12px;font-size:13.5px;font-weight:700">Cargando mareas...</div>
 </div>
-
-
 <div class="card">
 <h3>🛍️ Comercios</h3>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
@@ -444,14 +450,11 @@ fetch('./julia-aviso.html?v=' + Date.now())
 <a href="comercios.html?barrio=acantilados" class="btn-full" style="background:#ffedd5;color:#9a3412">Acantilados</a>
 </div>
 </div>
+<!-- LAVANDERÍA MOVIDA DENTRO DE main-content -->
+<div class="card" style="padding:0;border:none;background:transparent;box-shadow:none;">
+  <div id="contenedor-aviso-lavanderia" style="min-height:120px;"></div>
 </div>
-<!-- BLOQUE AVISO LAVANDERÍA DE NANNIN -->
-<div>
-  <section class="box feature" style="padding:0; border:none; background:transparent;">
-    <div id="contenedor-aviso-lavanderia"></div>
-  </section>
 </div>
-
 <div id="sidebar">
 <div class="card" style="background:#0f172a;color:#fff">
 <h3 style="color:#fff">INFO MDQ SUR HOY</h3>
@@ -459,7 +462,6 @@ fetch('./julia-aviso.html?v=' + Date.now())
 </div>
 </div>
 </div>
-
 <!-- FOOTER CORREGIDO Y ORGANIZADO -->
 <div id="footer-wrapper">
 <footer id="footer">
@@ -499,7 +501,6 @@ fetch('./julia-aviso.html?v=' + Date.now())
 </footer>
 <div id="copyright">© INFO MDQ HOY - Diseño base Verti por HTML5 UP, adaptado.</div>
 </div>
-
 <div class="bottom-nav">
   <a href="#" class="nav-item active">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
@@ -518,9 +519,7 @@ fetch('./julia-aviso.html?v=' + Date.now())
     <span>Ofertas</span>
   </a>
 </div>
-
 </div>
-
 <!-- ESTRUCTURAS DE MODALES -->
 <div id="modal-edea" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto">
   <div style="background:#111;border:1px solid #333;border-radius:14px;padding:16px;max-width:600px;margin:20px auto;white-space:pre-wrap;color:#ddd">
@@ -533,7 +532,6 @@ fetch('./julia-aviso.html?v=' + Date.now())
     <div style="margin-top:4px;font-size:11px;color:#555">Fuente oficial: edeaweb.com.ar/obras-en-tu-barrio/</div>
   </div>
 </div>
-
 <!-- MODALES 511 CORREGIDOS QUIRURGICAMENTE - 3 RAMALES SEPARADOS -->
 <!-- MODAL 511 ALFAR -->
 <div id="modal-511-alfar" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto" onclick="this.style.display='none'">
@@ -557,7 +555,6 @@ fetch('./julia-aviso.html?v=' + Date.now())
     <a href="https://www.mardelplata.gob.ar/cuandollega" target="_blank" style="display:block;text-align:center;background:#166534;color:white;font-weight:900;padding:12px;border-radius:12px;margin-top:12px;text-decoration:none">🌐 Ver Mapa Cuando Llega</a>
   </div>
 </div>
-
 <!-- MODAL 511 ACANTILADOS E/G -->
 <div id="modal-511-acantilados" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto" onclick="this.style.display='none'">
   <div style="background:white;border:3px solid #854d0e;border-radius:18px;padding:18px;max-width:560px;margin:20px auto;color:#1a202c" onclick="event.stopPropagation()">
@@ -579,7 +576,6 @@ fetch('./julia-aviso.html?v=' + Date.now())
     </div>
   </div>
 </div>
-
 <!-- MODAL 511 CHAPADMALAL / BRUSQUITAS -->
 <div id="modal-511-chapa" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto" onclick="this.style.display='none'">
   <div style="background:white;border:3px solid #9a3412;border-radius:18px;padding:18px;max-width:520px;margin:20px auto;color:#1a202c" onclick="event.stopPropagation()">
@@ -596,8 +592,6 @@ fetch('./julia-aviso.html?v=' + Date.now())
     <div style="margin-top:10px;background:#0f172a;color:#cbd5e1;border-radius:10px;padding:10px;font-size:11px;text-align:center">Para tiempo real usá app oficial Cuando Llega MDP o Mi Autobús / Moovit</div>
   </div>
 </div>
-
-
 <div id="modal-221" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto" onclick="this.style.display='none'">
   <div style="background:white;border:3px solid #0e7490;border-radius:14px;padding:16px;max-width:500px;margin:20px auto;color:#1a202c" onclick="event.stopPropagation()">
     <div style="display:flex;justify-content:space-between;align-items:center">
@@ -640,7 +634,6 @@ fetch('./julia-aviso.html?v=' + Date.now())
     <div style="margin-top:10px;font-size:10px;color:#64748b;text-align:center">Fuente: Moovit Oficial Costa Azul</div>
   </div>
 </div>
-
 <!-- SCRIPTS UNIFICADOS -->
 <script>
 // DÓLAR
@@ -672,7 +665,6 @@ async function dolar(){
  }catch(e){}
 }
 dolar();
-
 // CLIMA
 const CODIGOS_CLIMA={0:['☀️','Despejado'],1:['🌤️','Mayormente despejado'],2:['⛅','Parcialmente nublado'],3:['☁️','Nublado'],45:['🌫️','Niebla'],51:['🌦️','Llovizna'],61:['🌧️','Lluvia débil'],63:['🌧️','Lluvia'],80:['🌦️','Chubascos'],95:['⛈️','Tormenta']};
 async function clima(){
@@ -691,7 +683,6 @@ async function clima(){
   
   document.getElementById('c-min').textContent=Math.round(j.daily.temperature_2m_min[0])+'°';
   document.getElementById('c-max').textContent=Math.round(j.daily.temperature_2m_max[0])+'°';
-
   const nombresDia=['Hoy','Mañana'];
   document.getElementById('c-forecast').innerHTML=j.daily.time.map((fechaStr,i)=>{
     const [iconoD]=CODIGOS_CLIMA[j.daily.weather_code[i]]||['🌡️','—'];
@@ -712,7 +703,6 @@ async function clima(){
  }catch(e){}
 }
 clima();
-
 // QUINIELA
 let todas={Ciudad:[],Provincia:[],SantaFe:[],Cordoba:[],EntreRios:[],Uruguay:[]};
 const MAP={nacional:'Ciudad',ciudad:'Ciudad',provincia:'Provincia',santafe:'SantaFe',cordoba:'Cordoba',entrerios:'EntreRios',uruguay:'Uruguay'};
@@ -720,14 +710,11 @@ let datosCompletos=null;
 const horsARG=["Previa 10:15","Primera 12:00","Matutina 15:00","Vespertina 18:00","Nocturna 21:00"];
 const horsUY=["Vespertina 15:00","Nocturna 21:00"];
 let actual="Ciudad";
-
 function getHors(){return actual==="Uruguay"?horsUY:horsARG}
 function getListaSorteos(){return actual==="Uruguay"?["vespertina","nocturna"]:["previa","primera","matutina","vespertina","nocturna"]}
-
 function renderT(){
   document.getElementById('qt').innerHTML=Object.keys(todas).map(k=>`<div class="q-tab ${k===actual?'active':''}" onclick="actual='${k}';render()">${k}</div>`).join('');
 }
-
 function render(){
   renderT();
   document.getElementById('info-uy').style.display=actual==="Uruguay"?'block':'none';
@@ -742,7 +729,6 @@ function render(){
     return `<a href="./quiniela.html?loteria=${actual.toLowerCase()}&sorteo=${idSorteo}&fecha=${sel.value}" class="q-box${extra}"><div class="q-box-head">${h}</div><b>${num}</b></a>`;
   }).join('');
 }
-
 function fechaARG(off){
   const ahora=new Date();
   const partes=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Argentina/Buenos_Aires',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(ahora);
@@ -751,14 +737,12 @@ function fechaARG(off){
   base.setUTCDate(base.getUTCDate()+off);
   return base.toISOString().slice(0,10);
 }
-
 function etiquetaFecha(off,f){ 
   if(off===0) return 'Hoy - '+f.split('-').reverse().slice(0,2).join('/'); 
   if(off===-1) return 'Ayer - '+f.split('-').reverse().slice(0,2).join('/'); 
   const [y,m,d]=f.split('-'); 
   return `${d}/${m}/${y}`; 
 }
-
 const sel=document.getElementById('q-fecha');
 for(let i=0;i>=-29;i--){
   const f=fechaARG(i);
@@ -768,11 +752,9 @@ for(let i=0;i>=-29;i--){
   sel.appendChild(o);
 }
 sel.value=fechaARG(0);
-
 sel.addEventListener('change', () => { 
   cargarDia(sel.value); 
 });
-
 function cargarDia(fecha){
   const esHoy=fecha===fechaARG(0);
   document.getElementById('q-titulo').textContent=esHoy?'Quiniela Hoy - 6 Loterías':'Quiniela del '+fecha.split('-').reverse().join('/');
@@ -785,7 +767,6 @@ function cargarDia(fecha){
   }).catch(()=>{ datosCompletos={}; render(); });
 }
 cargarDia(sel.value);
-
 // TICKER AUTOMÁTICO
 function tickerDesdePagina(){
  const tg=document.getElementById('dolar-g');
@@ -809,7 +790,6 @@ function tickerDesdePagina(){
  }
 }
 setInterval(tickerDesdePagina,1500);
-
 // MAREAS
 async function mareas(){
  try{
@@ -835,8 +815,6 @@ async function mareas(){
  }
 }
 mareas();
-
-
 // ACCIONES DE MODALES (EDEA, 511, 221)
 document.getElementById('btn-edea').onclick = function(){
   document.getElementById('modal-edea').style.display = 'block';
@@ -853,7 +831,6 @@ document.getElementById('btn-edea').onclick = function(){
       document.getElementById('texto-edea').innerText = 'No se pudo cargar ahora. Probá en unos minutos.';
     });
 };
-
 document.getElementById('btn-511-alfar').onclick = function(){
   document.getElementById('modal-511-alfar').style.display = 'block';
 };
@@ -863,23 +840,18 @@ document.getElementById('btn-511-acantilados').onclick = function(){
 document.getElementById('btn-511-chapa').onclick = function(){
   document.getElementById('modal-511-chapa').style.display = 'block';
 };
-
 document.getElementById('btn-221').onclick = function(){
   document.getElementById('modal-221').style.display = 'block';
 };
-
 // CONSULTADOR DINÁMICO DE TIEMPO REAL POR PARADA
 function consultarArriboEnVivo(idParada){
   const cont = document.getElementById('contenedor-tiempo-real');
   cont.innerHTML = '<div style="text-align:center;padding:12px;color:#0284c7;font-weight:800;font-size:12px">🔄 Conectando con la red municipal...</div>';
-
   setTimeout(() => {
     const min1 = Math.floor(Math.random() * 7) + 3;
     const min2 = min1 + Math.floor(Math.random() * 12) + 14;
-
     let lineaNombre = "511";
     if(idParada === "1055") lineaNombre = "522 / 523";
-
     cont.innerHTML = `
       <div style="background:#fff;border:1.5px solid #0284c7;border-radius:12px;padding:10px;display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
         <div>
@@ -891,7 +863,6 @@ function consultarArriboEnVivo(idParada){
           <div style="font-size:10px;color:#64748b;font-weight:700">Próximo coche</div>
         </div>
       </div>
-
       <div style="background:#fff;border:1px solid #cbd5e1;border-radius:12px;padding:10px;display:flex;align-items:center;justify-content:space-between">
         <div>
           <span style="background:#0284c7;color:#fff;font-weight:900;padding:4px 8px;border-radius:6px;font-size:13px">${lineaNombre}</span>
@@ -905,7 +876,6 @@ function consultarArriboEnVivo(idParada){
     `;
   }, 400);
 }
-
 // BUSCADOR
 (function(){
  const input=document.getElementById('buscadorUnificado');
@@ -919,7 +889,7 @@ function consultarArriboEnVivo(idParada){
  });
 })();
 </script>
-<script src="avisos.js?v=1"></script>
+<script src="avisos.js?v=3"></script>
 <!-- MODAL PODOLOGA EN INDEX PRINCIPAL - COPIA EXACTA DEL AVISO -->
 <div id="modal-podologa-index" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto;" onclick="this.style.display='none'">
   <div style="background:#FFFEFB;border:2px solid #C9B8A3;border-radius:26px;overflow:hidden;max-width:440px;width:100%;margin:20px auto;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.4);" onclick="event.stopPropagation()">
@@ -956,6 +926,5 @@ function consultarArriboEnVivo(idParada){
     </div>
   </div>
 </div>
-
 </body>
 </html>
