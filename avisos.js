@@ -293,7 +293,7 @@ async function cargarAvisoJulia() {
     console.error("Error cargando Fonoaudiología:", error);
   }
 }
-cargarAvisoJulia();
+//cargarAvisoJulia();
 
 // ==========================================
 // 4. CARGA PROVEEDURÍA KEVIN
