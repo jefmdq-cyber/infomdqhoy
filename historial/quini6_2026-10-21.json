@@ -1,0 +1,96 @@
+{
+  "fecha": "Miércoles 21 de octubre",
+  "numero": "3419",
+  "tradicional": {
+    "pozo": "1.100.000.000 (Vacante)",
+    "resultados": [
+      4,
+      5,
+      32,
+      39,
+      40,
+      44
+    ],
+    "ganadores": [
+      {
+        "aciertos": "6",
+        "cantidad": 0,
+        "monto": "Vacante"
+      },
+      {
+        "aciertos": "5",
+        "cantidad": 12,
+        "monto": "3.460.491"
+      },
+      {
+        "aciertos": "4",
+        "cantidad": 604,
+        "monto": "20.625,44"
+      }
+    ]
+  },
+  "segunda": {
+    "pozo": "1.100.000.000 (Vacante)",
+    "resultados": [
+      4,
+      20,
+      21,
+      24,
+      42,
+      45
+    ],
+    "ganadores": [
+      {
+        "aciertos": "6",
+        "cantidad": 0,
+        "monto": "Vacante"
+      },
+      {
+        "aciertos": "5",
+        "cantidad": 10,
+        "monto": "4.152.589,20"
+      },
+      {
+        "aciertos": "4",
+        "cantidad": 767,
+        "monto": "16.242,20"
+      }
+    ]
+  },
+  "revancha": {
+    "pozo": "4.684.503.196,80 (Premio Individual)",
+    "resultados": [
+      1,
+      2,
+      11,
+      14,
+      28,
+      33
+    ],
+    "ganadores": [
+      {
+        "aciertos": "6",
+        "cantidad": 1,
+        "monto": "4.684.503.196,80"
+      }
+    ]
+  },
+  "siempre_sale": {
+    "pozo": "31.042.872 (Premio Individual)",
+    "resultados": [
+      13,
+      21,
+      39,
+      42,
+      43,
+      45
+    ],
+    "ganadores": [
+      {
+        "aciertos": "5",
+        "cantidad": 12,
+        "monto": "31.042.872"
+      }
+    ]
+  }
+}

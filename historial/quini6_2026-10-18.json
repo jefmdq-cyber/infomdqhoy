@@ -1,0 +1,36 @@
+{
+  "fecha": "Domingo 18 de octubre",
+  "numero": "3418",
+  "tradicional": {
+    "pozo": "1.418.485.786 (Premio Individual)",
+    "resultados": [7, 9, 11, 17, 25, 31],
+    "ganadores": [
+      { "aciertos": "6", "cantidad": 2, "monto": "1.418.485.786" },
+      { "aciertos": "5", "cantidad": 169, "monto": "334.605" },
+      { "aciertos": "4", "cantidad": 5474, "monto": "4.000" }
+    ]
+  },
+  "segunda": {
+    "pozo": "1.100.000.000",
+    "resultados": [4, 10, 16, 21, 27, 38],
+    "ganadores": [
+      { "aciertos": "6", "cantidad": 0, "monto": "Vacante" },
+      { "aciertos": "5", "cantidad": 37, "monto": "1.528.334" },
+      { "aciertos": "4", "cantidad": 2070, "monto": "8.195" }
+    ]
+  },
+  "revancha": {
+    "pozo": "4.254.526.426",
+    "resultados": [1, 5, 26, 40, 41, 43],
+    "ganadores": [
+      { "aciertos": "6", "cantidad": 0, "monto": "Vacante" }
+    ]
+  },
+  "siempre_sale": {
+    "pozo": "16.906.114 (Premio Individual)",
+    "resultados": [1, 10, 19, 25, 37, 44],
+    "ganadores": [
+      { "aciertos": "5", "cantidad": 30, "monto": "16.906.114" }
+    ]
+  }
+}
