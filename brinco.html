@@ -134,6 +134,8 @@ function actualizarCabecerasDinamicas(){
     select.innerHTML = `
       <option value="brinco.json">Concurso ${miDataJson.numero} - ${miDataJson.fecha} - OFICIAL</option>
       <option value="historial/brinco_${parseInt(miDataJson.numero)-1}.json">Concurso ${parseInt(miDataJson.numero)-1}</option>
+      <option value="historial/brinco_2026-10-18.json">Sorteo 1376 - 18/10/2026</option>
+      <option value="historial/brinco_2026-10-19.json">Sorteo 1283 - 19/10/2026</option>
     `;
     select.dataset.loaded = "true";
     select.onchange = (e) => {
