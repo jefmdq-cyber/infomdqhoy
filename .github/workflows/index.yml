@@ -23,28 +23,73 @@ jobs:
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
         run: |
-          python -c '
-          import os, json, requests, xml.etree.ElementTree as ET
+          python << 'PY'
+          import os, json, requests, xml.etree.ElementTree as ET, time
           from google.oauth2 import service_account
           import google.auth.transport.requests
 
-          # 1. Cargar credenciales
-          creds_dict = json.loads(os.environ["GOOGLE_CREDENTIALS"])
+          print("=== INICIO INDEXACION ===")
+          
+          # 1. Credenciales
+          creds_raw = os.environ.get("GOOGLE_CREDENTIALS","")
+          if not creds_raw:
+              print("ERROR: GOOGLE_CREDENTIALS vacio")
+              exit(1)
+          creds_dict = json.loads(creds_raw)
           SCOPES = ["https://www.googleapis.com/auth/indexing"]
           credentials = service_account.Credentials.from_service_account_info(creds_dict, scopes=SCOPES)
           credentials.refresh(google.auth.transport.requests.Request())
+          print("Credenciales OK")
 
-          # 2. Leer tu sitemap.xml del repo
-          tree = ET.parse("sitemap.xml")
+          # 2. Leer sitemap.xml
+          sitemap_path = "sitemap.xml"
+          if not os.path.exists(sitemap_path):
+              print(f"ERROR: No existe {sitemap_path}")
+              print(f"Archivos en raiz: {os.listdir('.')}")
+              exit(1)
+          
+          tree = ET.parse(sitemap_path)
+          root = tree.getroot()
+          print(f"Root tag: {root.tag}")
+          
+          # Busca sin y con namespace para no fallar
+          urls = []
+          # Con namespace
           ns = {"ns": "http://www.sitemaps.org/schemas/sitemap/0.9"}
-          urls = [elem.text for elem in tree.findall(".//ns:loc", ns)]
+          urls = [elem.text.strip() for elem in tree.findall(".//ns:loc", ns) if elem.text]
+          print(f"URLs encontradas con namespace: {len(urls)}")
+          
+          if not urls:
+              # Sin namespace fallback
+              urls = [elem.text.strip() for elem in root.iter() if elem.tag.endswith('loc') and elem.text]
+              print(f"URLs encontradas sin namespace: {len(urls)}")
+
+          if not urls:
+              print("ERROR: No se encontraron URLs en sitemap.xml")
+              print(ET.tostring(root, encoding='unicode')[:1000])
+              exit(1)
+
+          print(f"\n=== SE ENCONTRARON {len(urls)} URLs ===")
+          for i,u in enumerate(urls,1):
+              print(f"{i}/{len(urls)}: {u}")
 
           endpoint = "https://indexing.googleapis.com/v3/urlNotifications:publish"
           headers = {"Content-Type": "application/json", "Authorization": f"Bearer {credentials.token}"}
 
-          # 3. Enviar cada URL
-          for url in urls:
+          print(f"\n=== ENVIANDO A GOOGLE ===")
+          ok = 0
+          for idx, url in enumerate(urls,1):
               body = {"url": url, "type": "URL_UPDATED"}
-              r = requests.post(endpoint, headers=headers, json=body)
-              print(f"{url} -> {r.status_code} - {r.text}")
-          '
+              try:
+                  r = requests.post(endpoint, headers=headers, json=body, timeout=15)
+                  print(f"[{idx}/{len(urls)}] {url} -> {r.status_code}")
+                  if r.status_code in [200,204]:
+                      ok+=1
+                  else:
+                      print(f"  Respuesta: {r.text[:200]}")
+                  time.sleep(1)
+              except Exception as e:
+                  print(f"[{idx}/{len(urls)}] {url} -> ERROR {e}")
+
+          print(f"\n=== RESUMEN FINAL: {ok}/{len(urls)} indexadas OK ===")
+          PY
