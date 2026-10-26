@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /historial/?limit=*
 
 Sitemap: https://infomdqhoy.pages.dev/sitemap.xml
