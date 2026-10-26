@@ -1,0 +1,35 @@
+{
+  "fecha": "11/10/2026",
+  "numero": "2449",
+"proximo_fecha": "18/10/2026",
+    "proximo_numero": "2450",
+   "proximo_pozo": "Pozo estimado en juego: $400.000.000",
+    "proximo_carton_color": "",
+    "tradicional": {
+    "resultados": [1, 4, 6, 7, 8, 12, 13, 14, 15, 18, 19, 20, 23, 24, 25],
+    "pozo": "$1.269.721.818 (1 ganador)",
+    "ganadores": [
+      { "aciertos": 15, "cantidad": 1, "monto": "1.269.721.818" },
+      { "aciertos": 14, "cantidad": 21, "monto": "694.235" },
+      { "aciertos": 13, "cantidad": 693, "monto": "63.501" },
+      { "aciertos": 12, "cantidad": 7753, "monto": "19.465" }
+    ]
+  },
+  "rekino": {
+    "resultados": [2, 4, 8, 10, 11, 12, 13, 14, 16, 19, 21, 23, 24, 25],
+    "pozo": "$5.399.610",
+    "ganadores": [
+      { "aciertos": 14, "cantidad": 1, "monto": "5.399.610" }
+    ]
+  },
+  "carton": {
+    "premios_efectivo": "5 premios de $3.000.000 c/u al número de cartón",
+    "numeros_ganadores_carton": [
+      "529 295 - Santiago del Estero",
+      "396 444 - Corrientes",
+      "507 109 - Jujuy",
+      "855 356 - Santa Fe",
+      "500 553 - La Rioja"
+    ]
+  }
+}

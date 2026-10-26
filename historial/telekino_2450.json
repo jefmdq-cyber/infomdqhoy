@@ -1,0 +1,81 @@
+{
+  "fecha": "18/10/2026",
+  "numero": "2450",
+  "proximo_fecha": "25/10/2026",
+  "proximo_numero": "2451",
+  "proximo_pozo": "Pozo estimado en juego: $553.150.856",
+  "proximo_carton_color": "Violeta",
+  "tradicional": {
+    "resultados": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      11,
+      13,
+      14,
+      15,
+      16,
+      18,
+      21,
+      22
+    ],
+    "pozo": "$312.829.406 (Vacante)",
+    "ganadores": [
+      {
+        "aciertos": 15,
+        "cantidad": 0,
+        "monto": "312.829.406"
+      },
+      {
+        "aciertos": 14,
+        "cantidad": 26,
+        "monto": "662.982"
+      },
+      {
+        "aciertos": 13,
+        "cantidad": 639,
+        "monto": "81.426"
+      },
+      {
+        "aciertos": 12,
+        "cantidad": 7042,
+        "monto": "25.339"
+      }
+    ]
+  },
+  "rekino": {
+    "resultados": [
+      1,
+      4,
+      7,
+      8,
+      9,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      19,
+      20,
+      21,
+      24
+    ],
+    "pozo": "$336.014",
+    "ganadores": [
+      {
+        "aciertos": 14,
+        "cantidad": 19,
+        "monto": "336.014"
+      }
+    ]
+  },
+  "carton": {
+    "premios_efectivo": "5 premios de $3.000.000 c/u al número de cartón",
+    "numeros_ganadores_carton": []
+  }
+}
