@@ -386,25 +386,84 @@ async function cargarAvisoLavanderia() {
   try {
     const response = await fetch('./aviso-lavanderia.json?v=' + Date.now());
     if (!response.ok) return;
+    
     const nannin = await response.json();
     const contenedor = document.getElementById('contenedor-aviso-lavanderia') || asegurarContenedor('contenedor-aviso-lavanderia');
 
     if (contenedor && nannin) {
-      contenedor.innerHTML = '<div class="nannin-card" id="'+slug(nannin.id)+'" style="box-sizing:border-box;width:100%;max-width:760px;margin:0 auto 20px auto;background:#ffffff;border-radius:28px;overflow:hidden;box-shadow:0 14px 35px rgba(11,19,43,.12);border:1px solid #e5e7eb;font-family:Inter,Arial,sans-serif;color:#0b132b;cursor:pointer;" title="Tocá para ver más grande">'
-        +'<div style="background:linear-gradient(135deg,#0284c7,#0369a1);padding:18px 20px;color:white;display:flex;align-items:center;justify-content:space-between;">'
-        +'<div style="font-size:20px;font-weight:900;text-transform:uppercase;">'+nannin.nombre+'</div>'
-        +'<div style="font-size:24px;">🧺</div></div>'
-        +'<div style="padding:16px;">'
-        +(nannin.imagen_fachada ? '<div style="border-radius:16px;overflow:hidden;margin-bottom:12px;"><img src="'+nannin.imagen_fachada+'" alt="'+nannin.nombre+'" style="width:100%;height:auto;display:block;"></div>' : '')
-        +'<div style="font-size:13px;color:#475569;font-weight:700;margin-bottom:12px;">'+nannin.subtitulo+'</div>'
-        +(nannin.whatsapp_url ? '<a href="'+nannin.whatsapp_url+'" target="_blank" onclick="event.stopPropagation()" style="display:block;background:#25D366;color:white;text-align:center;padding:11px;border-radius:12px;font-weight:900;text-decoration:none;margin-bottom:8px;">'+nannin.whatsapp_btn_text+'</a>' : '')
-        +'</div></div>';
+      contenedor.innerHTML = `
+        <div class="nannin-card" id="${nannin.id}" style="box-sizing:border-box;width:100%;max-width:760px;margin:0 auto 20px auto;background:#ffffff;border-radius:28px;overflow:hidden;box-shadow:0 14px 35px rgba(11,19,43,.12);border:1px solid #e5e7eb;font-family:Inter,Arial,sans-serif;color:#0b132b;cursor:pointer;" title="Tocá para ver más grande">
+          
+          <div class="nannin-hero" style="position:relative;overflow:hidden;background:#e5e7eb;">
+            <img src="${nannin.imagen_fachada}" id="heroImg" alt="${nannin.nombre} - ${nannin.slogan}" loading="lazy" width="800" height="800" style="display:block;width:100%;height:auto;">
+            <div class="nannin-badge" style="position:absolute;top:15px;right:15px;background:#1e1b4b;color:#fff;font-size:11px;font-weight:900;padding:6px 12px;border-radius:999px;display:flex;align-items:center;gap:6px;">
+              <span style="width:8px;height:8px;background:#22c55e;border-radius:50%;display:inline-block;"></span> ${nannin.badge_top}
+            </div>
+          </div>
+
+          <div class="nannin-body" style="padding:20px;">
+            <h1 class="nannin-title" style="margin:0 0 6px 0;font-size:24px;font-weight:900;color:#0b132b;line-height:1.1;">${nannin.nombre.replace('DE NANNIN', '<br>DE NANNIN')}</h1>
+            <div class="nannin-subtitle" style="font-size:12px;font-weight:800;color:#64748b;letter-spacing:0.5px;margin-bottom:14px;">${nannin.slogan}</div>
+
+            <div class="nannin-pills" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;">
+              <div style="background:#fef3c7;color:#92400e;font-size:11px;font-weight:900;padding:6px 10px;border-radius:10px;">LAVADO • SECADO • PLANCHADO</div>
+              <div style="background:#f3e8ff;color:#6b21a8;font-size:11px;font-weight:900;padding:6px 10px;border-radius:10px;">ROPA • ACOLCHADOS • FRAZADAS • TOALLAS</div>
+            </div>
+
+            <div class="badges" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+              <div style="background:#f8fafc;border:1px solid #e2e8f0;padding:10px;border-radius:12px;font-size:12px;font-weight:900;display:flex;align-items:center;gap:8px;">
+                <span style="width:22px;height:22px;background:#1E1B4B;color:#FFC700;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;">$</span> CALIDAD A BUEN PRECIO
+              </div>
+              <div style="background:#f0fdf4;border:1px solid #dcfce7;padding:10px;border-radius:12px;font-size:12px;font-weight:900;color:#166534;display:flex;align-items:center;gap:8px;">
+                🚚 RETIRO + ENTREGA GRATIS
+              </div>
+            </div>
+
+            <div class="nannin-promo" style="background:linear-gradient(135deg,#fdf4ff,#fae8ff);border:2px dashed #e879f9;border-radius:16px;padding:14px;text-align:center;margin-bottom:16px;">
+              <h3 style="margin:0 0 10px 0;font-size:13px;font-weight:900;color:#701a75;line-height:1.3;">${nannin.promo_titulo}<br><span style="color:#a21caf;font-size:14px;">${nannin.promo_sub}</span></h3>
+              
+              <div class="grid6" style="display:grid;grid-template-columns:repeat(6, 1fr);gap:6px;">
+                <div style="background:white;padding:8px 4px;border-radius:10px;border:1px solid #f0abfc;font-size:11px;font-weight:800;color:#86198f;"><b>1ª</b><br><small style="font-size:8px;">VISITA</small><div style="color:#ec4899;margin-top:2px;">♥</div></div>
+                <div style="background:white;padding:8px 4px;border-radius:10px;border:1px solid #f0abfc;font-size:11px;font-weight:800;color:#86198f;"><b>2ª</b><br><small style="font-size:8px;">VISITA</small><div style="color:#ec4899;margin-top:2px;">♥</div></div>
+                <div style="background:white;padding:8px 4px;border-radius:10px;border:1px solid #f0abfc;font-size:11px;font-weight:800;color:#86198f;"><b>3ª</b><br><small style="font-size:8px;">VISITA</small><div style="color:#ec4899;margin-top:2px;">♥</div></div>
+                <div style="background:white;padding:8px 4px;border-radius:10px;border:1px solid #f0abfc;font-size:11px;font-weight:800;color:#86198f;"><b>4ª</b><br><small style="font-size:8px;">VISITA</small><div style="color:#ec4899;margin-top:2px;">♥</div></div>
+                <div style="background:white;padding:8px 4px;border-radius:10px;border:1px solid #f0abfc;font-size:11px;font-weight:800;color:#86198f;"><b>5ª</b><br><small style="font-size:8px;">VISITA</small><div style="color:#ec4899;margin-top:2px;">♥</div></div>
+                <div style="background:#f0abfc;color:white;padding:8px 4px;border-radius:10px;font-size:11px;font-weight:900;"><b>6ª</b><br><small style="font-size:8px;color:#fae8ff;">GRATIS</small><div style="margin-top:2px;">🎉</div></div>
+              </div>
+            </div>
+
+            <div class="buttons" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+              <a class="btn btn-wa" href="${nannin.whatsapp_url}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:white;padding:12px;border-radius:14px;font-weight:900;font-size:13px;text-decoration:none;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.82 9.82 0 0012.04 2C6.58 2 2.15 6.44 2.15 11.9c0 1.75.46 3.45 1.33 4.96L2 22l5.26-1.38a9.84 9.84 0 004.78 1.22h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.65-1.03-5.13-2.9-7zM12.05 20.3h-.01a8.19 8.19 0 01-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 01-1.27-4.54c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 012.41 5.82c0 4.54-3.7 8.24-8.24 8.24zm4.52-6.15c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13s-.64.81-.79.97-.29.19-.54.06c-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.14-.25-.02-.38.1-.51.11-.11.25-.29.37-.43.12-.15.16-.25.24-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07s.89 2.4 1.01 2.57c.12.17 1.75 2.67 4.24 3.75.59.26 1.05.41 1.41.52.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+                WhatsApp
+              </a>
+
+              <a class="btn btn-ig" href="${nannin.instagram_url}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);color:white;padding:12px;border-radius:14px;font-weight:900;font-size:13px;text-decoration:none;">
+                📸 ${nannin.instagram_user}
+              </a>
+
+              <a class="btn btn-fb" href="${nannin.facebook_url}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#1877f2;color:white;padding:12px;border-radius:14px;font-weight:900;font-size:13px;text-decoration:none;grid-column:1/-1;">
+                f ${nannin.facebook_text}
+              </a>
+
+              <a class="btn btn-map" href="${nannin.maps_url}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#0f172a;color:white;padding:12px;border-radius:14px;font-weight:900;font-size:13px;text-decoration:none;grid-column:1/-1;">
+                📍 ${nannin.maps_text}
+              </a>
+            </div>
+
+            <div class="footer" style="text-align:center;font-size:11px;color:#64748b;font-weight:700;margin-top:16px;line-height:1.4;">
+              ${nannin.pie_texto}
+            </div>
+          </div>
+        </div>
+      `;
       try { contenedor.appendChild(crearFooterSinIG(nannin.id, nannin.nombre)); } catch(e) {}
     }
   } catch (error) {
-    console.error("Error cargando Lavandería de Nannin:", error);
+    console.error("Error cargando aviso de Lavandería de Nannin:", error);
   }
 }
+
 cargarAvisoLavanderia();
 // AUTO-SCROLL PARA LINKS TIPO #kiosco-los-melli
 function irAlAvisoPorHash() {
