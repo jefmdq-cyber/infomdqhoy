@@ -1,6 +1,9 @@
 User-agent: *
 Allow: /
+
+# Bloquea solo APIs y archivos que no aportan a Google
 Disallow: /api/
 Disallow: /historial/?limit=*
+Disallow: /sw.js.bak
 
 Sitemap: https://infomdqhoy.pages.dev/sitemap.xml
