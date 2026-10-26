@@ -1,0 +1,85 @@
+{
+  "numero": "1376",
+  "fecha": "18/10/2026",
+  "hora": "21:00",
+  "lugar": "Santa Fe",
+  "sorteo_completo": "Concurso 1376 • 18/10/2026 - 21:00hs - Santa Fe",
+  "proximo_numero": "1377",
+  "proximo_fecha": "25/10/2026",
+  "proximo_hora": "21:00",
+  "proximo_pozo": "$630.000.000",
+  "proximo_valor_apuesta": "$1.500",
+  "fecha_caducidad": "02/11/2026",
+  "extracto_oficial": "PENNO, ANDREA ESCRIBANA C/ REG.ESP. - ORECCHIA, MARÍA JOSÉ AUTORIDAD DE SORTEO",
+  "tradicional": {
+    "resultados": [
+      7,
+      22,
+      26,
+      33,
+      34,
+      39
+    ],
+    "resultados_formateados": [
+      "07",
+      "22",
+      "26",
+      "33",
+      "34",
+      "39"
+    ],
+    "pozo_texto": "VACANTE 6 aciertos",
+    "ganadores": [
+      {
+        "premio": "1º Premio 6 aciertos",
+        "cantidad": "VACANTE*",
+        "monto": "531.408.765,00"
+      },
+      {
+        "premio": "2º Premio 5 aciertos",
+        "cantidad": 5,
+        "monto": "1.313.150,00"
+      },
+      {
+        "premio": "3º Premio 4 aciertos",
+        "cantidad": 347,
+        "monto": "6.244,00"
+      },
+      {
+        "premio": "4º Premio 3 aciertos",
+        "cantidad": 5556,
+        "monto": "1.500,00"
+      },
+      {
+        "premio": "Premio Estímulo Agenciero",
+        "cantidad": "VACANTE",
+        "monto": "5.845.496,41"
+      }
+    ],
+    "nota": "Dicho pozo pasa a incrementar el primer premio del concurso siguiente según artículo 33º del reglamento"
+  },
+  "junior": {
+    "resultados": [
+      5,
+      12,
+      20,
+      23,
+      30,
+      38
+    ],
+    "resultados_formateados": [
+      "05",
+      "12",
+      "20",
+      "23",
+      "30",
+      "38"
+    ],
+    "pozo": "32.818.461,00",
+    "aciertos": 5,
+    "ganadores": 13,
+    "premio_por_apuesta": "2.524.497,00",
+    "estimulo": "328.184,61",
+    "nota": "Premio NO acumulable - Siempre Sale"
+  }
+}
