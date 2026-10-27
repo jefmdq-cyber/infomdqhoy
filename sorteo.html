@@ -27,10 +27,10 @@ body{background:#f8fafc;color:#0b132b;padding-bottom:90px}
 .grid{display:grid;grid-template-columns:repeat(1,1fr);gap:12px;margin-top:14px}
 @media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr)}}
 .form-card{background:white;border-radius:20px;border:2px solid #0f172a;padding:20px;margin-top:20px;box-shadow:0 8px 24px rgba(15,23,42,0.08)}
-.input{width:100%;padding:14px 16px;border-radius:999px;border:2px solid #0f172a;background:white;font-weight:700;font-size:14px;outline:none;margin-bottom:12px;box-shadow:0 4px 14px rgba(15,23,42,0.04)}
+.input{width:100%;padding:14px 16px;border-radius:999px;border:2px solid #0f172a;background:white;color:#0f172a !important;font-weight:700;font-size:14px;outline:none;margin-bottom:12px;box-shadow:0 4px 14px rgba(15,23,42,0.04)}
 .input:focus{border-color:#a21caf}
-.input.amarillo{background:#fef9c3}
-.btn-participar{width:100%;padding:14px;border-radius:999px;border:none;background:linear-gradient(135deg,#a21caf,#ec4899);color:white;font-weight:900;font-size:15px;cursor:pointer;transition:opacity 0.2s}
+.input.amarillo{background:#fef9c3;color:#0f172a !important}
+.input::placeholder{color:#64748b;opacity:1}.btn-participar{width:100%;padding:14px;border-radius:999px;border:none;background:linear-gradient(135deg,#a21caf,#ec4899);color:white;font-weight:900;font-size:15px;cursor:pointer;transition:opacity 0.2s}
 .btn-participar:disabled{opacity:0.4;cursor:not-allowed}
 .check-wrap{display:flex;gap:10px;align-items:flex-start;margin:14px 0;font-size:12px;line-height:1.4}
 .terminos-card{background:#0b132b;color:#cbd5e1;border-radius:16px;padding:20px;margin-top:20px;font-size:12px;line-height:1.6}
