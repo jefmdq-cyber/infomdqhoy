@@ -1,9 +1,9 @@
 name: Quiniela 20 TODOS los sorteos
 on:
   schedule:
-    - cron: '0,20,40 13-23 * * *'
-    - cron: '0,20,40 0-1 * * *'
+      - cron: '*/20 13-23,0-1 * * *'
   workflow_dispatch:
+jobs:
   actualizar:
     runs-on: ubuntu-latest
     permissions:
