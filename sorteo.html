@@ -85,7 +85,7 @@ body{background:#f8fafc;color:#0b132b;padding-bottom:90px}
 <b>Organizador:</b> INFO MDQ HOY - Mar del Plata Sur<br>
 <b>Vigencia:</b> 28/10/2026 al 20/11/2026 19hs<br>
 <b>Participación:</b> Libre y gratuita, sin obligación de compra, para mayores de 18 años residentes en Mar del Plata. Una participación por día por WhatsApp.<br>
-<b>Premios:</b> 1er $30.000 Farmaacia Vara, 2do $20.000 Amapola, 3er $10.000 Kiosco Los Mellis. No canjeables por dinero, no transferibles.<br>
+<b>Premios:</b> 1er $30.000 Farmacia Vara, 2do $20.000 Amapola, 3er $10.000 Kiosco Los Mellis. No canjeables por dinero, no transferibles.<br>
 <b>Mecánica:</b> Completar formulario con palabra clave del día escondida en toda la página. Cada formulario válido otorga un número de 4 cifras (0001 al 9999). Si el número elegido ya está tomado, se avisa.<br>
 <b>Sorteo:</b> 20/11/2026 19hs por app-sorteos.com / wheelofnames.com con video grabado. Resultados en sorteo.html.<br>
 <b>Ganadores:</b> Se contacta por WhatsApp dentro de 48hs. Si no responde en 72hs, se resortea.<br>
@@ -118,7 +118,7 @@ async function participarSorteo(e){
     const res=await fetch('/api/sorteo',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nombre,whatsapp,barrio,palabraClave,numeroElegido})});
     const data=await res.json();
     if(!res.ok){alert(data.error||"Error");btn.disabled=false;btn.innerText="Participar y obtener mi número";return;}
-    document.getElementById('resultado').innerHTML=`<div style="background:#dcfce7;border:2px solid #22c55e;border-radius:16px;padding:20px;text-align:center;margin-top:16px;"><div style="font-size:14px;font-weight:800;color:#15803d;">¡Listo ${nombre}!</div><div style="font-size:42px;font-weight:900;color:#14532d;margin:8px 0;letter-spacing:2px;">${data.numero}</div><div style="font-size:12px;color:#166534;">Tu número de 4 cifras. Guardalo. Sortea 15/11 19hs. Capacidad 0001 al 9999</div></div>`;
+    document.getElementById('resultado').innerHTML=`<div style="background:#dcfce7;border:2px solid #22c55e;border-radius:16px;padding:20px;text-align:center;margin-top:16px;"><div style="font-size:14px;font-weight:800;color:#15803d;">¡Listo ${nombre}!</div><div style="font-size:42px;font-weight:900;color:#14532d;margin:8px 0;letter-spacing:2px;">${data.numero}</div><div style="font-size:12px;color:#166534;">Tu número de 4 cifras. Guardalo. Sortea 20/11 19hs. Capacidad 0001 al 9999</div></div>`;
     document.getElementById('resultado').scrollIntoView({behavior:'smooth'});
     document.getElementById('formSorteo').reset();
     btn.disabled=false;btn.innerText="Participar y obtener mi número";
