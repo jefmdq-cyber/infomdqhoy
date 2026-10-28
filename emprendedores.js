@@ -38,9 +38,13 @@ if (Array.isArray(datos) && datos.length > 0) {
         }
 
         // 3. Añadimos la tarjeta completa a la página
-        if (cardEl) {
-            contenedor.appendChild(cardEl);
-        }
+if (cardEl) {
+  contenedor.appendChild(cardEl);
+  // CARTEL PALABRA CLAVE DESPUÉS DE MADY
+  if (e.id === "aviso-sabores-mady") {
+    contenedor.insertAdjacentHTML('beforeend', `<div id="palabra-hoy" style="max-width:480px;margin:14px auto;padding:12px 16px;background:#fef9c3;border:2px dashed #f59e0b;border-radius:14px;text-align:center;font-weight:900;font-size:13px">🔑 Palabra clave de hoy: <span style="color:#a21caf">PREMIOS</span></div>`);
+  }
+}
     });
 }
 })
