@@ -27,8 +27,8 @@ body{background:#f8fafc;color:#0b132b;padding-bottom:90px}
 .grid{display:grid;grid-template-columns:repeat(1,1fr);gap:12px;margin-top:14px}
 @media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr)}}
 .form-card{background:white;border-radius:20px;border:2px solid #0f172a;padding:20px;margin-top:20px;box-shadow:0 8px 24px rgba(15,23,42,0.08)}
-.input{width:100%;padding:14px 16px;border-radius:999px;border:2px solid #0f172a;background:white;font-weight:700;font-size:14px;outline:none;margin-bottom:12px;box-shadow:0 4px 14px rgba(15,23,42,0.04)}
-.input:focus{border-color:#a21caf}
+.input{width:100%;padding:14px 16px;border-radius:999px;border:2px solid #0f172a;background:white;color:#0b132b;font-weight:700;font-size:14px}
+
 .input.amarillo{background:#fef9c3}
 .btn-participar{width:100%;padding:14px;border-radius:999px;border:none;background:linear-gradient(135deg,#a21caf,#ec4899);color:white;font-weight:900;font-size:15px;cursor:pointer;transition:opacity 0.2s}
 .btn-participar:disabled{opacity:0.4;cursor:not-allowed}
@@ -60,11 +60,16 @@ body{background:#f8fafc;color:#0b132b;padding-bottom:90px}
 <p style="font-size:12px;color:#475569;margin-bottom:14px">1. Buscá la palabra clave de hoy en toda la página - 2. Completá el formulario - 3. Elegí tu número de 4 cifras o te asignamos uno</p>
 
 <form id="formSorteo" onsubmit="participarSorteo(event)">
-<input class="input" id="nombre" placeholder="Tu nombre" required>
-<input class="input" id="whatsapp" placeholder="WhatsApp Ej: 223 5..." required>
-<input class="input" id="barrio" placeholder="Barrio Ej: Alfar, Faro, Serena" required>
-<input class="input amarillo" id="palabraClave" placeholder="Palabra clave de hoy Ej: AMAPOLA" required>
-<input class="input" id="numeroElegido" placeholder="Elegí tu número 0001 al 9999 o dejá vacío (opcional)" maxlength="4" inputmode="numeric">
+<label style="font-size:11px;font-weight:900;color:#0f172a;margin:10px 0 4px 16px;display:block">Tu nombre</label>
+<input class="input" id="nombre" required>
+<label style="font-size:11px;font-weight:900;color:#0f172a;margin:10px 0 4px 16px;display:block">WhatsApp</label>
+<input class="input" id="whatsapp" placeholder="Ej: 223 5..." required>
+<label style="font-size:11px;font-weight:900;color:#0f172a;margin:10px 0 4px 16px;display:block">Barrio</label>
+<input class="input" id="barrio" placeholder="Ej: Alfar, Faro, Serena" required>
+<label style="font-size:11px;font-weight:900;color:#0f172a;margin:10px 0 4px 16px;display:block">Palabra clave de hoy</label>
+<input class="input amarillo" id="palabraClave" placeholder="Ej: AMAPOLA" required>
+<label style="font-size:11px;font-weight:900;color:#0f172a;margin:10px 0 4px 16px;display:block">Tu número (opcional)</label>
+<input class="input" id="numeroElegido" placeholder="0001 al 9999 o dejá vacío" maxlength="4" inputmode="numeric">
 <div class="check-wrap">
 <input type="checkbox" id="acepto" required style="margin-top:2px">
 <label for="acepto">Acepto las <a href="#bases" style="color:#a21caf;font-weight:800">bases y condiciones</a> y soy mayor de 18 años</label>
