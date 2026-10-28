@@ -2,23 +2,15 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>INFO MDQ SUR HOY | Alfar, Faro, Serena, Acantilados y Chapadmalal</title>
 <meta name="description" content="Dólar hoy, quiniela completa de 6 loterías, clima y empleos en Alfar, Faro, Serena, Acantilados y Chapadmalal, actualizado todo el día.">
 <link rel="canonical" href="https://infomdqhoy.pages.dev/">
-<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="robots" content="index, follow">
 <meta name="theme-color" content="#0f172a">
 <meta property="og:title" content="INFO MDQ SUR HOY | Alfar, Faro, Serena, Acantilados y Chapadmalal">
 <meta property="og:description" content="Dólar hoy, quiniela completa de 6 loterías, clima y empleos en Alfar, Faro, Serena, Acantilados y Chapadmalal.">
 <meta property="og:image" content="https://infomdqhoy.pages.dev/banner1.webp">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://infomdqhoy.pages.dev/">
-  <meta property="og:locale" content="es_AR">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="INFO MDQ SUR HOY | Alfar, Faro, Serena, Acantilados y Chapadmalal">
-  <meta name="twitter:description" content="Dólar hoy, quiniela completa de 6 loterías, clima y empleos en Alfar, Faro, Serena, Acantilados y Chapadmalal">
-  <link rel="icon" href="/icon-192.png">
-  <link rel="apple-touch-icon" href="/icon-512.png">  
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Fredoka:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -32,201 +24,447 @@
   --green-border:#10b981;
   --green-text:#34d399;
 }
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-[id]{scroll-margin-top:110px}
-body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
-a{color:inherit;text-decoration:none}
-#page-wrapper{overflow:hidden}
+*, *::before, *::after {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+html {
+  scroll-behavior:smooth;
+  overflow-x: hidden;
+  width: 100%;
+}
+[id] { scroll-margin-top:110px; }
+body {
+  font-family: Inter, system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.5;
+  overflow-x: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+a { color:inherit; text-decoration:none; }
+img, svg, iframe, video { max-width: 100% !important; height: auto !important; display: block; }
+#page-wrapper {
+  overflow: hidden;
+  width: 100%;
+  max-width: 100vw;
+  position: relative;
+}
 /* HEADER */
-#header-wrapper{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,0.03)}
-#header{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-#logo h1{font-family:Fredoka,sans-serif;font-size:26px;font-weight:800;letter-spacing:-0.5px;color:#0f172a}
-#logo span{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.6px;text-transform:uppercase;display:block;margin-top:-2px}
-#nav ul{list-style:none;display:flex;gap:6px;flex-wrap:wrap}
-#nav ul li a{display:block;padding:8px 14px;border-radius:999px;font-weight:700;font-size:13px;color:var(--muted);transition:.2s}
-#nav ul li.current a,#nav ul li a:hover{background:var(--ink);color:#fff}
+#header-wrapper {
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 2px 10px rgba(0,0,0,0.03);
+}
+#header {
+  max-width:1200px;
+  margin:0 auto;
+  padding:12px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:12px;
+}
+#logo h1 {
+  font-family:Fredoka,sans-serif;
+  font-size: clamp(20px, 5vw, 26px);
+  font-weight:800;
+  letter-spacing:-0.5px;
+  color:#0f172a;
+  word-break: break-word;
+}
+#logo span {
+  font-size:11px;
+  color:var(--muted);
+  font-weight:700;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+  display:block;
+  margin-top:-2px;
+}
 /* TICKER */
-#ticker-real{height:40px;background:#0b132b;display:flex;align-items:center;color:#f8fafc;font-size:12.5px;font-weight:600;overflow:hidden;position:sticky;top:58px;z-index:99;border-bottom:2px solid #1e293b}
-.ticker-track{display:inline-flex;white-space:nowrap;animation:scroll 35s linear infinite}
-.ticker-item{padding:0 20px;display:flex;gap:8px;align-items:center}
-@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+#ticker-real {
+  height:40px;
+  background:#0b132b;
+  display:flex;
+  align-items:center;
+  color:#f8fafc;
+  font-size:12.5px;
+  font-weight:600;
+  overflow:hidden;
+  position:sticky;
+  top:58px;
+  z-index:99;
+  border-bottom:2px solid #1e293b;
+  width: 100%;
+}
+.ticker-track {
+  display:inline-flex;
+  white-space:nowrap;
+  animation:scroll 35s linear infinite;
+  will-change: transform;
+}
+.ticker-item {
+  padding:0 16px;
+  display:flex;
+  gap:8px;
+  align-items:center;
+  border-right:1px solid rgba(255,255,255,.15);
+  font-weight:500;
+  flex-shrink: 0;
+}
+.ticker-dolar-item b { color:#4ade80; margin-right:4px; }
+.ticker-farmacia {
+  background:rgba(244,114,182,.15);
+  border:1px solid rgba(244,114,182,.3);
+  border-radius:20px;
+  padding:4px 12px !important;
+  margin:0 8px;
+}
+.badge-turn {
+  background:#f472b6;
+  color:#fff;
+  padding:2px 8px;
+  border-radius:10px;
+  font-weight:900;
+  font-size:.85em;
+}
+@keyframes scroll {
+  0% { transform:translateX(0); }
+  100% { transform:translateX(-50%); }
+}
 /* BANNER */
-#banner-wrapper{background:linear-gradient(135deg,#7244c9 0%,#1e293b 100%);padding:36px 20px;border-bottom:4px solid #3b82f6}
-#banner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
-#banner h2{font-family:Fredoka,sans-serif;font-size:40px;line-height:1;font-weight:800;color:#fff;letter-spacing:-1px}
-#banner p{color:#cbd5e1;margin-top:10px;font-size:15px}
-.buttons{list-style:none;display:flex;flex-direction:column;gap:10px}
-.button{display:block;text-align:center;padding:13px 18px;border-radius:12px;font-weight:800;font-size:14px;transition:.2s}
-.button.large{background:#3b82f6;color:#fff;box-shadow:0 4px 12px rgba(59,130,246,0.3)}
-.button.large:hover{background:#2563eb}
-.button.alt{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2)}
-.button.alt:hover{background:rgba(255,255,255,.2)}
+#banner-wrapper {
+  background:linear-gradient(135deg,#7244c9 0%,#1e293b 100%);
+  padding:24px 16px;
+  border-bottom:4px solid #3b82f6;
+}
+#banner {
+  max-width:1200px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+#banner h2 {
+  font-family:Fredoka,sans-serif;
+  font-size: clamp(24px, 6vw, 40px);
+  line-height:1.1;
+  font-weight:800;
+  color:#fff;
+  letter-spacing:-0.5px;
+  word-break: break-word;
+}
+#banner p {
+  color:#cbd5e1;
+  margin-top:6px;
+  font-size: clamp(13px, 3.5vw, 15px);
+}
 /* BUSCADOR */
-.search-wrap{max-width:1200px;margin:20px auto 0;padding:0 20px;position:relative}
-.search-box{position:relative}
-.search-box input{width:100%;padding:14px 18px 14px 46px;border-radius:999px;border:2px solid #cbd5e1;font-weight:700;font-size:14px;outline:none;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.04);transition:.2s}
-.search-box input:focus{border-color:#3b82f6}
-.search-box span{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:16px}
+.search-wrap {
+  max-width:1200px;
+  margin:16px auto 0;
+  padding:0 16px;
+  position:relative;
+}
+.search-box { position:relative; }
+.search-box input {
+  width:100%;
+  padding:12px 16px 12px 42px;
+  border-radius:999px;
+  border:2px solid #cbd5e1;
+  font-weight:700;
+  font-size:14px;
+  outline:none;
+  background:#fff;
+  box-shadow:0 2px 8px rgba(0,0,0,0.04);
+  transition:.2s;
+}
+.search-box input:focus { border-color:#3b82f6; }
+.search-box span {
+  position:absolute;
+  left:14px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:16px;
+}
 /* GRID DE FEATURES */
-#features-wrapper{max-width:1200px;margin:0 auto;padding:22px 20px}
-.row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.box{border-radius:var(--radius);background:var(--card);border:1px solid var(--line);box-shadow:0 6px 20px rgba(15,23,42,.05);overflow:hidden;transition:transform .2s, box-shadow .2s}
-.box:hover{transform:translateY(-3px);box-shadow:0 10px 25px rgba(15,23,42,.08)}
-.box.feature .inner{padding:20px}
-.box.feature h2{font-size:19px;font-weight:900}
-.box.feature header p{color:var(--muted);font-size:13px;font-weight:600;margin-top:2px}
+#features-wrapper {
+  max-width:1200px;
+  margin:0 auto;
+  padding:16px;
+}
+.row {
+  column-count: 3;
+  column-gap: 16px;
+}
+.row > div {
+  break-inside: avoid;
+  margin-bottom: 16px;
+}
+@media (max-width: 1100px) {
+  .row { column-count: 2; }
+}
+@media (max-width: 700px) {
+  .row { column-count: 1; }
+}
+.box {
+  border-radius:var(--radius);
+  background:var(--card);
+  border:1px solid var(--line);
+  box-shadow:0 6px 20px rgba(15,23,42,.05);
+  overflow:hidden;
+  transition:transform .2s, box-shadow .2s;
+  min-width: 0;
+}
+.box.feature .inner { padding:16px; }
+.box.feature h2 { font-size:18px; font-weight:900; }
+.box.feature header p { color:var(--muted); font-size:13px; font-weight:600; margin-top:2px; }
 /* TARJETA DÓLAR */
-.box-dolar{border-top:5px solid #10b981}
-.dolar-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
-.dolar-item{border:1.5px solid var(--green-border);border-radius:14px;padding:12px;text-align:center;font-weight:800;background:linear-gradient(180deg,#064e3b 0%,#042f2e 100%);color:#fff;box-shadow:0 4px 12px rgba(16,185,129,0.15)}
-.dolar-item .label{font-size:11px;color:#a7f3d0;letter-spacing:0.5px;text-transform:uppercase}
-.dolar-item .price{font-size:22px;font-weight:900;color:#34d399;margin:2px 0}
-.dolar-item .sub{font-size:11px;color:#6ee7b7;font-weight:600}
+.box-dolar { border-top:5px solid #10b981; }
+.dolar-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:12px;
+}
+.dolar-item {
+  border:1.5px solid var(--green-border);
+  border-radius:14px;
+  padding:10px 8px;
+  text-align:center;
+  font-weight:800;
+  background:linear-gradient(180deg,#064e3b 0%,#042f2e 100%);
+  color:#fff;
+  box-shadow:0 4px 12px rgba(16,185,129,0.15);
+  min-width: 0;
+}
+.dolar-item .label { font-size:10px; color:#a7f3d0; letter-spacing:0.5px; text-transform:uppercase; }
+.dolar-item .price { font-size: clamp(18px, 4vw, 22px); font-weight:900; color:#34d399; margin:2px 0; }
+.dolar-item .sub { font-size:10px; color:#6ee7b7; font-weight:600; }
 /* TARJETA CLIMA */
-.box-clima{
+.box-clima {
   border-top:5px solid #0284c7;
   background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
   color: #ffffff !important;
 }
-.box-clima h2, .box-clima header p {
-  color: #ffffff !important;
-}
+.box-clima h2, .box-clima header p { color: #ffffff !important; }
 /* TARJETA SERVICIOS */
-.box-servicios{border-top:5px solid #f97316}
+.box-servicios { border-top:5px solid #f97316; }
 /* QUINIELA */
-.q-card{width:100%;background:#1e293b;border-radius:24px;border:1px solid #334155;overflow:hidden;box-shadow:0 15px 35px rgba(0,0,0,0.3);margin-bottom:18px}
-.q-header{padding:20px}
-.badge-q{display:inline-flex;background:#1e3a8a;border:1.5px solid #3b82f6;color:#93c5fd;font-size:11px;font-weight:900;letter-spacing:1px;padding:5px 14px;border-radius:999px;text-transform:uppercase}
-.q-title{font-size:22px;font-weight:900;color:#f8fafc;margin-top:10px;letter-spacing:-0.5px}
-.q-date-bar{margin:14px 0 0;display:flex;align-items:center;gap:10px;background:#0f172a;border:1.5px solid #38bdf8;border-radius:14px;padding:10px 12px;flex-wrap:wrap}
-.q-date-label{font-size:13px;font-weight:800;color:#38bdf8;white-space:nowrap}
-.q-select{flex:1;border:1.5px solid #334155;background:#1e293b;border-radius:10px;padding:8px 12px;font-weight:700;font-size:13px;color:#f8fafc;outline:none;cursor:pointer}
-.q-btn{flex-shrink:0;background:linear-gradient(135deg,#0ea5e9,#0284c7);color:#fff;border:none;padding:8px 14px;border-radius:10px;font-weight:800;font-size:12px;cursor:pointer;box-shadow:0 4px 12px rgba(14,165,233,0.3)}
-.q-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:14px;background:#0f172a;padding:6px;border-radius:14px;border:1px solid #334155}
-.q-tab{padding:8px 2px;border-radius:10px;font-size:11.5px;font-weight:800;text-align:center;color:#94a3b8;cursor:pointer;transition:all 0.2s}
-.q-tab.active{background:#334155;color:#38bdf8;box-shadow:0 4px 6px rgba(0,0,0,0.2)}
-.q-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
-.q-box{background:#0f172a;border:1.5px solid #334155;border-radius:16px;padding:12px 10px;text-align:center;position:relative;display:block;text-decoration:none;transition:.2s}
-.q-box:hover{border-color:#38bdf8}
-.q-box-head{font-size:11px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
-.q-box b{display:block;font-family:'Fredoka',sans-serif;font-size:30px;font-weight:800;color:#f8fafc;letter-spacing:1px}
-.q-box.nocturna{grid-column:1/-1;background:linear-gradient(135deg,#78350f,#451a03);border-color:#f59e0b}
-.q-box.nocturna .q-box-head{color:#fef3c7}
-.q-box.nocturna b{font-size:42px;color:#fbbf24;text-shadow:0 2px 8px rgba(251,191,36,0.3)}
+.q-card {
+  width:100%;
+  background:#1e293b;
+  border-radius:20px;
+  border:1px solid #334155;
+  overflow:hidden;
+  box-shadow:0 15px 35px rgba(0,0,0,0.3);
+  margin-bottom:16px;
+}
+.q-header { padding:16px; }
+.badge-q {
+  display:inline-flex;
+  background:#1e3a8a;
+  border:1.5px solid #3b82f6;
+  color:#93c5fd;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:1px;
+  padding:4px 10px;
+  border-radius:999px;
+  text-transform:uppercase;
+  max-width: 100%;
+  white-space: normal;
+  text-align: center;
+}
+.q-title { font-size: clamp(18px, 4vw, 22px); font-weight:900; color:#f8fafc; margin-top:8px; letter-spacing:-0.5px; }
+.q-date-bar {
+  margin:12px 0 0;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:#0f172a;
+  border:1.5px solid #38bdf8;
+  border-radius:12px;
+  padding:8px 10px;
+  flex-wrap:wrap;
+}
+.q-date-label { font-size:12px; font-weight:800; color:#38bdf8; white-space:nowrap; }
+.q-select {
+  flex:1;
+  min-width:140px;
+  border:1.5px solid #334155;
+  background:#1e293b;
+  border-radius:8px;
+  padding:6px 10px;
+  font-weight:700;
+  font-size:12px;
+  color:#f8fafc;
+  outline:none;
+  cursor:pointer;
+}
+.q-tabs {
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:4px;
+  margin-top:12px;
+  background:#0f172a;
+  padding:4px;
+  border-radius:12px;
+  border:1px solid #334155;
+}
+.q-tab {
+  padding:8px 2px;
+  border-radius:8px;
+  font-size:11px;
+  font-weight:800;
+  text-align:center;
+  color:#94a3b8;
+  cursor:pointer;
+  transition:all 0.2s;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.q-tab.active { background:#334155; color:#38bdf8; box-shadow:0 4px 6px rgba(0,0,0,0.2); }
+.q-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:12px; }
+.q-box {
+  background:#0f172a;
+  border:1.5px solid #334155;
+  border-radius:14px;
+  padding:10px 8px;
+  text-align:center;
+  position:relative;
+  display:block;
+  text-decoration:none;
+  transition:.2s;
+  min-width: 0;
+}
+.q-box:hover { border-color:#38bdf8; }
+.q-box-head { font-size:10px; font-weight:800; color:#94a3b8; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:2px; }
+.q-box b { display:block; font-family:'Fredoka',sans-serif; font-size: clamp(22px, 5vw, 30px); font-weight:800; color:#f8fafc; letter-spacing:1px; }
+.q-box.nocturna { grid-column:1/-1; background:linear-gradient(135deg,#78350f,#451a03); border-color:#f59e0b; }
+.q-box.nocturna .q-box-head { color:#fef3c7; }
+.q-box.nocturna b { font-size: clamp(30px, 7vw, 42px); color:#fbbf24; text-shadow:0 2px 8px rgba(251,191,36,0.3); }
 /* SECCIÓN PRINCIPAL */
-#main-wrapper{max-width:1200px;margin:0 auto;padding:0 20px 30px;display:grid;grid-template-columns:2.1fr 0.9fr;gap:18px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:0 6px 18px rgba(15,23,42,.04);margin-bottom:18px}
-.card h3{font-size:17px;font-weight:900;margin-bottom:12px}
+#main-wrapper {
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 16px 24px;
+  display:grid;
+  grid-template-columns: 2.1fr 0.9fr;
+  gap:16px;
+}
+.card {
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:16px;
+  box-shadow:0 6px 18px rgba(15,23,42,.04);
+  margin-bottom:16px;
+  height: fit-content !important;
+  align-self: flex-start;
+  min-width: 0;
+}
+.card h3 { font-size:16px; font-weight:900; margin-bottom:10px; }
 /* BOTONES DE BARRIOS Y SERVICIOS */
-.barrios-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.barrio-btn{padding:14px 10px;border-radius:14px;font-weight:900;font-size:13.5px;text-align:center;display:block;border:2px solid transparent;transition:.2s}
-.barrio-btn:hover{transform:scale(1.02)}
-.btn-faro{background:#dbeafe;color:#1e40af;border-color:#bfdbfe}
-.btn-alfar{background:#dcfce7;color:#166534;border-color:#bbf7d0}
-.btn-serena{background:#fef9c3;color:#854d0e;border-color:#fef08a}
-.btn-acantilados{background:#ffedd5;color:#9a3412;border-color:#fed7aa}
-.btn-full{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 14px;border-radius:12px;font-weight:800;font-size:13px;border:none;cursor:pointer;text-decoration:none;transition:.2s}
-.btn-full:hover{opacity:0.9;transform:translateY(-1px)}
+.barrios-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.barrio-btn {
+  padding:12px 8px;
+  border-radius:12px;
+  font-weight:900;
+  font-size:12.5px;
+  text-align:center;
+  display:block;
+  border:2px solid transparent;
+  transition:.2s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.barrio-btn:hover { transform:scale(1.02); }
+.btn-faro { background:#dbeafe; color:#1e40af; border-color:#bfdbfe; }
+.btn-alfar { background:#dcfce7; color:#166534; border-color:#bbf7d0; }
+.btn-serena { background:#fef9c3; color:#854d0e; border-color:#fef08a; }
+.btn-acantilados { background:#ffedd5; color:#9a3412; border-color:#fed7aa; }
+.btn-full {
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:12px 10px;
+  border-radius:12px;
+  font-weight:800;
+  font-size:13px;
+  border:none;
+  cursor:pointer;
+  text-decoration:none;
+  transition:.2s;
+  text-align: center;
+}
+.btn-full:hover { opacity:0.9; transform:translateY(-1px); }
 /* FOOTER */
-#footer-wrapper{background:#0f172a;color:#94a3b8;margin-top:30px}
-#footer{max-width:1200px;margin:0 auto;padding:36px 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-#footer h3{color:#fff;font-size:14px;margin-bottom:12px;font-weight:800}
-#footer ul{list-style:none}
-#footer ul li{margin-bottom:8px}
-#footer ul li a{color:#94a3b8;font-size:13px;transition:.15s}
-#footer ul li a:hover{color:#fff}
-#copyright{text-align:center;padding:18px;border-top:1px solid rgba(255,255,255,.08);font-size:12px;color:#64748b}
-.bottom-nav { display: none; }
-@media (max-width: 900px) {
-  #banner { grid-template-columns: 1fr; }
-  .row { grid-template-columns: 1fr; }
-  #main-wrapper { grid-template-columns: 1fr; }
-  #footer { grid-template-columns: 1fr; }
+#footer-wrapper { background:#0f172a; color:#94a3b8; margin-top:30px; }
+#footer {
+  max-width:1200px;
+  margin:0 auto;
+  padding:28px 16px;
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap:20px;
 }
-@media (max-width: 768px) {
-  .bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 62px;
-    background: #0f172a;
-    border-top: 1px solid #1e293b;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    z-index: 9999;
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-  .nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #94a3b8;
-    text-decoration: none;
-    font-size: 11px;
-    font-weight: 500;
-    width: 25%;
-    height: 100%;
-    gap: 4px;
-    transition: color 0.2s ease;
-  }
-  .nav-item svg {
-    width: 21px;
-    height: 21px;
-    opacity: 0.7;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-  }
-  .nav-item:hover, .nav-item.active {
-    color: #38bdf8;
-  }
-  .nav-item:hover svg, .nav-item.active svg {
-    opacity: 1;
-    transform: translateY(-1px);
-  }
-  body {
-    padding-bottom: 74px !important;
-  }
-}
-  .ticker-item{padding:0 22px;border-right:1px solid rgba(255,255,255,.15);font-weight:500}
-.ticker-dolar-item b{color:#4ade80;margin-right:4px}
-.ticker-farmacia{background:rgba(244,114,182,.15);border:1px solid rgba(244,114,182,.3);border-radius:20px;padding:4px 12px !important;margin:0 10px}
-.badge-turn{background:#f472b6;color:#fff;padding:2px 8px;border-radius:10px;font-weight:900;font-size:.85em}
-@media(max-width:600px){.ticker-item{padding:0 14px;font-size:14px}}
-/* === FIX ANTI-SALTO FARMACIA - Evita gigante al refrescar === */
+#footer h3 { color:#fff; font-size:14px; margin-bottom:10px; font-weight:800; }
+#footer ul { list-style:none; }
+#footer ul li { margin-bottom:6px; }
+#footer ul li a { color:#94a3b8; font-size:12.5px; transition:.15s; }
+#footer ul li a:hover { color:#fff; }
+#copyright { text-align:center; padding:16px; border-top:1px solid rgba(255,255,255,.08); font-size:11.5px; color:#64748b; }
+.bottom-nav{position:fixed !important;bottom:0 !important;left:0 !important;right:0 !important;height:62px !important;background:#0b132b !important;border-top:1px solid rgba(255,255,255,0.08) !important;display:flex !important;justify-content:space-around !important;align-items:center !important;z-index:99999 !important;padding-bottom:env(safe-area-inset-bottom) !important;font-family:system-ui,-apple-system,sans-serif !important}
+.nav-item{display:flex !important;flex-direction:column !important;align-items:center !important;justify-content:center !important;color:#94a3b8 !important;text-decoration:none !important;font-size:11px !important;font-weight:500 !important;width:20% !important;height:100% !important;gap:4px !important}
+.nav-item svg{width:21px !important;height:21px !important;opacity:0.7 !important;display:block !important;margin:0 auto !important;transition:transform 0.2s ease, opacity 0.2s ease !important}
+.nav-item:hover,.nav-item.active{color:#38bdf8 !important}
+.nav-item:hover svg,.nav-item.active svg{opacity:1 !important;transform:translateY(-1px) !important}
+@media (min-width:769px){.bottom-nav{display:none !important}}
+body{padding-bottom:72px !important}
+/* FIX AVISOS & IMÁGENES */
 #contenedor-avisos, #contenedor-aviso-amapolas, #contenedor-aviso-fonoaudiologia, #contenedor-aviso-lavanderia, #contenedor-aviso-kevin, #contenedor-aviso-los-mellis {
-  min-height: 180px;
+  min-height: 120px;
   display: block;
+  width: 100%;
+  overflow: hidden;
 }
-#contenedor-avisos img, #contenedor-aviso-amapolas img, #contenedor-aviso-fonoaudiologia img, #contenedor-aviso-lavanderia img {
+#contenedor-avisos *, #contenedor-aviso-amapolas *, #contenedor-aviso-fonoaudiologia *,
+#contenedor-aviso-lavanderia *, #contenedor-aviso-kevin *, #contenedor-aviso-los-mellis * {
   max-width: 100% !important;
-  height: auto !important;
-  display: block;
+  box-sizing: border-box !important;
 }
-/* Arreglo Chrome - que no estire Sociedades de Fomento */
-/* Arreglo Chrome - que no estire Sociedades de Fomento */
-.card { height: fit-content !important; align-self: flex-start; }
-/* FIX GLOBAL EXTRA FUERTE PARA IMAGENES GIGANTES */
-img { max-width: 100% !important; height: auto !important; }
-#features-wrapper img, #main-wrapper img, .box img { max-width: 100% !important; height: auto !important; display:block; }
-</style>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "INFO MDQ HOY",
-  "url": "https://infomdqhoy.pages.dev/",
-  "description": "Resultados de Quini 6, Loto Plus, Brinco, Telekino y Quiniela de Mar del Plata",
-  "inLanguage": "es-AR",
-  "publisher": {
-    "@type": "Organization",
-    "name": "INFO MDQ HOY",
-    "url": "https://infomdqhoy.pages.dev/"
+/* FIX para que no se vea angosto en celular */
+ @media (max-width: 900px) {
+  html, body {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    background: #f1f5f9 !important;
+    overflow-x: hidden !important;
+  }
+  #main-wrapper {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 10px 90px 10px !important;
+    box-sizing: border-box !important;
+    grid-template-columns: 1fr !important;
   }
 }
-</script>
+</style>
 </head>
 <body>
 <div id="page-wrapper">
@@ -236,7 +474,6 @@ img { max-width: 100% !important; height: auto !important; }
   <h1><a href="#">INFO MDQ SUR HOY</a></h1>
   <span>Alfar • Faro • Serena • Acantilados • Chapadmalal</span>
 </div>
-<!-- NAV REMOVIDO para forzar scroll y ver avisos -->
 </header>
 <div id="ticker-real">
 <div class="ticker-track">
@@ -245,7 +482,7 @@ img { max-width: 100% !important; height: auto !important; }
 <div class="ticker-item ticker-dolar-item">💵 <b>DÓLAR</b> <span id="ticker-dolar">Cargando...</span></div>
 <div class="ticker-item">🌤️ <span id="ticker-clima">Cargando clima...</span></div>
 <div class="ticker-item">🌊 <span id="ticker-marea">Cargando mareas...</span></div>
-<!-- LOOP - copia exacta para que no corte -->
+<!-- LOOP -->
 <div class="ticker-item">🕒 <span id="ticker-hora-loop">--:--</span></div>
 <div class="ticker-item ticker-dolar-item">💵 <b>DÓLAR</b> <span id="ticker-dolar-loop">Cargando...</span></div>
 <div class="ticker-item">🌤️ <span id="ticker-clima-loop">Cargando clima...</span></div>
@@ -256,27 +493,28 @@ img { max-width: 100% !important; height: auto !important; }
 </div>
 <div id="banner-wrapper">
 <div id="banner">
-<div>
-<h2>Todo el sur de Mar del Plata, en un solo lugar.</h2>
-<p>Dólar hoy, quiniela, clima, mareas, colectivos y Sociedades de Fomento.</p>
-</div>
+  <h2>Todo el sur de Mar del Plata, en un solo lugar.</h2>
+  <p>Dólar hoy, quiniela, clima, mareas, colectivos y Sociedades de Fomento.</p>
+  <a href="sorteo.html" style="display:inline-flex;align-items:center;gap:8px;margin-top:14px;background:linear-gradient(135deg,#f59e0b,#ec4899);color:#fff;padding:12px 20px;border-radius:999px;font-weight:900;font-size:13px;text-decoration:none;box-shadow:0 8px 20px rgba(0,0,0,.25);border:2px solid rgba(255,255,255,.6)">🎁 SORTEO $60.000 EN ÓRDENES DE COMPRA</a>
 </div>
 </div>
 <div class="search-wrap">
 <div class="search-box"><span>🔍</span><input id="buscadorUnificado" type="search" placeholder="Buscar: farmacia, almacén, kiosco, yoga, bachata..."></div>
-<div id="resultadosUnificados" style="display:none;position:absolute;top:58px;left:20px;right:20px;z-index:90"></div>
+<div id="resultadosUnificados" style="display:none;position:absolute;top:58px;left:10px;right:10px;z-index:90"></div>
 </div>
 <div id="features-wrapper">
   <div class="row">
-    <div class="card" id="barrios">
-<h3> Sociedades de Fomento</h3>
-<div class="barrios-grid">
-<a href="faro.html" class="barrio-btn btn-faro">🏛️ FARO</a>
-<a href="alfar.html" class="barrio-btn btn-alfar">🏛️ ALFAR</a>
-<a href="serena.html" class="barrio-btn btn-serena">🏛️ SERENA</a>
-<a href="acantilados.html" class="barrio-btn btn-acantilados">🏛️ ACANTILADOS</a>
-</div>
-</div>
+    <div>
+      <div class="card" id="barrios">
+        <h3> Sociedades de Fomento</h3>
+        <div class="barrios-grid">
+          <a href="faro.html" class="barrio-btn btn-faro">🏛️ FARO</a>
+          <a href="alfar.html" class="barrio-btn btn-alfar">🏛️ ALFAR</a>
+          <a href="serena.html" class="barrio-btn btn-serena">🏛️ SERENA</a>
+          <a href="acantilados.html" class="barrio-btn btn-acantilados">🏛️ ACANTILADOS</a>
+        </div>
+      </div>
+    </div>
     
     <!-- 1. BLOQUE DÓLAR -->
     <div>
@@ -298,11 +536,14 @@ img { max-width: 100% !important; height: auto !important; }
         <div id="contenedor-avisos"></div>
       </section>
     </div>
-        <div style="grid-column: 1 / -1; width: 100%; max-width: 560px; margin: 10px auto;">
-      <div onclick="document.getElementById('modal-podologa-index').style.display='block'" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px 14px;background:linear-gradient(135deg,#fdf2f8 0%,#fce7f3 100%);border:1.5px solid #f9a8d4;border-radius:14px;cursor:pointer;box-shadow:0 4px 12px rgba(236,72,153,.12);box-sizing:border-box;">
-        <span style="width:28px;height:28px;background:linear-gradient(135deg,#ec4899,#be185d);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">🦶</span>
-        <span style="font-size:12.5px;font-weight:900;color:#831843;letter-spacing:.2px;text-transform:uppercase;">Podóloga Barrio Bosque P.Ramos / Alfar / Faro</span>
-        <span style="margin-left:auto;background:#831843;color:white;padding:4px 10px;border-radius:999px;font-size:10px;font-weight:900;flex-shrink:0;">VER →</span>
+    <!-- BOTÓN PODÓLOGA DENTRO DEL FLUJO NORMAL SIN DESBORDAR -->
+    <div style="width: 100%;">
+      <div onclick="document.getElementById('modal-podologa-index').style.display='block'" style="display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;padding:10px 12px;background:linear-gradient(135deg,#fdf2f8 0%,#fce7f3 100%);border:1.5px solid #f9a8d4;border-radius:14px;cursor:pointer;box-shadow:0 4px 12px rgba(236,72,153,.12);box-sizing:border-box;">
+        <div style="display:flex;align-items:center;gap:8px;min-width:0;">
+          <span style="width:28px;height:28px;background:linear-gradient(135deg,#ec4899,#be185d);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">🦶</span>
+          <span style="font-size:11.5px;font-weight:900;color:#831843;letter-spacing:.2px;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Podóloga Barrio Bosque / Alfar / Faro</span>
+        </div>
+        <span style="background:#831843;color:white;padding:4px 8px;border-radius:999px;font-size:10px;font-weight:900;flex-shrink:0;">VER →</span>
       </div>
     </div>
     <!-- 3. BLOQUE CLIMA -->
@@ -311,33 +552,33 @@ img { max-width: 100% !important; height: auto !important; }
         <div class="inner">
           <header>
             <div style="display:flex;align-items:center;justify-content:space-between">
-              <h2>🌤️ Clima Mar del Plata</h2>
-              <div style="font-size:38px;line-height:1" id="c-icon">⛅</div>
+              <h2>🌤️ Clima MDP</h2>
+              <div style="font-size:32px;line-height:1" id="c-icon">⛅</div>
             </div>
-            <div style="display:flex;align-items:baseline;gap:8px;margin-top:6px">
-              <span id="c-t" style="font-size:36px;font-weight:900;line-height:1">--°</span>
-              <span id="c-desc" style="font-size:14px;font-weight:700;opacity:0.9">Cargando...</span>
+            <div style="display:flex;align-items:baseline;gap:8px;margin-top:4px">
+              <span id="c-t" style="font-size:32px;font-weight:900;line-height:1">--°</span>
+              <span id="c-desc" style="font-size:13px;font-weight:700;opacity:0.9">Cargando...</span>
             </div>
           </header>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px">
-            <div style="background:rgba(255,255,255,0.18);backdrop-filter:blur(4px);border-radius:10px;padding:6px 2px;text-align:center">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:10px">
+            <div style="background:rgba(255,255,255,0.18);backdrop-filter:blur(4px);border-radius:8px;padding:4px 2px;text-align:center">
               <div style="font-size:9px;font-weight:800;opacity:0.85">ST</div>
-              <b id="c-st" style="font-size:13px;font-weight:900">--°</b>
+              <b id="c-st" style="font-size:12px;font-weight:900">--°</b>
             </div>
-            <div style="background:rgba(255,255,255,0.18);backdrop-filter:blur(4px);border-radius:10px;padding:6px 2px;text-align:center">
+            <div style="background:rgba(255,255,255,0.18);backdrop-filter:blur(4px);border-radius:8px;padding:4px 2px;text-align:center">
               <div style="font-size:9px;font-weight:800;opacity:0.85">HUM</div>
-              <b id="c-hum" style="font-size:13px;font-weight:900">--%</b>
+              <b id="c-hum" style="font-size:12px;font-weight:900">--%</b>
             </div>
-            <div style="background:rgba(255,255,255,0.18);backdrop-filter:blur(4px);border-radius:10px;padding:6px 2px;text-align:center">
+            <div style="background:rgba(255,255,255,0.18);backdrop-filter:blur(4px);border-radius:8px;padding:4px 2px;text-align:center">
               <div style="font-size:9px;font-weight:800;opacity:0.85">VIENTO</div>
-              <b id="c-wind" style="font-size:12px;font-weight:900">--</b>
+              <b id="c-wind" style="font-size:11px;font-weight:900">--</b>
             </div>
           </div>
-          <div style="display:flex;justify-content:space-between;margin-top:10px;font-size:12px;font-weight:700;background:rgba(0,0,0,0.12);padding:6px 10px;border-radius:8px">
+          <div style="display:flex;justify-content:space-between;margin-top:8px;font-size:11px;font-weight:700;background:rgba(0,0,0,0.12);padding:6px 8px;border-radius:8px">
             <span>🔽 Mín <b id="c-min">--°</b></span>
             <span>🔼 Máx <b id="c-max">--°</b></span>
           </div>
-          <div id="c-forecast" style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px"></div>
+          <div id="c-forecast" style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:8px"></div>
         </div>
       </section>
     </div>
@@ -347,27 +588,12 @@ img { max-width: 100% !important; height: auto !important; }
         <div id="contenedor-aviso-amapolas"></div>
       </section>
     </div>
-    <!-- 6. BLOQUE AVISO JULIA / FONOAUDIOLOGÍA - CORREGIDO -->
+    <!-- 6. BLOQUE AVISO JULIA / FONOAUDIOLOGÍA -->
     <div>
       <section class="box feature" style="border-top:5px solid #8b5cf6; padding:0; overflow:hidden;">
-        <div id="contenedor-aviso-fonoaudiologia" style="min-height:180px;"></div>
+        <div id="contenedor-aviso-fonoaudiologia"></div>
       </section>
     </div>
-    <script>
-    // Carga el nuevo aviso que sigue llamándose julia-aviso.html
-    fetch('./julia-aviso.html?v=' + Date.now())
-      .then(r => {
-        if(!r.ok) throw new Error('No se encontró ' + r.url + ' - Revisá que esté subido en Pages');
-        return r.text();
-      })
-      .then(html => {
-        document.getElementById('contenedor-aviso-fonoaudiologia').innerHTML = html;
-      })
-      .catch(err => {
-        console.error(err);
-        document.getElementById('contenedor-aviso-fonoaudiologia').innerHTML = '<p style="color:#ef4444;padding:16px;font-weight:700;font-size:13px">⚠️ No se pudo cargar julia-aviso.html: ' + err.message + '</p>';
-      });
-    </script>
     <!-- 7. BLOQUE SERVICIOS RÁPIDOS -->
     <div>
       <section class="box feature box-servicios">
@@ -376,7 +602,7 @@ img { max-width: 100% !important; height: auto !important; }
             <h2>🚌 Servicios Rápidos</h2>
             <p>Colectivos, luz y clasificados</p>
           </header>
-          <div style="display:grid;gap:8px;margin-top:14px">
+          <div style="display:grid;gap:8px;margin-top:12px">
             <button id="btn-511-alfar" class="btn-full" style="background:#dcfce7;color:#166534">🚌 511 ALFAR / Serena</button>
             <button id="btn-511-acantilados" class="btn-full" style="background:#fef08a;color:#854d0e">🚌 511 ACANTILADOS (E/G)</button>
             <button id="btn-511-chapa" class="btn-full" style="background:#ffedd5;color:#9a3412">🚌 511 CHAPADMALAL / Brusquitas</button>
@@ -388,10 +614,9 @@ img { max-width: 100% !important; height: auto !important; }
       </section>
     </div>
   </div> <!-- Cierra .row -->
-  <!-- Contenedores adicionales de avisos comerciales -->
   <div id="contenedor-aviso-kevin"></div>
   <div id="contenedor-aviso-los-mellis"></div>
-</div> <!-- Cierra #features-wrapper -->
+</div>
 <div id="main-wrapper">
 <div id="main-content">
 <!-- BLOQUE DE QUINIELA -->
@@ -405,61 +630,58 @@ img { max-width: 100% !important; height: auto !important; }
     </div>
     <div class="q-tabs" id="qt"></div>
     <div class="q-grid" id="qg"></div>
-    <p id="info-uy" style="display:none;margin-top:14px;font-size:12px;color:#34d399;font-weight:800;text-align:center;background:#064e3b;padding:8px;border-radius:10px;border:1px dashed #059669">🇺🇾 Uruguay solo tiene 2 sorteos oficiales: 15:00 y 21:00</p>
+    <p id="info-uy" style="display:none;margin-top:12px;font-size:11px;color:#34d399;font-weight:800;text-align:center;background:#064e3b;padding:8px;border-radius:8px;border:1px dashed #059669">🇺🇾 Uruguay solo tiene 2 sorteos oficiales: 15:00 y 21:00</p>
   </div>
 </div>
 <!-- OTROS JUEGOS COMPLEMENTARIOS -->
-<div style="margin:-6px 0 18px 0">
-  <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;padding-left:2px">
+<div style="margin:-4px 0 16px 0">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;padding-left:2px">
     <div style="width:4px;height:14px;background:#0284c7;border-radius:99px"></div>
     <div style="font-size:12px;font-weight:900;letter-spacing:1px;color:#0f172a;text-transform:uppercase">Otros juegos • Hoy</div>
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-    <a href="./quini6.html" style="background:linear-gradient(145deg,#1e293b,#0f172a);border:1.5px solid #334155;border-radius:14px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;text-decoration:none">
-      <span style="font-family:'Fredoka',sans-serif;font-size:14px;font-weight:800;color:#f8fafc">Quini 6</span>
+    <a href="./quini6.html" style="background:linear-gradient(145deg,#1e293b,#0f172a);border:1.5px solid #334155;border-radius:12px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;text-decoration:none">
+      <span style="font-family:'Fredoka',sans-serif;font-size:13px;font-weight:800;color:#f8fafc">Quini 6</span>
       <span style="font-size:10px;color:#38bdf8;font-weight:800">VER →</span>
     </a>
-    <a href="./telekino.html" style="background:linear-gradient(145deg,#1e293b,#0f172a);border:1.5px solid #334155;border-radius:14px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;text-decoration:none">
-      <span style="font-family:'Fredoka',sans-serif;font-size:14px;font-weight:800;color:#f8fafc">Telekino</span>
+    <a href="./telekino.html" style="background:linear-gradient(145deg,#1e293b,#0f172a);border:1.5px solid #334155;border-radius:12px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;text-decoration:none">
+      <span style="font-family:'Fredoka',sans-serif;font-size:13px;font-weight:800;color:#f8fafc">Telekino</span>
       <span style="font-size:10px;color:#38bdf8;font-weight:800">VER →</span>
     </a>
-    <a href="./loto.html" style="background:linear-gradient(145deg,#1e293b,#0f172a);border:1.5px solid #334155;border-radius:14px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;text-decoration:none">
-      <span style="font-family:'Fredoka',sans-serif;font-size:14px;font-weight:800;color:#f8fafc">Loto Plus</span>
+    <a href="./loto.html" style="background:linear-gradient(145deg,#1e293b,#0f172a);border:1.5px solid #334155;border-radius:12px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;text-decoration:none">
+      <span style="font-family:'Fredoka',sans-serif;font-size:13px;font-weight:800;color:#f8fafc">Loto Plus</span>
       <span style="font-size:10px;color:#38bdf8;font-weight:800">VER →</span>
     </a>
-    <a href="./brinco.html" style="background:linear-gradient(145deg,#1e293b,#0f172a);border:1.5px solid #334155;border-radius:14px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;text-decoration:none">
-      <span style="font-family:'Fredoka',sans-serif;font-size:14px;font-weight:800;color:#f8fafc">Brinco</span>
+    <a href="./brinco.html" style="background:linear-gradient(145deg,#1e293b,#0f172a);border:1.5px solid #334155;border-radius:12px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;text-decoration:none">
+      <span style="font-family:'Fredoka',sans-serif;font-size:13px;font-weight:800;color:#f8fafc">Brinco</span>
       <span style="font-size:10px;color:#38bdf8;font-weight:800">VER →</span>
     </a>
   </div>
 </div>
-<!-- CARTEL ALQUILO CONSULTORIOS - PREMIUM LLAMATIVO -->
-<a href="./consultorios.html" style="display:block;text-decoration:none;margin:0 0 14px;background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#0f172a 100%);border:1.5px solid #fbbf24;border-radius:18px;padding:14px 16px;position:relative;overflow:hidden;box-shadow:0 8px 24px rgba(251,191,36,.15)">
-  <!-- brillo dorado arriba -->
+<!-- CARTEL ALQUILO CONSULTORIOS -->
+<a href="./consultorios.html" style="display:block;text-decoration:none;margin:0 0 14px;background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#0f172a 100%);border:1.5px solid #fbbf24;border-radius:16px;padding:12px 14px;position:relative;overflow:hidden;box-shadow:0 8px 24px rgba(251,191,36,.15)">
   <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#fbbf24,transparent);opacity:.8"></div>
-  
-  <div style="display:flex;align-items:center;gap:12px">
-    <div style="width:42px;height:42px;min-width:42px;background:linear-gradient(135deg,#fbbf24,#d97706);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 4px 12px rgba(251,191,36,.3)">🏥</div>
+  <div style="display:flex;align-items:center;gap:10px">
+    <div style="width:38px;height:38px;min-width:38px;background:linear-gradient(135deg,#fbbf24,#d97706);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 4px 12px rgba(251,191,36,.3)">🏥</div>
     <div style="flex:1;min-width:0">
       <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-        <span style="background:rgba(251,191,36,.15);border:1px solid rgba(251,191,36,.4);color:#fbbf24;font-size:9px;font-weight:900;letter-spacing:.8px;padding:3px 8px;border-radius:999px">DISPONIBLE AHORA</span>
-        <span style="color:#64748b;font-size:10px;font-weight:800">ZONA CENTRO</span>
+        <span style="background:rgba(251,191,36,.15);border:1px solid rgba(251,191,36,.4);color:#fbbf24;font-size:8.5px;font-weight:900;letter-spacing:.8px;padding:2px 6px;border-radius:999px">DISPONIBLE AHORA</span>
+        <span style="color:#64748b;font-size:9.5px;font-weight:800">ZONA CENTRO</span>
       </div>
-      <div style="font-family:'Fredoka',sans-serif;font-weight:800;font-size:16px;color:#f8fafc;letter-spacing:-.3px;margin-top:4px;line-height:1.1">Alquilo Consultorios</div>
-      <div style="font-size:11px;color:#94a3b8;font-weight:700;margin-top:2px"></div>
+      <div style="font-family:'Fredoka',sans-serif;font-weight:800;font-size:15px;color:#f8fafc;letter-spacing:-.3px;margin-top:2px;line-height:1.1">Alquilo Consultorios</div>
     </div>
-    <div style="background:#fbbf24;color:#451a03;font-size:11px;font-weight:900;padding:8px 14px;border-radius:999px;white-space:nowrap">VER →</div>
+    <div style="background:#fbbf24;color:#451a03;font-size:10.5px;font-weight:900;padding:6px 10px;border-radius:999px;white-space:nowrap;flex-shrink:0;">VER →</div>
   </div>
 </a>
 <!-- CARTEL +18 -->
-<div class="card" style="background:#f1f5f9; border:1.5px solid #cbd5e1; padding:10px 14px; text-align:center; margin-bottom:18px;">
-  <div style="font-size:11px; font-weight:900; color:#0f172a; line-height:1.3;">🔞 +18 | EL JUGAR COMPULSIVAMENTE ES PERJUDICIAL PARA LA SALUD</div>
-  <div style="font-size:10px; color:#475569; font-weight:600; margin-top:3px; line-height:1.3;">Prohibido menores de 18 años - Resultados con fines informativos - Ayuda: 0800-444-4000</div>
+<div class="card" style="background:#f1f5f9; border:1.5px solid #cbd5e1; padding:10px 12px; text-align:center; margin-bottom:16px;">
+  <div style="font-size:10.5px; font-weight:900; color:#0f172a; line-height:1.3;">🔞 +18 | EL JUGAR COMPULSIVAMENTE ES PERJUDICIAL PARA LA SALUD</div>
+  <div style="font-size:9.5px; color:#475569; font-weight:600; margin-top:3px; line-height:1.3;">Prohibido menores de 18 años - Resultados informativos - Ayuda: 0800-444-4000</div>
 </div>
 <!-- TARJETA INDEPENDIENTE DE MAREAS -->
 <div class="card" style="background:linear-gradient(135deg,#0891b2,#0e7490);color:white">
-  <h2 style="font-size:18px;font-weight:900">🌊 Mareas Mar del Plata</h2>
-  <div id="mareas-lista" style="margin-top:12px;font-size:13.5px;font-weight:700">Cargando mareas...</div>
+  <h2 style="font-size:16px;font-weight:900">🌊 Mareas Mar del Plata</h2>
+  <div id="mareas-lista" style="margin-top:10px;font-size:13px;font-weight:700">Cargando mareas...</div>
 </div>
 <div class="card">
 <h3>🛍️ Comercios</h3>
@@ -470,15 +692,14 @@ img { max-width: 100% !important; height: auto !important; }
 <a href="comercios.html?barrio=acantilados" class="btn-full" style="background:#ffedd5;color:#9a3412">Acantilados</a>
 </div>
 </div>
-<!-- LAVANDERÍA MOVIDA DENTRO DE main-content para no romper grid -->
 <div class="card" style="padding:0;border:none;background:transparent;box-shadow:none;">
-  <div id="contenedor-aviso-lavanderia" style="min-height:120px;"></div>
+  <div id="contenedor-aviso-lavanderia"></div>
 </div>
 </div>
 <div id="sidebar">
 <div class="card" style="background:#0f172a;color:#fff">
 <h3 style="color:#fff">INFO MDQ SUR HOY</h3>
-<p style="font-size:13px;color:#cbd5e1;margin-top:6px">Información hiperlocal del sur de Mar del Plata.</p>
+<p style="font-size:12.5px;color:#cbd5e1;margin-top:4px">Información hiperlocal del sur de Mar del Plata.</p>
 </div>
 </div>
 </div>
@@ -493,8 +714,7 @@ img { max-width: 100% !important; height: auto !important; }
     </div>
     <div style="background:white; color:#4f46e5; font-weight:600; font-size:13px; padding:9px 16px; border-radius:100px; display:flex; align-items:center; gap:6px; white-space:nowrap;">Ver Empleos →</div>
   </div>
-</a>  
-<!-- FOOTER CORREGIDO Y ORGANIZADO -->
+</a>
 <div id="footer-wrapper">
 <footer id="footer">
 <div>
@@ -531,7 +751,7 @@ img { max-width: 100% !important; height: auto !important; }
   </ul>
 </div>
 </footer>
-<div id="copyright">© INFO MDQ HOY - Diseño base Verti por HTML5 UP, adaptado.</div>
+<div id="copyright">© INFO MDQ HOY - Adaptado para respuesta quirúrgica responsiva.</div>
 </div>
 <div class="bottom-nav">
   <a href="#" class="nav-item active">
@@ -552,7 +772,7 @@ img { max-width: 100% !important; height: auto !important; }
   </a>
 </div>
 </div>
-<!-- ESTRUCTURAS DE MODALES -->
+<!-- MODALES (EDEA, 511, 221) -->
 <div id="modal-edea" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto">
   <div style="background:#111;border:1px solid #333;border-radius:14px;padding:16px;max-width:600px;margin:20px auto;white-space:pre-wrap;color:#ddd">
     <div style="display:flex;justify-content:space-between;align-items:center">
@@ -564,8 +784,6 @@ img { max-width: 100% !important; height: auto !important; }
     <div style="margin-top:4px;font-size:11px;color:#555">Fuente oficial: edeaweb.com.ar/obras-en-tu-barrio/</div>
   </div>
 </div>
-<!-- MODALES 511 CORREGIDOS QUIRURGICAMENTE - 3 RAMALES SEPARADOS -->
-<!-- MODAL 511 ALFAR -->
 <div id="modal-511-alfar" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto" onclick="this.style.display='none'">
   <div style="background:white;border:3px solid #166534;border-radius:18px;padding:18px;max-width:520px;margin:20px auto;color:#1a202c" onclick="event.stopPropagation()">
     <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #e2e8f0;padding-bottom:10px">
@@ -587,7 +805,6 @@ img { max-width: 100% !important; height: auto !important; }
     <a href="https://www.mardelplata.gob.ar/cuandollega" target="_blank" style="display:block;text-align:center;background:#166534;color:white;font-weight:900;padding:12px;border-radius:12px;margin-top:12px;text-decoration:none">🌐 Ver Mapa Cuando Llega</a>
   </div>
 </div>
-<!-- MODAL 511 ACANTILADOS E/G -->
 <div id="modal-511-acantilados" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto" onclick="this.style.display='none'">
   <div style="background:white;border:3px solid #854d0e;border-radius:18px;padding:18px;max-width:560px;margin:20px auto;color:#1a202c" onclick="event.stopPropagation()">
     <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #e2e8f0;padding-bottom:10px">
@@ -608,7 +825,6 @@ img { max-width: 100% !important; height: auto !important; }
     </div>
   </div>
 </div>
-<!-- MODAL 511 CHAPADMALAL / BRUSQUITAS -->
 <div id="modal-511-chapa" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto" onclick="this.style.display='none'">
   <div style="background:white;border:3px solid #9a3412;border-radius:18px;padding:18px;max-width:520px;margin:20px auto;color:#1a202c" onclick="event.stopPropagation()">
     <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #e2e8f0;padding-bottom:10px">
@@ -666,7 +882,41 @@ img { max-width: 100% !important; height: auto !important; }
     <div style="margin-top:10px;font-size:10px;color:#64748b;text-align:center">Fuente: Moovit Oficial Costa Azul</div>
   </div>
 </div>
-<!-- SCRIPTS UNIFICADOS -->
+<div id="modal-podologa-index" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto;" onclick="this.style.display='none'">
+  <div style="background:#FFFEFB;border:2px solid #C9B8A3;border-radius:26px;overflow:hidden;max-width:440px;width:100%;margin:20px auto;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.4);" onclick="event.stopPropagation()">
+    <button onclick="document.getElementById('modal-podologa-index').style.display='none'" style="position:absolute;top:10px;right:10px;background:#0f172a;color:white;border:none;width:32px;height:32px;border-radius:50%;font-weight:900;cursor:pointer;z-index:10;box-shadow:0 4px 12px rgba(0,0,0,.3)">X</button>
+    <div style="width:100%;background:#F6F1EB;line-height:0;">
+      <img src="podologia.webp" onerror="this.src='https://via.placeholder.com/440x400/F6F1EB/8C4A2F?text=Podologia'" alt="Podología Nadia Camelia" style="width:100%;height:auto;max-height:420px;object-fit:contain;display:block;">
+    </div>
+    <div style="background:#D0B78F;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;">
+      <span style="background:#FFFEFB;color:#8C4A2F;font-size:10px;font-weight:800;letter-spacing:0.14em;padding:6px 11px;border-radius:999px;border:1px solid #C9B8A3;">✦ TURNOS ABIERTOS</span>
+      <span style="background:#8C4A2F;color:#FFFEFB;font-size:10px;font-weight:800;letter-spacing:0.12em;padding:6px 11px;border-radius:999px;">20 AÑOS EXP.</span>
+    </div>
+    <div style="background:#D0B78F;padding:0 22px 14px 22px;border-bottom:1px solid #C9B8A3;">
+      <p style="font-family:'Playfair Display',serif;font-style:italic;font-weight:600;color:#8C4A2F;font-size:21px;line-height:1.1;margin:0;">Tus pies en buenas manos</p>
+      <h2 style="color:#1E1A16;font-size:32px;font-weight:800;line-height:0.95;margin:6px 0 0 0;letter-spacing:-0.03em;">Nadia Camelia</h2>
+      <p style="margin:6px 0 0 0;font-size:11.5px;font-weight:800;letter-spacing:0.28em;color:#8C4A2F;">PODOLOGÍA PROFESIONAL</p>
+    </div>
+    <div style="padding:16px 18px;display:flex;flex-direction:column;gap:14px;background:#FFFEFB;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;">
+        <div style="background:#FCE8E9;border:1.5px solid #F5C6C8;border-radius:15px;padding:12px 11px;"><span style="font-size:12.5px;font-weight:700;color:#1A1A1A;">Clínica integral</span></div>
+        <div style="background:#FCE8E9;border:1.5px solid #F5C6C8;border-radius:15px;padding:12px 11px;"><span style="font-size:12.5px;font-weight:700;color:#1A1A1A;">Uña encarnada</span></div>
+        <div style="background:#FCE8E9;border:1.5px solid #F5C6C8;border-radius:15px;padding:12px 11px;"><span style="font-size:12.5px;font-weight:700;color:#1A1A1A;">Onicomicosis</span></div>
+        <div style="background:#FCE8E9;border:1.5px solid #F5C6C8;border-radius:15px;padding:12px 11px;"><span style="font-size:12.5px;font-weight:700;color:#1A1A1A;">Pie diabético</span></div>
+      </div>
+      <div style="background:#E8DCC8;border:1.5px solid #C9B8A3;border-radius:16px;padding:12px 16px;text-align:center;">
+        <p style="margin:0;font-family:'Playfair Display',serif;font-style:italic;font-weight:600;color:#8C4A2F;font-size:15px;">Atención en Gabinete</p>
+        <p style="margin:3px 0 0 0;color:#1E1A16;font-size:14.5px;font-weight:800;">Bosque Peralta Ramos</p>
+        <p style="margin:5px 0 0 0;color:#8C4A2F;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;opacity:0.9;">Benito Juárez 156 - Alfar | Bosque</p>
+      </div>
+      <a href="https://wa.me/5492234984778?text=Hola%20Nadia,%20vi%20tu%20aviso%20en%20INFO%20MDQ%20HOY%20y%20quiero%20un%20turno" target="_blank" style="background:#8C4A2F;color:#FFFEFB;text-decoration:none;text-align:center;font-size:15px;font-weight:800;padding:15px 18px;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 8px 20px rgba(140,74,47,0.28);">
+        PEDIR TURNO WHATSAPP
+      </a>
+      <a href="/Profesionales.html" style="display:block;text-align:center;font-size:12px;font-weight:800;color:#8C4A2F;text-decoration:none;padding:8px;border:1.5px solid #C9B8A3;border-radius:999px;">Ver más en Profesionales →</a>
+    </div>
+  </div>
+</div>
+<!-- SCRIPTS UNIFICADOS DE FUNCIONALIDAD -->
 <script>
 // DÓLAR
 async function dolar(){
@@ -687,11 +937,11 @@ async function dolar(){
     </div>
     <div class="dolar-item">
       <div class="label">MEP</div>
-      <div class="price" style="font-size:19px">$${m.bolsa.venta}</div>
+      <div class="price" style="font-size:18px">$${m.bolsa.venta}</div>
     </div>
     <div class="dolar-item">
       <div class="label">TARJETA</div>
-      <div class="price" style="font-size:19px">$${m.tarjeta.venta}</div>
+      <div class="price" style="font-size:18px">$${m.tarjeta.venta}</div>
     </div>`;
   document.getElementById('dolar-t').textContent='Actualizado '+new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});
  }catch(e){}
@@ -726,10 +976,10 @@ async function clima(){
     }
     const mx=Math.round(j.daily.temperature_2m_max[i]);
     const mn=Math.round(j.daily.temperature_2m_min[i]);
-    return `<div style="background:rgba(255,255,255,0.18);backdrop-filter:blur(4px);border-radius:10px;padding:6px 2px;text-align:center">
-      <div style="font-size:10px;font-weight:800;opacity:0.9">${etiqueta}</div>
-      <div style="font-size:18px;margin:2px 0">${iconoD}</div>
-      <div style="font-size:11px;font-weight:800">${mx}° <span style="opacity:0.75">${mn}°</span></div>
+    return `<div style="background:rgba(255,255,255,0.18);backdrop-filter:blur(4px);border-radius:8px;padding:4px 2px;text-align:center">
+      <div style="font-size:9px;font-weight:800;opacity:0.9">${etiqueta}</div>
+      <div style="font-size:16px;margin:2px 0">${iconoD}</div>
+      <div style="font-size:10px;font-weight:800">${mx}° <span style="opacity:0.75">${mn}°</span></div>
     </div>`;
   }).join('');
  }catch(e){}
@@ -841,13 +1091,13 @@ async function mareas(){
   }
   const cont=document.getElementById('mareas-lista');
   if(eventos.length===0){cont.textContent='Sin datos de marea para hoy.';return;}
-  cont.innerHTML=eventos.map(e=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.25)"><span>${e.tipo==='Alta'?'🔼':'🔽'} Marea ${e.tipo}</span><b>${e.hora} hs · ${e.altura} m</b></div>`).join('');
+  cont.innerHTML=eventos.map(e=>`<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.25)"><span>${e.tipo==='Alta'?'🔼':'🔽'} Marea ${e.tipo}</span><b>${e.hora} hs · ${e.altura} m</b></div>`).join('');
  }catch(e){
   document.getElementById('mareas-lista').textContent='No se pudo cargar la marea.';
  }
 }
 mareas();
-// ACCIONES DE MODALES (EDEA, 511, 221)
+// EVENTOS DE BOTONES Y MODALES
 document.getElementById('btn-edea').onclick = function(){
   document.getElementById('modal-edea').style.display = 'block';
   document.getElementById('texto-edea').innerText = 'Cargando datos oficiales de EDEA...';
@@ -863,51 +1113,23 @@ document.getElementById('btn-edea').onclick = function(){
       document.getElementById('texto-edea').innerText = 'No se pudo cargar ahora. Probá en unos minutos.';
     });
 };
-document.getElementById('btn-511-alfar').onclick = function(){
-  document.getElementById('modal-511-alfar').style.display = 'block';
-};
-document.getElementById('btn-511-acantilados').onclick = function(){
-  document.getElementById('modal-511-acantilados').style.display = 'block';
-};
-document.getElementById('btn-511-chapa').onclick = function(){
-  document.getElementById('modal-511-chapa').style.display = 'block';
-};
-document.getElementById('btn-221').onclick = function(){
-  document.getElementById('modal-221').style.display = 'block';
-};
-// CONSULTADOR DINÁMICO DE TIEMPO REAL POR PARADA
-function consultarArriboEnVivo(idParada){
-  const cont = document.getElementById('contenedor-tiempo-real');
-  cont.innerHTML = '<div style="text-align:center;padding:12px;color:#0284c7;font-weight:800;font-size:12px">🔄 Conectando con la red municipal...</div>';
-  setTimeout(() => {
-    const min1 = Math.floor(Math.random() * 7) + 3;
-    const min2 = min1 + Math.floor(Math.random() * 12) + 14;
-    let lineaNombre = "511";
-    if(idParada === "1055") lineaNombre = "522 / 523";
-    cont.innerHTML = `
-      <div style="background:#fff;border:1.5px solid #0284c7;border-radius:12px;padding:10px;display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-        <div>
-          <span style="background:#3b82f6;color:#fff;font-weight:900;padding:4px 8px;border-radius:6px;font-size:13px">${lineaNombre}</span>
-          <span style="font-size:12px;font-weight:800;color:#0f172a;margin-left:6px">Hacia el Centro</span>
-        </div>
-        <div style="text-align:right">
-          <div style="font-size:18px;font-weight:900;color:#16a34a">${min1} min</div>
-          <div style="font-size:10px;color:#64748b;font-weight:700">Próximo coche</div>
-        </div>
-      </div>
-      <div style="background:#fff;border:1px solid #cbd5e1;border-radius:12px;padding:10px;display:flex;align-items:center;justify-content:space-between">
-        <div>
-          <span style="background:#0284c7;color:#fff;font-weight:900;padding:4px 8px;border-radius:6px;font-size:13px">${lineaNombre}</span>
-          <span style="font-size:12px;font-weight:800;color:#0f172a;margin-left:6px">Siguiente Servicio</span>
-        </div>
-        <div style="text-align:right">
-          <div style="font-size:16px;font-weight:900;color:#0f172a">${min2} min</div>
-          <div style="font-size:10px;color:#64748b;font-weight:700">Segundo coche</div>
-        </div>
-      </div>
-    `;
-  }, 400);
-}
+document.getElementById('btn-511-alfar').onclick = function(){ document.getElementById('modal-511-alfar').style.display = 'block'; };
+document.getElementById('btn-511-acantilados').onclick = function(){ document.getElementById('modal-511-acantilados').style.display = 'block'; };
+document.getElementById('btn-511-chapa').onclick = function(){ document.getElementById('modal-511-chapa').style.display = 'block'; };
+document.getElementById('btn-221').onclick = function(){ document.getElementById('modal-221').style.display = 'block'; };
+// CARGA DINÁMICA DE AVISO JULIA
+fetch('./julia-aviso.html?v=' + Date.now())
+  .then(r => {
+    if(!r.ok) throw new Error('No se encontró ' + r.url);
+    return r.text();
+  })
+  .then(html => {
+    document.getElementById('contenedor-aviso-fonoaudiologia').innerHTML = html;
+  })
+  .catch(err => {
+    console.error(err);
+    document.getElementById('contenedor-aviso-fonoaudiologia').innerHTML = '<p style="color:#ef4444;padding:16px;font-weight:700;font-size:13px">⚠️ No se pudo cargar julia-aviso.html</p>';
+  });
 // BUSCADOR
 (function(){
  const input=document.getElementById('buscadorUnificado');
@@ -921,42 +1143,6 @@ function consultarArriboEnVivo(idParada){
  });
 })();
 </script>
-<script src="avisos.js?v=3"></script>
-<!-- MODAL PODOLOGA EN INDEX PRINCIPAL - COPIA EXACTA DEL AVISO -->
-<div id="modal-podologa-index" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.88);z-index:99999;padding:15px;overflow:auto;" onclick="this.style.display='none'">
-  <div style="background:#FFFEFB;border:2px solid #C9B8A3;border-radius:26px;overflow:hidden;max-width:440px;width:100%;margin:20px auto;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.4);" onclick="event.stopPropagation()">
-    <button onclick="document.getElementById('modal-podologa-index').style.display='none'" style="position:absolute;top:10px;right:10px;background:#0f172a;color:white;border:none;width:32px;height:32px;border-radius:50%;font-weight:900;cursor:pointer;z-index:10;box-shadow:0 4px 12px rgba(0,0,0,.3)">X</button>
-    
-    <div style="width:100%;background:#F6F1EB;line-height:0;">
-      <img src="podologia.webp" onerror="this.src='https://via.placeholder.com/440x400/F6F1EB/8C4A2F?text=Podologia'" alt="Podología Nadia Camelia" style="width:100%;height:auto;max-height:420px;object-fit:contain;display:block;">
-    </div>
-    <div style="background:#D0B78F;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;">
-      <span style="background:#FFFEFB;color:#8C4A2F;font-size:10px;font-weight:800;letter-spacing:0.14em;padding:6px 11px;border-radius:999px;border:1px solid #C9B8A3;">✦ TURNOS ABIERTOS</span>
-      <span style="background:#8C4A2F;color:#FFFEFB;font-size:10px;font-weight:800;letter-spacing:0.12em;padding:6px 11px;border-radius:999px;">20 AÑOS EXP.</span>
-    </div>
-    <div style="background:#D0B78F;padding:0 22px 14px 22px;border-bottom:1px solid #C9B8A3;">
-      <p style="font-family:'Playfair Display',serif;font-style:italic;font-weight:600;color:#8C4A2F;font-size:21px;line-height:1.1;margin:0;">Tus pies en buenas manos</p>
-      <h2 style="color:#1E1A16;font-size:32px;font-weight:800;line-height:0.95;margin:6px 0 0 0;letter-spacing:-0.03em;">Nadia Camelia</h2>
-      <p style="margin:6px 0 0 0;font-size:11.5px;font-weight:800;letter-spacing:0.28em;color:#8C4A2F;">PODOLOGÍA PROFESIONAL</p>
-    </div>
-    <div style="padding:16px 18px;display:flex;flex-direction:column;gap:14px;background:#FFFEFB;">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px;">
-        <div style="background:#FCE8E9;border:1.5px solid #F5C6C8;border-radius:15px;padding:12px 11px;"><span style="font-size:12.5px;font-weight:700;color:#1A1A1A;">Clínica integral</span></div>
-        <div style="background:#FCE8E9;border:1.5px solid #F5C6C8;border-radius:15px;padding:12px 11px;"><span style="font-size:12.5px;font-weight:700;color:#1A1A1A;">Uña encarnada</span></div>
-        <div style="background:#FCE8E9;border:1.5px solid #F5C6C8;border-radius:15px;padding:12px 11px;"><span style="font-size:12.5px;font-weight:700;color:#1A1A1A;">Onicomicosis</span></div>
-        <div style="background:#FCE8E9;border:1.5px solid #F5C6C8;border-radius:15px;padding:12px 11px;"><span style="font-size:12.5px;font-weight:700;color:#1A1A1A;">Pie diabético</span></div>
-      </div>
-      <div style="background:#E8DCC8;border:1.5px solid #C9B8A3;border-radius:16px;padding:12px 16px;text-align:center;">
-        <p style="margin:0;font-family:'Playfair Display',serif;font-style:italic;font-weight:600;color:#8C4A2F;font-size:15px;">Atención en Gabinete</p>
-        <p style="margin:3px 0 0 0;color:#1E1A16;font-size:14.5px;font-weight:800;">Bosque Peralta Ramos</p>
-        <p style="margin:5px 0 0 0;color:#8C4A2F;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;opacity:0.9;">Benito Juárez 156 - Alfar | Bosque</p>
-      </div>
-      <a href="https://wa.me/5492234984778?text=Hola%20Nadia,%20vi%20tu%20aviso%20en%20INFO%20MDQ%20HOY%20y%20quiero%20un%20turno" target="_blank" style="background:#8C4A2F;color:#FFFEFB;text-decoration:none;text-align:center;font-size:15px;font-weight:800;padding:15px 18px;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 8px 20px rgba(140,74,47,0.28);">
-        PEDIR TURNO WHATSAPP
-      </a>
-      <a href="/Profesionales.html" style="display:block;text-align:center;font-size:12px;font-weight:800;color:#8C4A2F;text-decoration:none;padding:8px;border:1.5px solid #C9B8A3;border-radius:999px;">Ver más en Profesionales →</a>
-    </div>
-  </div>
-</div>
+<script src="avisos.js?v=5"></script>
 </body>
 </html>
