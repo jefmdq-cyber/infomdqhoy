@@ -1,99 +1,99 @@
 {
-  "fecha": "28/10/2026",
-  "numero": "3930",
-  "proximo_fecha": "31/10/2026",
-  "proximo_numero": "3931",
-  "proximo_pozo": "$29.300.000.000",
-  "numero_plus": "3",
+  "numero": 3931,
+  "fecha": "31/10/2026",
+  "proximo_fecha": "04/11/2026",
+  "proximo_numero": 3932,
+  "proximo_pozo": "$29.310.000.000",
+  "numero_plus": 6,
   "tradicional": {
     "resultados": [
-      3,
-      4,
-      5,
-      11,
+      2,
+      8,
+      20,
       24,
-      37
+      30,
+      40
     ],
-    "pozo": "$4.458.912.656,00 (Vacante)",
+    "pozo": "$4.508.100.826,16 (Vacante)",
     "ganadores": [
       {
         "aciertos": 6,
         "cantidad": 0,
-        "monto": "Vacante"
+        "monto": "4.508.100.826,16"
       },
       {
         "aciertos": 5,
-        "cantidad": 0,
-        "monto": "$0,00"
+        "cantidad": 12,
+        "monto": "1.796.117,40"
       },
       {
         "aciertos": 4,
-        "cantidad": 0,
-        "monto": "$0,00"
+        "cantidad": 448,
+        "monto": "9.622,05"
       }
     ]
   },
   "match": {
     "resultados": [
-      0,
-      2,
-      20,
-      23,
-      32,
-      37
+      9,
+      14,
+      16,
+      19,
+      27,
+      42
     ],
-    "pozo": "$2.326.813.282,00 (Vacante)",
+    "pozo": "$2.376.001.452,40 (Vacante)",
     "ganadores": [
       {
         "aciertos": 6,
         "cantidad": 0,
-        "monto": "Vacante"
+        "monto": "2.376.001.452,40"
       },
       {
         "aciertos": 5,
-        "cantidad": 0,
-        "monto": "$0,00"
+        "cantidad": 12,
+        "monto": "1.796.117,40"
       },
       {
         "aciertos": 4,
-        "cantidad": 0,
-        "monto": "$0,00"
+        "cantidad": 497,
+        "monto": "8.673,40"
       }
     ]
   },
   "desquite": {
     "resultados": [
-      16,
-      18,
-      24,
-      25,
-      27,
-      31
+      6,
+      13,
+      17,
+      36,
+      41,
+      42
     ],
-    "pozo": "$2.870.876.483,00 (Vacante)",
+    "pozo": "$2.919.218.665,60 (Vacante)",
     "ganadores": [
       {
         "aciertos": 6,
         "cantidad": 0,
-        "monto": "Vacante"
+        "monto": "2.919.218.665,60"
       }
     ]
   },
   "sale_o_sale": {
     "resultados": [
+      2,
       9,
-      13,
-      16,
-      18,
-      20,
-      37
+      26,
+      29,
+      33,
+      41
     ],
-    "pozo": "$41.527.872,00",
+    "pozo": "Sale o Sale",
     "ganadores": [
       {
         "aciertos": 5,
-        "cantidad": 0,
-        "monto": "$41.527.872,00"
+        "cantidad": 17,
+        "monto": "3.265.668,00"
       }
     ]
   }
