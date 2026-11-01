@@ -37,15 +37,22 @@ function compartirWhatsAppReal(id, nombre){
 
 async function darAmorReal(id, btn){
   const storageKey = 'liked_'+id;
+  const likesKey = 'likes_'+id; // para limpiar los NaN viejos
   const span = btn.querySelector('.corazon-num');
-  const countActual = parseInt(span?.textContent || '0', 10);
-  const yaVotado = localStorage.getItem(storageKey);
-  if(yaVotado && countActual > 0){
+  
+  // 1. Lee el número que se ve, blindado contra NaN
+  let countActual = parseInt(span?.textContent || '0', 10);
+  if(isNaN(countActual)) countActual = 0;
+
+  // 2. Si ya votó, solo anima y sale
+  if(localStorage.getItem(storageKey)){
     btn.animate([{transform:'scale(1)'},{transform:'scale(1.25)'},{transform:'scale(1)'}], {duration:200});
     return;
   }
+
   btn.disabled = true;
   btn.style.transform='scale(1.15)';
+
   try{
     const res = await fetch('/api/likes?v=' + Date.now(), {
       method: 'POST',
@@ -54,11 +61,44 @@ async function darAmorReal(id, btn){
       cache: 'no-store'
     });
     if(!res.ok) throw new Error('fail');
-    const totalReal = (await res.text()).trim();
+    
+    let totalReal = (await res.text()).trim();
+    
+    // Si tu API devuelve JSON tipo {"likes":5} o {"total":5}, lo limpiamos
+    try {
+      const j = JSON.parse(totalReal);
+      if(typeof j === 'number') totalReal = String(j);
+      else if(j.total !== undefined) totalReal = String(j.total);
+      else if(j.likes !== undefined) totalReal = String(j.likes);
+    } catch(e){}
+
+    let num = parseInt(totalReal, 10);
+    
+    // 3. Si la API no devolvió número, hacemos fallback local (para no mostrar NaN nunca)
+    if(isNaN(num)){
+      let localRaw = localStorage.getItem(likesKey);
+      let localNum = parseInt(localRaw, 10);
+      if(isNaN(localNum)) localNum = countActual;
+      num = localNum + 1;
+      localStorage.setItem(likesKey, String(num));
+    } else {
+      // Si la API sí devolvió bien, pisamos el NaN viejo
+      localStorage.setItem(likesKey, String(num));
+    }
+
     localStorage.setItem(storageKey,'1');
-    if(span) span.textContent = totalReal;
+    if(span) span.textContent = String(num);
     btn.style.background='#fecaca';
+
   }catch(e){
+    // Fallback offline: si falla la API, cuenta local y no muestra NaN
+    let localRaw = localStorage.getItem(likesKey);
+    let localNum = parseInt(localRaw, 10);
+    if(isNaN(localNum)) localNum = countActual;
+    const fallback = localNum + 1;
+    localStorage.setItem(likesKey, String(fallback));
+    localStorage.setItem(storageKey,'1');
+    if(span) span.textContent = String(fallback);
     console.error("Error guardando amor:", e);
   } finally {
     btn.style.transform='scale(1)';
