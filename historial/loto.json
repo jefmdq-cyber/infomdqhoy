@@ -1,0 +1,100 @@
+{
+  "fecha": "28/10/2026",
+  "numero": "3930",
+  "proximo_fecha": "31/10/2026",
+  "proximo_numero": "3931",
+  "proximo_pozo": "$29.300.000.000",
+  "numero_plus": "3",
+  "tradicional": {
+    "resultados": [
+      3,
+      4,
+      5,
+      11,
+      24,
+      37
+    ],
+    "pozo": "$4.458.912.656,00 (Vacante)",
+    "ganadores": [
+      {
+        "aciertos": 6,
+        "cantidad": 0,
+        "monto": "Vacante"
+      },
+      {
+        "aciertos": 5,
+        "cantidad": 0,
+        "monto": "$0,00"
+      },
+      {
+        "aciertos": 4,
+        "cantidad": 0,
+        "monto": "$0,00"
+      }
+    ]
+  },
+  "match": {
+    "resultados": [
+      0,
+      2,
+      20,
+      23,
+      32,
+      37
+    ],
+    "pozo": "$2.326.813.282,00 (Vacante)",
+    "ganadores": [
+      {
+        "aciertos": 6,
+        "cantidad": 0,
+        "monto": "Vacante"
+      },
+      {
+        "aciertos": 5,
+        "cantidad": 0,
+        "monto": "$0,00"
+      },
+      {
+        "aciertos": 4,
+        "cantidad": 0,
+        "monto": "$0,00"
+      }
+    ]
+  },
+  "desquite": {
+    "resultados": [
+      16,
+      18,
+      24,
+      25,
+      27,
+      31
+    ],
+    "pozo": "$2.870.876.483,00 (Vacante)",
+    "ganadores": [
+      {
+        "aciertos": 6,
+        "cantidad": 0,
+        "monto": "Vacante"
+      }
+    ]
+  },
+  "sale_o_sale": {
+    "resultados": [
+      9,
+      13,
+      16,
+      18,
+      20,
+      37
+    ],
+    "pozo": "$41.527.872,00",
+    "ganadores": [
+      {
+        "aciertos": 5,
+        "cantidad": 0,
+        "monto": "$41.527.872,00"
+      }
+    ]
+  }
+}
