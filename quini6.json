@@ -1,126 +1,70 @@
 {
-  "fecha": "Miércoles 28 de octubre",
-  "numero": "3421",
-  "proximo_fecha": "Domingo 01 de noviembre",
-  "proximo_pozo": "$4.750.000.000",
+  "fecha": "01/11/2026",
+  "numero": "3422",
+  "proximo_fecha": "04/11/2026",
+  "proximo_numero": "3423",
+  "proximo_pozo": "Pozo estimado en juego: $5.400.000.000",
   "tradicional": {
-    "pozo": "$1.100.000.000 (Vacante)",
-    "resultados": [
-      6,
-      25,
-      34,
-      36,
-      38,
-      45
-    ],
+    "resultados": [7, 8, 9, 10, 14, 41],
+    "pozo": "Vacante",
     "ganadores": [
-      {
-        "aciertos": "6",
-        "cantidad": 0,
-        "monto": "Vacante"
-      },
-      {
-        "aciertos": "5",
-        "cantidad": 4,
-        "monto": "10.273.986"
-      },
-      {
-        "aciertos": "4",
-        "cantidad": 474,
-        "monto": "26.010,09"
-      }
+      { "aciertos": 6, "cantidad": 0, "monto": "0" }
     ]
   },
-  "segunda": {
-    "pozo": "$1.500.000.000 (Vacante)",
-    "resultados": [
-      9,
-      19,
-      26,
-      29,
-      33,
-      44
-    ],
+  "la_segunda": {
+    "resultados": [2, 4, 16, 24, 27, 37],
+    "pozo": "Vacante",
     "ganadores": [
-      {
-        "aciertos": "6",
-        "cantidad": 0,
-        "monto": "Vacante"
-      },
-      {
-        "aciertos": "5",
-        "cantidad": 13,
-        "monto": "3.161.226,46"
-      },
-      {
-        "aciertos": "4",
-        "cantidad": 1247,
-        "monto": "9.886,75"
-      }
+      { "aciertos": 6, "cantidad": 0, "monto": "0" }
     ]
   },
   "revancha": {
-    "pozo": "$1.080.516.153,60",
-    "resultados": [
-      22,
-      26,
-      35,
-      42,
-      43,
-      45
-    ],
+    "resultados": [0, 2, 14, 23, 29, 39],
+    "pozo": "Vacante",
     "ganadores": [
-      {
-        "aciertos": "6",
-        "cantidad": 1,
-        "monto": "1.080.516.153,60"
-      }
+      { "aciertos": 6, "cantidad": 0, "monto": "0" }
     ]
   },
   "siempre_sale": {
-    "pozo": "$184.382.730 (Premio Individual)",
-    "resultados": [
-      20,
-      22,
-      26,
-      35,
-      36,
-      37
-    ],
+    "resultados": [2, 5, 8, 9, 14, 40],
+    "pozo": "$486.377.136",
     "ganadores": [
-      {
-        "aciertos": "5",
-        "cantidad": 2,
-        "monto": "184.382.730"
-      }
-    ]
-  },
-  "extra": {
-    "pozo": "$542.005,42 c/u",
-    "resultados": [
-      6,
-      9,
-      19,
-      22,
-      25,
-      26,
-      29,
-      33,
-      34,
-      35,
-      36,
-      38,
-      42,
-      43,
-      44,
-      45
-    ],
-    "ganadores": [
-      {
-        "aciertos": "Extra",
-        "cantidad": 369,
-        "monto": "542.005,42"
-      }
+      { "aciertos": 5, "cantidad": 54, "monto": "9.006.984" }
     ]
   }
 }
+```
+
+---
+
+### 2. `brinco.json` (Sorteo N° 1378)
+```json
+{
+  "fecha": "01/11/2026",
+  "numero": "1378",
+  "proximo_fecha": "08/11/2026",
+  "proximo_numero": "1379",
+  "proximo_pozo": "Pozo estimado en juego: $720.000.000",
+  "tradicional": {
+    "resultados": [5, 10, 15, 23, 27, 38],
+    "pozo": "$621.178.158 (Vacante)",
+    "ganadores": [
+      { "aciertos": 6, "cantidad": 0, "monto": "0" },
+      { "aciertos": 5, "cantidad": 14, "monto": "473.625" },
+      { "aciertos": 4, "cantidad": 347, "monto": "6.305" },
+      { "aciertos": 3, "cantidad": 4953, "monto": "2.080" }
+    ]
+  },
+  "junior": {
+    "resultados": [3, 12, 18, 22, 25, 39],
+    "pozo": "$33.143.416",
+    "ganadores": [
+      { "aciertos": 5, "cantidad": 11, "monto": "3.013.037" }
+    ]
+  }
+}
+```
+
+<FollowUp>
+¿Quedaron bien estructurados según los scripts de tu sitio, o necesitas cambiar el formato de alguna clave (como usar **puntos en lugar de comas** en los montos)?
+</FollowUp>
