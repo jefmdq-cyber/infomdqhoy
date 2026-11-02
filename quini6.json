@@ -33,38 +33,3 @@
     ]
   }
 }
-```
-
----
-
-### 2. `brinco.json` (Sorteo N° 1378)
-```json
-{
-  "fecha": "01/11/2026",
-  "numero": "1378",
-  "proximo_fecha": "08/11/2026",
-  "proximo_numero": "1379",
-  "proximo_pozo": "Pozo estimado en juego: $720.000.000",
-  "tradicional": {
-    "resultados": [5, 10, 15, 23, 27, 38],
-    "pozo": "$621.178.158 (Vacante)",
-    "ganadores": [
-      { "aciertos": 6, "cantidad": 0, "monto": "0" },
-      { "aciertos": 5, "cantidad": 14, "monto": "473.625" },
-      { "aciertos": 4, "cantidad": 347, "monto": "6.305" },
-      { "aciertos": 3, "cantidad": 4953, "monto": "2.080" }
-    ]
-  },
-  "junior": {
-    "resultados": [3, 12, 18, 22, 25, 39],
-    "pozo": "$33.143.416",
-    "ganadores": [
-      { "aciertos": 5, "cantidad": 11, "monto": "3.013.037" }
-    ]
-  }
-}
-```
-
-<FollowUp>
-¿Quedaron bien estructurados según los scripts de tu sitio, o necesitas cambiar el formato de alguna clave (como usar **puntos en lugar de comas** en los montos)?
-</FollowUp>
