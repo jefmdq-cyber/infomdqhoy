@@ -1,3 +1,1 @@
-/a/*  /a/:splat  200
-/*.json  /:splat.json  200
-/*  /index.html  200
+/* /404.html 404
