@@ -1,85 +1,122 @@
 {
-  "numero": "1377",
-  "fecha": "25/10/2026",
-  "hora": "21:00",
-  "lugar": "Santa Fe",
-  "sorteo_completo": "Concurso 1377 • 25/10/2026 - 21:00hs - Santa Fe",
-  "proximo_numero": "1378",
-  "proximo_fecha": "01/11/2026",
-  "proximo_hora": "21:00",
-  "proximo_pozo": "$670.000.000",
-  "proximo_valor_apuesta": "$1.500",
-  "fecha_caducidad": "10/11/2026",
-  "extracto_oficial": "PENNO, ANDREA ESCRIBANA C/ REG.ESP. - ORECCHIA, MARÍA JOSÉ AUTORIDAD DE SORTEO",
+  "numero": 3422,
+  "fecha": "01/11/2026",
+  "proximo_fecha": "04/11/2026",
+  "proximo_numero": 3423,
+  "proximo_pozo": "5.400.000.000",
+  "pozo_estimado_sorteo": "4.750.000.000",
   "tradicional": {
     "resultados": [
-      22,
-      23,
-      25,
-      32,
-      34,
-      36
+      7,
+      8,
+      9,
+      10,
+      14,
+      41
     ],
-    "resultados_formateados": [
-      "22",
-      "23",
-      "25",
-      "32",
-      "34",
-      "36"
-    ],
-    "pozo_texto": "VACANTE 6 aciertos",
+    "pozo": "1.243.482.887,00 (Vacante)",
     "ganadores": [
       {
-        "premio": "1º Premio 6 aciertos",
-        "cantidad": "VACANTE*",
-        "monto": "576.443.315,90"
+        "aciertos": 6,
+        "cantidad": 0,
+        "monto": "1.243.482.887,00"
       },
       {
-        "premio": "2º Premio 5 aciertos",
-        "cantidad": 5,
-        "monto": "1.332.236,43"
+        "aciertos": 5,
+        "cantidad": 32,
+        "monto": "1.694.274,75"
       },
       {
-        "premio": "3º Premio 4 aciertos",
-        "cantidad": 170,
-        "monto": "12.930,53"
-      },
-      {
-        "premio": "4º Premio 3 aciertos",
-        "cantidad": 3350,
-        "monto": "1.500,00"
-      },
-      {
-        "premio": "Premio Estímulo Agenciero",
-        "cantidad": "VACANTE",
-        "monto": "6.349.415,88"
+        "aciertos": 4,
+        "cantidad": 2453,
+        "monto": "6.630,67"
       }
-    ],
-    "nota": "Dicho pozo pasa a incrementar el primer premio del concurso siguiente según artículo 33º del reglamento"
+    ]
   },
-  "junior": {
+  "segunda": {
+    "resultados": [
+      2,
+      4,
+      16,
+      24,
+      27,
+      37
+    ],
+    "pozo": "1.855.682.086,00 (Vacante)",
+    "ganadores": [
+      {
+        "aciertos": 6,
+        "cantidad": 0,
+        "monto": "1.855.682.086,00"
+      },
+      {
+        "aciertos": 5,
+        "cantidad": 32,
+        "monto": "1.694.274,75"
+      },
+      {
+        "aciertos": 4,
+        "cantidad": 1924,
+        "monto": "6.630,67"
+      }
+    ]
+  },
+  "revancha": {
     "resultados": [
       0,
+      2,
+      14,
+      23,
+      29,
+      39
+    ],
+    "pozo": "0,00 (Vacante) - Sin ganadores con 6 aciertos",
+    "ganadores": [
+      {
+        "aciertos": 6,
+        "cantidad": 0,
+        "monto": "0,00"
+      }
+    ]
+  },
+  "siempre_sale": {
+    "resultados": [
+      2,
+      5,
+      8,
       9,
+      14,
+      40
+    ],
+    "pozo": "486.377.136,00 - 54 ganadores de $9.006.984,00 c/u",
+    "ganadores": [
+      {
+        "aciertos": 5,
+        "cantidad": 54,
+        "monto": "9.006.984,00"
+      }
+    ]
+  },
+  "extra": {
+    "resultados": [
+      0,
+      2,
+      4,
+      7,
+      8,
+      9,
+      10,
+      14,
       16,
-      18,
-      34,
-      38
+      23,
+      24,
+      27,
+      29,
+      37,
+      39,
+      41
     ],
-    "resultados_formateados": [
-      "00",
-      "09",
-      "16",
-      "18",
-      "34",
-      "38"
-    ],
-    "pozo": "33.295.460,27",
-    "aciertos": 5,
-    "ganadores": 2,
-    "premio_por_apuesta": "16.647.730,14",
-    "estimulo": "332.954,60",
-    "nota": "Premio NO acumulable - Siempre Sale"
+    "pozo": "Extra - 16 números",
+    "ganadores": []
   }
 }
