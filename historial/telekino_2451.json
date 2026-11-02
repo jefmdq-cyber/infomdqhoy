@@ -1,0 +1,87 @@
+{
+  "fecha": "25/10/2026",
+  "numero": "2451",
+  "proximo_fecha": "01/11/2026",
+  "proximo_numero": "2452",
+  "proximo_pozo": "Pozo estimado en juego: $553.150.856",
+  "proximo_carton_color": "Verde",
+  "tradicional": {
+    "resultados": [
+      3,
+      4,
+      8,
+      9,
+      11,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      22,
+      23,
+      25
+    ],
+    "pozo": "$553.150.856 (Vacante)",
+    "ganadores": [
+      {
+        "aciertos": 15,
+        "cantidad": 0,
+        "monto": "553.150.856"
+      },
+      {
+        "aciertos": 14,
+        "cantidad": 22,
+        "monto": "601.918"
+      },
+      {
+        "aciertos": 13,
+        "cantidad": 632,
+        "monto": "63.246"
+      },
+      {
+        "aciertos": 12,
+        "cantidad": 7154,
+        "monto": "19.161"
+      }
+    ]
+  },
+  "rekino": {
+    "resultados": [
+      1,
+      5,
+      6,
+      9,
+      10,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      23,
+      24,
+      25
+    ],
+    "pozo": "$306.532",
+    "ganadores": [
+      {
+        "aciertos": 14,
+        "cantidad": 16,
+        "monto": "306.532"
+      }
+    ]
+  },
+  "carton": {
+    "premios_efectivo": "5 premios de $3.000.000 c/u al número de cartón",
+    "numeros_ganadores_carton": [
+      "55.211 - MENDOZA",
+      "151.211 - SGO. DEL ESTERO",
+      "227.401 - BUENOS AIRES",
+      "234.689 - BUENOS AIRES",
+      "445.193 - CORRIENTES"
+    ]
+  }
+}
