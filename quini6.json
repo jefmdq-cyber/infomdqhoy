@@ -5,28 +5,28 @@
   "proximo_numero": "3423",
   "proximo_pozo": "Pozo estimado en juego: $5.400.000.000",
   "tradicional": {
-    "resultados":,
+    "resultados": [7, 8, 9, 10, 14, 41],
     "pozo": "Vacante",
     "ganadores": [
       { "aciertos": 6, "cantidad": 0, "monto": "0" }
     ]
   },
   "la_segunda": {
-    "resultados":,
+    "resultados": [2, 4, 16, 24, 27, 37],
     "pozo": "Vacante",
     "ganadores": [
       { "aciertos": 6, "cantidad": 0, "monto": "0" }
     ]
   },
   "revancha": {
-    "resultados":,
+    "resultados": [0, 2, 14, 23, 29, 39],
     "pozo": "Vacante",
     "ganadores": [
       { "aciertos": 6, "cantidad": 0, "monto": "0" }
     ]
   },
   "siempre_sale": {
-    "resultados":,
+    "resultados": [2, 5, 8, 9, 14, 40],
     "pozo": "$486.377.136",
     "ganadores": [
       { "aciertos": 5, "cantidad": 54, "monto": "9.006.984" }
