@@ -1,0 +1,122 @@
+{
+  "numero": 3422,
+  "fecha": "01/11/2026",
+  "proximo_fecha": "04/11/2026",
+  "proximo_numero": 3423,
+  "proximo_pozo": "5.400.000.000",
+  "pozo_estimado_sorteo": "4.750.000.000",
+  "tradicional": {
+    "resultados": [
+      7,
+      8,
+      9,
+      10,
+      14,
+      41
+    ],
+    "pozo": "1.243.482.887,00 (Vacante)",
+    "ganadores": [
+      {
+        "aciertos": 6,
+        "cantidad": 0,
+        "monto": "1.243.482.887,00"
+      },
+      {
+        "aciertos": 5,
+        "cantidad": 32,
+        "monto": "1.694.274,75"
+      },
+      {
+        "aciertos": 4,
+        "cantidad": 2453,
+        "monto": "6.630,67"
+      }
+    ]
+  },
+  "segunda": {
+    "resultados": [
+      2,
+      4,
+      16,
+      24,
+      27,
+      37
+    ],
+    "pozo": "1.855.682.086,00 (Vacante)",
+    "ganadores": [
+      {
+        "aciertos": 6,
+        "cantidad": 0,
+        "monto": "1.855.682.086,00"
+      },
+      {
+        "aciertos": 5,
+        "cantidad": 32,
+        "monto": "1.694.274,75"
+      },
+      {
+        "aciertos": 4,
+        "cantidad": 1924,
+        "monto": "6.630,67"
+      }
+    ]
+  },
+  "revancha": {
+    "resultados": [
+      0,
+      2,
+      14,
+      23,
+      29,
+      39
+    ],
+    "pozo": "800,000,000 (Vacante) - Sin ganadores con 6 aciertos",
+    "ganadores": [
+      {
+        "aciertos": 6,
+        "cantidad": 0,
+        "monto": "0,00"
+      }
+    ]
+  },
+  "siempre_sale": {
+    "resultados": [
+      2,
+      5,
+      8,
+      9,
+      14,
+      40
+    ],
+    "pozo": "486.377.136,00 - 54 ganadores de $9.006.984,00 c/u",
+    "ganadores": [
+      {
+        "aciertos": 5,
+        "cantidad": 54,
+        "monto": "9.006.984,00"
+      }
+    ]
+  },
+  "extra": {
+    "resultados": [
+      0,
+      2,
+      4,
+      7,
+      8,
+      9,
+      10,
+      14,
+      16,
+      23,
+      24,
+      27,
+      29,
+      37,
+      39,
+      41
+    ],
+    "pozo": "Extra - 16 números",
+    "ganadores": []
+  }
+}
