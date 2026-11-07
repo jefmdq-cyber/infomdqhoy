@@ -1,0 +1,58 @@
+{
+  "id": "yr-soluciones",
+  "nombre": "YR SOLUCIONES",
+  "subtitulo": "SERVICIO TÉCNICO ESPECIALIZADO",
+  "badge_top": "🔧 ESTACIÓN CHAPADMALAL • SERVICIO OFICIAL",
+  "slogan": "EN YR SOLUCIONES ARREGLAMOS",
+  "slogan2": "Tu máquina vuelve a andar",
+  "pregunta": "¿Se rompió tu herramienta? La arreglamos",
+  "descripcion": "Reparación de maquinaria eléctrica de obra y jardinería, motores a explosión y pequeños electrodomésticos",
+  "direccion": "Calle 16, frente a la estación",
+  "direccion_completa": "Calle 16, frente a la estación, Estación Chapadmalal",
+  "barrio": "estacion-chapadmalal",
+  "barrios": [
+    "estacion-chapadmalal",
+    "chapadmalal"
+  ],
+  "localidad": "Estación Chapadmalal",
+  "horario": "Lunes a sábados de 12 a 20 hs",
+  "consultas": "Consultas 24 hs",
+  "whatsapp": "2235257861",
+  "whatsapp_url": "https://wa.me/5492235257861?text=Hola%20YR%20Soluciones%20vengo%20de%20INFO%20MDQ%20HOY",
+  "whatsapp_texto": "223 525-7861",
+  "instagram_url": "https://www.instagram.com/yrsolucion",
+  "instagram_user": "@yrsolucion",
+  "facebook_url": "https://www.facebook.com/share/19eTvJUTc1/?mibextid=wwXIfr",
+  "facebook_text": "YR Soluciones en Facebook",
+  "web_url": "https://yrsoluciones.com.ar",
+  "web_text": "yrsoluciones.com.ar",
+  "maps_url": "https://maps.app.goo.gl/n6dEQ6X2Yqi8WcrM7?g_st=ic",
+  "maps_text": "Calle 16, frente a la estación",
+  "imagen_fachada": "./yr-soluciones.webp",
+  "imagen_2": "./yr-soluciones2.webp",
+  "servicio_oficial": [
+    "CROSSMASTER",
+    "bta TOOLS",
+    "DOWEN PAGIO"
+  ],
+  "servicios": [
+    {
+      "titulo": "Maquinaria de obra",
+      "desc": "Amoladoras, taladros, sierras"
+    },
+    {
+      "titulo": "Jardinería",
+      "desc": "Bordeadoras, motosierras"
+    },
+    {
+      "titulo": "Motores explosión",
+      "desc": "Grupos, motobombas"
+    },
+    {
+      "titulo": "Electrodomésticos",
+      "desc": "Pequeños equipos"
+    }
+  ],
+  "pie_texto": "Servicio Técnico Oficial • Consultas 24 hs • Estación Chapadmalal",
+  "search_tags": "yr soluciones herramientas reparacion chapadmalal estacion servicio tecnico crossmaster bta dowen pagio"
+}
